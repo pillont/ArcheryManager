@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ArcheryManager.Pages"
+             xmlns:ctl="clr-namespace:ArcheryManager.CustomControls"
+             x:Class="ArcheryManager.Pages.TimerPage" BackgroundColor="{Binding Color}">
+
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+        <ctl:CustomTimer x:Name="timer" FontSize="72" />
+        <Button Text="Start" Clicked="ButtonStart_Clicked" IsEnabled="{Binding IsStartEnabled}" />
+        <Button Text="{Binding PauseReplayText}" Clicked="ButtonPause_Clicked" IsEnabled="{Binding IsPauseEnabled}" />
+        <Button Text="Stop" Clicked="ButtonStop_Clicked" IsEnabled="{Binding IsStopEnabled}" />
+    </StackLayout>
+</ContentPage>
