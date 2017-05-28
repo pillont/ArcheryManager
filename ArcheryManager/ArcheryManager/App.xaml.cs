@@ -14,7 +14,12 @@ namespace ArcheryManager
         {
             InitializeComponent();
 
+#if TEST
+            MainPage = new BackDoorPage();
+
+#else
             MainPage = new TimerPage();
+#endif
         }
 
         protected override void OnStart()
