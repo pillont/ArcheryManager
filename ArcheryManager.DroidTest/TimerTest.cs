@@ -1,15 +1,16 @@
-﻿using System;
-using System.IO;
+﻿using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
+using System.Text;
+using System.Threading.Tasks;
 using Xamarin.UITest;
-using Xamarin.UITest.Queries;
 using Xamarin.UITest.Android;
 
 namespace ArcheryManager.DroidTest
 {
     [TestFixture]
-    public class Tests
+    public class TimerTest
     {
         private AndroidApp app;
 
@@ -25,12 +26,19 @@ namespace ArcheryManager.DroidTest
                 // code if the app is not included in the solution.
                 .ApkFile(TestSetting.ApkUri)
                 .StartApp();
+
+            app.Screenshot("BackDoor Page");
+            app.Tap("TimerButton");
+            app.Screenshot("Timer page");
         }
 
         [Test]
-        public void AppLaunches()
+        public void InitElement()
         {
-            app.Screenshot("First screen.");
+            app.WaitForElement(c => c.Marked("TimerLabel").Text("120"));
+            app.WaitForElement(c => c.Marked("StartButton"));
+            app.WaitForElement(c => c.Marked("StopButton"));
+            app.WaitForElement(c => c.Marked("PauseButton"));
         }
     }
 }

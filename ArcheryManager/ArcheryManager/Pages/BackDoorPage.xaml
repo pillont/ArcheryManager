@@ -4,6 +4,6 @@
              x:Class="ArcheryManager.Pages.BackDoorPage">
 
     <StackLayout>
-        <Button Text="timer" Clicked="Button_Clicked"/>
+        <Button Text="timer" AutomationId="TimerButton" Clicked="Button_Clicked" />
     </StackLayout>
 </ContentPage>

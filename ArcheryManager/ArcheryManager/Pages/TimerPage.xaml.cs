@@ -1,4 +1,5 @@
-﻿using ArcheryManager.CustomControls;
+﻿using ArcheryManager.Behaviors;
+using ArcheryManager.CustomControls;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,6 +13,8 @@ namespace ArcheryManager.Pages
         private const string PauseText = "Pause";
         private const string ReplayText = "Replay";
         private static readonly Color DefaultbackgroundColor = Color.White;
+
+        private readonly TimerBehavior<CustomTimer> behavior;
 
         public Color Color
         {
@@ -58,6 +61,8 @@ namespace ArcheryManager.Pages
         {
             this.BindingContext = this;
             InitializeComponent();
+            behavior = new TimerBehavior<CustomTimer>();
+            timer.Behaviors.Add(behavior);
             timer.PropertyChanged += Timer_PropertyChanged;
         }
 
@@ -104,20 +109,20 @@ namespace ArcheryManager.Pages
 
         private void ButtonStart_Clicked(object sender, EventArgs e)
         {
-            timer.Start();
+            behavior.Start();
         }
 
         private void ButtonStop_Clicked(object sender, EventArgs e)
         {
-            timer.Stop();
+            behavior.Stop();
         }
 
         private void ButtonPause_Clicked(object sender, EventArgs e)
         {
             if (timer.IsPaused)
-                timer.Continue();
+                behavior.Continue();
             else if (!timer.IsStopped)
-                timer.Pause();
+                behavior.Pause();
         }
     }
 }
