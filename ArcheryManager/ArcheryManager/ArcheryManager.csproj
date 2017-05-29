@@ -48,6 +48,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Behaviors\TimerBehavior.cs" />
+    <Compile Include="CustomControls\CustomTarget.cs" />
     <Compile Include="CustomControls\CustomTimer.cs" />
     <Compile Include="Interfaces\ITimer.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -55,6 +56,9 @@
     </Compile>
     <Compile Include="Pages\BackDoorPage.xaml.cs">
       <DependentUpon>BackDoorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TargetPage.xaml.cs">
+      <DependentUpon>TargetPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\TimerPage.xaml.cs">
       <DependentUpon>TimerPage.xaml</DependentUpon>
@@ -106,7 +110,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\TargetPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -18,7 +18,7 @@ namespace ArcheryManager
             MainPage = new BackDoorPage();
 
 #else
-            MainPage = new TimerPage();
+            MainPage = new TargetPage();
 #endif
         }
 

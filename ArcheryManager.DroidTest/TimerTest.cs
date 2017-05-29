@@ -40,5 +40,13 @@ namespace ArcheryManager.DroidTest
             app.WaitForElement(c => c.Marked("StopButton"));
             app.WaitForElement(c => c.Marked("PauseButton"));
         }
+
+        [Test]
+        public void StartButton()
+        {
+            app.Tap("StartButton");
+            System.Threading.Thread.Sleep(5000);
+            app.WaitForElement(c => c.Marked("TimerLabel").Text("5"));
+        }
     }
 }
