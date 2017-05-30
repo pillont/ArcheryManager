@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArcheryManager.Behaviors;
+using System;
 using Xamarin.Forms;
 using XFShapeView;
 
@@ -6,17 +7,33 @@ namespace ArcheryManager.CustomControls
 {
     public class CustomTarget : ContentView
     {
-        private double currentScale;
-        private double startScale;
-        private double xOffset;
-        private double yOffset;
+        /// <summary>
+        /// color of the arrows in the target
+        /// </summary>
+        private readonly Color ArrowColor = Color.Green;
+
+        /// <summary>
+        /// color of the point to set arrow
+        /// </summary>
+        private readonly Color ArrowSetterColor = Color.Fuchsia;
+
+        /// <summary>
+        /// point to set arrow during manipulation
+        /// </summary>
+        public readonly ShapeView ArrowSetter;
+
+        /// <summary>
+        /// gris container of the target
+        /// </summary>
+        public readonly Grid TargetGrid;
 
         public CustomTarget()
         {
-            Grid grid = new Grid();
-            var pinchGesture = new PinchGestureRecognizer();
-            pinchGesture.PinchUpdated += PinchGesture_PinchUpdated;
-            grid.GestureRecognizers.Add(pinchGesture);
+            #region visual generation
+
+            #region targetgrid
+
+            TargetGrid = new Grid();
 
             for (int i = 1; i < 12; i++)
             {
@@ -28,13 +45,13 @@ namespace ArcheryManager.CustomControls
                     WidthRequest = 350 * rate, //TODO
                     ShapeType = ShapeType.Circle,
                     BorderColor = BorderColorZone(i),
-                    Color = ColorZone(i),
+                    Color = ColorofZone(i),
                     BorderWidth = 1,
                     VerticalOptions = LayoutOptions.Center,
                     HorizontalOptions = LayoutOptions.Center,
                 };
 
-                grid.Children.Add(shape);
+                TargetGrid.Children.Add(shape);
             }
 
             var center = new ShapeView
@@ -48,61 +65,56 @@ namespace ArcheryManager.CustomControls
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Center,
             };
-            grid.Children.Add(center);
-            Content = grid;
+            TargetGrid.Children.Add(center);
+
+            #endregion targetgrid
+
+            #region arrow setter point
+
+            ArrowSetter = new ShapeView()
+            {
+                HeightRequest = 10,
+                WidthRequest = 10,
+                ShapeType = ShapeType.Circle,
+                BorderColor = ArrowSetterColor,
+                Color = ArrowSetterColor,
+                BorderWidth = 1,
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.Center,
+                IsVisible = false,
+            };
+
+            #endregion arrow setter point
+
+            #region global grid
+
+            Grid globalGrid = new Grid();
+            globalGrid.Children.Add(TargetGrid);
+            globalGrid.Children.Add(ArrowSetter);
+
+            Content = globalGrid;
+
+            #endregion global grid
+
+            #endregion visual generation
+
+            var behavior = new TargetBehavior();
+            Behaviors.Add(behavior);
         }
 
-        private void PinchGesture_PinchUpdated(object sender, PinchGestureUpdatedEventArgs e)
+        public void SetArrow(Point position)
         {
-            //REF : https://developer.xamarin.com/guides/xamarin-forms/application-fundamentals/gestures/pinch/
-            if (e.Status == GestureStatus.Started)
-            {
-                // Store the current scale factor applied to the wrapped user interface element,
-                // and zero the components for the center point of the translate transform.
-                startScale = Content.Scale;
-                Content.AnchorX = 0;
-                Content.AnchorY = 0;
-            }
-            if (e.Status == GestureStatus.Running)
-            {
-                // Calculate the scale factor to be applied.
-                currentScale += (e.Scale - 1) * startScale;
-                currentScale = Math.Max(1, currentScale);
-
-                // The ScaleOrigin is in relative coordinates to the wrapped user interface element,
-                // so get the X pixel coordinate.
-                double renderedX = Content.X + xOffset;
-                double deltaX = renderedX / Width;
-                double deltaWidth = Width / (Content.Width * startScale);
-                double originX = (e.ScaleOrigin.X - deltaX) * deltaWidth;
-
-                // The ScaleOrigin is in relative coordinates to the wrapped user interface element,
-                // so get the Y pixel coordinate.
-                double renderedY = Content.Y + yOffset;
-                double deltaY = renderedY / Height;
-                double deltaHeight = Height / (Content.Height * startScale);
-                double originY = (e.ScaleOrigin.Y - deltaY) * deltaHeight;
-
-                // Calculate the transformed element pixel coordinates.
-                double targetX = xOffset - (originX * Content.Width) * (currentScale - startScale);
-                double targetY = yOffset - (originY * Content.Height) * (currentScale - startScale);
-
-                // Apply translation based on the change in origin.
-                Content.TranslationX = Clamp(targetX, -Content.Width * (currentScale - 1), 0);
-                Content.TranslationY = Clamp(targetY, -Content.Height * (currentScale - 1), 0);
-
-                // Apply scale factor.
-                Content.Scale = currentScale;
-            }
-            if (e.Status == GestureStatus.Completed)
-            {
-                // Store the translation delta's of the wrapped user interface element.
-                xOffset = Content.TranslationX;
-                yOffset = Content.TranslationY;
-            }
+            //TODO set arrow in the target
+            throw new NotImplementedException();
         }
 
-        private Color ColorZone(int i)
+        /// <summary>
+        ///determine the color associated to the score zone
+        ///
+        /// </summary>
+        /// <param name="i">score zone / 11 => X10 </param>
+        /// <returns>default white</returns>
+        private Color ColorofZone(int i)
         {
             switch (i)
             {
@@ -128,17 +140,16 @@ namespace ArcheryManager.CustomControls
             }
         }
 
+        /// <summary>
+        /// determine the color of the zone string
+        /// </summary>
+        /// <param name="i">score zone</param>
         private Color BorderColorZone(int i)
         {
             if (i == 3 || i == 4)
                 return Color.White;
             else
                 return Color.Black;
-        }
-
-        public static double Clamp(double value, double min, double max)
-        {
-            return (value < min) ? min : (value > max) ? max : value;
         }
     }
 }

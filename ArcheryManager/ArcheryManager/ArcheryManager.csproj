@@ -47,11 +47,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Behaviors\CustomBehavior.cs" />
+    <Compile Include="Behaviors\TargetBehavior.cs" />
     <Compile Include="Behaviors\TimerBehavior.cs" />
     <Compile Include="CustomControls\CustomTarget.cs" />
     <Compile Include="CustomControls\CustomTimer.cs" />
     <Compile Include="Interfaces\ITimer.cs" />
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BackDoorPage.xaml.cs">
@@ -66,7 +68,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MainPage.xaml">
+    <EmbeddedResource Include="Pages\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

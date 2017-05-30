@@ -4,7 +4,7 @@ using ArcheryManager.Interfaces;
 
 namespace ArcheryManager.Behaviors
 {
-    public class TimerBehavior<T> : Behavior<T> where T : BindableObject, ITimer
+    public class TimerBehavior<T> : CustomBehavior<T> where T : BindableObject, ITimer
     {
         /*
          * Times
@@ -27,7 +27,6 @@ namespace ArcheryManager.Behaviors
         /// <summary>
         /// timer associated to the behavior
         /// </summary>
-        protected T associatedTimer;
 
         #region logical properties
 
@@ -46,51 +45,45 @@ namespace ArcheryManager.Behaviors
             set
             {
                 current = value;
-                associatedTimer.Text = value.ToString();
-                associatedTimer.Progress = current * associatedTimer.MaxProgress / currentMax;
+                associatedObject.Text = value.ToString();
+                associatedObject.Progress = current * associatedObject.MaxProgress / currentMax;
             }
         }
 
         #endregion logical properties
 
-        protected override void OnAttachedTo(T bindable)
-        {
-            base.OnAttachedTo(bindable);
-            associatedTimer = bindable;
-        }
-
         #region public function
 
         public void Start()
         {
-            if (!associatedTimer.IsStopped)
+            if (!associatedObject.IsStopped)
                 return;
 
-            associatedTimer.IsWaitingTime = true;
-            associatedTimer.IsStopped = false;
-            associatedTimer.IsPaused = false;
-            currentMax = associatedTimer.WaitingTime;
-            Current = associatedTimer.WaitingTime;
+            associatedObject.IsWaitingTime = true;
+            associatedObject.IsStopped = false;
+            associatedObject.IsPaused = false;
+            currentMax = associatedObject.WaitingTime;
+            Current = associatedObject.WaitingTime;
             Device.StartTimer(TimeSpan.FromSeconds(1), WaitingTimerFunction);
         }
 
         public void Stop()
         {
-            associatedTimer.IsStopped = true;
+            associatedObject.IsStopped = true;
             //TODO wait one second to be sure the current timer while stopped
         }
 
         public void Pause()
         {
-            associatedTimer.IsPaused = true;
+            associatedObject.IsPaused = true;
             //TODO wait one second to be sure the current timer while paused
         }
 
         public void Continue()
         {
-            if (associatedTimer.IsPaused && !associatedTimer.IsStopped)
+            if (associatedObject.IsPaused && !associatedObject.IsStopped)
             {
-                associatedTimer.IsPaused = false;
+                associatedObject.IsPaused = false;
                 Device.StartTimer(TimeSpan.FromSeconds(1), TimerFunction);
             }
         }
@@ -104,23 +97,23 @@ namespace ArcheryManager.Behaviors
         /// </summary>
         private bool WaitingTimerFunction()
         {
-            if (associatedTimer.IsStopped || associatedTimer.IsPaused) // timer was stop
+            if (associatedObject.IsStopped || associatedObject.IsPaused) // timer was stop
             {
                 SettingStop();
                 return false;
             }
 
-            associatedTimer.Color = associatedTimer.WaitingColor;
+            associatedObject.Color = associatedObject.WaitingColor;
             Current--;
 
             var res = ShouldContinueTimer(avoidZero: true);
 
             if (!res) // start timerFunction in the end of this function
             {
-                currentMax = associatedTimer.Time;
-                Current = associatedTimer.Time;
+                currentMax = associatedObject.Time;
+                Current = associatedObject.Time;
                 UpdateColor();
-                associatedTimer.IsWaitingTime = false;
+                associatedObject.IsWaitingTime = false;
                 Device.StartTimer(TimeSpan.FromSeconds(1), TimerFunction);
             }
             return res;
@@ -131,13 +124,13 @@ namespace ArcheryManager.Behaviors
         /// </summary>
         private bool TimerFunction()
         {
-            if (associatedTimer.IsStopped) // timer was stop
+            if (associatedObject.IsStopped) // timer was stop
             {
                 SettingStop();
                 return false;
             }
 
-            if (associatedTimer.IsPaused) // timer was paused
+            if (associatedObject.IsPaused) // timer was paused
             {
                 return false;
             }
@@ -154,10 +147,10 @@ namespace ArcheryManager.Behaviors
 
         private void SettingStop()
         {
-            associatedTimer.IsStopped = true;
-            associatedTimer.IsPaused = false;
-            Current = associatedTimer.Time;
-            associatedTimer.Color = StopTimeColor;
+            associatedObject.IsStopped = true;
+            associatedObject.IsPaused = false;
+            Current = associatedObject.Time;
+            associatedObject.Color = StopTimeColor;
         }
 
         /// <summary>
@@ -166,14 +159,14 @@ namespace ArcheryManager.Behaviors
         private void UpdateColor()
         {
             // general time
-            if (Current > associatedTimer.LimitTime)
-                associatedTimer.Color = Color.Green;
+            if (Current > associatedObject.LimitTime)
+                associatedObject.Color = Color.Green;
             // limit time
             else if (ShouldContinueTimer())
-                associatedTimer.Color = LimitTimeColor;
+                associatedObject.Color = LimitTimeColor;
             // stop time
             else
-                associatedTimer.Color = StopTimeColor;
+                associatedObject.Color = StopTimeColor;
         }
 
         /// <summary>
