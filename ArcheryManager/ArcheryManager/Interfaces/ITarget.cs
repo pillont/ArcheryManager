@@ -29,7 +29,7 @@ namespace ArcheryManager.Interfaces
         /// <summary>
         ///clean the arrows in the target
         /// </summary>
-        void CleanArrows();
+        void ClearArrows();
 
         /// <summary>
         /// remove last arrow added

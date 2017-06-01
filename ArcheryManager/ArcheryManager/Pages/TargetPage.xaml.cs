@@ -10,5 +10,15 @@ namespace ArcheryManager.Pages
         {
             InitializeComponent();
         }
+
+        private void Button_RemoveLast(object sender, System.EventArgs e)
+        {
+            customTarget.RemoveLastArrow();
+        }
+
+        private void Button_RemoveAll(object sender, System.EventArgs e)
+        {
+            customTarget.ClearArrows();
+        }
     }
 }

@@ -21,6 +21,11 @@ namespace ArcheryManager.CustomControls
             }
             set
             {
+                if (Items != null)
+                {
+                    Items.CollectionChanged -= Items_CollectionChanged;
+                }
+
                 SetValue(ItemsProperty, value);
                 value.CollectionChanged += Items_CollectionChanged;
             }
@@ -44,21 +49,28 @@ namespace ArcheryManager.CustomControls
         /// <param name="e"></param>
         private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (e.NewItems != null)
+            if (e.Action == NotifyCollectionChangedAction.Reset)
             {
-                foreach (var item in e.NewItems)
-                {
-                    View container = CreateItemContainer();
-                    container.BindingContext = item;
-                    this.Children.Add(container);
-                }
+                this.Children.Clear();
             }
-            if (e.OldItems != null)
+            else
             {
-                foreach (var item in e.OldItems)
+                if (e.NewItems != null)
                 {
-                    View container = FindContainer(item);
-                    this.Children.Remove(container);
+                    foreach (var item in e.NewItems)
+                    {
+                        View container = CreateItemContainer();
+                        container.BindingContext = item;
+                        this.Children.Add(container);
+                    }
+                }
+                if (e.OldItems != null)
+                {
+                    foreach (var item in e.OldItems)
+                    {
+                        View container = FindContainer(item);
+                        this.Children.Remove(container);
+                    }
                 }
             }
         }

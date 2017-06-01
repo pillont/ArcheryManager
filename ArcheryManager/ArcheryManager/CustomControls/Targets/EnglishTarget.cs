@@ -2,11 +2,9 @@
 using ArcheryManager.Interfaces;
 using ArcheryManager.Utils;
 using System;
-using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using XFShapeView;
 using static ArcheryManager.Utils.Arrow;
-using static ArcheryManager.Utils.TargetScoreCounter;
 
 namespace ArcheryManager.CustomControls.Targets
 {
@@ -45,7 +43,7 @@ namespace ArcheryManager.CustomControls.Targets
         /// <summary>
         /// count the score on the target
         /// </summary>
-        private readonly TargetScoreCounter counter;
+        public ScoreCounter Counter { get; private set; }
 
         /// <summary>
         /// color of the arrows in the target
@@ -145,7 +143,8 @@ namespace ArcheryManager.CustomControls.Targets
             var behavior = new TargetBehavior<EnglishTarget>();
             Behaviors.Add(behavior);
 
-            counter = new TargetScoreCounter(arrowGrid.Items);
+            Counter = new ScoreCounter();
+            arrowGrid.Items = Counter.Arrows;
         }
 
         #region public functions
@@ -153,7 +152,7 @@ namespace ArcheryManager.CustomControls.Targets
         public void AddArrow(Point position)
         {
             Arrow arrow = ArrowInPosition(position);
-            counter.AddArrow(arrow);
+            Counter.AddArrow(arrow);
         }
 
         private Arrow ArrowInPosition(Point position)
@@ -167,19 +166,14 @@ namespace ArcheryManager.CustomControls.Targets
             return arrow;
         }
 
-        private Color ColorOf(Score score)
-        {
-            return default(Color);// throw new NotImplementedException();
-        }
-
         public void RemoveLastArrow()
         {
-            var arrow = counter.RemoveLastArrow();
+            Counter.RemoveLastArrow();
         }
 
-        public void CleanArrows()
+        public void ClearArrows()
         {
-            var arrows = counter.CleanArrows();
+            Counter.ClearArrow();
         }
 
         #endregion public functions
@@ -245,6 +239,39 @@ namespace ArcheryManager.CustomControls.Targets
                     return (Score)i;
             }
             return (Score)0;
+        }
+
+        private Color ColorOf(Score score)
+        {
+            switch (score)
+            {
+                case Score.Miss:
+                    return Color.Green;
+
+                case Score.One:
+                case Score.Two:
+                    return Color.White;
+
+                case Score.Three:
+                case Score.Four:
+                    return Color.Black;
+
+                case Score.Five:
+                case Score.Six:
+                    return Color.Blue;
+
+                case Score.Seven:
+                case Score.Height:
+                    return Color.Red;
+
+                case Score.Nine:
+                case Score.Ten:
+                case Score.XTen:
+                    return Color.Yellow;
+
+                default:
+                    goto case Score.Miss;
+            }
         }
     }
 }

@@ -53,7 +53,7 @@
     <Compile Include="CustomControls\ItemsGrid.cs" />
     <Compile Include="Interfaces\ITarget.cs" />
     <Compile Include="Utils\Arrow.cs" />
-    <Compile Include="Utils\TargetScoreCounter.cs" />
+    <Compile Include="Utils\ScoreCounter.cs" />
     <Compile Include="Behaviors\TimerBehavior.cs" />
     <Compile Include="CustomControls\Targets\EnglishTarget.cs" />
     <Compile Include="CustomControls\CustomTimer.cs" />

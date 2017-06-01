@@ -1,5 +1,5 @@
 ﻿using Xamarin.Forms;
-using static ArcheryManager.Utils.TargetScoreCounter;
+using static ArcheryManager.Utils.ScoreCounter;
 
 namespace ArcheryManager.Utils
 {
