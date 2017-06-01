@@ -1,24 +1,23 @@
-﻿using ArcheryManager.CustomControls;
+﻿using ArcheryManager.Interfaces;
 using Xamarin.Forms;
 
 namespace ArcheryManager.Behaviors
 {
-    public class TargetBehavior : CustomBehavior<CustomTarget>
+    public class TargetBehavior<T> : CustomBehavior<T> where T : BindableObject, ITarget
     {
         /// <summary>
         /// scale of the target during manipulation to set arrow
         /// </summary>
-        private const double TargetScale = 1.35;
+        public const double TargetScale = 1.35;
 
         /// <summary>
         /// rate of the target translation during manipulation to set arrow
         /// </summary>
-        private const double TargetTranslationRate = -0.3;
+        public const double TargetTranslationRate = -0.3;
 
-        protected override void OnAttachedTo(CustomTarget bindable)
+        protected override void OnAttachedTo(T bindable)
         {
             base.OnAttachedTo(bindable);
-
             ApplyPanGesture(associatedObject.TargetGrid);
         }
 
@@ -52,7 +51,6 @@ namespace ArcheryManager.Behaviors
 
                 case GestureStatus.Canceled:
                 case GestureStatus.Completed:
-
                     EndPanGesture();
                     break;
             }
@@ -68,7 +66,7 @@ namespace ArcheryManager.Behaviors
 
             var position = new Point(associatedObject.ArrowSetter.TranslationX,
                                         associatedObject.ArrowSetter.TranslationY);
-            associatedObject.SetArrow(position);
+            associatedObject.AddArrow(position);
 
             associatedObject.TargetGrid.TranslationX = 0;
             associatedObject.TargetGrid.TranslationY = 0;
@@ -99,7 +97,6 @@ namespace ArcheryManager.Behaviors
         private void StartPanGesture()
         {
             associatedObject.ArrowSetter.IsVisible = true;
-
             associatedObject.TargetGrid.Scale = TargetScale;
         }
     }
