@@ -9,22 +9,6 @@ namespace ArcheryManager.Utils
 {
     public class TargetScoreCounter
     {
-        public enum Score
-        {
-            Miss = 0,
-            One = 1,
-            Two = 2,
-            Three = 3,
-            Four = 4,
-            Five = 5,
-            Six = 6,
-            Seven = 7,
-            Height = 8,
-            Nine = 9,
-            Ten = 10,
-            XTen = 11,
-        }
-
         private IList<Arrow> arrows;
 
         public ReadOnlyCollection<Arrow> Arrows
@@ -37,17 +21,14 @@ namespace ArcheryManager.Utils
 
         public Color ArrowColor { get; private set; }
 
-        public TargetScoreCounter()
+        public TargetScoreCounter(IList<Arrow> list)
         {
-            arrows = new List<Arrow>();
+            arrows = list;
         }
 
-        public Arrow AddArrow(View visual, Score score)
+        public void AddArrow(Arrow arrow)
         {
-            var arrow = new Arrow(visual, score);
             arrows.Add(arrow);
-
-            return arrow;
         }
 
         public IEnumerable<Arrow> CleanArrows()

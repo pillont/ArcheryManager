@@ -2,8 +2,10 @@
 using ArcheryManager.Interfaces;
 using ArcheryManager.Utils;
 using System;
+using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using XFShapeView;
+using static ArcheryManager.Utils.Arrow;
 using static ArcheryManager.Utils.TargetScoreCounter;
 
 namespace ArcheryManager.CustomControls.Targets
@@ -105,6 +107,10 @@ namespace ArcheryManager.CustomControls.Targets
             };
             TargetGrid.Children.Add(center);
 
+            var arrowGrid = new ArrowsGrid();
+
+            TargetGrid.Children.Add(arrowGrid);
+
             #endregion targetgrid
 
             #region arrow setter point
@@ -139,36 +145,41 @@ namespace ArcheryManager.CustomControls.Targets
             var behavior = new TargetBehavior<EnglishTarget>();
             Behaviors.Add(behavior);
 
-            counter = new TargetScoreCounter();
+            counter = new TargetScoreCounter(arrowGrid.Items);
         }
 
         #region public functions
 
         public void AddArrow(Point position)
         {
-            var score = ScoreAt(position); // position with scale
+            Arrow arrow = ArrowInPosition(position);
+            counter.AddArrow(arrow);
+        }
 
-            var realPosition = new Point( // position without scale
-                            x: (position.X + position.X * Math.Abs(TargetBehavior<EnglishTarget>.TargetTranslationRate)) / TargetBehavior<EnglishTarget>.TargetScale,
-                            y: (position.Y + position.Y * Math.Abs(TargetBehavior<EnglishTarget>.TargetTranslationRate)) / TargetBehavior<EnglishTarget>.TargetScale);
-            var visual = ArrowVisual(realPosition);
+        private Arrow ArrowInPosition(Point position)
+        {
+            var score = ScoreAt(position);
+            Color color = ColorOf(score);
+            var x = (position.X + position.X * Math.Abs(TargetBehavior<EnglishTarget>.TargetTranslationRate)) / TargetBehavior<EnglishTarget>.TargetScale;
+            var y = (position.Y + position.Y * Math.Abs(TargetBehavior<EnglishTarget>.TargetTranslationRate)) / TargetBehavior<EnglishTarget>.TargetScale;
 
-            var arrow = counter.AddArrow(visual, score);
-            TargetGrid.Children.Add(arrow);
+            var arrow = new Arrow(x, y, score, color);
+            return arrow;
+        }
+
+        private Color ColorOf(Score score)
+        {
+            return default(Color);// throw new NotImplementedException();
         }
 
         public void RemoveLastArrow()
         {
             var arrow = counter.RemoveLastArrow();
-            TargetGrid.Children.Remove(arrow);
         }
 
         public void CleanArrows()
         {
             var arrows = counter.CleanArrows();
-
-            foreach (var a in arrows)
-                TargetGrid.Children.Remove(a);
         }
 
         #endregion public functions
@@ -215,23 +226,6 @@ namespace ArcheryManager.CustomControls.Targets
                 return Color.White;
             else
                 return Color.Black;
-        }
-
-        private View ArrowVisual(Point position)
-        {
-            return new ShapeView
-            {
-                HeightRequest = ArrowWidth,
-                WidthRequest = ArrowWidth,
-                ShapeType = ShapeType.Circle,
-                BorderColor = ArrowColor,
-                Color = ArrowColor,
-                BorderWidth = 1,
-                TranslationX = position.X,
-                TranslationY = position.Y,
-                VerticalOptions = LayoutOptions.Center,
-                HorizontalOptions = LayoutOptions.Center,
-            };
         }
 
         private Score ScoreAt(Point position)

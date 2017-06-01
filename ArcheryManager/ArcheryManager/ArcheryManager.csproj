@@ -49,6 +49,8 @@
     </Compile>
     <Compile Include="Behaviors\CustomBehavior.cs" />
     <Compile Include="Behaviors\TargetBehavior.cs" />
+    <Compile Include="CustomControls\ArrowsGrid.cs" />
+    <Compile Include="CustomControls\ItemsGrid.cs" />
     <Compile Include="Interfaces\ITarget.cs" />
     <Compile Include="Utils\Arrow.cs" />
     <Compile Include="Utils\TargetScoreCounter.cs" />
