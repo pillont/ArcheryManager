@@ -190,11 +190,11 @@ namespace ArcheryManager.CustomControls.Targets
             {
                 case 3:
                 case 4:
-                    return Color.Black;
+                    return Color.Gray;
 
                 case 5:
                 case 6:
-                    return Color.Blue;
+                    return Color.AliceBlue;
 
                 case 7:
                 case 8:
