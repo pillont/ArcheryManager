@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace ArcheryManager.Behaviors
 {
-    public class TargetBehavior<T> : CustomBehavior<T> where T : BindableObject, ITarget
+    public class TargetBehavior<T> : CustomBehavior<T> where T : BindableObject, IMovableTarget, ITargetWithInteraction
     {
         /// <summary>
         /// scale of the target during manipulation to set arrow

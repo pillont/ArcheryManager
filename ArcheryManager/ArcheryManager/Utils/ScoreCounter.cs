@@ -1,6 +1,7 @@
 ﻿using Xamarin.Forms;
 using System.Collections.ObjectModel;
 using System.Linq;
+using ArcheryManager.Factories;
 
 namespace ArcheryManager.Utils
 {
@@ -8,6 +9,8 @@ namespace ArcheryManager.Utils
     {
         public static readonly BindableProperty ArrowsProperty =
                       BindableProperty.Create(nameof(Arrows), typeof(ObservableCollection<Arrow>), typeof(ScoreCounter), null);
+
+        private readonly ArrowFactory arrowFactory;
 
         public ObservableCollection<Arrow> Arrows
         {
@@ -24,10 +27,9 @@ namespace ArcheryManager.Utils
             }
         }
 
-        public Color ArrowColor { get; private set; }
-
-        public ScoreCounter()
+        public ScoreCounter(ArrowFactory arrowFactory)
         {
+            this.arrowFactory = arrowFactory;
             Arrows = new ObservableCollection<Arrow>();
         }
 
@@ -35,9 +37,11 @@ namespace ArcheryManager.Utils
         {
         }
 
-        public void AddArrow(Arrow a)
+        public void AddArrow(Point position)
         {
-            Arrows?.Add(a);
+            Arrow arrow = arrowFactory.Create(position);
+
+            Arrows?.Add(arrow);
         }
 
         public void ClearArrow()

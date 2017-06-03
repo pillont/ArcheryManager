@@ -1,39 +1,47 @@
 ﻿using ArcheryManager.Behaviors;
+using ArcheryManager.Factories;
 using ArcheryManager.Interfaces;
 using ArcheryManager.Utils;
-using System;
 using Xamarin.Forms;
 using XFShapeView;
-using static ArcheryManager.Utils.Arrow;
 
 namespace ArcheryManager.CustomControls.Targets
 {
-    public class EnglishTarget : ContentView, ITarget
+    public class EnglishTarget : ContentView, IMovableTarget, ITargetWithInteraction
     {
         /// <summary>
         /// count of color in the target
         /// </summary>
-        private const int ColorCount = 12;
+        public const int ColorCount = 12;
 
         /// <summary>
         /// ratio to define the width of the zone
         /// </summary>
-        private const double ColorWidthRatio = 1.02;
+        public const double ColorWidthRatio = 1.02;
 
         /// <summary>
         /// size of the target
         /// </summary>
-        private const int TargetSize = 350; //TODO allow to change value
+        private const int DefaultTargetSize = 350; //TODO allow to change value
+
+        public static readonly BindableProperty TargetSizeProperty =
+                      BindableProperty.Create(nameof(TargetSize), typeof(int), typeof(EnglishTarget), DefaultTargetSize);
+
+        public int TargetSize
+        {
+            get { return (int)GetValue(TargetSizeProperty); }
+            set { SetValue(TargetSizeProperty, value); }
+        }
 
         /// <summary>
         /// width of the target strings
         /// </summary>
-        private const int StringWidth = 1;
+        public const int StringWidth = 1;
 
         /// <summary>
         /// width of the arrow in the target
         /// </summary>
-        private const int ArrowWidth = 10;
+        public const int ArrowWidth = 10;
 
         /// <summary>
         /// width of the arrow in the zoomed target
@@ -143,7 +151,8 @@ namespace ArcheryManager.CustomControls.Targets
             var behavior = new TargetBehavior<EnglishTarget>();
             Behaviors.Add(behavior);
 
-            Counter = new ScoreCounter();
+            var factory = new EnglishArrowFactory(this);
+            Counter = new ScoreCounter(factory);
             arrowGrid.Items = Counter.Arrows;
         }
 
@@ -151,19 +160,7 @@ namespace ArcheryManager.CustomControls.Targets
 
         public void AddArrow(Point position)
         {
-            Arrow arrow = ArrowInPosition(position);
-            Counter.AddArrow(arrow);
-        }
-
-        private Arrow ArrowInPosition(Point position)
-        {
-            var score = ScoreAt(position);
-            Color color = ColorOf(score);
-            var x = (position.X + position.X * Math.Abs(TargetBehavior<EnglishTarget>.TargetTranslationRate)) / TargetBehavior<EnglishTarget>.TargetScale;
-            var y = (position.Y + position.Y * Math.Abs(TargetBehavior<EnglishTarget>.TargetTranslationRate)) / TargetBehavior<EnglishTarget>.TargetScale;
-
-            var arrow = new Arrow(x, y, score, color);
-            return arrow;
+            Counter.AddArrow(position);
         }
 
         public void RemoveLastArrow()
@@ -190,11 +187,11 @@ namespace ArcheryManager.CustomControls.Targets
             {
                 case 3:
                 case 4:
-                    return Color.Gray;
+                    return Color.Black;
 
                 case 5:
                 case 6:
-                    return Color.AliceBlue;
+                    return Color.Blue;
 
                 case 7:
                 case 8:
@@ -220,58 +217,6 @@ namespace ArcheryManager.CustomControls.Targets
                 return Color.White;
             else
                 return Color.Black;
-        }
-
-        private Score ScoreAt(Point position)
-        {
-            double distance = Math.Sqrt(Math.Pow(position.X, 2) + Math.Pow(position.Y, 2));
-            distance -= distance * TargetBehavior<EnglishTarget>.TargetTranslationRate; // target translation
-            distance -= ArrowWidth / 2; // arrow size
-            distance -= StringWidth; // string size
-
-            for (int i = 11; i > 0; i--)
-            {
-                double rate = (ColorCount - i * ColorWidthRatio) / ColorCount;
-
-                double size = TargetSize * rate;
-                size *= TargetBehavior<EnglishTarget>.TargetScale; // target scale
-                if (distance < size / 2)
-                    return (Score)i;
-            }
-            return (Score)0;
-        }
-
-        private Color ColorOf(Score score)
-        {
-            switch (score)
-            {
-                case Score.Miss:
-                    return Color.Green;
-
-                case Score.One:
-                case Score.Two:
-                    return Color.White;
-
-                case Score.Three:
-                case Score.Four:
-                    return Color.Black;
-
-                case Score.Five:
-                case Score.Six:
-                    return Color.Blue;
-
-                case Score.Seven:
-                case Score.Height:
-                    return Color.Red;
-
-                case Score.Nine:
-                case Score.Ten:
-                case Score.XTen:
-                    return Color.Yellow;
-
-                default:
-                    goto case Score.Miss;
-            }
         }
     }
 }

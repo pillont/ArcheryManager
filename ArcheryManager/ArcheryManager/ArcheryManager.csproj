@@ -51,7 +51,10 @@
     <Compile Include="Behaviors\TargetBehavior.cs" />
     <Compile Include="CustomControls\ArrowsGrid.cs" />
     <Compile Include="CustomControls\ItemsGrid.cs" />
-    <Compile Include="Interfaces\ITarget.cs" />
+    <Compile Include="Factories\ArrowFactory.cs" />
+    <Compile Include="Factories\EnglishArrowFactory.cs" />
+    <Compile Include="Interfaces\IMovableTarget.cs" />
+    <Compile Include="Interfaces\ITargetWithInteraction.cs" />
     <Compile Include="Utils\Arrow.cs" />
     <Compile Include="Utils\ScoreCounter.cs" />
     <Compile Include="Behaviors\TimerBehavior.cs" />
@@ -123,7 +126,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

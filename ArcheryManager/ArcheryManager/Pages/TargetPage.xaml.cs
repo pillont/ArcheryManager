@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using ArcheryManager.Interfaces;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ArcheryManager.Pages
@@ -6,6 +7,14 @@ namespace ArcheryManager.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TargetPage : ContentPage
     {
+        private ITargetWithInteraction target
+        {
+            get
+            {
+                return customTarget;
+            }
+        }
+
         public TargetPage()
         {
             InitializeComponent();
@@ -14,12 +23,12 @@ namespace ArcheryManager.Pages
 
         private void Button_RemoveLast(object sender, System.EventArgs e)
         {
-            customTarget.RemoveLastArrow();
+            target.RemoveLastArrow();
         }
 
         private void Button_RemoveAll(object sender, System.EventArgs e)
         {
-            customTarget.ClearArrows();
+            target.ClearArrows();
         }
     }
 }

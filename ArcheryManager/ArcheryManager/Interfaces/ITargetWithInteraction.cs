@@ -1,25 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-using XFShapeView;
+﻿using Xamarin.Forms;
 
 namespace ArcheryManager.Interfaces
 {
-    public interface ITarget
+    public interface ITargetWithInteraction
     {
-        /// <summary>
-        /// grid who content the target
-        /// </summary>
-        Grid TargetGrid { get; }
-
-        /// <summary>
-        /// arrow setter of the target
-        /// </summary>
-        ShapeView ArrowSetter { get; }
-
         /// <summary>
         /// add new arrow
         /// </summary>

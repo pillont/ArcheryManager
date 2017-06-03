@@ -7,6 +7,7 @@
              x:Class="ArcheryManager.Pages.TargetPage">
 
     <StackLayout>
+        <!-- TODO : target update-->
         <ctl:EnglishTarget x:Name="customTarget"  HeightRequest="1200" WidthRequest="1200" />
         <Button Text="remove last" Clicked="Button_RemoveLast" />
         <Button Text="remove all"  Clicked="Button_RemoveAll" />
@@ -24,9 +25,9 @@
                                 Color="{Binding Color}"
                                 BorderWidth = "1" />
 
-                            <Label VerticalTextAlignment="Center" 
+                            <Label VerticalTextAlignment="Center"
                                    HorizontalTextAlignment="Center"
-                                   Text="{Binding ScoreArrow}" />
+                                   Text="{Binding Score}" />
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
