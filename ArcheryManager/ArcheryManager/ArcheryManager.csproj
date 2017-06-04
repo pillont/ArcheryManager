@@ -48,7 +48,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Behaviors\CustomBehavior.cs" />
-    <Compile Include="Behaviors\TargetBehavior.cs" />
+    <Compile Include="Behaviors\MovableTargetBehavior.cs" />
     <Compile Include="CustomControls\ArrowsGrid.cs" />
     <Compile Include="CustomControls\ItemsGrid.cs" />
     <Compile Include="CustomControls\ArrowCustomGrid.cs" />

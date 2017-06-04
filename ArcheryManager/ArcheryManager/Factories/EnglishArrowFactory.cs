@@ -77,7 +77,7 @@ namespace ArcheryManager.Factories
 
         private double transformPosition(double val)
         {
-            return (val + val * Math.Abs(TargetBehavior<EnglishTarget>.TargetTranslationRate)) / TargetBehavior<EnglishTarget>.TargetScale;
+            return (val + val * Math.Abs(MovableTargetBehavior<EnglishTarget>.TargetTranslationRate)) / MovableTargetBehavior<EnglishTarget>.TargetScale;
         }
 
         protected string ScoreByIndex(int i)
@@ -88,7 +88,7 @@ namespace ArcheryManager.Factories
         protected override string ScoreOf(Point position)
         {
             double distance = Math.Sqrt(Math.Pow(position.X, 2) + Math.Pow(position.Y, 2));
-            distance -= distance * TargetBehavior<EnglishTarget>.TargetTranslationRate; // target translation
+            distance -= distance * MovableTargetBehavior<EnglishTarget>.TargetTranslationRate; // target translation
             distance -= EnglishTarget.ArrowWidth / 2; // arrow size
             distance -= EnglishTarget.StringWidth; // string size
 
@@ -97,7 +97,7 @@ namespace ArcheryManager.Factories
                 double rate = (EnglishTarget.ColorCount - i * EnglishTarget.ColorWidthRatio) / EnglishTarget.ColorCount;
 
                 double size = target.TargetSize * rate;
-                size *= TargetBehavior<EnglishTarget>.TargetScale; // target scale
+                size *= MovableTargetBehavior<EnglishTarget>.TargetScale; // target scale
                 if (distance < size / 2)
                     return ScoreByIndex(i);
             }

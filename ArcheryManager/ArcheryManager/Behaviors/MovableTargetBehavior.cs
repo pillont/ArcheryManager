@@ -1,9 +1,10 @@
 ﻿using ArcheryManager.Interfaces;
+using ArcheryManager.Utils;
 using Xamarin.Forms;
 
 namespace ArcheryManager.Behaviors
 {
-    public class TargetBehavior<T> : CustomBehavior<T> where T : BindableObject, IMovableTarget, ITargetWithInteraction
+    public class MovableTargetBehavior<T> : CustomBehavior<T> where T : BindableObject, IMovableTarget
     {
         /// <summary>
         /// scale of the target during manipulation to set arrow
@@ -14,6 +15,20 @@ namespace ArcheryManager.Behaviors
         /// rate of the target translation during manipulation to set arrow
         /// </summary>
         public const double TargetTranslationRate = -0.3;
+
+        /// <summary>
+        /// score counter where add new arrows
+        /// </summary>
+        private ScoreCounter counter;
+
+        /// <summary>
+        /// behavior to add interaction of pan on movable target
+        /// </summary>
+        /// <param name="counter">score counter where add new arrows</param>
+        public MovableTargetBehavior(ScoreCounter counter)
+        {
+            this.counter = counter;
+        }
 
         protected override void OnAttachedTo(T bindable)
         {
@@ -66,7 +81,7 @@ namespace ArcheryManager.Behaviors
 
             var position = new Point(associatedObject.ArrowSetter.TranslationX,
                                         associatedObject.ArrowSetter.TranslationY);
-            associatedObject.AddArrow(position);
+            counter.AddArrow(position);
 
             associatedObject.TargetGrid.TranslationX = 0;
             associatedObject.TargetGrid.TranslationY = 0;

@@ -44,7 +44,7 @@ namespace ArcheryManager.Utils
             Arrows?.Add(arrow);
         }
 
-        public void ClearArrow()
+        public void ClearArrows()
         {
             Arrows?.Clear();
         }

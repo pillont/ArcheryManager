@@ -2,13 +2,26 @@
 using ArcheryManager.Factories;
 using ArcheryManager.Interfaces;
 using ArcheryManager.Utils;
+using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using XFShapeView;
 
 namespace ArcheryManager.CustomControls.Targets
 {
-    public class EnglishTarget : ContentView, IMovableTarget, ITargetWithInteraction
+    public class EnglishTarget : ContentView, IMovableTarget
     {
+        public ObservableCollection<Arrow> Items
+        {
+            get
+            {
+                return arrowGrid.Items;
+            }
+            set
+            {
+                arrowGrid.Items = value;
+            }
+        }
+
         /// <summary>
         /// count of color in the target
         /// </summary>
@@ -46,12 +59,7 @@ namespace ArcheryManager.CustomControls.Targets
         /// <summary>
         /// width of the arrow in the zoomed target
         /// </summary>
-        private const double ArrowWidthZommed = ArrowWidth * TargetBehavior<EnglishTarget>.TargetScale;
-
-        /// <summary>
-        /// count the score on the target
-        /// </summary>
-        public ScoreCounter Counter { get; private set; }
+        private const double ArrowWidthZommed = ArrowWidth * MovableTargetBehavior<EnglishTarget>.TargetScale;
 
         /// <summary>
         /// color of the arrows in the target
@@ -62,6 +70,10 @@ namespace ArcheryManager.CustomControls.Targets
         /// color of the point to set arrow
         /// </summary>
         private readonly Color ArrowSetterColor = Color.Fuchsia;
+
+        private ArrowsGrid arrowGrid;
+
+        public EnglishArrowFactory Factory { get; private set; }
 
         /// <summary>
         /// point to set arrow during manipulation
@@ -113,7 +125,7 @@ namespace ArcheryManager.CustomControls.Targets
             };
             TargetGrid.Children.Add(center);
 
-            var arrowGrid = new ArrowsGrid();
+            arrowGrid = new ArrowsGrid();
 
             TargetGrid.Children.Add(arrowGrid);
 
@@ -124,7 +136,7 @@ namespace ArcheryManager.CustomControls.Targets
             ArrowSetter = new ShapeView()
             {
                 HeightRequest = ArrowWidthZommed,
-                WidthRequest = ArrowWidth * TargetBehavior<EnglishTarget>.TargetScale,
+                WidthRequest = ArrowWidth * MovableTargetBehavior<EnglishTarget>.TargetScale,
                 ShapeType = ShapeType.Circle,
                 BorderColor = ArrowSetterColor,
                 Color = ArrowSetterColor,
@@ -148,32 +160,8 @@ namespace ArcheryManager.CustomControls.Targets
 
             #endregion visual generation
 
-            var behavior = new TargetBehavior<EnglishTarget>();
-            Behaviors.Add(behavior);
-
-            var factory = new EnglishArrowFactory(this);
-            Counter = new ScoreCounter(factory);
-            arrowGrid.Items = Counter.Arrows;
+            Factory = new EnglishArrowFactory(this);
         }
-
-        #region public functions
-
-        public void AddArrow(Point position)
-        {
-            Counter.AddArrow(position);
-        }
-
-        public void RemoveLastArrow()
-        {
-            Counter.RemoveLastArrow();
-        }
-
-        public void ClearArrows()
-        {
-            Counter.ClearArrow();
-        }
-
-        #endregion public functions
 
         /// <summary>
         ///determine the color associated to the score zone
