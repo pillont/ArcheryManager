@@ -13,8 +13,8 @@
         <Button Text="remove last" Clicked="Button_RemoveLast" />
         <Button Text="remove all"  Clicked="Button_RemoveAll" />
 
-        <Grid HeightRequest="100">
-            <ctl:ArrowCustomGrid x:Name="scoreList"  Grid.Column="0" MaxWidth="49" />
-        </Grid>
+        <ScrollView x:Name="scrollArrows" MinimumHeightRequest="60" HeightRequest="60">
+            <ctl:ArrowCustomGrid x:Name="scoreList"  Grid.Column="0" MinWidth="49" />
+        </ScrollView>
     </StackLayout>
 </ContentPage>

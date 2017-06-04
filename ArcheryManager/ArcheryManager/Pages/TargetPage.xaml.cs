@@ -18,7 +18,14 @@ namespace ArcheryManager.Pages
         public TargetPage()
         {
             InitializeComponent();
-            scoreList.Items = customTarget.Counter.Arrows;
+            var list = customTarget.Counter.Arrows;
+            scoreList.Items = list;
+            list.CollectionChanged += RowDefinitions_ItemSizeChanged;
+        }
+
+        private void RowDefinitions_ItemSizeChanged(object sender, System.EventArgs e)
+        {
+            scrollArrows.ScrollToAsync(scoreList, ScrollToPosition.End, true);
         }
 
         private void Button_RemoveLast(object sender, System.EventArgs e)

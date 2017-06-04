@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ArcheryManager.Utils;
+﻿using ArcheryManager.Utils;
 using Xamarin.Forms;
 using XFShapeView;
 
@@ -17,6 +12,7 @@ namespace ArcheryManager.CustomControls
 
             var shape = new ShapeView()
             {
+                Margin = new Thickness(2),
                 HeightRequest = 20,
                 WidthRequest = 20,
                 ShapeType = ShapeType.Circle,
