@@ -1,37 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:ctl="clr-namespace:ArcheryManager.CustomControls.Targets"
+             xmlns:targ="clr-namespace:ArcheryManager.CustomControls.Targets"
+             xmlns:ctl="clr-namespace:ArcheryManager.CustomControls"
              xmlns:controls="clr-namespace:XFShapeView;assembly=XFShapeView"
              xmlns:shape="clr-namespace:XFShapeView;assembly=XFShapeView"
              x:Class="ArcheryManager.Pages.TargetPage">
 
     <StackLayout>
         <!-- TODO : target update-->
-        <ctl:EnglishTarget x:Name="customTarget"  HeightRequest="1200" WidthRequest="1200" />
+        <targ:EnglishTarget x:Name="customTarget"  HeightRequest="1200" WidthRequest="1200" />
         <Button Text="remove last" Clicked="Button_RemoveLast" />
         <Button Text="remove all"  Clicked="Button_RemoveAll" />
 
-        <ListView x:Name="scoreList" ItemsSource="{Binding Arrows}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid>
-                            <shape:ShapeView
-                                HeightRequest = "20"
-                                WidthRequest = "20"
-                                ShapeType = "Circle"
-                                BorderColor = "{Binding Color}"
-                                Color="{Binding Color}"
-                                BorderWidth = "1" />
-
-                            <Label VerticalTextAlignment="Center"
-                                   HorizontalTextAlignment="Center"
-                                   Text="{Binding Score}" />
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Grid HeightRequest="100">
+            <ctl:ArrowCustomGrid x:Name="scoreList"  Grid.Column="0" MaxWidth="49" />
+        </Grid>
     </StackLayout>
 </ContentPage>

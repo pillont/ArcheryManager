@@ -18,7 +18,7 @@ namespace ArcheryManager.Pages
         public TargetPage()
         {
             InitializeComponent();
-            scoreList.BindingContext = customTarget.Counter;
+            scoreList.Items = customTarget.Counter.Arrows;
         }
 
         private void Button_RemoveLast(object sender, System.EventArgs e)

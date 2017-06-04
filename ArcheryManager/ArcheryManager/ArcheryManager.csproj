@@ -51,6 +51,8 @@
     <Compile Include="Behaviors\TargetBehavior.cs" />
     <Compile Include="CustomControls\ArrowsGrid.cs" />
     <Compile Include="CustomControls\ItemsGrid.cs" />
+    <Compile Include="CustomControls\ArrowCustomGrid.cs" />
+    <Compile Include="CustomControls\UniformGrid.cs" />
     <Compile Include="Factories\ArrowFactory.cs" />
     <Compile Include="Factories\EnglishArrowFactory.cs" />
     <Compile Include="Interfaces\IMovableTarget.cs" />

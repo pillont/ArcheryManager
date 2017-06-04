@@ -34,7 +34,7 @@ namespace ArcheryManager.CustomControls
             set { SetValue(ArrowColorProperty, value); }
         }
 
-        protected override View CreateItemContainer()
+        protected override View CreateItemContainer(Arrow arrow)
         {
             var ctn = new ShapeView
             {

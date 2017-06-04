@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using Xamarin.Forms;
@@ -7,6 +9,10 @@ namespace ArcheryManager.CustomControls
 {
     public abstract class ItemsGrid<T> : Grid
     {
+        public event Action<View> ItemAdded;
+
+        public event Action<View> ItemRemoved;
+
         public static readonly BindableProperty ItemsProperty =
               BindableProperty.Create(nameof(Items), typeof(ObservableCollection<T>), typeof(ItemsGrid<T>), null);
 
@@ -40,7 +46,7 @@ namespace ArcheryManager.CustomControls
         /// function to create the container of the item
         /// </summary>
         /// <returns></returns>
-        protected abstract View CreateItemContainer();
+        protected abstract View CreateItemContainer(T data);
 
         /// <summary>
         /// event when the collection change
@@ -51,17 +57,23 @@ namespace ArcheryManager.CustomControls
         {
             if (e.Action == NotifyCollectionChangedAction.Reset)
             {
+                var items = new List<View>(Children);
                 this.Children.Clear();
+                foreach (var i in items)
+                {
+                    ItemRemoved?.Invoke(i);
+                }
             }
             else
             {
                 if (e.NewItems != null)
                 {
-                    foreach (var item in e.NewItems)
+                    foreach (T item in e.NewItems)
                     {
-                        View container = CreateItemContainer();
+                        var container = CreateItemContainer(item);
                         container.BindingContext = item;
                         this.Children.Add(container);
+                        ItemAdded?.Invoke(container);
                     }
                 }
                 if (e.OldItems != null)
@@ -70,6 +82,7 @@ namespace ArcheryManager.CustomControls
                     {
                         View container = FindContainer(item);
                         this.Children.Remove(container);
+                        ItemRemoved?.Invoke(container);
                     }
                 }
             }
