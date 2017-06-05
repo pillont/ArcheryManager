@@ -8,13 +8,13 @@
              x:Class="ArcheryManager.Pages.TargetPage">
 
     <StackLayout>
-        <!-- TODO : target update-->
+        <ctl:TotalCounter x:Name="totalCounter" />
         <targ:EnglishTarget x:Name="customTarget"  HeightRequest="1200" WidthRequest="1200" />
-        <Button Text="remove last" Clicked="Button_RemoveLast" />
-        <Button Text="remove all"  Clicked="Button_RemoveAll" />
 
-        <ScrollView x:Name="scrollArrows" MinimumHeightRequest="60" HeightRequest="60">
+        <ScrollView x:Name="scrollArrows" MinimumHeightRequest="60" HeightRequest="60" BackgroundColor="AliceBlue">
             <ctl:ArrowCustomGrid x:Name="scoreList"  Grid.Column="0" MinWidth="49" />
         </ScrollView>
+
+        <ctl:TargetCommands x:Name="targetCommands" Counter="{Binding Counter}" />
     </StackLayout>
 </ContentPage>

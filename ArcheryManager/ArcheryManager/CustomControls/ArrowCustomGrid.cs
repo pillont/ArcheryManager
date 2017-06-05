@@ -17,8 +17,8 @@ namespace ArcheryManager.CustomControls
                 WidthRequest = 20,
                 ShapeType = ShapeType.Circle,
                 BorderWidth = 1,
+                BorderColor = Color.Black,
             };
-            shape.SetBinding(ShapeView.BorderColorProperty, "Color");
             shape.SetBinding(ShapeView.ColorProperty, "Color");
 
             grid.Children.Add(shape);

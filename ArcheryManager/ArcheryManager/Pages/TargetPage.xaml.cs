@@ -9,35 +9,35 @@ namespace ArcheryManager.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TargetPage : ContentPage
     {
-        private ScoreCounter counter;
+        public static readonly BindableProperty CounterProperty =
+                              BindableProperty.Create(nameof(Counter), typeof(ScoreCounter), typeof(TargetPage), null);
+
+        public ScoreCounter Counter
+        {
+            get { return (ScoreCounter)GetValue(CounterProperty); }
+            set { SetValue(CounterProperty, value); }
+        }
 
         public TargetPage()
         {
             InitializeComponent();
+            this.BindingContext = this;
+            Counter = new ScoreCounter(customTarget.Factory);
 
-            counter = new ScoreCounter(customTarget.Factory);
-            var list = counter.Arrows;
+            var list = Counter.Arrows;
+            list.CollectionChanged += RowDefinitions_ItemSizeChanged;
             scoreList.Items = list;
             customTarget.Items = list;
-            list.CollectionChanged += RowDefinitions_ItemSizeChanged;
 
-            var behavior = new MovableTargetBehavior<EnglishTarget>(counter);
+            var behavior = new MovableTargetBehavior<EnglishTarget>(Counter);
             customTarget.Behaviors.Add(behavior);
+
+            totalCounter.BindingContext = Counter;
         }
 
         private void RowDefinitions_ItemSizeChanged(object sender, System.EventArgs e)
         {
             scrollArrows.ScrollToAsync(scoreList, ScrollToPosition.End, true);
-        }
-
-        private void Button_RemoveLast(object sender, System.EventArgs e)
-        {
-            counter.RemoveLastArrow();
-        }
-
-        private void Button_RemoveAll(object sender, System.EventArgs e)
-        {
-            counter.ClearArrows();
         }
     }
 }

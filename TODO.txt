@@ -1,3 +1,7 @@
 checkbox sur les targets :
 	-> fleche dnas l ordre de tir
 	-> fleche dans l ordre decroissant
+
+mode target / zappette
+
+AB/CD mode

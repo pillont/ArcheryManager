@@ -52,6 +52,12 @@
     <Compile Include="CustomControls\ArrowsGrid.cs" />
     <Compile Include="CustomControls\ItemsGrid.cs" />
     <Compile Include="CustomControls\ArrowCustomGrid.cs" />
+    <Compile Include="CustomControls\TargetCommands.xaml.cs">
+      <DependentUpon>TargetCommands.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\TotalCounter.xaml.cs">
+      <DependentUpon>TotalCounter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\UniformGrid.cs" />
     <Compile Include="Factories\ArrowFactory.cs" />
     <Compile Include="Factories\EnglishArrowFactory.cs" />
@@ -124,6 +130,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\TargetPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CustomControls\TotalCounter.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CustomControls\TargetCommands.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
