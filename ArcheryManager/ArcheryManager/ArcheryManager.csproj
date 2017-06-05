@@ -60,6 +60,7 @@
     </Compile>
     <Compile Include="CustomControls\UniformGrid.cs" />
     <Compile Include="Factories\ArrowFactory.cs" />
+    <Compile Include="Factories\ArrowSetting.cs" />
     <Compile Include="Factories\EnglishArrowFactory.cs" />
     <Compile Include="Interfaces\IMovableTarget.cs" />
     <Compile Include="Interfaces\ITargetWithInteraction.cs" />

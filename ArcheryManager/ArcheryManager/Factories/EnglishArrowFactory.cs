@@ -3,64 +3,20 @@ using ArcheryManager.CustomControls.Targets;
 using ArcheryManager.Interfaces;
 using ArcheryManager.Utils;
 using System;
-using System.Linq;
-using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace ArcheryManager.Factories
 {
     public class EnglishArrowFactory : ArrowFactory
     {
-        private const string MissScore = "M";
-        private const string OneScore = "1";
-        private const string TwoScore = "2";
-        private const string ThreeScore = "3";
-        private const string FourScore = "4";
-        private const string FiveScore = "5";
-        private const string SixScore = "6";
-        private const string SevenScore = "7";
-        private const string HeightScore = "8";
-        private const string NineScore = "9";
-        private const string TenScore = "10";
-        private const string XtenScore = "X10";
-
-        private Dictionary<string, Color> EnglishColorOf = new Dictionary<string, Color>()
-        {
-            { MissScore, Color.Green},
-            { OneScore, Color.White},
-            { TwoScore, Color.White},
-            { ThreeScore, Color.Gray},
-            { FourScore, Color.Gray},
-            { FiveScore, Color.CornflowerBlue},
-            { SixScore,  Color.CornflowerBlue},
-            { SevenScore, Color.Red},
-            { HeightScore, Color.Red},
-            { NineScore, Color.Yellow},
-            { TenScore, Color.Yellow},
-            { XtenScore, Color.Yellow},
-        };
-
-        private static readonly Dictionary<int, string> englishScoreByIndex = new Dictionary<int, string>()
-        {
-            { 0 , MissScore },
-            { 1 , OneScore },
-            { 2 , TwoScore },
-            { 3 , ThreeScore },
-            { 4 , FourScore },
-            { 5 , FiveScore },
-            { 6 , SixScore },
-            { 7 , SevenScore },
-            { 8 , HeightScore },
-            { 9 , NineScore },
-            { 10 , TenScore },
-            { 11 , XtenScore },
-        };
+        private ArrowSetting setting;
 
         private readonly IMovableTarget target;
 
         public EnglishArrowFactory(IMovableTarget target)
         {
             this.target = target;
+            setting = ArrowSetting.EnglishInstance;
         }
 
         public override Arrow Create(Point position)
@@ -82,7 +38,7 @@ namespace ArcheryManager.Factories
 
         protected string ScoreByIndex(int i)
         {
-            return englishScoreByIndex[i];
+            return setting.ScoreByIndex(i);
         }
 
         protected override string ScoreOf(Point position)
@@ -101,21 +57,17 @@ namespace ArcheryManager.Factories
                 if (distance < size / 2)
                     return ScoreByIndex(i);
             }
-            return MissScore;
+            return ArrowSetting.MissScore;
         }
 
         protected override Color ColorOf(string value)
         {
-            return EnglishColorOf[value];
+            return setting.ColorOf(value);
         }
 
         protected override int ValueByScore(string score)
         {
-            var index = englishScoreByIndex.Where(val => val.Value == score).FirstOrDefault().Key;
-            if (index < 11)
-                return index;
-            else // case of X10
-                return 10;
+            return setting.ValueByScore(score);
         }
     }
 }
