@@ -1,12 +1,13 @@
 ﻿using Xamarin.Forms;
 using System.Collections.ObjectModel;
-using System.Linq;
-using ArcheryManager.Factories;
+using System.Collections.Generic;
 
 namespace ArcheryManager.Utils
 {
     public class ScoreCounter : BindableObject
     {
+        private List<List<Arrow>> FlightsSaved = new List<List<Arrow>>();
+
         public static readonly BindableProperty FlightProperty =
                       BindableProperty.Create(nameof(Flight), typeof(int), typeof(ScoreCounter), 0);
 
@@ -28,7 +29,6 @@ namespace ArcheryManager.Utils
         public static readonly BindableProperty ArrowsProperty =
                       BindableProperty.Create(nameof(Arrows), typeof(ObservableCollection<Arrow>), typeof(ScoreCounter), null);
 
-        private readonly ArrowFactory arrowFactory;
         private int lastTotal = 0;
 
         public ObservableCollection<Arrow> Arrows
@@ -48,14 +48,15 @@ namespace ArcheryManager.Utils
 
         internal void NewFlight()
         {
+            FlightsSaved.Add(new List<Arrow>(Arrows));
+
             lastTotal += Flight;
             Flight = 0;
             Arrows.Clear();
         }
 
-        public ScoreCounter(ArrowFactory arrowFactory)
+        public ScoreCounter()
         {
-            this.arrowFactory = arrowFactory;
             Arrows = new ObservableCollection<Arrow>();
         }
 
@@ -71,10 +72,8 @@ namespace ArcheryManager.Utils
             Total += Flight;
         }
 
-        public void AddArrow(Point position)
+        public void AddArrow(Arrow arrow)
         {
-            Arrow arrow = arrowFactory.Create(position);
-
             Arrows?.Add(arrow);
         }
 
@@ -85,9 +84,8 @@ namespace ArcheryManager.Utils
 
         public void RemoveLastArrow()
         {
-            var res = Arrows.LastOrDefault();
-            if (res != null)
-                Arrows.Remove(res);
+            if (Arrows.Count > 0)
+                Arrows.RemoveAt(Arrows.Count - 1);
         }
     }
 }

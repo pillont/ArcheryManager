@@ -11,9 +11,14 @@ namespace ArcheryManager.Utils
         public Color Color { get; private set; }
 
         public Arrow(Point position, string score, int value, Color color)
+            : this(score, value, color)
         {
             TranslationX = position.X;
             TranslationY = position.Y;
+        }
+
+        public Arrow(string score, int value, Color color)
+        {
             Score = score;
             Color = color;
             Value = value;

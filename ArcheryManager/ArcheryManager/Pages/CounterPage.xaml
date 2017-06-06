@@ -1,19 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:targ="clr-namespace:ArcheryManager.CustomControls.Targets"
              xmlns:ctl="clr-namespace:ArcheryManager.CustomControls"
-             xmlns:controls="clr-namespace:XFShapeView;assembly=XFShapeView"
-             xmlns:shape="clr-namespace:XFShapeView;assembly=XFShapeView"
-             x:Class="ArcheryManager.Pages.TargetPage">
+             x:Class="ArcheryManager.Pages.CounterPage">
 
     <StackLayout>
         <ctl:TotalCounter x:Name="totalCounter" />
-        <targ:EnglishTarget x:Name="customTarget"  HeightRequest="1200" WidthRequest="1200" />
-
         <ScrollView x:Name="scrollArrows" MinimumHeightRequest="60" HeightRequest="60" BackgroundColor="AliceBlue">
             <ctl:ArrowCustomGrid x:Name="scoreList"  Grid.Column="0" CountByRow="6" />
         </ScrollView>
+
+        <ctl:CounterButtons x:Name="counterButtons" />
 
         <ctl:CounterCommands x:Name="counterCommands" Counter="{Binding Counter}" />
     </StackLayout>

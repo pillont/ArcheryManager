@@ -1,6 +1,7 @@
 ﻿using Xamarin.Forms;
 using System.Linq;
 using System.Collections.Specialized;
+using System.Runtime.CompilerServices;
 
 namespace ArcheryManager.CustomControls
 {
@@ -15,13 +16,13 @@ namespace ArcheryManager.CustomControls
             set { SetValue(HeightCellProperty, value); }
         }
 
-        public static readonly BindableProperty MinWidthProperty =
-                              BindableProperty.Create(nameof(MinWidth), typeof(double?), typeof(UniformGrid<T>), null);
+        public static readonly BindableProperty CountByRowProperty =
+                      BindableProperty.Create(nameof(CountByRow), typeof(int?), typeof(UniformGrid<T>), null);
 
-        public double? MinWidth
+        public int? CountByRow
         {
-            get { return (double?)GetValue(MinWidthProperty); }
-            set { SetValue(MinWidthProperty, value); }
+            get { return (int?)GetValue(CountByRowProperty); }
+            set { SetValue(CountByRowProperty, value); }
         }
 
         public UniformGrid()
@@ -30,6 +31,19 @@ namespace ArcheryManager.CustomControls
             this.ItemAdded += UniformGrid_ItemAdded;
             this.ItemRemoved += UniformGrid_ItemRemoved;
             this.Items.CollectionChanged += Items_CollectionChanged;
+        }
+
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
+
+            if (propertyName == nameof(HeightCell))
+            {
+                foreach (var row in this.RowDefinitions)
+                {
+                    row.Height = new GridLength(HeightCell);
+                }
+            }
         }
 
         private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -68,8 +82,8 @@ namespace ArcheryManager.CustomControls
             {
                 SetItemInNewColumn(obj);
 
-                var widthLessMinimum = this.Children.First().Width != -1 && this.Children.First().Width < MinWidth;
-                if (widthLessMinimum)
+                var moreCountByRowWanted = this.ColumnDefinitions.Count > CountByRow;
+                if (moreCountByRowWanted)
                 {
                     var last = this.ColumnDefinitions.Last();
                     this.ColumnDefinitions.Remove(last);

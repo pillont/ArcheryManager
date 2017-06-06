@@ -60,9 +60,12 @@ namespace ArcheryManager.Factories
         {
             this.scoreByIndex = scoreByIndex;
             this.colorOf = colorOf;
+            ZoneCount = scoreByIndex.Count;
         }
 
-        public static ArrowSetting EnglishInstance
+        public int ZoneCount { get; set; }
+
+        public static ArrowSetting EnglishInstance //TODO multi class with singleton and common interface IArrowSetting
         {
             get
             {

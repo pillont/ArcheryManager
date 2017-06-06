@@ -22,10 +22,10 @@ namespace ArcheryManager.Pages
         {
             InitializeComponent();
             this.BindingContext = this;
-            Counter = new ScoreCounter(customTarget.Factory);
+            Counter = new ScoreCounter();
 
             var list = Counter.Arrows;
-            list.CollectionChanged += RowDefinitions_ItemSizeChanged;
+            scoreList.SizeChanged += ScoreList_SizeChanged;
             scoreList.Items = list;
             customTarget.Items = list;
 
@@ -35,7 +35,7 @@ namespace ArcheryManager.Pages
             totalCounter.BindingContext = Counter;
         }
 
-        private void RowDefinitions_ItemSizeChanged(object sender, System.EventArgs e)
+        private void ScoreList_SizeChanged(object sender, System.EventArgs e)
         {
             scrollArrows.ScrollToAsync(scoreList, ScrollToPosition.End, true);
         }

@@ -5,6 +5,8 @@ namespace ArcheryManager.Factories
 {
     public abstract class ArrowFactory
     {
+        public ArrowSetting Setting { get; internal set; }
+
         public virtual Arrow Create(Point position)
         {
             string score = ScoreOf(position);

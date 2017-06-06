@@ -7,16 +7,14 @@ using Xamarin.Forms;
 
 namespace ArcheryManager.Factories
 {
-    public class EnglishArrowFactory : ArrowFactory
+    public class EnglishArrowFactory : ArrowFactory // TODO add functionnalities to general ArrowFactory, just add setting to ctor
     {
-        private ArrowSetting setting;
-
         private readonly IMovableTarget target;
 
         public EnglishArrowFactory(IMovableTarget target)
         {
             this.target = target;
-            setting = ArrowSetting.EnglishInstance;
+            Setting = ArrowSetting.EnglishInstance;
         }
 
         public override Arrow Create(Point position)
@@ -38,7 +36,7 @@ namespace ArcheryManager.Factories
 
         protected string ScoreByIndex(int i)
         {
-            return setting.ScoreByIndex(i);
+            return Setting.ScoreByIndex(i);
         }
 
         protected override string ScoreOf(Point position)
@@ -50,7 +48,7 @@ namespace ArcheryManager.Factories
 
             for (int i = 11; i > 0; i--)
             {
-                double rate = (EnglishTarget.ColorCount - i * EnglishTarget.ColorWidthRatio) / EnglishTarget.ColorCount;
+                double rate = (Setting.ZoneCount - i * EnglishTarget.ColorWidthRatio) / Setting.ZoneCount;
 
                 double size = target.TargetSize * rate;
                 size *= MovableTargetBehavior<EnglishTarget>.TargetScale; // target scale
@@ -62,12 +60,12 @@ namespace ArcheryManager.Factories
 
         protected override Color ColorOf(string value)
         {
-            return setting.ColorOf(value);
+            return Setting.ColorOf(value);
         }
 
         protected override int ValueByScore(string score)
         {
-            return setting.ValueByScore(score);
+            return Setting.ValueByScore(score);
         }
     }
 }

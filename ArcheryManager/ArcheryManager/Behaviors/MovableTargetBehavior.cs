@@ -81,7 +81,8 @@ namespace ArcheryManager.Behaviors
 
             var position = new Point(associatedObject.ArrowSetter.TranslationX,
                                         associatedObject.ArrowSetter.TranslationY);
-            counter.AddArrow(position);
+            var arrow = associatedObject.Factory.Create(position);
+            counter.AddArrow(arrow);
 
             associatedObject.TargetGrid.TranslationX = 0;
             associatedObject.TargetGrid.TranslationY = 0;

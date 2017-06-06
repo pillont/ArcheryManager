@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace ArcheryManager.CustomControls
@@ -42,6 +43,17 @@ namespace ArcheryManager.CustomControls
             Items = new ObservableCollection<T>();
         }
 
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
+
+            if (propertyName == nameof(Items))
+            {
+                // set first add to apply event on the item in the new list
+                Items_CollectionChanged(Items, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, Items));
+            }
+        }
+
         /// <summary>
         /// function to create the container of the item
         /// </summary>
@@ -78,9 +90,10 @@ namespace ArcheryManager.CustomControls
                 }
                 if (e.OldItems != null)
                 {
+                    var i = e.OldStartingIndex;
                     foreach (var item in e.OldItems)
                     {
-                        View container = FindContainer(item);
+                        View container = FindContainer(i++);
                         this.Children.Remove(container);
                         ItemRemoved?.Invoke(container);
                     }
@@ -95,6 +108,11 @@ namespace ArcheryManager.CustomControls
         public View FindContainer(object item)
         {
             return this.Children.Where(ctn => ctn.BindingContext == item).First();
+        }
+
+        public View FindContainer(int i)
+        {
+            return this.Children[i];
         }
     }
 }

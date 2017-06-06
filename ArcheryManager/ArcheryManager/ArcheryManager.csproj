@@ -50,11 +50,12 @@
     <Compile Include="Behaviors\CustomBehavior.cs" />
     <Compile Include="Behaviors\MovableTargetBehavior.cs" />
     <Compile Include="CustomControls\ArrowsGrid.cs" />
-    <Compile Include="CustomControls\ItemsGrid.cs" />
-    <Compile Include="CustomControls\ArrowCustomGrid.cs" />
-    <Compile Include="CustomControls\TargetCommands.xaml.cs">
-      <DependentUpon>TargetCommands.xaml</DependentUpon>
+    <Compile Include="CustomControls\ArrowUniformGrid.cs" />
+    <Compile Include="CustomControls\CounterButtons.xaml.cs">
+      <DependentUpon>CounterButtons.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\CounterCommands.cs" />
+    <Compile Include="CustomControls\ItemsGrid.cs" />
     <Compile Include="CustomControls\TotalCounter.xaml.cs">
       <DependentUpon>TotalCounter.xaml</DependentUpon>
     </Compile>
@@ -64,6 +65,9 @@
     <Compile Include="Factories\EnglishArrowFactory.cs" />
     <Compile Include="Interfaces\IMovableTarget.cs" />
     <Compile Include="Interfaces\ITargetWithInteraction.cs" />
+    <Compile Include="Pages\CounterPage.xaml.cs">
+      <DependentUpon>CounterPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\Arrow.cs" />
     <Compile Include="Utils\ScoreCounter.cs" />
     <Compile Include="Behaviors\TimerBehavior.cs" />
@@ -143,6 +147,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CustomControls\TargetCommands.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\CounterPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CustomControls\CounterButtons.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

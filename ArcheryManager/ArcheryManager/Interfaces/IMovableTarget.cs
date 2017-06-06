@@ -1,10 +1,13 @@
-﻿using Xamarin.Forms;
+﻿using ArcheryManager.Factories;
+using Xamarin.Forms;
 using XFShapeView;
 
 namespace ArcheryManager.Interfaces
 {
     public interface IMovableTarget
     {
+        ArrowFactory Factory { get; }
+
         /// <summary>
         /// grid who content the target
         /// </summary>

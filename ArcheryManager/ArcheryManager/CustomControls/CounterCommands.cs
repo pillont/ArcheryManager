@@ -4,21 +4,18 @@ using Xamarin.Forms;
 
 namespace ArcheryManager.CustomControls
 {
-    public partial class TargetCommands : ContentView
+    public partial class CounterCommands : ContentView
     {
         public static readonly BindableProperty CounterProperty =
-                      BindableProperty.Create(nameof(Counter), typeof(ScoreCounter), typeof(TargetCommands), null);
+                      BindableProperty.Create(nameof(Counter), typeof(ScoreCounter), typeof(CounterCommands), null);
 
         public ScoreCounter Counter
         {
             get { return (ScoreCounter)GetValue(CounterProperty); }
-            set
-            {
-                SetValue(CounterProperty, value);
-            }
+            set { SetValue(CounterProperty, value); }
         }
 
-        public TargetCommands()
+        public CounterCommands()
         {
             InitializeComponent();
         }

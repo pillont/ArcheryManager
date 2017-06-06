@@ -4,7 +4,7 @@ using XFShapeView;
 
 namespace ArcheryManager.CustomControls
 {
-    public class ArrowCustomGrid : UniformGrid<Arrow>
+    public class ArrowUniformGrid : UniformGrid<Arrow>
     {
         protected override View CreateItemContainer(Arrow arrow)
         {
@@ -26,6 +26,7 @@ namespace ArcheryManager.CustomControls
             var label = new Label()
             {
                 VerticalTextAlignment = TextAlignment.Center,
+                FontAttributes = FontAttributes.Bold,
                 HorizontalTextAlignment = TextAlignment.Center,
             };
             label.SetBinding(Label.TextProperty, "Score");

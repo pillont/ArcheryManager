@@ -8,7 +8,7 @@ using XFShapeView;
 
 namespace ArcheryManager.CustomControls.Targets
 {
-    public class EnglishTarget : ContentView, IMovableTarget
+    public class EnglishTarget : ContentView, IMovableTarget //TODO set global target with this class, just add setting to the ctor
     {
         public ObservableCollection<Arrow> Items
         {
@@ -21,11 +21,6 @@ namespace ArcheryManager.CustomControls.Targets
                 arrowGrid.Items = value;
             }
         }
-
-        /// <summary>
-        /// count of color in the target
-        /// </summary>
-        public const int ColorCount = 12;
 
         /// <summary>
         /// ratio to define the width of the zone
@@ -73,7 +68,7 @@ namespace ArcheryManager.CustomControls.Targets
 
         private ArrowsGrid arrowGrid;
 
-        public EnglishArrowFactory Factory { get; private set; }
+        public ArrowFactory Factory { get; private set; }
 
         /// <summary>
         /// point to set arrow during manipulation
@@ -87,15 +82,17 @@ namespace ArcheryManager.CustomControls.Targets
 
         public EnglishTarget()
         {
+            Factory = new EnglishArrowFactory(this);
+
             #region visual generation
 
             #region targetgrid
 
             TargetGrid = new Grid();
 
-            for (int i = 1; i < ColorCount; i++)
+            for (int i = 1; i < Factory.Setting.ZoneCount; i++)
             {
-                double rate = (ColorCount - i * ColorWidthRatio) / ColorCount;
+                double rate = (Factory.Setting.ZoneCount - i * ColorWidthRatio) / Factory.Setting.ZoneCount;
 
                 var shape = new ShapeView
                 {
@@ -159,8 +156,6 @@ namespace ArcheryManager.CustomControls.Targets
             #endregion global grid
 
             #endregion visual generation
-
-            Factory = new EnglishArrowFactory(this);
         }
 
         /// <summary>
