@@ -12,9 +12,14 @@ namespace ArcheryManager.Pages
             InitializeComponent();
         }
 
-        private async void Button_Clicked(object sender, EventArgs e)
+        private async void Timer_Click(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new TimerPage());
+        }
+
+        private async void Target_Click(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new TargetPage());
         }
     }
 }

@@ -1,10 +1,5 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.UITest;
 using Xamarin.UITest.Android;
 
 namespace ArcheryManager.DroidTest
@@ -24,7 +19,7 @@ namespace ArcheryManager.DroidTest
         }
 
         [Test]
-        public void InitElement()
+        public void InitTimerElement()
         {
             app.WaitForElement(c => c.Marked("TimerLabel").Text("120"));
             app.WaitForElement(c => c.Marked("StartButton"));
@@ -36,8 +31,56 @@ namespace ArcheryManager.DroidTest
         public void StartButton()
         {
             app.Tap("StartButton");
-            System.Threading.Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(4000);
+
             app.WaitForElement(c => c.Marked("TimerLabel").Text("5"));
+
+            System.Threading.Thread.Sleep(4000);
+
+            app.WaitForElement(c => c.Marked("TimerLabel").Text("120"));
+
+            System.Threading.Thread.Sleep(4000);
+
+            app.WaitForElement(c => c.Marked("TimerLabel").Text("115"));
+        }
+
+        [Test]
+        public void StopButton()
+        {
+            app.Tap("StartButton");
+            System.Threading.Thread.Sleep(4000);
+            app.Tap("StopButton");
+            app.WaitForElement(c => c.Marked("TimerLabel").Text("120"));
+            System.Threading.Thread.Sleep(4000);
+            app.WaitForElement(c => c.Marked("TimerLabel").Text("120"));
+
+            app.Tap("StartButton");
+            System.Threading.Thread.Sleep(14000);
+            app.Tap("StopButton");
+            app.WaitForElement(c => c.Marked("TimerLabel").Text("120"));
+            System.Threading.Thread.Sleep(4000);
+            app.WaitForElement(c => c.Marked("TimerLabel").Text("120"));
+
+            app.Tap("StartButton");
+            System.Threading.Thread.Sleep(14000);
+            app.WaitForElement(c => c.Marked("TimerLabel").Text("115"));
+        }
+
+        [Test]
+        public void PauseButton()
+        {
+            app.Tap("StartButton");
+            System.Threading.Thread.Sleep(5000);
+            Assert.IsFalse(app.Query("PauseButton").First().Enabled);
+
+            System.Threading.Thread.Sleep(9000);
+            app.Tap("PauseButton");
+            app.WaitForElement(c => c.Marked("TimerLabel").Text("115"));
+            System.Threading.Thread.Sleep(5000);
+            app.WaitForElement(c => c.Marked("TimerLabel").Text("115"));
+            app.Tap("PauseButton");
+            System.Threading.Thread.Sleep(4000);
+            app.WaitForElement(c => c.Marked("TimerLabel").Text("110"));
         }
     }
 }

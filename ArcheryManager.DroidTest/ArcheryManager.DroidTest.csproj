@@ -78,6 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TargetTest.cs" />
     <Compile Include="Tests.cs" />
     <Compile Include="TestSetting.cs" />
     <Compile Include="TimerTest.cs" />

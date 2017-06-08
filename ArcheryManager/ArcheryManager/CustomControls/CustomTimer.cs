@@ -250,7 +250,9 @@ namespace ArcheryManager.CustomControls
                 ProgressBorderColor = ProgressBorderColor,
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Center,
+                AutomationId = "timerCircle",
             };
+
             progressCircle.SetBinding(ShapeView.ColorProperty, nameof(Color));
             progressCircle.SetBinding(ShapeView.ProgressProperty, nameof(Progress));
             progressCircle.BindingContext = this;

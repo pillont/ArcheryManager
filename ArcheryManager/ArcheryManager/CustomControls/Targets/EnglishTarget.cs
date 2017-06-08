@@ -104,6 +104,7 @@ namespace ArcheryManager.CustomControls.Targets
                     BorderWidth = StringWidth,
                     VerticalOptions = LayoutOptions.Center,
                     HorizontalOptions = LayoutOptions.Center,
+                    AutomationId = "zone" + i,
                 };
 
                 TargetGrid.Children.Add(shape);
@@ -119,10 +120,11 @@ namespace ArcheryManager.CustomControls.Targets
                 BorderWidth = 1,
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Center,
+                AutomationId = "center",
             };
             TargetGrid.Children.Add(center);
 
-            arrowGrid = new ArrowsGrid();
+            arrowGrid = new ArrowsGrid() { AutomationId = "arrowInTargetGrid", };
 
             TargetGrid.Children.Add(arrowGrid);
 

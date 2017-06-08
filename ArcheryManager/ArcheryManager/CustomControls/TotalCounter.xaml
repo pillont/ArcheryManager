@@ -9,12 +9,12 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <StackLayout HorizontalOptions="Center" Grid.Column="0">
-                <Label Text="Flight :" />
-                <Label FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center" Text="{Binding Flight}" />
+                <Label AutomationId="FlightScoreTitle" Text="Flight :" />
+                <Label AutomationId="FlightScore" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center" Text="{Binding Flight}" />
             </StackLayout>
             <StackLayout Grid.Column="1" HorizontalOptions="Center">
-                <Label Text="Total :" />
-                <Label FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center" Text="{Binding Total}" />
+                <Label AutomationId="TotalScoreTitle" Text="Total :" />
+                <Label AutomationId="TotalScore" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center" Text="{Binding Total}" />
             </StackLayout>
         </Grid>
     </ContentView.Content>

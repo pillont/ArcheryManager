@@ -4,9 +4,9 @@
              x:Class="ArcheryManager.CustomControls.CounterCommands">
     <ContentView.Content>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-            <Button Text="Remove last" Clicked="Button_RemoveLast" />
-            <Button Text="Remove all"  Clicked="Button_RemoveAll" />
-            <Button Text="New flight"  Clicked="Button_NewFlight" />
+            <Button AutomationId="removeArrow" Text="Remove last" Clicked="Button_RemoveLast" />
+            <Button AutomationId="removeAllArrows" Text="Remove all"  Clicked="Button_RemoveAll" />
+            <Button AutomationId="nextFlight" Text="New flight"  Clicked="Button_NewFlight" />
         </StackLayout>
     </ContentView.Content>
 </ContentView>

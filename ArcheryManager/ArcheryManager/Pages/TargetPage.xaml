@@ -12,7 +12,7 @@
         <targ:EnglishTarget x:Name="customTarget"  HeightRequest="1200" WidthRequest="1200" />
 
         <ScrollView x:Name="scrollArrows" MinimumHeightRequest="60" HeightRequest="60" BackgroundColor="AliceBlue">
-            <ctl:ArrowCustomGrid x:Name="scoreList"  Grid.Column="0" CountByRow="6" />
+            <ctl:ArrowUniformGrid AutomationId="scoreList" x:Name="scoreList"  Grid.Column="0" CountByRow="6" />
         </ScrollView>
 
         <ctl:CounterCommands x:Name="counterCommands" Counter="{Binding Counter}" />

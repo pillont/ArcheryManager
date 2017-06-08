@@ -5,6 +5,6 @@
     xmlns:ctl="clr-namespace:ArcheryManager.CustomControls"
     x:Class="ArcheryManager.CustomControls.CounterButtons">
     <ContentView.Content>
-        <ctl:ArrowCustomGrid x:Name="buttonGrid"  HeightCell="70" CountByRow="3" />
+        <ctl:ArrowUniformGrid x:Name="buttonGrid"  HeightCell="70" CountByRow="3" />
     </ContentView.Content>
 </ContentView>
