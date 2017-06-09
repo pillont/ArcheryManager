@@ -1,21 +1,21 @@
-﻿using ArcheryManager.Factories;
-using ArcheryManager.Utils;
+﻿using ArcheryManager.Utils;
 using System;
 using System.Collections.ObjectModel;
 
 using Xamarin.Forms;
 using System.Runtime.CompilerServices;
+using ArcheryManager.Interfaces;
 
 namespace ArcheryManager.CustomControls
 {
     public partial class CounterButtons : ContentView
     {
         public static readonly BindableProperty SettingProperty =
-                      BindableProperty.Create(nameof(Setting), typeof(ArrowSetting), typeof(CounterButtons), null);
+                      BindableProperty.Create(nameof(Setting), typeof(IArrowSetting), typeof(CounterButtons), null);
 
-        public ArrowSetting Setting
+        public IArrowSetting Setting
         {
-            get { return (ArrowSetting)GetValue(SettingProperty); }
+            get { return (IArrowSetting)GetValue(SettingProperty); }
             set { SetValue(SettingProperty, value); }
         }
 
@@ -40,7 +40,7 @@ namespace ArcheryManager.CustomControls
 
             if (propertyName == nameof(Setting))
             {
-                DrawButtons(Setting);
+                DrawButtons();
             }
         }
 
@@ -65,26 +65,26 @@ namespace ArcheryManager.CustomControls
             }
         }
 
-        private void DrawButtons(ArrowSetting setting)
+        private void DrawButtons()
         {
             var buttonsData = new ObservableCollection<Arrow>();
 
-            for (int i = 1; i < setting.ZoneCount; i++)
+            for (int i = 1; i < Setting.ZoneCount; i++)
             {
-                Arrow arrow = GetArrow(setting, i);
+                Arrow arrow = GetArrow(i);
                 buttonsData.Add(arrow);
             }
-            var missArrow = GetArrow(setting, 0);
+            var missArrow = GetArrow(0);
             buttonsData.Add(missArrow);
 
             buttonGrid.Items = buttonsData;
         }
 
-        private static Arrow GetArrow(ArrowSetting setting, int i)
+        private Arrow GetArrow(int i)
         {
-            var score = setting.ScoreByIndex(i);
-            var value = setting.ValueByScore(score);
-            var color = setting.ColorOf(score);
+            var score = Setting.ScoreByIndex(i);
+            var value = Setting.ValueByScore(score);
+            var color = Setting.ColorOf(score);
 
             var arrow = new Arrow(score, value, color);
             return arrow;

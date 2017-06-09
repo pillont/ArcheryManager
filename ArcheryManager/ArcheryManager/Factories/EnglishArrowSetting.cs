@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
-using Xamarin.Forms;
+﻿using ArcheryManager.Interfaces;
+using System.Collections.Generic;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace ArcheryManager.Factories
 {
-    public class ArrowSetting
+    public class EnglishArrowSetting : IArrowSetting
     {
         public const string MissScore = "M";
         public const string OneScore = "1";
@@ -18,6 +19,7 @@ namespace ArcheryManager.Factories
         public const string NineScore = "9";
         public const string TenScore = "10";
         public const string XtenScore = "X10";
+        private const int EnglishZOneCOunt = 12;
 
         private static Dictionary<string, Color> EnglishColorOf = new Dictionary<string, Color>()
         {
@@ -51,30 +53,30 @@ namespace ArcheryManager.Factories
             { 11 , XtenScore },
         };
 
-        private static ArrowSetting englishInstance;
-
-        private readonly Dictionary<int, string> scoreByIndex;
-        private readonly Dictionary<string, Color> colorOf;
-
-        private ArrowSetting(Dictionary<int, string> scoreByIndex, Dictionary<string, Color> colorOf)
-        {
-            this.scoreByIndex = scoreByIndex;
-            this.colorOf = colorOf;
-            ZoneCount = scoreByIndex.Count;
-        }
-
-        public int ZoneCount { get; set; }
-
-        public static ArrowSetting EnglishInstance //TODO multi class with singleton and common interface IArrowSetting
+        public int ZoneCount
         {
             get
             {
-                if (englishInstance == null)
-                {
-                    englishInstance = new ArrowSetting(englishScoreByIndex, EnglishColorOf);
-                }
-                return englishInstance;
+                return EnglishZOneCOunt;
             }
+        }
+
+        private static IArrowSetting instance;
+
+        public static IArrowSetting Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new EnglishArrowSetting();
+                }
+                return instance;
+            }
+        }
+
+        private EnglishArrowSetting()
+        {
         }
 
         public string ScoreByIndex(int i)

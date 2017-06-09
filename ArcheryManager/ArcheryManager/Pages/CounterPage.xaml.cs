@@ -1,4 +1,5 @@
 ﻿using ArcheryManager.Factories;
+using ArcheryManager.Interfaces;
 using ArcheryManager.Utils;
 
 using Xamarin.Forms;
@@ -9,6 +10,8 @@ namespace ArcheryManager.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CounterPage : ContentPage
     {
+        private static readonly IArrowSetting EnglishSetting = EnglishArrowSetting.Instance;
+
         public CounterPage()
         {
             InitializeComponent();
@@ -18,7 +21,7 @@ namespace ArcheryManager.Pages
             scoreList.Items = counter.Arrows;
 
             counterButtons.Counter = counter;
-            counterButtons.Setting = ArrowSetting.EnglishInstance;
+            counterButtons.Setting = EnglishSetting;
 
             counterCommands.Counter = counter;
         }

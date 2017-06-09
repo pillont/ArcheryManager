@@ -14,7 +14,7 @@ namespace ArcheryManager.Factories
         public EnglishArrowFactory(IMovableTarget target)
         {
             this.target = target;
-            Setting = ArrowSetting.EnglishInstance;
+            Setting = EnglishArrowSetting.Instance;
         }
 
         public override Arrow Create(Point position)
@@ -55,7 +55,7 @@ namespace ArcheryManager.Factories
                 if (distance < size / 2)
                     return ScoreByIndex(i);
             }
-            return ArrowSetting.MissScore;
+            return EnglishArrowSetting.MissScore;
         }
 
         protected override Color ColorOf(string value)

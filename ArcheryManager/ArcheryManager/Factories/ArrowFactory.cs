@@ -1,11 +1,12 @@
-﻿using ArcheryManager.Utils;
+﻿using ArcheryManager.Interfaces;
+using ArcheryManager.Utils;
 using Xamarin.Forms;
 
 namespace ArcheryManager.Factories
 {
     public abstract class ArrowFactory
     {
-        public ArrowSetting Setting { get; internal set; }
+        public IArrowSetting Setting { get; internal set; }
 
         public virtual Arrow Create(Point position)
         {
