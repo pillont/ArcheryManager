@@ -76,8 +76,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassTest.cs" />
-    <Compile Include="Factories\EnglishArrowFactoryTest.cs" />
+    <Compile Include="Factories\ArrowFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\EnglishArrowSettingFactory.cs" />
     <Compile Include="Utils\ScoreCounterTest.cs" />
   </ItemGroup>
   <ItemGroup>

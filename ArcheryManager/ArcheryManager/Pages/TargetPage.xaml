@@ -9,7 +9,7 @@
 
     <StackLayout>
         <ctl:TotalCounter x:Name="totalCounter" />
-        <targ:EnglishTarget x:Name="customTarget"  HeightRequest="1200" WidthRequest="1200" />
+        <targ:Target x:Name="customTarget"  HeightRequest="1200" WidthRequest="1200" />
 
         <ScrollView x:Name="scrollArrows" MinimumHeightRequest="60" HeightRequest="60" BackgroundColor="AliceBlue">
             <ctl:ArrowUniformGrid AutomationId="scoreList" x:Name="scoreList"  Grid.Column="0" CountByRow="6" />

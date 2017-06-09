@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
 
-namespace ArcheryManager.Factories
+namespace ArcheryManager.Settings
 {
     public class EnglishArrowSetting : IArrowSetting
     {
@@ -19,7 +19,7 @@ namespace ArcheryManager.Factories
         public const string NineScore = "9";
         public const string TenScore = "10";
         public const string XtenScore = "X10";
-        private const int EnglishZOneCOunt = 12;
+        private const int EnglishZoneCount = 12;
 
         private static Dictionary<string, Color> EnglishColorOf = new Dictionary<string, Color>()
         {
@@ -37,7 +37,7 @@ namespace ArcheryManager.Factories
             { XtenScore, Color.Yellow},
         };
 
-        private static readonly Dictionary<int, string> englishScoreByIndex = new Dictionary<int, string>()
+        private static readonly Dictionary<int, string> EnglishScoreByIndex = new Dictionary<int, string>()
         {
             { 0 , MissScore },
             { 1 , OneScore },
@@ -57,7 +57,7 @@ namespace ArcheryManager.Factories
         {
             get
             {
-                return EnglishZOneCOunt;
+                return EnglishZoneCount;
             }
         }
 
@@ -81,21 +81,79 @@ namespace ArcheryManager.Factories
 
         public string ScoreByIndex(int i)
         {
-            return englishScoreByIndex[i];
+            if (EnglishScoreByIndex.ContainsKey(i))
+            {
+                return EnglishScoreByIndex[i];
+            }
+            else
+            {
+                return MissScore;
+            }
         }
 
         public Color ColorOf(string score)
         {
-            return EnglishColorOf[score];
+            if (EnglishColorOf.ContainsKey(score))
+            {
+                return EnglishColorOf[score];
+            }
+            else
+            {
+                return EnglishColorOf[MissScore];
+            }
         }
 
         public int ValueByScore(string score)
         {
-            var index = englishScoreByIndex.Where(val => val.Value == score).FirstOrDefault().Key;
+            var index = EnglishScoreByIndex.Where(val => val.Value == score).FirstOrDefault().Key;
             if (index < 11)
                 return index;
             else // case of X10
                 return 10;
+        }
+
+        /// <summary>
+        ///determine the color associated to the score zone
+        ///
+        /// </summary>
+        /// <param name="i">score zone / 11 => X10 </param>
+        /// <returns>default white</returns>
+        public Color ColorofTargetZone(int i)
+        {
+            switch (i)
+            {
+                case 3:
+                case 4:
+                    return Color.Black;
+
+                case 5:
+                case 6:
+                    return Color.Blue;
+
+                case 7:
+                case 8:
+                    return Color.Red;
+
+                case 9:
+                case 10:
+                case 11:
+                    return Color.Yellow;
+
+                default:
+                    return Color.White;
+            }
+        }
+
+        /// <summary>
+        /// determine the color of the zone string
+        /// </summary>
+        /// <param name="i">score zone</param>
+        public Color BorderColorZone(int i)
+        {
+            if (i == 3 || i == 4)
+                return Color.White;
+            else
+                return Color.Black;
         }
     }
 }

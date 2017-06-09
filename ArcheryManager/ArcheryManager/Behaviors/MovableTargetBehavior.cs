@@ -1,10 +1,11 @@
-﻿using ArcheryManager.Interfaces;
+﻿using ArcheryManager.CustomControls.Targets;
+using ArcheryManager.Interfaces;
 using ArcheryManager.Utils;
 using Xamarin.Forms;
 
 namespace ArcheryManager.Behaviors
 {
-    public class MovableTargetBehavior<T> : CustomBehavior<T> where T : BindableObject, IMovableTarget
+    public class MovableTargetBehavior : CustomBehavior<Target>
     {
         /// <summary>
         /// scale of the target during manipulation to set arrow
@@ -30,7 +31,7 @@ namespace ArcheryManager.Behaviors
             this.counter = counter;
         }
 
-        protected override void OnAttachedTo(T bindable)
+        protected override void OnAttachedTo(Target bindable)
         {
             base.OnAttachedTo(bindable);
             ApplyPanGesture(associatedObject.TargetGrid);

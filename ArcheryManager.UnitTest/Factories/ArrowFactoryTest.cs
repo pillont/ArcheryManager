@@ -1,5 +1,6 @@
 ﻿using ArcheryManager.Factories;
 using ArcheryManager.Interfaces;
+using ArcheryManager.Settings;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -8,17 +9,18 @@ using Xamarin.Forms;
 namespace ArcheryManager.UnitTest.Factories
 {
     [TestFixture]
-    public class EnglishArrowFactoryTest
+    public class ArrowFactoryTest
     {
         private Mock<IMovableTarget> target;
-        private EnglishArrowFactory factory;
+        private ArrowFactory factory;
 
         [SetUp]
         public void Init()
         {
+            var setting = EnglishArrowSetting.Instance;
             target = new Mock<IMovableTarget>();
             target.SetupGet(c => c.TargetSize).Returns(350);
-            factory = new EnglishArrowFactory(target.Object);
+            factory = new ArrowFactory(target.Object, setting);
         }
 
         [Test]

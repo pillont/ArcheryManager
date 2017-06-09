@@ -1,6 +1,7 @@
 ﻿using ArcheryManager.Behaviors;
 using ArcheryManager.Factories;
 using ArcheryManager.Interfaces;
+using ArcheryManager.Settings;
 using ArcheryManager.Utils;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
@@ -8,8 +9,19 @@ using XFShapeView;
 
 namespace ArcheryManager.CustomControls.Targets
 {
-    public class EnglishTarget : ContentView, IMovableTarget //TODO set global target with this class, just add setting to the ctor
+    public class Target : ContentView, IMovableTarget
     {
+        public static readonly BindableProperty SettingProperty =
+                      BindableProperty.Create(nameof(Setting), typeof(IArrowSetting), typeof(Target), null);
+
+        public ArrowFactory Factory { get; private set; }
+
+        public IArrowSetting Setting
+        {
+            get { return (IArrowSetting)GetValue(SettingProperty); }
+            set { SetValue(SettingProperty, value); }
+        }
+
         public ObservableCollection<Arrow> Items
         {
             get
@@ -33,7 +45,7 @@ namespace ArcheryManager.CustomControls.Targets
         private const int DefaultTargetSize = 350; //TODO allow to change value
 
         public static readonly BindableProperty TargetSizeProperty =
-                      BindableProperty.Create(nameof(TargetSize), typeof(int), typeof(EnglishTarget), DefaultTargetSize);
+                      BindableProperty.Create(nameof(TargetSize), typeof(int), typeof(Target), DefaultTargetSize);
 
         public int TargetSize
         {
@@ -54,7 +66,7 @@ namespace ArcheryManager.CustomControls.Targets
         /// <summary>
         /// width of the arrow in the zoomed target
         /// </summary>
-        private const double ArrowWidthZommed = ArrowWidth * MovableTargetBehavior<EnglishTarget>.TargetScale;
+        private const double ArrowWidthZommed = ArrowWidth * MovableTargetBehavior.TargetScale;
 
         /// <summary>
         /// color of the arrows in the target
@@ -68,8 +80,6 @@ namespace ArcheryManager.CustomControls.Targets
 
         private ArrowsGrid arrowGrid;
 
-        public ArrowFactory Factory { get; private set; }
-
         /// <summary>
         /// point to set arrow during manipulation
         /// </summary>
@@ -80,14 +90,65 @@ namespace ArcheryManager.CustomControls.Targets
         /// </summary>
         public Grid TargetGrid { get; private set; }
 
-        public EnglishTarget()
+        public Target()
         {
-            Factory = new EnglishArrowFactory(this);
+            Setting = EnglishArrowSetting.Instance;
+            Factory = new ArrowFactory(this, Setting);
 
-            #region visual generation
+            CreateContent();
+        }
 
-            #region targetgrid
+        /// <summary>
+        /// create the target content
+        /// </summary>
+        private void CreateContent()
+        {
+            CreateTargetVisual();
+            CreateArrowsGrid();
 
+            CreateVisualArrowSetter();
+
+            Grid globalGrid = new Grid();
+            globalGrid.Children.Add(TargetGrid);
+            globalGrid.Children.Add(ArrowSetter);
+
+            Content = globalGrid;
+        }
+
+        /// <summary>
+        /// generate the grid to show the arrows
+        /// </summary>
+        private void CreateArrowsGrid()
+        {
+            arrowGrid = new ArrowsGrid() { AutomationId = "arrowInTargetGrid", };
+            TargetGrid.Children.Add(arrowGrid);
+        }
+
+        /// <summary>
+        /// generate ArrowSetter
+        /// </summary>
+        private void CreateVisualArrowSetter()
+        {
+            ArrowSetter = new ShapeView()
+            {
+                HeightRequest = ArrowWidthZommed,
+                WidthRequest = ArrowWidth * MovableTargetBehavior.TargetScale,
+                ShapeType = ShapeType.Circle,
+                BorderColor = ArrowSetterColor,
+                Color = ArrowSetterColor,
+                BorderWidth = 1,
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.Center,
+                IsVisible = false,
+            };
+        }
+
+        /// <summary>
+        /// function to generate TargetGrid
+        /// init and add all shapes in the grid
+        /// </summary>
+        private void CreateTargetVisual()
+        {
             TargetGrid = new Grid();
 
             for (int i = 1; i < Factory.Setting.ZoneCount; i++)
@@ -99,8 +160,8 @@ namespace ArcheryManager.CustomControls.Targets
                     HeightRequest = TargetSize * rate, //TODO
                     WidthRequest = TargetSize * rate, //TODO
                     ShapeType = ShapeType.Circle,
-                    BorderColor = BorderColorZone(i),
-                    Color = ColorofZone(i),
+                    BorderColor = Setting.BorderColorZone(i),
+                    Color = Setting.ColorofTargetZone(i),
                     BorderWidth = StringWidth,
                     VerticalOptions = LayoutOptions.Center,
                     HorizontalOptions = LayoutOptions.Center,
@@ -123,85 +184,6 @@ namespace ArcheryManager.CustomControls.Targets
                 AutomationId = "center",
             };
             TargetGrid.Children.Add(center);
-
-            arrowGrid = new ArrowsGrid() { AutomationId = "arrowInTargetGrid", };
-
-            TargetGrid.Children.Add(arrowGrid);
-
-            #endregion targetgrid
-
-            #region arrow setter point
-
-            ArrowSetter = new ShapeView()
-            {
-                HeightRequest = ArrowWidthZommed,
-                WidthRequest = ArrowWidth * MovableTargetBehavior<EnglishTarget>.TargetScale,
-                ShapeType = ShapeType.Circle,
-                BorderColor = ArrowSetterColor,
-                Color = ArrowSetterColor,
-                BorderWidth = 1,
-                VerticalOptions = LayoutOptions.Center,
-                HorizontalOptions = LayoutOptions.Center,
-                IsVisible = false,
-            };
-
-            #endregion arrow setter point
-
-            #region global grid
-
-            Grid globalGrid = new Grid();
-            globalGrid.Children.Add(TargetGrid);
-            globalGrid.Children.Add(ArrowSetter);
-
-            Content = globalGrid;
-
-            #endregion global grid
-
-            #endregion visual generation
-        }
-
-        /// <summary>
-        ///determine the color associated to the score zone
-        ///
-        /// </summary>
-        /// <param name="i">score zone / 11 => X10 </param>
-        /// <returns>default white</returns>
-        private Color ColorofZone(int i)
-        {
-            switch (i)
-            {
-                case 3:
-                case 4:
-                    return Color.Black;
-
-                case 5:
-                case 6:
-                    return Color.Blue;
-
-                case 7:
-                case 8:
-                    return Color.Red;
-
-                case 9:
-                case 10:
-                case 11:
-                    return Color.Yellow;
-
-                default:
-                    return Color.White;
-            }
-        }
-
-        /// <summary>
-        /// determine the color of the zone string
-        /// </summary>
-        /// <param name="i">score zone</param>
-        private Color BorderColorZone(int i)
-        {
-            if (i == 3 || i == 4)
-                return Color.White;
-            else
-                return Color.Black;
         }
     }
 }

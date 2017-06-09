@@ -14,7 +14,7 @@ namespace ArcheryManager.Pages
         private const string ReplayText = "Replay";
         private static readonly Color DefaultbackgroundColor = Color.White;
 
-        private readonly TimerBehavior<CustomTimer> behavior;
+        private readonly TimerBehavior<CustomTimer> Behavior;
 
         public Color Color
         {
@@ -61,8 +61,8 @@ namespace ArcheryManager.Pages
         {
             this.BindingContext = this;
             InitializeComponent();
-            behavior = new TimerBehavior<CustomTimer>();
-            timer.Behaviors.Add(behavior);
+            Behavior = new TimerBehavior<CustomTimer>();
+            timer.Behaviors.Add(Behavior);
             timer.PropertyChanged += Timer_PropertyChanged;
         }
 
@@ -109,20 +109,20 @@ namespace ArcheryManager.Pages
 
         private void ButtonStart_Clicked(object sender, EventArgs e)
         {
-            behavior.Start();
+            Behavior.Start();
         }
 
         private void ButtonStop_Clicked(object sender, EventArgs e)
         {
-            behavior.Stop();
+            Behavior.Stop();
         }
 
         private void ButtonPause_Clicked(object sender, EventArgs e)
         {
             if (timer.IsPaused)
-                behavior.Continue();
+                Behavior.Continue();
             else if (!timer.IsStopped)
-                behavior.Pause();
+                Behavior.Pause();
         }
     }
 }

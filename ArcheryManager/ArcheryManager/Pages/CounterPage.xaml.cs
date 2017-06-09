@@ -1,7 +1,6 @@
-﻿using ArcheryManager.Factories;
+﻿using ArcheryManager.Settings;
 using ArcheryManager.Interfaces;
 using ArcheryManager.Utils;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

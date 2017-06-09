@@ -29,7 +29,7 @@ namespace ArcheryManager.Pages
             scoreList.Items = list;
             customTarget.Items = list;
 
-            var behavior = new MovableTargetBehavior<EnglishTarget>(Counter);
+            var behavior = new MovableTargetBehavior(Counter);
             customTarget.Behaviors.Add(behavior);
 
             totalCounter.BindingContext = Counter;
