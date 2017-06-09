@@ -113,6 +113,12 @@ namespace ArcheryManager.Behaviors
         /// </summary>
         private void StartPanGesture()
         {
+            associatedObject.TargetGrid.TranslationX = 0;
+            associatedObject.TargetGrid.TranslationY = 0;
+
+            associatedObject.ArrowSetter.TranslationX = 0;
+            associatedObject.ArrowSetter.TranslationY = 0;
+
             associatedObject.ArrowSetter.IsVisible = true;
             associatedObject.TargetGrid.Scale = TargetScale;
         }

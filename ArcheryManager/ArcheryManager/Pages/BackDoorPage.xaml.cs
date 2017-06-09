@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArcheryManager.Settings;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,7 +20,7 @@ namespace ArcheryManager.Pages
 
         private async void Target_Click(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new TargetPage());
+            await Navigation.PushModalAsync(new TargetPage(FieldArrowSetting.Instance));
         }
 
         private async void ButtonCounter_Clicked(object sender, EventArgs e)

@@ -1,4 +1,5 @@
 ﻿using ArcheryManager.Pages;
+using ArcheryManager.Settings;
 using Xamarin.Forms;
 
 namespace ArcheryManager
@@ -13,7 +14,7 @@ namespace ArcheryManager
             MainPage = new BackDoorPage();
 
 #else
-            MainPage = new CounterPage();
+            MainPage = new TargetPage(IndoorCompoundArrowSetting.Instance);
 #endif
         }
 

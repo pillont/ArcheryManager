@@ -41,7 +41,7 @@ namespace ArcheryManager.CustomControls
                 HeightRequest = ArrowWidth,
                 WidthRequest = ArrowWidth,
                 ShapeType = ShapeType.Circle,
-                BorderColor = ArrowColor,
+                BorderColor = Color.Black,
                 Color = ArrowColor,
                 BorderWidth = 1,
                 VerticalOptions = LayoutOptions.Center,

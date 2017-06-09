@@ -61,6 +61,8 @@
     </Compile>
     <Compile Include="CustomControls\UniformGrid.cs" />
     <Compile Include="Factories\ArrowFactory.cs" />
+    <Compile Include="Settings\IndoorCompoundArrowSetting.cs" />
+    <Compile Include="Settings\IndoorRecurveArrowSetting.cs" />
     <Compile Include="Settings\EnglishArrowSetting.cs" />
     <Compile Include="Interfaces\IArrowSetting.cs" />
     <Compile Include="Interfaces\IMovableTarget.cs" />
@@ -68,6 +70,7 @@
     <Compile Include="Pages\CounterPage.xaml.cs">
       <DependentUpon>CounterPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings\FieldArrowSetting.cs" />
     <Compile Include="Utils\Arrow.cs" />
     <Compile Include="Utils\ScoreCounter.cs" />
     <Compile Include="Behaviors\TimerBehavior.cs" />

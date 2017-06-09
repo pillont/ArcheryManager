@@ -1,5 +1,6 @@
 ﻿using ArcheryManager.Behaviors;
 using ArcheryManager.CustomControls.Targets;
+using ArcheryManager.Interfaces;
 using ArcheryManager.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -18,7 +19,7 @@ namespace ArcheryManager.Pages
             set { SetValue(CounterProperty, value); }
         }
 
-        public TargetPage()
+        public TargetPage(IArrowSetting setting)
         {
             InitializeComponent();
             this.BindingContext = this;
@@ -28,6 +29,7 @@ namespace ArcheryManager.Pages
             scoreList.SizeChanged += ScoreList_SizeChanged;
             scoreList.Items = list;
             customTarget.Items = list;
+            customTarget.Setting = setting;
 
             var behavior = new MovableTargetBehavior(Counter);
             customTarget.Behaviors.Add(behavior);

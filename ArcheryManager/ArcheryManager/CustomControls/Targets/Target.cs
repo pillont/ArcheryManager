@@ -14,12 +14,29 @@ namespace ArcheryManager.CustomControls.Targets
         public static readonly BindableProperty SettingProperty =
                       BindableProperty.Create(nameof(Setting), typeof(IArrowSetting), typeof(Target), null);
 
-        public ArrowFactory Factory { get; private set; }
+        public ArrowFactory factory;
+
+        public ArrowFactory Factory
+        {
+            get
+            {
+                return factory;
+            }
+            private set
+            {
+                factory = value;
+                CreateTargetVisual();
+            }
+        }
 
         public IArrowSetting Setting
         {
             get { return (IArrowSetting)GetValue(SettingProperty); }
-            set { SetValue(SettingProperty, value); }
+            set
+            {
+                SetValue(SettingProperty, value);
+                Factory = new ArrowFactory(this, Setting);
+            }
         }
 
         public ObservableCollection<Arrow> Items
@@ -92,10 +109,9 @@ namespace ArcheryManager.CustomControls.Targets
 
         public Target()
         {
-            Setting = EnglishArrowSetting.Instance;
-            Factory = new ArrowFactory(this, Setting);
-
             CreateContent();
+
+            Setting = EnglishArrowSetting.Instance;
         }
 
         /// <summary>
@@ -103,8 +119,9 @@ namespace ArcheryManager.CustomControls.Targets
         /// </summary>
         private void CreateContent()
         {
-            CreateTargetVisual();
-            CreateArrowsGrid();
+            arrowGrid = new ArrowsGrid() { AutomationId = "arrowInTargetGrid", };
+
+            TargetGrid = new Grid();
 
             CreateVisualArrowSetter();
 
@@ -113,15 +130,6 @@ namespace ArcheryManager.CustomControls.Targets
             globalGrid.Children.Add(ArrowSetter);
 
             Content = globalGrid;
-        }
-
-        /// <summary>
-        /// generate the grid to show the arrows
-        /// </summary>
-        private void CreateArrowsGrid()
-        {
-            arrowGrid = new ArrowsGrid() { AutomationId = "arrowInTargetGrid", };
-            TargetGrid.Children.Add(arrowGrid);
         }
 
         /// <summary>
@@ -149,7 +157,7 @@ namespace ArcheryManager.CustomControls.Targets
         /// </summary>
         private void CreateTargetVisual()
         {
-            TargetGrid = new Grid();
+            TargetGrid.Children.Clear();
 
             for (int i = 1; i < Factory.Setting.ZoneCount; i++)
             {
@@ -183,7 +191,9 @@ namespace ArcheryManager.CustomControls.Targets
                 HorizontalOptions = LayoutOptions.Center,
                 AutomationId = "center",
             };
+
             TargetGrid.Children.Add(center);
+            TargetGrid.Children.Add(arrowGrid);
         }
     }
 }
