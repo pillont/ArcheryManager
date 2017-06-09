@@ -46,7 +46,7 @@ namespace ArcheryManager.Utils
             }
         }
 
-        internal void NewFlight()
+        public void NewFlight()
         {
             FlightsSaved.Add(new List<Arrow>(Arrows));
 

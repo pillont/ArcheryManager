@@ -40,7 +40,7 @@ namespace ArcheryManager.CustomControls
 
             if (propertyName == nameof(Setting))
             {
-                DrawButton(Setting);
+                DrawButtons(Setting);
             }
         }
 
@@ -65,7 +65,7 @@ namespace ArcheryManager.CustomControls
             }
         }
 
-        private void DrawButton(ArrowSetting setting)
+        private void DrawButtons(ArrowSetting setting)
         {
             var buttonsData = new ObservableCollection<Arrow>();
 

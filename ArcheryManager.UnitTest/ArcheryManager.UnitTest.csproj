@@ -75,9 +75,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Behaviors\TimerBehaviorTest.cs" />
     <Compile Include="ClassTest.cs" />
+    <Compile Include="Factories\EnglishArrowFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\ScoreCounterTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -3,19 +3,44 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ArcheryManager.CustomControls.TotalCounter">
     <ContentView.Content>
-        <Grid HeightRequest="100">
+        <Grid HeightRequest="100" AutomationId="scoreGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <StackLayout HorizontalOptions="Center" Grid.Column="0">
-                <Label AutomationId="FlightScoreTitle" Text="Flight :" />
-                <Label AutomationId="FlightScore" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center" Text="{Binding Flight}" />
-            </StackLayout>
-            <StackLayout Grid.Column="1" HorizontalOptions="Center">
-                <Label AutomationId="TotalScoreTitle" Text="Total :" />
-                <Label AutomationId="TotalScore" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center" Text="{Binding Total}" />
-            </StackLayout>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Label AutomationId="FlightScoreTitle"
+                   HorizontalOptions="Center"
+                   Grid.Column="0"
+                   Grid.Row="0"
+                   Text="Flight :" />
+            <Label AutomationId="FlightScore"
+                   HorizontalOptions="Center"
+                   Grid.Column="0"
+                   Grid.Row="1"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalTextAlignment="Center"
+                   Text="{Binding Flight}" />
+
+            <Label AutomationId="TotalScoreTitle"
+                   HorizontalOptions="Center"
+                   Text="Total :"
+                   Grid.Column="1"
+                   Grid.Row="0" />
+
+            <Label AutomationId="TotalScore"
+                   HorizontalOptions="Center"
+                   FontAttributes="Bold"
+                   Grid.Column="1"
+                   Grid.Row="1"
+                   TextColor="Black"
+                   HorizontalTextAlignment="Center"
+                   Text="{Binding Total}" />
         </Grid>
     </ContentView.Content>
 </ContentView>

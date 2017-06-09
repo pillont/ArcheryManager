@@ -7,7 +7,7 @@
     <StackLayout>
         <ctl:TotalCounter x:Name="totalCounter" />
         <ScrollView x:Name="scrollArrows" MinimumHeightRequest="60" HeightRequest="60" BackgroundColor="AliceBlue">
-            <ctl:ArrowUniformGrid x:Name="scoreList"  Grid.Column="0" CountByRow="6" />
+            <ctl:ArrowUniformGrid x:Name="scoreList" AutomationId="scoreList" Grid.Column="0" CountByRow="6" />
         </ScrollView>
 
         <ctl:CounterButtons x:Name="counterButtons" />

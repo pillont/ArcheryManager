@@ -25,11 +25,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3_UWP", "3_UWP", "{EF111EA4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArcheryManager.UnitTest", "ArcheryManager.UnitTest\ArcheryManager.UnitTest.csproj", "{EBDAE7FD-AD4D-4649-8A82-72BC1F057EE9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{124087EF-C772-46A1-890C-96871657277C}"
-	ProjectSection(SolutionItems) = preProject
-		TODO.txt = TODO.txt
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU

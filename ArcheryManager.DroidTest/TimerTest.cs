@@ -73,7 +73,7 @@ namespace ArcheryManager.DroidTest
             System.Threading.Thread.Sleep(5000);
             Assert.IsFalse(app.Query("PauseButton").First().Enabled);
 
-            System.Threading.Thread.Sleep(9000);
+            System.Threading.Thread.Sleep(10000);
             app.Tap("PauseButton");
             app.WaitForElement(c => c.Marked("TimerLabel").Text("115"));
             System.Threading.Thread.Sleep(5000);

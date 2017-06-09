@@ -13,7 +13,7 @@ namespace ArcheryManager
             MainPage = new BackDoorPage();
 
 #else
-            MainPage = new TargetPage();
+            MainPage = new CounterPage();
 #endif
         }
 

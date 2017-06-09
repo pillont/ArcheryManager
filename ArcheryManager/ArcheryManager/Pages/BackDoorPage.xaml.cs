@@ -21,5 +21,10 @@ namespace ArcheryManager.Pages
         {
             await Navigation.PushModalAsync(new TargetPage());
         }
+
+        private async void ButtonCounter_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new CounterPage());
+        }
     }
 }
