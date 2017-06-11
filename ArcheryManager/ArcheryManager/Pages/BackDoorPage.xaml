@@ -5,7 +5,10 @@
 
     <StackLayout>
         <Button Text="timer" AutomationId="TimerButton" Clicked="Timer_Click" />
-        <Button Text="target" AutomationId="TargetButton" Clicked="Target_Click" />
+        <Button Text="english target" AutomationId="EnglishTargetButton" x:Name="EnglishTargetButton" Clicked="Target_Click" />
+        <Button Text="field  target" AutomationId="fieldTargetButton" x:Name="fieldTargetButton" Clicked="Target_Click" />
+        <Button Text="indoor recurve target" AutomationId="indoorRecurveTargetButton" x:Name="indoorRecurveTargetButton" Clicked="Target_Click" />
+        <Button Text="indoor compound target" AutomationId="indoorCompoundTargetButton" x:Name="indoorCompoundTargetButton" Clicked="Target_Click" />
         <Button Text="button counter " AutomationId="ButtonCounterButton" Clicked="ButtonCounter_Clicked" />
     </StackLayout>
 </ContentPage>

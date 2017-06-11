@@ -6,7 +6,7 @@ using Xamarin.Forms;
 namespace ArcheryManager.UnitTest.Settings
 {
     [TestFixture]
-    public class EnglishArrowSettingFactory
+    public class EnglishArrowSettingFactoryTest
     {
         private readonly IArrowSetting Setting = EnglishArrowSetting.Instance;
 

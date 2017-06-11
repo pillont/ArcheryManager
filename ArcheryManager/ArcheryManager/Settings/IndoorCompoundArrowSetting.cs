@@ -124,7 +124,6 @@ namespace ArcheryManager.Settings
                 case 4:
                 case 5:
                 case 6:
-                case 7:
                     return Color.Yellow;
 
                 default:

@@ -59,7 +59,7 @@ namespace ArcheryManager.Factories
                 if (distance < size / 2)
                     return ScoreByIndex(i);
             }
-            return EnglishArrowSetting.MissScore;
+            return ScoreByIndex(0);
         }
 
         protected Color ColorOf(string value)

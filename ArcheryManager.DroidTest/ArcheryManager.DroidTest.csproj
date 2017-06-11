@@ -78,8 +78,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IndoorCompoundTargetTest.cs" />
+    <Compile Include="IndoorRecurveTargetTest.cs" />
+    <Compile Include="GenericTargetTest.cs" />
     <Compile Include="ButtonScoreTest.cs" />
-    <Compile Include="TargetTest.cs" />
+    <Compile Include="FieldTargetTest.cs" />
+    <Compile Include="EnglishTargetTest.cs" />
     <Compile Include="Tests.cs" />
     <Compile Include="TestSetting.cs" />
     <Compile Include="TimerTest.cs" />

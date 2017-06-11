@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 using System.Linq;
 using Xamarin.UITest.Android;
 
@@ -73,13 +74,14 @@ namespace ArcheryManager.DroidTest
             System.Threading.Thread.Sleep(5000);
             Assert.IsFalse(app.Query("PauseButton").First().Enabled);
 
-            System.Threading.Thread.Sleep(10000);
-            app.Tap("PauseButton");
             app.WaitForElement(c => c.Marked("TimerLabel").Text("115"));
-            System.Threading.Thread.Sleep(5000);
             app.Tap("PauseButton");
-            app.WaitForElement(c => c.Marked("TimerLabel").Text("114"));
-            System.Threading.Thread.Sleep(4000);
+            var val = Convert.ToInt32(app.WaitForElement(c => c.Marked("TimerLabel")).First().Text);
+
+            System.Threading.Thread.Sleep(5000);
+            app.WaitForElement(c => c.Marked("TimerLabel").Text(val.ToString()));
+            app.Tap("PauseButton");
+            app.WaitForElement(c => c.Marked("TimerLabel").Text((--val).ToString()));
             app.WaitForElement(c => c.Marked("TimerLabel").Text("110"));
         }
     }

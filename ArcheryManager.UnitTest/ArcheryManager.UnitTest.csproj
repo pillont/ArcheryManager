@@ -78,7 +78,10 @@
     <Compile Include="ClassTest.cs" />
     <Compile Include="Factories\ArrowFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings\EnglishArrowSettingFactory.cs" />
+    <Compile Include="Settings\EnglishArrowSettingFactoryTest.cs" />
+    <Compile Include="Settings\FieldArrowSettingTest.cs" />
+    <Compile Include="Settings\IndoorCompoundArrowSettingTest.cs" />
+    <Compile Include="Settings\IndoorRecurveArrowSettingTest.cs" />
     <Compile Include="Utils\ScoreCounterTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -88,10 +91,6 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ArcheryManager\ArcheryManager.Android\ArcheryManager.Android.csproj">
-      <Project>{26E59374-8BE8-41BC-B5F4-D0ECF512D087}</Project>
-      <Name>ArcheryManager.Android</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ArcheryManager\ArcheryManager\ArcheryManager.csproj">
       <Project>{2913bd0d-2c36-4a81-bb1e-51f5470ab111}</Project>
       <Name>ArcheryManager</Name>
