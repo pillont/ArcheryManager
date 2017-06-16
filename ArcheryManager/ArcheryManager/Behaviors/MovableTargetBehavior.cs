@@ -1,5 +1,4 @@
-﻿using ArcheryManager.CustomControls.Targets;
-using ArcheryManager.Interfaces;
+﻿using ArcheryManager.CustomControls;
 using ArcheryManager.Utils;
 using Xamarin.Forms;
 

@@ -1,4 +1,5 @@
-﻿using ArcheryManager.Utils;
+﻿using ArcheryManager.Settings;
+using ArcheryManager.Utils;
 using Xamarin.Forms;
 using XFShapeView;
 
@@ -11,11 +12,6 @@ namespace ArcheryManager.CustomControls
         /// </summary>
         private const double DefaultArrowWidth = 10;
 
-        /// <summary>
-        /// color of the arrows in the target
-        /// </summary>
-        private static readonly Color DefaultArrowColor = Color.Green;
-
         public static readonly BindableProperty ArrowWidthProperty =
                       BindableProperty.Create(nameof(ArrowWidth), typeof(double), typeof(ArrowsGrid), DefaultArrowWidth);
 
@@ -26,12 +22,25 @@ namespace ArcheryManager.CustomControls
         }
 
         public static readonly BindableProperty ArrowColorProperty =
-                      BindableProperty.Create(nameof(ArrowColor), typeof(Color), typeof(ArrowsGrid), DefaultArrowColor);
+                      BindableProperty.Create(nameof(ArrowColor), typeof(Color), typeof(ArrowsGrid), CommonConstant.DefaultArrowColor);
 
         public Color ArrowColor
         {
             get { return (Color)GetValue(ArrowColorProperty); }
             set { SetValue(ArrowColorProperty, value); }
+        }
+
+        public static readonly BindableProperty SelectedArrowColorProperty =
+                      BindableProperty.Create(nameof(SelectedArrowColor), typeof(Color), typeof(ArrowsGrid), CommonConstant.DefaultSelectedArrowColor);
+
+        public Color SelectedArrowColor
+        {
+            get { return (Color)GetValue(SelectedArrowColorProperty); }
+            set { SetValue(SelectedArrowColorProperty, value); }
+        }
+
+        public ArrowsGrid()
+        {
         }
 
         protected override View CreateItemContainer(Arrow arrow)
@@ -52,6 +61,27 @@ namespace ArcheryManager.CustomControls
             ctn.SetBinding(View.TranslationYProperty, nameof(Arrow.TranslationY));
 
             return ctn;
+        }
+
+        public void SelectArrow(Arrow arrow)
+        {
+            var container = FindContainer(arrow) as ShapeView;
+            container.Color = SelectedArrowColor;
+        }
+
+        public void UnSelectArrow(Arrow arrow)
+        {
+            var container = FindContainer(arrow) as ShapeView;
+            container.Color = ArrowColor;
+        }
+
+        public void ResetSelection()
+        {
+            foreach (var arrow in Items)
+            {
+                var container = FindContainer(arrow) as ShapeView;
+                container.Color = ArrowColor;
+            }
         }
     }
 }

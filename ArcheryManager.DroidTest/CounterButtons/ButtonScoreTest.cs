@@ -2,7 +2,7 @@
 using System.Linq;
 using Xamarin.UITest.Android;
 
-namespace ArcheryManager.DroidTest
+namespace ArcheryManager.DroidTest.GenericCountable
 {
     [TestFixture]
     public class ButtonScoreTest

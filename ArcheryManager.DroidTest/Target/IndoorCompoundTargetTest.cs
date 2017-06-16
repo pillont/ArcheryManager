@@ -2,10 +2,10 @@
 using System.Linq;
 using Xamarin.UITest.Android;
 
-namespace ArcheryManager.DroidTest
+namespace ArcheryManager.DroidTest.Target
 {
     [TestFixture]
-    public class IndoorRecurveTargetTest
+    public class IndoorCompoundTargetTest
     {
         private AndroidApp app;
 
@@ -14,7 +14,7 @@ namespace ArcheryManager.DroidTest
         {
             app = TestSetting.InitTestApplication();
             app.Screenshot("BackDoor Page");
-            app.Tap("indoorRecurveTargetButton");
+            app.Tap("indoorCompoundTargetButton");
             app.Screenshot("Target page");
         }
 
@@ -30,17 +30,19 @@ namespace ArcheryManager.DroidTest
         [Test]
         public void InitTargetElement()
         {
-            Assert.AreEqual(872, app.WaitForElement("zone1").First().Rect.Height);
-            Assert.AreEqual(693, app.WaitForElement("zone2").First().Rect.Height);
-            Assert.AreEqual(514, app.WaitForElement("zone3").First().Rect.Height);
-            Assert.AreEqual(336, app.WaitForElement("zone4").First().Rect.Height);
-            Assert.AreEqual(158, app.WaitForElement("zone5").First().Rect.Height);
+            Assert.AreEqual(897, app.WaitForElement("zone1").First().Rect.Height);
+            Assert.AreEqual(744, app.WaitForElement("zone2").First().Rect.Height);
+            Assert.AreEqual(591, app.WaitForElement("zone3").First().Rect.Height);
+            Assert.AreEqual(438, app.WaitForElement("zone4").First().Rect.Height);
+            Assert.AreEqual(285, app.WaitForElement("zone5").First().Rect.Height);
+            Assert.AreEqual(132, app.WaitForElement("zone6").First().Rect.Height);
 
-            Assert.AreEqual(872, app.WaitForElement("zone1").First().Rect.Width);
-            Assert.AreEqual(693, app.WaitForElement("zone2").First().Rect.Width);
-            Assert.AreEqual(514, app.WaitForElement("zone3").First().Rect.Width);
-            Assert.AreEqual(336, app.WaitForElement("zone4").First().Rect.Width);
-            Assert.AreEqual(158, app.WaitForElement("zone5").First().Rect.Width);
+            Assert.AreEqual(897, app.WaitForElement("zone1").First().Rect.Width);
+            Assert.AreEqual(744, app.WaitForElement("zone2").First().Rect.Width);
+            Assert.AreEqual(591, app.WaitForElement("zone3").First().Rect.Width);
+            Assert.AreEqual(438, app.WaitForElement("zone4").First().Rect.Width);
+            Assert.AreEqual(285, app.WaitForElement("zone5").First().Rect.Width);
+            Assert.AreEqual(132, app.WaitForElement("zone6").First().Rect.Width);
         }
 
         [Test]

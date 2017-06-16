@@ -1,5 +1,4 @@
 ﻿using ArcheryManager.Behaviors;
-using ArcheryManager.CustomControls.Targets;
 using ArcheryManager.Interfaces;
 using ArcheryManager.Settings;
 using ArcheryManager.Utils;
@@ -47,12 +46,12 @@ namespace ArcheryManager.Factories
         {
             double distance = Math.Sqrt(Math.Pow(position.X, 2) + Math.Pow(position.Y, 2));
             distance -= distance * MovableTargetBehavior.TargetTranslationRate; // target translation
-            distance -= CustomControls.Targets.Target.ArrowWidth / 2; // arrow size
-            distance -= CustomControls.Targets.Target.StringWidth; // string size
+            distance -= CustomControls.Target.ArrowWidth / 2; // arrow size
+            distance -= CustomControls.Target.StringWidth; // string size
 
             for (int i = Setting.ZoneCount - 1; i > 0; i--)
             {
-                double rate = (Setting.ZoneCount - i * CustomControls.Targets.Target.ColorWidthRatio) / Setting.ZoneCount;
+                double rate = (Setting.ZoneCount - i * CustomControls.Target.ColorWidthRatio) / Setting.ZoneCount;
 
                 double size = Target.TargetSize * rate;
                 size *= MovableTargetBehavior.TargetScale; // target scale

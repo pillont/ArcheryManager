@@ -6,6 +6,9 @@ namespace ArcheryManager.CustomControls
 {
     public class ArrowUniformGrid : UniformGrid<Arrow>
     {
+        public const int DefaultBorderWidth = 1;
+        public static readonly Color DefaultBorderColor = Color.Black;
+
         protected override View CreateItemContainer(Arrow arrow)
         {
             var grid = new Grid();
@@ -16,12 +19,10 @@ namespace ArcheryManager.CustomControls
                 HeightRequest = 20,
                 WidthRequest = 20,
                 ShapeType = ShapeType.Circle,
-                BorderWidth = 1,
-                BorderColor = Color.Black,
+                BorderWidth = DefaultBorderWidth,
+                BorderColor = DefaultBorderColor,
             };
             shape.SetBinding(ShapeView.ColorProperty, "Color");
-
-            grid.Children.Add(shape);
 
             var label = new Label()
             {
@@ -31,8 +32,10 @@ namespace ArcheryManager.CustomControls
             };
             label.SetBinding(Label.TextProperty, "Score");
 
+            //NOTE : ArrowUniformGridController is helper to find element in the kind of container
+            //       If this structure change, think to change in the helper to
+            grid.Children.Add(shape);
             grid.Children.Add(label);
-
             return grid;
         }
     }

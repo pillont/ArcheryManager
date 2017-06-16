@@ -1,7 +1,7 @@
 ﻿using ArcheryManager.Behaviors;
-using ArcheryManager.CustomControls.Targets;
 using ArcheryManager.Interfaces;
 using ArcheryManager.Utils;
+using System.Collections.Specialized;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -28,6 +28,11 @@ namespace ArcheryManager.Pages
             var list = Counter.Arrows;
             scoreList.SizeChanged += ScoreList_SizeChanged;
             scoreList.Items = list;
+
+            var selectBehavior = new SelectableArrowInListBehavior(unSelectButton, removeSelectionButton);
+            scoreList.Behaviors.Add(selectBehavior);
+            selectBehavior.ItemsSelectedChange += SelectBehavior_SelectionChange;
+
             customTarget.Items = list;
             customTarget.Setting = setting;
 
@@ -35,6 +40,30 @@ namespace ArcheryManager.Pages
             customTarget.Behaviors.Add(behavior);
 
             totalCounter.BindingContext = Counter;
+        }
+
+        private void SelectBehavior_SelectionChange(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Reset)
+            {
+                customTarget.ResetSelection();
+            }
+            if (e.NewItems != null)
+            {
+                foreach (View v in e.NewItems)
+                {
+                    var a = v.BindingContext as Arrow;
+                    customTarget.SelectArrow(a);
+                }
+            }
+            if (e.OldItems != null)
+            {
+                foreach (View v in e.OldItems)
+                {
+                    var a = v.BindingContext as Arrow;
+                    customTarget.UnSelectArrow(a);
+                }
+            }
         }
 
         private void ScoreList_SizeChanged(object sender, System.EventArgs e)

@@ -3,7 +3,7 @@ using System.Linq;
 using Xamarin.UITest.Android;
 using Xamarin.UITest.Queries;
 
-namespace ArcheryManager.DroidTest
+namespace ArcheryManager.DroidTest.Target
 {
     [TestFixture]
     public class GenericTargetTest
@@ -28,7 +28,7 @@ namespace ArcheryManager.DroidTest
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 600, 900);
-            var pure = new AppRect() { Width = 30, Height = 30, X = 630, Y = 890, CenterX = 644, CenterY = 902 };
+            var pure = new AppRect() { Width = 30, Height = 30, X = 630, Y = 876, CenterX = 644, CenterY = 891 };
 
             var list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(1, list.Count()); // have one arrow in target
@@ -49,7 +49,7 @@ namespace ArcheryManager.DroidTest
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 450, 750);
-            pure = new AppRect() { Width = 30, Height = 30, X = 492, Y = 750, CenterX = 507, CenterY = 766 };
+            pure = new AppRect() { Width = 30, Height = 30, X = 492, Y = 738, CenterX = 507, CenterY = 753 };
 
             list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(2, list.Count()); // have one arrow in target
@@ -78,7 +78,7 @@ namespace ArcheryManager.DroidTest
             app.DragCoordinates(500, 800, 450, 750);
             // drag to create arrow
             app.DragCoordinates(500, 800, 600, 900);
-            var pure = new AppRect() { Width = 30, Height = 30, X = 492, Y = 750, CenterX = 507, CenterY = 764 };
+            var pure = new AppRect() { Width = 30, Height = 30, X = 492, Y = 739, CenterX = 507, CenterY = 753 };
 
             var list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(2, list.Count()); // have one arrow in target
@@ -171,31 +171,6 @@ namespace ArcheryManager.DroidTest
             app.Tap("nextFlight");
 
             Assert.AreEqual(0, app.Query(e => e.Marked("scoreList").Child()).Count());
-        }
-
-        [Test]
-        public void LongTap_RemoveArrowsTest()
-        {
-            app.WaitForElement("scoreList"); //update visual
-            app.DragCoordinates(500, 800, 450, 750);
-            app.DragCoordinates(500, 800, 600, 900);
-
-            Assert.AreEqual(2, app.Query(c => c.Marked("scoreList").Child()).Count());
-            app.TouchAndHold(c => c.Marked("scoreList").Child(0));
-            Assert.AreEqual(1, app.Query(c => c.Marked("scoreList").Child()).Count());
-        }
-
-        [Test]
-        public void LongTap_RemoveArrows_goodArrowTest()
-        {
-            app.WaitForElement("scoreList"); //update visual
-            app.DragCoordinates(500, 800, 450, 750);
-            app.DragCoordinates(500, 800, 600, 900);
-
-            var value = app.Query(c => c.Marked("scoreList").Child(1).Child().Child(1)).First().Text;
-
-            app.TouchAndHold(c => c.Marked("scoreList").Child(0));
-            Assert.AreEqual(value, app.Query(c => c.Marked("scoreList").Child().Child().Child(1)).First().Text);
         }
     }
 }

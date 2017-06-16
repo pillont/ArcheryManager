@@ -6,8 +6,9 @@ using ArcheryManager.Utils;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using XFShapeView;
+using System;
 
-namespace ArcheryManager.CustomControls.Targets
+namespace ArcheryManager.CustomControls
 {
     public class Target : ContentView, IMovableTarget
     {
@@ -194,6 +195,21 @@ namespace ArcheryManager.CustomControls.Targets
 
             TargetGrid.Children.Add(center);
             TargetGrid.Children.Add(arrowGrid);
+        }
+
+        public void SelectArrow(Arrow arrow)
+        {
+            arrowGrid.SelectArrow(arrow);
+        }
+
+        public void UnSelectArrow(Arrow arrow)
+        {
+            arrowGrid.UnSelectArrow(arrow);
+        }
+
+        public void ResetSelection()
+        {
+            arrowGrid.ResetSelection();
         }
     }
 }

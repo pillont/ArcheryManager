@@ -58,7 +58,7 @@ namespace ArcheryManager.CustomControls
 
             foreach (var i in Children)
             {
-                ApplyPosition(obj);
+                ApplyPosition(i);
             }
         }
 

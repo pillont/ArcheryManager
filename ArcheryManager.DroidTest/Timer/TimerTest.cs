@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using Xamarin.UITest.Android;
 
-namespace ArcheryManager.DroidTest
+namespace ArcheryManager.DroidTest.Timer
 {
     [TestFixture]
     public class TimerTest

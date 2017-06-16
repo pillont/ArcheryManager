@@ -49,6 +49,9 @@
     </Compile>
     <Compile Include="Behaviors\CustomBehavior.cs" />
     <Compile Include="Behaviors\MovableTargetBehavior.cs" />
+    <Compile Include="Behaviors\SelectableArrowInListBehavior.cs" />
+    <Compile Include="Helpers\ArrowUniformGridHelper.cs" />
+    <Compile Include="Helpers\GestureHelper.cs" />
     <Compile Include="CustomControls\ArrowsGrid.cs" />
     <Compile Include="CustomControls\ArrowUniformGrid.cs" />
     <Compile Include="CustomControls\CounterButtons.xaml.cs">
@@ -61,6 +64,7 @@
     </Compile>
     <Compile Include="CustomControls\UniformGrid.cs" />
     <Compile Include="Factories\ArrowFactory.cs" />
+    <Compile Include="Settings\CommonConstant.cs" />
     <Compile Include="Settings\IndoorCompoundArrowSetting.cs" />
     <Compile Include="Settings\IndoorRecurveArrowSetting.cs" />
     <Compile Include="Settings\EnglishArrowSetting.cs" />
@@ -74,7 +78,7 @@
     <Compile Include="Utils\Arrow.cs" />
     <Compile Include="Utils\ScoreCounter.cs" />
     <Compile Include="Behaviors\TimerBehavior.cs" />
-    <Compile Include="CustomControls\Targets\Target.cs" />
+    <Compile Include="CustomControls\Target.cs" />
     <Compile Include="CustomControls\CustomTimer.cs" />
     <Compile Include="Interfaces\ITimer.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">
@@ -149,7 +153,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CustomControls\TargetCommands.xaml">
+    <EmbeddedResource Include="CustomControls\CounterCommands.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
