@@ -1,6 +1,7 @@
 ﻿using ArcheryManager.Interactions.Behaviors;
 using ArcheryManager.Interfaces;
 using ArcheryManager.Utils;
+using System;
 using System.Collections;
 using System.Collections.Specialized;
 using Xamarin.Forms;
@@ -109,6 +110,12 @@ namespace ArcheryManager.Pages
             Grid.SetColumn(totalCounter, 1);
             Grid.SetColumn(customTarget, 0);
             Grid.SetColumn(scrollArrows, 1);
+
+            var size = Math.Min(globalGrid.Width / 2, globalGrid.Height);
+            size -= 10; //target margin
+
+            customTarget.TargetSize = size;
+            customTarget.DrawTargetVisual();
         }
 
         private void SetupGridForVerticalDevice(Size screenSize)
@@ -116,8 +123,9 @@ namespace ArcheryManager.Pages
             globalGrid.RowDefinitions.Clear();
             globalGrid.ColumnDefinitions.Clear();
 
+            int targetRate = 6;
             globalGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            globalGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(6, GridUnitType.Star) });
+            globalGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(targetRate, GridUnitType.Star) });
             globalGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
 
             Grid.SetColumn(totalCounter, 0);
@@ -129,6 +137,12 @@ namespace ArcheryManager.Pages
             Grid.SetRow(scrollArrows, 2);
 
             Grid.SetRowSpan(customTarget, 1);
+
+            var size = Math.Min(globalGrid.Width, ((double)targetRate) / 8d * globalGrid.Height);
+            size -= 10; //target margin
+
+            customTarget.TargetSize = size;
+            customTarget.DrawTargetVisual();
         }
 
         #endregion rotation device

@@ -25,7 +25,7 @@ namespace ArcheryManager.CustomControls
             private set
             {
                 factory = value;
-                CreateTargetVisual();
+                DrawTargetVisual();
             }
         }
 
@@ -155,7 +155,7 @@ namespace ArcheryManager.CustomControls
         /// function to generate TargetGrid
         /// init and add all shapes in the grid
         /// </summary>
-        private void CreateTargetVisual()
+        public void DrawTargetVisual()
         {
             TargetGrid.Children.Clear();
 
