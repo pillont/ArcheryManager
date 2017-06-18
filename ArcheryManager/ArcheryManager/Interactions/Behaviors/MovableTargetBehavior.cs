@@ -1,8 +1,9 @@
 ﻿using ArcheryManager.CustomControls;
+using ArcheryManager.Helpers;
 using ArcheryManager.Utils;
 using Xamarin.Forms;
 
-namespace ArcheryManager.Behaviors
+namespace ArcheryManager.Interactions.Behaviors
 {
     public class MovableTargetBehavior : CustomBehavior<Target>
     {
@@ -33,18 +34,8 @@ namespace ArcheryManager.Behaviors
         protected override void OnAttachedTo(Target bindable)
         {
             base.OnAttachedTo(bindable);
-            ApplyPanGesture(associatedObject.TargetGrid);
-        }
 
-        /// <summary>
-        /// apply pan gesture on view to set new arrow
-        /// </summary>
-        /// <param name="v"></param>
-        private void ApplyPanGesture(View v)
-        {
-            var panGesture = new PanGestureRecognizer();
-            panGesture.PanUpdated += OnPanUpdated;
-            v.GestureRecognizers.Add(panGesture);
+            GestureHelper.AddPanGestureOn(associatedObject.TargetGrid, OnPanUpdated);
         }
 
         /// <summary>
@@ -52,21 +43,21 @@ namespace ArcheryManager.Behaviors
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnPanUpdated(object sender, PanUpdatedEventArgs e)
+        private void OnPanUpdated(object sender, CustomPanUpdatedEventArgs e)
         {
             switch (e.StatusType)
             {
                 case GestureStatus.Started:
-                    StartPanGesture();
+                    StartPanGesture(sender, e);
                     break;
 
                 case GestureStatus.Running:
-                    UpdatePanGesture(e);
+                    UpdatePanGesture(sender, e);
                     break;
 
                 case GestureStatus.Canceled:
                 case GestureStatus.Completed:
-                    EndPanGesture();
+                    EndPanGesture(sender, e);
                     break;
             }
         }
@@ -75,7 +66,7 @@ namespace ArcheryManager.Behaviors
         /// function during end of the pan manipulations
         /// scale and translation reset / arrow setter not visible
         /// </summary>
-        private void EndPanGesture()
+        private void EndPanGesture(object sender, CustomPanUpdatedEventArgs e)
         {
             associatedObject.TargetGrid.Scale = 1;
 
@@ -97,7 +88,7 @@ namespace ArcheryManager.Behaviors
         /// function during update of the pan munipulations
         /// translation update
         /// </summary>
-        private void UpdatePanGesture(PanUpdatedEventArgs e)
+        private void UpdatePanGesture(object sender, CustomPanUpdatedEventArgs e)
         {
             associatedObject.TargetGrid.TranslationX = e.TotalX * TargetTranslationRate;
             associatedObject.TargetGrid.TranslationY = e.TotalY * TargetTranslationRate;
@@ -110,7 +101,7 @@ namespace ArcheryManager.Behaviors
         /// function during start of the pan munipulations
         /// scale on the target / arrow setter visible
         /// </summary>
-        private void StartPanGesture()
+        private void StartPanGesture(object sender, CustomPanUpdatedEventArgs e)
         {
             associatedObject.TargetGrid.TranslationX = 0;
             associatedObject.TargetGrid.TranslationY = 0;

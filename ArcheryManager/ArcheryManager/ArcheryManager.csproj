@@ -47,9 +47,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Behaviors\CustomBehavior.cs" />
-    <Compile Include="Behaviors\MovableTargetBehavior.cs" />
-    <Compile Include="Behaviors\SelectableArrowInListBehavior.cs" />
+    <Compile Include="Interactions\Behaviors\CustomBehavior.cs" />
+    <Compile Include="Interactions\Behaviors\MovableTargetBehavior.cs" />
+    <Compile Include="Interactions\Behaviors\SelectableArrowInListBehavior.cs" />
     <Compile Include="Helpers\ArrowUniformGridHelper.cs" />
     <Compile Include="Helpers\GestureHelper.cs" />
     <Compile Include="CustomControls\ArrowsGrid.cs" />
@@ -64,6 +64,8 @@
     </Compile>
     <Compile Include="CustomControls\UniformGrid.cs" />
     <Compile Include="Factories\ArrowFactory.cs" />
+    <Compile Include="Interactions\CustomPanGestureReconizer.cs" />
+    <Compile Include="Interactions\CustomPanUpdatedEventArgs.cs" />
     <Compile Include="Settings\CommonConstant.cs" />
     <Compile Include="Settings\IndoorCompoundArrowSetting.cs" />
     <Compile Include="Settings\IndoorRecurveArrowSetting.cs" />
@@ -76,8 +78,9 @@
     </Compile>
     <Compile Include="Settings\FieldArrowSetting.cs" />
     <Compile Include="Utils\Arrow.cs" />
+    <Compile Include="Utils\ScreenRotationWatcher.cs" />
     <Compile Include="Utils\ScoreCounter.cs" />
-    <Compile Include="Behaviors\TimerBehavior.cs" />
+    <Compile Include="Interactions\Behaviors\TimerBehavior.cs" />
     <Compile Include="CustomControls\Target.cs" />
     <Compile Include="CustomControls\CustomTimer.cs" />
     <Compile Include="Interfaces\ITimer.cs" />

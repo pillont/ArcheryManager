@@ -1,5 +1,5 @@
-﻿using ArcheryManager.Behaviors;
-using ArcheryManager.CustomControls;
+﻿using ArcheryManager.CustomControls;
+using ArcheryManager.Interactions.Behaviors;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

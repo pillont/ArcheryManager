@@ -6,18 +6,13 @@
              xmlns:shape="clr-namespace:XFShapeView;assembly=XFShapeView"
              x:Class="ArcheryManager.Pages.TargetPage">
 
-    <StackLayout>
-        <ctl:TotalCounter x:Name="totalCounter" />
-        <ctl:Target x:Name="customTarget"  HeightRequest="1200" WidthRequest="1200" />
+    <Grid x:Name="globalGrid">
 
-        <StackLayout Orientation="Horizontal">
-            <Button AutomationId="unSelectButton" x:Name="unSelectButton" Text="Unselect" />
-            <Button AutomationId="removeSelectionButton" x:Name="removeSelectionButton" Text="Remove selection" />
-        </StackLayout>
-        <ScrollView x:Name="scrollArrows" MinimumHeightRequest="60" HeightRequest="60" BackgroundColor="AliceBlue">
-            <ctl:ArrowUniformGrid AutomationId="scoreList" x:Name="scoreList"  Grid.Column="0" CountByRow="6" />
+        <ctl:TotalCounter x:Name="totalCounter" Grid.Row="0" />
+        <ctl:Target x:Name="customTarget"  MinimumHeightRequest="1200" MinimumWidthRequest="1200" />
+
+        <ScrollView x:Name="scrollArrows" MinimumHeightRequest="60"  BackgroundColor="AliceBlue">
+            <ctl:ArrowUniformGrid AutomationId="scoreList" x:Name="scoreList"   CountByRow="6" />
         </ScrollView>
-
-        <ctl:CounterCommands x:Name="counterCommands" Counter="{Binding Counter}" />
-    </StackLayout>
+    </Grid>
 </ContentPage>

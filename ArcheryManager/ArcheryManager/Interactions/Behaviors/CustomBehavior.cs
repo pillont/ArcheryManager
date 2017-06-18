@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace ArcheryManager.Behaviors
+namespace ArcheryManager.Interactions.Behaviors
 {
     /// <summary>
     /// abstract behavior with associated object initialized during OnAttached

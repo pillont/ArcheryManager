@@ -4,8 +4,19 @@ using Xamarin.Forms;
 
 namespace ArcheryManager.CustomControls
 {
+    // TODO remove
+
     public partial class CounterCommands : ContentView
     {
+        public static readonly BindableProperty OrientationProperty =
+                      BindableProperty.Create(nameof(Orientation), typeof(StackOrientation), typeof(CounterButtons), StackOrientation.Horizontal);
+
+        public StackOrientation Orientation
+        {
+            get { return (StackOrientation)GetValue(OrientationProperty); }
+            set { SetValue(OrientationProperty, value); }
+        }
+
         public static readonly BindableProperty CounterProperty =
                       BindableProperty.Create(nameof(Counter), typeof(ScoreCounter), typeof(CounterCommands), null);
 
@@ -18,6 +29,7 @@ namespace ArcheryManager.CustomControls
         public CounterCommands()
         {
             InitializeComponent();
+            this.BindingContext = this;
         }
 
         private void Button_RemoveLast(object sender, System.EventArgs e)

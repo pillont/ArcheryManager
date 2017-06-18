@@ -1,12 +1,11 @@
-﻿using ArcheryManager.Behaviors;
-using ArcheryManager.Factories;
+﻿using ArcheryManager.Factories;
 using ArcheryManager.Interfaces;
 using ArcheryManager.Settings;
 using ArcheryManager.Utils;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using XFShapeView;
-using System;
+using ArcheryManager.Interactions.Behaviors;
 
 namespace ArcheryManager.CustomControls
 {
@@ -60,7 +59,7 @@ namespace ArcheryManager.CustomControls
         /// <summary>
         /// size of the target
         /// </summary>
-        private const int DefaultTargetSize = 350; //TODO allow to change value
+        private const int DefaultTargetSize = 320; //TODO allow to change value
 
         public static readonly BindableProperty TargetSizeProperty =
                       BindableProperty.Create(nameof(TargetSize), typeof(int), typeof(Target), DefaultTargetSize);
@@ -79,7 +78,7 @@ namespace ArcheryManager.CustomControls
         /// <summary>
         /// width of the arrow in the target
         /// </summary>
-        public const int ArrowWidth = 10;
+        public const int ArrowWidth = 7;
 
         /// <summary>
         /// width of the arrow in the zoomed target
@@ -120,7 +119,7 @@ namespace ArcheryManager.CustomControls
         /// </summary>
         private void CreateContent()
         {
-            arrowGrid = new ArrowsGrid() { AutomationId = "arrowInTargetGrid", };
+            arrowGrid = new ArrowsGrid() { AutomationId = "arrowInTargetGrid", ArrowWidth = ArrowWidth };
 
             TargetGrid = new Grid();
 

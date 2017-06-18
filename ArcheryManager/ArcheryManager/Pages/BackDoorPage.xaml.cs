@@ -16,7 +16,7 @@ namespace ArcheryManager.Pages
 
         private async void Timer_Click(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new TimerPage());
+            await App.NavigationPage.PushAsync(new TimerPage());
         }
 
         private async void Target_Click(object sender, EventArgs e)
@@ -38,13 +38,14 @@ namespace ArcheryManager.Pages
             {
                 setting = IndoorRecurveArrowSetting.Instance;
             }
+
             TargetPage target = new TargetPage(setting);
-            await Navigation.PushModalAsync(target);
+            await App.NavigationPage.PushAsync(target);
         }
 
         private async void ButtonCounter_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new CounterPage());
+            await App.NavigationPage.PushAsync(new CounterPage());
         }
     }
 }

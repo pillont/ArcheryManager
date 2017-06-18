@@ -2,30 +2,33 @@
 using ArcheryManager.Helpers;
 using ArcheryManager.Settings;
 using ArcheryManager.Utils;
-using System;
 using System.Linq;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using Xamarin.Forms;
 
-namespace ArcheryManager.Behaviors
+namespace ArcheryManager.Interactions.Behaviors
 {
     public class SelectableArrowInListBehavior : CustomBehavior<ArrowUniformGrid>
     {
+        private const int WidthOfSelectedBorder = 10;
+
+        private ObservableCollection<View> selectedArrows;
+
         public event NotifyCollectionChangedEventHandler ItemsSelectedChange;
 
-        private const int WidthOfSelectedBorder = 10;
-        private ObservableCollection<View> selectedArrows;
-        private readonly View UnSelectViewToClick;
-        private readonly View RemoveViewToClick;
-
-        public SelectableArrowInListBehavior(View unSelectViewToClick, View removeViewToClick)
+        public ReadOnlyCollection<View> SelectedArrow
         {
-            RemoveViewToClick = removeViewToClick;
-            UnSelectViewToClick = unSelectViewToClick;
+            get
+            {
+                return new ReadOnlyCollection<View>(selectedArrows);
+            }
+        }
+
+        public SelectableArrowInListBehavior()
+        {
             selectedArrows = new ObservableCollection<View>();
             selectedArrows.CollectionChanged += SelectedArrows_CollectionChanged;
-            DisableButtons();
         }
 
         protected override void OnAttachedTo(ArrowUniformGrid list)
@@ -33,9 +36,6 @@ namespace ArcheryManager.Behaviors
             base.OnAttachedTo(list);
 
             associatedObject.ItemAdded += AssociatedObject_ItemAdded;
-
-            GestureHelper.AddTapGestureOn(UnSelectViewToClick, UnSelectViewToClick_Tapped);
-            GestureHelper.AddTapGestureOn(RemoveViewToClick, RemoveViewToClick_Tapped);
 
             associatedObject.Items.CollectionChanged += Items_CollectionChanged;
         }
@@ -65,20 +65,12 @@ namespace ArcheryManager.Behaviors
         private void SelectedArrows_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             ItemsSelectedChange?.Invoke(sender, e);
-
-            if (selectedArrows.Count > 0)
-            {
-                EnableButtons();
-            }
-            else
-            {
-                DisableButtons();
-            }
         }
 
         #region tap remove
 
-        private void RemoveViewToClick_Tapped(object sender, EventArgs e)
+        //TODO : private function and add toolitem in ctor
+        public void RemoveSelection()
         {
             RemoveSelectedItems();
             selectedArrows.Clear();
@@ -97,15 +89,9 @@ namespace ArcheryManager.Behaviors
 
         #region tap unselect
 
-        private void UnSelectViewToClick_Tapped(object sender, EventArgs e)
+        public void UnSelect()
         {
             UnSelectSelection();
-        }
-
-        private void DisableButtons()
-        {
-            UnSelectViewToClick.IsVisible = false;
-            RemoveViewToClick.IsVisible = false;
         }
 
         private void UnSelectSelection()
@@ -155,12 +141,6 @@ namespace ArcheryManager.Behaviors
 
             shape.BorderColor = CommonConstant.DefaultSelectedArrowColor;
             shape.BorderWidth = WidthOfSelectedBorder;
-        }
-
-        private void EnableButtons()
-        {
-            UnSelectViewToClick.IsVisible = true;
-            RemoveViewToClick.IsVisible = true;
         }
 
         #endregion gesture to item added in list

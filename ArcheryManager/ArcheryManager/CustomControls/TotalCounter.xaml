@@ -17,7 +17,10 @@
                    HorizontalOptions="Center"
                    Grid.Column="0"
                    Grid.Row="0"
-                   Text="Flight :" />
+                   Text="Flight :"
+                   VerticalTextAlignment="End"
+                   VerticalOptions="End" />
+
             <Label AutomationId="FlightScore"
                    HorizontalOptions="Center"
                    Grid.Column="0"
@@ -25,13 +28,18 @@
                    FontAttributes="Bold"
                    TextColor="Black"
                    HorizontalTextAlignment="Center"
-                   Text="{Binding Flight}" />
+                   Text="{Binding Flight}"
+                   VerticalTextAlignment="Start"
+                   VerticalOptions="Start"
+                   FontSize="Large" />
 
             <Label AutomationId="TotalScoreTitle"
                    HorizontalOptions="Center"
                    Text="Total :"
                    Grid.Column="1"
-                   Grid.Row="0" />
+                   Grid.Row="0"
+                   VerticalTextAlignment="End"
+                   VerticalOptions="End" />
 
             <Label AutomationId="TotalScore"
                    HorizontalOptions="Center"
@@ -40,7 +48,10 @@
                    Grid.Row="1"
                    TextColor="Black"
                    HorizontalTextAlignment="Center"
-                   Text="{Binding Total}" />
+                   Text="{Binding Total}"
+                   VerticalTextAlignment="Start"
+                   VerticalOptions="Start"
+                   FontSize="Large" />
         </Grid>
     </ContentView.Content>
 </ContentView>

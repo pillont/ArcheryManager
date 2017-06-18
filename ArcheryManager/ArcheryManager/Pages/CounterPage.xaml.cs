@@ -3,6 +3,7 @@ using ArcheryManager.Interfaces;
 using ArcheryManager.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ArcheryManager.Interactions.Behaviors;
 
 namespace ArcheryManager.Pages
 {
@@ -23,6 +24,9 @@ namespace ArcheryManager.Pages
             counterButtons.Setting = EnglishSetting;
 
             counterCommands.Counter = counter;
+
+            var selectBehavior = new SelectableArrowInListBehavior();
+            scoreList.Behaviors.Add(selectBehavior);
         }
 
         private void ScoreList_SizeChanged(object sender, System.EventArgs e)

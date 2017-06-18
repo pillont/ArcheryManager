@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using ArcheryManager.Interfaces;
 
-namespace ArcheryManager.Behaviors
+namespace ArcheryManager.Interactions.Behaviors
 {
     public class TimerBehavior<T> : CustomBehavior<T> where T : BindableObject, ITimer
     {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArcheryManager.Interactions;
+using System;
 using Xamarin.Forms;
 
 namespace ArcheryManager.Helpers
@@ -17,6 +18,13 @@ namespace ArcheryManager.Helpers
                 recognizer.Tapped += action;
                 view.GestureRecognizers.Add(recognizer);
             }
+        }
+
+        public static void AddPanGestureOn(View view, EventHandler<CustomPanUpdatedEventArgs> action)
+        {
+            var recognizer = new CustomPanGestureReconizer();
+            recognizer.PanUpdated += action;
+            view.GestureRecognizers.Add(recognizer);
         }
     }
 }
