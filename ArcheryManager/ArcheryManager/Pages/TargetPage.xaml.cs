@@ -5,15 +5,13 @@ using System.Collections;
 using System.Collections.Specialized;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System.Collections.Generic;
 
 namespace ArcheryManager.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TargetPage : ContentPage
     {
-        private readonly SelectableArrowInListBehavior SelectBehavior;
-        private readonly RotationWatcher RotationWatcher;
+        private readonly ScreenRotationWatcher RotationWatcher;
         private readonly ScoreCounter Counter = new ScoreCounter();
 
         public TargetPage(IArrowSetting setting)
@@ -22,8 +20,8 @@ namespace ArcheryManager.Pages
 
             #region view setup
 
-            RotationWatcher = new RotationWatcher(SetupGridForVerticalDevice, SetupGridForHorizontalDevice);
-            ShowGeneralButtonsInTitle();
+            RotationWatcher = new ScreenRotationWatcher(SetupGridForVerticalDevice, SetupGridForHorizontalDevice);
+            SetupToolbarItems();
 
             #endregion view setup
 
@@ -33,9 +31,9 @@ namespace ArcheryManager.Pages
             scoreList.SizeChanged += ScoreList_SizeChanged;
             scoreList.Items = arrowList;
 
-            SelectBehavior = new SelectableArrowInListBehavior();
-            SelectBehavior.ItemsSelectedChange += SelectBehavior_SelectionChange;
-            scoreList.Behaviors.Add(SelectBehavior);
+            var selectBehavior = new SelectableArrowInListBehavior(this.ToolbarItems);
+            selectBehavior.ItemsSelectedChange += SelectBehavior_SelectionChange;
+            scoreList.Behaviors.Add(selectBehavior);
 
             #endregion score list
 
@@ -54,6 +52,31 @@ namespace ArcheryManager.Pages
             totalCounter.BindingContext = Counter;
 
             #endregion total score
+        }
+
+        private void SetupToolbarItems()
+        {
+            ToolbarItems.Clear();
+            AddCounterToolbarItems();
+            AddTargetToolbarItems();
+        }
+
+        private void AddTargetToolbarItems()
+        {
+            ToolbarItems.Add(new ToolbarItem()
+            {
+                Text = "Settings",
+                Order = ToolbarItemOrder.Secondary
+                //TODO make setting page
+            });
+        }
+
+        private void AddCounterToolbarItems()
+        {
+            foreach (var item in Counter.AssociatedToolbarItem())
+            {
+                ToolbarItems.Add(item);
+            }
         }
 
         #region rotation device
@@ -81,7 +104,7 @@ namespace ArcheryManager.Pages
             Grid.SetRow(customTarget, 0);
             Grid.SetRow(scrollArrows, 1);
 
-            Grid.SetRowSpan(customTarget, 4);
+            Grid.SetRowSpan(customTarget, 2);
 
             Grid.SetColumn(totalCounter, 1);
             Grid.SetColumn(customTarget, 0);
@@ -129,17 +152,6 @@ namespace ArcheryManager.Pages
             {
                 UnSelectArrowsInTarget(e.OldItems);
             }
-
-            // have selected element
-            if (SelectBehavior.SelectedArrow.Count != 0)
-            {
-                ShowSelectionButtonsInTitle();
-            }
-            // have not selected element
-            else
-            {
-                ShowGeneralButtonsInTitle();
-            }
         }
 
         private void UnSelectArrowsInTarget(IList oldItems)
@@ -161,82 +173,6 @@ namespace ArcheryManager.Pages
         }
 
         #endregion arrow selection
-
-        #region title buttons
-
-        private void ShowGeneralButtonsInTitle()
-        {
-            this.ToolbarItems.Clear();
-
-            foreach (var item in GetGeneralTitleButtons())
-            {
-                this.ToolbarItems.Add(item);
-            }
-        }
-
-        private void ShowSelectionButtonsInTitle()
-        {
-            this.ToolbarItems.Clear();
-
-            foreach (var item in GetSelectionTitleButtons())
-            {
-                this.ToolbarItems.Add(item);
-            }
-        }
-
-        private List<ToolbarItem> GetGeneralTitleButtons()
-        {
-            return new List<ToolbarItem>()
-            {
-                new ToolbarItem()
-                {
-                    Text = "Remove last",
-                    Order = ToolbarItemOrder.Primary,
-                    Command = new Command(Counter.RemoveLastArrow)
-                },
-
-                new ToolbarItem()
-                {
-                    Text = "Remove all",
-                    Order = ToolbarItemOrder.Primary,
-                    Command = new Command(Counter.ClearArrows)
-                },
-
-                new ToolbarItem()
-                {
-                    Text = "New Flight",
-                    Order = ToolbarItemOrder.Primary,
-                    Command = new Command(Counter.NewFlight)
-                },
-                new ToolbarItem()
-                {
-                    Text = "Settings",
-                    Order = ToolbarItemOrder.Secondary
-                    //TODO make setting page
-                },
-            };
-        }
-
-        public List<ToolbarItem> GetSelectionTitleButtons()
-        {
-            return new List<ToolbarItem>()
-            {
-                new ToolbarItem()
-                {
-                    Text = "Unselect",
-                    Order = ToolbarItemOrder.Primary,
-                    Command = new Command(SelectBehavior.UnSelect)
-                },
-                new ToolbarItem()
-                {
-                    Text = "Remove",
-                    Order = ToolbarItemOrder.Primary,
-                    Command = new Command(SelectBehavior.RemoveSelection)
-                }
-            };
-        }
-
-        #endregion title buttons
 
         #region scrool list
 

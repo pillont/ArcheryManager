@@ -6,6 +6,7 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using Xamarin.Forms;
+using System.Collections.Generic;
 
 namespace ArcheryManager.Interactions.Behaviors
 {
@@ -14,19 +15,15 @@ namespace ArcheryManager.Interactions.Behaviors
         private const int WidthOfSelectedBorder = 10;
 
         private ObservableCollection<View> selectedArrows;
+        private readonly IList<ToolbarItem> toolbarItems;
+        private readonly List<ToolbarItem> DefaultToolbarItems;
 
         public event NotifyCollectionChangedEventHandler ItemsSelectedChange;
 
-        public ReadOnlyCollection<View> SelectedArrow
+        public SelectableArrowInListBehavior(IList<ToolbarItem> toolbarItems)
         {
-            get
-            {
-                return new ReadOnlyCollection<View>(selectedArrows);
-            }
-        }
-
-        public SelectableArrowInListBehavior()
-        {
+            this.toolbarItems = toolbarItems;
+            DefaultToolbarItems = new List<ToolbarItem>(toolbarItems);
             selectedArrows = new ObservableCollection<View>();
             selectedArrows.CollectionChanged += SelectedArrows_CollectionChanged;
         }
@@ -65,12 +62,23 @@ namespace ArcheryManager.Interactions.Behaviors
         private void SelectedArrows_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             ItemsSelectedChange?.Invoke(sender, e);
+
+            // have selected element
+            if (selectedArrows.Count != 0)
+            {
+                ChangeButtonsFor(GetSelectionTitleButtons());
+            }
+            // have not selected element
+            else
+            {
+                ChangeButtonsFor(DefaultToolbarItems);
+            }
         }
 
         #region tap remove
 
         //TODO : private function and add toolitem in ctor
-        public void RemoveSelection()
+        private void RemoveSelection()
         {
             RemoveSelectedItems();
             selectedArrows.Clear();
@@ -80,8 +88,8 @@ namespace ArcheryManager.Interactions.Behaviors
         {
             foreach (var arrow in selectedArrows.ToList())
             {
-                var context = arrow.BindingContext as Arrow;
-                associatedObject.Items.Remove(context);
+                int index = associatedObject.Children.IndexOf(arrow);
+                associatedObject.Items.RemoveAt(index);
             }
         }
 
@@ -89,7 +97,7 @@ namespace ArcheryManager.Interactions.Behaviors
 
         #region tap unselect
 
-        public void UnSelect()
+        private void UnSelect()
         {
             UnSelectSelection();
         }
@@ -144,5 +152,48 @@ namespace ArcheryManager.Interactions.Behaviors
         }
 
         #endregion gesture to item added in list
+
+        #region toolbar items
+
+        private void ChangeButtonsFor(List<ToolbarItem> list)
+        {
+            toolbarItems.Clear();
+
+            foreach (var item in list)
+            {
+                toolbarItems.Add(item);
+            }
+        }
+
+        private void ShowSelectionButtonsInTitle()
+        {
+            toolbarItems.Clear();
+
+            foreach (var item in GetSelectionTitleButtons())
+            {
+                toolbarItems.Add(item);
+            }
+        }
+
+        private List<ToolbarItem> GetSelectionTitleButtons()
+        {
+            return new List<ToolbarItem>()
+            {
+                new ToolbarItem()
+                {
+                    Text = "Unselect",
+                    Order = ToolbarItemOrder.Primary,
+                    Command = new Command(UnSelect)
+                },
+                new ToolbarItem()
+                {
+                    Text = "Remove",
+                    Order = ToolbarItemOrder.Primary,
+                    Command = new Command(RemoveSelection)
+                }
+            };
+        }
+
+        #endregion toolbar items
     }
 }

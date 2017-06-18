@@ -6,18 +6,9 @@
 
     <StackLayout>
         <ctl:TotalCounter x:Name="totalCounter" />
-
-        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-            <!-- TODO : pass in title view -->
-            <Button AutomationId="unSelectButton" x:Name="unSelectButton" Text="Unselect" />
-            <Button AutomationId="removeSelectionButton" x:Name="removeSelectionButton" Text="Remove" />
-        </StackLayout>
         <ScrollView x:Name="scrollArrows" MinimumHeightRequest="60" HeightRequest="60" BackgroundColor="AliceBlue">
             <ctl:ArrowUniformGrid x:Name="scoreList" AutomationId="scoreList" Grid.Column="0" CountByRow="6" />
         </ScrollView>
-
         <ctl:CounterButtons x:Name="counterButtons" />
-
-        <ctl:CounterCommands x:Name="counterCommands" Counter="{Binding Counter}" />
     </StackLayout>
 </ContentPage>

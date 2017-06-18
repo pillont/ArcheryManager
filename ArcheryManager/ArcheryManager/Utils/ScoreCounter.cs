@@ -46,6 +46,38 @@ namespace ArcheryManager.Utils
             }
         }
 
+        public ScoreCounter()
+        {
+            Arrows = new ObservableCollection<Arrow>();
+        }
+
+        public List<ToolbarItem> AssociatedToolbarItem()
+        {
+            return new List<ToolbarItem>()
+            {
+                new ToolbarItem()
+                {
+                    Text = "Remove last",
+                    Order = ToolbarItemOrder.Primary,
+                    Command = new Command(RemoveLastArrow)
+                },
+
+                new ToolbarItem()
+                {
+                    Text = "Remove all",
+                    Order = ToolbarItemOrder.Primary,
+                    Command = new Command(ClearArrows)
+                },
+
+                new ToolbarItem()
+                {
+                    Text = "New Flight",
+                    Order = ToolbarItemOrder.Primary,
+                    Command = new Command(NewFlight)
+                },
+            };
+        }
+
         public void NewFlight()
         {
             FlightsSaved.Add(new List<Arrow>(Arrows));
@@ -53,11 +85,6 @@ namespace ArcheryManager.Utils
             lastTotal += Flight;
             Flight = 0;
             Arrows.Clear();
-        }
-
-        public ScoreCounter()
-        {
-            Arrows = new ObservableCollection<Arrow>();
         }
 
         private void Arrows_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)

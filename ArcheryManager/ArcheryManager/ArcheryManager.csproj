@@ -57,7 +57,6 @@
     <Compile Include="CustomControls\CounterButtons.xaml.cs">
       <DependentUpon>CounterButtons.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\CounterCommands.cs" />
     <Compile Include="CustomControls\ItemsGrid.cs" />
     <Compile Include="CustomControls\TotalCounter.xaml.cs">
       <DependentUpon>TotalCounter.xaml</DependentUpon>
@@ -151,12 +150,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CustomControls\TotalCounter.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="CustomControls\CounterCommands.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

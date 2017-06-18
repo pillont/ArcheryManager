@@ -59,14 +59,14 @@ namespace ArcheryManager.CustomControls
         /// <summary>
         /// size of the target
         /// </summary>
-        private const int DefaultTargetSize = 320; //TODO allow to change value
+        private const double DefaultTargetSize = 320;
 
         public static readonly BindableProperty TargetSizeProperty =
-                      BindableProperty.Create(nameof(TargetSize), typeof(int), typeof(Target), DefaultTargetSize);
+                      BindableProperty.Create(nameof(TargetSize), typeof(double), typeof(Target), DefaultTargetSize);
 
-        public int TargetSize
+        public double TargetSize
         {
-            get { return (int)GetValue(TargetSizeProperty); }
+            get { return (double)GetValue(TargetSizeProperty); }
             set { SetValue(TargetSizeProperty, value); }
         }
 
