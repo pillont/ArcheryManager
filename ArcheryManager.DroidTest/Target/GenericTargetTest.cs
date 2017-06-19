@@ -28,7 +28,7 @@ namespace ArcheryManager.DroidTest.Target
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 600, 900);
-            var pure = new AppRect() { Width = 30, Height = 30, X = 630, Y = 876, CenterX = 644, CenterY = 891 };
+            var pure = new AppRect() { Width = 14, Height = 14, X = 462, Y = 751, CenterX = 469, CenterY = 759 };
 
             var list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(1, list.Count()); // have one arrow in target
@@ -49,7 +49,7 @@ namespace ArcheryManager.DroidTest.Target
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 450, 750);
-            pure = new AppRect() { Width = 30, Height = 30, X = 492, Y = 738, CenterX = 507, CenterY = 753 };
+            pure = new AppRect() { Width = 14, Height = 14, X = 333, Y = 622, CenterX = 340, CenterY = 629 };
 
             list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(2, list.Count()); // have one arrow in target
@@ -78,12 +78,12 @@ namespace ArcheryManager.DroidTest.Target
             app.DragCoordinates(500, 800, 450, 750);
             // drag to create arrow
             app.DragCoordinates(500, 800, 600, 900);
-            var pure = new AppRect() { Width = 30, Height = 30, X = 492, Y = 739, CenterX = 507, CenterY = 753 };
+            var pure = new AppRect() { Width = 14, Height = 14, X = 333, Y = 621, CenterX = 340, CenterY = 629 };
 
             var list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(2, list.Count()); // have one arrow in target
 
-            app.Tap("removeArrow");
+            app.Tap("Remove last");
 
             list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(1, list.Count()); // have one arrow in target
@@ -103,7 +103,7 @@ namespace ArcheryManager.DroidTest.Target
             Assert.LessOrEqual(pure.CenterY - 2, rec.CenterY);
             Assert.GreaterOrEqual(pure.CenterY + 2, rec.CenterY);
 
-            app.Tap("removeArrow");
+            app.Tap("Remove last");
 
             list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(0, list.Count()); // have one arrow in target
@@ -122,7 +122,7 @@ namespace ArcheryManager.DroidTest.Target
             var list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(2, list.Count()); // have one arrow in target
 
-            app.Tap("removeAllArrows");
+            app.Tap("Remove all");
 
             list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(0, list.Count()); // have one arrow in target
@@ -142,7 +142,7 @@ namespace ArcheryManager.DroidTest.Target
 
             Assert.AreEqual(2, app.Query(e => e.Marked("scoreList").Child()).Count());
 
-            app.Tap("nextFlight");
+            app.Tap("New Flight");
 
             Assert.AreEqual(0, app.Query(e => e.Marked("scoreList").Child()).Count());
         }
@@ -155,7 +155,7 @@ namespace ArcheryManager.DroidTest.Target
             app.DragCoordinates(500, 800, 600, 900);
             Assert.AreEqual(2, app.Query(e => e.Marked("scoreList").Child()).Count());
 
-            app.Tap("removeAllArrows");
+            app.Tap("Remove all");
 
             Assert.AreEqual(0, app.Query(e => e.Marked("scoreList").Child()).Count());
         }
@@ -168,7 +168,7 @@ namespace ArcheryManager.DroidTest.Target
             app.DragCoordinates(500, 800, 600, 900);
             Assert.AreEqual(2, app.Query(e => e.Marked("scoreList").Child()).Count());
 
-            app.Tap("nextFlight");
+            app.Tap("New Flight");
 
             Assert.AreEqual(0, app.Query(e => e.Marked("scoreList").Child()).Count());
         }

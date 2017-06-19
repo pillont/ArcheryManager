@@ -56,9 +56,11 @@ namespace ArcheryManager.CustomControls
         {
             resetDimension();
 
-            foreach (var i in Children)
+            int indexChild = 0;
+            foreach (var child in Children)
             {
-                ApplyPosition(i);
+                ApplyPosition(child, indexChild);
+                indexChild++;
             }
         }
 
@@ -71,10 +73,10 @@ namespace ArcheryManager.CustomControls
 
         private void UniformGrid_ItemAdded(BindableObject obj)
         {
-            ApplyPosition(obj);
+            ApplyPosition(obj, Children.Count - 1);
         }
 
-        private void ApplyPosition(BindableObject obj)
+        private void ApplyPosition(BindableObject obj, int childIndex)
         {
             bool onlyOneRow = this.RowDefinitions.Count <= 1;
 
@@ -95,14 +97,10 @@ namespace ArcheryManager.CustomControls
             }
             else
             {
-                int completRow;
-                if (Children.Count - 1 % this.ColumnDefinitions.Count == 0)
-                    completRow = this.RowDefinitions.Count;
-                else
-                    completRow = this.RowDefinitions.Count - 1;
+                int completRow = this.RowDefinitions.Count - 1;
+                var currentColumn = childIndex - (completRow * this.ColumnDefinitions.Count);
 
-                var currentColumn = Children.Count - 1 - (completRow * this.ColumnDefinitions.Count);
-                var needNewRow = currentColumn >= this.ColumnDefinitions.Count;
+                bool needNewRow = childIndex % this.ColumnDefinitions.Count == 0;
                 if (needNewRow)
                 {
                     AddRow();

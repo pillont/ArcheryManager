@@ -23,8 +23,8 @@ namespace ArcheryManager.DroidTest.GenericCountable
             var list = app.WaitForElement("scoreList");
 
             // not visible
-            app.WaitForNoElement("unSelectButton");
-            app.WaitForNoElement("removeSelectionButton");
+            app.WaitForNoElement("Unselect");
+            app.WaitForNoElement("Remove");
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 450, 750);
@@ -34,15 +34,15 @@ namespace ArcheryManager.DroidTest.GenericCountable
             app.Tap(e => e.Marked("scoreList").Child(1).Child(1).Child());
 
             // visible
-            app.WaitForElement("unSelectButton");
-            app.WaitForElement("removeSelectionButton");
+            app.WaitForElement("Unselect");
+            app.WaitForElement("Remove");
 
             //un select all
-            app.Tap("unSelectButton");
+            app.Tap("Unselect");
 
             // not visible
-            app.WaitForNoElement("unSelectButton");
-            app.WaitForNoElement("removeSelectionButton");
+            app.WaitForNoElement("Unselect");
+            app.WaitForNoElement("Remove");
         }
 
         [Test]
@@ -51,50 +51,23 @@ namespace ArcheryManager.DroidTest.GenericCountable
             var list = app.WaitForElement("scoreList");
 
             // not visible
-            app.WaitForNoElement("unSelectButton");
-            app.WaitForNoElement("removeSelectionButton");
+            app.WaitForNoElement("Unselect");
+            app.WaitForNoElement("Remove");
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 450, 750);
             app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
 
             // visible
-            app.WaitForElement("unSelectButton");
-            app.WaitForElement("removeSelectionButton");
+            app.WaitForElement("Unselect");
+            app.WaitForElement("Remove");
 
             // remove arrow
-            app.Tap("removeSelectionButton");
+            app.Tap("Remove");
 
             // not visible
-            app.WaitForNoElement("unSelectButton");
-            app.WaitForNoElement("removeSelectionButton");
-        }
-
-        [Test]
-        public void RemoveSelectedArrowByOtherButtonVisibilityTest()
-        {
-            var list = app.WaitForElement("scoreList");
-
-            // not visible
-            app.WaitForNoElement("unSelectButton");
-            app.WaitForNoElement("removeSelectionButton");
-
-            // drag to create arrow
-            app.DragCoordinates(500, 800, 450, 750);
-            app.WaitForElement("scoreList");
-
-            app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
-
-            // visible
-            app.WaitForElement("unSelectButton");
-            app.WaitForElement("removeSelectionButton");
-
-            // remove arrow
-            app.Tap("removeAllArrows");
-
-            // not visible
-            app.WaitForNoElement("unSelectButton");
-            app.WaitForNoElement("removeSelectionButton");
+            app.WaitForNoElement("Unselect");
+            app.WaitForNoElement("Remove");
         }
 
         [Test]
@@ -103,8 +76,8 @@ namespace ArcheryManager.DroidTest.GenericCountable
             var list = app.WaitForElement("scoreList");
 
             // not visible
-            app.WaitForNoElement("unSelectButton");
-            app.WaitForNoElement("removeSelectionButton");
+            app.WaitForNoElement("Unselect");
+            app.WaitForNoElement("Remove");
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 450, 750);
@@ -113,22 +86,22 @@ namespace ArcheryManager.DroidTest.GenericCountable
             app.Tap(e => e.Marked("scoreList").Child(1).Child(1).Child());
 
             // visible
-            app.WaitForElement("unSelectButton");
-            app.WaitForElement("removeSelectionButton");
+            app.WaitForElement("Unselect");
+            app.WaitForElement("Remove");
 
             // unselect one
             app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
 
             // visible
-            app.WaitForElement("unSelectButton");
-            app.WaitForElement("removeSelectionButton");
+            app.WaitForElement("Unselect");
+            app.WaitForElement("Remove");
 
             // unselect all
             app.Tap(e => e.Marked("scoreList").Child(1).Child(1).Child());
 
             // not visible
-            app.WaitForNoElement("unSelectButton");
-            app.WaitForNoElement("removeSelectionButton");
+            app.WaitForNoElement("Unselect");
+            app.WaitForNoElement("Remove");
         }
 
         [Test]
@@ -152,7 +125,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
 
             //remove last
             app.Tap(e => e.Marked("scoreList").Child(3).Child(1).Child());
-            app.Tap("removeSelectionButton");
+            app.Tap("Remove");
 
             Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Text);
             Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Text);
@@ -160,7 +133,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
 
             //remove first
             app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
-            app.Tap("removeSelectionButton");
+            app.Tap("Remove");
 
             Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Text);
             Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Text);
@@ -193,7 +166,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
             //unselect 0,1
             app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
             app.Tap(e => e.Marked("scoreList").Child(1).Child(1).Child());
-            app.Tap("removeSelectionButton");
+            app.Tap("Remove");
 
             // wait 0,1,3
             Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Text);
@@ -220,48 +193,48 @@ namespace ArcheryManager.DroidTest.GenericCountable
             var rec3 = app.Query(e => e.Marked("scoreList").Child(2).Child(1).Child()).First().Rect;
             var rec4 = app.Query(e => e.Marked("scoreList").Child(3).Child(1).Child()).First().Rect;
 
-            Assert.LessOrEqual(110, rec1.CenterX);
-            Assert.GreaterOrEqual(140, rec1.CenterX);
-            Assert.LessOrEqual(1500, rec1.CenterY);
-            Assert.GreaterOrEqual(1520, rec1.CenterY);
+            Assert.LessOrEqual(87, rec1.CenterX);
+            Assert.GreaterOrEqual(95, rec1.CenterX);
+            Assert.LessOrEqual(1105, rec1.CenterY);
+            Assert.GreaterOrEqual(1115, rec1.CenterY);
 
-            Assert.LessOrEqual(395, rec2.CenterX);
-            Assert.GreaterOrEqual(415, rec2.CenterX);
-            Assert.LessOrEqual(1500, rec2.CenterY);
-            Assert.GreaterOrEqual(1520, rec2.CenterY);
+            Assert.LessOrEqual(280, rec2.CenterX);
+            Assert.GreaterOrEqual(290, rec2.CenterX);
+            Assert.LessOrEqual(1105, rec2.CenterY);
+            Assert.GreaterOrEqual(1115, rec2.CenterY);
 
-            Assert.LessOrEqual(670, rec3.CenterX);
-            Assert.GreaterOrEqual(690, rec3.CenterX);
-            Assert.LessOrEqual(1500, rec3.CenterY);
-            Assert.GreaterOrEqual(1520, rec3.CenterY);
+            Assert.LessOrEqual(475, rec3.CenterX);
+            Assert.GreaterOrEqual(485, rec3.CenterX);
+            Assert.LessOrEqual(1105, rec3.CenterY);
+            Assert.GreaterOrEqual(1115, rec3.CenterY);
 
-            Assert.LessOrEqual(945, rec4.CenterX);
-            Assert.GreaterOrEqual(965, rec4.CenterX);
-            Assert.LessOrEqual(1500, rec4.CenterY);
-            Assert.GreaterOrEqual(1520, rec4.CenterY);
+            Assert.LessOrEqual(670, rec4.CenterX);
+            Assert.GreaterOrEqual(680, rec4.CenterX);
+            Assert.LessOrEqual(1105, rec4.CenterY);
+            Assert.GreaterOrEqual(1115, rec4.CenterY);
 
             // remove first
             app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
-            app.Tap("removeSelectionButton");
+            app.Tap("Remove"); // toolbar items to remove
 
             rec1 = app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Rect;
             rec2 = app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Rect;
             rec3 = app.Query(e => e.Marked("scoreList").Child(2).Child(1).Child()).First().Rect;
 
-            Assert.LessOrEqual(165, rec1.CenterX);
-            Assert.GreaterOrEqual(185, rec1.CenterX);
-            Assert.LessOrEqual(1500, rec1.CenterY);
-            Assert.GreaterOrEqual(1520, rec1.CenterY);
+            Assert.LessOrEqual(120, rec1.CenterX);
+            Assert.GreaterOrEqual(130, rec1.CenterX);
+            Assert.LessOrEqual(1105, rec1.CenterY);
+            Assert.GreaterOrEqual(1115, rec1.CenterY);
 
-            Assert.LessOrEqual(530, rec2.CenterX);
-            Assert.GreaterOrEqual(550, rec2.CenterX);
-            Assert.LessOrEqual(1500, rec2.CenterY);
-            Assert.GreaterOrEqual(1520, rec2.CenterY);
+            Assert.LessOrEqual(380, rec2.CenterX);
+            Assert.GreaterOrEqual(385, rec2.CenterX);
+            Assert.LessOrEqual(1105, rec2.CenterY);
+            Assert.GreaterOrEqual(1115, rec2.CenterY);
 
-            Assert.LessOrEqual(900, rec3.CenterX);
-            Assert.GreaterOrEqual(910, rec3.CenterX);
-            Assert.LessOrEqual(1500, rec3.CenterY);
-            Assert.GreaterOrEqual(1520, rec3.CenterY);
+            Assert.LessOrEqual(640, rec3.CenterX);
+            Assert.GreaterOrEqual(650, rec3.CenterX);
+            Assert.LessOrEqual(1105, rec3.CenterY);
+            Assert.GreaterOrEqual(1115, rec3.CenterY);
         }
     }
 }

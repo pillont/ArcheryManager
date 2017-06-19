@@ -30,27 +30,27 @@ namespace ArcheryManager.DroidTest.Target
         [Test]
         public void InitTargetElement()
         {
-            Assert.AreEqual(897, app.WaitForElement("zone1").First().Rect.Height);
-            Assert.AreEqual(744, app.WaitForElement("zone2").First().Rect.Height);
-            Assert.AreEqual(591, app.WaitForElement("zone3").First().Rect.Height);
-            Assert.AreEqual(438, app.WaitForElement("zone4").First().Rect.Height);
-            Assert.AreEqual(285, app.WaitForElement("zone5").First().Rect.Height);
-            Assert.AreEqual(132, app.WaitForElement("zone6").First().Rect.Height);
+            Assert.AreEqual(639, app.WaitForElement("zone1").First().Rect.Height);
+            Assert.AreEqual(530, app.WaitForElement("zone2").First().Rect.Height);
+            Assert.AreEqual(421, app.WaitForElement("zone3").First().Rect.Height);
+            Assert.AreEqual(312, app.WaitForElement("zone4").First().Rect.Height);
+            Assert.AreEqual(203, app.WaitForElement("zone5").First().Rect.Height);
+            Assert.AreEqual(94, app.WaitForElement("zone6").First().Rect.Height);
 
-            Assert.AreEqual(897, app.WaitForElement("zone1").First().Rect.Width);
-            Assert.AreEqual(744, app.WaitForElement("zone2").First().Rect.Width);
-            Assert.AreEqual(591, app.WaitForElement("zone3").First().Rect.Width);
-            Assert.AreEqual(438, app.WaitForElement("zone4").First().Rect.Width);
-            Assert.AreEqual(285, app.WaitForElement("zone5").First().Rect.Width);
-            Assert.AreEqual(132, app.WaitForElement("zone6").First().Rect.Width);
+            Assert.AreEqual(639, app.WaitForElement("zone1").First().Rect.Width);
+            Assert.AreEqual(530, app.WaitForElement("zone2").First().Rect.Width);
+            Assert.AreEqual(421, app.WaitForElement("zone3").First().Rect.Width);
+            Assert.AreEqual(312, app.WaitForElement("zone4").First().Rect.Width);
+            Assert.AreEqual(203, app.WaitForElement("zone5").First().Rect.Width);
+            Assert.AreEqual(94, app.WaitForElement("zone6").First().Rect.Width);
         }
 
         [Test]
         public void InitCommandTargetElement()
         {
-            app.WaitForElement("nextFlight");
-            app.WaitForElement("removeAllArrows");
-            app.WaitForElement("removeArrow");
+            app.WaitForElement("New Flight");
+            app.WaitForElement("Remove all");
+            app.WaitForElement("Remove last");
         }
 
         [Test]
@@ -70,30 +70,30 @@ namespace ArcheryManager.DroidTest.Target
             Assert.AreEqual(0, app.Query(e => e.Marked("scoreList").Child()).Count());
 
             // drag to create arrow
-            app.DragCoordinates(500, 800, 450, 750);
+            app.DragCoordinates(300, 800, 250, 750);
             Assert.AreEqual(1, app.Query(e => e.Marked("scoreList").Child()).Count());
-            Assert.AreEqual("6", app.Query(e => e.Marked("scoreList").Child().Child(1).Child()).Last().Text);
+            Assert.AreEqual("5", app.Query(e => e.Marked("scoreList").Child().Child(1).Child()).Last().Text);
 
             // drag to create arrow
-            app.DragCoordinates(500, 800, 600, 900);
+            app.DragCoordinates(500, 900, 600, 1000);
             Assert.AreEqual(2, app.Query(e => e.Marked("scoreList").Child()).Count());
-            Assert.AreEqual("5", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).Last().Text);
+            Assert.AreEqual("4", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).Last().Text);
         }
 
         [Test]
         public void ArrowRemoveInList()
         {
             app.WaitForElement("scoreList"); //update visual
-            app.DragCoordinates(500, 800, 450, 750);
+            app.DragCoordinates(600, 600, 650, 550);
             app.DragCoordinates(500, 800, 600, 900);
             Assert.AreEqual(2, app.Query(e => e.Marked("scoreList").Child()).Count());
 
-            app.Tap("removeArrow");
+            app.Tap("Remove last");
 
             Assert.AreEqual(1, app.Query(e => e.Marked("scoreList").Child()).Count());
-            Assert.AreEqual("6", app.Query(e => e.Marked("scoreList").Child().Child(1).Child()).Last().Text);
+            Assert.AreEqual("5", app.Query(e => e.Marked("scoreList").Child().Child(1).Child()).Last().Text);
 
-            app.Tap("removeArrow");
+            app.Tap("Remove last");
 
             Assert.AreEqual(0, app.Query(e => e.Marked("scoreList").Child()).Count());
         }
@@ -109,19 +109,19 @@ namespace ArcheryManager.DroidTest.Target
             Assert.AreEqual("0", app.Query("FlightScore").First().Text);
 
             // drag to create arrow
-            app.DragCoordinates(500, 800, 450, 750);
-            Assert.AreEqual("6", app.Query("FlightScore").First().Text);
+            app.DragCoordinates(300, 1000, 250, 950);
+            Assert.AreEqual("5", app.Query("FlightScore").First().Text);
 
             // drag to create arrow
-            app.DragCoordinates(500, 800, 600, 900);
-            Assert.AreEqual("11", app.Query("FlightScore").First().Text);
+            app.DragCoordinates(530, 730, 630, 830);
+            Assert.AreEqual("9", app.Query("FlightScore").First().Text);
 
             //remove arrow
-            app.Tap("removeArrow");
-            Assert.AreEqual("6", app.Query("FlightScore").First().Text);
+            app.Tap("Remove last");
+            Assert.AreEqual("5", app.Query("FlightScore").First().Text);
 
             //remove all
-            app.Tap("removeAllArrows");
+            app.Tap("Remove all");
             Assert.AreEqual("0", app.Query("FlightScore").First().Text);
         }
 
@@ -133,36 +133,36 @@ namespace ArcheryManager.DroidTest.Target
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 450, 750);
-            Assert.AreEqual("6", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("5", app.Query("TotalScore").First().Text);
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 600, 900);
-            Assert.AreEqual("11", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("9", app.Query("TotalScore").First().Text);
 
-            app.Tap("nextFlight");
+            app.Tap("New Flight");
 
             Assert.AreEqual("0", app.Query("FlightScore").First().Text);
-            Assert.AreEqual("11", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("9", app.Query("TotalScore").First().Text);
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 450, 750);
-            Assert.AreEqual("6", app.Query("FlightScore").First().Text);
-            Assert.AreEqual("17", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("5", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("14", app.Query("TotalScore").First().Text);
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 600, 900);
-            Assert.AreEqual("11", app.Query("FlightScore").First().Text);
-            Assert.AreEqual("22", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("9", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("18", app.Query("TotalScore").First().Text);
 
             //remove arrow
-            app.Tap("removeArrow");
-            Assert.AreEqual("6", app.Query("FlightScore").First().Text);
-            Assert.AreEqual("17", app.Query("TotalScore").First().Text);
+            app.Tap("Remove last");
+            Assert.AreEqual("5", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("14", app.Query("TotalScore").First().Text);
 
             //remove all
-            app.Tap("removeAllArrows");
+            app.Tap("Remove all");
             Assert.AreEqual("0", app.Query("FlightScore").First().Text);
-            Assert.AreEqual("11", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("9", app.Query("TotalScore").First().Text);
         }
 
         #endregion score
