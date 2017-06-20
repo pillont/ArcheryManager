@@ -108,10 +108,15 @@ namespace ArcheryManager.CustomControls
         public Grid TargetGrid { get; private set; }
 
         public Target()
+            : this(EnglishArrowSetting.Instance)
+
+        { }
+
+        public Target(IArrowSetting setting)
         {
             CreateContent();
 
-            Setting = EnglishArrowSetting.Instance;
+            Setting = setting;
         }
 
         /// <summary>

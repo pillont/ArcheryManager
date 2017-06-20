@@ -209,5 +209,29 @@ namespace ArcheryManager.DroidTest.GenericCountable
         }
 
         #endregion score
+
+        [Test]
+        public void ButtonsCounterInPortraitOrientation()
+        {
+            app.SetOrientationLandscape();
+            app.WaitForElement("scoreList");
+
+            var count = app.Query("scoreGrid").First().Rect;
+            var list = app.Query("scoreList").First().Rect;
+
+            Assert.AreEqual(598, count.CenterX);
+            Assert.AreEqual(244, count.CenterY);
+
+            Assert.AreEqual(598, list.CenterX);
+            Assert.AreEqual(456, list.CenterY);
+
+            app.ScrollToVerticalEnd();
+
+            var tar = app.Query("buttonGrid").First().Rect;
+            Assert.AreEqual(598, tar.CenterX);
+
+            Assert.GreaterOrEqual(tar.CenterY, 465);
+            Assert.LessOrEqual(tar.CenterY, 472);
+        }
     }
 }

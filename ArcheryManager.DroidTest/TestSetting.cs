@@ -12,12 +12,15 @@ namespace ArcheryManager.DroidTest
             // TOD0: If the Android app being tested is included in the solution then open
             // the Unit Tests window, right click Test Apps, select Add App Project
             // and select the app projects that should be tested.
-            return ConfigureApp
+            var app = ConfigureApp
                     .Android
                     // TOD0: Update this path to point to your Android app and uncomment the
                     // code if the app is not included in the solution.
                     .ApkFile(TestSetting.ApkUri)
                     .StartApp();
+
+            app.SetOrientationPortrait();
+            return app;
         }
     }
 }

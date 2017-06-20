@@ -172,5 +172,25 @@ namespace ArcheryManager.DroidTest.Target
 
             Assert.AreEqual(0, app.Query(e => e.Marked("scoreList").Child()).Count());
         }
+
+        [Test]
+        public void TargetInPortraitOrientation()
+        {
+            app.SetOrientationLandscape();
+            app.WaitForElement("scoreList");
+
+            var tar = app.Query("arrowInTargetGrid").First().Rect;
+            var count = app.Query("scoreGrid").First().Rect;
+            var list = app.Query("scoreList").First().Rect;
+
+            Assert.AreEqual(296, tar.CenterX);
+            Assert.AreEqual(456, tar.CenterY);
+
+            Assert.AreEqual(900, count.CenterX);
+            Assert.AreEqual(297, count.CenterY);
+
+            Assert.AreEqual(900, list.CenterX);
+            Assert.AreEqual(615, list.CenterY);
+        }
     }
 }
