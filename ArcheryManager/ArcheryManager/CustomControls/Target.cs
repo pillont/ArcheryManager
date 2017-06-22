@@ -96,6 +96,7 @@ namespace ArcheryManager.CustomControls
         private readonly Color ArrowSetterColor = Color.Fuchsia;
 
         private ArrowsGrid arrowGrid;
+        public AverageCanvas AverageCanvas { get; private set; } // TODO set private with layout builder
 
         /// <summary>
         /// point to set arrow during manipulation
@@ -125,7 +126,7 @@ namespace ArcheryManager.CustomControls
         private void CreateContent()
         {
             arrowGrid = new ArrowsGrid() { AutomationId = "arrowInTargetGrid", ArrowWidth = ArrowWidth };
-
+            AverageCanvas = new AverageCanvas() { VerticalOptions = LayoutOptions.CenterAndExpand, HorizontalOptions = LayoutOptions.CenterAndExpand };
             TargetGrid = new Grid();
 
             CreateVisualArrowSetter();
@@ -197,8 +198,9 @@ namespace ArcheryManager.CustomControls
                 AutomationId = "center",
             };
 
-            TargetGrid.Children.Add(center);
-            TargetGrid.Children.Add(arrowGrid);
+            TargetGrid.Children.Add(center);//TODO layout builder
+            TargetGrid.Children.Add(AverageCanvas); //TODO layout builder
+            TargetGrid.Children.Add(arrowGrid);//TODO layout builder
         }
 
         public void SelectArrow(Arrow arrow)

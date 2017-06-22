@@ -41,6 +41,7 @@ namespace ArcheryManager.Pages
             #region target
 
             customTarget.Items = arrowList;
+            customTarget.AverageCanvas.Counter = Counter;
             customTarget.Setting = setting;
 
             var behavior = new MovableTargetBehavior(Counter);
