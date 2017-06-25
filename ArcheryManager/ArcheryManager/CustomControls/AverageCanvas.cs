@@ -6,10 +6,33 @@ using XFShapeView;
 
 namespace ArcheryManager.CustomControls
 {
+    /// <summary>
+    /// need target setting in binding context
+    /// </summary>
     public class AverageCanvas : ContentView
     {
         private ScoreCounter counter;
         private Point averageCenter;
+        private TargetSetting Setting;
+
+        public new TargetSetting BindingContext
+        {
+            get
+            {
+                if (base.BindingContext is TargetSetting)
+                {
+                    return base.BindingContext as TargetSetting;
+                }
+                else
+                {
+                    throw new InvalidCastException("binding target of average canvas must be Target setting");
+                }
+            }
+            set
+            {
+                base.BindingContext = value;
+            }
+        }
 
         public ScoreCounter Counter
         {
@@ -31,23 +54,64 @@ namespace ArcheryManager.CustomControls
             }
         }
 
+        #region target setting
+
+        /// <summary>
+        /// get target setting by bindingcontext
+        /// </summary>
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+
+            if (Setting != null)
+            {
+                Setting.PropertyChanged -= Setting_PropertyChanged;
+            }
+
+            Setting = BindingContext;
+            Setting.PropertyChanged += Setting_PropertyChanged;
+        }
+
+        /// <summary>
+        /// update average during AllArrowShowed changing
+        /// </summary>
+        private void Setting_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(TargetSetting.ShowAllArrows))
+            {
+                UpdateAverage();
+            }
+        }
+
+        #endregion target setting
+
+        /// <summary>
+        /// update average when AllArrow of the counter changing
+        /// </summary>
         private void AllArrows_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if (Counter.AllArrows.Count < 2)
+            if (Counter.ArrowsShowed.Count < 2)
             {
                 Content = null;
             }
             else
             {
-                UpdateAverageCenter();
-                UpdateAverageForm();
+                UpdateAverage();
             }
+        }
+
+        #region average update
+
+        private void UpdateAverage()
+        {
+            UpdateAverageCenter();
+            UpdateAverageForm();
         }
 
         private void UpdateAverageForm()
         {
-            var standartDeviationX = StatisticHelper.CalculateStdDev(Counter.AllArrows.Select(a => a.TranslationX));
-            var standartDeviationY = StatisticHelper.CalculateStdDev(Counter.AllArrows.Select(a => a.TranslationY));
+            var standartDeviationX = StatisticHelper.CalculateStdDev(Counter.ArrowsShowed.Select(a => a.TranslationX));
+            var standartDeviationY = StatisticHelper.CalculateStdDev(Counter.ArrowsShowed.Select(a => a.TranslationY));
             Content = CreateAverageVisual(standartDeviationX, standartDeviationY);
         }
 
@@ -71,14 +135,16 @@ namespace ArcheryManager.CustomControls
 
         private void UpdateAverageCenter()
         {
-            if (Counter.AllArrows.Count == 0)
+            if (Counter.ArrowsShowed.Count == 0)
             {
                 throw new InvalidOperationException();
             }
 
-            double averageX = Counter.AllArrows.Average(a => a.TranslationX);
-            double averageY = Counter.AllArrows.Average(a => a.TranslationY);
+            double averageX = Counter.ArrowsShowed.Average(a => a.TranslationX);
+            double averageY = Counter.ArrowsShowed.Average(a => a.TranslationY);
             averageCenter = new Point(averageX, averageY);
         }
+
+        #endregion average update
     }
 }

@@ -13,11 +13,15 @@ namespace ArcheryManager.Pages
     public partial class TargetPage : ContentPage
     {
         private readonly ScreenRotationWatcher RotationWatcher;
-        private readonly ScoreCounter Counter = new ScoreCounter();
+        private readonly ScoreCounter Counter;
+        private readonly TargetSetting Setting;
 
         public TargetPage(IArrowSetting setting)
         {
             InitializeComponent();
+
+            this.Setting = new TargetSetting();
+            Counter = new ScoreCounter(Setting);
 
             #region view setup
 
@@ -26,9 +30,9 @@ namespace ArcheryManager.Pages
 
             #endregion view setup
 
-            #region score list
+            #region score list //TODO Factory
 
-            var arrowList = Counter.Arrows;
+            var arrowList = Counter.CurrentArrows;
             scoreList.SizeChanged += ScoreList_SizeChanged;
             scoreList.Items = arrowList;
 
@@ -36,18 +40,28 @@ namespace ArcheryManager.Pages
             selectBehavior.ItemsSelectedChange += SelectBehavior_SelectionChange;
             scoreList.Behaviors.Add(selectBehavior);
 
-            #endregion score list
+            #endregion score list //TODO Factory
 
-            #region target
+            #region target //TODO factory
 
-            customTarget.Items = arrowList;
-            customTarget.AverageCanvas.Counter = Counter;
+            //TODO target factory
+            customTarget.ArrowGrid.Items = arrowList;
+            customTarget.PreviousArrowGrid.Items = Counter.PreviousArrows;
+
+            var lastArrowsGrid = customTarget.PreviousArrowGrid;
+            lastArrowsGrid.BindingContext = Setting;
+            lastArrowsGrid.SetBinding(IsVisibleProperty, nameof(TargetSetting.ShowAllArrows));
+
+            var average = customTarget.AverageCanvas;
+            average.BindingContext = Setting;
+            average.SetBinding(IsVisibleProperty, nameof(TargetSetting.AverageIsVisible));
+            average.Counter = Counter;
             customTarget.Setting = setting;
 
             var behavior = new MovableTargetBehavior(Counter);
             customTarget.Behaviors.Add(behavior);
 
-            #endregion target
+            #endregion target //TODO factory
 
             #region total score
 
@@ -68,9 +82,15 @@ namespace ArcheryManager.Pages
             ToolbarItems.Add(new ToolbarItem()
             {
                 Text = "Settings",
-                Order = ToolbarItemOrder.Secondary
-                //TODO make setting page
+                Order = ToolbarItemOrder.Secondary,
+                Command = new Command(OpenSettingPage)
             });
+        }
+
+        private void OpenSettingPage(object obj)
+        {
+            var page = new SettingTargetPage() { BindingContext = Setting };
+            App.NavigationPage.PushAsync(page);
         }
 
         private void AddCounterToolbarItems()
@@ -191,6 +211,11 @@ namespace ArcheryManager.Pages
 
         #region scrool list
 
+        /// <summary>
+        /// scroll down in list of arrow each time arrowList update
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ScoreList_SizeChanged(object sender, System.EventArgs e)
         {
             scrollArrows.ScrollToAsync(scoreList, ScrollToPosition.End, true);

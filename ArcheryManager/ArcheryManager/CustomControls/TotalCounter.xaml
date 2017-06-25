@@ -28,7 +28,7 @@
                    FontAttributes="Bold"
                    TextColor="Black"
                    HorizontalTextAlignment="Center"
-                   Text="{Binding Flight}"
+                   Text="{Binding FlightScore}"
                    VerticalTextAlignment="Start"
                    VerticalOptions="Start"
                    FontSize="Large" />
@@ -48,7 +48,7 @@
                    Grid.Row="1"
                    TextColor="Black"
                    HorizontalTextAlignment="Center"
-                   Text="{Binding Total}"
+                   Text="{Binding TotalScore}"
                    VerticalTextAlignment="Start"
                    VerticalOptions="Start"
                    FontSize="Large" />

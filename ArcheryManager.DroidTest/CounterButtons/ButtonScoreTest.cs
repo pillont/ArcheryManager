@@ -230,8 +230,8 @@ namespace ArcheryManager.DroidTest.GenericCountable
             var tar = app.Query("buttonGrid").First().Rect;
             Assert.AreEqual(598, tar.CenterX);
 
-            Assert.GreaterOrEqual(tar.CenterY, 465);
-            Assert.LessOrEqual(tar.CenterY, 472);
+            Assert.GreaterOrEqual(tar.CenterY, 467);
+            Assert.LessOrEqual(tar.CenterY, 474);
         }
     }
 }

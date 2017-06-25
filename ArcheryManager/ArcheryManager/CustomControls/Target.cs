@@ -2,7 +2,6 @@
 using ArcheryManager.Interfaces;
 using ArcheryManager.Settings;
 using ArcheryManager.Utils;
-using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using XFShapeView;
 using ArcheryManager.Interactions.Behaviors;
@@ -11,64 +10,7 @@ namespace ArcheryManager.CustomControls
 {
     public class Target : ContentView, IMovableTarget
     {
-        public static readonly BindableProperty SettingProperty =
-                      BindableProperty.Create(nameof(Setting), typeof(IArrowSetting), typeof(Target), null);
-
-        public ArrowFactory factory;
-
-        public ArrowFactory Factory
-        {
-            get
-            {
-                return factory;
-            }
-            private set
-            {
-                factory = value;
-                DrawTargetVisual();
-            }
-        }
-
-        public IArrowSetting Setting
-        {
-            get { return (IArrowSetting)GetValue(SettingProperty); }
-            set
-            {
-                SetValue(SettingProperty, value);
-                Factory = new ArrowFactory(this, Setting);
-            }
-        }
-
-        public ObservableCollection<Arrow> Items
-        {
-            get
-            {
-                return arrowGrid.Items;
-            }
-            set
-            {
-                arrowGrid.Items = value;
-            }
-        }
-
-        /// <summary>
-        /// ratio to define the width of the zone
-        /// </summary>
-        public const double ColorWidthRatio = 1.02;
-
-        /// <summary>
-        /// size of the target
-        /// </summary>
-        private const double DefaultTargetSize = 320;
-
-        public static readonly BindableProperty TargetSizeProperty =
-                      BindableProperty.Create(nameof(TargetSize), typeof(double), typeof(Target), DefaultTargetSize);
-
-        public double TargetSize
-        {
-            get { return (double)GetValue(TargetSizeProperty); }
-            set { SetValue(TargetSizeProperty, value); }
-        }
+        #region constants
 
         /// <summary>
         /// width of the target strings
@@ -95,8 +37,66 @@ namespace ArcheryManager.CustomControls
         /// </summary>
         private readonly Color ArrowSetterColor = Color.Fuchsia;
 
-        private ArrowsGrid arrowGrid;
-        public AverageCanvas AverageCanvas { get; private set; } // TODO set private with layout builder
+        /// <summary>
+        /// ratio to define the width of the zone
+        /// </summary>
+        public const double ColorWidthRatio = 1.02;
+
+        /// <summary>
+        /// size of the target
+        /// </summary>
+        private const double DefaultTargetSize = 320;
+
+        public static readonly BindableProperty TargetSizeProperty =
+                      BindableProperty.Create(nameof(TargetSize), typeof(double), typeof(Target), DefaultTargetSize);
+
+        private readonly Color PreviousArrowsColor = Color.DarkGray;
+
+        #endregion constants
+
+        public static readonly BindableProperty SettingProperty =
+                      BindableProperty.Create(nameof(Setting), typeof(IArrowSetting), typeof(Target), null);
+
+        public IArrowSetting Setting
+        {
+            get { return (IArrowSetting)GetValue(SettingProperty); }
+            set
+            {
+                SetValue(SettingProperty, value);
+                Factory = new ArrowFactory(this, Setting);
+            }
+        }
+
+        public ArrowFactory factory;
+
+        public ArrowFactory Factory
+        {
+            get
+            {
+                return factory;
+            }
+            private set
+            {
+                factory = value;
+                DrawTargetVisual();
+            }
+        }
+
+        public double TargetSize
+        {
+            get { return (double)GetValue(TargetSizeProperty); }
+            set { SetValue(TargetSizeProperty, value); }
+        }
+
+        #region target layout
+
+        public readonly ArrowsGrid ArrowGrid;
+
+        public readonly ArrowsGrid PreviousArrowGrid;
+
+        public readonly AverageCanvas AverageCanvas; // TODO set private with layout builder
+
+        #endregion target layout
 
         /// <summary>
         /// point to set arrow during manipulation
@@ -110,23 +110,29 @@ namespace ArcheryManager.CustomControls
 
         public Target()
             : this(EnglishArrowSetting.Instance)
-
         { }
 
         public Target(IArrowSetting setting)
         {
+            /*
+             * target layout
+             */
+            PreviousArrowGrid = new ArrowsGrid() { AutomationId = "lastArrowInTargetGrid", ArrowWidth = ArrowWidth, ArrowColor = PreviousArrowsColor };
+            AverageCanvas = new AverageCanvas() { VerticalOptions = LayoutOptions.CenterAndExpand, HorizontalOptions = LayoutOptions.CenterAndExpand };
+            ArrowGrid = new ArrowsGrid() { AutomationId = "arrowInTargetGrid", ArrowWidth = ArrowWidth, ArrowColor = CommonConstant.DefaultArrowColor };
+
             CreateContent();
 
             Setting = setting;
         }
+
+        #region visual of the target
 
         /// <summary>
         /// create the target content
         /// </summary>
         private void CreateContent()
         {
-            arrowGrid = new ArrowsGrid() { AutomationId = "arrowInTargetGrid", ArrowWidth = ArrowWidth };
-            AverageCanvas = new AverageCanvas() { VerticalOptions = LayoutOptions.CenterAndExpand, HorizontalOptions = LayoutOptions.CenterAndExpand };
             TargetGrid = new Grid();
 
             CreateVisualArrowSetter();
@@ -200,22 +206,29 @@ namespace ArcheryManager.CustomControls
 
             TargetGrid.Children.Add(center);//TODO layout builder
             TargetGrid.Children.Add(AverageCanvas); //TODO layout builder
-            TargetGrid.Children.Add(arrowGrid);//TODO layout builder
+            TargetGrid.Children.Add(PreviousArrowGrid);//TODO layout builder
+            TargetGrid.Children.Add(ArrowGrid);//TODO layout builder
         }
+
+        #endregion visual of the target
+
+        #region selection interactions
 
         public void SelectArrow(Arrow arrow)
         {
-            arrowGrid.SelectArrow(arrow);
+            ArrowGrid.SelectArrow(arrow);
         }
 
         public void UnSelectArrow(Arrow arrow)
         {
-            arrowGrid.UnSelectArrow(arrow);
+            ArrowGrid.UnSelectArrow(arrow);
         }
 
         public void ResetSelection()
         {
-            arrowGrid.ResetSelection();
+            ArrowGrid.ResetSelection();
         }
+
+        #endregion selection interactions
     }
 }

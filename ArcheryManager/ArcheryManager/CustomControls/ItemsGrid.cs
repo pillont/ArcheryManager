@@ -18,7 +18,7 @@ namespace ArcheryManager.CustomControls
               BindableProperty.Create(nameof(Items), typeof(ObservableCollection<T>), typeof(ItemsGrid<T>), null);
 
         /// <summary>
-        /// item to show in the grid
+        /// items to show in the grid
         /// </summary>
         public ObservableCollection<T> Items
         {
@@ -28,6 +28,11 @@ namespace ArcheryManager.CustomControls
             }
             set
             {
+                if (value == null)
+                {
+                    throw new NullReferenceException();
+                }
+
                 if (Items != null)
                 {
                     Items.CollectionChanged -= Items_CollectionChanged;
@@ -43,63 +48,12 @@ namespace ArcheryManager.CustomControls
             Items = new ObservableCollection<T>();
         }
 
-        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            base.OnPropertyChanged(propertyName);
-
-            if (propertyName == nameof(Items))
-            {
-                // set first add to apply event on the item in the new list
-                Items_CollectionChanged(Items, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, Items));
-            }
-        }
+        #region container of the items
 
         /// <summary>
-        /// function to create the container of the item
+        /// function to create the container of the items
         /// </summary>
-        /// <returns></returns>
         protected abstract View CreateItemContainer(T data);
-
-        /// <summary>
-        /// event when the collection change
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.Action == NotifyCollectionChangedAction.Reset)
-            {
-                var items = new List<View>(Children);
-                this.Children.Clear();
-                foreach (var i in items)
-                {
-                    ItemRemoved?.Invoke(i);
-                }
-            }
-            else
-            {
-                if (e.NewItems != null)
-                {
-                    foreach (T item in e.NewItems)
-                    {
-                        var container = CreateItemContainer(item);
-                        container.BindingContext = item;
-                        this.Children.Add(container);
-                        ItemAdded?.Invoke(container);
-                    }
-                }
-                if (e.OldItems != null)
-                {
-                    var i = e.OldStartingIndex;
-                    foreach (var item in e.OldItems)
-                    {
-                        View container = FindContainer(i++);
-                        this.Children.Remove(container);
-                        ItemRemoved?.Invoke(container);
-                    }
-                }
-            }
-        }
 
         /// <summary>
         /// function to find the container of the object
@@ -114,5 +68,73 @@ namespace ArcheryManager.CustomControls
         {
             return this.Children[i];
         }
+
+        #endregion container of the items
+
+        #region Items changing
+
+        /// <summary>
+        /// call ItemCollectionChanged when list of Items change
+        /// </summary>
+        /// <param name="propertyName"></param>
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
+
+            if (propertyName == nameof(Items))
+            {
+                if (Items != null)
+                {
+                    // set first add to apply event on the item in the new list
+                    Items_CollectionChanged(Items, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, Items));
+                }
+            }
+        }
+
+        /// <summary>
+        /// event when the collection change
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            //reset
+            if (e.Action == NotifyCollectionChangedAction.Reset)
+            {
+                var items = new List<View>(Children);
+                this.Children.Clear();
+                foreach (var i in items)
+                {
+                    ItemRemoved?.Invoke(i);
+                }
+            }
+            else
+            {
+                //item added
+                if (e.NewItems != null)
+                {
+                    foreach (T item in e.NewItems)
+                    {
+                        var container = CreateItemContainer(item);
+                        container.BindingContext = item;
+                        this.Children.Add(container);
+                        ItemAdded?.Invoke(container);
+                    }
+                }
+                // items removed
+                if (e.OldItems != null)
+                {
+                    int i = e.OldStartingIndex;
+                    foreach (var item in e.OldItems)
+                    {
+                        var container = FindContainer(i++);
+                        Children.Remove(container);
+                        ItemRemoved?.Invoke(container);
+                    }
+                }
+            }
+        }
+
+        #endregion Items changing
     }
 }

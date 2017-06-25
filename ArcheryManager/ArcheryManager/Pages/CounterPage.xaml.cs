@@ -19,7 +19,7 @@ namespace ArcheryManager.Pages
             Counter = new ScoreCounter();
             totalCounter.BindingContext = Counter;
             scoreList.SizeChanged += ScoreList_SizeChanged;
-            scoreList.Items = Counter.Arrows;
+            scoreList.Items = Counter.CurrentArrows;
 
             counterButtons.Counter = Counter;
             counterButtons.Setting = EnglishSetting;

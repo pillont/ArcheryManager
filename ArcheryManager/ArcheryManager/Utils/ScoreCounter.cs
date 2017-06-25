@@ -1,9 +1,7 @@
 ﻿using Xamarin.Forms;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
-using System.Linq;
-using XFShapeView;
-using System;
+using System.Collections.Specialized;
 
 namespace ArcheryManager.Utils
 {
@@ -11,7 +9,49 @@ namespace ArcheryManager.Utils
     {
         #region properties
 
-        #region bindable prop
+        #region Arrows list
+
+        public static readonly BindableProperty CurrentArrowsProperty =
+                      BindableProperty.Create(nameof(CurrentArrows), typeof(ObservableCollection<Arrow>), typeof(ScoreCounter), null);
+
+        public ObservableCollection<Arrow> CurrentArrows
+        {
+            get { return (ObservableCollection<Arrow>)GetValue(CurrentArrowsProperty); }
+            private set
+            {
+                if (CurrentArrows != null)
+                {
+                    CurrentArrows.CollectionChanged -= Arrows_CollectionChanged;
+                }
+
+                SetValue(CurrentArrowsProperty, value);
+                value.CollectionChanged += Arrows_CollectionChanged;
+            }
+        }
+
+        public ObservableCollection<Arrow> ArrowsShowed
+        {
+            get
+            {
+                if (setting.ShowAllArrows)
+                {
+                    return AllArrows;
+                }
+                else
+                {
+                    return CurrentArrows;
+                }
+            }
+        }
+
+        public static readonly BindableProperty PreviousArrowsProperty =
+                      BindableProperty.Create(nameof(PreviousArrows), typeof(ObservableCollection<Arrow>), typeof(ScoreCounter), null);
+
+        public ObservableCollection<Arrow> PreviousArrows
+        {
+            get { return (ObservableCollection<Arrow>)GetValue(PreviousArrowsProperty); }
+            set { SetValue(PreviousArrowsProperty, value); }
+        }
 
         public static readonly BindableProperty AllArrowsProperty =
                       BindableProperty.Create(nameof(AllArrows), typeof(ObservableCollection<Arrow>), typeof(ScoreCounter), null);
@@ -22,54 +62,56 @@ namespace ArcheryManager.Utils
             set { SetValue(AllArrowsProperty, value); }
         }
 
-        private readonly List<Flight> FlightsSaved = new List<Flight>();
+        #endregion Arrows list
 
-        public static readonly BindableProperty FlightProperty =
-                      BindableProperty.Create(nameof(Flight), typeof(int), typeof(ScoreCounter), 0);
+        #region bindable prop
 
-        public int Flight
+        public static readonly BindableProperty FlightScoreProperty =
+                      BindableProperty.Create(nameof(FlightScore), typeof(int), typeof(ScoreCounter), 0);
+
+        public int FlightScore
         {
-            get { return (int)GetValue(FlightProperty); }
-            private set { SetValue(FlightProperty, value); }
+            get { return (int)GetValue(FlightScoreProperty); }
+            private set { SetValue(FlightScoreProperty, value); }
         }
 
-        public static readonly BindableProperty TotalProperty =
-                      BindableProperty.Create(nameof(Total), typeof(int), typeof(ScoreCounter), 0);
+        public static readonly BindableProperty TotalScoreProperty =
+                      BindableProperty.Create(nameof(TotalScore), typeof(int), typeof(ScoreCounter), 0);
 
-        public int Total
+        public int TotalScore
         {
-            get { return (int)GetValue(TotalProperty); }
-            private set { SetValue(TotalProperty, value); }
-        }
-
-        public static readonly BindableProperty ArrowsProperty =
-                      BindableProperty.Create(nameof(Arrows), typeof(ObservableCollection<Arrow>), typeof(ScoreCounter), null);
-
-        public ObservableCollection<Arrow> Arrows
-        {
-            get { return (ObservableCollection<Arrow>)GetValue(ArrowsProperty); }
-            private set
-            {
-                if (Arrows != null)
-                {
-                    Arrows.CollectionChanged -= Arrows_CollectionChanged;
-                }
-
-                SetValue(ArrowsProperty, value);
-                value.CollectionChanged += Arrows_CollectionChanged;
-            }
+            get { return (int)GetValue(TotalScoreProperty); }
+            private set { SetValue(TotalScoreProperty, value); }
         }
 
         #endregion bindable prop
 
+        private readonly List<Flight> FlightsSaved = new List<Flight>();
+
         private int lastTotal = 0;
+        private readonly TargetSetting setting;
 
         #endregion properties
 
-        public ScoreCounter()
+        /// <summary>
+        /// counter without target
+        /// example : buttons page
+        /// </summary>
+        public ScoreCounter() // TODO : make FlightSetting ancestor of Target setting =>remove this ctor and change the second to accept FlightSetting
         {
-            Arrows = new ObservableCollection<Arrow>();
+            CurrentArrows = new ObservableCollection<Arrow>();
             AllArrows = new ObservableCollection<Arrow>();
+            PreviousArrows = new ObservableCollection<Arrow>();
+        }
+
+        /// <summary>
+        /// score counter with associated target
+        /// </summary>
+        /// <param name="setting"></param>
+        public ScoreCounter(TargetSetting setting)
+            : this()
+        {
+            this.setting = setting;
         }
 
         #region toolbar item
@@ -105,22 +147,35 @@ namespace ArcheryManager.Utils
 
         #region update when arrows change
 
-        private void Arrows_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void Arrows_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            UpdateTotal();
             UpdateAllArrow();
+            UpdateLastArrow();
+            UpdateTotal();
+        }
+
+        private void UpdateLastArrow()
+        {
+            var all = GetArrows(getCurrent: false);
+
+            PreviousArrows.Clear();
+
+            foreach (var a in all)
+            {
+                PreviousArrows.Add(a);
+            }
         }
 
         private void UpdateTotal()
         {
-            Flight = 0;
-            foreach (var a in Arrows)
+            FlightScore = 0;
+            foreach (var a in CurrentArrows)
             {
-                Flight += a.Value;
+                FlightScore += a.Value;
             }
 
-            Total = lastTotal;
-            Total += Flight;
+            TotalScore = lastTotal;
+            TotalScore += FlightScore;
         }
 
         #endregion update when arrows change
@@ -129,7 +184,7 @@ namespace ArcheryManager.Utils
 
         private void UpdateAllArrow()
         {
-            var all = GetAllArrow();
+            var all = GetArrows(getCurrent: true);
 
             AllArrows.Clear();
 
@@ -139,9 +194,18 @@ namespace ArcheryManager.Utils
             }
         }
 
-        private List<Arrow> GetAllArrow()
+        private List<Arrow> GetArrows(bool getCurrent)
         {
-            var all = new List<Arrow>(Arrows);
+            List<Arrow> all;
+            if (getCurrent)
+            {
+                all = new List<Arrow>(CurrentArrows);
+            }
+            else
+            {
+                all = new List<Arrow>();
+            }
+
             foreach (var f in FlightsSaved)
             {
                 all.AddRange(f);
@@ -156,28 +220,28 @@ namespace ArcheryManager.Utils
 
         public void NewFlight()
         {
-            FlightsSaved.Add(new Flight(Arrows) { Number = FlightsSaved.Count + 1 });
+            FlightsSaved.Add(new Flight(CurrentArrows) { Number = FlightsSaved.Count + 1 });
 
-            lastTotal += Flight;
-            Flight = 0;
-            Arrows.Clear();
+            lastTotal += FlightScore;
+            FlightScore = 0;
+            CurrentArrows.Clear();
         }
 
         public void AddArrow(Arrow arrow)
         {
-            Arrows?.Add(arrow);
+            CurrentArrows?.Add(arrow);
         }
 
         public void ClearArrows()
         {
-            Arrows?.Clear();
+            CurrentArrows?.Clear();
         }
 
         public void RemoveLastArrow()
         {
-            if (Arrows.Count > 0)
+            if (CurrentArrows.Count > 0)
             {
-                Arrows.RemoveAt(Arrows.Count - 1);
+                CurrentArrows.RemoveAt(CurrentArrows.Count - 1);
             }
         }
 
