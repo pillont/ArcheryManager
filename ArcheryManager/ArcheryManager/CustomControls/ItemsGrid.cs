@@ -61,7 +61,7 @@ namespace ArcheryManager.CustomControls
         /// <param name="item">objec to find the container</param>
         public View FindContainer(object item)
         {
-            return this.Children.Where(ctn => ctn.BindingContext == item).First();
+            return Children.Where(ctn => ctn.BindingContext == item).FirstOrDefault();
         }
 
         public View FindContainer(int i)

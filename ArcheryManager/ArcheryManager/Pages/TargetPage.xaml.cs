@@ -1,11 +1,10 @@
-﻿using ArcheryManager.Interactions.Behaviors;
+﻿using ArcheryManager.Factories;
 using ArcheryManager.Interfaces;
 using ArcheryManager.Utils;
 using System;
-using System.Collections;
-using System.Collections.Specialized;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ArcheryManager.CustomControls;
 
 namespace ArcheryManager.Pages
 {
@@ -15,6 +14,7 @@ namespace ArcheryManager.Pages
         private readonly ScreenRotationWatcher RotationWatcher;
         private readonly ScoreCounter Counter;
         private readonly TargetSetting Setting;
+        private readonly Target customTarget;
 
         public TargetPage(IArrowSetting setting)
         {
@@ -30,38 +30,16 @@ namespace ArcheryManager.Pages
 
             #endregion view setup
 
-            #region score list //TODO Factory
+            customTarget = TargetFactory.Create(Counter, Setting, setting);
+            targetGrid.Children.Add(customTarget);
 
-            var arrowList = Counter.CurrentArrows;
+            #region ScoreList
+
+            var scoreList = ScoreListFactory.Create(customTarget, Counter, ToolbarItems);
             scoreList.SizeChanged += ScoreList_SizeChanged;
-            scoreList.Items = arrowList;
+            scrollArrows.Content = scoreList;
 
-            var selectBehavior = new SelectableArrowInListBehavior(this.ToolbarItems);
-            selectBehavior.ItemsSelectedChange += SelectBehavior_SelectionChange;
-            scoreList.Behaviors.Add(selectBehavior);
-
-            #endregion score list //TODO Factory
-
-            #region target //TODO factory
-
-            //TODO target factory
-            customTarget.ArrowGrid.Items = arrowList;
-            customTarget.PreviousArrowGrid.Items = Counter.PreviousArrows;
-
-            var lastArrowsGrid = customTarget.PreviousArrowGrid;
-            lastArrowsGrid.BindingContext = Setting;
-            lastArrowsGrid.SetBinding(IsVisibleProperty, nameof(TargetSetting.ShowAllArrows));
-
-            var average = customTarget.AverageCanvas;
-            average.BindingContext = Setting;
-            average.SetBinding(IsVisibleProperty, nameof(TargetSetting.AverageIsVisible));
-            average.Counter = Counter;
-            customTarget.Setting = setting;
-
-            var behavior = new MovableTargetBehavior(Counter);
-            customTarget.Behaviors.Add(behavior);
-
-            #endregion target //TODO factory
+            #endregion ScoreList
 
             #region total score
 
@@ -123,13 +101,13 @@ namespace ArcheryManager.Pages
             globalGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
 
             Grid.SetRow(totalCounter, 0);
-            Grid.SetRow(customTarget, 0);
+            Grid.SetRow(targetGrid, 0);
             Grid.SetRow(scrollArrows, 1);
 
-            Grid.SetRowSpan(customTarget, 2);
+            Grid.SetRowSpan(targetGrid, 2);
 
             Grid.SetColumn(totalCounter, 1);
-            Grid.SetColumn(customTarget, 0);
+            Grid.SetColumn(targetGrid, 0);
             Grid.SetColumn(scrollArrows, 1);
 
             var size = Math.Min(globalGrid.Width / 2, globalGrid.Height);
@@ -150,14 +128,14 @@ namespace ArcheryManager.Pages
             globalGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
 
             Grid.SetColumn(totalCounter, 0);
-            Grid.SetColumn(customTarget, 0);
+            Grid.SetColumn(targetGrid, 0);
             Grid.SetColumn(scrollArrows, 0);
 
             Grid.SetRow(totalCounter, 0);
-            Grid.SetRow(customTarget, 1);
+            Grid.SetRow(targetGrid, 1);
             Grid.SetRow(scrollArrows, 2);
 
-            Grid.SetRowSpan(customTarget, 1);
+            Grid.SetRowSpan(targetGrid, 1);
 
             var size = Math.Min(globalGrid.Width, ((double)targetRate) / 8d * globalGrid.Height);
             size -= 10; //target margin
@@ -168,47 +146,6 @@ namespace ArcheryManager.Pages
 
         #endregion rotation device
 
-        #region arrow selection
-
-        private void SelectBehavior_SelectionChange(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            //reset selection
-            if (e.Action == NotifyCollectionChangedAction.Reset)
-            {
-                customTarget.ResetSelection();
-            }
-            // new selected element
-            if (e.NewItems != null)
-            {
-                SelectArrowsInTarget(e.NewItems);
-            }
-            // remove selected element
-            if (e.OldItems != null)
-            {
-                UnSelectArrowsInTarget(e.OldItems);
-            }
-        }
-
-        private void UnSelectArrowsInTarget(IList oldItems)
-        {
-            foreach (View v in oldItems)
-            {
-                var a = v.BindingContext as Arrow;
-                customTarget.UnSelectArrow(a);
-            }
-        }
-
-        private void SelectArrowsInTarget(IList newItems)
-        {
-            foreach (View v in newItems)
-            {
-                var a = v.BindingContext as Arrow;
-                customTarget.SelectArrow(a);
-            }
-        }
-
-        #endregion arrow selection
-
         #region scrool list
 
         /// <summary>
@@ -218,7 +155,7 @@ namespace ArcheryManager.Pages
         /// <param name="e"></param>
         private void ScoreList_SizeChanged(object sender, System.EventArgs e)
         {
-            scrollArrows.ScrollToAsync(scoreList, ScrollToPosition.End, true);
+            scrollArrows.ScrollToAsync(scrollArrows.Content, ScrollToPosition.End, true);
         }
 
         #endregion scrool list

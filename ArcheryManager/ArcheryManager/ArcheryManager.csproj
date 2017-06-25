@@ -48,6 +48,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\AverageCanvas.cs" />
+    <Compile Include="Factories\ScoreListFactory.cs" />
+    <Compile Include="Factories\TargetFactory.cs" />
     <Compile Include="Interactions\Behaviors\CustomBehavior.cs" />
     <Compile Include="Interactions\Behaviors\MovableTargetBehavior.cs" />
     <Compile Include="Interactions\Behaviors\SelectableArrowInListBehavior.cs" />

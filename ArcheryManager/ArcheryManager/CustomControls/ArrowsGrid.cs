@@ -66,21 +66,26 @@ namespace ArcheryManager.CustomControls
         public void SelectArrow(Arrow arrow)
         {
             var container = FindContainer(arrow) as ShapeView;
-            container.Color = SelectedArrowColor;
+            if (container != null)
+            {
+                container.Color = SelectedArrowColor;
+            }
         }
 
         public void UnSelectArrow(Arrow arrow)
         {
             var container = FindContainer(arrow) as ShapeView;
-            container.Color = ArrowColor;
+            if (container != null)
+            {
+                container.Color = ArrowColor;
+            }
         }
 
         public void ResetSelection()
         {
             foreach (var arrow in Items)
             {
-                var container = FindContainer(arrow) as ShapeView;
-                container.Color = ArrowColor;
+                UnSelectArrow(arrow);
             }
         }
     }

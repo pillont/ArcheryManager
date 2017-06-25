@@ -9,10 +9,8 @@
     <Grid x:Name="globalGrid">
 
         <ctl:TotalCounter x:Name="totalCounter" Grid.Row="0" />
-        <ctl:Target x:Name="customTarget"  MinimumHeightRequest="1200" MinimumWidthRequest="1200" />
+        <Grid x:Name="targetGrid" />
 
-        <ScrollView x:Name="scrollArrows" MinimumHeightRequest="60"  BackgroundColor="AliceBlue">
-            <ctl:ArrowUniformGrid AutomationId="scoreList" x:Name="scoreList"   CountByRow="6" />
-        </ScrollView>
+        <ScrollView x:Name="scrollArrows" MinimumHeightRequest="60"  BackgroundColor="AliceBlue" />
     </Grid>
 </ContentPage>

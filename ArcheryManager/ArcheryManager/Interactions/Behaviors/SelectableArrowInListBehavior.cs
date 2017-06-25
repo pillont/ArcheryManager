@@ -77,7 +77,6 @@ namespace ArcheryManager.Interactions.Behaviors
 
         #region tap remove
 
-        //TODO : private function and add toolitem in ctor
         private void RemoveSelection()
         {
             RemoveSelectedItems();
