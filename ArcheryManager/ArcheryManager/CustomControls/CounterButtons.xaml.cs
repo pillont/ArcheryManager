@@ -44,6 +44,7 @@ namespace ArcheryManager.CustomControls
             }
         }
 
+        //TODO Set behavior
         private void ButtonGrid_ItemAdded(View ctn)
         {
             var recognizer = new TapGestureRecognizer();

@@ -71,6 +71,8 @@ namespace ArcheryManager.CustomControls
 
         #endregion container of the items
 
+        //TODO set behavior
+
         #region Items changing
 
         /// <summary>

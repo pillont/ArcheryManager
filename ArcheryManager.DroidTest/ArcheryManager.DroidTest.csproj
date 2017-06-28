@@ -86,6 +86,7 @@
     <Compile Include="CounterButtons\ButtonScoreTest.cs" />
     <Compile Include="Target\FieldTargetTest.cs" />
     <Compile Include="Target\EnglishTargetTest.cs" />
+    <Compile Include="Target\TargetAverageTest.cs" />
     <Compile Include="Tests.cs" />
     <Compile Include="TestSetting.cs" />
     <Compile Include="Timer\TimerTest.cs" />

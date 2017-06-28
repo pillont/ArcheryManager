@@ -8,11 +8,13 @@ namespace ArcheryManager.UnitTest.Utils
     public class ScoreCounterTest
     {
         private ScoreCounter counter;
+        private TargetSetting setting;
 
         [SetUp]
         public void Init()
         {
-            counter = new ScoreCounter();
+            setting = new TargetSetting();
+            counter = new ScoreCounter(setting);
         }
 
         [Test]
@@ -22,6 +24,8 @@ namespace ArcheryManager.UnitTest.Utils
             Assert.Zero(counter.FlightScore);
             Assert.Zero(counter.TotalScore);
         }
+
+        #region total calcul
 
         [Test]
         public void Counter_AddArrowTest()
@@ -171,6 +175,128 @@ namespace ArcheryManager.UnitTest.Utils
             Assert.AreEqual(0, counter.FlightScore);
             Assert.AreEqual(26, counter.TotalScore);
             Assert.AreEqual(0, counter.CurrentArrows.Count);
+        }
+
+        #endregion total calcul
+
+        [Test]
+        public void CurrentArrowTest()
+        {
+            var a1 = new Arrow("1", 1, Color.White);
+            var a2 = new Arrow("2", 2, Color.White);
+            var a3 = new Arrow("3", 3, Color.Black);
+            var a4 = new Arrow("4", 4, Color.Black);
+            var a5 = new Arrow("5", 5, Color.Blue);
+
+            counter.AddArrow(a1);
+            counter.AddArrow(a2);
+            Assert.AreEqual(2, counter.CurrentArrows.Count);
+            Assert.IsTrue(counter.CurrentArrows.Contains(a1));
+            Assert.IsTrue(counter.CurrentArrows.Contains(a2));
+
+            counter.NewFlight();
+            Assert.AreEqual(0, counter.CurrentArrows.Count);
+
+            counter.AddArrow(a3);
+            Assert.AreEqual(1, counter.CurrentArrows.Count);
+            Assert.IsTrue(counter.CurrentArrows.Contains(a3));
+
+            counter.RemoveLastArrow();
+            Assert.AreEqual(0, counter.CurrentArrows.Count);
+
+            counter.AddArrow(a4);
+            Assert.AreEqual(1, counter.CurrentArrows.Count);
+            Assert.IsTrue(counter.CurrentArrows.Contains(a4));
+
+            counter.ClearArrows();
+            Assert.AreEqual(0, counter.CurrentArrows.Count);
+        }
+
+        [Test]
+        public void PreviousArrowTest()
+        {
+            var a1 = new Arrow("1", 1, Color.White);
+            var a2 = new Arrow("2", 2, Color.White);
+            var a3 = new Arrow("3", 3, Color.Black);
+            var a4 = new Arrow("4", 4, Color.Black);
+            var a5 = new Arrow("5", 5, Color.Blue);
+
+            counter.AddArrow(a1);
+            counter.AddArrow(a2);
+            Assert.AreEqual(0, counter.PreviousArrows.Count);
+
+            counter.NewFlight();
+            Assert.AreEqual(2, counter.PreviousArrows.Count);
+            Assert.IsTrue(counter.PreviousArrows.Contains(a1));
+            Assert.IsTrue(counter.PreviousArrows.Contains(a2));
+
+            counter.AddArrow(a3);
+            Assert.AreEqual(2, counter.PreviousArrows.Count);
+            Assert.IsTrue(counter.PreviousArrows.Contains(a1));
+            Assert.IsTrue(counter.PreviousArrows.Contains(a2));
+        }
+
+        [Test]
+        public void AllArrowTest()
+        {
+            var a1 = new Arrow("1", 1, Color.White);
+            var a2 = new Arrow("2", 2, Color.White);
+            var a3 = new Arrow("3", 3, Color.Black);
+            var a4 = new Arrow("4", 4, Color.Black);
+            var a5 = new Arrow("5", 5, Color.Blue);
+
+            counter.AddArrow(a1);
+            counter.AddArrow(a2);
+            Assert.AreEqual(2, counter.AllArrows.Count);
+            Assert.IsTrue(counter.AllArrows.Contains(a1));
+            Assert.IsTrue(counter.AllArrows.Contains(a2));
+
+            counter.NewFlight();
+            Assert.AreEqual(2, counter.AllArrows.Count);
+            Assert.IsTrue(counter.AllArrows.Contains(a1));
+            Assert.IsTrue(counter.AllArrows.Contains(a2));
+
+            counter.AddArrow(a3);
+            Assert.AreEqual(3, counter.AllArrows.Count);
+            Assert.IsTrue(counter.AllArrows.Contains(a1));
+            Assert.IsTrue(counter.AllArrows.Contains(a2));
+            Assert.IsTrue(counter.AllArrows.Contains(a3));
+
+            counter.RemoveLastArrow();
+            Assert.AreEqual(2, counter.AllArrows.Count);
+            Assert.IsTrue(counter.AllArrows.Contains(a1));
+            Assert.IsTrue(counter.AllArrows.Contains(a2));
+
+            counter.AddArrow(a4);
+            Assert.AreEqual(3, counter.AllArrows.Count);
+            Assert.IsTrue(counter.AllArrows.Contains(a1));
+            Assert.IsTrue(counter.AllArrows.Contains(a2));
+            Assert.IsTrue(counter.AllArrows.Contains(a4));
+
+            counter.ClearArrows();
+            Assert.AreEqual(2, counter.AllArrows.Count);
+            Assert.IsTrue(counter.AllArrows.Contains(a1));
+            Assert.IsTrue(counter.AllArrows.Contains(a2));
+        }
+
+        [Test]
+        public void ArrowsShowedTest()
+        {
+            var a1 = new Arrow("1", 1, Color.White);
+            var a2 = new Arrow("2", 2, Color.White);
+            var a3 = new Arrow("3", 3, Color.Black);
+            var a4 = new Arrow("4", 4, Color.Black);
+
+            counter.AddArrow(a1);
+            counter.AddArrow(a2);
+
+            counter.NewFlight();
+            counter.AddArrow(a3);
+            counter.AddArrow(a4);
+
+            Assert.AreEqual(counter.CurrentArrows, counter.ArrowsShowed);
+            setting.ShowAllArrows = true;
+            Assert.AreEqual(counter.AllArrows, counter.ArrowsShowed);
         }
     }
 }

@@ -54,7 +54,7 @@ namespace ArcheryManager.Pages
 
         private void AddCounterToolbarItems()
         {
-            foreach (var item in Counter.AssociatedToolbarItem())
+            foreach (var item in Counter.AssociatedToolbarItem)
             {
                 ToolbarItems.Add(item);
             }

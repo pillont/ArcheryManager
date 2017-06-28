@@ -126,7 +126,7 @@ namespace ArcheryManager.Interactions.Behaviors
             GestureHelper.AddTapGestureOn(obj, ArrowRecognizer_Tapped);
         }
 
-        private void ArrowRecognizer_Tapped(object sender, System.EventArgs e)
+        public void ArrowRecognizer_Tapped(object sender, System.EventArgs e)
         {
             var container = sender as View;
 

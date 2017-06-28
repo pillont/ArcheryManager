@@ -116,31 +116,34 @@ namespace ArcheryManager.Utils
 
         #region toolbar item
 
-        public List<ToolbarItem> AssociatedToolbarItem()
+        public List<ToolbarItem> AssociatedToolbarItem
         {
-            return new List<ToolbarItem>()
+            get
             {
-                new ToolbarItem()
+                return new List<ToolbarItem>()
                 {
-                    Text = "Remove last",
-                    Order = ToolbarItemOrder.Primary,
-                    Command = new Command(RemoveLastArrow)
-                },
+                    new ToolbarItem()
+                    {
+                        Text = "Remove last",
+                        Order = ToolbarItemOrder.Primary,
+                        Command = new Command(RemoveLastArrow)
+                    },
 
-                new ToolbarItem()
-                {
-                    Text = "Remove all",
-                    Order = ToolbarItemOrder.Primary,
-                    Command = new Command(ClearArrows)
-                },
+                    new ToolbarItem()
+                    {
+                        Text = "Remove all",
+                        Order = ToolbarItemOrder.Primary,
+                        Command = new Command(ClearArrows)
+                    },
 
-                new ToolbarItem()
-                {
-                    Text = "New Flight",
-                    Order = ToolbarItemOrder.Primary,
-                    Command = new Command(NewFlight)
-                },
-            };
+                    new ToolbarItem()
+                    {
+                        Text = "New Flight",
+                        Order = ToolbarItemOrder.Primary,
+                        Command = new Command(NewFlight)
+                    },
+                };
+            }
         }
 
         #endregion toolbar item
