@@ -33,5 +33,71 @@ namespace ArcheryManager.DroidTest.StepDefinition
         {
             Assert.AreEqual(value, TestSetting.App.Query(e => e.Marked("scoreList").Child(p0).Child(1).Child()).First().Text);
         }
+
+        [Then(@"le bouton nouvelle volée est désactivé")]
+        public void AlorsLeBoutonNouvelleVoleeEstDesactive()
+        {
+            Assert.IsFalse(TestSetting.App.Query("New Flight").First().Enabled);
+        }
+
+        [Then(@"le bouton nouvelle volée est activé")]
+        public void AlorsLeBoutonNouvelleVoleeEstActive()
+        {
+            Assert.IsTrue(TestSetting.App.Query("New Flight").First().Enabled);
+        }
+
+        [When(@"je supprime la dernière flèche")]
+        public void QuandJeSupprimeLaDerniereFleche()
+        {
+            TestSetting.App.Tap("Remove last");
+        }
+
+        [When(@"Je click sur le bouton nouvelle volée")]
+        public void QuandJeClickSurLeBoutonNouvelleVolee()
+        {
+            TestSetting.App.Tap("New Flight");
+        }
+
+        [Then(@"le nombre de flèche est dasactivé")]
+        public void AlorsLeNombreDeFlecheEstDasactive()
+        {
+            Assert.IsFalse(TestSetting.App.Query("numberOfArrowsEntry").First().Enabled);
+        }
+
+        [Then(@"le nombre de flèche est activé")]
+        public void AlorsLeNombreDeFlecheEstActive()
+        {
+            Assert.IsTrue(TestSetting.App.Query("numberOfArrowsEntry").First().Enabled);
+        }
+
+        [When(@"je click sur le check nombre de flèches défini")]
+        public void QuandJeClickSurLeCheckNombreDeFlechesDefini()
+        {
+            TestSetting.App.Tap("ArrowsOrderSwitch");
+        }
+
+        [Then(@"le nombre de flèche est de (.*)")]
+        public void AlorsLeNombreDeFlecheEstDe(int p0)
+        {
+            Assert.AreEqual(p0, TestSetting.App.Query("numberOfArrowsEntry").First().Text);
+        }
+
+        [When(@"je remplit le nombre de flèche par (.*)")]
+        public void QuandJeRemplitLeNombreDeFlechePar(int p0)
+        {
+            TestSetting.App.EnterText("numberOfArrowsEntry", p0.ToString());
+        }
+
+        [Then(@"le nombre de flèches dans la liste est de (.*)")]
+        public void AlorsLeNombreDeFlechesDansLaListeEstDe(int p0)
+        {
+            Assert.AreEqual(p0, TestSetting.App.Query(e => e.Marked("arrowInTargetGrid").Child()).Count());
+        }
+
+        [Then(@"le nombre de flèches actuelles sur la cible est de (.*)")]
+        public void AlorsLeNombreDeFlechesActuellesSurLaCibleEstDe(int p0)
+        {
+            Assert.AreEqual(p0, TestSetting.App.Query(e => e.Marked("arrowInTargetGrid").Child()).Count());
+        }
     }
 }

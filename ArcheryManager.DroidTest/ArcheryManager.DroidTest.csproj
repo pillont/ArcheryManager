@@ -86,15 +86,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FrenchFeature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Targets\NewFlightFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NewFlightFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\StartFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StartFeature.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\TargetSettingFeature.feature.cs">
+    <Compile Include="Features\Targets\OrderArrowsInLIstFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TargetSettingFeature.feature</DependentUpon>
+      <DependentUpon>OrderArrowsInLIstFeature.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Targets\NumberArrowFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NumberArrowFeature.feature</DependentUpon>
     </Compile>
     <Compile Include="GenericCountable\ArrowsListTest.cs" />
     <Compile Include="GenericCountable\ArrowsSelectionTest.cs" />
@@ -121,13 +131,21 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>FrenchFeature.feature.cs</LastGenOutput>
     </None>
+    <None Include="Features\Targets\NewFlightFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>NewFlightFeature.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\StartFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>StartFeature.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\TargetSettingFeature.feature">
+    <None Include="Features\Targets\OrderArrowsInLIstFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>TargetSettingFeature.feature.cs</LastGenOutput>
+      <LastGenOutput>OrderArrowsInLIstFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Targets\NumberArrowFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>NumberArrowFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
