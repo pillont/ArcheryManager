@@ -46,8 +46,8 @@
       <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.core.interfaces.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=3.0.5797.27534, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.0.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="nunit.util, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.util.dll</HintPath>
@@ -58,6 +58,9 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="TechTalk.SpecFlow, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
+      <HintPath>..\packages\SpecFlow.2.1.0\lib\net45\TechTalk.SpecFlow.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Forms.2.3.4.224\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
@@ -78,8 +81,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\FrenchFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FrenchFeature.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\StartFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StartFeature.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\TargetSettingFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TargetSettingFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="GenericCountable\ArrowsListTest.cs" />
     <Compile Include="GenericCountable\ArrowsSelectionTest.cs" />
+    <Compile Include="StepDefinition\BackdoorSteps.cs" />
+    <Compile Include="StepDefinition\GenericSearchElement.cs" />
+    <Compile Include="StepDefinition\NavigationSteps.cs" />
+    <Compile Include="StepDefinition\TargetSteps.cs" />
     <Compile Include="Target\IndoorCompoundTargetTest.cs" />
     <Compile Include="Target\IndoorRecurveTargetTest.cs" />
     <Compile Include="Target\GenericTargetTest.cs" />
@@ -92,7 +114,24 @@
     <Compile Include="Timer\TimerTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Features\FrenchFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>FrenchFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\StartFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>StartFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\TargetSettingFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>TargetSettingFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
