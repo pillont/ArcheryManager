@@ -77,12 +77,14 @@
   <ItemGroup>
     <Compile Include="ClassTest.cs" />
     <Compile Include="Factories\ArrowFactoryTest.cs" />
+    <Compile Include="Factories\ScoreListFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\EnglishArrowSettingFactoryTest.cs" />
     <Compile Include="Settings\FieldArrowSettingTest.cs" />
     <Compile Include="Settings\IndoorCompoundArrowSettingTest.cs" />
     <Compile Include="Settings\IndoorRecurveArrowSettingTest.cs" />
     <Compile Include="Utils\ScoreCounterTest.cs" />
+    <Compile Include="Utils\StatisticHelperTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

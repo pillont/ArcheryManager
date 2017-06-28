@@ -117,9 +117,24 @@ namespace ArcheryManager.CustomControls
             /*
              * target layout
              */
-            PreviousArrowGrid = new ArrowsGrid() { AutomationId = "lastArrowInTargetGrid", ArrowWidth = ArrowWidth, ArrowColor = PreviousArrowsColor };
-            AverageCanvas = new AverageCanvas() { VerticalOptions = LayoutOptions.CenterAndExpand, HorizontalOptions = LayoutOptions.CenterAndExpand };
-            ArrowGrid = new ArrowsGrid() { AutomationId = "arrowInTargetGrid", ArrowWidth = ArrowWidth, ArrowColor = CommonConstant.DefaultArrowColor };
+            PreviousArrowGrid = new ArrowsGrid()
+            {
+                AutomationId = "lastArrowInTargetGrid",
+                ArrowWidth = ArrowWidth,
+                ArrowColor = PreviousArrowsColor
+            };
+            AverageCanvas = new AverageCanvas()
+            {
+                AutomationId = "averageCanvas",
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                HorizontalOptions = LayoutOptions.CenterAndExpand
+            };
+            ArrowGrid = new ArrowsGrid()
+            {
+                AutomationId = "arrowInTargetGrid",
+                ArrowWidth = ArrowWidth,
+                ArrowColor = CommonConstant.DefaultArrowColor
+            };
 
             CreateContent();
 
@@ -214,17 +229,17 @@ namespace ArcheryManager.CustomControls
 
         #region selection interactions
 
-        public void SelectArrow(Arrow arrow)
+        public virtual void SelectArrow(Arrow arrow)
         {
             ArrowGrid.SelectArrow(arrow);
         }
 
-        public void UnSelectArrow(Arrow arrow)
+        public virtual void UnSelectArrow(Arrow arrow)
         {
             ArrowGrid.UnSelectArrow(arrow);
         }
 
-        public void ResetSelection()
+        public virtual void ResetSelection()
         {
             ArrowGrid.ResetSelection();
         }

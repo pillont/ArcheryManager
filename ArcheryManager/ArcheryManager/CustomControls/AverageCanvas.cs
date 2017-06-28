@@ -11,6 +11,7 @@ namespace ArcheryManager.CustomControls
     /// </summary>
     public class AverageCanvas : ContentView
     {
+        private const int MinArrowForAverage = 2;
         private ScoreCounter counter;
         private Point averageCenter;
         private TargetSetting Setting;
@@ -77,9 +78,19 @@ namespace ArcheryManager.CustomControls
         /// </summary>
         private void Setting_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(TargetSetting.ShowAllArrows))
+            try
             {
-                UpdateAverage();
+                if (e.PropertyName == nameof(TargetSetting.ShowAllArrows))
+                {
+                    if (Counter.ArrowsShowed.Count > MinArrowForAverage)
+                    {
+                        UpdateAverage();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
@@ -90,7 +101,7 @@ namespace ArcheryManager.CustomControls
         /// </summary>
         private void AllArrows_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if (Counter.ArrowsShowed.Count < 2)
+            if (Counter.ArrowsShowed.Count < MinArrowForAverage)
             {
                 Content = null;
             }
@@ -102,7 +113,7 @@ namespace ArcheryManager.CustomControls
 
         #region average update
 
-        private void UpdateAverage()
+        private void UpdateAverage()// TODO make behavior
         {
             UpdateAverageCenter();
             UpdateAverageForm();

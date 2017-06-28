@@ -12,7 +12,8 @@ namespace ArcheryManager.Utils
         public static double CalculateStdDev(IEnumerable<double> values) //TO TEST
         {
             double ret = 0;
-            if (values.Count() > 0)
+
+            if (values?.Count() > 0)
             {
                 //Compute the Average
                 double avg = values.Average();
