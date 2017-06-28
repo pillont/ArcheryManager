@@ -72,9 +72,9 @@ namespace ArcheryManager.DroidTest.Features
                         "mytag"});
 #line 6
 this.ScenarioSetup(scenarioInfo);
-#line 7
- testRunner.When("J\'ouvre une page de backdoor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 8
+ testRunner.When("J\'ouvre une page de backdoor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 9
  testRunner.Then("il y a 6 boutons", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
