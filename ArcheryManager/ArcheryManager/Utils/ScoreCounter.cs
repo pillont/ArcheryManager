@@ -8,6 +8,8 @@ namespace ArcheryManager.Utils
 {
     public class ScoreCounter : BindableObject
     {
+        private const string NewFlightText = "New Flight";
+
         #region properties
 
         #region Arrows list
@@ -91,6 +93,7 @@ namespace ArcheryManager.Utils
 
         private int lastTotal = 0;
         private readonly TargetSetting setting;
+        private readonly IList<ToolbarItem> toolbarItems;
 
         #endregion properties
 
@@ -98,12 +101,13 @@ namespace ArcheryManager.Utils
         /// score counter with associated target
         /// </summary>
         /// <param name="setting"></param>
-        public ScoreCounter(TargetSetting setting)// TODO : make FlightSetting ancestor of Target setting =>remove this ctor and change the second to accept FlightSetting
+        public ScoreCounter(TargetSetting setting, IList<ToolbarItem> toolbarItems)// TODO : make FlightSetting ancestor of Target setting =>remove this ctor and change the second to accept FlightSetting
         {
             CurrentArrows = new ObservableCollection<Arrow>();
             AllArrows = new ObservableCollection<Arrow>();
             PreviousArrows = new ObservableCollection<Arrow>();
 
+            this.toolbarItems = toolbarItems;
             this.setting = setting;
 
             setting.PropertyChanged += Setting_PropertyChanged;
@@ -115,37 +119,60 @@ namespace ArcheryManager.Utils
             {
                 UpdateOrder();
             }
+            else if (e.PropertyName == nameof(setting.HaveMaxArrowsCount)
+                || e.PropertyName == nameof(setting.ArrowsCount))
+            {
+                RemoveNewFlightButton();
+                AddNewFlightIfCanValidFlight();
+            }
         }
 
         #region toolbar item
 
-        public List<ToolbarItem> AssociatedToolbarItem
+        public void AddDefaultToolbarItems()
         {
-            get
+            toolbarItems.Add(new ToolbarItem()
             {
-                return new List<ToolbarItem>()
-                {
-                    new ToolbarItem()
-                    {
-                        Text = "Remove last",
-                        Order = ToolbarItemOrder.Primary,
-                        Command = new Command(RemoveLastArrow)
-                    },
+                Text = "Remove last",
+                Order = ToolbarItemOrder.Primary,
+                Command = new Command(RemoveLastArrow)
+            });
 
-                    new ToolbarItem()
-                    {
-                        Text = "Remove all",
-                        Order = ToolbarItemOrder.Primary,
-                        Command = new Command(ClearArrows)
-                    },
+            toolbarItems.Add(new ToolbarItem()
+            {
+                Text = "Remove all",
+                Order = ToolbarItemOrder.Primary,
+                Command = new Command(ClearArrows)
+            });
+        }
 
-                    new ToolbarItem()
-                    {
-                        Text = "New Flight",
-                        Order = ToolbarItemOrder.Primary,
-                        Command = new Command(NewFlight)
-                    },
-                };
+        private void AddNewFlightButton()
+        {
+            toolbarItems.Add(new ToolbarItem()
+            {
+                Text = NewFlightText,
+                Order = ToolbarItemOrder.Primary,
+                Command = new Command(NewFlight),
+            });
+        }
+
+        private bool ContainsNewFlightButton()
+        {
+            var button = GetCurrentNewFlightButton();
+            return button != null;
+        }
+
+        private ToolbarItem GetCurrentNewFlightButton()
+        {
+            return toolbarItems.Where(i => i.Text == NewFlightText).FirstOrDefault();
+        }
+
+        private void RemoveNewFlightButton()
+        {
+            var button = GetCurrentNewFlightButton();
+            if (button != null)
+            {
+                toolbarItems.Remove(button);
             }
         }
 
@@ -158,6 +185,41 @@ namespace ArcheryManager.Utils
             UpdateAllArrow();
             UpdateLastArrow();
             UpdateTotal();
+
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                AddNewFlightIfCanValidFlight();
+            }
+            else if (e.Action == NotifyCollectionChangedAction.Remove
+                || e.Action == NotifyCollectionChangedAction.Reset)
+            {
+                RemoveNewFlightIfCantValidFlight();
+            }
+        }
+
+        private void RemoveNewFlightIfCantValidFlight()
+        {
+            if (!CanValidFlight())
+            {
+                RemoveNewFlightButton();
+            }
+        }
+
+        private void AddNewFlightIfCanValidFlight()
+        {
+            if (CanValidFlight())
+            {
+                if (!ContainsNewFlightButton())
+                {
+                    AddNewFlightButton();
+                }
+            }
+        }
+
+        private bool CanValidFlight()
+        {
+            return CurrentArrows.Count > 0 && (
+                (!setting.HaveMaxArrowsCount) || CurrentArrows.Count >= setting.ArrowsCount);
         }
 
         public void UpdateOrder()

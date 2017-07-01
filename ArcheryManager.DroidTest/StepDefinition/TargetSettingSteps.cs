@@ -34,7 +34,6 @@ namespace ArcheryManager.DroidTest.StepDefinition
             TestSetting.App.WaitForElement("numberArrowEntry");
             TestSetting.App.ClearText("numberArrowEntry");
             TestSetting.App.EnterText("numberArrowEntry", p0.ToString());
-            TestSetting.App.DismissKeyboard();
             TestSetting.App.Tap("NumberOfArrowsLabel");
         }
 

@@ -34,8 +34,7 @@ Scénario: test la desactivation du bouton nouvelle volée avec un nombre défin
 	Et je tire une flèche en 0, 0
 	
 	# pas toutes les flèches de tirées
-	Alors le bouton nouvelle volée est desactivé 
-
+	Alors le bouton nouvelle volée est désactivé 
 
 
 Scénario: test l'activation du bouton nouvelle volée avec un nombre défini de flèches
@@ -52,4 +51,25 @@ Scénario: test l'activation du bouton nouvelle volée avec un nombre défini de
 	
 	#le nombre de flèche défini est atteint
 	Alors le bouton nouvelle volée est activé
+
+
+Scénario: test désactiviation du bouton nouvelle volée lorsque le nombre de flèche à changé
+	Quand J'ouvre une page de cible fita
+	Et j'ouvre le menu de paramètre
+	Et je click sur le check nombre de flèches défini
+	Et je remplit le nombre de flèche par 5
+	Et je reviens à la page d'avant
+	Et je tire une flèche en 200, 100
+	Et je tire une flèche en 100, 300
+	Et je tire une flèche en 0, 0
+	Et je tire une flèche en 100, 200
+	Et je tire une flèche en 300, 100
+	
+	Et j'ouvre le menu de paramètre
+	Et je remplit le nombre de flèche par 6
+	Et je reviens à la page d'avant
+	
+	#le nombre de flèche défini est atteint
+	Alors le bouton nouvelle volée est désactivé
+
 

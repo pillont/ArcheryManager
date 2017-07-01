@@ -110,7 +110,8 @@ namespace ArcheryManager.Interactions.Behaviors
         {
             CleanTranslation();
 
-            bool canShootNewArrow = counter.CurrentArrows.Count < setting.ArrowsCount;
+            bool canShootNewArrow = (!setting.HaveMaxArrowsCount)
+                                    || counter.CurrentArrows.Count < setting.ArrowsCount;
             if (canShootNewArrow)
             {
                 StartInteraction();

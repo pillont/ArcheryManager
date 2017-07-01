@@ -2,6 +2,7 @@
 using ArcheryManager.Settings;
 using ArcheryManager.Utils;
 using NUnit.Framework;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace ArcheryManager.UnitTest.Utils
@@ -9,6 +10,8 @@ namespace ArcheryManager.UnitTest.Utils
     [TestFixture]
     public class ScoreCounterTest
     {
+        private List<ToolbarItem> toolBarList;
+
         private ScoreCounter counter;
         private TargetSetting targetSetting;
         private IArrowSetting arrowSetting;
@@ -16,8 +19,9 @@ namespace ArcheryManager.UnitTest.Utils
         [SetUp]
         public void Init()
         {
+            toolBarList = new List<ToolbarItem>();
             targetSetting = new TargetSetting();
-            counter = new ScoreCounter(targetSetting);
+            counter = new ScoreCounter(targetSetting, toolBarList);
             arrowSetting = EnglishArrowSetting.Instance;
         }
 
@@ -370,6 +374,50 @@ namespace ArcheryManager.UnitTest.Utils
             Assert.AreEqual(a1, counter.CurrentArrows[0]);
             Assert.AreEqual(a3, counter.CurrentArrows[1]);
             Assert.AreEqual(a2, counter.CurrentArrows[2]);
+        }
+
+        [Test]
+        public void ToolBarItems_HaveMaxTest()
+        {
+            targetSetting.HaveMaxArrowsCount = true;
+            counter.AddDefaultToolbarItems();
+            targetSetting.ArrowsCount = 2;
+            Assert.AreEqual(3, toolBarList.Count);
+            counter.AddArrow(new Arrow(0, 0, arrowSetting));
+            Assert.AreEqual(3, toolBarList.Count);
+            counter.AddArrow(new Arrow(0, 0, arrowSetting));
+            Assert.AreEqual(3, toolBarList.Count);
+            counter.AddArrow(new Arrow(0, 0, arrowSetting));
+            Assert.AreEqual(3, toolBarList.Count);
+        }
+
+        [Test]
+        public void ToolBarItems_AddTest()
+        {
+            targetSetting.HaveMaxArrowsCount = false;
+            counter.AddDefaultToolbarItems();
+            Assert.AreEqual(2, toolBarList.Count);
+
+            targetSetting.ArrowsCount = 2;
+            counter.AddArrow(new Arrow(0, 0, arrowSetting));
+            Assert.AreEqual(2, toolBarList.Count);
+            counter.AddArrow(new Arrow(0, 0, arrowSetting));
+            Assert.AreEqual(3, toolBarList.Count);
+        }
+
+        [Test]
+        public void ToolBarItems_RemoveTest()
+        {
+            targetSetting.HaveMaxArrowsCount = false;
+            counter.AddDefaultToolbarItems();
+            Assert.AreEqual(2, toolBarList.Count);
+            targetSetting.ArrowsCount = 2;
+
+            counter.AddArrow(new Arrow(0, 0, arrowSetting));
+            counter.AddArrow(new Arrow(0, 0, arrowSetting));
+
+            counter.RemoveLastArrow();
+            Assert.AreEqual(2, toolBarList.Count);
         }
     }
 }
