@@ -18,15 +18,13 @@ namespace ArcheryManager.Factories
             Setting = setting;
         }
 
-        public virtual Arrow Create(Point position)
+        public virtual Arrow Create(Point position, int numberInFlight)
         {
-            string score = ScoreOf(position);
-            int value = ValueByScore(score);
-            Color color = ColorOf(score);
+            int index = IndexByPosition(position);
             var x = transformPosition(position.X);
             var y = transformPosition(position.Y);
             var point = new Point(x, y);
-            var res = new Arrow(point, score, value, color);
+            var res = new Arrow(index, numberInFlight, point, Setting);
 
             return res;
         }
@@ -41,7 +39,7 @@ namespace ArcheryManager.Factories
             return Setting.ScoreByIndex(i);
         }
 
-        protected string ScoreOf(Point position)
+        protected int IndexByPosition(Point position)
         {
             double distance = Math.Sqrt(Math.Pow(position.X, 2) + Math.Pow(position.Y, 2));
             distance -= distance * MovableTargetBehavior.TargetTranslationRate; // target translation
@@ -55,9 +53,9 @@ namespace ArcheryManager.Factories
                 double size = Target.TargetSize * rate;
                 size *= MovableTargetBehavior.TargetScale; // target scale
                 if (distance < size / 2)
-                    return ScoreByIndex(i);
+                    return i;
             }
-            return ScoreByIndex(0);
+            return 0;
         }
 
         protected Color ColorOf(string value)

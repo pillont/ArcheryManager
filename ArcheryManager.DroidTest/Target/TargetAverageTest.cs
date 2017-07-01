@@ -110,12 +110,12 @@ namespace ArcheryManager.DroidTest.Target
 
             average = app.Query(e => e.Marked("averageCanvas").Child()).First();
             Assert.LessOrEqual(290, average.Rect.CenterX);
-            Assert.LessOrEqual(650, average.Rect.CenterY);
-            Assert.LessOrEqual(173, average.Rect.Height);
+            Assert.LessOrEqual(666, average.Rect.CenterY);
+            Assert.LessOrEqual(171, average.Rect.Height);
             Assert.LessOrEqual(345, average.Rect.Width);
 
             Assert.GreaterOrEqual(296, average.Rect.CenterX);
-            Assert.GreaterOrEqual(658, average.Rect.CenterY);
+            Assert.GreaterOrEqual(673, average.Rect.CenterY);
             Assert.GreaterOrEqual(181, average.Rect.Height);
             Assert.GreaterOrEqual(355, average.Rect.Width);
         }
@@ -157,12 +157,12 @@ namespace ArcheryManager.DroidTest.Target
 
             average = app.Query(e => e.Marked("averageCanvas").Child()).First();
             Assert.LessOrEqual(290, average.Rect.CenterX);
-            Assert.LessOrEqual(650, average.Rect.CenterY);
+            Assert.LessOrEqual(667, average.Rect.CenterY);
             Assert.LessOrEqual(171, average.Rect.Height);
             Assert.LessOrEqual(343, average.Rect.Width);
 
-            Assert.GreaterOrEqual(296, average.Rect.CenterX);
-            Assert.GreaterOrEqual(658, average.Rect.CenterY);
+            Assert.GreaterOrEqual(298, average.Rect.CenterX);
+            Assert.GreaterOrEqual(674, average.Rect.CenterY);
             Assert.GreaterOrEqual(181, average.Rect.Height);
             Assert.GreaterOrEqual(355, average.Rect.Width);
         }
@@ -186,7 +186,7 @@ namespace ArcheryManager.DroidTest.Target
 
             Assert.LessOrEqual(378, average.Rect.CenterX);
             Assert.LessOrEqual(668, average.Rect.CenterY);
-            Assert.LessOrEqual(244, average.Rect.Height);
+            Assert.LessOrEqual(242, average.Rect.Height);
             Assert.LessOrEqual(240, average.Rect.Width);
 
             Assert.GreaterOrEqual(385, average.Rect.CenterX);
@@ -205,25 +205,25 @@ namespace ArcheryManager.DroidTest.Target
             Assert.LessOrEqual(378, average.Rect.CenterX);
             Assert.LessOrEqual(668, average.Rect.CenterY);
             Assert.LessOrEqual(250, average.Rect.Height);
-            Assert.LessOrEqual(390, average.Rect.Width);
+            Assert.LessOrEqual(378, average.Rect.Width);
 
             Assert.GreaterOrEqual(385, average.Rect.CenterX);
             Assert.GreaterOrEqual(674, average.Rect.CenterY);
             Assert.GreaterOrEqual(260, average.Rect.Height);
-            Assert.GreaterOrEqual(398, average.Rect.Width);
+            Assert.GreaterOrEqual(383, average.Rect.Width);
 
             app.DragCoordinates(400, 800, 100, 800);
 
             average = app.Query(e => e.Marked("averageCanvas").Child()).First();
             Assert.LessOrEqual(450, average.Rect.CenterX);
-            Assert.LessOrEqual(660, average.Rect.CenterY);
+            Assert.LessOrEqual(685, average.Rect.CenterY);
             Assert.LessOrEqual(220, average.Rect.Height);
-            Assert.LessOrEqual(505, average.Rect.Width);
+            Assert.LessOrEqual(488, average.Rect.Width);
 
             Assert.GreaterOrEqual(460, average.Rect.CenterX);
-            Assert.GreaterOrEqual(668, average.Rect.CenterY);
+            Assert.GreaterOrEqual(695, average.Rect.CenterY);
             Assert.GreaterOrEqual(230, average.Rect.Height);
-            Assert.GreaterOrEqual(515, average.Rect.Width);
+            Assert.GreaterOrEqual(507, average.Rect.Width);
         }
     }
 }

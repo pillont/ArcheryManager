@@ -10,13 +10,16 @@ namespace ArcheryManager.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CounterPage : ContentPage
     {
+        private readonly TargetSetting Setting;
         private static readonly IArrowSetting EnglishSetting = EnglishArrowSetting.Instance;
         private readonly ScoreCounter Counter;
 
         public CounterPage()
         {
             InitializeComponent();
-            Counter = new ScoreCounter();
+
+            this.Setting = new TargetSetting() { HaveTarget = false };
+            Counter = new ScoreCounter(Setting);
             totalCounter.BindingContext = Counter;
             scoreList.SizeChanged += ScoreList_SizeChanged;
             scoreList.Items = Counter.CurrentArrows;
@@ -47,9 +50,15 @@ namespace ArcheryManager.Pages
             ToolbarItems.Add(new ToolbarItem()
             {
                 Text = "Settings",
-                Order = ToolbarItemOrder.Secondary
-                //TODO make setting page
+                Order = ToolbarItemOrder.Secondary,
+                Command = new Command(OpenSettingPage)
             });
+        }
+
+        private void OpenSettingPage(object obj)
+        {
+            var page = new SettingTargetPage() { BindingContext = Setting };
+            App.NavigationPage.PushAsync(page);
         }
 
         private void AddCounterToolbarItems()

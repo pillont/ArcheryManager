@@ -1,27 +1,52 @@
-﻿using Xamarin.Forms;
+﻿using ArcheryManager.Interfaces;
+using Xamarin.Forms;
 
 namespace ArcheryManager.Utils
 {
     public class Arrow
     {
+        public int NumberInFlight { get; private set; }
         public double TranslationX { get; private set; }
         public double TranslationY { get; private set; }
-        public string Score { get; private set; }
-        public int Value { get; private set; }
-        public Color Color { get; private set; }
+        public IArrowSetting Setting { get; private set; }
+        public int Index { get; private set; }
 
-        public Arrow(Point position, string score, int value, Color color)
-            : this(score, value, color)
+        public string Score
+        {
+            get
+            {
+                return Setting.ScoreByIndex(Index);
+            }
+        }
+
+        public int Value
+        {
+            get
+            {
+                return Setting.ValueByScore(Score);
+            }
+        }
+
+        public Color Color
+        {
+            get
+            {
+                return Setting.ColorOf(Score);
+            }
+        }
+
+        public Arrow(int index, int numberInFlight, Point position, IArrowSetting setting)
+            : this(index, numberInFlight, setting)
         {
             TranslationX = position.X;
             TranslationY = position.Y;
         }
 
-        public Arrow(string score, int value, Color color)
+        public Arrow(int index, int numberInFlight, IArrowSetting setting)
         {
-            Score = score;
-            Color = color;
-            Value = value;
+            Index = index;
+            NumberInFlight = numberInFlight;
+            Setting = setting;
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using ArcheryManager.CustomControls;
 using ArcheryManager.Factories;
 using ArcheryManager.Interactions.Behaviors;
+using ArcheryManager.Interfaces;
+using ArcheryManager.Settings;
 using ArcheryManager.Utils;
 using Moq;
 using NUnit.Framework;
@@ -13,6 +15,7 @@ namespace ArcheryManager.UnitTest.Factories
     [TestFixture]
     public class ScoreListFactoryTest
     {
+        private IArrowSetting setting;
         private ScoreCounter counter;
         private List<ToolbarItem> list;
         private Mock<Target> target;
@@ -26,14 +29,15 @@ namespace ArcheryManager.UnitTest.Factories
         public void Init()
         {
             Xamarin.Forms.Mocks.MockForms.Init();
+            setting = EnglishArrowSetting.Instance;
             list = new List<ToolbarItem>();
-            counter = new ScoreCounter();
+            counter = new ScoreCounter(new TargetSetting());
             target = new Mock<Target>();
             scorelist = ScoreListFactory.Create(target.Object, counter, list);
-            a1 = new Arrow("1", 1, Color.White);
-            a2 = new Arrow("2", 2, Color.White);
-            a3 = new Arrow("3", 3, Color.Black);
-            a4 = new Arrow("4", 4, Color.Black);
+            a1 = new Arrow(1, 0, setting);
+            a2 = new Arrow(2, 0, setting);
+            a3 = new Arrow(3, 0, setting);
+            a4 = new Arrow(4, 0, setting);
             scorelist.Items.Add(a1);
             scorelist.Items.Add(a2);
             scorelist.Items.Add(a3);

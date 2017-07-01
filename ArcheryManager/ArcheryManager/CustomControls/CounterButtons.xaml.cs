@@ -59,8 +59,9 @@ namespace ArcheryManager.CustomControls
             {
                 var view = sender as BindableObject;
 
-                if (view.BindingContext is Arrow arrow)
+                if (view.BindingContext is Arrow buttonArrow)
                 {
+                    var arrow = new Arrow(buttonArrow.Index, Counter.CurrentArrows.Count, Setting);
                     Counter.AddArrow(arrow);
                 }
             }
@@ -83,11 +84,11 @@ namespace ArcheryManager.CustomControls
 
         private Arrow GetArrow(int i)
         {
-            var score = Setting.ScoreByIndex(i);
-            var value = Setting.ValueByScore(score);
+            string score = Setting.ScoreByIndex(i);
+            int value = Setting.ValueByScore(score);
             var color = Setting.ColorOf(score);
-
-            var arrow = new Arrow(score, value, color);
+            int numberInFlight = Counter.CurrentArrows.Count;
+            var arrow = new Arrow(i, numberInFlight, Setting);
             return arrow;
         }
     }

@@ -29,26 +29,29 @@ namespace ArcheryManager.UnitTest.Factories
         [Test]
         public void EnglishArrowFactory_CreateTest()
         {
-            var arrow = factory.Create(new Point(5, 2));
+            var arrow = factory.Create(new Point(5, 2), 0);
             Assert.AreEqual(4.8, Math.Round(arrow.TranslationX, 1));
             Assert.AreEqual(1.9, Math.Round(arrow.TranslationY, 1));
             Assert.AreEqual(Color.Pink, arrow.Color);
             Assert.AreEqual("test", arrow.Score);
             Assert.AreEqual(42, arrow.Value);
+            Assert.AreEqual(0, arrow.NumberInFlight);
 
-            arrow = factory.Create(new Point(20, 15));
+            arrow = factory.Create(new Point(20, 15), 0);
             Assert.AreEqual(19.3, Math.Round(arrow.TranslationX, 1));
             Assert.AreEqual(14.4, Math.Round(arrow.TranslationY, 1));
             Assert.AreEqual(Color.Pink, arrow.Color);
             Assert.AreEqual("test", arrow.Score);
             Assert.AreEqual(42, arrow.Value);
+            Assert.AreEqual(0, arrow.NumberInFlight);
 
-            arrow = factory.Create(new Point(40, 20));//9 38.5/19.2
+            arrow = factory.Create(new Point(40, 20), 0);//9 38.5/19.2
             Assert.AreEqual(38.5, Math.Round(arrow.TranslationX, 1));
             Assert.AreEqual(19.3, Math.Round(arrow.TranslationY, 1));
             Assert.AreEqual(Color.Pink, arrow.Color);
             Assert.AreEqual("test", arrow.Score);
             Assert.AreEqual(42, arrow.Value);
+            Assert.AreEqual(0, arrow.NumberInFlight);
         }
     }
 }

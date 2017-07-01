@@ -18,5 +18,12 @@ namespace ArcheryManager.DroidTest.StepDefinition
             TestSetting.InitTestApplication();
             TestSetting.App.Tap("EnglishTargetButton");
         }
+
+        [When(@"J'ouvre une page zappette")]
+        public void QuandJOuvreUnePageZappette()
+        {
+            TestSetting.InitTestApplication();
+            TestSetting.App.Tap("ButtonCounterButton");
+        }
     }
 }

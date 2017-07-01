@@ -61,9 +61,9 @@ namespace ArcheryManager.Settings
             }
         }
 
-        private static IArrowSetting instance;
+        private static EnglishArrowSetting instance;
 
-        public static IArrowSetting Instance
+        public static EnglishArrowSetting Instance
         {
             get
             {
@@ -105,11 +105,15 @@ namespace ArcheryManager.Settings
 
         public int ValueByScore(string score)
         {
-            var index = EnglishScoreByIndex.Where(val => val.Value == score).FirstOrDefault().Key;
+            int index = EnglishScoreByIndex.Where(val => val.Value == score).FirstOrDefault().Key;
             if (index < 11)
+            {
                 return index;
+            }
             else // case of X10
+            {
                 return 10;
+            }
         }
 
         /// <summary>
@@ -154,6 +158,11 @@ namespace ArcheryManager.Settings
                 return Color.White;
             else
                 return Color.Black;
+        }
+
+        public bool IsScoreExisted(string score)
+        {
+            return EnglishScoreByIndex.ContainsValue(score);
         }
     }
 }

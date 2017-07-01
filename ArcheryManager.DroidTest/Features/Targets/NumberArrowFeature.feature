@@ -3,7 +3,7 @@ Fonctionnalité:  NumberArrowFeature
 	test les possibilités de tirer un nombre de flèche défini ou non
 
 	#TODO
-#@mytag
+
 #Scénario: test la possibilité de tirer un nombre de flèches libre
 #	Quand J'ouvre une page de cible fita
 #	Et je tire une flèche en 200, 100
@@ -14,7 +14,7 @@ Fonctionnalité:  NumberArrowFeature
 #	# possible de changer parceque le nombre de flèches est libre
 #	Alors le bouton nouvelle volée est activé
 
-#@mytag
+
 #Scénario: test la desactivation par défault du bouton nombre de flèche
 #	Quand J'ouvre une page de cible fita
 #	Et j'ouvre le menu de paramètre
@@ -22,7 +22,7 @@ Fonctionnalité:  NumberArrowFeature
 #	Alors le nombre de flèche est dasactivé
 #	Et le check nombre de flèches n'est pas checké
 	
-#@mytag
+
 #Scénario: test l'activation du bouton nombre de flèche
 #	Quand J'ouvre une page de cible fita
 #	Et j'ouvre le menu de paramètre
@@ -32,7 +32,7 @@ Fonctionnalité:  NumberArrowFeature
 #	Et le nombre de flèche est de 6
 
 	
-#@mytag
+
 #Scénario: test la non possibilité de tirer une nouvelle flèche
 #	Quand J'ouvre une page de cible fita
 #	Et j'ouvre le menu de paramètre

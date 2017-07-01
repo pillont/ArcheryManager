@@ -2,7 +2,6 @@
 		test de feature avec UiTest
 
 
-@mytag
 Scenario: test le nombre de bouton dans la page de backdoor
 	# Given initialisation
 	When J'ouvre une page de backdoor

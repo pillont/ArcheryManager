@@ -62,6 +62,328 @@ namespace ArcheryManager.DroidTest.Features.Targets
         {
             testRunner.CollectScenarioErrors();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test l\'ordre des flèches par défault dans la page cible")]
+        public virtual void TestLOrdreDesFlechesParDefaultDansLaPageCible()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test l\'ordre des flèches par défault dans la page cible", ((string[])(null)));
+#line 6
+this.ScenarioSetup(scenarioInfo);
+#line 7
+ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 8
+ testRunner.And("je tire une flèche en 200, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 9
+ testRunner.And("je tire une flèche en 100, 298", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 10
+ testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 13
+ testRunner.Then("la fleche 0 de la liste est un 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 14
+ testRunner.Then("la fleche 1 de la liste est un 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 15
+ testRunner.Then("la fleche 2 de la liste est un X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test la fonctionnalité d\'ordonner les flèches tirées après le tir dans la page ci" +
+            "ble")]
+        public virtual void TestLaFonctionnaliteDOrdonnerLesFlechesTireesApresLeTirDansLaPageCible()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test la fonctionnalité d\'ordonner les flèches tirées après le tir dans la page ci" +
+                    "ble", ((string[])(null)));
+#line 18
+this.ScenarioSetup(scenarioInfo);
+#line 19
+ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 20
+ testRunner.And("je tire une flèche en 200, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 21
+ testRunner.And("je tire une flèche en 100, 296", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 22
+ testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 23
+ testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 24
+ testRunner.And("je click sur l option flèche ordonnée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 25
+ testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 28
+ testRunner.Then("la fleche 0 de la liste est un X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 29
+ testRunner.Then("la fleche 1 de la liste est un 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 30
+ testRunner.Then("la fleche 2 de la liste est un 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test la fonctionnalité d\'ordonner des flèches de même valeur dans la page cible")]
+        public virtual void TestLaFonctionnaliteDOrdonnerDesFlechesDeMemeValeurDansLaPageCible()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test la fonctionnalité d\'ordonner des flèches de même valeur dans la page cible", ((string[])(null)));
+#line 32
+ this.ScenarioSetup(scenarioInfo);
+#line 33
+ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 34
+ testRunner.And("je tire une flèche en 20, 30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 35
+ testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 36
+ testRunner.And("je tire une flèche en 30, 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 37
+ testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 38
+ testRunner.And("je click sur l option flèche ordonnée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 39
+ testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 42
+ testRunner.Then("la fleche 0 de la liste est un X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 43
+ testRunner.Then("la fleche 1 de la liste est un 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 44
+ testRunner.Then("la fleche 2 de la liste est un 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test de la fonctionnalité d\'ordonner les flèches avant le tir dans la page cible")]
+        public virtual void TestDeLaFonctionnaliteDOrdonnerLesFlechesAvantLeTirDansLaPageCible()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test de la fonctionnalité d\'ordonner les flèches avant le tir dans la page cible", ((string[])(null)));
+#line 47
+this.ScenarioSetup(scenarioInfo);
+#line 48
+ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 49
+ testRunner.When("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 50
+ testRunner.And("je click sur l option flèche ordonnée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 51
+ testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 52
+ testRunner.And("je tire une flèche en 200, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 53
+ testRunner.And("je tire une flèche en 100, 298", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 54
+ testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 57
+ testRunner.Then("la fleche 0 de la liste est un X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 58
+ testRunner.Then("la fleche 1 de la liste est un 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 59
+ testRunner.Then("la fleche 2 de la liste est un 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test de la fonctionnalité d\'ordonner et de retourner à l ordre par défault dans l" +
+            "a page cible")]
+        public virtual void TestDeLaFonctionnaliteDOrdonnerEtDeRetournerALOrdreParDefaultDansLaPageCible()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test de la fonctionnalité d\'ordonner et de retourner à l ordre par défault dans l" +
+                    "a page cible", ((string[])(null)));
+#line 61
+this.ScenarioSetup(scenarioInfo);
+#line 62
+ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 63
+ testRunner.When("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 64
+ testRunner.And("je click sur l option flèche ordonnée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 65
+ testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 66
+ testRunner.And("je tire une flèche en 200, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 67
+ testRunner.And("je tire une flèche en 100, 298", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 68
+ testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 69
+ testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 70
+ testRunner.And("je click sur l option flèche ordonnée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 71
+ testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 74
+ testRunner.Then("la fleche 0 de la liste est un 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 75
+ testRunner.Then("la fleche 1 de la liste est un 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 76
+ testRunner.Then("la fleche 2 de la liste est un X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test l\'ordre des flèches par défault dans la page zappette")]
+        public virtual void TestLOrdreDesFlechesParDefaultDansLaPageZappette()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test l\'ordre des flèches par défault dans la page zappette", ((string[])(null)));
+#line 80
+this.ScenarioSetup(scenarioInfo);
+#line 81
+ testRunner.When("J\'ouvre une page zappette", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 82
+ testRunner.And("je click sur le boutton 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 83
+ testRunner.And("je click sur le boutton 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 84
+ testRunner.And("je click sur le boutton X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 87
+ testRunner.Then("la fleche 0 de la liste est un 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 88
+ testRunner.Then("la fleche 1 de la liste est un 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 89
+ testRunner.Then("la fleche 2 de la liste est un X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test la fonctionnalité d\'ordonner les flèches tirées après le tir dans la page za" +
+            "ppette")]
+        public virtual void TestLaFonctionnaliteDOrdonnerLesFlechesTireesApresLeTirDansLaPageZappette()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test la fonctionnalité d\'ordonner les flèches tirées après le tir dans la page za" +
+                    "ppette", ((string[])(null)));
+#line 92
+this.ScenarioSetup(scenarioInfo);
+#line 93
+ testRunner.When("J\'ouvre une page zappette", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 94
+ testRunner.And("je click sur le boutton 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 95
+ testRunner.And("je click sur le boutton 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 96
+ testRunner.And("je click sur le boutton X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 97
+ testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 98
+ testRunner.And("je click sur l option flèche ordonnée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 99
+ testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 102
+ testRunner.Then("la fleche 0 de la liste est un X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 103
+ testRunner.Then("la fleche 1 de la liste est un 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 104
+ testRunner.Then("la fleche 2 de la liste est un 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test la fonctionnalité d\'ordonner des flèches de même valeur dans la page zappett" +
+            "e")]
+        public virtual void TestLaFonctionnaliteDOrdonnerDesFlechesDeMemeValeurDansLaPageZappette()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test la fonctionnalité d\'ordonner des flèches de même valeur dans la page zappett" +
+                    "e", ((string[])(null)));
+#line 106
+ this.ScenarioSetup(scenarioInfo);
+#line 107
+ testRunner.When("J\'ouvre une page zappette", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 108
+ testRunner.And("je click sur le boutton 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 109
+ testRunner.And("je click sur le boutton X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 110
+ testRunner.And("je click sur le boutton 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 111
+ testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 112
+ testRunner.And("je click sur l option flèche ordonnée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 113
+ testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 116
+ testRunner.Then("la fleche 0 de la liste est un X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 117
+ testRunner.Then("la fleche 1 de la liste est un 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 118
+ testRunner.Then("la fleche 2 de la liste est un 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test de la fonctionnalité d\'ordonner les flèches avant le tir dans la page zappet" +
+            "te")]
+        public virtual void TestDeLaFonctionnaliteDOrdonnerLesFlechesAvantLeTirDansLaPageZappette()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test de la fonctionnalité d\'ordonner les flèches avant le tir dans la page zappet" +
+                    "te", ((string[])(null)));
+#line 121
+this.ScenarioSetup(scenarioInfo);
+#line 122
+ testRunner.When("J\'ouvre une page zappette", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 123
+ testRunner.When("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 124
+ testRunner.And("je click sur l option flèche ordonnée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 125
+ testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 126
+ testRunner.And("je click sur le boutton 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 127
+ testRunner.And("je click sur le boutton 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 128
+ testRunner.And("je click sur le boutton X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 131
+ testRunner.Then("la fleche 0 de la liste est un X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 132
+ testRunner.Then("la fleche 1 de la liste est un 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 133
+ testRunner.Then("la fleche 2 de la liste est un 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test de la fonctionnalité d\'ordonner et de retourner à l ordre par défault dans l" +
+            "a page zappette")]
+        public virtual void TestDeLaFonctionnaliteDOrdonnerEtDeRetournerALOrdreParDefaultDansLaPageZappette()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test de la fonctionnalité d\'ordonner et de retourner à l ordre par défault dans l" +
+                    "a page zappette", ((string[])(null)));
+#line 135
+this.ScenarioSetup(scenarioInfo);
+#line 136
+ testRunner.When("J\'ouvre une page zappette", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 137
+ testRunner.When("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 138
+ testRunner.And("je click sur l option flèche ordonnée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 139
+ testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 140
+ testRunner.And("je click sur le boutton 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 141
+ testRunner.And("je click sur le boutton 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 142
+ testRunner.And("je click sur le boutton X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 143
+ testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 144
+ testRunner.And("je click sur l option flèche ordonnée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 145
+ testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 148
+ testRunner.Then("la fleche 0 de la liste est un 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 149
+ testRunner.Then("la fleche 1 de la liste est un 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 150
+ testRunner.Then("la fleche 2 de la liste est un X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

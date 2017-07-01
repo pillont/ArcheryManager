@@ -28,9 +28,9 @@
                 Grid.Column="1"
                 Grid.Row="1"
                 AutomationId="ArrowsOrderSwitch" />
-        <Label  Text="See all arrows" Grid.Column="0" Grid.Row="2" VerticalTextAlignment="Center" />
-        <Switch IsToggled="{Binding ShowAllArrows}" Grid.Column="1" Grid.Row="2" AutomationId="ShowAllArrowsSwitch" />
-        <Label Text="See average" Grid.Column="0" Grid.Row="3" VerticalTextAlignment="Center" />
-        <Switch IsToggled="{Binding AverageIsVisible}" Grid.Column="1" Grid.Row="3" AutomationId="VisibilityAverageSwitch" />
+        <Label  Text="See all arrows" Grid.Column="0" Grid.Row="2" VerticalTextAlignment="Center" IsVisible="{Binding HaveTarget}" />
+        <Switch IsToggled="{Binding ShowAllArrows}" Grid.Column="1" Grid.Row="2" AutomationId="ShowAllArrowsSwitch" IsVisible="{Binding HaveTarget}" />
+        <Label Text="See average" Grid.Column="0" Grid.Row="3" VerticalTextAlignment="Center" IsVisible="{Binding HaveTarget}" />
+        <Switch IsToggled="{Binding AverageIsVisible}" Grid.Column="1" Grid.Row="3" AutomationId="VisibilityAverageSwitch" IsVisible="{Binding HaveTarget}" />
     </Grid>
 </ContentPage>

@@ -65,16 +65,14 @@ namespace ArcheryManager.DroidTest.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("test le nombre de bouton dans la page de backdoor")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
         public virtual void TestLeNombreDeBoutonDansLaPageDeBackdoor()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test le nombre de bouton dans la page de backdoor", new string[] {
-                        "mytag"});
-#line 6
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test le nombre de bouton dans la page de backdoor", ((string[])(null)));
+#line 5
 this.ScenarioSetup(scenarioInfo);
-#line 8
+#line 7
  testRunner.When("J\'ouvre une page de backdoor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 9
+#line 8
  testRunner.Then("il y a 6 boutons", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

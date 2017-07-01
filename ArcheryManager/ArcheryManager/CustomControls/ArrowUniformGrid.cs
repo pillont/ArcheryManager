@@ -26,6 +26,8 @@ namespace ArcheryManager.CustomControls
 
             var label = new Label()
             {
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
                 VerticalTextAlignment = TextAlignment.Center,
                 FontAttributes = FontAttributes.Bold,
                 HorizontalTextAlignment = TextAlignment.Center,
