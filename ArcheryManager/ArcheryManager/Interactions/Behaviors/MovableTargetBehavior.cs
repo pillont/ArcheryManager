@@ -72,7 +72,9 @@ namespace ArcheryManager.Interactions.Behaviors
 
             var position = new Point(associatedObject.ArrowSetter.TranslationX,
                                         associatedObject.ArrowSetter.TranslationY);
-            var arrow = associatedObject.Factory.Create(position);
+
+            var numberInFlight = counter.CurrentArrows.Count;
+            var arrow = associatedObject.Factory.Create(position, numberInFlight);
             counter.AddArrow(arrow);
 
             associatedObject.TargetGrid.TranslationX = 0;

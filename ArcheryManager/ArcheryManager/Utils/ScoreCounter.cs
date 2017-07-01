@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 
 namespace ArcheryManager.Utils
 {
@@ -94,24 +95,26 @@ namespace ArcheryManager.Utils
         #endregion properties
 
         /// <summary>
-        /// counter without target
-        /// example : buttons page
+        /// score counter with associated target
         /// </summary>
-        public ScoreCounter() // TODO : make FlightSetting ancestor of Target setting =>remove this ctor and change the second to accept FlightSetting
+        /// <param name="setting"></param>
+        public ScoreCounter(TargetSetting setting)// TODO : make FlightSetting ancestor of Target setting =>remove this ctor and change the second to accept FlightSetting
         {
             CurrentArrows = new ObservableCollection<Arrow>();
             AllArrows = new ObservableCollection<Arrow>();
             PreviousArrows = new ObservableCollection<Arrow>();
+
+            this.setting = setting;
+
+            setting.PropertyChanged += Setting_PropertyChanged;
         }
 
-        /// <summary>
-        /// score counter with associated target
-        /// </summary>
-        /// <param name="setting"></param>
-        public ScoreCounter(TargetSetting setting)
-            : this()
+        private void Setting_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            this.setting = setting;
+            if (e.PropertyName == nameof(setting.IsDecreasingOrder))
+            {
+                UpdateOrder();
+            }
         }
 
         #region toolbar item
@@ -155,6 +158,25 @@ namespace ArcheryManager.Utils
             UpdateAllArrow();
             UpdateLastArrow();
             UpdateTotal();
+        }
+
+        public void UpdateOrder()
+        {
+            IEnumerable<Arrow> orderedList;
+            if (setting.IsDecreasingOrder)
+            {
+                orderedList = CurrentArrows.OrderByDescending(a => a.Index).ToList();
+            }
+            else
+            {
+                orderedList = CurrentArrows.OrderBy(a => a.NumberInFlight).ToList();
+            }
+
+            CurrentArrows.Clear();
+            foreach (var a in orderedList)
+            {
+                CurrentArrows.Add(a);
+            }
         }
 
         private void UpdateLastArrow()
@@ -233,6 +255,7 @@ namespace ArcheryManager.Utils
         public void AddArrow(Arrow arrow)
         {
             CurrentArrows?.Add(arrow);
+            UpdateOrder();
         }
 
         public void ClearArrows()

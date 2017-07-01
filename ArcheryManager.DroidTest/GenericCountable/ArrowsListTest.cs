@@ -149,16 +149,16 @@ namespace ArcheryManager.DroidTest.GenericCountable
 
             //NOTE : can not use e.Marked("scoreList").Child because center of the list not in the view...
             app.DragCoordinates(500, 800, 500, 700); // add arrow
-            Assert.AreEqual(59, app.WaitForElement("9").First().Rect.CenterX);
+            Assert.AreEqual(58, app.WaitForElement("9").First().Rect.CenterX);
 
             app.DragCoordinates(500, 800, 500, 900);// add arrow
-            Assert.AreEqual(189, app.WaitForElement("9").Last().Rect.CenterX);
+            Assert.AreEqual(188, app.WaitForElement("9").Last().Rect.CenterX);
 
             app.DragCoordinates(500, 800, 300, 800);// add arrow
-            Assert.AreEqual(319, app.WaitForElement("8").Last().Rect.CenterX);
+            Assert.AreEqual(318, app.WaitForElement("8").Last().Rect.CenterX);
 
             app.DragCoordinates(500, 800, 800, 800);// add arrow
-            Assert.AreEqual(449, app.WaitForElement("7").Last().Rect.CenterX);
+            Assert.AreEqual(448, app.WaitForElement("7").Last().Rect.CenterX);
         }
 
         [Test]
@@ -181,28 +181,28 @@ namespace ArcheryManager.DroidTest.GenericCountable
             app.DragCoordinates(500, 800, 800, 800);// add arrow
             app.DragCoordinates(500, 800, 500, 700); // add arrow
 
-            Assert.AreEqual(59, app.WaitForElement("9").First().Rect.CenterX);
-            Assert.AreEqual(189, app.WaitForElement("8").Last().Rect.CenterX);
-            Assert.AreEqual(319, app.WaitForElement("7").Last().Rect.CenterX);
-            Assert.AreEqual(449, app.WaitForElement("9").Last().Rect.CenterX);
+            Assert.AreEqual(58, app.WaitForElement("9").First().Rect.CenterX);
+            Assert.AreEqual(188, app.WaitForElement("8").Last().Rect.CenterX);
+            Assert.AreEqual(318, app.WaitForElement("7").Last().Rect.CenterX);
+            Assert.AreEqual(448, app.WaitForElement("9").Last().Rect.CenterX);
 
             //remove arrow
             app.Tap("Remove last");
 
-            Assert.AreEqual(59, app.WaitForElement("9").First().Rect.CenterX);
-            Assert.AreEqual(189, app.WaitForElement("8").Last().Rect.CenterX);
-            Assert.AreEqual(319, app.WaitForElement("7").Last().Rect.CenterX);
+            Assert.AreEqual(58, app.WaitForElement("9").First().Rect.CenterX);
+            Assert.AreEqual(188, app.WaitForElement("8").Last().Rect.CenterX);
+            Assert.AreEqual(318, app.WaitForElement("7").Last().Rect.CenterX);
 
             //remove arrow
             app.Tap("Remove last");
 
-            Assert.AreEqual(59, app.WaitForElement("9").First().Rect.CenterX);
-            Assert.AreEqual(189, app.WaitForElement("8").Last().Rect.CenterX);
+            Assert.AreEqual(58, app.WaitForElement("9").First().Rect.CenterX);
+            Assert.AreEqual(188, app.WaitForElement("8").Last().Rect.CenterX);
 
             //remove arrow
             app.Tap("Remove last");
 
-            Assert.AreEqual(59, app.WaitForElement("9").First().Rect.CenterX);
+            Assert.AreEqual(58, app.WaitForElement("9").First().Rect.CenterX);
 
             //remove arrow
             app.Tap("Remove last");
@@ -232,31 +232,31 @@ namespace ArcheryManager.DroidTest.GenericCountable
             app.DragCoordinates(500, 800, 800, 800);// add arrow
             app.DragCoordinates(500, 800, 500, 700); // add arrow
 
-            Assert.AreEqual(59, app.WaitForElement("9").First().Rect.CenterX);
-            Assert.AreEqual(189, app.WaitForElement("8").Last().Rect.CenterX);
-            Assert.AreEqual(319, app.WaitForElement("7").Last().Rect.CenterX);
-            Assert.AreEqual(449, app.WaitForElement("9").Last().Rect.CenterX);
+            Assert.AreEqual(58, app.WaitForElement("9").First().Rect.CenterX);
+            Assert.AreEqual(188, app.WaitForElement("8").Last().Rect.CenterX);
+            Assert.AreEqual(318, app.WaitForElement("7").Last().Rect.CenterX);
+            Assert.AreEqual(448, app.WaitForElement("9").Last().Rect.CenterX);
 
             //remove arrow
             app.Tap(c => c.Marked("9").Index(1));
             app.Tap("Remove");
 
-            Assert.AreEqual(59, app.WaitForElement("9").First().Rect.CenterX);
-            Assert.AreEqual(189, app.WaitForElement("8").Last().Rect.CenterX);
-            Assert.AreEqual(319, app.WaitForElement("7").Last().Rect.CenterX);
+            Assert.AreEqual(58, app.WaitForElement("9").First().Rect.CenterX);
+            Assert.AreEqual(188, app.WaitForElement("8").Last().Rect.CenterX);
+            Assert.AreEqual(318, app.WaitForElement("7").Last().Rect.CenterX);
 
             //remove arrow
             app.Tap("7");
             app.Tap("Remove");
 
-            Assert.AreEqual(59, app.WaitForElement("9").First().Rect.CenterX);
-            Assert.AreEqual(189, app.WaitForElement("8").Last().Rect.CenterX);
+            Assert.AreEqual(58, app.WaitForElement("9").First().Rect.CenterX);
+            Assert.AreEqual(188, app.WaitForElement("8").Last().Rect.CenterX);
 
             //remove arrow
             app.Tap(c => c.Marked("8"));
             app.Tap("Remove");
 
-            Assert.AreEqual(59, app.WaitForElement("9").First().Rect.CenterX);
+            Assert.AreEqual(58, app.WaitForElement("9").First().Rect.CenterX);
 
             //remove arrow
             app.Tap(c => c.Marked("9"));

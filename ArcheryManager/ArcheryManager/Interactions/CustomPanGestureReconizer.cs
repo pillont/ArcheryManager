@@ -61,9 +61,10 @@ namespace ArcheryManager.Interactions
             {
                 case 0:
                 case 1:
+                case 2:
                     break; //NOTE : remove the first update to avoid difference in position
 
-                case 2:
+                case 3:
                     startPosition = new Point(e.TotalX, e.TotalY);
                     StartTapPosition = new Point(-e.TotalX * 3.65, -e.TotalY * 3.65);
                     newArgs = new CustomPanUpdatedEventArgs(e.StatusType, e.GestureId, 0, 0, StartTapPosition);

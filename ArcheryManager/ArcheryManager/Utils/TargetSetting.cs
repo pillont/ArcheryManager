@@ -6,6 +6,15 @@ namespace ArcheryManager.Utils
     {
         public const int MinArrowCount = 3;
 
+        public static readonly BindableProperty HaveTargetProperty =
+                      BindableProperty.Create(nameof(HaveTarget), typeof(bool), typeof(TargetSetting), true);
+
+        public bool HaveTarget
+        {
+            get { return (bool)GetValue(HaveTargetProperty); }
+            set { SetValue(HaveTargetProperty, value); }
+        }
+
         public static readonly BindableProperty IsDecreasingOrderProperty =
                       BindableProperty.Create(nameof(IsDecreasingOrder), typeof(bool), typeof(TargetSetting), false);
 

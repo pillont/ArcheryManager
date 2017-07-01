@@ -14,12 +14,12 @@ namespace ArcheryManager
             {
                 if (navigationPage == null)
                 {
-#if TEST
+                    //#if TEST
                     navigationPage = new NavigationPage(new BackDoorPage());
 
-#else
-                    navigationPage  = new NavigationPage(new TargetPage(IndoorCompoundArrowSetting.Instance));
-#endif
+                    //#else
+                    //                  navigationPage  = new NavigationPage(new TargetPage(IndoorCompoundArrowSetting.Instance));
+                    //#endif
                 }
                 return navigationPage;
             }
