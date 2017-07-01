@@ -62,6 +62,127 @@ namespace ArcheryManager.DroidTest.Features.Targets
         {
             testRunner.CollectScenarioErrors();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test la possibilité de tirer un nombre de flèches libre")]
+        public virtual void TestLaPossibiliteDeTirerUnNombreDeFlechesLibre()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test la possibilité de tirer un nombre de flèches libre", ((string[])(null)));
+#line 6
+this.ScenarioSetup(scenarioInfo);
+#line 7
+ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 8
+ testRunner.And("je tire une flèche en 200, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 9
+ testRunner.And("je tire une flèche en 100, 300", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 10
+ testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 11
+ testRunner.And("Je click sur le bouton nouvelle volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 12
+ testRunner.And("je tire une flèche en 100, 300", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 15
+ testRunner.Then("le bouton nouvelle volée est activé", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test la desactivation par défault du bouton nombre de flèche")]
+        public virtual void TestLaDesactivationParDefaultDuBoutonNombreDeFleche()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test la desactivation par défault du bouton nombre de flèche", ((string[])(null)));
+#line 18
+this.ScenarioSetup(scenarioInfo);
+#line 19
+ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 20
+ testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 22
+ testRunner.Then("le nombre de flèche est désactivé", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test du minimum de flèche")]
+        public virtual void TestDuMinimumDeFleche()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test du minimum de flèche", ((string[])(null)));
+#line 25
+this.ScenarioSetup(scenarioInfo);
+#line 26
+ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 27
+ testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 28
+ testRunner.And("je click sur le check nombre de flèches défini", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 29
+ testRunner.And("je remplit le nombre de flèche par 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 31
+ testRunner.Then("le nombre de flèche est de 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test l\'activation du bouton nombre de flèche")]
+        public virtual void TestLActivationDuBoutonNombreDeFleche()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test l\'activation du bouton nombre de flèche", ((string[])(null)));
+#line 34
+this.ScenarioSetup(scenarioInfo);
+#line 35
+ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 36
+ testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 37
+ testRunner.And("je click sur le check nombre de flèches défini", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 39
+ testRunner.Then("le nombre de flèche est activé", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 40
+ testRunner.And("le nombre de flèche est de 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test la non possibilité de tirer plus du max")]
+        public virtual void TestLaNonPossibiliteDeTirerPlusDuMax()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test la non possibilité de tirer plus du max", ((string[])(null)));
+#line 43
+this.ScenarioSetup(scenarioInfo);
+#line 44
+ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 45
+ testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 46
+ testRunner.And("je click sur le check nombre de flèches défini", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 47
+ testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 48
+ testRunner.And("je tire une flèche en 200, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 49
+ testRunner.And("je tire une flèche en 100, 300", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 50
+ testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 51
+ testRunner.And("je tire une flèche en 100, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 52
+ testRunner.And("je tire une flèche en 300, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 53
+ testRunner.And("je tire une flèche en 100, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 56
+ testRunner.And("je tire une flèche en 100, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 58
+ testRunner.Then("le nombre de flèches dans la liste est de 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 59
+ testRunner.And("le nombre de flèches actuelles sur la cible est de 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

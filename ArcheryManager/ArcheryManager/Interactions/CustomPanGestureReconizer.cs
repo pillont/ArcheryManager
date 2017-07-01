@@ -13,6 +13,7 @@ namespace ArcheryManager.Interactions
 
         private int countUpdate;
         private Point startPosition;
+        private bool isCancel;
 
         public new event EventHandler<CustomPanUpdatedEventArgs> PanUpdated;
 
@@ -36,12 +37,18 @@ namespace ArcheryManager.Interactions
                     break;
 
                 case GestureStatus.Running:
-                    UpdatePanGesture(sender, e);
+                    if (!isCancel)
+                    {
+                        UpdatePanGesture(sender, e);
+                    }
                     break;
 
                 case GestureStatus.Canceled:
                 case GestureStatus.Completed:
-                    CallEventPanGesture(sender, e);
+                    if (!isCancel)
+                    {
+                        CallEventPanGesture(sender, e);
+                    }
                     break;
             }
         }
@@ -50,6 +57,7 @@ namespace ArcheryManager.Interactions
         {
             StartTapPosition = default(Point);
             countUpdate = 0;
+            isCancel = false;
         }
 
         private void UpdatePanGesture(object sender, PanUpdatedEventArgs e)
@@ -83,6 +91,11 @@ namespace ArcheryManager.Interactions
         {
             var newArgs = new CustomPanUpdatedEventArgs(e.StatusType, e.GestureId, e.TotalX, e.TotalY, StartTapPosition);
             this.PanUpdated?.Invoke(sender, newArgs);
+        }
+
+        public void CancelGesture()
+        {
+            isCancel = true;
         }
     }
 }

@@ -32,7 +32,7 @@ namespace ArcheryManager.Factories
             average.Counter = counter;
             customTarget.Setting = arrowSetting;
 
-            var behavior = new MovableTargetBehavior(counter);
+            var behavior = new MovableTargetBehavior(counter, targetSetting);
             customTarget.Behaviors.Add(behavior);
 
             return customTarget;

@@ -5,6 +5,16 @@ namespace ArcheryManager.Utils
     public class TargetSetting : BindableObject
     {
         public const int MinArrowCount = 3;
+        public const int DefaultArrowCount = 6;
+
+        public static readonly BindableProperty HaveMaxArrowsCountProperty =
+                     BindableProperty.Create(nameof(HaveMaxArrowsCount), typeof(bool), typeof(TargetSetting), false);
+
+        public bool HaveMaxArrowsCount
+        {
+            get { return (bool)GetValue(HaveMaxArrowsCountProperty); }
+            set { SetValue(HaveMaxArrowsCountProperty, value); }
+        }
 
         public static readonly BindableProperty HaveTargetProperty =
                       BindableProperty.Create(nameof(HaveTarget), typeof(bool), typeof(TargetSetting), true);
@@ -43,7 +53,7 @@ namespace ArcheryManager.Utils
         }
 
         public static readonly BindableProperty ArrowsCountProperty =
-                      BindableProperty.Create(nameof(ArrowsCount), typeof(int), typeof(TargetSetting), MinArrowCount);
+                      BindableProperty.Create(nameof(ArrowsCount), typeof(int), typeof(TargetSetting), DefaultArrowCount);
 
         public int ArrowsCount
         {

@@ -107,6 +107,7 @@
     <Compile Include="StepDefinition\CounterButtonsSteps.cs" />
     <Compile Include="StepDefinition\GenericSearchElement.cs" />
     <Compile Include="StepDefinition\NavigationSteps.cs" />
+    <Compile Include="StepDefinition\TargetSettingSteps.cs" />
     <Compile Include="StepDefinition\TargetSteps.cs" />
     <Compile Include="Target\IndoorCompoundTargetTest.cs" />
     <Compile Include="Target\IndoorRecurveTargetTest.cs" />

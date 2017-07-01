@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converter="clr-namespace:XLabs.Forms.Converter;assembly=XLabs.Forms"
              x:Class="ArcheryManager.Pages.SettingTargetPage">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -14,14 +15,21 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Label Text="Number of arrows" Grid.Column="0" Grid.Row="0" />
+        <Label AutomationId="NumberOfArrowsLabel" Text="Number of arrows" Grid.Column="0" Grid.Row="0" />
 
-        <Entry Keyboard="Numeric"
+        <StackLayout Grid.Column="1" Grid.Row="0" Orientation="Vertical">
+            <StackLayout>
+                <Label Text="Have fix number" />
+                <Switch IsToggled="{Binding HaveMaxArrowsCount}"
+                        AutomationId="maxArrowsSwitch" />
+            </StackLayout>
+            <Entry Keyboard="Numeric"
+                IsEnabled="{Binding HaveMaxArrowsCount}"
                Text="{Binding ArrowsCount}"
                Unfocused="ArrowCount_Unfocused"
-               Grid.Column="1"
-               Grid.Row="0"
-               AutomationId="numberArrowEntry" />
+               AutomationId="numberArrowEntry"
+               x:Name="numberArrowEntry" />
+        </StackLayout>
 
         <Label Text="Arrows in decreasing order" Grid.Column="0" Grid.Row="1" VerticalTextAlignment="Center" />
         <Switch IsToggled="{Binding IsDecreasingOrder}"

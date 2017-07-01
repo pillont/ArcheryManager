@@ -2,6 +2,7 @@
 using ArcheryManager.Helpers;
 using ArcheryManager.Utils;
 using Xamarin.Forms;
+using System.Linq;
 
 namespace ArcheryManager.Interactions.Behaviors
 {
@@ -22,19 +23,21 @@ namespace ArcheryManager.Interactions.Behaviors
         /// </summary>
         private ScoreCounter counter;
 
+        private readonly TargetSetting setting;
+
         /// <summary>
         /// behavior to add interaction of pan on movable target
         /// </summary>
         /// <param name="counter">score counter where add new arrows</param>
-        public MovableTargetBehavior(ScoreCounter counter)
+        public MovableTargetBehavior(ScoreCounter counter, TargetSetting setting)
         {
+            this.setting = setting;
             this.counter = counter;
         }
 
         protected override void OnAttachedTo(Target bindable)
         {
             base.OnAttachedTo(bindable);
-
             GestureHelper.AddPanGestureOn(associatedObject.TargetGrid, OnPanUpdated);
         }
 
@@ -105,14 +108,39 @@ namespace ArcheryManager.Interactions.Behaviors
         /// </summary>
         private void StartPanGesture(object sender, CustomPanUpdatedEventArgs e)
         {
+            CleanTranslation();
+
+            bool canShootNewArrow = counter.CurrentArrows.Count < setting.ArrowsCount;
+            if (canShootNewArrow)
+            {
+                StartInteraction();
+            }
+            else
+            {
+                CancelInteraction(sender);
+            }
+        }
+
+        private static void CancelInteraction(object sender)
+        {
+            var v = sender as View;
+            var recognizer = v.GestureRecognizers.OfType<CustomPanGestureReconizer>().First();
+            recognizer.CancelGesture();
+        }
+
+        private void StartInteraction()
+        {
+            associatedObject.ArrowSetter.IsVisible = true;
+            associatedObject.TargetGrid.Scale = TargetScale;
+        }
+
+        private void CleanTranslation()
+        {
             associatedObject.TargetGrid.TranslationX = 0;
             associatedObject.TargetGrid.TranslationY = 0;
 
             associatedObject.ArrowSetter.TranslationX = 0;
             associatedObject.ArrowSetter.TranslationY = 0;
-
-            associatedObject.ArrowSetter.IsVisible = true;
-            associatedObject.TargetGrid.Scale = TargetScale;
         }
     }
 }
