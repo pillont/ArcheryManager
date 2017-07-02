@@ -1,7 +1,9 @@
-﻿using ArcheryManager.Settings;
+﻿using System;
+using ArcheryManager.Settings;
 using ArcheryManager.Utils;
 using Xamarin.Forms;
 using XFShapeView;
+using System.Collections.Generic;
 
 namespace ArcheryManager.CustomControls
 {
@@ -39,6 +41,21 @@ namespace ArcheryManager.CustomControls
             set { SetValue(SelectedArrowColorProperty, value); }
         }
 
+        private double targetSize;
+
+        public double TargetSize
+        {
+            get
+            {
+                return targetSize;
+            }
+            set
+            {
+                targetSize = value;
+                UpdateAllTransforms();
+            }
+        }
+
         public ArrowsGrid()
         {
         }
@@ -55,12 +72,35 @@ namespace ArcheryManager.CustomControls
                 BorderWidth = 1,
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Center,
+                TranslationX = TranslationXOf(arrow),
+                TranslationY = TranslationYOf(arrow),
             };
-
-            ctn.SetBinding(View.TranslationXProperty, nameof(Arrow.TranslationX));
-            ctn.SetBinding(View.TranslationYProperty, nameof(Arrow.TranslationY));
-
             return ctn;
+        }
+
+        private void UpdateAllTransforms()
+        {
+            foreach (var a in Items)
+            {
+                var container = FindContainer(a);
+                container.TranslationX = TranslationXOf(a);
+                container.TranslationY = TranslationYOf(a);
+            }
+        }
+
+        private double TranslationYOf(Arrow arrow)
+        {
+            return TransformTranslation(arrow.TranslationY, arrow.TargetSize);
+        }
+
+        private double TranslationXOf(Arrow arrow)
+        {
+            return TransformTranslation(arrow.TranslationX, arrow.TargetSize);
+        }
+
+        private double TransformTranslation(double translation, double targetSize)
+        {
+            return TargetSize / targetSize * translation;
         }
 
         public void SelectArrow(Arrow arrow)

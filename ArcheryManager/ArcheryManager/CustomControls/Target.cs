@@ -85,7 +85,12 @@ namespace ArcheryManager.CustomControls
         public double TargetSize
         {
             get { return (double)GetValue(TargetSizeProperty); }
-            set { SetValue(TargetSizeProperty, value); }
+            set
+            {
+                SetValue(TargetSizeProperty, value);
+                PreviousArrowGrid.TargetSize = TargetSize;
+                ArrowGrid.TargetSize = TargetSize;
+            }
         }
 
         #region target layout

@@ -18,13 +18,13 @@ namespace ArcheryManager.Factories
             Setting = setting;
         }
 
-        public virtual Arrow Create(Point position, int numberInFlight)
+        public virtual Arrow Create(Point position, int numberInFlight, double targetSize)
         {
             int index = IndexByPosition(position);
             var x = transformPosition(position.X);
             var y = transformPosition(position.Y);
             var point = new Point(x, y);
-            var res = new Arrow(index, numberInFlight, point, Setting);
+            var res = new Arrow(index, numberInFlight, point, targetSize, Setting);
 
             return res;
         }

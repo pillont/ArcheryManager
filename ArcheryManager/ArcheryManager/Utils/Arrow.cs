@@ -8,6 +8,7 @@ namespace ArcheryManager.Utils
         public int NumberInFlight { get; private set; }
         public double TranslationX { get; private set; }
         public double TranslationY { get; private set; }
+        public double TargetSize { get; private set; }
         public IArrowSetting Setting { get; private set; }
         public int Index { get; private set; }
 
@@ -35,11 +36,13 @@ namespace ArcheryManager.Utils
             }
         }
 
-        public Arrow(int index, int numberInFlight, Point position, IArrowSetting setting)
+        public Arrow(int index, int numberInFlight, Point position, double targetSize, IArrowSetting setting)
             : this(index, numberInFlight, setting)
         {
             TranslationX = position.X;
             TranslationY = position.Y;
+
+            TargetSize = targetSize;
         }
 
         public Arrow(int index, int numberInFlight, IArrowSetting setting)

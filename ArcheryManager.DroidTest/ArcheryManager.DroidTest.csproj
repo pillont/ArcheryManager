@@ -101,12 +101,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NumberArrowFeature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Targets\TargetRotationFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TargetRotationFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="GenericCountable\ArrowsListTest.cs" />
     <Compile Include="GenericCountable\ArrowsSelectionTest.cs" />
     <Compile Include="StepDefinition\BackdoorSteps.cs" />
     <Compile Include="StepDefinition\CounterButtonsSteps.cs" />
     <Compile Include="StepDefinition\GenericSearchElement.cs" />
-    <Compile Include="StepDefinition\NavigationSteps.cs" />
+    <Compile Include="StepDefinition\DeviceInteractionSteps.cs" />
     <Compile Include="StepDefinition\TargetSettingSteps.cs" />
     <Compile Include="StepDefinition\TargetSteps.cs" />
     <Compile Include="Target\IndoorCompoundTargetTest.cs" />
@@ -139,6 +144,10 @@
     <None Include="Features\Targets\NumberArrowFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>NumberArrowFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Targets\TargetRotationFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>TargetRotationFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
