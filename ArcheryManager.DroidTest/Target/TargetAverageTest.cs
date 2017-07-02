@@ -94,7 +94,7 @@ namespace ArcheryManager.DroidTest.Target
             app.DragCoordinates(300, 800, 400, 900);
             app.DragCoordinates(400, 800, 300, 700);
 
-            var average = app.Query(e => e.Marked("averageCanvas").Child()).First();
+            var average = app.Query(e => e.Marked("averageCanvas").Child().Child(0)).First();
 
             Assert.LessOrEqual(378, average.Rect.CenterX);
             Assert.LessOrEqual(668, average.Rect.CenterY);
@@ -108,7 +108,7 @@ namespace ArcheryManager.DroidTest.Target
 
             app.DragCoordinates(400, 800, 100, 800);
 
-            average = app.Query(e => e.Marked("averageCanvas").Child()).First();
+            average = app.Query(e => e.Marked("averageCanvas").Child().Child(0)).First();
             Assert.LessOrEqual(290, average.Rect.CenterX);
             Assert.LessOrEqual(666, average.Rect.CenterY);
             Assert.LessOrEqual(171, average.Rect.Height);
@@ -141,7 +141,7 @@ namespace ArcheryManager.DroidTest.Target
             app.DragCoordinates(300, 800, 400, 900);
             app.DragCoordinates(400, 800, 300, 700);
 
-            var average = app.Query(e => e.Marked("averageCanvas").Child()).First();
+            var average = app.Query(e => e.Marked("averageCanvas").Child().Child(0)).First();
 
             Assert.LessOrEqual(378, average.Rect.CenterX);
             Assert.LessOrEqual(668, average.Rect.CenterY);
@@ -155,7 +155,7 @@ namespace ArcheryManager.DroidTest.Target
 
             app.DragCoordinates(400, 800, 100, 800);
 
-            average = app.Query(e => e.Marked("averageCanvas").Child()).First();
+            average = app.Query(e => e.Marked("averageCanvas").Child().Child(0)).First();
             Assert.LessOrEqual(290, average.Rect.CenterX);
             Assert.LessOrEqual(667, average.Rect.CenterY);
             Assert.LessOrEqual(171, average.Rect.Height);
@@ -214,7 +214,7 @@ namespace ArcheryManager.DroidTest.Target
 
             app.DragCoordinates(400, 800, 100, 800);
 
-            average = app.Query(e => e.Marked("averageCanvas").Child()).First();
+            average = app.Query(e => e.Marked("averageCanvas").Child().Child(0)).First();
             Assert.LessOrEqual(450, average.Rect.CenterX);
             Assert.LessOrEqual(685, average.Rect.CenterY);
             Assert.LessOrEqual(220, average.Rect.Height);
