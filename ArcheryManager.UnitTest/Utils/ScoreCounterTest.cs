@@ -382,11 +382,9 @@ namespace ArcheryManager.UnitTest.Utils
             targetSetting.HaveMaxArrowsCount = true;
             counter.AddDefaultToolbarItems();
             targetSetting.ArrowsCount = 2;
-            Assert.AreEqual(3, toolBarList.Count);
+            Assert.AreEqual(2, toolBarList.Count);
             counter.AddArrow(new Arrow(0, 0, arrowSetting));
-            Assert.AreEqual(3, toolBarList.Count);
-            counter.AddArrow(new Arrow(0, 0, arrowSetting));
-            Assert.AreEqual(3, toolBarList.Count);
+            Assert.AreEqual(2, toolBarList.Count);
             counter.AddArrow(new Arrow(0, 0, arrowSetting));
             Assert.AreEqual(3, toolBarList.Count);
         }
@@ -400,13 +398,26 @@ namespace ArcheryManager.UnitTest.Utils
 
             targetSetting.ArrowsCount = 2;
             counter.AddArrow(new Arrow(0, 0, arrowSetting));
-            Assert.AreEqual(2, toolBarList.Count);
-            counter.AddArrow(new Arrow(0, 0, arrowSetting));
             Assert.AreEqual(3, toolBarList.Count);
         }
 
         [Test]
         public void ToolBarItems_RemoveTest()
+        {
+            targetSetting.HaveMaxArrowsCount = true;
+            counter.AddDefaultToolbarItems();
+            Assert.AreEqual(2, toolBarList.Count);
+            targetSetting.ArrowsCount = 2;
+
+            counter.AddArrow(new Arrow(0, 0, arrowSetting));
+            counter.AddArrow(new Arrow(0, 0, arrowSetting));
+
+            counter.RemoveLastArrow();
+            Assert.AreEqual(2, toolBarList.Count);
+        }
+
+        [Test]
+        public void ToolBarItems_RemoveWithoutMaxTest()
         {
             targetSetting.HaveMaxArrowsCount = false;
             counter.AddDefaultToolbarItems();
@@ -416,6 +427,8 @@ namespace ArcheryManager.UnitTest.Utils
             counter.AddArrow(new Arrow(0, 0, arrowSetting));
             counter.AddArrow(new Arrow(0, 0, arrowSetting));
 
+            counter.RemoveLastArrow();
+            Assert.AreEqual(3, toolBarList.Count);
             counter.RemoveLastArrow();
             Assert.AreEqual(2, toolBarList.Count);
         }
