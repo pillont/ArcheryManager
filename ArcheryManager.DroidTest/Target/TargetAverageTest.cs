@@ -210,7 +210,7 @@ namespace ArcheryManager.DroidTest.Target
             Assert.GreaterOrEqual(385, average.Rect.CenterX);
             Assert.GreaterOrEqual(674, average.Rect.CenterY);
             Assert.GreaterOrEqual(260, average.Rect.Height);
-            Assert.GreaterOrEqual(383, average.Rect.Width);
+            Assert.GreaterOrEqual(386, average.Rect.Width);
 
             app.DragCoordinates(400, 800, 100, 800);
 

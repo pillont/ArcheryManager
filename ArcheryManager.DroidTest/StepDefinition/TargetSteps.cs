@@ -63,5 +63,16 @@ namespace ArcheryManager.DroidTest.StepDefinition
         {
             Assert.AreEqual(p0, TestSetting.App.Query(e => e.Marked("arrowInTargetGrid").Child()).Count());
         }
+
+        [Then(@"la flèche numéro (.*) est en (.*), (.*)")]
+        public void AlorsLaFlecheNumeroEstEn(int p0, int p1, int p2)
+        {
+            TestSetting.App.WaitForElement("arrowInTargetGrid");
+            var rect = TestSetting.App.Query(e => e.Marked("arrowInTargetGrid").Child(p0)).First().Rect;
+            Assert.LessOrEqual(p1 - 5, rect.CenterX);
+            Assert.GreaterOrEqual(p1 + 5, rect.CenterX);
+            Assert.LessOrEqual(p2 - 5, rect.CenterY);
+            Assert.GreaterOrEqual(p2 + 5, rect.CenterY);
+        }
     }
 }

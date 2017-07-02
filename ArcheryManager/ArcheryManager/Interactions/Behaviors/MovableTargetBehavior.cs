@@ -77,7 +77,7 @@ namespace ArcheryManager.Interactions.Behaviors
                                         associatedObject.ArrowSetter.TranslationY);
 
             var numberInFlight = counter.CurrentArrows.Count;
-            var arrow = associatedObject.Factory.Create(position, numberInFlight);
+            var arrow = associatedObject.Factory.Create(position, numberInFlight, associatedObject.TargetSize);
             counter.AddArrow(arrow);
 
             associatedObject.TargetGrid.TranslationX = 0;
