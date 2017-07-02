@@ -24,14 +24,16 @@ namespace ArcheryManager.UnitTest.Factories
         private Arrow a3;
         private Arrow a2;
         private Arrow a1;
+        private IList<ToolbarItem> toolbarItems;
 
         [SetUp]
         public void Init()
         {
             Xamarin.Forms.Mocks.MockForms.Init();
+            toolbarItems = new List<ToolbarItem>();
             setting = EnglishArrowSetting.Instance;
             list = new List<ToolbarItem>();
-            counter = new ScoreCounter(new TargetSetting());
+            counter = new ScoreCounter(new TargetSetting(), toolbarItems);
             target = new Mock<Target>();
             scorelist = ScoreListFactory.Create(target.Object, counter, list);
             a1 = new Arrow(1, 0, setting);

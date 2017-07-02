@@ -43,13 +43,13 @@ namespace ArcheryManager.DroidTest.StepDefinition
         [Then(@"le bouton nouvelle volée est désactivé")]
         public void AlorsLeBoutonNouvelleVoleeEstDesactive()
         {
-            Assert.IsFalse(TestSetting.App.Query("New Flight").First().Enabled);
+            Assert.AreEqual(0, TestSetting.App.Query("New Flight").Count());
         }
 
         [Then(@"le bouton nouvelle volée est activé")]
         public void AlorsLeBoutonNouvelleVoleeEstActive()
         {
-            Assert.IsTrue(TestSetting.App.Query("New Flight").First().Enabled);
+            Assert.IsNotNull(TestSetting.App.Query("New Flight").First());
         }
 
         [Then(@"le nombre de flèches dans la liste est de (.*)")]

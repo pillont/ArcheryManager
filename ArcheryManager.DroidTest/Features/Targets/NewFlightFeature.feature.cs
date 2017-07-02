@@ -140,7 +140,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 34
  testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 37
- testRunner.Then("le bouton nouvelle volée est desactivé", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("le bouton nouvelle volée est désactivé", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -150,30 +150,71 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TestLActivationDuBoutonNouvelleVoleeAvecUnNombreDefiniDeFleches()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test l\'activation du bouton nouvelle volée avec un nombre défini de flèches", ((string[])(null)));
-#line 41
+#line 40
 this.ScenarioSetup(scenarioInfo);
-#line 42
+#line 41
  testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
-#line 43
+#line 42
  testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 44
+#line 43
  testRunner.And("je click sur le check nombre de flèches défini", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 45
+#line 44
  testRunner.And("je remplit le nombre de flèche par 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 46
+#line 45
  testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 47
+#line 46
  testRunner.And("je tire une flèche en 200, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 48
+#line 47
  testRunner.And("je tire une flèche en 100, 300", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 49
+#line 48
  testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 50
+#line 49
  testRunner.And("je tire une flèche en 100, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 51
+#line 50
  testRunner.And("je tire une flèche en 300, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 54
+#line 53
  testRunner.Then("le bouton nouvelle volée est activé", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test désactiviation du bouton nouvelle volée lorsque le nombre de flèche à changé" +
+            "")]
+        public virtual void TestDesactiviationDuBoutonNouvelleVoleeLorsqueLeNombreDeFlecheAChange()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test désactiviation du bouton nouvelle volée lorsque le nombre de flèche à changé" +
+                    "", ((string[])(null)));
+#line 56
+this.ScenarioSetup(scenarioInfo);
+#line 57
+ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 58
+ testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 59
+ testRunner.And("je click sur le check nombre de flèches défini", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 60
+ testRunner.And("je remplit le nombre de flèche par 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 61
+ testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 62
+ testRunner.And("je tire une flèche en 200, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 63
+ testRunner.And("je tire une flèche en 100, 300", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 64
+ testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 65
+ testRunner.And("je tire une flèche en 100, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 66
+ testRunner.And("je tire une flèche en 300, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 68
+ testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 69
+ testRunner.And("je remplit le nombre de flèche par 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 70
+ testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 73
+ testRunner.Then("le bouton nouvelle volée est désactivé", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -19,7 +19,7 @@ namespace ArcheryManager.Pages
             InitializeComponent();
 
             this.Setting = new TargetSetting() { HaveTarget = false };
-            Counter = new ScoreCounter(Setting);
+            Counter = new ScoreCounter(Setting, ToolbarItems);
             totalCounter.BindingContext = Counter;
             scoreList.SizeChanged += ScoreList_SizeChanged;
             scoreList.Items = Counter.CurrentArrows;
@@ -41,7 +41,7 @@ namespace ArcheryManager.Pages
         private void SetupToolbarItems()
         {
             ToolbarItems.Clear();
-            AddCounterToolbarItems();
+            Counter.AddDefaultToolbarItems();
             AddCounterButtonsToolbarItems();
         }
 
@@ -59,14 +59,6 @@ namespace ArcheryManager.Pages
         {
             var page = new SettingTargetPage() { BindingContext = Setting };
             App.NavigationPage.PushAsync(page);
-        }
-
-        private void AddCounterToolbarItems()
-        {
-            foreach (var item in Counter.AssociatedToolbarItem)
-            {
-                ToolbarItems.Add(item);
-            }
         }
     }
 }

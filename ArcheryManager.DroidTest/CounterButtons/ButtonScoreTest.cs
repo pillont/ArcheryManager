@@ -47,7 +47,6 @@ namespace ArcheryManager.DroidTest.GenericCountable
         [Test]
         public void InitCommandTargetElement()
         {
-            app.WaitForElement("New Flight");
             app.WaitForElement("Remove all");
             app.WaitForElement("Remove last");
         }
@@ -230,8 +229,8 @@ namespace ArcheryManager.DroidTest.GenericCountable
             var tar = app.Query("buttonGrid").First().Rect;
             Assert.AreEqual(598, tar.CenterX);
 
-            Assert.GreaterOrEqual(tar.CenterY, 467);
-            Assert.LessOrEqual(tar.CenterY, 474);
+            Assert.GreaterOrEqual(tar.CenterY, 463);
+            Assert.LessOrEqual(tar.CenterY, 473);
         }
     }
 }

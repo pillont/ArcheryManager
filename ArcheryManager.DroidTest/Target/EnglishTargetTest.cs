@@ -60,7 +60,6 @@ namespace ArcheryManager.DroidTest.Target
         [Test]
         public void InitCommandTargetElement()
         {
-            app.WaitForElement("New Flight");
             app.WaitForElement("Remove all");
             app.WaitForElement("Remove last");
         }
