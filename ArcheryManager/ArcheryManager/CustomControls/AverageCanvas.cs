@@ -121,17 +121,31 @@ namespace ArcheryManager.CustomControls
 
         private void UpdateAverageForm()
         {
-            var standartDeviationX = StatisticHelper.CalculateStdDev(Counter.ArrowsShowed.Select(a => a.TranslationX));
-            var standartDeviationY = StatisticHelper.CalculateStdDev(Counter.ArrowsShowed.Select(a => a.TranslationY));
+            double standartDeviationX = StatisticHelper.CalculateStdDev(Counter.ArrowsShowed.Select(a => a.TranslationX));
+            double standartDeviationY = StatisticHelper.CalculateStdDev(Counter.ArrowsShowed.Select(a => a.TranslationY));
             Content = CreateAverageVisual(standartDeviationX, standartDeviationY);
         }
 
         private View CreateAverageVisual(double standartDeviationX, double standartDeviationY)
         {
-            return new ShapeView()
+            var center = new ShapeView()
+            {
+                ShapeType = ShapeType.Circle,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center,
+                TranslationX = averageCenter.X,
+                TranslationY = averageCenter.Y,
+                Color = Color.HotPink,
+                BorderWidth = 2,
+                BorderColor = Color.HotPink,
+                HeightRequest = 15,
+                WidthRequest = 15,
+            };
+
+            var big = new ShapeView()
             {
                 ShapeType = ShapeType.Oval,
-
+                Opacity = 0.8,
                 HeightRequest = standartDeviationY * 2,
                 WidthRequest = standartDeviationX * 2,
                 HorizontalOptions = LayoutOptions.Center,
@@ -142,6 +156,16 @@ namespace ArcheryManager.CustomControls
                 BorderWidth = 2,
                 BorderColor = Color.HotPink,
             };
+
+            var grid = new Grid()
+            {
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+            };
+            grid.Children.Add(big);
+            grid.Children.Add(center);
+
+            return grid;
         }
 
         private void UpdateAverageCenter()
