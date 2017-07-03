@@ -141,7 +141,15 @@ namespace ArcheryManager.CustomControls
         public int Time
         {
             get { return (int)GetValue(TimeProperty); }
-            set { SetValue(TimeProperty, value); }
+            set
+            {
+                SetValue(TimeProperty, value);
+
+                if (IsStopped)
+                {
+                    Text = Time.ToString();
+                }
+            }
         }
 
         #endregion timer setting

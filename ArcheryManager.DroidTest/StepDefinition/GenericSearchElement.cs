@@ -16,5 +16,11 @@ namespace ArcheryManager.DroidTest.StepDefinition
             var allButton = app.Query(e => e.Button());
             Assert.AreEqual(p0, allButton.Count());
         }
+
+        [When(@"que j'attend un texte equal à (.*)")]
+        public void QuandQueJAttendUnTexteEqualA(string p0)
+        {
+            TestSetting.App.WaitForElement(e => e.Text(p0));
+        }
     }
 }

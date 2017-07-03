@@ -105,6 +105,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\StatisticHelper.cs" />
     <Compile Include="Utils\TargetSetting.cs" />
+    <Compile Include="Utils\TimerSetting.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\MainPage.xaml">

@@ -46,7 +46,14 @@ namespace ArcheryManager.Interactions.Behaviors
             {
                 current = value;
                 associatedObject.Text = value.ToString();
-                associatedObject.Progress = current * associatedObject.MaxProgress / currentMax;
+                if (currentMax != 0)
+                {
+                    associatedObject.Progress = current * associatedObject.MaxProgress / currentMax;
+                }
+                else
+                {
+                    associatedObject.Progress = 0;
+                }
             }
         }
 

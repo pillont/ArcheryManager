@@ -106,8 +106,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TargetRotationFeature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Timer\TimerMultiWaveFeatures.feature.cs" />
+    <Compile Include="Features\Timer\TimerMultiWaveFeatures1.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimerMultiWaveFeatures.feature</DependentUpon>
+    </Compile>
     <Compile Include="GenericCountable\ArrowsListTest.cs" />
     <Compile Include="GenericCountable\ArrowsSelectionTest.cs" />
+    <Compile Include="StepDefinition\TimerSteps.cs" />
     <Compile Include="StepDefinition\BackdoorSteps.cs" />
     <Compile Include="StepDefinition\CounterButtonsSteps.cs" />
     <Compile Include="StepDefinition\GenericSearchElement.cs" />
@@ -148,6 +155,10 @@
     <None Include="Features\Targets\TargetRotationFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>TargetRotationFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Timer\TimerMultiWaveFeatures.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>TimerMultiWaveFeatures1.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>

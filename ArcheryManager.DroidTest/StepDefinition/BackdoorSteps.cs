@@ -12,6 +12,13 @@ namespace ArcheryManager.DroidTest.StepDefinition
             TestSetting.InitTestApplication();
         }
 
+        [When(@"J'ouvre une page timer")]
+        public void WhenJOuvreUnePageTimer()
+        {
+            TestSetting.InitTestApplication();
+            TestSetting.App.Tap("TimerButton");
+        }
+
         [When(@"J'ouvre une page de cible fita")]
         public void WhenJOuvreUnePageDeCibleFita()
         {
