@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using TechTalk.SpecFlow;
 
 namespace ArcheryManager.DroidTest.StepDefinition
@@ -16,6 +17,12 @@ namespace ArcheryManager.DroidTest.StepDefinition
         public void QuandJeTourneLeTelephone()
         {
             TestSetting.App.SetOrientationLandscape();
+        }
+
+        [When(@"j'attend (.*) secondes")]
+        public void QuandJAttendSecondes(int p0)
+        {
+            Thread.Sleep(p0 * 1000);
         }
     }
 }
