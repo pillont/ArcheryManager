@@ -40,12 +40,19 @@ Scénario: test de lancement de timer en shootout
 	Et je click sur l'option de vague
 	Et je click sur l'option de vague
 	Et je lance le timer
-	Alors le timer est à 39 sec
+	Alors le timer est à 40 sec
 		
 Scénario: test de vague par défault
 	Quand J'ouvre une page timer
 	Alors le text de vague est vide
 
+
+Scénario: test de la perduration de la vague
+	Quand J'ouvre une page timer
+	Et je click sur l'option de vague
+	Et je lance le timer
+	Et j'attend 12 secondes
+	Alors le texte de vague contient AB
 
 Scénario: test du texte de la première vague
 	Quand J'ouvre une page timer
@@ -57,8 +64,7 @@ Scénario: test de changement de vague
 	Et je click sur l'option de vague
 	Et je lance le timer
 	Et j'attend 12 secondes
-
-	Et j'attend un texte equal à 115
+	Et j'arrete le timer
 	Et je lance le timer
 
 	Alors le texte de vague contient CD
@@ -68,11 +74,29 @@ Scénario: test de permutation de vague
 	Quand J'ouvre une page timer
 	Et je click sur l'option de vague
 	Et je lance le timer
-	Et j'attend un texte equal à 115
+	Et j'attend 12 secondes
+	Et j'arrete le timer
 	Et je lance le timer
+	Et j'attend 12 secondes
+	Et j'arrete le timer
 	Et je lance le timer
-	Et j'attend un texte equal à 115
-	Et je lance le timer
+	Et j'attend 12 secondes
 
 	Alors le texte de vague contient CD
+
+Scénario: test de changement de vague apres timer entier
+	Quand J'ouvre une page timer
+	Et je click sur l'option de vague
+	Et je lance le timer
+	Et j'attend 150 secondes
+
+	Alors le texte de vague contient CD
+
+Scénario: test de maintient d'une seul vague
+	Quand J'ouvre une page timer
+	Et je lance le timer
+	Et j'arrete le timer
+
+	Alors le text de vague est vide
+
 

@@ -48,6 +48,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\AverageCanvas.cs" />
+    <Compile Include="CustomControls\WaveControl.cs" />
     <Compile Include="Factories\ScoreListFactory.cs" />
     <Compile Include="Factories\TargetFactory.cs" />
     <Compile Include="Interactions\Behaviors\CustomBehavior.cs" />
@@ -89,7 +90,6 @@
     <Compile Include="Interactions\Behaviors\TimerBehavior.cs" />
     <Compile Include="CustomControls\Target.cs" />
     <Compile Include="CustomControls\CustomTimer.cs" />
-    <Compile Include="Interfaces\ITimer.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -105,7 +105,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\StatisticHelper.cs" />
     <Compile Include="Utils\TargetSetting.cs" />
-    <Compile Include="Utils\TimerSetting.cs" />
+    <Compile Include="Utils\TimerPageSetting.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\MainPage.xaml">

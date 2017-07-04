@@ -21,10 +21,9 @@ namespace ArcheryManager.Pages
         private const string DefaultPauseReplayText = PauseText;
         private const string PauseText = "Pause";
         private const string ReplayText = "Replay";
-        private const string AB = "AB";
         private static readonly Color DefaultbackgroundColor = Color.White;
 
-        private readonly TimerBehavior<CustomTimer> Behavior;
+        private readonly TimerBehavior Behavior;
 
         public Color Color
         {
@@ -67,14 +66,14 @@ namespace ArcheryManager.Pages
             set { SetValue(IsStopEnabledProperty, value); }
         }
 
-        public TimerSetting TimerSetting { get; private set; }
+        public TimerPageSetting TimerSetting { get; private set; }
 
         public TimerPage()
         {
-            TimerSetting = new TimerSetting();
+            TimerSetting = new TimerPageSetting();
             this.BindingContext = this;
             InitializeComponent();
-            Behavior = new TimerBehavior<CustomTimer>();
+            Behavior = new TimerBehavior();
             timer.Behaviors.Add(Behavior);
             timer.PropertyChanged += Timer_PropertyChanged;
 
@@ -95,43 +94,24 @@ namespace ArcheryManager.Pages
             switch (TimerSetting.Mode)
             {
                 case TimerMode.ABC:
-                    CleanWaveText();
-                    SetTime(TimerSetting.Time);
+                    timer.Time = TimerSetting.Time;
+                    timer.ShowWaitingTime = true;
+                    timer.WaveControl.StopWave();
                     break;
 
                 case TimerMode.ABCD:
-                    SetWareText(AB);
-                    SetTime(TimerSetting.Time);
-                    SetWaitingTime(TimerSetting.WaitingTime);
+                    timer.WaveControl.StartWave();
+                    timer.Time = TimerSetting.Time;
+                    timer.ShowWaitingTime = true;
 
                     break;
 
                 case TimerMode.Shootout:
-                    SetTime(ShootoutTime);
-                    SetWaitingTime(0);
-                    CleanWaveText();
+                    timer.Time = ShootoutTime;
+                    timer.ShowWaitingTime = false;
+                    timer.WaveControl.StopWave();
                     break;
             }
-        }
-
-        private void SetWaitingTime(int time)
-        {
-            timer.WaitingTime = time;
-        }
-
-        private void SetTime(int time)
-        {
-            timer.Time = time;
-        }
-
-        private void SetWareText(string text)
-        {
-            waveText.Text = text;
-        }
-
-        private void CleanWaveText()
-        {
-            waveText.Text = string.Empty;
         }
 
         private void Timer_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

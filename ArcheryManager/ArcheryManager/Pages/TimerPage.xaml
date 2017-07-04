@@ -7,8 +7,6 @@
 
     <StackLayout HorizontalOptions="Center" VerticalOptions="Center" AutomationId="test">
         <ctl:CustomTimer x:Name="timer" FontSize="72" AutomationId="CustomTimer" />
-
-        <Label x:Name="waveText" AutomationId="WaveText" FontSize="Large" />
         <Button Text="Start" AutomationId="StartButton"  Clicked="ButtonStart_Clicked" IsEnabled="{Binding IsStartEnabled}" />
         <Button Text="{Binding PauseReplayText}" AutomationId="PauseButton" Clicked="ButtonPause_Clicked" IsEnabled="{Binding IsPauseEnabled}" />
         <Button Text="Stop" AutomationId="StopButton" Clicked="ButtonStop_Clicked" IsEnabled="{Binding IsStopEnabled}" />
