@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using ArcheryManager.CustomControls;
+using ArcheryManager.Services;
 
 namespace ArcheryManager.Interactions.Behaviors
 {
@@ -77,10 +78,12 @@ namespace ArcheryManager.Interactions.Behaviors
             if (associatedObject.ShowWaitingTime)
             {
                 StartWaitingFunction();
+                PlaySong();
             }
             else
             {
                 StartTimerFunction();
+                PlaySong();
             }
         }
 
@@ -100,6 +103,12 @@ namespace ArcheryManager.Interactions.Behaviors
             //TODO wait one second to be sure the current timer while stopped
 
             _waveLabel.NextWave();
+            PlaySong();
+        }
+
+        private void PlaySong()
+        {
+            DependencyService.Get<IAudioPlayer>().PlayAudioFile("coq.mp3");
         }
 
         public void Pause()
@@ -139,6 +148,7 @@ namespace ArcheryManager.Interactions.Behaviors
 
             if (!res) // start timerFunction in the end of this function
             {
+                PlaySong();
                 StartTimerFunction();
             }
             return res;
@@ -178,6 +188,7 @@ namespace ArcheryManager.Interactions.Behaviors
             {
                 SettingStop();
                 _waveLabel.NextWave();
+                PlaySong();
             }
 
             return res;
