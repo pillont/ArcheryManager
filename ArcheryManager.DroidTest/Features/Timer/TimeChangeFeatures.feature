@@ -2,6 +2,7 @@
 Fonctionnalité: TimeChangeFeatures
 	test de changement de temps dans un timer
 
+<<<<<<< HEAD
 Scénario: test d'ouverture de picker
 	Quand J'ouvre une page timer
 	Et Je click sur le bouton de réglage de temps
@@ -29,6 +30,13 @@ Plan du scénario: test de changement de temps avant changement de vague
 	| 240  |
 	| 150  |
 	| 300  |
+=======
+Scénario: test la valeur par défault
+	Quand J'ouvre une page timer
+	Et Je click sur le bouton de réglage de temps
+
+	Alors un picker s'ouvre avec 120 de selectionné
+>>>>>>> test on the time selector
 
 
 Plan du scénario: test de changement de temps
