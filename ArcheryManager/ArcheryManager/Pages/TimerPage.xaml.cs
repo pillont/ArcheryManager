@@ -1,5 +1,6 @@
 ﻿using ArcheryManager.CustomControls;
 using ArcheryManager.Interactions.Behaviors;
+using ArcheryManager.Utils;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -9,12 +10,20 @@ namespace ArcheryManager.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TimerPage : ContentPage
     {
+        public enum TimerMode
+        {
+            ABC,
+            ABCD,
+            Shootout
+        };
+
+        private const int ShootoutTime = 40;
         private const string DefaultPauseReplayText = PauseText;
         private const string PauseText = "Pause";
         private const string ReplayText = "Replay";
         private static readonly Color DefaultbackgroundColor = Color.White;
 
-        private readonly TimerBehavior<CustomTimer> Behavior;
+        private readonly TimerBehavior Behavior;
 
         public Color Color
         {
@@ -57,13 +66,52 @@ namespace ArcheryManager.Pages
             set { SetValue(IsStopEnabledProperty, value); }
         }
 
+        public TimerPageSetting TimerSetting { get; private set; }
+
         public TimerPage()
         {
+            TimerSetting = new TimerPageSetting();
             this.BindingContext = this;
             InitializeComponent();
-            Behavior = new TimerBehavior<CustomTimer>();
+            Behavior = new TimerBehavior();
             timer.Behaviors.Add(Behavior);
             timer.PropertyChanged += Timer_PropertyChanged;
+
+            var waveButton = new ToolbarItem()
+            {
+                Command = new Command(WaveButton_Click),
+                BindingContext = TimerSetting,
+            };
+
+            waveButton.SetBinding(MenuItem.TextProperty, nameof(TimerSetting.Mode));
+            ToolbarItems.Add(waveButton);
+        }
+
+        private void WaveButton_Click()
+        {
+            TimerSetting.Mode = (TimerMode)(((int)TimerSetting.Mode + 1) % 3);
+
+            switch (TimerSetting.Mode)
+            {
+                case TimerMode.ABC:
+                    timer.Time = TimerSetting.Time;
+                    timer.ShowWaitingTime = true;
+                    timer.WaveControl.StopWave();
+                    break;
+
+                case TimerMode.ABCD:
+                    timer.WaveControl.StartWave();
+                    timer.Time = TimerSetting.Time;
+                    timer.ShowWaitingTime = true;
+
+                    break;
+
+                case TimerMode.Shootout:
+                    timer.Time = ShootoutTime;
+                    timer.ShowWaitingTime = false;
+                    timer.WaveControl.StopWave();
+                    break;
+            }
         }
 
         private void Timer_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

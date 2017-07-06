@@ -1,10 +1,10 @@
 ﻿using System;
 using Xamarin.Forms;
-using ArcheryManager.Interfaces;
+using ArcheryManager.CustomControls;
 
 namespace ArcheryManager.Interactions.Behaviors
 {
-    public class TimerBehavior<T> : CustomBehavior<T> where T : BindableObject, ITimer
+    internal class TimerBehavior : CustomBehavior<CustomTimer>
     {
         /*
          * Times
@@ -30,8 +30,8 @@ namespace ArcheryManager.Interactions.Behaviors
 
         #region logical properties
 
-        private int current;
-        private int currentMax;
+        private int _current;
+        private int _currentMax;
 
         /// <summary>
         /// current time to show
@@ -40,17 +40,32 @@ namespace ArcheryManager.Interactions.Behaviors
         {
             get
             {
-                return current;
+                return _current;
             }
             set
             {
-                current = value;
+                _current = value;
                 associatedObject.Text = value.ToString();
-                associatedObject.Progress = current * associatedObject.MaxProgress / currentMax;
+                if (_currentMax != 0)
+                {
+                    associatedObject.Progress = _current * associatedObject.MaxProgress / _currentMax;
+                }
+                else
+                {
+                    associatedObject.Progress = 0;
+                }
             }
         }
 
         #endregion logical properties
+
+        private WaveControl _waveLabel;
+
+        protected override void OnAttachedTo(CustomTimer bindable)
+        {
+            base.OnAttachedTo(bindable);
+            _waveLabel = associatedObject.WaveControl;
+        }
 
         #region public function
 
@@ -59,10 +74,22 @@ namespace ArcheryManager.Interactions.Behaviors
             if (!associatedObject.IsStopped)
                 return;
 
+            if (associatedObject.ShowWaitingTime)
+            {
+                StartWaitingFunction();
+            }
+            else
+            {
+                StartTimerFunction();
+            }
+        }
+
+        private void StartWaitingFunction()
+        {
             associatedObject.IsWaitingTime = true;
             associatedObject.IsStopped = false;
             associatedObject.IsPaused = false;
-            currentMax = associatedObject.WaitingTime;
+            _currentMax = associatedObject.WaitingTime;
             Current = associatedObject.WaitingTime;
             Device.StartTimer(TimeSpan.FromSeconds(1), WaitingTimerFunction);
         }
@@ -71,6 +98,8 @@ namespace ArcheryManager.Interactions.Behaviors
         {
             associatedObject.IsStopped = true;
             //TODO wait one second to be sure the current timer while stopped
+
+            _waveLabel.NextWave();
         }
 
         public void Pause()
@@ -110,13 +139,19 @@ namespace ArcheryManager.Interactions.Behaviors
 
             if (!res) // start timerFunction in the end of this function
             {
-                currentMax = associatedObject.Time;
-                Current = associatedObject.Time;
-                UpdateColor();
-                associatedObject.IsWaitingTime = false;
-                Device.StartTimer(TimeSpan.FromSeconds(1), TimerFunction);
+                StartTimerFunction();
             }
             return res;
+        }
+
+        private void StartTimerFunction()
+        {
+            associatedObject.IsStopped = false;
+            _currentMax = associatedObject.Time;
+            Current = associatedObject.Time;
+            UpdateColor();
+            associatedObject.IsWaitingTime = false;
+            Device.StartTimer(TimeSpan.FromSeconds(1), TimerFunction);
         }
 
         /// <summary>
@@ -140,7 +175,10 @@ namespace ArcheryManager.Interactions.Behaviors
 
             var res = ShouldContinueTimer();
             if (!res) // stop the timer in the end of this function
+            {
                 SettingStop();
+                _waveLabel.NextWave();
+            }
 
             return res;
         }

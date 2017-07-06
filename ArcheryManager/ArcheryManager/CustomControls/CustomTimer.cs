@@ -5,16 +5,17 @@ using XFShapeView;
 
 namespace ArcheryManager.CustomControls
 {
-    public partial class CustomTimer : ContentView, ITimer
+    public partial class CustomTimer : ContentView
     {
+        private const bool DefaultShowWaitingTime = true;
         /*
          * Sizes
          */
         private const float DefaultBorderWidth = 2f;
         private const float DefaultProgressBorderWidth = 10f;
         private const int DefaultFontSize = 24;
-
         private const int maxProgress = 100;
+        private const int CircleSize = 300; //TODO
 
         /// <summary>
         /// max of progress in the circle
@@ -54,7 +55,7 @@ namespace ArcheryManager.CustomControls
         /// color of the progress border
         /// </summary>
         public static readonly BindableProperty ProgressBorderColorProperty =
-                      BindableProperty.Create(nameof(ProgressBorderColor), typeof(Color), typeof(CustomTimer), TimerBehavior<CustomTimer>.DefaultProgressBorderColor);
+                      BindableProperty.Create(nameof(ProgressBorderColor), typeof(Color), typeof(CustomTimer), TimerBehavior.DefaultProgressBorderColor);
 
         public Color ProgressBorderColor
         {
@@ -84,7 +85,7 @@ namespace ArcheryManager.CustomControls
         }
 
         public static readonly BindableProperty BorderColorProperty =
-                     BindableProperty.Create(nameof(BorderColor), typeof(Color), typeof(CustomTimer), TimerBehavior<CustomTimer>.DefaultBorderColor);
+                     BindableProperty.Create(nameof(BorderColor), typeof(Color), typeof(CustomTimer), TimerBehavior.DefaultBorderColor);
 
         public Color BorderColor
         {
@@ -96,11 +97,20 @@ namespace ArcheryManager.CustomControls
 
         #region timer setting
 
+        public static readonly BindableProperty ShowWaitingTimeProperty =
+                      BindableProperty.Create(nameof(ShowWaitingTime), typeof(bool), typeof(CustomTimer), DefaultShowWaitingTime);
+
+        public bool ShowWaitingTime
+        {
+            get { return (bool)GetValue(ShowWaitingTimeProperty); }
+            set { SetValue(ShowWaitingTimeProperty, value); }
+        }
+
         /// <summary>
         /// limit time of the timer
         /// </summary>
         public static readonly BindableProperty LimitTimeProperty =
-                      BindableProperty.Create(nameof(LimitTime), typeof(int), typeof(CustomTimer), TimerBehavior<CustomTimer>.DefaultLimitTime);
+                      BindableProperty.Create(nameof(LimitTime), typeof(int), typeof(CustomTimer), TimerBehavior.DefaultLimitTime);
 
         public int LimitTime
         {
@@ -112,7 +122,7 @@ namespace ArcheryManager.CustomControls
         /// color during the waiting time
         /// </summary>
         public static readonly BindableProperty WaitingColorProperty =
-                      BindableProperty.Create(nameof(WaitingColor), typeof(Color), typeof(CustomTimer), TimerBehavior<CustomTimer>.DefaultWaitingColor);
+                      BindableProperty.Create(nameof(WaitingColor), typeof(Color), typeof(CustomTimer), TimerBehavior.DefaultWaitingColor);
 
         public Color WaitingColor
         {
@@ -124,7 +134,7 @@ namespace ArcheryManager.CustomControls
         /// time of the wainting period
         /// </summary>
         public static readonly BindableProperty WaitingTimeProperty =
-                      BindableProperty.Create(nameof(WaitingTime), typeof(int), typeof(CustomTimer), TimerBehavior<CustomTimer>.DefaultWaitingTime);
+                      BindableProperty.Create(nameof(WaitingTime), typeof(int), typeof(CustomTimer), TimerBehavior.DefaultWaitingTime);
 
         public int WaitingTime
         {
@@ -133,7 +143,7 @@ namespace ArcheryManager.CustomControls
         }
 
         public static readonly BindableProperty TimeProperty =
-                      BindableProperty.Create(nameof(Time), typeof(int), typeof(CustomTimer), TimerBehavior<CustomTimer>.DefaultTime);
+                      BindableProperty.Create(nameof(Time), typeof(int), typeof(CustomTimer), TimerBehavior.DefaultTime);
 
         /// <summary>
         /// general time of the timer
@@ -141,14 +151,22 @@ namespace ArcheryManager.CustomControls
         public int Time
         {
             get { return (int)GetValue(TimeProperty); }
-            set { SetValue(TimeProperty, value); }
+            set
+            {
+                SetValue(TimeProperty, value);
+
+                if (IsStopped)
+                {
+                    Text = Time.ToString();
+                }
+            }
         }
 
         #endregion timer setting
 
         #region values properties
 
-        public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Color), typeof(CustomTimer), TimerBehavior<CustomTimer>.DefaultColor);
+        public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Color), typeof(CustomTimer), TimerBehavior.DefaultColor);
 
         /// <summary>
         /// color of the timer
@@ -165,7 +183,7 @@ namespace ArcheryManager.CustomControls
             }
         }
 
-        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(CustomTimer), TimerBehavior<CustomTimer>.DefaultTime.ToString());
+        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(CustomTimer), TimerBehavior.DefaultTime.ToString());
 
         /// <summary>
         /// text of the timer
@@ -209,6 +227,8 @@ namespace ArcheryManager.CustomControls
         public static readonly BindableProperty IsWaitingTimeProperty =
                       BindableProperty.Create(nameof(IsWaitingTime), typeof(bool), typeof(CustomTimer), false);
 
+        public WaveControl WaveControl { get; private set; }
+
         public bool IsWaitingTime
         {
             get { return (bool)GetValue(IsWaitingTimeProperty); }
@@ -222,11 +242,13 @@ namespace ArcheryManager.CustomControls
         public CustomTimer()
         {
             ShapeView progressCircle = CreateCircle();
-            Label textLabel = CreateLabel();
+            var time = CreateTimeLabel();
+            var wave = CreateWaveLabel();
 
             Grid grid = new Grid();
             grid.Children.Add(progressCircle);
-            grid.Children.Add(textLabel);
+            grid.Children.Add(time);
+            grid.Children.Add(wave);
 
             Content = grid;
         }
@@ -241,8 +263,8 @@ namespace ArcheryManager.CustomControls
         {
             var progressCircle = new ShapeView
             {
-                HeightRequest = 300, //TODO
-                WidthRequest = 300, //TODO
+                HeightRequest = CircleSize,
+                WidthRequest = CircleSize,
                 ShapeType = ShapeType.ProgressCircle,
                 BorderColor = BorderColor,
                 BorderWidth = BorderWidth,
@@ -263,9 +285,9 @@ namespace ArcheryManager.CustomControls
         /// function to create label
         /// </summary>
         /// <returns></returns>
-        private Label CreateLabel()
+        private View CreateTimeLabel()
         {
-            var textLabel = new Label()
+            var timeLabel = new Label()
             {
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Center,
@@ -274,11 +296,35 @@ namespace ArcheryManager.CustomControls
                 AutomationId = "TimerLabel",
             };
 
-            textLabel.SetBinding(Label.TextProperty, nameof(Text));
-            textLabel.SetBinding(Label.FontSizeProperty, nameof(FontSize));
-            textLabel.SetBinding(Label.FontAttributesProperty, nameof(FontAttributes));
-            textLabel.BindingContext = this;
-            return textLabel;
+            timeLabel.SetBinding(Label.TextProperty, nameof(Text));
+            timeLabel.SetBinding(Label.FontSizeProperty, nameof(FontSize));
+            timeLabel.SetBinding(Label.FontAttributesProperty, nameof(FontAttributes));
+            timeLabel.BindingContext = this;
+
+            return timeLabel;
+        }
+
+        /// <summary>
+        /// function to create label
+        /// </summary>
+        /// <returns></returns>
+        private View CreateWaveLabel()
+        {
+            WaveControl = new WaveControl()
+            {
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.Center,
+                FontSize = FontSize,
+                FontAttributes = FontAttributes,
+                AutomationId = "WaveText",
+                TranslationY = CircleSize / 4,
+            };
+
+            WaveControl.SetBinding(Label.FontSizeProperty, nameof(FontSize));
+            WaveControl.SetBinding(Label.FontAttributesProperty, nameof(FontAttributes));
+            WaveControl.BindingContext = this;
+
+            return WaveControl;
         }
 
         #endregion visuals generation
