@@ -66,5 +66,11 @@ namespace ArcheryManager.DroidTest.StepDefinition
         {
             Assert.AreEqual(p0, TestSetting.App.Query("WaveText").First().Text);
         }
+
+        [When(@"Je click sur le bouton de réglage de temps")]
+        public void QuandJeClickSurLeBoutonDeReglageDeTemps()
+        {
+            TestSetting.App.Tap("Time");
+        }
     }
 }

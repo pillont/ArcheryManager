@@ -21,6 +21,7 @@ namespace ArcheryManager.Pages
         private const string DefaultPauseReplayText = PauseText;
         private const string PauseText = "Pause";
         private const string ReplayText = "Replay";
+        private const string TimeSelectorToolBarItemName = "Time";
         private static readonly Color DefaultbackgroundColor = Color.White;
 
         private readonly TimerBehavior Behavior;
@@ -53,12 +54,51 @@ namespace ArcheryManager.Pages
         public TimerPage()
         {
             TimerSetting = new TimerPageSetting();
-            this.BindingContext = this;
+            BindingContext = this;
             InitializeComponent();
             Behavior = new TimerBehavior();
             timer.Behaviors.Add(Behavior);
             timer.PropertyChanged += Timer_PropertyChanged;
+            AddToolbarItems();
 
+            var recognizer = new TapGestureRecognizer() { Command = new Command(Timer_Tap) };
+            timer.GestureRecognizers.Add(recognizer);
+        }
+
+        #region toolbar items
+
+        private void AddToolbarItems()
+        {
+            var waveButton = CreateWaveButton();
+            ToolbarItems.Add(waveButton);
+
+            var timeButton = CreateTimeSelectorButton();
+            ToolbarItems.Add(timeButton);
+        }
+
+        private ToolbarItem CreateTimeSelectorButton()
+        {
+            var timeButton = new ToolbarItem()
+            {
+                Command = new Command(TimeSelectorButton_Click),
+                BindingContext = TimerSetting,
+                Text = TimeSelectorToolBarItemName,
+            };
+
+            return timeButton;
+        }
+
+        private void TimeSelectorButton_Click(object obj)
+        {
+            /*
+             * 1.- Add a Picker with IsVisible property = false, and add it to your page //  value => biding time!
+             * 2.- When the user taps on the button use the focus event of the picker so the user can see it:
+             * 3.- picker.Focus();
+             */
+        }
+
+        private ToolbarItem CreateWaveButton()
+        {
             var waveButton = new ToolbarItem()
             {
                 Command = new Command(WaveButton_Click),
@@ -66,10 +106,8 @@ namespace ArcheryManager.Pages
             };
 
             waveButton.SetBinding(MenuItem.TextProperty, nameof(TimerSetting.Mode));
-            ToolbarItems.Add(waveButton);
 
-            var recognizer = new TapGestureRecognizer() { Command = new Command(Timer_Tap) };
-            timer.GestureRecognizers.Add(recognizer);
+            return waveButton;
         }
 
         private void Timer_Tap(object obj)
@@ -110,6 +148,8 @@ namespace ArcheryManager.Pages
                     break;
             }
         }
+
+        #endregion toolbar items
 
         private void Timer_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
