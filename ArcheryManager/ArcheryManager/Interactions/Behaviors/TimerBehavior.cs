@@ -13,6 +13,7 @@ namespace ArcheryManager.Interactions.Behaviors
         public const int DefaultTime = 120;
         public const int DefaultWaitingTime = 10;
         public const int DefaultLimitTime = 30;
+        private const string SongFileName = "coq.mp3";
 
         /*
          * Colors
@@ -106,7 +107,7 @@ namespace ArcheryManager.Interactions.Behaviors
 
         private void PlaySong()
         {
-            DependencyService.Get<IAudioPlayer>().PlayAudioFile("coq.mp3");
+            DependencyService.Get<IAudioPlayer>().PlayAudioFile(SongFileName);
         }
 
         public void Pause()
