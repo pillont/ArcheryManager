@@ -92,7 +92,7 @@ namespace ArcheryManager.Interactions.Behaviors
             associatedObject.IsStopped = false;
             associatedObject.IsPaused = false;
             _currentMax = associatedObject.WaitingTime;
-            Current = associatedObject.WaitingTime;
+            this.Current = associatedObject.WaitingTime;
             Device.StartTimer(TimeSpan.FromSeconds(1), WaitingTimerFunction);
             PlaySong();
         }
@@ -142,9 +142,9 @@ namespace ArcheryManager.Interactions.Behaviors
             }
 
             associatedObject.Color = associatedObject.WaitingColor;
-            Current--;
+            this.Current--;
 
-            var res = ShouldContinueTimer(avoidZero: true);
+            bool res = ShouldContinueTimer(avoidZero: true);
 
             if (!res) // start timerFunction in the end of this function
             {
@@ -158,7 +158,7 @@ namespace ArcheryManager.Interactions.Behaviors
         {
             associatedObject.IsStopped = false;
             _currentMax = associatedObject.Time;
-            Current = associatedObject.Time;
+            this.Current = associatedObject.Time;
             UpdateColor();
             associatedObject.IsWaitingTime = false;
             Device.StartTimer(TimeSpan.FromSeconds(1), TimerFunction);
@@ -182,7 +182,7 @@ namespace ArcheryManager.Interactions.Behaviors
                 return false;
             }
 
-            Current--;
+            this.Current--;
             UpdateColor();
 
             var res = ShouldContinueTimer();
@@ -200,7 +200,7 @@ namespace ArcheryManager.Interactions.Behaviors
         {
             associatedObject.IsStopped = true;
             associatedObject.IsPaused = false;
-            Current = associatedObject.Time;
+            this.Current = associatedObject.Time;
             associatedObject.Color = StopTimeColor;
         }
 
@@ -210,7 +210,7 @@ namespace ArcheryManager.Interactions.Behaviors
         private void UpdateColor()
         {
             // general time
-            if (Current > associatedObject.LimitTime)
+            if (this.Current > associatedObject.LimitTime)
                 associatedObject.Color = Color.Green;
             // limit time
             else if (ShouldContinueTimer())
@@ -227,9 +227,9 @@ namespace ArcheryManager.Interactions.Behaviors
         private bool ShouldContinueTimer(bool avoidZero = false)
         {
             if (avoidZero)
-                return Current > 0; // end of the timer
+                return this.Current > 0; // end of the timer
             else
-                return Current >= 0; // end of the timer
+                return this.Current >= 0; // end of the timer
         }
 
         #endregion private functions
