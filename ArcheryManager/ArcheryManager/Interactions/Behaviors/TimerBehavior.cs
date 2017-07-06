@@ -72,18 +72,16 @@ namespace ArcheryManager.Interactions.Behaviors
 
         public void Start()
         {
-            if (!associatedObject.IsStopped)
-                return;
-
-            if (associatedObject.ShowWaitingTime)
+            if (associatedObject.IsStopped)
             {
-                StartWaitingFunction();
-                PlaySong();
-            }
-            else
-            {
-                StartTimerFunction();
-                PlaySong();
+                if (associatedObject.ShowWaitingTime)
+                {
+                    StartWaitingFunction();
+                }
+                else
+                {
+                    StartTimerFunction();
+                }
             }
         }
 
@@ -95,6 +93,7 @@ namespace ArcheryManager.Interactions.Behaviors
             _currentMax = associatedObject.WaitingTime;
             Current = associatedObject.WaitingTime;
             Device.StartTimer(TimeSpan.FromSeconds(1), WaitingTimerFunction);
+            PlaySong();
         }
 
         public void Stop()
@@ -103,7 +102,6 @@ namespace ArcheryManager.Interactions.Behaviors
             //TODO wait one second to be sure the current timer while stopped
 
             _waveLabel.NextWave();
-            PlaySong();
         }
 
         private void PlaySong()
@@ -138,6 +136,7 @@ namespace ArcheryManager.Interactions.Behaviors
             if (associatedObject.IsStopped || associatedObject.IsPaused) // timer was stop
             {
                 SettingStop();
+                PlaySong();
                 return false;
             }
 
@@ -162,6 +161,7 @@ namespace ArcheryManager.Interactions.Behaviors
             UpdateColor();
             associatedObject.IsWaitingTime = false;
             Device.StartTimer(TimeSpan.FromSeconds(1), TimerFunction);
+            PlaySong();
         }
 
         /// <summary>
@@ -172,6 +172,7 @@ namespace ArcheryManager.Interactions.Behaviors
             if (associatedObject.IsStopped) // timer was stop
             {
                 SettingStop();
+                PlaySong();
                 return false;
             }
 
