@@ -30,15 +30,6 @@ namespace ArcheryManager.Pages
             get { return timer.Color; }
         }
 
-        public static readonly BindableProperty IsStartEnabledProperty =
-                      BindableProperty.Create(nameof(IsStartEnabled), typeof(bool), typeof(TimerPage), true);
-
-        public bool IsStartEnabled
-        {
-            get { return (bool)GetValue(IsStartEnabledProperty); }
-            set { SetValue(IsStartEnabledProperty, value); }
-        }
-
         public static readonly BindableProperty PauseReplayTextProperty =
                       BindableProperty.Create(nameof(PauseReplayText), typeof(string), typeof(TimerPage), DefaultPauseReplayText);
 
@@ -55,15 +46,6 @@ namespace ArcheryManager.Pages
         {
             get { return (bool)GetValue(IsPauseEnabledProperty); }
             set { SetValue(IsPauseEnabledProperty, value); }
-        }
-
-        public static readonly BindableProperty IsStopEnabledProperty =
-                      BindableProperty.Create(nameof(IsStopEnabled), typeof(bool), typeof(TimerPage), false);
-
-        public bool IsStopEnabled
-        {
-            get { return (bool)GetValue(IsStopEnabledProperty); }
-            set { SetValue(IsStopEnabledProperty, value); }
         }
 
         public TimerPageSetting TimerSetting { get; private set; }
@@ -85,6 +67,21 @@ namespace ArcheryManager.Pages
 
             waveButton.SetBinding(MenuItem.TextProperty, nameof(TimerSetting.Mode));
             ToolbarItems.Add(waveButton);
+
+            var recognizer = new TapGestureRecognizer() { Command = new Command(Timer_Tap) };
+            timer.GestureRecognizers.Add(recognizer);
+        }
+
+        private void Timer_Tap(object obj)
+        {
+            if (timer.IsStopped)
+            {
+                ButtonStart_Clicked(timer, null);
+            }
+            else
+            {
+                ButtonStop_Clicked(timer, null);
+            }
         }
 
         private void WaveButton_Click()
@@ -121,9 +118,6 @@ namespace ArcheryManager.Pages
             switch (e.PropertyName)
             {
                 case nameof(timer.IsStopped):
-
-                    IsStartEnabled = timer.IsStopped;
-                    IsStopEnabled = !timer.IsStopped;
 
                     IsPauseEnabled = GetPauseEnabledValue(timer);
                     break;
