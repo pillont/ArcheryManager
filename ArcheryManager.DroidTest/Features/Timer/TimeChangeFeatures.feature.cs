@@ -64,10 +64,10 @@ namespace ArcheryManager.DroidTest.Features.Timer
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("test la valeur par défault")]
-        public virtual void TestLaValeurParDefault()
+        [NUnit.Framework.DescriptionAttribute("test d\'ouverture de picker")]
+        public virtual void TestDOuvertureDePicker()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test la valeur par défault", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test d\'ouverture de picker", ((string[])(null)));
 #line 5
 this.ScenarioSetup(scenarioInfo);
 #line 6
@@ -75,7 +75,22 @@ this.ScenarioSetup(scenarioInfo);
 #line 7
  testRunner.And("Je click sur le bouton de réglage de temps", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 9
- testRunner.Then("un picker s\'ouvre avec 120 de selectionné", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("un picker s\'ouvre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test de temps par défault")]
+        public virtual void TestDeTempsParDefault()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test de temps par défault", ((string[])(null)));
+#line 12
+this.ScenarioSetup(scenarioInfo);
+#line 13
+ testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 15
+ testRunner.Then("le timer est à 120 sec", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -88,15 +103,15 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TestDeChangementDeTemps(string time, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test de changement de temps", exampleTags);
-#line 12
+#line 18
 this.ScenarioSetup(scenarioInfo);
-#line 13
+#line 19
  testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
-#line 14
+#line 20
  testRunner.And("Je click sur le bouton de réglage de temps", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 15
+#line 21
  testRunner.And(string.Format("je selectionne {0} dans le picker", time), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 17
+#line 23
  testRunner.Then(string.Format("le timer est à {0} sec", time), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
@@ -110,19 +125,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TestDeLancementApresChangementDeTemps(string time, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test de lancement apres changement de temps", exampleTags);
-#line 26
+#line 32
 this.ScenarioSetup(scenarioInfo);
-#line 27
- testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
-#line 28
- testRunner.And("Je click sur le bouton de réglage de temps", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 29
- testRunner.And(string.Format("je selectionne {0} dans le picker", time), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 30
- testRunner.And("je lance le timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 31
- testRunner.And("j\'attend 10 secondes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 33
+ testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 34
+ testRunner.And("Je click sur le bouton de réglage de temps", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 35
+ testRunner.And(string.Format("je selectionne {0} dans le picker", time), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 36
+ testRunner.And("je lance le timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 37
+ testRunner.And("j\'attend 10 secondes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 39
  testRunner.Then(string.Format("le timer est à {0} sec", time), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();

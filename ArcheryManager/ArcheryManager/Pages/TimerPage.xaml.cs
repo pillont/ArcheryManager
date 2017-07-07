@@ -2,6 +2,8 @@
 using ArcheryManager.Interactions.Behaviors;
 using ArcheryManager.Utils;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -85,16 +87,16 @@ namespace ArcheryManager.Pages
                 Text = TimeSelectorToolBarItemName,
             };
 
+            var list = timePicker.ItemsSource as List<double>;
+            int index = list.FindIndex(i => i == timer.Time);
+            timePicker.SelectedIndex = index;
+
             return timeButton;
         }
 
         private void TimeSelectorButton_Click(object obj)
         {
-            /*
-             * 1.- Add a Picker with IsVisible property = false, and add it to your page //  value => biding time!
-             * 2.- When the user taps on the button use the focus event of the picker so the user can see it:
-             * 3.- picker.Focus();
-             */
+            timePicker.Focus();
         }
 
         private ToolbarItem CreateWaveButton()
@@ -205,6 +207,18 @@ namespace ArcheryManager.Pages
                 Behavior.Continue();
             else if (!timer.IsStopped)
                 Behavior.Pause();
+        }
+
+        private void Picker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                timer.Time = Convert.ToInt32(timePicker.ItemsSource[timePicker.SelectedIndex]);
+            }
+            catch (Exception)
+            {
+                DisplayAlert("Error", "error during the change of time", "OK");
+            }
         }
     }
 }

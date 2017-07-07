@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using TechTalk.SpecFlow;
 
 namespace ArcheryManager.DroidTest.StepDefinition
@@ -9,13 +9,14 @@ namespace ArcheryManager.DroidTest.StepDefinition
         [When(@"je selectionne (.*) dans le picker")]
         public void QuandJeSelectionneDansLePicker(int p0)
         {
-            ScenarioContext.Current.Pending();
+            TestSetting.App.ScrollDownTo(e => e.Text(p0.ToString()));
+            TestSetting.App.Tap(e => e.Text(p0.ToString()));
         }
-        
-        [Then(@"un picker s'ouvre avec (.*) de selectionné")]
-        public void AlorsUnPickerSOuvreAvecDeSelectionne(int p0)
+
+        [Then(@"un picker s'ouvre")]
+        public void AlorsUnPickerSOuvre()
         {
-            ScenarioContext.Current.Pending();
+            TestSetting.App.WaitForElement(e => e.Id("select_dialog_listview"));
         }
     }
 }

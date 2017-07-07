@@ -2,11 +2,17 @@
 Fonctionnalité: TimeChangeFeatures
 	test de changement de temps dans un timer
 
-Scénario: test la valeur par défault
+Scénario: test d'ouverture de picker
 	Quand J'ouvre une page timer
 	Et Je click sur le bouton de réglage de temps
 
-	Alors un picker s'ouvre avec 120 de selectionné
+	Alors un picker s'ouvre 
+
+
+Scénario: test de temps par défault
+	Quand J'ouvre une page timer
+	
+	Alors le timer est à 120 sec
 
 
 Plan du scénario: test de changement de temps

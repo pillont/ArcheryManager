@@ -6,6 +6,13 @@
              x:Class="ArcheryManager.Pages.TimerPage" BackgroundColor="{Binding Color}">
 
     <StackLayout HorizontalOptions="Center" VerticalOptions="Center" AutomationId="test">
+        <ctl:NumericPicker x:Name="timePicker"
+                           IsVisible="False"
+                           SelectedIndexChanged="Picker_SelectedIndexChanged"
+                           Min="40"
+                           Max="300"
+                           Step="5" />
+
         <ctl:CustomTimer x:Name="timer" FontSize="72" AutomationId="CustomTimer" />
         <Button Text="{Binding PauseReplayText}" AutomationId="PauseButton" Clicked="ButtonPause_Clicked" IsEnabled="{Binding IsPauseEnabled}" />
     </StackLayout>
