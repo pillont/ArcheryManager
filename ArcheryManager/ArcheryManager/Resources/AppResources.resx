@@ -126,14 +126,29 @@
   <data name="ArrowsInDecreasingOrder" xml:space="preserve">
     <value>Arrows in decreasing order</value>
   </data>
+  <data name="ButtonCounter" xml:space="preserve">
+    <value>Button counter</value>
+  </data>
   <data name="Duel" xml:space="preserve">
     <value>Duel</value>
+  </data>
+  <data name="EnglishTarget" xml:space="preserve">
+    <value>English target</value>
+  </data>
+  <data name="FieldTarget" xml:space="preserve">
+    <value>Field target</value>
   </data>
   <data name="Flight" xml:space="preserve">
     <value>Flight</value>
   </data>
   <data name="HaveFixNumber" xml:space="preserve">
     <value>Have fixe number</value>
+  </data>
+  <data name="IndoorCompoundTarget" xml:space="preserve">
+    <value>Indoor compound target</value>
+  </data>
+  <data name="IndoorRecurveTarget" xml:space="preserve">
+    <value>Indoor recurve target</value>
   </data>
   <data name="NewFlight" xml:space="preserve">
     <value>New Flight</value>
@@ -170,6 +185,9 @@
   </data>
   <data name="Time" xml:space="preserve">
     <value>Time</value>
+  </data>
+  <data name="Timer" xml:space="preserve">
+    <value>Timer</value>
   </data>
   <data name="Total" xml:space="preserve">
     <value>Total</value>

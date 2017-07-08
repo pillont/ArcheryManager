@@ -89,11 +89,38 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Button counter.
+        /// </summary>
+        internal static string ButtonCounter {
+            get {
+                return ResourceManager.GetString("ButtonCounter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Duel.
         /// </summary>
         internal static string Duel {
             get {
                 return ResourceManager.GetString("Duel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à English target.
+        /// </summary>
+        internal static string EnglishTarget {
+            get {
+                return ResourceManager.GetString("EnglishTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Field target.
+        /// </summary>
+        internal static string FieldTarget {
+            get {
+                return ResourceManager.GetString("FieldTarget", resourceCulture);
             }
         }
         
@@ -112,6 +139,24 @@ namespace ArcheryManager.Resources {
         internal static string HaveFixNumber {
             get {
                 return ResourceManager.GetString("HaveFixNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Indoor compound target.
+        /// </summary>
+        internal static string IndoorCompoundTarget {
+            get {
+                return ResourceManager.GetString("IndoorCompoundTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Indoor recurve target.
+        /// </summary>
+        internal static string IndoorRecurveTarget {
+            get {
+                return ResourceManager.GetString("IndoorRecurveTarget", resourceCulture);
             }
         }
         
@@ -220,6 +265,15 @@ namespace ArcheryManager.Resources {
         internal static string Time {
             get {
                 return ResourceManager.GetString("Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Timer.
+        /// </summary>
+        internal static string Timer {
+            get {
+                return ResourceManager.GetString("Timer", resourceCulture);
             }
         }
         
