@@ -421,6 +421,27 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test changement de vague pendant que le timer est actif")]
+        public virtual void TestChangementDeVaguePendantQueLeTimerEstActif()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test changement de vague pendant que le timer est actif", ((string[])(null)));
+#line 142
+this.ScenarioSetup(scenarioInfo);
+#line 143
+ testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 144
+ testRunner.And("je lance le timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 145
+ testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 146
+ testRunner.And("j\'attend 10 secondes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 148
+ testRunner.Then("le timer est à 120 sec", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

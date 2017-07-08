@@ -163,6 +163,8 @@ namespace ArcheryManager.Pages
 
         private void WaveButton_Click()
         {
+            Behavior.Stop();
+
             int count = Enum.GetNames(typeof(TimerMode)).Length;
             TimerSetting.Mode = (TimerMode)(((int)TimerSetting.Mode + 1) % count);
 

@@ -139,3 +139,11 @@ Scénario: test de maintient d'une seul vague
 	Alors le text de vague est vide
 
 
+Scénario: test changement de vague pendant que le timer est actif
+	Quand J'ouvre une page timer
+	Et je lance le timer
+	Et je click sur l'option de vague
+	Et j'attend 10 secondes
+
+	Alors le timer est à 120 sec
+
