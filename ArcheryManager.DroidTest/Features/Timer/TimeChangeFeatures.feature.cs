@@ -96,6 +96,30 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test de changement de temps avant changement de vague")]
+        [NUnit.Framework.TestCaseAttribute("240", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("150", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("300", new string[0])]
+        public virtual void TestDeChangementDeTempsAvantChangementDeVague(string time, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test de changement de temps avant changement de vague", exampleTags);
+#line 19
+this.ScenarioSetup(scenarioInfo);
+#line 20
+ testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 21
+ testRunner.And("Je click sur le bouton de réglage de temps", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 22
+ testRunner.And(string.Format("je selectionne {0} dans le picker", time), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 23
+ testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 25
+ testRunner.Then(string.Format("le timer est à {0} sec", time), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("test de changement de temps")]
         [NUnit.Framework.TestCaseAttribute("240", new string[0])]
         [NUnit.Framework.TestCaseAttribute("150", new string[0])]
@@ -103,15 +127,15 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TestDeChangementDeTemps(string time, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test de changement de temps", exampleTags);
-#line 18
+#line 34
 this.ScenarioSetup(scenarioInfo);
-#line 19
+#line 35
  testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
-#line 20
+#line 36
  testRunner.And("Je click sur le bouton de réglage de temps", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 21
+#line 37
  testRunner.And(string.Format("je selectionne {0} dans le picker", time), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 23
+#line 39
  testRunner.Then(string.Format("le timer est à {0} sec", time), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
@@ -125,19 +149,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TestDeLancementApresChangementDeTemps(string time, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test de lancement apres changement de temps", exampleTags);
-#line 32
+#line 48
 this.ScenarioSetup(scenarioInfo);
-#line 33
+#line 49
  testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
-#line 34
+#line 50
  testRunner.And("Je click sur le bouton de réglage de temps", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 35
+#line 51
  testRunner.And(string.Format("je selectionne {0} dans le picker", time), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 36
+#line 52
  testRunner.And("je lance le timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 37
+#line 53
  testRunner.And("j\'attend 10 secondes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 39
+#line 55
  testRunner.Then(string.Format("le timer est à {0} sec", time), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();

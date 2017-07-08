@@ -2,8 +2,8 @@
 using ArcheryManager.Interactions.Behaviors;
 using ArcheryManager.Utils;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -56,6 +56,7 @@ namespace ArcheryManager.Pages
         public TimerPage()
         {
             TimerSetting = new TimerPageSetting();
+            TimerSetting.PropertyChanged += TimerSetting_PropertyChanged;
             BindingContext = this;
             InitializeComponent();
             Behavior = new TimerBehavior();
@@ -65,6 +66,14 @@ namespace ArcheryManager.Pages
 
             var recognizer = new TapGestureRecognizer() { Command = new Command(Timer_Tap) };
             timer.GestureRecognizers.Add(recognizer);
+        }
+
+        private void TimerSetting_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(TimerSetting.Time))
+            {
+                timer.Time = TimerSetting.Time;
+            }
         }
 
         #region toolbar items
@@ -213,7 +222,7 @@ namespace ArcheryManager.Pages
         {
             try
             {
-                timer.Time = Convert.ToInt32(timePicker.ItemsSource[timePicker.SelectedIndex]);
+                TimerSetting.Time = Convert.ToInt32(timePicker.ItemsSource[timePicker.SelectedIndex]);
             }
             catch (Exception)
             {
