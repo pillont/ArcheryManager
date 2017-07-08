@@ -79,6 +79,7 @@
     <Compile Include="Factories\ArrowFactoryTest.cs" />
     <Compile Include="Factories\ScoreListFactoryTest.cs" />
     <Compile Include="Pages\TimerPageTest.cs" />
+    <Compile Include="Interactions\Behaviors\WaveBehaviorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\EnglishArrowSettingFactoryTest.cs" />
     <Compile Include="Settings\FieldArrowSettingTest.cs" />

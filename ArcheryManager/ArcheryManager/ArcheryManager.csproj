@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="CustomControls\UniformGrid.cs" />
     <Compile Include="Factories\ArrowFactory.cs" />
+    <Compile Include="Interactions\Behaviors\WaveBehavior.cs" />
     <Compile Include="Interactions\CustomPanGestureReconizer.cs" />
     <Compile Include="Interactions\CustomPanUpdatedEventArgs.cs" />
     <Compile Include="Pages\SettingTargetPage.xaml.cs">

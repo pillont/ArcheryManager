@@ -12,9 +12,45 @@ Scénario: test de changement d'option en ABCD
 	Et je click sur l'option de vague
 	Alors l'option de vague est en ABCD
 
+
+Scénario: test de changement d'option en Duel
+	Quand J'ouvre une page timer
+	Et je click sur l'option de vague
+	Et je click sur l'option de vague
+	Alors l'option de vague est en VS
+
 	
+Scénario: test de vague par défaut en duel 
+	Quand J'ouvre une page timer
+	Et je click sur l'option de vague
+	Et je click sur l'option de vague
+	
+	Alors le texte de vague contient AB
+
+
+Scénario: test de permutation de la vague en duel
+	Quand J'ouvre une page timer
+	Et je click sur l'option de vague
+	Et je click sur l'option de vague
+	Et je lance le timer
+	Et j'arrete le timer
+
+	Alors le texte de vague contient CD
+	
+Scénario: test de maintien de rythme en duel
+	Quand J'ouvre une page timer
+	Et je click sur l'option de vague
+	Et je click sur l'option de vague
+	Et je lance le timer
+	Et j'arrete le timer
+	Et je lance le timer
+	Et j'arrete le timer
+
+	Alors le texte de vague contient AB
+
 Scénario: test de changement d'option en Shootout
 	Quand J'ouvre une page timer
+	Et je click sur l'option de vague
 	Et je click sur l'option de vague
 	Et je click sur l'option de vague
 	Alors l'option de vague est en Shootout
@@ -25,6 +61,7 @@ Scénario: test de changement d'option retour en ABC
 	Et je click sur l'option de vague
 	Et je click sur l'option de vague
 	Et je click sur l'option de vague
+	Et je click sur l'option de vague
 	Alors l'option de vague est en ABC
 
 
@@ -32,11 +69,13 @@ Scénario: test de temps pour l'option shootout
 	Quand J'ouvre une page timer
 	Et je click sur l'option de vague
 	Et je click sur l'option de vague
+	Et je click sur l'option de vague
 	Alors le timer est à 40 sec
 	
 
 Scénario: test de lancement de timer en shootout
 	Quand J'ouvre une page timer
+	Et je click sur l'option de vague
 	Et je click sur l'option de vague
 	Et je click sur l'option de vague
 	Et je lance le timer

@@ -14,7 +14,9 @@ namespace ArcheryManager.DroidTest.StepDefinition
                         TestSetting.App.Query("ABC").Count() != 0//ABC check
                             ? "ABC" // abc click if true
                                 : TestSetting.App.Query("ABCD").Count() != 0 ? // ABCD check
-                                                                            "ABCD" : //ABCD click if true
+                                                                            "ABCD"  //ABCD click if true
+                                : TestSetting.App.Query("VS").Count() != 0 ? // VS check
+                                                                            "VS" :
                                                                                 "Shootout"); // else shootoff
         }
 
@@ -46,6 +48,12 @@ namespace ArcheryManager.DroidTest.StepDefinition
         public void AlorsLOptionDeVagueEstEnShootout()
         {
             Assert.AreEqual(1, TestSetting.App.Query("Shootout").Count());
+        }
+
+        [Then(@"l'option de vague est en VS")]
+        public void AlorsLOptionDeVagueEstEnVS()
+        {
+            Assert.AreEqual(1, TestSetting.App.Query("VS").Count());
         }
 
         [Then(@"le timer est à (.*) sec")]
