@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using ArcheryManager.CustomControls;
+using ArcheryManager.Services;
 
 namespace ArcheryManager.Interactions.Behaviors
 {
@@ -12,6 +13,7 @@ namespace ArcheryManager.Interactions.Behaviors
         public const int DefaultTime = 120;
         public const int DefaultWaitingTime = 10;
         public const int DefaultLimitTime = 30;
+        private const string SongFileName = "coq.mp3";
 
         /*
          * Colors
@@ -71,16 +73,16 @@ namespace ArcheryManager.Interactions.Behaviors
 
         public void Start()
         {
-            if (!associatedObject.IsStopped)
-                return;
-
-            if (associatedObject.ShowWaitingTime)
+            if (associatedObject.IsStopped)
             {
-                StartWaitingFunction();
-            }
-            else
-            {
-                StartTimerFunction();
+                if (associatedObject.ShowWaitingTime)
+                {
+                    StartWaitingFunction();
+                }
+                else
+                {
+                    StartTimerFunction();
+                }
             }
         }
 
@@ -90,8 +92,9 @@ namespace ArcheryManager.Interactions.Behaviors
             associatedObject.IsStopped = false;
             associatedObject.IsPaused = false;
             _currentMax = associatedObject.WaitingTime;
-            Current = associatedObject.WaitingTime;
+            this.Current = associatedObject.WaitingTime;
             Device.StartTimer(TimeSpan.FromSeconds(1), WaitingTimerFunction);
+            PlaySong();
         }
 
         public void Stop()
@@ -100,6 +103,11 @@ namespace ArcheryManager.Interactions.Behaviors
             //TODO wait one second to be sure the current timer while stopped
 
             _waveLabel.NextWave();
+        }
+
+        private void PlaySong()
+        {
+            DependencyService.Get<IAudioPlayer>().PlayAudioFile(SongFileName);
         }
 
         public void Pause()
@@ -129,16 +137,18 @@ namespace ArcheryManager.Interactions.Behaviors
             if (associatedObject.IsStopped || associatedObject.IsPaused) // timer was stop
             {
                 SettingStop();
+                PlaySong();
                 return false;
             }
 
             associatedObject.Color = associatedObject.WaitingColor;
-            Current--;
+            this.Current--;
 
-            var res = ShouldContinueTimer(avoidZero: true);
+            bool res = ShouldContinueTimer(avoidZero: true);
 
             if (!res) // start timerFunction in the end of this function
             {
+                PlaySong();
                 StartTimerFunction();
             }
             return res;
@@ -148,10 +158,11 @@ namespace ArcheryManager.Interactions.Behaviors
         {
             associatedObject.IsStopped = false;
             _currentMax = associatedObject.Time;
-            Current = associatedObject.Time;
+            this.Current = associatedObject.Time;
             UpdateColor();
             associatedObject.IsWaitingTime = false;
             Device.StartTimer(TimeSpan.FromSeconds(1), TimerFunction);
+            PlaySong();
         }
 
         /// <summary>
@@ -162,6 +173,7 @@ namespace ArcheryManager.Interactions.Behaviors
             if (associatedObject.IsStopped) // timer was stop
             {
                 SettingStop();
+                PlaySong();
                 return false;
             }
 
@@ -170,7 +182,7 @@ namespace ArcheryManager.Interactions.Behaviors
                 return false;
             }
 
-            Current--;
+            this.Current--;
             UpdateColor();
 
             var res = ShouldContinueTimer();
@@ -178,6 +190,7 @@ namespace ArcheryManager.Interactions.Behaviors
             {
                 SettingStop();
                 _waveLabel.NextWave();
+                PlaySong();
             }
 
             return res;
@@ -187,7 +200,7 @@ namespace ArcheryManager.Interactions.Behaviors
         {
             associatedObject.IsStopped = true;
             associatedObject.IsPaused = false;
-            Current = associatedObject.Time;
+            this.Current = associatedObject.Time;
             associatedObject.Color = StopTimeColor;
         }
 
@@ -197,7 +210,7 @@ namespace ArcheryManager.Interactions.Behaviors
         private void UpdateColor()
         {
             // general time
-            if (Current > associatedObject.LimitTime)
+            if (this.Current > associatedObject.LimitTime)
                 associatedObject.Color = Color.Green;
             // limit time
             else if (ShouldContinueTimer())
@@ -214,9 +227,9 @@ namespace ArcheryManager.Interactions.Behaviors
         private bool ShouldContinueTimer(bool avoidZero = false)
         {
             if (avoidZero)
-                return Current > 0; // end of the timer
+                return this.Current > 0; // end of the timer
             else
-                return Current >= 0; // end of the timer
+                return this.Current >= 0; // end of the timer
         }
 
         #endregion private functions

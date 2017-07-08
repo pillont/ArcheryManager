@@ -72,6 +72,7 @@
     <Compile Include="Pages\SettingTargetPage.xaml.cs">
       <DependentUpon>SettingTargetPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\IAudioPlayer.cs" />
     <Compile Include="Settings\CommonConstant.cs" />
     <Compile Include="Settings\IndoorCompoundArrowSetting.cs" />
     <Compile Include="Settings\IndoorRecurveArrowSetting.cs" />
