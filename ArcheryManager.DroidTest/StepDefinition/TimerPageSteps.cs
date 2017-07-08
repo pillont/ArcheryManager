@@ -21,13 +21,13 @@ namespace ArcheryManager.DroidTest.StepDefinition
         [When(@"je lance le timer")]
         public void QuandJeClickSurLeTimer()
         {
-            TestSetting.App.Tap("StartButton"/*TODO : CustomTimer*/);
+            TestSetting.App.Tap("CustomTimer");
         }
 
         [When(@"j'arrete le timer")]
         public void QuandJarreteLeTimer()
         {
-            TestSetting.App.Tap("StopButton"/*TODO : CustomTimer*/);
+            TestSetting.App.Tap("CustomTimer");
         }
 
         [Then(@"l'option de vague est en ABC")]

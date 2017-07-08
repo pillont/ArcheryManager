@@ -22,16 +22,15 @@ namespace ArcheryManager.DroidTest.Timer
         [Test]
         public void InitTimerElement()
         {
+            app.WaitForElement("CustomTimer");
             app.WaitForElement(c => c.Marked("TimerLabel").Text("120"));
-            app.WaitForElement(c => c.Marked("StartButton"));
-            app.WaitForElement(c => c.Marked("StopButton"));
-            app.WaitForElement(c => c.Marked("PauseButton"));
+            app.WaitForElement("PauseButton");
         }
 
         [Test]
         public void StartButton()
         {
-            app.Tap("StartButton");
+            TestSetting.App.Tap("CustomTimer");
             System.Threading.Thread.Sleep(4000);
 
             app.WaitForElement(c => c.Marked("TimerLabel").Text("5"));
@@ -48,21 +47,21 @@ namespace ArcheryManager.DroidTest.Timer
         [Test]
         public void StopButton()
         {
-            app.Tap("StartButton");
+            TestSetting.App.Tap("CustomTimer");
             System.Threading.Thread.Sleep(4000);
-            app.Tap("StopButton");
+            TestSetting.App.Tap("CustomTimer");
             app.WaitForElement(c => c.Marked("TimerLabel").Text("120"));
             System.Threading.Thread.Sleep(4000);
             app.WaitForElement(c => c.Marked("TimerLabel").Text("120"));
 
-            app.Tap("StartButton");
+            TestSetting.App.Tap("CustomTimer");
             System.Threading.Thread.Sleep(14000);
-            app.Tap("StopButton");
+            TestSetting.App.Tap("CustomTimer");
             app.WaitForElement(c => c.Marked("TimerLabel").Text("120"));
             System.Threading.Thread.Sleep(4000);
             app.WaitForElement(c => c.Marked("TimerLabel").Text("120"));
 
-            app.Tap("StartButton");
+            TestSetting.App.Tap("CustomTimer");
             System.Threading.Thread.Sleep(14000);
             app.WaitForElement(c => c.Marked("TimerLabel").Text("115"));
         }
@@ -70,7 +69,7 @@ namespace ArcheryManager.DroidTest.Timer
         [Test]
         public void PauseButton()
         {
-            app.Tap("StartButton");
+            TestSetting.App.Tap("CustomTimer");
             System.Threading.Thread.Sleep(5000);
             Assert.IsFalse(app.Query("PauseButton").First().Enabled);
 
