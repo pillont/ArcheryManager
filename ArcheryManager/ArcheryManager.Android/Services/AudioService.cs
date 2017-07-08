@@ -9,20 +9,20 @@ namespace ArcheryManager.Droid.Services
 {
     public class AudioService : IAudioPlayer
     {
-        public AudioService()
+        protected static readonly MediaPlayer Player;
+
+        static AudioService()
         {
+            Player = new MediaPlayer();
         }
 
         public void PlayAudioFile(string fileName)
         {
-            var player = new MediaPlayer();
+            Player.Reset();
             var fd = global::Android.App.Application.Context.Assets.OpenFd(fileName);
-            player.Prepared += (s, e) =>
-            {
-                player.Start();
-            };
-            player.SetDataSource(fd.FileDescriptor, fd.StartOffset, fd.Length);
-            player.Prepare();
+            Player.SetDataSource(fd.FileDescriptor, fd.StartOffset, fd.Length);
+            Player.Prepare();
+            Player.Start();
         }
     }
 }

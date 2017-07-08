@@ -51,6 +51,7 @@ namespace ArcheryManager.DroidTest.StepDefinition
         [Then(@"le timer est à (.*) sec")]
         public void AlorsLeTimerEstASec(int p0)
         {
+            TestSetting.App.WaitForElement("TimerLabel");
             Assert.AreEqual(p0.ToString(), TestSetting.App.Query("TimerLabel").First().Text);
         }
 
@@ -65,6 +66,12 @@ namespace ArcheryManager.DroidTest.StepDefinition
         public void AlorsLeTexteDeVagueContientCD(string p0)
         {
             Assert.AreEqual(p0, TestSetting.App.Query("WaveText").First().Text);
+        }
+
+        [When(@"Je click sur le bouton de réglage de temps")]
+        public void QuandJeClickSurLeBoutonDeReglageDeTemps()
+        {
+            TestSetting.App.Tap("Time");
         }
     }
 }

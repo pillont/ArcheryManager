@@ -176,6 +176,21 @@
   <ItemGroup>
     <BundleResource Include="Resources\coq.mp3" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\strike.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\train.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\duck.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\end_point.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\not_kiddin.mp3" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -111,12 +111,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MultiwaveFeatures.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Timer\TimeChangeFeatures.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimeChangeFeatures.feature</DependentUpon>
+    </Compile>
     <Compile Include="GenericCountable\ArrowsListTest.cs" />
     <Compile Include="GenericCountable\ArrowsSelectionTest.cs" />
     <Compile Include="StepDefinition\BackdoorSteps.cs" />
     <Compile Include="StepDefinition\CounterButtonsSteps.cs" />
     <Compile Include="StepDefinition\GenericSearchElement.cs" />
     <Compile Include="StepDefinition\DeviceInteractionSteps.cs" />
+    <Compile Include="StepDefinition\PickerSteps.cs" />
     <Compile Include="StepDefinition\TargetSettingSteps.cs" />
     <Compile Include="StepDefinition\TargetSteps.cs" />
     <Compile Include="StepDefinition\TimerPageSteps.cs" />
@@ -158,6 +164,10 @@
     <None Include="Features\Timer\MultiwaveFeatures.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>MultiwaveFeatures.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Timer\TimeChangeFeatures.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>TimeChangeFeatures.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>

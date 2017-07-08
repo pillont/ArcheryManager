@@ -1,9 +1,7 @@
-﻿using System;
-using ArcheryManager.Settings;
+﻿using ArcheryManager.Settings;
 using ArcheryManager.Utils;
 using Xamarin.Forms;
 using XFShapeView;
-using System.Collections.Generic;
 
 namespace ArcheryManager.CustomControls
 {
