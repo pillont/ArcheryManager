@@ -1,12 +1,40 @@
-﻿using Xamarin.Forms;
+﻿using System.Collections.Generic;
+using Xamarin.Forms;
 using static ArcheryManager.Pages.TimerPage;
 
 namespace ArcheryManager.Utils
 {
     public class TimerPageSetting : BindableObject
     {
+        private const string DefaultSongFileName = coqFileName;
+        private const string DuckFileName = "duck.mp3";
+        private const string EndPointFileName = "end_point.mp3";
+        private const string NotKiddingFileName = "not_kiddin.mp3";
+        private const string coqFileName = "coq.mp3";
+        private const string StrikeFileName = "strike.mp3";
+        private const string TrainFileName = "train.mp3";
+
         private const int DefaultWaitingTime = 10;
         private const int DefaultTime = 120;
+
+        public static readonly Dictionary<string, string> AllSongFileNames = new Dictionary<string, string>
+        {
+            {    "coq" , coqFileName },
+            {    "duck", DuckFileName },
+            {    "end point",EndPointFileName },
+            {    "not kiddin",NotKiddingFileName },
+            {    "strike",StrikeFileName },
+            {    "train",TrainFileName },
+        };
+
+        public static readonly BindableProperty SongFileNameProperty =
+                          BindableProperty.Create(nameof(SongFileName), typeof(string), typeof(TimerPageSetting), DefaultSongFileName);
+
+        public string SongFileName
+        {
+            get { return (string)GetValue(SongFileNameProperty); }
+            set { SetValue(SongFileNameProperty, value); }
+        }
 
         public static readonly BindableProperty TimeProperty =
                       BindableProperty.Create(nameof(Time), typeof(int), typeof(TimerPageSetting), DefaultTime);

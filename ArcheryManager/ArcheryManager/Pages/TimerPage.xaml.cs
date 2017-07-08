@@ -59,7 +59,7 @@ namespace ArcheryManager.Pages
             TimerSetting.PropertyChanged += TimerSetting_PropertyChanged;
             BindingContext = this;
             InitializeComponent();
-            Behavior = new TimerBehavior();
+            Behavior = new TimerBehavior(TimerSetting);
             timer.Behaviors.Add(Behavior);
             timer.PropertyChanged += Timer_PropertyChanged;
             AddToolbarItems();
