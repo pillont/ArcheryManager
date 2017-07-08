@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Xamarin.Forms;
+using System.Linq;
 using static ArcheryManager.Pages.TimerPage;
 
 namespace ArcheryManager.Utils
@@ -17,7 +18,7 @@ namespace ArcheryManager.Utils
         private const int DefaultWaitingTime = 10;
         private const int DefaultTime = 120;
 
-        public static readonly Dictionary<string, string> AllSongFileNames = new Dictionary<string, string>
+        public static readonly Dictionary<string, string> AllSongFiles = new Dictionary<string, string>
         {
             {    "coq" , coqFileName },
             {    "duck", DuckFileName },
@@ -26,6 +27,14 @@ namespace ArcheryManager.Utils
             {    "strike",StrikeFileName },
             {    "train",TrainFileName },
         };
+
+        public static List<string> AllSongFilesNames
+        {
+            get
+            {
+                return AllSongFiles.Keys.ToList();
+            }
+        }
 
         public static readonly BindableProperty SongFileNameProperty =
                           BindableProperty.Create(nameof(SongFileName), typeof(string), typeof(TimerPageSetting), DefaultSongFileName);

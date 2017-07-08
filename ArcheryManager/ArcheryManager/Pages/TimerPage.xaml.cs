@@ -2,6 +2,7 @@
 using ArcheryManager.Interactions.Behaviors;
 using ArcheryManager.Utils;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Xamarin.Forms;
@@ -24,6 +25,7 @@ namespace ArcheryManager.Pages
         private const string PauseText = "Pause";
         private const string ReplayText = "Replay";
         private const string TimeSelectorToolBarItemName = "Time";
+        private const string SongSelectorToolBarItemName = "Song";
         private static readonly Color DefaultbackgroundColor = Color.White;
 
         private readonly TimerBehavior Behavior;
@@ -80,11 +82,35 @@ namespace ArcheryManager.Pages
 
         private void AddToolbarItems()
         {
-            var waveButton = CreateWaveButton();
-            ToolbarItems.Add(waveButton);
+            var songButton = CreateSongSelectorButton();
+            ToolbarItems.Add(songButton);
 
             var timeButton = CreateTimeSelectorButton();
             ToolbarItems.Add(timeButton);
+
+            var waveButton = CreateWaveButton();
+            ToolbarItems.Add(waveButton);
+        }
+
+        private ToolbarItem CreateSongSelectorButton()
+        {
+            var songButton = new ToolbarItem()
+            {
+                Command = new Command(SongSelectorButton_Click),
+                BindingContext = TimerSetting,
+                Text = SongSelectorToolBarItemName,
+            };
+
+            var list = timePicker.ItemsSource as List<double>;
+            int index = list.FindIndex(i => i == timer.Time);
+            timePicker.SelectedIndex = index;
+
+            return songButton;
+        }
+
+        private void SongSelectorButton_Click(object obj)
+        {
+            songPicker.Focus();
         }
 
         private ToolbarItem CreateTimeSelectorButton()
@@ -218,7 +244,7 @@ namespace ArcheryManager.Pages
                 Behavior.Pause();
         }
 
-        private void Picker_SelectedIndexChanged(object sender, EventArgs e)
+        private void TimerPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
@@ -228,6 +254,13 @@ namespace ArcheryManager.Pages
             {
                 DisplayAlert("Error", "error during the change of time", "OK");
             }
+        }
+
+        private void SongPicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string name = songPicker.ItemsSource[songPicker.SelectedIndex] as string;
+            string fileName = TimerPageSetting.AllSongFiles.Where(pair => pair.Key == name).First().Value;
+            TimerSetting.SongFileName = fileName;
         }
     }
 }
