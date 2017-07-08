@@ -5,6 +5,7 @@ using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ArcheryManager.CustomControls;
+using ArcheryManager.Resources;
 
 namespace ArcheryManager.Pages
 {
@@ -59,7 +60,7 @@ namespace ArcheryManager.Pages
         {
             ToolbarItems.Add(new ToolbarItem()
             {
-                Text = "Settings",
+                Text = AppResources.Settings,
                 Order = ToolbarItemOrder.Secondary,
                 Command = new Command(OpenSettingPage)
             });

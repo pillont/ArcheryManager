@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using ArcheryManager.Resources;
+using NUnit.Framework;
 using System.Linq;
 using TechTalk.SpecFlow;
 
@@ -11,13 +12,11 @@ namespace ArcheryManager.DroidTest.StepDefinition
         public void QuandJeClickSurLOptionDeVague()
         {
             TestSetting.App.Tap(
-                        TestSetting.App.Query("ABC").Count() != 0//ABC check
-                            ? "ABC" // abc click if true
-                                : TestSetting.App.Query("ABCD").Count() != 0 ? // ABCD check
-                                                                            "ABCD"  //ABCD click if true
-                                : TestSetting.App.Query("VS").Count() != 0 ? // VS check
-                                                                            "VS" :
-                                                                                "Shootout"); // else shootoff
+                        TestSetting.App.Query(TranslateExtension.GetTextResource("ABC")).Count() != 0//ABC check
+                            ? TranslateExtension.GetTextResource("ABC") // abc click if true
+                                : TestSetting.App.Query(TranslateExtension.GetTextResource("ABCD")).Count() != 0 ? // ABCD check
+                                                                            TranslateExtension.GetTextResource("ABCD") : //ABCD click if true
+                                                                                TranslateExtension.GetTextResource("ShootOut")); // else shootoff
         }
 
         [When(@"je lance le timer")]
@@ -35,19 +34,19 @@ namespace ArcheryManager.DroidTest.StepDefinition
         [Then(@"l'option de vague est en ABC")]
         public void AlorsLOptionDeVagueEstEnABC()
         {
-            Assert.AreEqual(1, TestSetting.App.Query("ABC").Count());
+            Assert.AreEqual(1, TestSetting.App.Query(TranslateExtension.GetTextResource("ABC")).Count());
         }
 
         [Then(@"l'option de vague est en ABCD")]
         public void AlorsLOptionDeVagueEstEnABCD()
         {
-            Assert.AreEqual(1, TestSetting.App.Query("ABCD").Count());
+            Assert.AreEqual(1, TestSetting.App.Query(TranslateExtension.GetTextResource("ABCD")).Count());
         }
 
         [Then(@"l'option de vague est en Shootout")]
         public void AlorsLOptionDeVagueEstEnShootout()
         {
-            Assert.AreEqual(1, TestSetting.App.Query("Shootout").Count());
+            Assert.AreEqual(1, TestSetting.App.Query(TranslateExtension.GetTextResource("Shootout")).Count());
         }
 
         [Then(@"l'option de vague est en VS")]
@@ -84,7 +83,7 @@ namespace ArcheryManager.DroidTest.StepDefinition
         [When(@"Je click sur le bouton de réglage de temps")]
         public void QuandJeClickSurLeBoutonDeReglageDeTemps()
         {
-            TestSetting.App.Tap("Time");
+            TestSetting.App.Tap(TranslateExtension.GetTextResource("Time"));
         }
     }
 }

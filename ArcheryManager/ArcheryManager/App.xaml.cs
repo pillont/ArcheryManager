@@ -1,5 +1,4 @@
 ﻿using ArcheryManager.Pages;
-using ArcheryManager.Settings;
 using Xamarin.Forms;
 
 namespace ArcheryManager

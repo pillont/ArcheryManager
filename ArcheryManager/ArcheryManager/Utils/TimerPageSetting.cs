@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Xamarin.Forms;
 using System.Linq;
-using static ArcheryManager.Pages.TimerPage;
+using ArcheryManager.Resources;
 
 namespace ArcheryManager.Utils
 {
@@ -55,11 +55,11 @@ namespace ArcheryManager.Utils
         }
 
         public static readonly BindableProperty ModeProperty =
-                      BindableProperty.Create(nameof(Mode), typeof(TimerMode), typeof(TimerPageSetting), default(TimerMode));
+                      BindableProperty.Create(nameof(Mode), typeof(string), typeof(TimerPageSetting), string.Empty);
 
-        public TimerMode Mode
+        public string Mode
         {
-            get { return (TimerMode)GetValue(ModeProperty); }
+            get { return (string)GetValue(ModeProperty); }
             set { SetValue(ModeProperty, value); }
         }
 
@@ -70,6 +70,11 @@ namespace ArcheryManager.Utils
         {
             get { return (int)GetValue(WaitingTimeProperty); }
             set { SetValue(WaitingTimeProperty, value); }
+        }
+
+        public TimerPageSetting()
+        {
+            Mode = AppResources.ABC;
         }
     }
 }

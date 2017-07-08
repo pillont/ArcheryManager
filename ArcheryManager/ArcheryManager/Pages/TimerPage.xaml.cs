@@ -1,5 +1,6 @@
 ﻿using ArcheryManager.CustomControls;
 using ArcheryManager.Interactions.Behaviors;
+using ArcheryManager.Resources;
 using ArcheryManager.Utils;
 using System;
 using System.Linq;
@@ -13,20 +14,15 @@ namespace ArcheryManager.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TimerPage : ContentPage
     {
-        public enum TimerMode
+        public List<string> TimerMode = new List<string>
         {
-            ABC,
-            ABCD,
-            VS,
-            Shootout,
+            AppResources.ABC,
+            AppResources.ABCD,
+            AppResources.ShootOut,
+            //AppResources.Duel,
         };
 
         private const int ShootoutTime = 40;
-        private const string DefaultPauseReplayText = PauseText;
-        private const string PauseText = "Pause";
-        private const string ReplayText = "Replay";
-        private const string TimeSelectorToolBarItemName = "Time";
-        private const string SongSelectorToolBarItemName = "Song";
         private static readonly Color DefaultbackgroundColor = Color.White;
 
         private readonly TimerBehavior Behavior;
@@ -37,7 +33,7 @@ namespace ArcheryManager.Pages
         }
 
         public static readonly BindableProperty PauseReplayTextProperty =
-                      BindableProperty.Create(nameof(PauseReplayText), typeof(string), typeof(TimerPage), DefaultPauseReplayText);
+                      BindableProperty.Create(nameof(PauseReplayText), typeof(string), typeof(TimerPage), string.Empty);
 
         public string PauseReplayText
         {
@@ -163,38 +159,61 @@ namespace ArcheryManager.Pages
 
         private void WaveButton_Click()
         {
+<<<<<<< HEAD
             Behavior.Stop();
 
             int count = Enum.GetNames(typeof(TimerMode)).Length;
             TimerSetting.Mode = (TimerMode)(((int)TimerSetting.Mode + 1) % count);
+=======
+            int currentIndex = TimerMode.IndexOf(TimerSetting.Mode);
+            TimerSetting.Mode = TimerMode[(int)(currentIndex + 1) % TimerMode.Count];
+>>>>>>> translate all text in multilanguage
 
-            switch (TimerSetting.Mode)
+            if (TimerSetting.Mode == AppResources.ABC)
             {
+<<<<<<< HEAD
                 case TimerMode.ABC:
                     timer.Time = TimerSetting.Time;
-                    timer.ShowWaitingTime = true;
-                    timer.WaveBehavior.StopWave();
-                    break;
+                timer.ShowWaitingTime = true;
+                timer.WaveBehavior.StopWave();
+                break;
 
                 case TimerMode.ABCD:
                     timer.WaveBehavior.StartWave();
-                    timer.WaveBehavior.DuelMode = false;
-                    timer.Time = TimerSetting.Time;
-                    timer.ShowWaitingTime = true;
-                    break;
+                timer.WaveBehavior.DuelMode = false;
+                timer.Time = TimerSetting.Time;
+                timer.ShowWaitingTime = true;
+                break;
 
                 case TimerMode.VS:
                     timer.WaveBehavior.StartWave();
-                    timer.WaveBehavior.DuelMode = true;
-                    timer.Time = TimerSetting.Time;
-                    timer.ShowWaitingTime = true;
-                    break;
+                timer.WaveBehavior.DuelMode = true;
+                timer.Time = TimerSetting.Time;
+                timer.ShowWaitingTime = true;
+                break;
 
                 case TimerMode.Shootout:
                     timer.Time = ShootoutTime;
-                    timer.ShowWaitingTime = false;
-                    timer.WaveBehavior.StopWave();
-                    break;
+                timer.ShowWaitingTime = false;
+                timer.WaveBehavior.StopWave();
+                break;
+=======
+                timer.Time = TimerSetting.Time;
+                timer.ShowWaitingTime = true;
+                timer.WaveControl.StopWave();
+            }
+            else if (TimerSetting.Mode == AppResources.ABCD)
+            {
+                timer.WaveControl.StartWave();
+                timer.Time = TimerSetting.Time;
+                timer.ShowWaitingTime = true;
+            }
+            else if (TimerSetting.Mode == AppResources.ShootOut)
+            {
+                timer.Time = ShootoutTime;
+                timer.ShowWaitingTime = false;
+                timer.WaveControl.StopWave();
+>>>>>>> translate all text in multilanguage
             }
         }
 
@@ -215,11 +234,11 @@ namespace ArcheryManager.Pages
 
                     if (timer.IsPaused)
                     {
-                        PauseReplayText = ReplayText;
+                        PauseReplayText = AppResources.Replay;
                     }
                     else
                     {
-                        PauseReplayText = PauseText;
+                        PauseReplayText = AppResources.Pause;
                     }
                     break;
 

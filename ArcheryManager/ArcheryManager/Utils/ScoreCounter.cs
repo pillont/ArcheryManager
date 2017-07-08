@@ -3,13 +3,12 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using ArcheryManager.Resources;
 
 namespace ArcheryManager.Utils
 {
     public class ScoreCounter : BindableObject
     {
-        private const string NewFlightText = "New Flight";
-
         #region properties
 
         #region Arrows list
@@ -133,14 +132,14 @@ namespace ArcheryManager.Utils
         {
             toolbarItems.Add(new ToolbarItem()
             {
-                Text = "Remove last",
+                Text = AppResources.RemoveLast,
                 Order = ToolbarItemOrder.Primary,
                 Command = new Command(RemoveLastArrow)
             });
 
             toolbarItems.Add(new ToolbarItem()
             {
-                Text = "Remove all",
+                Text = AppResources.RemoveAll,
                 Order = ToolbarItemOrder.Primary,
                 Command = new Command(ClearArrows)
             });
@@ -150,7 +149,7 @@ namespace ArcheryManager.Utils
         {
             toolbarItems.Add(new ToolbarItem()
             {
-                Text = NewFlightText,
+                Text = AppResources.NewFlight,
                 Order = ToolbarItemOrder.Primary,
                 Command = new Command(NewFlight),
             });
@@ -164,7 +163,8 @@ namespace ArcheryManager.Utils
 
         private ToolbarItem GetCurrentNewFlightButton()
         {
-            return toolbarItems.Where(i => i.Text == NewFlightText).FirstOrDefault();
+            string newFlightText = AppResources.NewFlight;
+            return toolbarItems.Where(i => i.Text == newFlightText).FirstOrDefault();
         }
 
         private void RemoveNewFlightButton()

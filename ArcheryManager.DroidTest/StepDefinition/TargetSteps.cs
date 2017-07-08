@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using ArcheryManager.Resources;
+using NUnit.Framework;
 using System.Linq;
 using TechTalk.SpecFlow;
 
@@ -19,7 +20,7 @@ namespace ArcheryManager.DroidTest.StepDefinition
         public void WhenJOuvreLeMenuDeParametre()
         {
             TestSetting.App.Tap("More options");
-            TestSetting.App.Tap("Settings");
+            TestSetting.App.Tap(TranslateExtension.GetTextResource("Settings"));
         }
 
         [Then(@"la fleche (.*) de la liste est un (.*)")]
