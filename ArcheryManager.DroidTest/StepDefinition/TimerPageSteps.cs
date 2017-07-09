@@ -51,7 +51,6 @@ namespace ArcheryManager.DroidTest.StepDefinition
         [Then(@"le timer est à (.*) sec")]
         public void AlorsLeTimerEstASec(int p0)
         {
-            TestSetting.App.WaitForElement("TimerLabel");
             Assert.AreEqual(p0.ToString(), TestSetting.App.Query("TimerLabel").First().Text);
         }
 
