@@ -96,7 +96,7 @@ namespace ArcheryManager.Pages
             {
                 Command = new Command(SongSelectorButton_Click),
                 BindingContext = TimerSetting,
-                Text = SongSelectorToolBarItemName,
+                Text = AppResources.Song,
             };
 
             var list = timePicker.ItemsSource as List<double>;
@@ -117,7 +117,7 @@ namespace ArcheryManager.Pages
             {
                 Command = new Command(TimeSelectorButton_Click),
                 BindingContext = TimerSetting,
-                Text = TimeSelectorToolBarItemName,
+                Text = AppResources.Time,
             };
 
             var list = timePicker.ItemsSource as List<double>;

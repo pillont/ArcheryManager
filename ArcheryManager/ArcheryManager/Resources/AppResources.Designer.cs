@@ -260,6 +260,15 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Song.
+        /// </summary>
+        internal static string Song {
+            get {
+                return ResourceManager.GetString("Song", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Time.
         /// </summary>
         internal static string Time {

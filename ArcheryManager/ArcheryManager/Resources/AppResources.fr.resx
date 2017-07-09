@@ -168,6 +168,9 @@
   <data name="ShootOut" xml:space="preserve">
     <value>Barrage</value>
   </data>
+  <data name="Song" xml:space="preserve">
+    <value>Son</value>
+  </data>
   <data name="Time" xml:space="preserve">
     <value>Temps</value>
   </data>

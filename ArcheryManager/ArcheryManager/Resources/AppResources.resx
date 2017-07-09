@@ -183,6 +183,9 @@
   <data name="ShootOut" xml:space="preserve">
     <value>ShoutOut</value>
   </data>
+  <data name="Song" xml:space="preserve">
+    <value>Song</value>
+  </data>
   <data name="Time" xml:space="preserve">
     <value>Time</value>
   </data>
