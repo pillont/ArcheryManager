@@ -114,7 +114,7 @@ namespace ArcheryManager.DroidTest.Target
             Assert.LessOrEqual(171, average.Rect.Height);
             Assert.LessOrEqual(342, average.Rect.Width);
 
-            Assert.GreaterOrEqual(296, average.Rect.CenterX);
+            Assert.GreaterOrEqual(298, average.Rect.CenterX);
             Assert.GreaterOrEqual(673, average.Rect.CenterY);
             Assert.GreaterOrEqual(181, average.Rect.Height);
             Assert.GreaterOrEqual(350, average.Rect.Width);
