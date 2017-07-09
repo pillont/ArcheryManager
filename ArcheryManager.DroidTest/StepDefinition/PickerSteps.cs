@@ -1,4 +1,3 @@
-﻿using System.Linq;
 using TechTalk.SpecFlow;
 
 namespace ArcheryManager.DroidTest.StepDefinition
