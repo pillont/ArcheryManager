@@ -49,7 +49,6 @@
     </Compile>
     <Compile Include="CustomControls\AverageCanvas.cs" />
     <Compile Include="CustomControls\NumericPicker.cs" />
-    <Compile Include="CustomControls\WaveControl.cs" />
     <Compile Include="Factories\ScoreListFactory.cs" />
     <Compile Include="Factories\TargetFactory.cs" />
     <Compile Include="Interactions\Behaviors\CustomBehavior.cs" />
@@ -68,6 +67,7 @@
     </Compile>
     <Compile Include="CustomControls\UniformGrid.cs" />
     <Compile Include="Factories\ArrowFactory.cs" />
+    <Compile Include="Interactions\Behaviors\WaveBehavior.cs" />
     <Compile Include="Interactions\CustomPanGestureReconizer.cs" />
     <Compile Include="Interactions\CustomPanUpdatedEventArgs.cs" />
     <Compile Include="Pages\SettingTargetPage.xaml.cs">
