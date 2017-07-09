@@ -61,7 +61,6 @@ namespace ArcheryManager.Interactions.Behaviors
 
         #endregion logical properties
 
-        private WaveControl _waveLabel;
         private readonly TimerPageSetting Setting;
 
         public TimerBehavior(TimerPageSetting setting)
@@ -69,10 +68,12 @@ namespace ArcheryManager.Interactions.Behaviors
             this.Setting = setting;
         }
 
+        private WaveBehavior _waveBehavior;
+
         protected override void OnAttachedTo(CustomTimer bindable)
         {
             base.OnAttachedTo(bindable);
-            _waveLabel = associatedObject.WaveControl;
+            _waveBehavior = associatedObject.WaveBehavior;
         }
 
         #region public function
@@ -108,7 +109,7 @@ namespace ArcheryManager.Interactions.Behaviors
             associatedObject.IsStopped = true;
             //TODO wait one second to be sure the current timer while stopped
 
-            _waveLabel.NextWave();
+            _waveBehavior.NextWave();
         }
 
         private void PlaySong()
@@ -196,7 +197,8 @@ namespace ArcheryManager.Interactions.Behaviors
             if (!res) // stop the timer in the end of this function
             {
                 SettingStop();
-                _waveLabel.NextWave();
+
+                _waveBehavior.NextWave();
                 PlaySong();
             }
 

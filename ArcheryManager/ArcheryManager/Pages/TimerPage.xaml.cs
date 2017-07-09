@@ -17,7 +17,8 @@ namespace ArcheryManager.Pages
         {
             ABC,
             ABCD,
-            Shootout
+            VS,
+            Shootout,
         };
 
         private const int ShootoutTime = 40;
@@ -162,27 +163,37 @@ namespace ArcheryManager.Pages
 
         private void WaveButton_Click()
         {
-            TimerSetting.Mode = (TimerMode)(((int)TimerSetting.Mode + 1) % 3);
+            Behavior.Stop();
+
+            int count = Enum.GetNames(typeof(TimerMode)).Length;
+            TimerSetting.Mode = (TimerMode)(((int)TimerSetting.Mode + 1) % count);
 
             switch (TimerSetting.Mode)
             {
                 case TimerMode.ABC:
                     timer.Time = TimerSetting.Time;
                     timer.ShowWaitingTime = true;
-                    timer.WaveControl.StopWave();
+                    timer.WaveBehavior.StopWave();
                     break;
 
                 case TimerMode.ABCD:
-                    timer.WaveControl.StartWave();
+                    timer.WaveBehavior.StartWave();
+                    timer.WaveBehavior.DuelMode = false;
                     timer.Time = TimerSetting.Time;
                     timer.ShowWaitingTime = true;
+                    break;
 
+                case TimerMode.VS:
+                    timer.WaveBehavior.StartWave();
+                    timer.WaveBehavior.DuelMode = true;
+                    timer.Time = TimerSetting.Time;
+                    timer.ShowWaitingTime = true;
                     break;
 
                 case TimerMode.Shootout:
                     timer.Time = ShootoutTime;
                     timer.ShowWaitingTime = false;
-                    timer.WaveControl.StopWave();
+                    timer.WaveBehavior.StopWave();
                     break;
             }
         }
