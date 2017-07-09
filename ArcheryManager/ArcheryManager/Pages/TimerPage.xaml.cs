@@ -18,8 +18,8 @@ namespace ArcheryManager.Pages
         {
             AppResources.ABC,
             AppResources.ABCD,
-            AppResources.ShootOut,
             AppResources.Duel,
+            AppResources.ShootOut,
         };
 
         private const int ShootoutTime = 40;
@@ -173,6 +173,14 @@ namespace ArcheryManager.Pages
             else if (TimerSetting.Mode == AppResources.ABCD)
             {
                 timer.WaveBehavior.StartWave();
+                timer.WaveBehavior.DuelMode = false;
+                timer.Time = TimerSetting.Time;
+                timer.ShowWaitingTime = true;
+            }
+            else if (TimerSetting.Mode == AppResources.Duel)
+            {
+                timer.WaveBehavior.StartWave();
+                timer.WaveBehavior.DuelMode = true;
                 timer.Time = TimerSetting.Time;
                 timer.ShowWaitingTime = true;
             }
