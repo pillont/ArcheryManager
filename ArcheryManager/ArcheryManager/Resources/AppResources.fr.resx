@@ -126,14 +126,32 @@
   <data name="ArrowsInDecreasingOrder" xml:space="preserve">
     <value>Flèches dans l'ordre décroissant</value>
   </data>
+  <data name="ButtonCounter" xml:space="preserve">
+    <value>Zapette</value>
+  </data>
   <data name="Duel" xml:space="preserve">
     <value>Duel</value>
+  </data>
+  <data name="EnglishTarget" xml:space="preserve">
+    <value>Cible anglaise</value>
+  </data>
+  <data name="FieldTarget" xml:space="preserve">
+    <value>Cible campagne</value>
   </data>
   <data name="Flight" xml:space="preserve">
     <value>Volée</value>
   </data>
   <data name="HaveFixNumber" xml:space="preserve">
     <value>Nombre fixe</value>
+  </data>
+  <data name="IndoorCompoundTarget" xml:space="preserve">
+    <value>Cible salle poulie</value>
+  </data>
+  <data name="IndoorRecurveTarget" xml:space="preserve">
+    <value>Cible salle classique</value>
+  </data>
+  <data name="MoreOptions" xml:space="preserve">
+    <value>Plus d'options</value>
   </data>
   <data name="NewFlight" xml:space="preserve">
     <value>Volée suivante</value>
@@ -151,7 +169,7 @@
     <value>Tout suppr </value>
   </data>
   <data name="RemoveLast" xml:space="preserve">
-    <value>Suppr la dernière</value>
+    <value>Supprimer</value>
   </data>
   <data name="Replay" xml:space="preserve">
     <value>Relancer</value>
@@ -173,6 +191,9 @@
   </data>
   <data name="Time" xml:space="preserve">
     <value>Temps</value>
+  </data>
+  <data name="Timer" xml:space="preserve">
+    <value>Chronomètre</value>
   </data>
   <data name="Total" xml:space="preserve">
     <value>Total</value>

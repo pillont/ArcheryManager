@@ -150,6 +150,9 @@
   <data name="IndoorRecurveTarget" xml:space="preserve">
     <value>Indoor recurve target</value>
   </data>
+  <data name="MoreOptions" xml:space="preserve">
+    <value>More options</value>
+  </data>
   <data name="NewFlight" xml:space="preserve">
     <value>New Flight</value>
   </data>

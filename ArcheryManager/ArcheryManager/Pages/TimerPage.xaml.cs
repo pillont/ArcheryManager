@@ -159,52 +159,20 @@ namespace ArcheryManager.Pages
 
         private void WaveButton_Click()
         {
-<<<<<<< HEAD
             Behavior.Stop();
 
-            int count = Enum.GetNames(typeof(TimerMode)).Length;
-            TimerSetting.Mode = (TimerMode)(((int)TimerSetting.Mode + 1) % count);
-=======
             int currentIndex = TimerMode.IndexOf(TimerSetting.Mode);
             TimerSetting.Mode = TimerMode[(int)(currentIndex + 1) % TimerMode.Count];
->>>>>>> translate all text in multilanguage
 
             if (TimerSetting.Mode == AppResources.ABC)
             {
-<<<<<<< HEAD
-                case TimerMode.ABC:
-                    timer.Time = TimerSetting.Time;
+                timer.Time = TimerSetting.Time;
                 timer.ShowWaitingTime = true;
                 timer.WaveBehavior.StopWave();
-                break;
-
-                case TimerMode.ABCD:
-                    timer.WaveBehavior.StartWave();
-                timer.WaveBehavior.DuelMode = false;
-                timer.Time = TimerSetting.Time;
-                timer.ShowWaitingTime = true;
-                break;
-
-                case TimerMode.VS:
-                    timer.WaveBehavior.StartWave();
-                timer.WaveBehavior.DuelMode = true;
-                timer.Time = TimerSetting.Time;
-                timer.ShowWaitingTime = true;
-                break;
-
-                case TimerMode.Shootout:
-                    timer.Time = ShootoutTime;
-                timer.ShowWaitingTime = false;
-                timer.WaveBehavior.StopWave();
-                break;
-=======
-                timer.Time = TimerSetting.Time;
-                timer.ShowWaitingTime = true;
-                timer.WaveControl.StopWave();
             }
             else if (TimerSetting.Mode == AppResources.ABCD)
             {
-                timer.WaveControl.StartWave();
+                timer.WaveBehavior.StartWave();
                 timer.Time = TimerSetting.Time;
                 timer.ShowWaitingTime = true;
             }
@@ -212,8 +180,7 @@ namespace ArcheryManager.Pages
             {
                 timer.Time = ShootoutTime;
                 timer.ShowWaitingTime = false;
-                timer.WaveControl.StopWave();
->>>>>>> translate all text in multilanguage
+                timer.WaveBehavior.StopWave();
             }
         }
 

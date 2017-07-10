@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Xamarin.UITest.Android;
 using System.Linq;
+using ArcheryManager.Resources;
 
 namespace ArcheryManager.DroidTest.Target
 {
@@ -22,8 +23,8 @@ namespace ArcheryManager.DroidTest.Target
         public void SettingButtonsTest()
         {
             app.WaitForElement("scoreList"); //update visual
-            app.Tap("More options");
-            app.Tap("Settings");
+            app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
+            app.Tap(TranslateExtension.GetTextResource("Settings"));
 
             app.WaitForElement("numberArrowEntry");
             app.WaitForElement("ArrowsOrderSwitch");
@@ -35,8 +36,9 @@ namespace ArcheryManager.DroidTest.Target
         public void AverageVisibilityTest()
         {
             app.WaitForElement("scoreList"); //update visual
-            app.Tap("More options");
-            app.Tap("Settings");
+
+            app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
+            app.Tap(TranslateExtension.GetTextResource("Settings"));
             app.Tap("VisibilityAverageSwitch");
             app.Back();
 
@@ -84,8 +86,8 @@ namespace ArcheryManager.DroidTest.Target
         public void AveragePositionTest()
         {
             app.WaitForElement("scoreList"); //update visual
-            app.Tap("More options");
-            app.Tap("Settings");
+            app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
+            app.Tap(TranslateExtension.GetTextResource("Settings"));
             app.Tap("VisibilityAverageSwitch");
             app.Back();
 
@@ -124,8 +126,8 @@ namespace ArcheryManager.DroidTest.Target
         public void AveragePositionMultiFlightTest()
         {
             app.WaitForElement("scoreList"); //update visual
-            app.Tap("More options");
-            app.Tap("Settings");
+            app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
+            app.Tap(TranslateExtension.GetTextResource("Settings"));
             app.Tap("VisibilityAverageSwitch");
             app.Back();
 
@@ -171,8 +173,8 @@ namespace ArcheryManager.DroidTest.Target
         public void AveragePositionAllArrowTest()
         {
             app.WaitForElement("scoreList"); //update visual
-            app.Tap("More options");
-            app.Tap("Settings");
+            app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
+            app.Tap(TranslateExtension.GetTextResource("Settings"));
             app.Tap("VisibilityAverageSwitch");
             app.Tap("ShowAllArrowsSwitch");
             app.Back();

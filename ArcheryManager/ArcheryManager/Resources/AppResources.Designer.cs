@@ -161,6 +161,15 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à More options.
+        /// </summary>
+        internal static string MoreOptions {
+            get {
+                return ResourceManager.GetString("MoreOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à New Flight.
         /// </summary>
         internal static string NewFlight {
