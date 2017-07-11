@@ -31,8 +31,7 @@ namespace ArcheryManager.DroidTest.Features.Targets
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "RestartCounter", "\tIn order to avoid silly mistakes\r\n\tAs a math idiot\r\n\tI want to be told the sum o" +
-                    "f two numbers", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("fr-FR"), "RestartCounter", "\ttest la fonctionnalité de restart d un tir compté", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -65,22 +64,87 @@ namespace ArcheryManager.DroidTest.Features.Targets
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Add two numbers")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void AddTwoNumbers()
+        [NUnit.Framework.DescriptionAttribute("test de remise à zéro")]
+        public virtual void TestDeRemiseAZero()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", new string[] {
-                        "mytag"});
-#line 7
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test de remise à zéro", ((string[])(null)));
+#line 5
 this.ScenarioSetup(scenarioInfo);
+#line 6
+ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 7
+ testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 8
- testRunner.Given("I have entered 50 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.And("je click sur l\'option toutes flèches", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 9
- testRunner.And("I have entered 70 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 10
- testRunner.When("I press add", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 11
- testRunner.Then("the result should be 120 on the screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("je tire une flèche en 300, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 12
+ testRunner.And("je tire une flèche en 200, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 13
+ testRunner.And("je tire une flèche en 100, 300", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 14
+ testRunner.And("Je click sur le bouton nouvelle volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 16
+ testRunner.And("je tire une flèche en 300, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 17
+ testRunner.And("je tire une flèche en 200, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 18
+ testRunner.And("je tire une flèche en 100, 300", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 20
+ testRunner.And("je click sur le bouton de restart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 22
+ testRunner.Then("le nombre de flèches actuelles sur la cible est de 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 23
+ testRunner.And("le nombre de flèches précèdente sur la cible est de 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 24
+ testRunner.And("le score total est de 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 25
+ testRunner.And("le score de la volée est de 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test reprise après un restart")]
+        public virtual void TestRepriseApresUnRestart()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test reprise après un restart", ((string[])(null)));
+#line 27
+this.ScenarioSetup(scenarioInfo);
+#line 28
+ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 29
+ testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 30
+ testRunner.And("je click sur l\'option toutes flèches", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 31
+ testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 33
+ testRunner.And("je tire une flèche en 300, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 34
+ testRunner.And("je tire une flèche en 200, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 35
+ testRunner.And("je tire une flèche en 100, 300", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 36
+ testRunner.And("Je click sur le bouton nouvelle volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 38
+ testRunner.And("je click sur le bouton de restart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 40
+ testRunner.And("je tire une flèche en 300, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 41
+ testRunner.And("je tire une flèche en 200, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 42
+ testRunner.And("je tire une flèche en 100, 300", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 45
+ testRunner.Then("le nombre de flèches actuelles sur la cible est de 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 46
+ testRunner.And("le nombre de flèches précèdente sur la cible est de 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 47
+ testRunner.And("le score total est de 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 48
+ testRunner.And("le score de la volée est de 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line hidden
             this.ScenarioCleanup();
         }
