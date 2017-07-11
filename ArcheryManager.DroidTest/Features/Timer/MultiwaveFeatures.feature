@@ -17,6 +17,7 @@ Scénario: test de changement d'option en Duel
 	Quand J'ouvre une page timer
 	Et je click sur l'option de vague
 	Et je click sur l'option de vague
+	Et je click sur l'option de vague
 	Alors l'option de vague est en VS
 
 	

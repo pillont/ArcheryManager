@@ -19,7 +19,7 @@ namespace ArcheryManager.Pages
             AppResources.ABC,
             AppResources.ABCD,
             AppResources.ShootOut,
-            //AppResources.Duel,
+            AppResources.Duel,
         };
 
         private const int ShootoutTime = 40;
