@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using ArcheryManager.Resources;
+using NUnit.Framework;
 using System.Linq;
 using Xamarin.UITest.Android;
 
@@ -60,8 +61,8 @@ namespace ArcheryManager.DroidTest.Target
         [Test]
         public void InitCommandTargetElement()
         {
-            app.WaitForElement("Remove all");
-            app.WaitForElement("Remove last");
+            app.WaitForElement(TranslateExtension.GetTextResource("RemoveAll"));
+            app.WaitForElement(TranslateExtension.GetTextResource("RemoveLast"));
         }
 
         [Test]
@@ -99,12 +100,12 @@ namespace ArcheryManager.DroidTest.Target
             app.DragCoordinates(500, 800, 600, 900);
             Assert.AreEqual(2, app.Query(e => e.Marked("scoreList").Child()).Count());
 
-            app.Tap("Remove last");
+            app.Tap(TranslateExtension.GetTextResource("RemoveLast"));
 
             Assert.AreEqual(1, app.Query(e => e.Marked("scoreList").Child()).Count());
             Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child().Child(1).Child()).Last().Text);
 
-            app.Tap("Remove last");
+            app.Tap(TranslateExtension.GetTextResource("RemoveLast"));
 
             Assert.AreEqual(0, app.Query(e => e.Marked("scoreList").Child()).Count());
         }
@@ -128,11 +129,11 @@ namespace ArcheryManager.DroidTest.Target
             Assert.AreEqual("18", app.Query("FlightScore").First().Text);
 
             //remove arrow
-            app.Tap("Remove last");
+            app.Tap(TranslateExtension.GetTextResource("RemoveLast"));
             Assert.AreEqual("10", app.Query("FlightScore").First().Text);
 
             //remove all
-            app.Tap("Remove all");
+            app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
             Assert.AreEqual("0", app.Query("FlightScore").First().Text);
         }
 
@@ -150,7 +151,7 @@ namespace ArcheryManager.DroidTest.Target
             app.DragCoordinates(500, 800, 600, 900);
             Assert.AreEqual("18", app.Query("TotalScore").First().Text);
 
-            app.Tap("New Flight");
+            app.Tap(TranslateExtension.GetTextResource("NewFlight"));
 
             Assert.AreEqual("0", app.Query("FlightScore").First().Text);
             Assert.AreEqual("18", app.Query("TotalScore").First().Text);
@@ -166,12 +167,12 @@ namespace ArcheryManager.DroidTest.Target
             Assert.AreEqual("36", app.Query("TotalScore").First().Text);
 
             //remove arrow
-            app.Tap("Remove last");
+            app.Tap(TranslateExtension.GetTextResource("RemoveLast"));
             Assert.AreEqual("10", app.Query("FlightScore").First().Text);
             Assert.AreEqual("28", app.Query("TotalScore").First().Text);
 
             //remove all
-            app.Tap("Remove all");
+            app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
             Assert.AreEqual("0", app.Query("FlightScore").First().Text);
             Assert.AreEqual("18", app.Query("TotalScore").First().Text);
         }

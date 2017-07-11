@@ -46,37 +46,38 @@ namespace ArcheryManager.DroidTest.StepDefinition
         [Then(@"l'option de vague est en Shootout")]
         public void AlorsLOptionDeVagueEstEnShootout()
         {
-            Assert.AreEqual(1, TestSetting.App.Query(TranslateExtension.GetTextResource("Shootout")).Count());
+            Assert.AreEqual(1, TestSetting.App.Query(TranslateExtension.GetTextResource("ShootOut")).Count());
         }
 
         [Then(@"l'option de vague est en VS")]
         public void AlorsLOptionDeVagueEstEnVS()
         {
-            Assert.AreEqual(1, TestSetting.App.Query("VS").Count());
+            TestSetting.App.WaitForElement(TranslateExtension.GetTextResource("Duel"));
         }
 
         [Then(@"le timer est à (.*) sec")]
         public void AlorsLeTimerEstASec(int p0)
         {
-            var query = TestSetting.App.Query("TimerLabel");
-            if (query.Count() == 0)
+            var res = TestSetting.App.Query("TimerLabel");
+            if (res.Count() == 0)
             {
                 TestSetting.App.WaitForElement("TimerLabel");
-                query = TestSetting.App.Query("TimerLabel");
+                res = TestSetting.App.Query(e => e.Marked("TimerLabel"));
             }
-            Assert.AreEqual(p0.ToString(), query.First().Text);
+            Assert.AreEqual(p0.ToString(), res.First().Text);
         }
 
         [Then(@"le text de vague est vide")]
         public void AlorsLeTextDeVagueEstVide()
         {
             var res = TestSetting.App.Query("WaveText");
-            Assert.IsTrue(res.Count() == 0 || res.Count() == 1 && string.IsNullOrEmpty(res.First().Text));
+            Assert.IsTrue(res.Count() == 0 || (res.Count() == 1 && string.IsNullOrEmpty(res.First().Text)));
         }
 
         [Then(@"le texte de vague contient (.*)")]
         public void AlorsLeTexteDeVagueContientCD(string p0)
         {
+            TestSetting.App.WaitForElement("WaveText");
             Assert.AreEqual(p0, TestSetting.App.Query("WaveText").First().Text);
         }
 

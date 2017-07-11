@@ -206,6 +206,15 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Remove.
+        /// </summary>
+        internal static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Remove all.
         /// </summary>
         internal static string RemoveAll {
@@ -301,6 +310,15 @@ namespace ArcheryManager.Resources {
         internal static string Total {
             get {
                 return ResourceManager.GetString("Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à UnSelect.
+        /// </summary>
+        internal static string UnSelect {
+            get {
+                return ResourceManager.GetString("UnSelect", resourceCulture);
             }
         }
     }

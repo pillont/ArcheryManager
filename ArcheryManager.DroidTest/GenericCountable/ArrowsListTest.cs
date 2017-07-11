@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using ArcheryManager.Resources;
+using NUnit.Framework;
 using System.Linq;
 using Xamarin.UITest.Android;
 
@@ -187,25 +188,25 @@ namespace ArcheryManager.DroidTest.GenericCountable
             Assert.AreEqual(448, app.WaitForElement("9").Last().Rect.CenterX);
 
             //remove arrow
-            app.Tap("Remove last");
+            app.Tap(TranslateExtension.GetTextResource("RemoveLast"));
 
             Assert.AreEqual(58, app.WaitForElement("9").First().Rect.CenterX);
             Assert.AreEqual(188, app.WaitForElement("8").Last().Rect.CenterX);
             Assert.AreEqual(318, app.WaitForElement("7").Last().Rect.CenterX);
 
             //remove arrow
-            app.Tap("Remove last");
+            app.Tap(TranslateExtension.GetTextResource("RemoveLast"));
 
             Assert.AreEqual(58, app.WaitForElement("9").First().Rect.CenterX);
             Assert.AreEqual(188, app.WaitForElement("8").Last().Rect.CenterX);
 
             //remove arrow
-            app.Tap("Remove last");
+            app.Tap(TranslateExtension.GetTextResource("RemoveLast"));
 
             Assert.AreEqual(58, app.WaitForElement("9").First().Rect.CenterX);
 
             //remove arrow
-            app.Tap("Remove last");
+            app.Tap(TranslateExtension.GetTextResource("RemoveLast"));
 
             Assert.AreEqual(3, app.WaitForElement("10").Count());
             Assert.AreEqual(1, app.WaitForElement("7").Count());
@@ -239,7 +240,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
 
             //remove arrow
             app.Tap(c => c.Marked("9").Index(1));
-            app.Tap("Remove");
+            app.Tap(TranslateExtension.GetTextResource("Remove"));
 
             Assert.AreEqual(58, app.WaitForElement("9").First().Rect.CenterX);
             Assert.AreEqual(188, app.WaitForElement("8").Last().Rect.CenterX);
@@ -247,20 +248,20 @@ namespace ArcheryManager.DroidTest.GenericCountable
 
             //remove arrow
             app.Tap("7");
-            app.Tap("Remove");
+            app.Tap(TranslateExtension.GetTextResource("Remove"));
 
             Assert.AreEqual(58, app.WaitForElement("9").First().Rect.CenterX);
             Assert.AreEqual(188, app.WaitForElement("8").Last().Rect.CenterX);
 
             //remove arrow
             app.Tap(c => c.Marked("8"));
-            app.Tap("Remove");
+            app.Tap(TranslateExtension.GetTextResource("Remove"));
 
             Assert.AreEqual(58, app.WaitForElement("9").First().Rect.CenterX);
 
             //remove arrow
             app.Tap(c => c.Marked("9"));
-            app.Tap("Remove");
+            app.Tap(TranslateExtension.GetTextResource("Remove"));
 
             Assert.AreEqual(3, app.WaitForElement("10").Count());
             Assert.AreEqual(1, app.WaitForElement("7").Count());

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using ArcheryManager.Resources;
+using NUnit.Framework;
 using System.Linq;
 using Xamarin.UITest.Android;
 
@@ -19,12 +20,13 @@ namespace ArcheryManager.DroidTest.GenericCountable
 
         [Test]
         public void UnSelectButtonsVisibilityTest()
+
         {
             var list = app.WaitForElement("scoreList");
 
             // not visible
-            app.WaitForNoElement("Unselect");
-            app.WaitForNoElement("Remove");
+            app.WaitForNoElement(TranslateExtension.GetTextResource("UnSelect"));
+            app.WaitForNoElement(TranslateExtension.GetTextResource("Remove"));
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 450, 750);
@@ -34,15 +36,15 @@ namespace ArcheryManager.DroidTest.GenericCountable
             app.Tap(e => e.Marked("scoreList").Child(1).Child(1).Child());
 
             // visible
-            app.WaitForElement("Unselect");
-            app.WaitForElement("Remove");
+            app.WaitForElement(TranslateExtension.GetTextResource("UnSelect"));
+            app.WaitForElement(TranslateExtension.GetTextResource("Remove"));
 
             //un select all
-            app.Tap("Unselect");
+            app.Tap(TranslateExtension.GetTextResource("UnSelect"));
 
             // not visible
-            app.WaitForNoElement("Unselect");
-            app.WaitForNoElement("Remove");
+            app.WaitForNoElement(TranslateExtension.GetTextResource("UnSelect"));
+            app.WaitForNoElement(TranslateExtension.GetTextResource("Remove"));
         }
 
         [Test]
@@ -51,33 +53,34 @@ namespace ArcheryManager.DroidTest.GenericCountable
             var list = app.WaitForElement("scoreList");
 
             // not visible
-            app.WaitForNoElement("Unselect");
-            app.WaitForNoElement("Remove");
+            app.WaitForNoElement(TranslateExtension.GetTextResource("UnSelect"));
+            app.WaitForNoElement(TranslateExtension.GetTextResource("Remove"));
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 450, 750);
             app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
 
             // visible
-            app.WaitForElement("Unselect");
-            app.WaitForElement("Remove");
+            app.WaitForElement(TranslateExtension.GetTextResource("UnSelect"));
+            app.WaitForElement(TranslateExtension.GetTextResource("Remove"));
 
             // remove arrow
-            app.Tap("Remove");
+            app.Tap(TranslateExtension.GetTextResource("Remove"));
 
             // not visible
-            app.WaitForNoElement("Unselect");
-            app.WaitForNoElement("Remove");
+            app.WaitForNoElement(TranslateExtension.GetTextResource("UnSelect"));
+            app.WaitForNoElement(TranslateExtension.GetTextResource("Remove"));
         }
 
         [Test]
-        public void TapUnSelection_ButtonsVisibilityTest()
+        public void UnSelection_ButtonsVisibilityTest()
+
         {
             var list = app.WaitForElement("scoreList");
 
             // not visible
-            app.WaitForNoElement("Unselect");
-            app.WaitForNoElement("Remove");
+            app.WaitForNoElement(TranslateExtension.GetTextResource("UnSelect"));
+            app.WaitForNoElement(TranslateExtension.GetTextResource("Remove"));
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 450, 750);
@@ -86,22 +89,22 @@ namespace ArcheryManager.DroidTest.GenericCountable
             app.Tap(e => e.Marked("scoreList").Child(1).Child(1).Child());
 
             // visible
-            app.WaitForElement("Unselect");
-            app.WaitForElement("Remove");
+            app.WaitForElement(TranslateExtension.GetTextResource("UnSelect"));
+            app.WaitForElement(TranslateExtension.GetTextResource("Remove"));
 
-            // unselect one
+            // TranslateExtension.GetTextResource("UnSelect") one
             app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
 
             // visible
-            app.WaitForElement("Unselect");
-            app.WaitForElement("Remove");
+            app.WaitForElement(TranslateExtension.GetTextResource("UnSelect"));
+            app.WaitForElement(TranslateExtension.GetTextResource("Remove"));
 
-            // unselect all
+            // TranslateExtension.GetTextResource("UnSelect") all
             app.Tap(e => e.Marked("scoreList").Child(1).Child(1).Child());
 
             // not visible
-            app.WaitForNoElement("Unselect");
-            app.WaitForNoElement("Remove");
+            app.WaitForNoElement(TranslateExtension.GetTextResource("UnSelect"));
+            app.WaitForNoElement(TranslateExtension.GetTextResource("Remove"));
         }
 
         [Test]
@@ -125,7 +128,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
 
             //remove last
             app.Tap(e => e.Marked("scoreList").Child(3).Child(1).Child());
-            app.Tap("Remove");
+            app.Tap(TranslateExtension.GetTextResource("Remove"));
 
             Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Text);
             Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Text);
@@ -133,14 +136,15 @@ namespace ArcheryManager.DroidTest.GenericCountable
 
             //remove first
             app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
-            app.Tap("Remove");
+            app.Tap(TranslateExtension.GetTextResource("Remove"));
 
             Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Text);
             Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Text);
         }
 
         [Test]
-        public void RemoveWithUnSelectTest()
+        public void UnSelectTest()
+
         {
             var list = app.WaitForElement("scoreList");
 
@@ -163,10 +167,10 @@ namespace ArcheryManager.DroidTest.GenericCountable
             app.Tap(e => e.Marked("scoreList").Child(1).Child(1).Child());
             app.Tap(e => e.Marked("scoreList").Child(2).Child(1).Child());
 
-            //unselect 0,1
+            //TranslateExtension.GetTextResource("UnSelect") 0,1
             app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
             app.Tap(e => e.Marked("scoreList").Child(1).Child(1).Child());
-            app.Tap("Remove");
+            app.Tap(TranslateExtension.GetTextResource("Remove"));
 
             // wait 0,1,3
             Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Text);
@@ -215,7 +219,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
 
             // remove first
             app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
-            app.Tap("Remove"); // toolbar items to remove
+            app.Tap(TranslateExtension.GetTextResource("Remove")); // toolbar items to remove
 
             rec1 = app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Rect;
             rec2 = app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Rect;

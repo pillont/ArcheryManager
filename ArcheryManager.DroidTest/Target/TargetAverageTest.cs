@@ -55,10 +55,10 @@ namespace ArcheryManager.DroidTest.Target
             app.DragCoordinates(300, 800, 300, 1000);
             app.WaitForElement("averageCanvas");
 
-            app.Tap("Remove last");
+            app.Tap(TranslateExtension.GetTextResource("RemoveLast"));
             app.WaitForElement("averageCanvas");
 
-            app.Tap("Remove last");
+            app.Tap(TranslateExtension.GetTextResource("RemoveLast"));
             app.WaitForNoElement("averageCanvas");
 
             app.DragCoordinates(300, 800, 400, 800);
@@ -68,17 +68,17 @@ namespace ArcheryManager.DroidTest.Target
             app.WaitForElement("averageCanvas");
 
             app.Tap(c => c.Marked("9").Index(1));
-            app.Tap("Remove");
+            app.Tap(TranslateExtension.GetTextResource("Remove"));
             app.WaitForElement("averageCanvas");
 
             app.Tap(c => c.Marked("9").Index(0));
-            app.Tap("Remove");
+            app.Tap(TranslateExtension.GetTextResource("Remove"));
             app.WaitForNoElement("averageCanvas");
 
             app.DragCoordinates(300, 800, 400, 800);
             app.WaitForElement("averageCanvas");
 
-            app.Tap("Remove all");
+            app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
             app.WaitForNoElement("averageCanvas");
         }
 
@@ -138,7 +138,7 @@ namespace ArcheryManager.DroidTest.Target
             app.DragCoordinates(300, 800, 700, 900);
             app.DragCoordinates(400, 800, 770, 800);
 
-            app.Tap("New Flight");
+            app.Tap(TranslateExtension.GetTextResource("NewFlight"));
 
             app.DragCoordinates(300, 800, 400, 900);
             app.DragCoordinates(400, 800, 300, 700);
@@ -196,7 +196,7 @@ namespace ArcheryManager.DroidTest.Target
             Assert.GreaterOrEqual(250, average.Rect.Height);
             Assert.GreaterOrEqual(248, average.Rect.Width);
 
-            app.Tap("New Flight");
+            app.Tap(TranslateExtension.GetTextResource("NewFlight"));
 
             app.DragCoordinates(300, 800, 600, 1000);
             app.DragCoordinates(400, 800, 800, 700);
