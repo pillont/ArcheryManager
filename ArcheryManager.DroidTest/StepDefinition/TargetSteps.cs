@@ -44,7 +44,7 @@ namespace ArcheryManager.DroidTest.StepDefinition
         [Then(@"le bouton nouvelle volée est désactivé")]
         public void AlorsLeBoutonNouvelleVoleeEstDesactive()
         {
-            Assert.AreEqual(0, TranslateExtension.GetTextResource("NewFlight").Count());
+            Assert.AreEqual(0, TestSetting.App.Query(TranslateExtension.GetTextResource("NewFlight")).Count());
         }
 
         [Then(@"le bouton nouvelle volée est activé")]

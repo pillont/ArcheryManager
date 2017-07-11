@@ -10,6 +10,6 @@
         <Button Text="{resources:Translate FieldTarget}" AutomationId="fieldTargetButton" x:Name="fieldTargetButton" Clicked="Target_Click" />
         <Button Text="{resources:Translate IndoorRecurveTarget}" AutomationId="indoorRecurveTargetButton" x:Name="indoorRecurveTargetButton" Clicked="Target_Click" />
         <Button Text="{resources:Translate IndoorCompoundTarget}" AutomationId="indoorCompoundTargetButton" x:Name="indoorCompoundTargetButton" Clicked="Target_Click" />
-        <Button Text="button counter " AutomationId="ButtonCounterButton" Clicked="ButtonCounter_Clicked" />
+        <Button Text="{resources:Translate ButtonCounter}" AutomationId="ButtonCounterButton" Clicked="ButtonCounter_Clicked" />
     </StackLayout>
 </ContentPage>
