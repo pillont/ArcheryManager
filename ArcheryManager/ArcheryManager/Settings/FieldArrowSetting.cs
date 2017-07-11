@@ -9,6 +9,7 @@ namespace ArcheryManager.Settings
         public int ZoneCount => 7;
 
         private const string MissScore = "M";
+        private const int FieldMaxValue = 6;
         private static FieldArrowSetting instance;
 
         public static FieldArrowSetting Instance
@@ -21,6 +22,14 @@ namespace ArcheryManager.Settings
                 }
 
                 return instance;
+            }
+        }
+
+        public int MaxScore
+        {
+            get
+            {
+                return FieldMaxValue;
             }
         }
 

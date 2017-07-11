@@ -10,15 +10,6 @@ namespace ArcheryManager.CustomControls
 {
     public partial class CounterButtons : ContentView
     {
-        public static readonly BindableProperty SettingProperty =
-                      BindableProperty.Create(nameof(Setting), typeof(IArrowSetting), typeof(CounterButtons), null);
-
-        public IArrowSetting Setting
-        {
-            get { return (IArrowSetting)GetValue(SettingProperty); }
-            set { SetValue(SettingProperty, value); }
-        }
-
         public static readonly BindableProperty CounterProperty =
                       BindableProperty.Create(nameof(Counter), typeof(ScoreCounter), typeof(CounterButtons), null);
 
@@ -38,7 +29,7 @@ namespace ArcheryManager.CustomControls
         {
             base.OnPropertyChanged(propertyName);
 
-            if (propertyName == nameof(Setting))
+            if (propertyName == nameof(Counter))
             {
                 DrawButtons();
             }
@@ -61,7 +52,7 @@ namespace ArcheryManager.CustomControls
 
                 if (view.BindingContext is Arrow buttonArrow)
                 {
-                    var arrow = new Arrow(buttonArrow.Index, Counter.CurrentArrows.Count, Setting);
+                    var arrow = new Arrow(buttonArrow.Index, Counter.CurrentArrows.Count);
                     Counter.AddArrow(arrow);
                 }
             }
@@ -71,7 +62,7 @@ namespace ArcheryManager.CustomControls
         {
             var buttonsData = new ObservableCollection<Arrow>();
 
-            for (int i = 1; i < Setting.ZoneCount; i++)
+            for (int i = 1; i < Counter.ArrowSetting.ZoneCount; i++)
             {
                 Arrow arrow = GetArrow(i);
                 buttonsData.Add(arrow);
@@ -84,11 +75,8 @@ namespace ArcheryManager.CustomControls
 
         private Arrow GetArrow(int i)
         {
-            string score = Setting.ScoreByIndex(i);
-            int value = Setting.ValueByScore(score);
-            var color = Setting.ColorOf(score);
             int numberInFlight = Counter.CurrentArrows.Count;
-            var arrow = new Arrow(i, numberInFlight, Setting);
+            var arrow = new Arrow(i, numberInFlight);
             return arrow;
         }
     }

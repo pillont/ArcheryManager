@@ -5,6 +5,7 @@ namespace ArcheryManager.Interfaces
     public interface IArrowSetting
     {
         int ZoneCount { get; }
+        int MaxScore { get; }
 
         string ScoreByIndex(int i);
 

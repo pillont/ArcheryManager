@@ -24,7 +24,7 @@ namespace ArcheryManager.Factories
             var x = transformPosition(position.X);
             var y = transformPosition(position.Y);
             var point = new Point(x, y);
-            var res = new Arrow(index, numberInFlight, point, targetSize, Setting);
+            var res = new Arrow(index, numberInFlight, point, targetSize);
 
             return res;
         }

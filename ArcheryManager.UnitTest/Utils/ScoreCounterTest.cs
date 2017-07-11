@@ -14,15 +14,15 @@ namespace ArcheryManager.UnitTest.Utils
 
         private ScoreCounter counter;
         private TargetSetting targetSetting;
-        private IArrowSetting arrowSetting;
+        private IArrowSetting ArrowSetting;
 
         [SetUp]
         public void Init()
         {
+            ArrowSetting = EnglishArrowSetting.Instance;
             toolBarList = new List<ToolbarItem>();
             targetSetting = new TargetSetting();
-            counter = new ScoreCounter(targetSetting, toolBarList);
-            arrowSetting = EnglishArrowSetting.Instance;
+            counter = new ScoreCounter(targetSetting, toolBarList, ArrowSetting);
         }
 
         [Test]
@@ -38,9 +38,9 @@ namespace ArcheryManager.UnitTest.Utils
         [Test]
         public void Counter_AddArrowTest()
         {
-            var arrow1 = new Arrow(10, 0, arrowSetting);
-            var arrow2 = new Arrow(9, 1, arrowSetting);
-            var arrow3 = new Arrow(8, 2, arrowSetting);
+            var arrow1 = new Arrow(10, 0);
+            var arrow2 = new Arrow(9, 1);
+            var arrow3 = new Arrow(8, 2);
 
             counter.AddArrow(arrow1);
             counter.AddArrow(arrow2);
@@ -55,9 +55,9 @@ namespace ArcheryManager.UnitTest.Utils
         [Test]
         public void Counter_AddRemoveArrowTest()
         {
-            var arrow1 = new Arrow(10, 0, arrowSetting);
-            var arrow2 = new Arrow(9, 1, arrowSetting);
-            var arrow3 = new Arrow(10, 2, arrowSetting);
+            var arrow1 = new Arrow(10, 0);
+            var arrow2 = new Arrow(9, 1);
+            var arrow3 = new Arrow(10, 2);
 
             counter.AddArrow(arrow1);
             counter.AddArrow(arrow2);
@@ -82,9 +82,9 @@ namespace ArcheryManager.UnitTest.Utils
         [Test]
         public void Counter_RemoveAllArrowTest()
         {
-            var arrow1 = new Arrow(10, 0, arrowSetting);
-            var arrow2 = new Arrow(9, 1, arrowSetting);
-            var arrow3 = new Arrow(10, 2, arrowSetting);
+            var arrow1 = new Arrow(10, 0);
+            var arrow2 = new Arrow(9, 1);
+            var arrow3 = new Arrow(10, 2);
 
             counter.AddArrow(arrow1);
             counter.AddArrow(arrow2);
@@ -97,9 +97,9 @@ namespace ArcheryManager.UnitTest.Utils
         [Test]
         public void Counter_RemoveAllArrowNewFlightTest()
         {
-            var arrow1 = new Arrow(10, 0, arrowSetting);
-            var arrow2 = new Arrow(9, 1, arrowSetting);
-            var arrow3 = new Arrow(10, 2, arrowSetting);
+            var arrow1 = new Arrow(10, 0);
+            var arrow2 = new Arrow(9, 1);
+            var arrow3 = new Arrow(10, 2);
 
             counter.AddArrow(arrow1);
             counter.AddArrow(arrow2);
@@ -117,21 +117,21 @@ namespace ArcheryManager.UnitTest.Utils
             Assert.AreEqual(0, counter.TotalScore);
             Assert.AreEqual(0, counter.CurrentArrows.Count);
 
-            var arrow1 = new Arrow(10, 0, arrowSetting);
+            var arrow1 = new Arrow(10, 0);
             counter.AddArrow(arrow1);
 
             Assert.AreEqual(10, counter.FlightScore);
             Assert.AreEqual(10, counter.TotalScore);
             Assert.AreEqual(1, counter.CurrentArrows.Count);
 
-            var arrow2 = new Arrow(9, 1, arrowSetting);
+            var arrow2 = new Arrow(9, 1);
             counter.AddArrow(arrow2);
 
             Assert.AreEqual(19, counter.FlightScore);
             Assert.AreEqual(19, counter.TotalScore);
             Assert.AreEqual(2, counter.CurrentArrows.Count);
 
-            var arrow3 = new Arrow(7, 2, arrowSetting);
+            var arrow3 = new Arrow(7, 2);
             counter.AddArrow(arrow3);
 
             Assert.AreEqual(26, counter.FlightScore);
@@ -156,7 +156,7 @@ namespace ArcheryManager.UnitTest.Utils
             Assert.AreEqual(0, counter.TotalScore);
             Assert.AreEqual(0, counter.CurrentArrows.Count);
 
-            var arrow1 = new Arrow(10, 0, arrowSetting);
+            var arrow1 = new Arrow(10, 0);
             counter.AddArrow(arrow1);
 
             Assert.AreEqual(10, counter.FlightScore);
@@ -169,14 +169,14 @@ namespace ArcheryManager.UnitTest.Utils
             Assert.AreEqual(10, counter.TotalScore);
             Assert.AreEqual(0, counter.CurrentArrows.Count);
 
-            var arrow2 = new Arrow(9, 1, arrowSetting);
+            var arrow2 = new Arrow(9, 1);
             counter.AddArrow(arrow2);
 
             Assert.AreEqual(9, counter.FlightScore);
             Assert.AreEqual(19, counter.TotalScore);
             Assert.AreEqual(1, counter.CurrentArrows.Count);
 
-            var arrow3 = new Arrow(7, 2, arrowSetting);
+            var arrow3 = new Arrow(7, 2);
             counter.AddArrow(arrow3);
             counter.NewFlight();
 
@@ -190,11 +190,11 @@ namespace ArcheryManager.UnitTest.Utils
         [Test]
         public void CurrentArrowTest()
         {
-            var a1 = new Arrow(1, 0, arrowSetting);
-            var a2 = new Arrow(2, 1, arrowSetting);
-            var a3 = new Arrow(3, 2, arrowSetting);
-            var a4 = new Arrow(4, 0, arrowSetting);
-            var a5 = new Arrow(5, 1, arrowSetting);
+            var a1 = new Arrow(1, 0);
+            var a2 = new Arrow(2, 1);
+            var a3 = new Arrow(3, 2);
+            var a4 = new Arrow(4, 0);
+            var a5 = new Arrow(5, 1);
 
             counter.AddArrow(a1);
             counter.AddArrow(a2);
@@ -223,11 +223,11 @@ namespace ArcheryManager.UnitTest.Utils
         [Test]
         public void PreviousArrowTest()
         {
-            var a1 = new Arrow(1, 0, arrowSetting);
-            var a2 = new Arrow(2, 1, arrowSetting);
-            var a3 = new Arrow(3, 2, arrowSetting);
-            var a4 = new Arrow(4, 0, arrowSetting);
-            var a5 = new Arrow(5, 1, arrowSetting);
+            var a1 = new Arrow(1, 0);
+            var a2 = new Arrow(2, 1);
+            var a3 = new Arrow(3, 2);
+            var a4 = new Arrow(4, 0);
+            var a5 = new Arrow(5, 1);
 
             counter.AddArrow(a1);
             counter.AddArrow(a2);
@@ -247,11 +247,11 @@ namespace ArcheryManager.UnitTest.Utils
         [Test]
         public void AllArrowTest()
         {
-            var a1 = new Arrow(1, 0, arrowSetting);
-            var a2 = new Arrow(2, 1, arrowSetting);
-            var a3 = new Arrow(3, 2, arrowSetting);
-            var a4 = new Arrow(4, 0, arrowSetting);
-            var a5 = new Arrow(5, 1, arrowSetting);
+            var a1 = new Arrow(1, 0);
+            var a2 = new Arrow(2, 1);
+            var a3 = new Arrow(3, 2);
+            var a4 = new Arrow(4, 0);
+            var a5 = new Arrow(5, 1);
 
             counter.AddArrow(a1);
             counter.AddArrow(a2);
@@ -290,10 +290,10 @@ namespace ArcheryManager.UnitTest.Utils
         [Test]
         public void ArrowsShowedTest()
         {
-            var a1 = new Arrow(1, 0, arrowSetting);
-            var a2 = new Arrow(2, 1, arrowSetting);
-            var a3 = new Arrow(3, 2, arrowSetting);
-            var a4 = new Arrow(4, 0, arrowSetting);
+            var a1 = new Arrow(1, 0);
+            var a2 = new Arrow(2, 1);
+            var a3 = new Arrow(3, 2);
+            var a4 = new Arrow(4, 0);
 
             counter.AddArrow(a1);
             counter.AddArrow(a2);
@@ -311,9 +311,9 @@ namespace ArcheryManager.UnitTest.Utils
         public void UpdateOrderBeforeTest()
         {
             targetSetting.IsDecreasingOrder = true;
-            var a1 = new Arrow(1, 0, arrowSetting);
-            var a2 = new Arrow(8, 0, arrowSetting);
-            var a3 = new Arrow(5, 0, arrowSetting);
+            var a1 = new Arrow(1, 0);
+            var a2 = new Arrow(8, 0);
+            var a3 = new Arrow(5, 0);
             counter.AddArrow(a1);
             counter.AddArrow(a2);
             counter.AddArrow(a3);
@@ -326,9 +326,9 @@ namespace ArcheryManager.UnitTest.Utils
         [Test]
         public void UpdateOrderAfetrTest()
         {
-            var a1 = new Arrow(1, 0, arrowSetting);
-            var a2 = new Arrow(8, 0, arrowSetting);
-            var a3 = new Arrow(5, 0, arrowSetting);
+            var a1 = new Arrow(1, 0);
+            var a2 = new Arrow(8, 0);
+            var a3 = new Arrow(5, 0);
             counter.AddArrow(a1);
             counter.AddArrow(a2);
             counter.AddArrow(a3);
@@ -344,9 +344,9 @@ namespace ArcheryManager.UnitTest.Utils
         {
             targetSetting.IsDecreasingOrder = true;
 
-            var a1 = new Arrow(1, 0, arrowSetting);
-            var a2 = new Arrow(8, 1, arrowSetting);
-            var a3 = new Arrow(5, 2, arrowSetting);
+            var a1 = new Arrow(1, 0);
+            var a2 = new Arrow(8, 1);
+            var a3 = new Arrow(5, 2);
             counter.AddArrow(a1);
             counter.AddArrow(a2);
             counter.AddArrow(a3);
@@ -363,9 +363,9 @@ namespace ArcheryManager.UnitTest.Utils
         {
             targetSetting.IsDecreasingOrder = true;
 
-            var a1 = new Arrow(11, 0, arrowSetting);
-            var a2 = new Arrow(10, 0, arrowSetting);
-            var a3 = new Arrow(11, 0, arrowSetting);
+            var a1 = new Arrow(11, 0);
+            var a2 = new Arrow(10, 0);
+            var a3 = new Arrow(11, 0);
             counter.AddArrow(a1);
             counter.AddArrow(a2);
             counter.AddArrow(a3);
@@ -383,9 +383,11 @@ namespace ArcheryManager.UnitTest.Utils
             counter.AddDefaultToolbarItems();
             targetSetting.ArrowsCount = 2;
             Assert.AreEqual(3, toolBarList.Count);
-            counter.AddArrow(new Arrow(0, 0, arrowSetting));
+
+            counter.AddArrow(new Arrow(0, 0));
             Assert.AreEqual(3, toolBarList.Count);
-            counter.AddArrow(new Arrow(0, 0, arrowSetting));
+
+            counter.AddArrow(new Arrow(0, 0));
             Assert.AreEqual(4, toolBarList.Count);
         }
 
@@ -397,7 +399,8 @@ namespace ArcheryManager.UnitTest.Utils
             Assert.AreEqual(3, toolBarList.Count);
 
             targetSetting.ArrowsCount = 2;
-            counter.AddArrow(new Arrow(0, 0, arrowSetting));
+
+            counter.AddArrow(new Arrow(0, 0));
             Assert.AreEqual(4, toolBarList.Count);
         }
 
@@ -409,8 +412,8 @@ namespace ArcheryManager.UnitTest.Utils
             Assert.AreEqual(3, toolBarList.Count);
             targetSetting.ArrowsCount = 2;
 
-            counter.AddArrow(new Arrow(0, 0, arrowSetting));
-            counter.AddArrow(new Arrow(0, 0, arrowSetting));
+            counter.AddArrow(new Arrow(0, 0));
+            counter.AddArrow(new Arrow(0, 0));
 
             counter.RemoveLastArrow();
             Assert.AreEqual(3, toolBarList.Count);
@@ -424,8 +427,8 @@ namespace ArcheryManager.UnitTest.Utils
             Assert.AreEqual(3, toolBarList.Count);
             targetSetting.ArrowsCount = 2;
 
-            counter.AddArrow(new Arrow(0, 0, arrowSetting));
-            counter.AddArrow(new Arrow(0, 0, arrowSetting));
+            counter.AddArrow(new Arrow(0, 0));
+            counter.AddArrow(new Arrow(0, 0));
 
             counter.RemoveLastArrow();
             Assert.AreEqual(4, toolBarList.Count);
@@ -436,10 +439,10 @@ namespace ArcheryManager.UnitTest.Utils
         [Test]
         public void RestartTest()
         {
-            var a1 = new Arrow(1, 0, arrowSetting);
-            var a2 = new Arrow(2, 0, arrowSetting);
-            var a3 = new Arrow(3, 0, arrowSetting);
-            var a4 = new Arrow(4, 0, arrowSetting);
+            var a1 = new Arrow(1, 0);
+            var a2 = new Arrow(2, 0);
+            var a3 = new Arrow(3, 0);
+            var a4 = new Arrow(4, 0);
 
             counter.AddArrow(a1);
             counter.AddArrow(a2);
@@ -457,10 +460,10 @@ namespace ArcheryManager.UnitTest.Utils
         [Test]
         public void RestartAndContinueTest()
         {
-            var a1 = new Arrow(1, 0, arrowSetting);
-            var a2 = new Arrow(2, 0, arrowSetting);
-            var a3 = new Arrow(3, 0, arrowSetting);
-            var a4 = new Arrow(4, 0, arrowSetting);
+            var a1 = new Arrow(1, 0);
+            var a2 = new Arrow(2, 0);
+            var a3 = new Arrow(3, 0);
+            var a4 = new Arrow(4, 0);
 
             counter.AddArrow(a1);
             counter.AddArrow(a2);
@@ -481,6 +484,39 @@ namespace ArcheryManager.UnitTest.Utils
             Assert.AreEqual(3, counter.PreviousArrows.Count);
             Assert.AreEqual(10, counter.TotalScore);
             Assert.AreEqual(4, counter.FlightScore);
+        }
+
+        [Test]
+        public void DefaultScoreStringTest()
+        {
+            Assert.AreEqual("0/0", counter.FlightScoreString);
+            Assert.AreEqual("0/0", counter.TotalScoreString);
+        }
+
+        [Test]
+        public void DefaultScoreStringInNewArrowTest()
+        {
+            counter.AddArrow(new Arrow(1, 0));
+            counter.AddArrow(new Arrow(2, 0));
+            counter.AddArrow(new Arrow(3, 0));
+            counter.NewFlight();
+
+            Assert.AreEqual("0/0", counter.FlightScoreString);
+            Assert.AreEqual("6/30", counter.TotalScoreString);
+        }
+
+        [Test]
+        public void TotalScoreTest()
+        {
+            counter.AddArrow(new Arrow(1, 0));
+            counter.AddArrow(new Arrow(2, 0));
+            counter.AddArrow(new Arrow(3, 0));
+            counter.NewFlight();
+            counter.AddArrow(new Arrow(4, 0));
+            counter.AddArrow(new Arrow(5, 0));
+
+            Assert.AreEqual("9/20", counter.FlightScoreString);
+            Assert.AreEqual("15/50", counter.TotalScoreString);
         }
     }
 }
