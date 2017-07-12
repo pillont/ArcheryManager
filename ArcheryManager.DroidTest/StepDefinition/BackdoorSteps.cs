@@ -23,6 +23,7 @@ namespace ArcheryManager.DroidTest.StepDefinition
         public void WhenJOuvreUnePageDeCibleFita()
         {
             TestSetting.InitTestApplication();
+            TestSetting.App.WaitForElement("EnglishTargetButton");
             TestSetting.App.Tap("EnglishTargetButton");
         }
 

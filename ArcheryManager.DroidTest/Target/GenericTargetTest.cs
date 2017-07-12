@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using ArcheryManager.Resources;
+using NUnit.Framework;
 using System.Linq;
 using Xamarin.UITest.Android;
 using Xamarin.UITest.Queries;
@@ -83,7 +84,7 @@ namespace ArcheryManager.DroidTest.Target
             var list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(2, list.Count()); // have one arrow in target
 
-            app.Tap("Remove last");
+            app.Tap(TranslateExtension.GetTextResource("RemoveLast"));
 
             list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(1, list.Count()); // have one arrow in target
@@ -103,7 +104,7 @@ namespace ArcheryManager.DroidTest.Target
             Assert.LessOrEqual(pure.CenterY - 2, rec.CenterY);
             Assert.GreaterOrEqual(pure.CenterY + 2, rec.CenterY);
 
-            app.Tap("Remove last");
+            app.Tap(TranslateExtension.GetTextResource("RemoveLast"));
 
             list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(0, list.Count()); // have one arrow in target
@@ -122,7 +123,7 @@ namespace ArcheryManager.DroidTest.Target
             var list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(2, list.Count()); // have one arrow in target
 
-            app.Tap("Remove all");
+            app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
 
             list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(0, list.Count()); // have one arrow in target
@@ -142,7 +143,7 @@ namespace ArcheryManager.DroidTest.Target
 
             Assert.AreEqual(2, app.Query(e => e.Marked("scoreList").Child()).Count());
 
-            app.Tap("New Flight");
+            app.Tap(TranslateExtension.GetTextResource("NewFlight"));
 
             Assert.AreEqual(0, app.Query(e => e.Marked("scoreList").Child()).Count());
         }
@@ -155,7 +156,7 @@ namespace ArcheryManager.DroidTest.Target
             app.DragCoordinates(500, 800, 600, 900);
             Assert.AreEqual(2, app.Query(e => e.Marked("scoreList").Child()).Count());
 
-            app.Tap("Remove all");
+            app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
 
             Assert.AreEqual(0, app.Query(e => e.Marked("scoreList").Child()).Count());
         }
@@ -168,7 +169,7 @@ namespace ArcheryManager.DroidTest.Target
             app.DragCoordinates(500, 800, 600, 900);
             Assert.AreEqual(2, app.Query(e => e.Marked("scoreList").Child()).Count());
 
-            app.Tap("New Flight");
+            app.Tap(TranslateExtension.GetTextResource("NewFlight"));
 
             Assert.AreEqual(0, app.Query(e => e.Marked("scoreList").Child()).Count());
         }

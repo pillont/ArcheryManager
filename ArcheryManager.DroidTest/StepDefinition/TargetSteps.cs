@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using ArcheryManager.Resources;
+using NUnit.Framework;
 using System.Linq;
 using TechTalk.SpecFlow;
 
@@ -18,8 +19,8 @@ namespace ArcheryManager.DroidTest.StepDefinition
         [When(@"j'ouvre le menu de paramètre")]
         public void WhenJOuvreLeMenuDeParametre()
         {
-            TestSetting.App.Tap("More options");
-            TestSetting.App.Tap("Settings");
+            TestSetting.App.Tap(TranslateExtension.GetTextResource("MoreOptions"));
+            TestSetting.App.Tap(TranslateExtension.GetTextResource("Settings"));
         }
 
         [Then(@"la fleche (.*) de la liste est un (.*)")]
@@ -31,25 +32,25 @@ namespace ArcheryManager.DroidTest.StepDefinition
         [When(@"je supprime la dernière flèche")]
         public void QuandJeSupprimeLaDerniereFleche()
         {
-            TestSetting.App.Tap("Remove last");
+            TestSetting.App.Tap(TranslateExtension.GetTextResource("RemoveLast"));
         }
 
         [When(@"Je click sur le bouton nouvelle volée")]
         public void QuandJeClickSurLeBoutonNouvelleVolee()
         {
-            TestSetting.App.Tap("New Flight");
+            TestSetting.App.Tap(TranslateExtension.GetTextResource("NewFlight"));
         }
 
         [Then(@"le bouton nouvelle volée est désactivé")]
         public void AlorsLeBoutonNouvelleVoleeEstDesactive()
         {
-            Assert.AreEqual(0, TestSetting.App.Query("New Flight").Count());
+            Assert.AreEqual(0, TestSetting.App.Query(TranslateExtension.GetTextResource("NewFlight")).Count());
         }
 
         [Then(@"le bouton nouvelle volée est activé")]
         public void AlorsLeBoutonNouvelleVoleeEstActive()
         {
-            Assert.IsNotNull(TestSetting.App.Query("New Flight").First());
+            Assert.IsNotNull(TestSetting.App.Query(TranslateExtension.GetTextResource("NewFlight")).First());
         }
 
         [Then(@"le nombre de flèches dans la liste est de (.*)")]

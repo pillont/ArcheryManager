@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using Xamarin.Forms;
 using System.Collections.Generic;
+using ArcheryManager.Resources;
 
 namespace ArcheryManager.Interactions.Behaviors
 {
@@ -180,13 +181,13 @@ namespace ArcheryManager.Interactions.Behaviors
             {
                 new ToolbarItem()
                 {
-                    Text = "Unselect",
+                    Text = AppResources.UnSelect,
                     Order = ToolbarItemOrder.Primary,
                     Command = new Command(UnSelect)
                 },
                 new ToolbarItem()
                 {
-                    Text = "Remove",
+                    Text = AppResources.Remove,
                     Order = ToolbarItemOrder.Primary,
                     Command = new Command(RemoveSelection)
                 }

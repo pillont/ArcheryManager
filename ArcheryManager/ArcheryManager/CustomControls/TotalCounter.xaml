@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:ArcheryManager.Resources"
              x:Class="ArcheryManager.CustomControls.TotalCounter">
     <ContentView.Content>
         <Grid HeightRequest="100" AutomationId="scoreGrid">
@@ -17,7 +18,7 @@
                    HorizontalOptions="Center"
                    Grid.Column="0"
                    Grid.Row="0"
-                   Text="Flight :"
+                   Text="{resources:Translate Flight}"
                    VerticalTextAlignment="End"
                    VerticalOptions="End" />
 
@@ -35,7 +36,7 @@
 
             <Label AutomationId="TotalScoreTitle"
                    HorizontalOptions="Center"
-                   Text="Total :"
+                   Text="{resources:Translate Total}"
                    Grid.Column="1"
                    Grid.Row="0"
                    VerticalTextAlignment="End"

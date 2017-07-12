@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:ArcheryManager.Resources"
              xmlns:converter="clr-namespace:XLabs.Forms.Converter;assembly=XLabs.Forms"
              x:Class="ArcheryManager.Pages.SettingTargetPage">
     <Grid>
@@ -15,11 +16,11 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Label AutomationId="NumberOfArrowsLabel" Text="Number of arrows" Grid.Column="0" Grid.Row="0" />
+        <Label AutomationId="NumberOfArrowsLabel" Text="{resources:Translate NumberOfArrows}" Grid.Column="0" Grid.Row="0" />
 
         <StackLayout Grid.Column="1" Grid.Row="0" Orientation="Vertical">
             <StackLayout>
-                <Label Text="Have fix number" />
+                <Label Text="{resources:Translate HaveFixNumber}" />
                 <Switch IsToggled="{Binding HaveMaxArrowsCount}"
                         AutomationId="maxArrowsSwitch" />
             </StackLayout>
@@ -31,14 +32,14 @@
                x:Name="numberArrowEntry" />
         </StackLayout>
 
-        <Label Text="Arrows in decreasing order" Grid.Column="0" Grid.Row="1" VerticalTextAlignment="Center" />
+        <Label Text="{resources:Translate ArrowsInDecreasingOrder}" Grid.Column="0" Grid.Row="1" VerticalTextAlignment="Center" />
         <Switch IsToggled="{Binding IsDecreasingOrder}"
                 Grid.Column="1"
                 Grid.Row="1"
                 AutomationId="ArrowsOrderSwitch" />
-        <Label  Text="See all arrows" Grid.Column="0" Grid.Row="2" VerticalTextAlignment="Center" IsVisible="{Binding HaveTarget}" />
+        <Label  Text="{resources:Translate SeeAllArrows}" Grid.Column="0" Grid.Row="2" VerticalTextAlignment="Center" IsVisible="{Binding HaveTarget}" />
         <Switch IsToggled="{Binding ShowAllArrows}" Grid.Column="1" Grid.Row="2" AutomationId="ShowAllArrowsSwitch" IsVisible="{Binding HaveTarget}" />
-        <Label Text="See average" Grid.Column="0" Grid.Row="3" VerticalTextAlignment="Center" IsVisible="{Binding HaveTarget}" />
+        <Label Text="{resources:Translate SeeAverage}" Grid.Column="0" Grid.Row="3" VerticalTextAlignment="Center" IsVisible="{Binding HaveTarget}" />
         <Switch IsToggled="{Binding AverageIsVisible}" Grid.Column="1" Grid.Row="3" AutomationId="VisibilityAverageSwitch" IsVisible="{Binding HaveTarget}" />
     </Grid>
 </ContentPage>

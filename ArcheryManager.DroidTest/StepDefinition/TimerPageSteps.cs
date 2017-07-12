@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using ArcheryManager.Resources;
+using NUnit.Framework;
 using System.Linq;
 using TechTalk.SpecFlow;
 
@@ -11,13 +12,11 @@ namespace ArcheryManager.DroidTest.StepDefinition
         public void QuandJeClickSurLOptionDeVague()
         {
             TestSetting.App.Tap(
-                        TestSetting.App.Query("ABC").Count() != 0//ABC check
-                            ? "ABC" // abc click if true
-                                : TestSetting.App.Query("ABCD").Count() != 0 ? // ABCD check
-                                                                            "ABCD"  //ABCD click if true
-                                : TestSetting.App.Query("VS").Count() != 0 ? // VS check
-                                                                            "VS" :
-                                                                                "Shootout"); // else shootoff
+                        TestSetting.App.Query(TranslateExtension.GetTextResource("ABC")).Count() != 0//ABC check
+                            ? TranslateExtension.GetTextResource("ABC") // abc click if true
+                                : TestSetting.App.Query(TranslateExtension.GetTextResource("ABCD")).Count() != 0 ? // ABCD check
+                                                                            TranslateExtension.GetTextResource("ABCD") : //ABCD click if true
+                                                                                TranslateExtension.GetTextResource("ShootOut")); // else shootoff
         }
 
         [When(@"je lance le timer")]
@@ -35,56 +34,57 @@ namespace ArcheryManager.DroidTest.StepDefinition
         [Then(@"l'option de vague est en ABC")]
         public void AlorsLOptionDeVagueEstEnABC()
         {
-            Assert.AreEqual(1, TestSetting.App.Query("ABC").Count());
+            Assert.AreEqual(1, TestSetting.App.Query(TranslateExtension.GetTextResource("ABC")).Count());
         }
 
         [Then(@"l'option de vague est en ABCD")]
         public void AlorsLOptionDeVagueEstEnABCD()
         {
-            Assert.AreEqual(1, TestSetting.App.Query("ABCD").Count());
+            Assert.AreEqual(1, TestSetting.App.Query(TranslateExtension.GetTextResource("ABCD")).Count());
         }
 
         [Then(@"l'option de vague est en Shootout")]
         public void AlorsLOptionDeVagueEstEnShootout()
         {
-            Assert.AreEqual(1, TestSetting.App.Query("Shootout").Count());
+            Assert.AreEqual(1, TestSetting.App.Query(TranslateExtension.GetTextResource("ShootOut")).Count());
         }
 
         [Then(@"l'option de vague est en VS")]
         public void AlorsLOptionDeVagueEstEnVS()
         {
-            Assert.AreEqual(1, TestSetting.App.Query("VS").Count());
+            TestSetting.App.WaitForElement(TranslateExtension.GetTextResource("Duel"));
         }
 
         [Then(@"le timer est à (.*) sec")]
         public void AlorsLeTimerEstASec(int p0)
         {
-            var query = TestSetting.App.Query("TimerLabel");
-            if (query.Count() == 0)
+            var res = TestSetting.App.Query("TimerLabel");
+            if (res.Count() == 0)
             {
                 TestSetting.App.WaitForElement("TimerLabel");
-                query = TestSetting.App.Query("TimerLabel");
+                res = TestSetting.App.Query(e => e.Marked("TimerLabel"));
             }
-            Assert.AreEqual(p0.ToString(), query.First().Text);
+            Assert.AreEqual(p0.ToString(), res.First().Text);
         }
 
         [Then(@"le text de vague est vide")]
         public void AlorsLeTextDeVagueEstVide()
         {
             var res = TestSetting.App.Query("WaveText");
-            Assert.IsTrue(res.Count() == 0 || res.Count() == 1 && string.IsNullOrEmpty(res.First().Text));
+            Assert.IsTrue(res.Count() == 0 || (res.Count() == 1 && string.IsNullOrEmpty(res.First().Text)));
         }
 
         [Then(@"le texte de vague contient (.*)")]
         public void AlorsLeTexteDeVagueContientCD(string p0)
         {
+            TestSetting.App.WaitForElement("WaveText");
             Assert.AreEqual(p0, TestSetting.App.Query("WaveText").First().Text);
         }
 
         [When(@"Je click sur le bouton de réglage de temps")]
         public void QuandJeClickSurLeBoutonDeReglageDeTemps()
         {
-            TestSetting.App.Tap("Time");
+            TestSetting.App.Tap(TranslateExtension.GetTextResource("Time"));
         }
     }
 }
