@@ -102,8 +102,8 @@ namespace ArcheryManager.DroidTest.StepDefinition
         [When(@"je click sur le bouton de restart")]
         public void QuandJeClickSurLeBoutonDeRestart()
         {
-            TestSetting.App.WaitForElement("More options");
-            TestSetting.App.Tap("More options");
+            TestSetting.App.WaitForElement(TranslateExtension.GetTextResource("MoreOptions"));
+            TestSetting.App.Tap(TranslateExtension.GetTextResource("MoreOptions"));
             TestSetting.App.Tap("Restart");
         }
     }
