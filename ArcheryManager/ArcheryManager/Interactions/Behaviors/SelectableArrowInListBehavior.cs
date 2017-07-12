@@ -187,7 +187,7 @@ namespace ArcheryManager.Interactions.Behaviors
                 },
                 new ToolbarItem()
                 {
-                    Text = AppResources.Remove,
+                    Text = AppResources.RemoveSelect,
                     Order = ToolbarItemOrder.Primary,
                     Command = new Command(RemoveSelection)
                 }

@@ -66,6 +66,8 @@ namespace ArcheryManager.Pages
 
             var recognizer = new TapGestureRecognizer() { Command = new Command(Timer_Tap) };
             timer.GestureRecognizers.Add(recognizer);
+
+            PauseReplayText = AppResources.Pause;
         }
 
         private void TimerSetting_PropertyChanged(object sender, PropertyChangedEventArgs e)

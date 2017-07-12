@@ -18,7 +18,7 @@ namespace ArcheryManager.DroidTest.StepDefinition
                                                                             "ABCD"  //ABCD click if true
                                 : TestSetting.App.Query(TranslateExtension.GetTextResource("Duel")).Count() != 0 ? // VS check
                                                                             TranslateExtension.GetTextResource("Duel") :
-                                                                                TranslateExtension.GetTextResource("ShootOut"); // else shootoff
+                                                                                TranslateExtension.GetTextResource("ShootOut")); // else shootoff
         }
 
         [When(@"je lance le timer")]

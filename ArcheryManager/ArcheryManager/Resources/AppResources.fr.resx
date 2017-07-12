@@ -165,14 +165,14 @@
   <data name="Pause" xml:space="preserve">
     <value>Pause</value>
   </data>
-  <data name="Remove" xml:space="preserve">
-    <value>Supprimer</value>
-  </data>
   <data name="RemoveAll" xml:space="preserve">
     <value>Tout suppr </value>
   </data>
   <data name="RemoveLast" xml:space="preserve">
     <value>Supprimer</value>
+  </data>
+  <data name="RemoveSelect" xml:space="preserve">
+    <value>Supprimer Sélection</value>
   </data>
   <data name="Replay" xml:space="preserve">
     <value>Relancer</value>

@@ -17,10 +17,6 @@ Scénario: test de changement d'option en Duel
 	Quand J'ouvre une page timer
 	Et je click sur l'option de vague
 	Et je click sur l'option de vague
-<<<<<<< HEAD
-	Et je click sur l'option de vague
-=======
->>>>>>> 32aaa2d... Merge pull request #65 from pillont/duel-timer-mode
 	Alors l'option de vague est en VS
 
 	
