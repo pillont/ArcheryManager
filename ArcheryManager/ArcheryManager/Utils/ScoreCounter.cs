@@ -143,6 +143,13 @@ namespace ArcheryManager.Utils
                 Order = ToolbarItemOrder.Primary,
                 Command = new Command(ClearArrows)
             });
+
+            toolbarItems.Add(new ToolbarItem()
+            {
+                Text = "Restart",
+                Order = ToolbarItemOrder.Secondary,
+                Command = new Command(RestartCount)
+            });
         }
 
         private void AddNewFlightButton()
@@ -183,7 +190,7 @@ namespace ArcheryManager.Utils
         private void Arrows_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             UpdateAllArrow();
-            UpdateLastArrow();
+            UpdatePreviousArrow();
             UpdateTotal();
 
             if (e.Action == NotifyCollectionChangedAction.Add)
@@ -241,7 +248,7 @@ namespace ArcheryManager.Utils
             }
         }
 
-        private void UpdateLastArrow()
+        private void UpdatePreviousArrow()
         {
             var all = GetArrows(getCurrent: false);
 
@@ -304,6 +311,16 @@ namespace ArcheryManager.Utils
         #endregion AllArrow
 
         #region interaction
+
+        public void RestartCount()
+        {
+            lastTotal = 0;
+            FlightsSaved.Clear();
+            CurrentArrows.Clear();
+            UpdatePreviousArrow();
+            UpdateAllArrow();
+            UpdateTotal();
+        }
 
         public void NewFlight()
         {

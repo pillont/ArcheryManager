@@ -101,6 +101,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NumberArrowFeature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Targets\RestartCounter.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RestartCounter.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Targets\TargetRotationFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -156,6 +161,10 @@
     <None Include="Features\Targets\NumberArrowFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>NumberArrowFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Targets\RestartCounter.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>RestartCounter.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Targets\TargetRotationFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

@@ -88,5 +88,19 @@ namespace ArcheryManager.DroidTest.StepDefinition
         {
             TestSetting.App.Tap(TranslateExtension.GetTextResource("Time"));
         }
+
+        [When(@"je click sur l'option de moyenne")]
+        public void QuandJeClickSurLOptionDeMoyenne()
+        {
+            TestSetting.App.WaitForElement("VisibilityAverageSwitch");
+            TestSetting.App.Tap("VisibilityAverageSwitch");
+        }
+
+        [When(@"je click sur l'option toutes flèches")]
+        public void QuandJeClickSurLOptionToutesFleches()
+        {
+            TestSetting.App.WaitForElement("ShowAllArrowsSwitch");
+            TestSetting.App.Tap("ShowAllArrowsSwitch");
+        }
     }
 }
