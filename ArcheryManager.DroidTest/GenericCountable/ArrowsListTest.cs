@@ -240,7 +240,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
 
             //remove arrow
             app.Tap(c => c.Marked("9").Index(1));
-            app.Tap(TranslateExtension.GetTextResource("Remove"));
+            app.Tap(TranslateExtension.GetTextResource("RemoveSelect"));
 
             Assert.AreEqual(58, app.WaitForElement("9").First().Rect.CenterX);
             Assert.AreEqual(188, app.WaitForElement("8").Last().Rect.CenterX);
@@ -248,20 +248,20 @@ namespace ArcheryManager.DroidTest.GenericCountable
 
             //remove arrow
             app.Tap("7");
-            app.Tap(TranslateExtension.GetTextResource("Remove"));
+            app.Tap(TranslateExtension.GetTextResource("RemoveSelect"));
 
             Assert.AreEqual(58, app.WaitForElement("9").First().Rect.CenterX);
             Assert.AreEqual(188, app.WaitForElement("8").Last().Rect.CenterX);
 
             //remove arrow
             app.Tap(c => c.Marked("8"));
-            app.Tap(TranslateExtension.GetTextResource("Remove"));
+            app.Tap(TranslateExtension.GetTextResource("RemoveSelect"));
 
             Assert.AreEqual(58, app.WaitForElement("9").First().Rect.CenterX);
 
             //remove arrow
             app.Tap(c => c.Marked("9"));
-            app.Tap(TranslateExtension.GetTextResource("Remove"));
+            app.Tap(TranslateExtension.GetTextResource("RemoveSelect"));
 
             Assert.AreEqual(3, app.WaitForElement("10").Count());
             Assert.AreEqual(1, app.WaitForElement("7").Count());

@@ -18,8 +18,8 @@ namespace ArcheryManager.Pages
         {
             AppResources.ABC,
             AppResources.ABCD,
+            AppResources.Duel,
             AppResources.ShootOut,
-            //AppResources.Duel,
         };
 
         private const int ShootoutTime = 40;
@@ -66,6 +66,8 @@ namespace ArcheryManager.Pages
 
             var recognizer = new TapGestureRecognizer() { Command = new Command(Timer_Tap) };
             timer.GestureRecognizers.Add(recognizer);
+
+            PauseReplayText = AppResources.Pause;
         }
 
         private void TimerSetting_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -173,6 +175,14 @@ namespace ArcheryManager.Pages
             else if (TimerSetting.Mode == AppResources.ABCD)
             {
                 timer.WaveBehavior.StartWave();
+                timer.WaveBehavior.DuelMode = false;
+                timer.Time = TimerSetting.Time;
+                timer.ShowWaitingTime = true;
+            }
+            else if (TimerSetting.Mode == AppResources.Duel)
+            {
+                timer.WaveBehavior.StartWave();
+                timer.WaveBehavior.DuelMode = true;
                 timer.Time = TimerSetting.Time;
                 timer.ShowWaitingTime = true;
             }

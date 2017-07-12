@@ -26,7 +26,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
 
             // not visible
             app.WaitForNoElement(TranslateExtension.GetTextResource("UnSelect"));
-            app.WaitForNoElement(TranslateExtension.GetTextResource("Remove"));
+            app.WaitForNoElement(TranslateExtension.GetTextResource("RemoveSelect"));
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 450, 750);
@@ -37,14 +37,14 @@ namespace ArcheryManager.DroidTest.GenericCountable
 
             // visible
             app.WaitForElement(TranslateExtension.GetTextResource("UnSelect"));
-            app.WaitForElement(TranslateExtension.GetTextResource("Remove"));
+            app.WaitForElement(TranslateExtension.GetTextResource("RemoveSelect"));
 
             //un select all
             app.Tap(TranslateExtension.GetTextResource("UnSelect"));
 
             // not visible
             app.WaitForNoElement(TranslateExtension.GetTextResource("UnSelect"));
-            app.WaitForNoElement(TranslateExtension.GetTextResource("Remove"));
+            app.WaitForNoElement(TranslateExtension.GetTextResource("RemoveSelect"));
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
 
             // not visible
             app.WaitForNoElement(TranslateExtension.GetTextResource("UnSelect"));
-            app.WaitForNoElement(TranslateExtension.GetTextResource("Remove"));
+            app.WaitForNoElement(TranslateExtension.GetTextResource("RemoveSelect"));
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 450, 750);
@@ -62,14 +62,14 @@ namespace ArcheryManager.DroidTest.GenericCountable
 
             // visible
             app.WaitForElement(TranslateExtension.GetTextResource("UnSelect"));
-            app.WaitForElement(TranslateExtension.GetTextResource("Remove"));
+            app.WaitForElement(TranslateExtension.GetTextResource("RemoveSelect"));
 
             // remove arrow
-            app.Tap(TranslateExtension.GetTextResource("Remove"));
+            app.Tap(TranslateExtension.GetTextResource("RemoveSelect"));
 
             // not visible
             app.WaitForNoElement(TranslateExtension.GetTextResource("UnSelect"));
-            app.WaitForNoElement(TranslateExtension.GetTextResource("Remove"));
+            app.WaitForNoElement(TranslateExtension.GetTextResource("RemoveSelect"));
         }
 
         [Test]
@@ -80,7 +80,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
 
             // not visible
             app.WaitForNoElement(TranslateExtension.GetTextResource("UnSelect"));
-            app.WaitForNoElement(TranslateExtension.GetTextResource("Remove"));
+            app.WaitForNoElement(TranslateExtension.GetTextResource("RemoveSelect"));
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 450, 750);
@@ -90,21 +90,21 @@ namespace ArcheryManager.DroidTest.GenericCountable
 
             // visible
             app.WaitForElement(TranslateExtension.GetTextResource("UnSelect"));
-            app.WaitForElement(TranslateExtension.GetTextResource("Remove"));
+            app.WaitForElement(TranslateExtension.GetTextResource("RemoveSelect"));
 
             // TranslateExtension.GetTextResource("UnSelect") one
             app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
 
             // visible
             app.WaitForElement(TranslateExtension.GetTextResource("UnSelect"));
-            app.WaitForElement(TranslateExtension.GetTextResource("Remove"));
+            app.WaitForElement(TranslateExtension.GetTextResource("RemoveSelect"));
 
             // TranslateExtension.GetTextResource("UnSelect") all
             app.Tap(e => e.Marked("scoreList").Child(1).Child(1).Child());
 
             // not visible
             app.WaitForNoElement(TranslateExtension.GetTextResource("UnSelect"));
-            app.WaitForNoElement(TranslateExtension.GetTextResource("Remove"));
+            app.WaitForNoElement(TranslateExtension.GetTextResource("RemoveSelect"));
         }
 
         [Test]
@@ -128,7 +128,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
 
             //remove last
             app.Tap(e => e.Marked("scoreList").Child(3).Child(1).Child());
-            app.Tap(TranslateExtension.GetTextResource("Remove"));
+            app.Tap(TranslateExtension.GetTextResource("RemoveSelect"));
 
             Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Text);
             Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Text);
@@ -136,7 +136,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
 
             //remove first
             app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
-            app.Tap(TranslateExtension.GetTextResource("Remove"));
+            app.Tap(TranslateExtension.GetTextResource("RemoveSelect"));
 
             Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Text);
             Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Text);
@@ -170,7 +170,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
             //TranslateExtension.GetTextResource("UnSelect") 0,1
             app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
             app.Tap(e => e.Marked("scoreList").Child(1).Child(1).Child());
-            app.Tap(TranslateExtension.GetTextResource("Remove"));
+            app.Tap(TranslateExtension.GetTextResource("RemoveSelect"));
 
             // wait 0,1,3
             Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Text);
@@ -219,7 +219,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
 
             // remove first
             app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
-            app.Tap(TranslateExtension.GetTextResource("Remove")); // toolbar items to remove
+            app.Tap(TranslateExtension.GetTextResource("RemoveSelect")); // toolbar items to remove
 
             rec1 = app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Rect;
             rec2 = app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Rect;

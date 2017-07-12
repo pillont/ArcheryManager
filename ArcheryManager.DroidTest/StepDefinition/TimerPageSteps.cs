@@ -12,10 +12,12 @@ namespace ArcheryManager.DroidTest.StepDefinition
         public void QuandJeClickSurLOptionDeVague()
         {
             TestSetting.App.Tap(
-                        TestSetting.App.Query(TranslateExtension.GetTextResource("ABC")).Count() != 0//ABC check
-                            ? TranslateExtension.GetTextResource("ABC") // abc click if true
-                                : TestSetting.App.Query(TranslateExtension.GetTextResource("ABCD")).Count() != 0 ? // ABCD check
-                                                                            TranslateExtension.GetTextResource("ABCD") : //ABCD click if true
+                        TestSetting.App.Query("ABC").Count() != 0//ABC check
+                            ? "ABC" // abc click if true
+                                : TestSetting.App.Query("ABCD").Count() != 0 ? // ABCD check
+                                                                            "ABCD"  //ABCD click if true
+                                : TestSetting.App.Query(TranslateExtension.GetTextResource("Duel")).Count() != 0 ? // VS check
+                                                                            TranslateExtension.GetTextResource("Duel") :
                                                                                 TranslateExtension.GetTextResource("ShootOut")); // else shootoff
         }
 
