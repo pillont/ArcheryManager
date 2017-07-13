@@ -70,12 +70,12 @@ namespace ArcheryManager.DroidTest.Target
             Assert.AreEqual(0, app.Query(e => e.Marked("scoreList").Child()).Count());
 
             // drag to create arrow
-            app.DragCoordinates(300, 800, 250, 750);
+            app.DragCoordinates(300, 800, 250, 775);
             Assert.AreEqual(1, app.Query(e => e.Marked("scoreList").Child()).Count());
             Assert.AreEqual("5", app.Query(e => e.Marked("scoreList").Child().Child(1).Child()).Last().Text);
 
             // drag to create arrow
-            app.DragCoordinates(500, 900, 600, 1000);
+            app.DragCoordinates(500, 900, 570, 960);
             Assert.AreEqual(2, app.Query(e => e.Marked("scoreList").Child()).Count());
             Assert.AreEqual("4", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).Last().Text);
         }
@@ -113,7 +113,7 @@ namespace ArcheryManager.DroidTest.Target
             Assert.AreEqual("5", app.Query("FlightScore").First().Text);
 
             // drag to create arrow
-            app.DragCoordinates(530, 730, 630, 830);
+            app.DragCoordinates(530, 730, 600, 830);
             Assert.AreEqual("9", app.Query("FlightScore").First().Text);
 
             //remove arrow
@@ -132,11 +132,11 @@ namespace ArcheryManager.DroidTest.Target
             Assert.AreEqual("0", app.Query("TotalScore").First().Text);
 
             // drag to create arrow
-            app.DragCoordinates(500, 800, 450, 750);
+            app.DragCoordinates(300, 1000, 250, 950);
             Assert.AreEqual("5", app.Query("TotalScore").First().Text);
 
             // drag to create arrow
-            app.DragCoordinates(500, 800, 600, 900);
+            app.DragCoordinates(530, 730, 600, 830);
             Assert.AreEqual("9", app.Query("TotalScore").First().Text);
 
             app.Tap(TranslateExtension.GetTextResource("NewFlight"));
@@ -145,12 +145,12 @@ namespace ArcheryManager.DroidTest.Target
             Assert.AreEqual("9", app.Query("TotalScore").First().Text);
 
             // drag to create arrow
-            app.DragCoordinates(500, 800, 450, 750);
+            app.DragCoordinates(300, 1000, 250, 950);
             Assert.AreEqual("5", app.Query("FlightScore").First().Text);
             Assert.AreEqual("14", app.Query("TotalScore").First().Text);
 
             // drag to create arrow
-            app.DragCoordinates(500, 800, 600, 900);
+            app.DragCoordinates(530, 730, 600, 830);
             Assert.AreEqual("9", app.Query("FlightScore").First().Text);
             Assert.AreEqual("18", app.Query("TotalScore").First().Text);
 

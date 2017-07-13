@@ -8,8 +8,8 @@ Scénario: test la position des flèches avant rotation
 	Et je tire une flèche en 200, 100
 	Et je tire une flèche en 150, 200
 
-	Alors la flèche numéro 0 est en 558, 758
-	Alors la flèche numéro 1 est en 512, 844
+	Alors la flèche numéro 0 est en 629, 795
+	Alors la flèche numéro 1 est en 566, 916
 	
 	
 Scénario: test la position des flèches après rotation
@@ -18,6 +18,6 @@ Scénario: test la position des flèches après rotation
 	Et je tire une flèche en 150, 200
 	Et je tourne le téléphone
 
-	Alors la flèche numéro 0 est en 429, 522
-	Et la flèche numéro 1 est en 394, 588
+	Alors la flèche numéro 0 est en 484, 550
+	Et la flèche numéro 1 est en 436, 643
 	

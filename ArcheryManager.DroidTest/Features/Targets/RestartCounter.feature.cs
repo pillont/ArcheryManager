@@ -79,19 +79,19 @@ this.ScenarioSetup(scenarioInfo);
 #line 9
  testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 11
- testRunner.And("je tire une flèche en 300, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 150, 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 12
- testRunner.And("je tire une flèche en 200, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 100, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 13
- testRunner.And("je tire une flèche en 100, 300", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 50, 150", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 14
  testRunner.And("Je click sur le bouton nouvelle volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 16
- testRunner.And("je tire une flèche en 300, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 150, 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 17
- testRunner.And("je tire une flèche en 200, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 100, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 18
- testRunner.And("je tire une flèche en 100, 300", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 50, 150", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 20
  testRunner.And("je click sur le bouton de restart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 22
@@ -122,29 +122,29 @@ this.ScenarioSetup(scenarioInfo);
 #line 31
  testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 33
- testRunner.And("je tire une flèche en 300, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 150, 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 34
- testRunner.And("je tire une flèche en 200, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 100, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 35
- testRunner.And("je tire une flèche en 100, 300", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 50, 150", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 36
  testRunner.And("Je click sur le bouton nouvelle volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 38
  testRunner.And("je click sur le bouton de restart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 40
- testRunner.And("je tire une flèche en 300, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 150, 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 41
- testRunner.And("je tire une flèche en 200, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 100, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 42
- testRunner.And("je tire une flèche en 100, 300", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 45
+ testRunner.And("je tire une flèche en 50, 150", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 44
  testRunner.Then("le nombre de flèches actuelles sur la cible est de 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
-#line 46
+#line 45
  testRunner.And("le nombre de flèches précèdente sur la cible est de 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 46
+ testRunner.And("le score total est de 16", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 47
- testRunner.And("le score total est de 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 48
- testRunner.And("le score de la volée est de 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("le score de la volée est de 16", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -79,9 +79,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 10
  testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 13
- testRunner.Then("la fleche 0 de la liste est un 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("la fleche 0 de la liste est un 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 14
- testRunner.Then("la fleche 1 de la liste est un 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("la fleche 1 de la liste est un M", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 15
  testRunner.Then("la fleche 2 de la liste est un X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
@@ -102,7 +102,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 20
  testRunner.And("je tire une flèche en 200, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 21
- testRunner.And("je tire une flèche en 100, 296", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 100, 298", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 22
  testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 23
@@ -114,9 +114,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 28
  testRunner.Then("la fleche 0 de la liste est un X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 29
- testRunner.Then("la fleche 1 de la liste est un 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("la fleche 1 de la liste est un 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 30
- testRunner.Then("la fleche 2 de la liste est un 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("la fleche 2 de la liste est un M", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -176,9 +176,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 57
  testRunner.Then("la fleche 0 de la liste est un X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 58
- testRunner.Then("la fleche 1 de la liste est un 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("la fleche 1 de la liste est un 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 59
- testRunner.Then("la fleche 2 de la liste est un 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("la fleche 2 de la liste est un M", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -213,9 +213,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 71
  testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 74
- testRunner.Then("la fleche 0 de la liste est un 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("la fleche 0 de la liste est un 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 75
- testRunner.Then("la fleche 1 de la liste est un 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("la fleche 1 de la liste est un M", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 76
  testRunner.Then("la fleche 2 de la liste est un X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden

@@ -77,9 +77,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 9
  testRunner.And("je tire une flèche en 150, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 11
- testRunner.Then("la flèche numéro 0 est en 558, 758", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("la flèche numéro 0 est en 629, 795", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 12
- testRunner.Then("la flèche numéro 1 est en 512, 844", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("la flèche numéro 1 est en 566, 916", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -100,9 +100,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 19
  testRunner.And("je tourne le téléphone", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 21
- testRunner.Then("la flèche numéro 0 est en 429, 522", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("la flèche numéro 0 est en 484, 550", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 22
- testRunner.And("la flèche numéro 1 est en 394, 588", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("la flèche numéro 1 est en 436, 643", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -82,12 +82,12 @@ namespace ArcheryManager.DroidTest.Target
             Assert.AreEqual(0, app.Query(e => e.Marked("scoreList").Child()).Count());
 
             // drag to create arrow
-            app.DragCoordinates(500, 800, 450, 750);
+            app.DragCoordinates(500, 800, 475, 775);
             Assert.AreEqual(1, app.Query(e => e.Marked("scoreList").Child()).Count());
             Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child().Child(1).Child()).Last().Text);
 
             // drag to create arrow
-            app.DragCoordinates(500, 800, 600, 900);
+            app.DragCoordinates(500, 800, 570, 850);
             Assert.AreEqual(2, app.Query(e => e.Marked("scoreList").Child()).Count());
             Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).Last().Text);
         }
@@ -96,8 +96,8 @@ namespace ArcheryManager.DroidTest.Target
         public void ArrowRemoveInList()
         {
             app.WaitForElement("scoreList"); //update visual
-            app.DragCoordinates(500, 800, 450, 750);
-            app.DragCoordinates(500, 800, 600, 900);
+            app.DragCoordinates(500, 800, 475, 775);
+            app.DragCoordinates(500, 800, 550, 850);
             Assert.AreEqual(2, app.Query(e => e.Marked("scoreList").Child()).Count());
 
             app.Tap(TranslateExtension.GetTextResource("RemoveLast"));
@@ -121,11 +121,11 @@ namespace ArcheryManager.DroidTest.Target
             Assert.AreEqual("0", app.Query("FlightScore").First().Text);
 
             // drag to create arrow
-            app.DragCoordinates(500, 800, 450, 750);
+            app.DragCoordinates(500, 800, 475, 775);
             Assert.AreEqual("10", app.Query("FlightScore").First().Text);
 
             // drag to create arrow
-            app.DragCoordinates(500, 800, 600, 900);
+            app.DragCoordinates(500, 800, 600, 800);
             Assert.AreEqual("18", app.Query("FlightScore").First().Text);
 
             //remove arrow
@@ -144,11 +144,11 @@ namespace ArcheryManager.DroidTest.Target
             Assert.AreEqual("0", app.Query("TotalScore").First().Text);
 
             // drag to create arrow
-            app.DragCoordinates(500, 800, 450, 750);
+            app.DragCoordinates(500, 800, 475, 775);
             Assert.AreEqual("10", app.Query("TotalScore").First().Text);
 
             // drag to create arrow
-            app.DragCoordinates(500, 800, 600, 900);
+            app.DragCoordinates(500, 800, 600, 800);
             Assert.AreEqual("18", app.Query("TotalScore").First().Text);
 
             app.Tap(TranslateExtension.GetTextResource("NewFlight"));
@@ -157,12 +157,12 @@ namespace ArcheryManager.DroidTest.Target
             Assert.AreEqual("18", app.Query("TotalScore").First().Text);
 
             // drag to create arrow
-            app.DragCoordinates(500, 800, 450, 750);
+            app.DragCoordinates(500, 800, 475, 775);
             Assert.AreEqual("10", app.Query("FlightScore").First().Text);
             Assert.AreEqual("28", app.Query("TotalScore").First().Text);
 
             // drag to create arrow
-            app.DragCoordinates(500, 800, 600, 900);
+            app.DragCoordinates(500, 800, 600, 800);
             Assert.AreEqual("18", app.Query("FlightScore").First().Text);
             Assert.AreEqual("36", app.Query("TotalScore").First().Text);
 
