@@ -494,6 +494,17 @@ namespace ArcheryManager.UnitTest.Utils
         }
 
         [Test]
+        public void DefaultScoreStringBeforeNewArrowTest()
+        {
+            counter.AddArrow(new Arrow(1, 0));
+            counter.AddArrow(new Arrow(2, 0));
+            counter.AddArrow(new Arrow(3, 0));
+
+            Assert.AreEqual("6/30", counter.FlightScoreString);
+            Assert.AreEqual("6/30", counter.TotalScoreString);
+        }
+
+        [Test]
         public void DefaultScoreStringInNewArrowTest()
         {
             counter.AddArrow(new Arrow(1, 0));

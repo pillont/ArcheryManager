@@ -149,63 +149,63 @@ namespace ArcheryManager.DroidTest.GenericCountable
         public void ScoreFlightUpdate()
         {
             app.WaitForElement("buttonGrid"); //update visual
-            Assert.AreEqual("0", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("0/0", app.Query("FlightScore").First().Text);
 
             // tap to create arrow
             app.Tap(c => c.Marked("buttonGrid").Child(9).Child(1).Child().Text("10"));
-            Assert.AreEqual("10", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("10/10", app.Query("FlightScore").First().Text);
 
             // tap to create arrow
             app.Tap(c => c.Marked("buttonGrid").Child(7).Child(1).Child().Text("8"));
-            Assert.AreEqual("18", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("18/20", app.Query("FlightScore").First().Text);
 
             //remove arrow
             app.Tap(TranslateExtension.GetTextResource("RemoveLast"));
-            Assert.AreEqual("10", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("10/10", app.Query("FlightScore").First().Text);
 
             //remove all
             app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
-            Assert.AreEqual("0", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("0/0", app.Query("FlightScore").First().Text);
         }
 
         [Test]
         public void ScoreTotalUpdate()
         {
             app.WaitForElement("buttonGrid"); //update visual
-            Assert.AreEqual("0", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("0/0", app.Query("TotalScore").First().Text);
 
             // tap to create arrow
             app.Tap(c => c.Marked("buttonGrid").Child(9).Child(1).Child().Text("10"));
-            Assert.AreEqual("10", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("10/10", app.Query("TotalScore").First().Text);
 
             // tap to create arrow
             app.Tap(c => c.Marked("buttonGrid").Child(7).Child(1).Child().Text("8"));
-            Assert.AreEqual("18", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("18/20", app.Query("TotalScore").First().Text);
 
             app.Tap(TranslateExtension.GetTextResource("NewFlight"));
 
-            Assert.AreEqual("0", app.Query("FlightScore").First().Text);
-            Assert.AreEqual("18", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("0/0", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("18/20", app.Query("TotalScore").First().Text);
 
             // tap to create arrow
             app.Tap(c => c.Marked("buttonGrid").Child(9).Child(1).Child().Text("10"));
-            Assert.AreEqual("10", app.Query("FlightScore").First().Text);
-            Assert.AreEqual("28", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("10/10", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("28/30", app.Query("TotalScore").First().Text);
 
             // tap to create arrow
             app.Tap(c => c.Marked("buttonGrid").Child(7).Child(1).Child().Text("8"));
-            Assert.AreEqual("18", app.Query("FlightScore").First().Text);
-            Assert.AreEqual("36", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("18/20", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("36/40", app.Query("TotalScore").First().Text);
 
             //remove arrow
             app.Tap(TranslateExtension.GetTextResource("RemoveLast"));
-            Assert.AreEqual("10", app.Query("FlightScore").First().Text);
-            Assert.AreEqual("28", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("10/10", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("28/30", app.Query("TotalScore").First().Text);
 
             //remove all
             app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
-            Assert.AreEqual("0", app.Query("FlightScore").First().Text);
-            Assert.AreEqual("18", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("0/0", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("18/20", app.Query("TotalScore").First().Text);
         }
 
         #endregion score

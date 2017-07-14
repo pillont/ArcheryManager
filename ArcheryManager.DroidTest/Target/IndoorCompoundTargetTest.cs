@@ -106,63 +106,63 @@ namespace ArcheryManager.DroidTest.Target
         public void ScoreFlightUpdate()
         {
             app.WaitForElement("FlightScore"); //update visual
-            Assert.AreEqual("0", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("0/0", app.Query("FlightScore").First().Text);
 
             // drag to create arrow
             app.DragCoordinates(520, 820, 550, 850);
-            Assert.AreEqual("10", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("10/10", app.Query("FlightScore").First().Text);
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 550, 850);
-            Assert.AreEqual("19", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("19/20", app.Query("FlightScore").First().Text);
 
             //remove arrow
             app.Tap(TranslateExtension.GetTextResource("RemoveLast"));
-            Assert.AreEqual("10", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("10/10", app.Query("FlightScore").First().Text);
 
             //remove all
             app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
-            Assert.AreEqual("0", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("0/0", app.Query("FlightScore").First().Text);
         }
 
         [Test]
         public void ScoreTotalUpdate()
         {
             app.WaitForElement("TotalScore"); //update visual
-            Assert.AreEqual("0", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("0/0", app.Query("TotalScore").First().Text);
 
             // drag to create arrow
             app.DragCoordinates(520, 820, 550, 850);
-            Assert.AreEqual("10", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("10/10", app.Query("TotalScore").First().Text);
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 550, 850);
-            Assert.AreEqual("19", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("19/20", app.Query("TotalScore").First().Text);
 
             app.Tap(TranslateExtension.GetTextResource("NewFlight"));
 
-            Assert.AreEqual("0", app.Query("FlightScore").First().Text);
-            Assert.AreEqual("19", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("0/0", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("19/20", app.Query("TotalScore").First().Text);
 
             // drag to create arrow
             app.DragCoordinates(520, 820, 550, 850);
-            Assert.AreEqual("10", app.Query("FlightScore").First().Text);
-            Assert.AreEqual("29", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("10/10", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("29/30", app.Query("TotalScore").First().Text);
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 550, 850);
-            Assert.AreEqual("19", app.Query("FlightScore").First().Text);
-            Assert.AreEqual("38", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("19/20", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("38/40", app.Query("TotalScore").First().Text);
 
             //remove arrow
             app.Tap(TranslateExtension.GetTextResource("RemoveLast"));
-            Assert.AreEqual("10", app.Query("FlightScore").First().Text);
-            Assert.AreEqual("29", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("10/10", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("29/30", app.Query("TotalScore").First().Text);
 
             //remove all
             app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
-            Assert.AreEqual("0", app.Query("FlightScore").First().Text);
-            Assert.AreEqual("19", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("0/0", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("19/20", app.Query("TotalScore").First().Text);
         }
 
         #endregion score

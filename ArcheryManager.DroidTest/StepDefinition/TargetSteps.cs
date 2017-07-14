@@ -106,5 +106,19 @@ namespace ArcheryManager.DroidTest.StepDefinition
             TestSetting.App.Tap(TranslateExtension.GetTextResource("MoreOptions"));
             TestSetting.App.Tap("Restart");
         }
+
+        [Then(@"le score de la volée est (.*)")]
+        public void AlorsLeScoreDeLaVoleeEst(string text)
+        {
+            TestSetting.App.WaitForElement("FlightScore");
+            Assert.AreEqual(text, TestSetting.App.Query("FlightScore").First().Text);
+        }
+
+        [Then(@"le score total est (.*)")]
+        public void AlorsLeScoreTotalEst(string text)
+        {
+            TestSetting.App.WaitForElement("TotalScore");
+            Assert.AreEqual(text, TestSetting.App.Query("TotalScore").First().Text);
+        }
     }
 }
