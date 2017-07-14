@@ -21,7 +21,7 @@ namespace ArcheryManager.Pages
             InitializeComponent();
 
             this.Setting = new TargetSetting() { HaveTarget = false };
-            Counter = new ScoreCounter(Setting, ToolbarItems, EnglishSetting);
+            Counter = new ScoreCounter(Setting, ToolbarItems, EnglishSetting, MessageToConfirm);
             totalCounter.BindingContext = Counter;
             scoreList.Setting = Counter.ArrowSetting;
             scoreList.SizeChanged += ScoreList_SizeChanged;
@@ -52,7 +52,7 @@ namespace ArcheryManager.Pages
         private void SetupToolbarItems()
         {
             ToolbarItems.Clear();
-            Counter.AddDefaultToolbarItems(MessageToConfirm);
+            Counter.AddDefaultToolbarItems();
             AddCounterButtonsToolbarItems();
         }
 

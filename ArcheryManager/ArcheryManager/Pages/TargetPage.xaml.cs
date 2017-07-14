@@ -6,7 +6,6 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ArcheryManager.CustomControls;
 using ArcheryManager.Resources;
-using System.Threading.Tasks;
 
 namespace ArcheryManager.Pages
 {
@@ -23,7 +22,7 @@ namespace ArcheryManager.Pages
             InitializeComponent();
 
             this.Setting = new TargetSetting();
-            Counter = new ScoreCounter(Setting, ToolbarItems, setting);
+            Counter = new ScoreCounter(Setting, ToolbarItems, setting, MessageToConfirm);
 
             #region view setup
 
@@ -52,7 +51,7 @@ namespace ArcheryManager.Pages
 
         private async void MessageToConfirm(string message, Action action)
         {
-            var valid = await DisplayAlert("title", message, "yes", "no");
+            var valid = await DisplayAlert(AppResources.Question, message, AppResources.Yes, AppResources.No);
             if (valid)
             {
                 action?.Invoke();
@@ -62,7 +61,7 @@ namespace ArcheryManager.Pages
         private void SetupToolbarItems()
         {
             ToolbarItems.Clear();
-            Counter.AddDefaultToolbarItems(MessageToConfirm);
+            Counter.AddDefaultToolbarItems();
             AddTargetToolbarItems();
         }
 

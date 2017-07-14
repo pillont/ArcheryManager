@@ -15,6 +15,8 @@ namespace ArcheryManager.Utils
         private const string NewFlightText = "New Flight";
         private const string ScoreFormat = "{0}/{1}";
 
+        private Action<string, Action> AskValidation;
+
         #region properties
 
         #region Arrows list
@@ -136,9 +138,10 @@ namespace ArcheryManager.Utils
         /// score counter with associated target
         /// </summary>
         /// <param name="setting"></param>
-        public ScoreCounter(TargetSetting setting, IList<ToolbarItem> toolbarItems, IArrowSetting ArrowSetting)// TODO : make FlightSetting ancestor of Target setting =>remove this ctor and change the second to accept FlightSetting
+        public ScoreCounter(TargetSetting setting, IList<ToolbarItem> toolbarItems, IArrowSetting ArrowSetting, Action<string, Action> askValidation)// TODO : make FlightSetting ancestor of Target setting =>remove this ctor and change the second to accept FlightSetting
         {
             this.ArrowSetting = ArrowSetting;
+            this.AskValidation = askValidation;
             CurrentArrows = new ObservableCollection<Arrow>();
             AllArrows = new ObservableCollection<Arrow>();
             PreviousArrows = new ObservableCollection<Arrow>();
@@ -165,7 +168,7 @@ namespace ArcheryManager.Utils
 
         #region toolbar item
 
-        public void AddDefaultToolbarItems(Action<string, Action> ifValid)
+        public void AddDefaultToolbarItems()
         {
             toolbarItems.Add(new ToolbarItem()
             {
@@ -178,14 +181,14 @@ namespace ArcheryManager.Utils
             {
                 Text = AppResources.RemoveAll,
                 Order = ToolbarItemOrder.Secondary,
-                Command = new Command(() => ifValid("clear ?", ClearArrows))
+                Command = new Command(() => AskValidation(AppResources.RemoveAllQuestion, ClearArrows))
             });
 
             toolbarItems.Add(new ToolbarItem()
             {
-                Text = "Restart",
+                Text = AppResources.Restart,
                 Order = ToolbarItemOrder.Secondary,
-                Command = new Command(RestartCount)
+                Command = new Command(() => AskValidation(AppResources.RestartQuestion, RestartCount))
             });
         }
 
@@ -195,7 +198,7 @@ namespace ArcheryManager.Utils
             {
                 Text = AppResources.NewFlight,
                 Order = ToolbarItemOrder.Primary,
-                Command = new Command(NewFlight),
+                Command = new Command(() => AskValidation(AppResources.NewFlightQuestion, NewFlight)),
             });
         }
 

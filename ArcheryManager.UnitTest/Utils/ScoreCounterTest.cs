@@ -22,7 +22,7 @@ namespace ArcheryManager.UnitTest.Utils
             ArrowSetting = EnglishArrowSetting.Instance;
             toolBarList = new List<ToolbarItem>();
             targetSetting = new TargetSetting();
-            counter = new ScoreCounter(targetSetting, toolBarList, ArrowSetting);
+            counter = new ScoreCounter(targetSetting, toolBarList, ArrowSetting, null);
         }
 
         [Test]
