@@ -113,13 +113,13 @@ namespace ArcheryManager.DroidTest.GenericCountable
             var list = app.WaitForElement("scoreList");
 
             // drag to create arrow
-            app.DragCoordinates(500, 800, 450, 750);
+            app.DragCoordinates(500, 800, 475, 775);
             // drag to create arrow
-            app.DragCoordinates(500, 800, 600, 900);
+            app.DragCoordinates(500, 800, 570, 850);
             // drag to create arrow
-            app.DragCoordinates(500, 800, 450, 850);
+            app.DragCoordinates(500, 800, 475, 825);
             // drag to create arrow
-            app.DragCoordinates(500, 800, 600, 700);
+            app.DragCoordinates(500, 800, 570, 750);
 
             Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Text);
             Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Text);
@@ -149,13 +149,13 @@ namespace ArcheryManager.DroidTest.GenericCountable
             var list = app.WaitForElement("scoreList");
 
             // drag to create arrow
-            app.DragCoordinates(500, 800, 450, 750);
+            app.DragCoordinates(500, 800, 470, 770);
             // drag to create arrow
-            app.DragCoordinates(500, 800, 600, 900);
+            app.DragCoordinates(500, 800, 570, 870);
             // drag to create arrow
-            app.DragCoordinates(500, 800, 450, 850);
+            app.DragCoordinates(500, 800, 470, 830);
             // drag to create arrow
-            app.DragCoordinates(500, 800, 600, 700);
+            app.DragCoordinates(500, 800, 570, 730);
 
             Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Text);
             Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Text);

@@ -29,7 +29,7 @@ namespace ArcheryManager.DroidTest.Target
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 600, 900);
-            var pure = new AppRect() { Width = 14, Height = 14, X = 462, Y = 751, CenterX = 469, CenterY = 759 };
+            var pure = new AppRect() { Width = 14, Height = 14, X = 499, Y = 788, CenterX = 506, CenterY = 795 };
 
             var list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(1, list.Count()); // have one arrow in target
@@ -50,7 +50,7 @@ namespace ArcheryManager.DroidTest.Target
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 450, 750);
-            pure = new AppRect() { Width = 14, Height = 14, X = 333, Y = 622, CenterX = 340, CenterY = 629 };
+            pure = new AppRect() { Width = 14, Height = 14, X = 315, Y = 604, CenterX = 322, CenterY = 611 };
 
             list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(2, list.Count()); // have one arrow in target
@@ -76,10 +76,10 @@ namespace ArcheryManager.DroidTest.Target
             app.WaitForElement("arrowInTargetGrid"); //update visual
 
             // drag to create arrow
-            app.DragCoordinates(500, 800, 450, 750);
+            app.DragCoordinates(500, 800, 475, 775);
             // drag to create arrow
-            app.DragCoordinates(500, 800, 600, 900);
-            var pure = new AppRect() { Width = 14, Height = 14, X = 333, Y = 621, CenterX = 340, CenterY = 629 };
+            app.DragCoordinates(500, 800, 550, 850);
+            var pure = new AppRect() { Width = 14, Height = 14, X = 346, Y = 635, CenterX = 353, CenterY = 642 };
 
             var list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(2, list.Count()); // have one arrow in target

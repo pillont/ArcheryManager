@@ -16,7 +16,7 @@ namespace ArcheryManager.Interactions.Behaviors
         /// <summary>
         /// rate of the target translation during manipulation to set arrow
         /// </summary>
-        public const double TargetTranslationRate = -0.3;
+        public const double TargetTranslationRate = -0.5;
 
         /// <summary>
         /// score counter where add new arrows
