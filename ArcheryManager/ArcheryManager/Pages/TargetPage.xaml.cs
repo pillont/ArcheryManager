@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ArcheryManager.CustomControls;
 using ArcheryManager.Resources;
+using System.Threading.Tasks;
 
 namespace ArcheryManager.Pages
 {
@@ -49,10 +50,19 @@ namespace ArcheryManager.Pages
             #endregion total score
         }
 
+        private async void MessageToConfirm(string message, Action action)
+        {
+            var valid = await DisplayAlert("title", message, "yes", "no");
+            if (valid)
+            {
+                action?.Invoke();
+            }
+        }
+
         private void SetupToolbarItems()
         {
             ToolbarItems.Clear();
-            Counter.AddDefaultToolbarItems();
+            Counter.AddDefaultToolbarItems(MessageToConfirm);
             AddTargetToolbarItems();
         }
 

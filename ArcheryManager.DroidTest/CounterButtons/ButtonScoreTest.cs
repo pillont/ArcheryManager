@@ -48,8 +48,9 @@ namespace ArcheryManager.DroidTest.GenericCountable
         [Test]
         public void InitCommandTargetElement()
         {
-            app.WaitForElement(TranslateExtension.GetTextResource("RemoveAll"));
             app.WaitForElement(TranslateExtension.GetTextResource("RemoveLast"));
+            app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
+            app.WaitForElement(TranslateExtension.GetTextResource("RemoveAll"));
         }
 
         [Test]
@@ -123,6 +124,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
             app.Tap(c => c.Marked("buttonGrid").Child(7));
             Assert.AreEqual(2, app.Query(e => e.Marked("scoreList").Child()).Count());
 
+            app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
             app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
 
             Assert.AreEqual(0, app.Query(e => e.Marked("scoreList").Child()).Count());
@@ -164,6 +166,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
             Assert.AreEqual("10/10", app.Query("FlightScore").First().Text);
 
             //remove all
+            app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
             app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
             Assert.AreEqual("0/0", app.Query("FlightScore").First().Text);
         }
@@ -203,6 +206,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
             Assert.AreEqual("28/30", app.Query("TotalScore").First().Text);
 
             //remove all
+            app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
             app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
             Assert.AreEqual("0/0", app.Query("FlightScore").First().Text);
             Assert.AreEqual("18/20", app.Query("TotalScore").First().Text);

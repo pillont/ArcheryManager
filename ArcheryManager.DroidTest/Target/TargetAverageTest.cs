@@ -78,6 +78,7 @@ namespace ArcheryManager.DroidTest.Target
             app.DragCoordinates(300, 800, 400, 800);
             app.WaitForElement("averageCanvas");
 
+            app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
             app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
             app.WaitForNoElement("averageCanvas");
         }

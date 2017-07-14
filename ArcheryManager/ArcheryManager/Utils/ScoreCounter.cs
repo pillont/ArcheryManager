@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using ArcheryManager.Resources;
 using ArcheryManager.Interfaces;
+using System;
 
 namespace ArcheryManager.Utils
 {
@@ -164,7 +165,7 @@ namespace ArcheryManager.Utils
 
         #region toolbar item
 
-        public void AddDefaultToolbarItems()
+        public void AddDefaultToolbarItems(Action<string, Action> ifValid)
         {
             toolbarItems.Add(new ToolbarItem()
             {
@@ -176,8 +177,8 @@ namespace ArcheryManager.Utils
             toolbarItems.Add(new ToolbarItem()
             {
                 Text = AppResources.RemoveAll,
-                Order = ToolbarItemOrder.Primary,
-                Command = new Command(ClearArrows)
+                Order = ToolbarItemOrder.Secondary,
+                Command = new Command(() => ifValid("clear ?", ClearArrows))
             });
 
             toolbarItems.Add(new ToolbarItem()

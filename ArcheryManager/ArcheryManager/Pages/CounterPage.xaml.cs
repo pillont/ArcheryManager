@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ArcheryManager.Interactions.Behaviors;
 using ArcheryManager.Resources;
+using System;
 
 namespace ArcheryManager.Pages
 {
@@ -39,10 +40,19 @@ namespace ArcheryManager.Pages
             scrollArrows.ScrollToAsync(scoreList, ScrollToPosition.End, true);
         }
 
+        private async void MessageToConfirm(string message, Action action)
+        {
+            var valid = await DisplayAlert("title", message, "yes", "no");
+            if (valid)
+            {
+                action?.Invoke();
+            }
+        }
+
         private void SetupToolbarItems()
         {
             ToolbarItems.Clear();
-            Counter.AddDefaultToolbarItems();
+            Counter.AddDefaultToolbarItems(MessageToConfirm);
             AddCounterButtonsToolbarItems();
         }
 

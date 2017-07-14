@@ -123,6 +123,7 @@ namespace ArcheryManager.DroidTest.Target
             var list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(2, list.Count()); // have one arrow in target
 
+            app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
             app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
 
             list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
@@ -156,6 +157,7 @@ namespace ArcheryManager.DroidTest.Target
             app.DragCoordinates(500, 800, 600, 900);
             Assert.AreEqual(2, app.Query(e => e.Marked("scoreList").Child()).Count());
 
+            app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
             app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
 
             Assert.AreEqual(0, app.Query(e => e.Marked("scoreList").Child()).Count());
