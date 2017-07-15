@@ -50,8 +50,13 @@
     <Compile Include="CustomControls\TargetImage.xaml.cs">
       <DependentUpon>TargetImage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Factories\ArrowsettingFactory.cs" />
+    <Compile Include="Factories\CounterPageFactory.cs" />
     <Compile Include="Pages\CounterSelectorPage.xaml.cs">
       <DependentUpon>CounterSelectorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GeneralMenu.xaml.cs">
+      <DependentUpon>GeneralMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\AppResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -113,15 +118,13 @@
     </Compile>
     <Compile Include="Settings\FieldArrowSetting.cs" />
     <Compile Include="Utils\Arrow.cs" />
+    <Compile Include="Utils\CountSetting.cs" />
     <Compile Include="Utils\Flight.cs" />
     <Compile Include="Utils\ScreenRotationWatcher.cs" />
     <Compile Include="Utils\ScoreCounter.cs" />
     <Compile Include="Interactions\Behaviors\TimerBehavior.cs" />
     <Compile Include="CustomControls\Target.cs" />
     <Compile Include="CustomControls\CustomTimer.cs" />
-    <Compile Include="Pages\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\BackDoorPage.xaml.cs">
       <DependentUpon>BackDoorPage.xaml</DependentUpon>
     </Compile>
@@ -146,10 +149,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.fr.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pages\MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="App.xaml">
       <SubType>Designer</SubType>
@@ -256,6 +255,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CustomControls\TargetImage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\GeneralMenu.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -5,7 +5,7 @@ namespace ArcheryManager.Utils
 {
     public class TargetSetting : BindableObject
     {
-        public Setting CountSetting { get; set; }
+        public CountSetting CountSetting { get; set; }
 
         public static readonly BindableProperty HaveTargetProperty =
                       BindableProperty.Create(nameof(HaveTarget), typeof(bool), typeof(TargetSetting), true);
@@ -43,7 +43,7 @@ namespace ArcheryManager.Utils
             set { SetValue(AverageIsVisibleProperty, value); }
         }
 
-        public TargetSetting(Setting countSetting)
+        public TargetSetting(CountSetting countSetting)
         {
             this.CountSetting = countSetting;
         }

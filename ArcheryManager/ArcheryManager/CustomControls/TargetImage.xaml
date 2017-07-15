@@ -1,14 +1,28 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ArcheryManager.CustomControls.TargetImage">
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:shape="clr-namespace:XFShapeView;assembly=XFShapeView"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArcheryManager.CustomControls.TargetImage">
     <ContentView.Content>
-
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="20" />
-            </Grid.RowDefinitions>
-            <Image Source="{Binding Source}" Grid.Row="0" />
-            <Label Text="{Binding Text}" Grid.Row="1" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
+        <Grid x:Name="generalGrid">
+            <shape:ShapeView IsVisible="{Binding IsSelected}"
+                             ShapeType="Box"
+                             Color="Aquamarine"
+                             VerticalOptions="CenterAndExpand"
+                             HorizontalOptions="CenterAndExpand"
+                             WidthRequest="2000"
+                             HeightRequest="2000" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
+                <Image Source="{Binding Source}" Grid.Row="0" />
+                <Label Text="{Binding Text}"
+                       Grid.Row="1"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="CenterAndExpand" />
+            </Grid>
         </Grid>
     </ContentView.Content>
 </ContentView>

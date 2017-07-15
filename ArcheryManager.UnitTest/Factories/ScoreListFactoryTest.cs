@@ -26,7 +26,7 @@ namespace ArcheryManager.UnitTest.Factories
         private Arrow a2;
         private Arrow a1;
         private IList<ToolbarItem> toolbarItems;
-        private Setting countSetting;
+        private CountSetting countSetting;
 
         [SetUp]
         public void Init()
@@ -36,7 +36,7 @@ namespace ArcheryManager.UnitTest.Factories
             setting = EnglishArrowSetting.Instance;
             list = new List<ToolbarItem>();
 
-            countSetting = new Setting();
+            countSetting = new CountSetting();
             counter = new ScoreCounter(new TargetSetting(countSetting), toolbarItems, setting);
 
             target = new Mock<Target>();

@@ -17,12 +17,12 @@ namespace ArcheryManager.UnitTest.Utils
         private TargetSetting targetSetting;
 
         private IArrowSetting arrowSetting;
-        private Setting setting;
+        private CountSetting setting;
 
         [SetUp]
         public void Init()
         {
-            setting = new Setting();
+            setting = new CountSetting();
             toolBarList = new List<ToolbarItem>();
             targetSetting = new TargetSetting(setting);
             arrowSetting = EnglishArrowSetting.Instance;

@@ -15,9 +15,8 @@ namespace ArcheryManager
                 {
                     //#if TEST
                     navigationPage = new NavigationPage(new BackDoorPage());
-
                     //#else
-                    //                  navigationPage  = new NavigationPage(new TargetPage(IndoorCompoundArrowSetting.Instance));
+                    //                    navigationPage = new NavigationPage(new GeneralMenu());
                     //#endif
                 }
                 return navigationPage;

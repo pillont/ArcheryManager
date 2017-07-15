@@ -1,5 +1,6 @@
 ﻿using ArcheryManager.Interfaces;
 using ArcheryManager.Settings;
+using ArcheryManager.Utils;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -39,13 +40,16 @@ namespace ArcheryManager.Pages
                 setting = IndoorRecurveArrowSetting.Instance;
             }
 
-            TargetPage target = new TargetPage(setting);
+            var countSetting = new CountSetting();
+            TargetPage target = new TargetPage(setting, countSetting);
             await App.NavigationPage.PushAsync(target);
         }
 
         private async void ButtonCounter_Clicked(object sender, EventArgs e)
         {
-            await App.NavigationPage.PushAsync(new CounterButtonPage());
+            var countSetting = new CountSetting();
+            var arrowSetting = EnglishArrowSetting.Instance;
+            await App.NavigationPage.PushAsync(new CounterButtonPage(arrowSetting, countSetting));
         }
 
         private async void CounterSelector_Clicked(object sender, EventArgs e)

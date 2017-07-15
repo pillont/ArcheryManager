@@ -1,15 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace ArcheryManager.CustomControls
 {
     public partial class TargetImage : ContentView
     {
+        public enum TargetStyle
+        {
+            EnglishTarget,
+            FieldTarget,
+            IndoorRecurveTarget,
+            IndoorCompoundTarget,
+        }
+
+        public TargetStyle StyleTarget { get; set; }
+        private const bool DefaultIsSelected = false;
+
         public static readonly BindableProperty TextProperty =
                       BindableProperty.Create(nameof(Text), typeof(string), typeof(TargetImage), string.Empty);
 
@@ -26,6 +31,15 @@ namespace ArcheryManager.CustomControls
         {
             get { return (ImageSource)GetValue(SourceProperty); }
             set { SetValue(SourceProperty, value); }
+        }
+
+        public static readonly BindableProperty IsSelectedProperty =
+                      BindableProperty.Create(nameof(IsSelected), typeof(bool), typeof(TargetImage), DefaultIsSelected);
+
+        public bool IsSelected
+        {
+            get { return (bool)GetValue(IsSelectedProperty); }
+            set { SetValue(IsSelectedProperty, value); }
         }
 
         public TargetImage()

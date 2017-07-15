@@ -45,15 +45,20 @@
             </StackLayout>
             <Entry Keyboard="Numeric"
                    Grid.Column="2"
-                   IsEnabled="{Binding HaveMaxArrowsCount}"
+                   IsVisible="{Binding HaveMaxArrowsCount}"
                    Text="{Binding ArrowsCount}"
                    Unfocused="ArrowCount_Unfocused"
+                   VerticalOptions="Center"
+                   HorizontalTextAlignment="Center"
                    AutomationId="numberArrowEntry"
                    x:Name="numberArrowEntry" />
         </Grid>
 
         <!-- images -->
-        <Grid Grid.Row="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+        <Grid Grid.Row="1"
+              x:Name="imageGrid"
+              VerticalOptions="CenterAndExpand"
+              HorizontalOptions="CenterAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -65,21 +70,25 @@
 
             <scr:TargetImage Source="EnglishTarget.png"
                              Text="{resources:Translate EnglishTarget}"
+                             StyleTarget="EnglishTarget"
                              Grid.Row="0"
                              Grid.Column="0" />
 
             <scr:TargetImage Source="FieldTarget.png"
                              Text="{resources:Translate FieldTarget}"
+                             StyleTarget="FieldTarget"
                              Grid.Row="0"
                              Grid.Column="1" />
 
             <scr:TargetImage Source="IndoorTarget.png"
                              Text="{resources:Translate IndoorRecurveTarget}"
+                             StyleTarget="IndoorRecurveTarget"
                              Grid.Row="1"
                              Grid.Column="0" />
 
             <scr:TargetImage Source="IndoorTarget.png"
                              Text="{resources:Translate IndoorCompoundTarget}"
+                             StyleTarget="IndoorCompoundTarget"
                              Grid.Row="1"
                              Grid.Column="1" />
         </Grid>
@@ -89,6 +98,6 @@
             <Label Text="{resources:Translate TargetWanted}" VerticalOptions="Center" VerticalTextAlignment="Center" />
         </StackLayout>
 
-        <Button Text="valid" Grid.Row="3" Margin="5" />
+        <Button Text="valid" Grid.Row="3" Margin="5" Clicked="Valid_Clicked" />
     </Grid>
 </ContentPage>

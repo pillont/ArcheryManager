@@ -1,13 +1,8 @@
-﻿using ArcheryManager.Utils;
+﻿using ArcheryManager.CustomControls;
+using ArcheryManager.Factories;
+using ArcheryManager.Utils;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,13 +11,39 @@ namespace ArcheryManager.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CounterSelectorPage : ContentPage
     {
-        private Setting setting;
+        private CountSetting _setting;
 
         public CounterSelectorPage()
         {
             InitializeComponent();
-            setting = new Setting();
-            this.BindingContext = setting;
+            _setting = new CountSetting();
+            this.BindingContext = _setting;
+
+            foreach (var image in imageGrid.Children)
+            {
+                var tap = new TapGestureRecognizer();
+                tap.Tapped += Image_Tapped;
+                image.GestureRecognizers.Add(tap);
+            }
+
+            var first = imageGrid.Children.First() as TargetImage;
+            SelectTarget(first);
+        }
+
+        private void Image_Tapped(object sender, EventArgs e)
+        {
+            SelectTarget(sender as TargetImage);
+        }
+
+        public void SelectTarget(TargetImage image)
+        {
+            foreach (TargetImage i in imageGrid.Children)
+            {
+                i.IsSelected = false;
+            }
+
+            _setting.TargetStyle = image.StyleTarget;
+            image.IsSelected = true;
         }
 
         /// <summary>
@@ -32,47 +53,19 @@ namespace ArcheryManager.Pages
         {
             var entry = sender as Entry;
             int val = Convert.ToInt32(entry.Text);
-            if (val < Setting.MinArrowCount)
+            if (val < CountSetting.MinArrowCount)
             {
                 if (BindingContext != null)
                 {
-                    setting.ArrowsCount = Setting.MinArrowCount;
+                    _setting.ArrowsCount = CountSetting.MinArrowCount;
                 }
             }
         }
-    }
 
-    public class Setting : BindableObject
-    {
-        public const int MinArrowCount = 3;
-        public const int DefaultArrowCount = 6;
-        private const bool DefaultWantTarget = true;
-
-        public static readonly BindableProperty ArrowsCountProperty =
-                      BindableProperty.Create(nameof(ArrowsCount), typeof(int), typeof(Setting), DefaultArrowCount);
-
-        public int ArrowsCount
+        private async void Valid_Clicked(object sender, EventArgs e)
         {
-            get { return (int)GetValue(ArrowsCountProperty); }
-            set { SetValue(ArrowsCountProperty, value); }
-        }
-
-        public static readonly BindableProperty HaveMaxArrowsCountProperty =
-                     BindableProperty.Create(nameof(HaveMaxArrowsCount), typeof(bool), typeof(Setting), false);
-
-        public bool HaveMaxArrowsCount
-        {
-            get { return (bool)GetValue(HaveMaxArrowsCountProperty); }
-            set { SetValue(HaveMaxArrowsCountProperty, value); }
-        }
-
-        public static readonly BindableProperty WantTargetProperty =
-                      BindableProperty.Create(nameof(WantTarget), typeof(bool), typeof(Setting), DefaultWantTarget);
-
-        public bool WantTarget
-        {
-            get { return (bool)GetValue(WantTargetProperty); }
-            set { SetValue(WantTargetProperty, value); }
+            var page = CounterPageFactory.Create(_setting);
+            await App.NavigationPage.PushAsync(page);
         }
     }
 }
