@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 
 using Xamarin.Forms;
 using System.Runtime.CompilerServices;
-using ArcheryManager.Interfaces;
 
 namespace ArcheryManager.CustomControls
 {
@@ -31,6 +30,8 @@ namespace ArcheryManager.CustomControls
 
             if (propertyName == nameof(Counter))
             {
+                buttonGrid.Setting = Counter.ArrowSetting;
+
                 DrawButtons();
             }
         }

@@ -119,8 +119,8 @@ namespace ArcheryManager.DroidTest.GenericCountable
         public void AllArrowRemoveInList()
         {
             app.WaitForElement("buttonGrid"); //update visual
-            app.Tap(c => c.Marked("buttonGrid").Child(9).Child(1).Child().Text("10"));
-            app.Tap(c => c.Marked("buttonGrid").Child(7).Child(1).Child().Text("8"));
+            app.Tap(c => c.Marked("buttonGrid").Child(9));
+            app.Tap(c => c.Marked("buttonGrid").Child(7));
             Assert.AreEqual(2, app.Query(e => e.Marked("scoreList").Child()).Count());
 
             app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
@@ -231,7 +231,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
             Assert.AreEqual(598, tar.CenterX);
 
             Assert.GreaterOrEqual(tar.CenterY, 463);
-            Assert.LessOrEqual(tar.CenterY, 473);
+            Assert.LessOrEqual(tar.CenterY, 478);
         }
     }
 }

@@ -13,8 +13,8 @@ Scénario: Score après tir
 	Et je tire une flèche en 50, 235
 	Et je tire une flèche en 0, 0
 	
-	Alors le score de la volée est 20/30
-	Alors le score total est 20/30
+	Alors le score de la volée est 15/30
+	Alors le score total est 15/30
 
 Scénario: Score après une nouvelle volée
 	Quand J'ouvre une page de cible fita
@@ -24,7 +24,7 @@ Scénario: Score après une nouvelle volée
 	Et Je click sur le bouton nouvelle volée
 
 	Alors le score de la volée est 0/0
-	Alors le score total est 20/30
+	Alors le score total est 15/30
 
 Scénario: Score tir après une nouvelle volée
 Quand J'ouvre une page de cible fita
@@ -36,8 +36,8 @@ Quand J'ouvre une page de cible fita
 	Et je tire une flèche en 50, 235
 	Et je tire une flèche en 0, 0
 
-	Alors le score de la volée est 20/30
-	Alors le score total est 40/60
+	Alors le score de la volée est 15/30
+	Alors le score total est 30/60
 
 
 

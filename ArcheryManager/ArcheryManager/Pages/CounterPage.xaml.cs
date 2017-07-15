@@ -22,6 +22,7 @@ namespace ArcheryManager.Pages
             this.Setting = new TargetSetting() { HaveTarget = false };
             Counter = new ScoreCounter(Setting, ToolbarItems, EnglishSetting);
             totalCounter.BindingContext = Counter;
+            scoreList.Setting = Counter.ArrowSetting;
             scoreList.SizeChanged += ScoreList_SizeChanged;
             scoreList.Items = Counter.CurrentArrows;
 

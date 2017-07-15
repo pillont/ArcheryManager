@@ -96,9 +96,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 14
  testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 16
- testRunner.Then("le score de la volée est 20/30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("le score de la volée est 15/30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 17
- testRunner.Then("le score total est 20/30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("le score total est 15/30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -123,7 +123,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 26
  testRunner.Then("le score de la volée est 0/0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 27
- testRunner.Then("le score total est 20/30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("le score total est 15/30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -152,9 +152,9 @@ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.
 #line 37
  testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 39
- testRunner.Then("le score de la volée est 20/30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("le score de la volée est 15/30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 40
- testRunner.Then("le score total est 40/60", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("le score total est 30/60", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
         }

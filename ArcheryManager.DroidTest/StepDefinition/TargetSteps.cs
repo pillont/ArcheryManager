@@ -83,21 +83,6 @@ namespace ArcheryManager.DroidTest.StepDefinition
             Assert.GreaterOrEqual(p2 + 5, rect.CenterY);
         }
 
-        [Then(@"le score total est de (.*)")]
-        public void AlorsLeScoreTotalEstDe(int p0)
-        {
-            TestSetting.App.WaitForElement("TotalScore");
-            string text = TestSetting.App.Query("TotalScore").First().Text;
-            Assert.AreEqual(p0, Convert.ToInt32(text));
-        }
-
-        [Then(@"le score de la volée est de (.*)")]
-        public void AlorsLeScoreDeLaVoleeEstDe(int p0)
-        {
-            TestSetting.App.WaitForElement("FlightScore");
-            string text = TestSetting.App.Query("FlightScore").First().Text;
-            Assert.AreEqual(p0, Convert.ToInt32(text));
-        }
 
         [When(@"je click sur le bouton de restart")]
         public void QuandJeClickSurLeBoutonDeRestart()

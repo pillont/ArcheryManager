@@ -28,18 +28,25 @@ namespace ArcheryManager.CustomControls
             }
             set
             {
-                if (value == null)
+                try
                 {
-                    throw new NullReferenceException();
-                }
+                    if (value == null)
+                    {
+                        throw new NullReferenceException();
+                    }
 
-                if (Items != null)
+                    if (Items != null)
+                    {
+                        Items.CollectionChanged -= Items_CollectionChanged;
+                    }
+
+                    SetValue(ItemsProperty, value);
+                    value.CollectionChanged += Items_CollectionChanged;
+                }
+                catch (Exception e)
                 {
-                    Items.CollectionChanged -= Items_CollectionChanged;
+                    throw;
                 }
-
-                SetValue(ItemsProperty, value);
-                value.CollectionChanged += Items_CollectionChanged;
             }
         }
 
