@@ -106,63 +106,63 @@ namespace ArcheryManager.DroidTest.Target
         public void ScoreFlightUpdate()
         {
             app.WaitForElement("FlightScore"); //update visual
-            Assert.AreEqual("0", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("0/0", app.Query("FlightScore").First().Text);
 
             // drag to create arrow
             app.DragCoordinates(300, 1000, 250, 950);
-            Assert.AreEqual("5", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("5/6", app.Query("FlightScore").First().Text);
 
             // drag to create arrow
             app.DragCoordinates(530, 730, 600, 830);
-            Assert.AreEqual("9", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("9/12", app.Query("FlightScore").First().Text);
 
             //remove arrow
             app.Tap(TranslateExtension.GetTextResource("RemoveLast"));
-            Assert.AreEqual("5", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("5/6", app.Query("FlightScore").First().Text);
 
             //remove all
             app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
-            Assert.AreEqual("0", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("0/0", app.Query("FlightScore").First().Text);
         }
 
         [Test]
         public void ScoreTotalUpdate()
         {
             app.WaitForElement("TotalScore"); //update visual
-            Assert.AreEqual("0", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("0/0", app.Query("TotalScore").First().Text);
 
             // drag to create arrow
             app.DragCoordinates(300, 1000, 250, 950);
-            Assert.AreEqual("5", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("5/6", app.Query("TotalScore").First().Text);
 
             // drag to create arrow
             app.DragCoordinates(530, 730, 600, 830);
-            Assert.AreEqual("9", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("9/12", app.Query("TotalScore").First().Text);
 
             app.Tap(TranslateExtension.GetTextResource("NewFlight"));
 
-            Assert.AreEqual("0", app.Query("FlightScore").First().Text);
-            Assert.AreEqual("9", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("0/0", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("9/12", app.Query("TotalScore").First().Text);
 
             // drag to create arrow
             app.DragCoordinates(300, 1000, 250, 950);
-            Assert.AreEqual("5", app.Query("FlightScore").First().Text);
-            Assert.AreEqual("14", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("5/6", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("14/18", app.Query("TotalScore").First().Text);
 
             // drag to create arrow
             app.DragCoordinates(530, 730, 600, 830);
-            Assert.AreEqual("9", app.Query("FlightScore").First().Text);
-            Assert.AreEqual("18", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("9/12", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("18/24", app.Query("TotalScore").First().Text);
 
             //remove arrow
             app.Tap(TranslateExtension.GetTextResource("RemoveLast"));
-            Assert.AreEqual("5", app.Query("FlightScore").First().Text);
-            Assert.AreEqual("14", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("5/6", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("14/18", app.Query("TotalScore").First().Text);
 
             //remove all
             app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
-            Assert.AreEqual("0", app.Query("FlightScore").First().Text);
-            Assert.AreEqual("9", app.Query("TotalScore").First().Text);
+            Assert.AreEqual("0/0", app.Query("FlightScore").First().Text);
+            Assert.AreEqual("9/12", app.Query("TotalScore").First().Text);
         }
 
         #endregion score

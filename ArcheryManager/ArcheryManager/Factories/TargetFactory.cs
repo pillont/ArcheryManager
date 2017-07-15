@@ -15,7 +15,7 @@ namespace ArcheryManager.Factories
         /// <param name="targetSetting"></param>
         /// <param name="arrowSetting"></param>
         /// <returns></returns>
-        public static Target Create(ScoreCounter counter, TargetSetting targetSetting, IArrowSetting arrowSetting)
+        public static Target Create(ScoreCounter counter, TargetSetting targetSetting)
         {
             var customTarget = new Target() { MinimumHeightRequest = 1200, MinimumWidthRequest = 1200 };
 
@@ -30,7 +30,7 @@ namespace ArcheryManager.Factories
             average.BindingContext = targetSetting;
             average.SetBinding(View.IsVisibleProperty, nameof(TargetSetting.AverageIsVisible));
             average.Counter = counter;
-            customTarget.Setting = arrowSetting;
+            customTarget.Setting = counter.ArrowSetting;
 
             var behavior = new MovableTargetBehavior(counter, targetSetting);
             customTarget.Behaviors.Add(behavior);

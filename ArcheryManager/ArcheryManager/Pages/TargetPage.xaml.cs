@@ -22,7 +22,7 @@ namespace ArcheryManager.Pages
             InitializeComponent();
 
             this.Setting = new TargetSetting();
-            Counter = new ScoreCounter(Setting, ToolbarItems);
+            Counter = new ScoreCounter(Setting, ToolbarItems, setting);
 
             #region view setup
 
@@ -31,12 +31,12 @@ namespace ArcheryManager.Pages
 
             #endregion view setup
 
-            customTarget = TargetFactory.Create(Counter, Setting, setting);
+            customTarget = TargetFactory.Create(Counter, Setting);
             targetGrid.Children.Add(customTarget);
 
             #region ScoreList
 
-            var scoreList = ScoreListFactory.Create(customTarget, Counter, ToolbarItems);
+            var scoreList = ScoreListFactory.Create(customTarget, Counter, ToolbarItems, setting);
             scoreList.SizeChanged += ScoreList_SizeChanged;
             scrollArrows.Content = scoreList;
 

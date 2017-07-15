@@ -4,11 +4,16 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using ArcheryManager.Resources;
+using ArcheryManager.Interfaces;
 
 namespace ArcheryManager.Utils
 {
     public class ScoreCounter : BindableObject
     {
+        public readonly IArrowSetting ArrowSetting;
+        private const string NewFlightText = "New Flight";
+        private const string ScoreFormat = "{0}/{1}";
+
         #region properties
 
         #region Arrows list
@@ -74,7 +79,19 @@ namespace ArcheryManager.Utils
         public int FlightScore
         {
             get { return (int)GetValue(FlightScoreProperty); }
-            private set { SetValue(FlightScoreProperty, value); }
+            private set
+            {
+                SetValue(FlightScoreProperty, value);
+                OnPropertyChanged(nameof(FlightScoreString));
+            }
+        }
+
+        public string FlightScoreString
+        {
+            get
+            {
+                return ScoreString(FlightScore, CurrentArrows);
+            }
         }
 
         public static readonly BindableProperty TotalScoreProperty =
@@ -83,7 +100,25 @@ namespace ArcheryManager.Utils
         public int TotalScore
         {
             get { return (int)GetValue(TotalScoreProperty); }
-            private set { SetValue(TotalScoreProperty, value); }
+            private set
+            {
+                SetValue(TotalScoreProperty, value);
+                OnPropertyChanged(nameof(TotalScoreString));
+            }
+        }
+
+        public string TotalScoreString
+        {
+            get
+            {
+                return ScoreString(TotalScore, AllArrows);
+            }
+        }
+
+        private string ScoreString(int score, ObservableCollection<Arrow> arrows)
+        {
+            int maxScore = arrows.Count * ArrowSetting.MaxScore;
+            return string.Format(ScoreFormat, score, maxScore);
         }
 
         #endregion bindable prop
@@ -100,8 +135,9 @@ namespace ArcheryManager.Utils
         /// score counter with associated target
         /// </summary>
         /// <param name="setting"></param>
-        public ScoreCounter(TargetSetting setting, IList<ToolbarItem> toolbarItems)// TODO : make FlightSetting ancestor of Target setting =>remove this ctor and change the second to accept FlightSetting
+        public ScoreCounter(TargetSetting setting, IList<ToolbarItem> toolbarItems, IArrowSetting ArrowSetting)// TODO : make FlightSetting ancestor of Target setting =>remove this ctor and change the second to accept FlightSetting
         {
+            this.ArrowSetting = ArrowSetting;
             CurrentArrows = new ObservableCollection<Arrow>();
             AllArrows = new ObservableCollection<Arrow>();
             PreviousArrows = new ObservableCollection<Arrow>();
@@ -265,7 +301,7 @@ namespace ArcheryManager.Utils
             FlightScore = 0;
             foreach (var a in CurrentArrows)
             {
-                FlightScore += a.Value;
+                FlightScore += ValueOf(a);
             }
 
             TotalScore = lastTotal;
@@ -351,5 +387,20 @@ namespace ArcheryManager.Utils
         }
 
         #endregion interaction
+
+        private string ScoreOf(Arrow a)
+        {
+            return ArrowSetting.ScoreByIndex(a.Index);
+        }
+
+        private int ValueOf(Arrow a)
+        {
+            return ArrowSetting.ValueByScore(ScoreOf(a));
+        }
+
+        private Color ColorOf(Arrow a)
+        {
+            return ArrowSetting.ColorOf(ScoreOf(a));
+        }
     }
 }

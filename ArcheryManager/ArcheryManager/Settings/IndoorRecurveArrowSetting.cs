@@ -15,6 +15,7 @@ namespace ArcheryManager.Settings
         public const string NineScore = "9";
         public const string TenScore = "10";
         private const int IndoorRecurveZoneCount = 6;
+        private const int IndoorRecurveMaxValue = 10;
 
         private static Dictionary<string, Color> IndoorRecurveColorOf = new Dictionary<string, Color>()
         {
@@ -35,6 +36,14 @@ namespace ArcheryManager.Settings
             { 4 , NineScore },
             { 5 , TenScore },
         };
+
+        public int MaxScore
+        {
+            get
+            {
+                return IndoorRecurveMaxValue;
+            }
+        }
 
         public int ZoneCount
         {

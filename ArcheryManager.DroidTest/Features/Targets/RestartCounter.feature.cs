@@ -99,9 +99,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 23
  testRunner.And("le nombre de flèches précèdente sur la cible est de 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 24
- testRunner.And("le score total est de 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("le score total est 0/0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 25
- testRunner.And("le score de la volée est de 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("le score de la volée est 0/0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -142,9 +142,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 45
  testRunner.And("le nombre de flèches précèdente sur la cible est de 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 46
- testRunner.And("le score total est de 16", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("le score total est 16/30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 47
- testRunner.And("le score de la volée est de 16", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("le score de la volée est 16/30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line hidden
             this.ScenarioCleanup();
         }

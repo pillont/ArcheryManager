@@ -21,8 +21,8 @@ Scénario: test de remise à zéro
 
 	Alors le nombre de flèches actuelles sur la cible est de 0
 	Et le nombre de flèches précèdente sur la cible est de 0
-	Et le score total est de 0
-	Et le score de la volée est de 0
+	Et le score total est 0/0
+	Et le score de la volée est 0/0
 
 Scénario: test reprise après un restart
 	Quand J'ouvre une page de cible fita
@@ -43,5 +43,5 @@ Scénario: test reprise après un restart
 	
 	Alors le nombre de flèches actuelles sur la cible est de 3
 	Et le nombre de flèches précèdente sur la cible est de 0
-	Et le score total est de 16
-	Et le score de la volée est de 16	
+	Et le score total est 16/30
+	Et le score de la volée est 16/30	

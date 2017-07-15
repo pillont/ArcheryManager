@@ -15,6 +15,7 @@ namespace ArcheryManager.Settings
         public const string NineScore = "9";
         public const string TenScore = "10";
         private const int IndoorRecurveZoneCount = 7;
+        private const int IndoorCounpoundMaxValue = 10;
 
         private static Dictionary<string, Color> IndoorRecurveColorOf = new Dictionary<string, Color>()
         {
@@ -26,7 +27,7 @@ namespace ArcheryManager.Settings
             { TenScore, Color.Yellow},
         };
 
-        private static readonly Dictionary<int, string> IndoorRecurveScoreByIndex = new Dictionary<int, string>()
+        private static readonly Dictionary<int, string> IndoorCompoundScoreByIndex = new Dictionary<int, string>()
         {
             { 0, MissScore },
             { 1 , SixScore },
@@ -42,6 +43,14 @@ namespace ArcheryManager.Settings
             get
             {
                 return IndoorRecurveZoneCount;
+            }
+        }
+
+        public int MaxScore
+        {
+            get
+            {
+                return IndoorCounpoundMaxValue;
             }
         }
 
@@ -65,9 +74,9 @@ namespace ArcheryManager.Settings
 
         public string ScoreByIndex(int i)
         {
-            if (IndoorRecurveScoreByIndex.ContainsKey(i))
+            if (IndoorCompoundScoreByIndex.ContainsKey(i))
             {
-                return IndoorRecurveScoreByIndex[i];
+                return IndoorCompoundScoreByIndex[i];
             }
             else
             {
@@ -89,7 +98,7 @@ namespace ArcheryManager.Settings
 
         public int ValueByScore(string score)
         {
-            var index = IndoorRecurveScoreByIndex.Where(val => val.Value == score).FirstOrDefault().Key;
+            var index = IndoorCompoundScoreByIndex.Where(val => val.Value == score).FirstOrDefault().Key;
             if (index == 0) // miss
                 return index;
             else

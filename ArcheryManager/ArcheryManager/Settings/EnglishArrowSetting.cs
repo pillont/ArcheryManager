@@ -20,6 +20,7 @@ namespace ArcheryManager.Settings
         public const string TenScore = "10";
         public const string XtenScore = "X10";
         private const int EnglishZoneCount = 12;
+        private const int EnglishMaxValue = 10;
 
         private static Dictionary<string, Color> EnglishColorOf = new Dictionary<string, Color>()
         {
@@ -58,6 +59,14 @@ namespace ArcheryManager.Settings
             get
             {
                 return EnglishZoneCount;
+            }
+        }
+
+        public int MaxScore
+        {
+            get
+            {
+                return EnglishMaxValue;
             }
         }
 

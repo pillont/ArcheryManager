@@ -20,13 +20,13 @@ namespace ArcheryManager.Pages
             InitializeComponent();
 
             this.Setting = new TargetSetting() { HaveTarget = false };
-            Counter = new ScoreCounter(Setting, ToolbarItems);
+            Counter = new ScoreCounter(Setting, ToolbarItems, EnglishSetting);
             totalCounter.BindingContext = Counter;
+            scoreList.Setting = Counter.ArrowSetting;
             scoreList.SizeChanged += ScoreList_SizeChanged;
             scoreList.Items = Counter.CurrentArrows;
 
             counterButtons.Counter = Counter;
-            counterButtons.Setting = EnglishSetting;
 
             var selectBehavior = new SelectableArrowInListBehavior(this.ToolbarItems);
             scoreList.Behaviors.Add(selectBehavior);

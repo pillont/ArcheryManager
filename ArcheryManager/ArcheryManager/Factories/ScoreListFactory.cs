@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using System.Linq;
 using System.Collections.Specialized;
+using ArcheryManager.Interfaces;
 
 namespace ArcheryManager.Factories
 {
@@ -15,9 +16,9 @@ namespace ArcheryManager.Factories
         /// scoreList items is currentarrows of counter
         /// Add selectableArrowInListBehavior to change the toolbar Items during selection
         /// </summary>
-        public static ArrowUniformGrid Create(ScoreCounter counter, IList<ToolbarItem> toolbarItems)
+        public static ArrowUniformGrid Create(ScoreCounter counter, IList<ToolbarItem> toolbarItems, IArrowSetting setting)
         {
-            var scoreList = new ArrowUniformGrid { AutomationId = "scoreList", CountByRow = 6 };
+            var scoreList = new ArrowUniformGrid { AutomationId = "scoreList", CountByRow = 6, Setting = setting };
             scoreList.Items = counter.CurrentArrows;
 
             var selectBehavior = new SelectableArrowInListBehavior(toolbarItems);
@@ -32,9 +33,9 @@ namespace ArcheryManager.Factories
         /// Add selectableArrowInListBehavior to change the toolbar Items during selection
         /// change the color of arrows in the target during the selection of arrow
         /// </summary>
-        public static ArrowUniformGrid Create(Target customTarget, ScoreCounter counter, IList<ToolbarItem> toolbarItems)
+        public static ArrowUniformGrid Create(Target customTarget, ScoreCounter counter, IList<ToolbarItem> toolbarItems, IArrowSetting setting)
         {
-            var scoreList = Create(counter, toolbarItems);
+            var scoreList = Create(counter, toolbarItems, setting);
             var selectBehavior = scoreList.Behaviors.OfType<SelectableArrowInListBehavior>().First();
             selectBehavior.ItemsSelectedChange += (s, e) => SelectBehavior_ItemsSelectedChange(customTarget, e);
 

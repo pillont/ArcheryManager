@@ -9,35 +9,10 @@ namespace ArcheryManager.Utils
         public double TranslationX { get; private set; }
         public double TranslationY { get; private set; }
         public double TargetSize { get; private set; }
-        public IArrowSetting Setting { get; private set; }
         public int Index { get; private set; }
 
-        public string Score
-        {
-            get
-            {
-                return Setting.ScoreByIndex(Index);
-            }
-        }
-
-        public int Value
-        {
-            get
-            {
-                return Setting.ValueByScore(Score);
-            }
-        }
-
-        public Color Color
-        {
-            get
-            {
-                return Setting.ColorOf(Score);
-            }
-        }
-
-        public Arrow(int index, int numberInFlight, Point position, double targetSize, IArrowSetting setting)
-            : this(index, numberInFlight, setting)
+        public Arrow(int index, int numberInFlight, Point position, double targetSize)
+            : this(index, numberInFlight)
         {
             TranslationX = position.X;
             TranslationY = position.Y;
@@ -45,11 +20,10 @@ namespace ArcheryManager.Utils
             TargetSize = targetSize;
         }
 
-        public Arrow(int index, int numberInFlight, IArrowSetting setting)
+        public Arrow(int index, int numberInFlight)
         {
             Index = index;
             NumberInFlight = numberInFlight;
-            Setting = setting;
         }
     }
 }

@@ -32,25 +32,16 @@ namespace ArcheryManager.UnitTest.Factories
             var arrow = factory.Create(new Point(5, 2), 0, 0);
             Assert.AreEqual(5.6, Math.Round(arrow.TranslationX, 1));
             Assert.AreEqual(2.2, Math.Round(arrow.TranslationY, 1));
-            Assert.AreEqual(Color.Pink, arrow.Color);
-            Assert.AreEqual("test", arrow.Score);
-            Assert.AreEqual(42, arrow.Value);
             Assert.AreEqual(0, arrow.NumberInFlight);
 
             arrow = factory.Create(new Point(20, 15), 0, 0);
             Assert.AreEqual(22.2, Math.Round(arrow.TranslationX, 1));
             Assert.AreEqual(16.7, Math.Round(arrow.TranslationY, 1));
-            Assert.AreEqual(Color.Pink, arrow.Color);
-            Assert.AreEqual("test", arrow.Score);
-            Assert.AreEqual(42, arrow.Value);
             Assert.AreEqual(0, arrow.NumberInFlight);
 
             arrow = factory.Create(new Point(40, 20), 0, 0);//9 38.5/19.2
             Assert.AreEqual(44.4, Math.Round(arrow.TranslationX, 1));
             Assert.AreEqual(22.2, Math.Round(arrow.TranslationY, 1));
-            Assert.AreEqual(Color.Pink, arrow.Color);
-            Assert.AreEqual("test", arrow.Score);
-            Assert.AreEqual(42, arrow.Value);
             Assert.AreEqual(0, arrow.NumberInFlight);
         }
     }
