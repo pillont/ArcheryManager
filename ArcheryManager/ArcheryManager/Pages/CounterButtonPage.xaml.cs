@@ -10,17 +10,18 @@ using System;
 namespace ArcheryManager.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CounterPage : ContentPage
+    public partial class CounterButtonPage : ContentPage
     {
         private readonly TargetSetting Setting;
         private static readonly IArrowSetting EnglishSetting = EnglishArrowSetting.Instance;
         private readonly ScoreCounter Counter;
 
-        public CounterPage()
+        public CounterButtonPage()
         {
             InitializeComponent();
 
-            this.Setting = new TargetSetting() { HaveTarget = false };
+            var countSetting = new Setting();
+            this.Setting = new TargetSetting(countSetting) { HaveTarget = false };
             Counter = new ScoreCounter(Setting, ToolbarItems, EnglishSetting);
             totalCounter.BindingContext = Counter;
             scoreList.Setting = Counter.ArrowSetting;

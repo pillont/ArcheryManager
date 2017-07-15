@@ -107,6 +107,15 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Selector of counter.
+        /// </summary>
+        internal static string CounterSelector {
+            get {
+                return ResourceManager.GetString("CounterSelector", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Duck.
         /// </summary>
         internal static string Duck {
@@ -382,6 +391,15 @@ namespace ArcheryManager.Resources {
         internal static string Strike {
             get {
                 return ResourceManager.GetString("Strike", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Target wanted.
+        /// </summary>
+        internal static string TargetWanted {
+            get {
+                return ResourceManager.GetString("TargetWanted", resourceCulture);
             }
         }
         

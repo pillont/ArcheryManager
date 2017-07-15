@@ -2,6 +2,7 @@
 using ArcheryManager.Factories;
 using ArcheryManager.Interactions.Behaviors;
 using ArcheryManager.Interfaces;
+using ArcheryManager.Pages;
 using ArcheryManager.Settings;
 using ArcheryManager.Utils;
 using Moq;
@@ -25,6 +26,7 @@ namespace ArcheryManager.UnitTest.Factories
         private Arrow a2;
         private Arrow a1;
         private IList<ToolbarItem> toolbarItems;
+        private Setting countSetting;
 
         [SetUp]
         public void Init()
@@ -33,7 +35,10 @@ namespace ArcheryManager.UnitTest.Factories
             toolbarItems = new List<ToolbarItem>();
             setting = EnglishArrowSetting.Instance;
             list = new List<ToolbarItem>();
-            counter = new ScoreCounter(new TargetSetting(), toolbarItems, setting);
+
+            countSetting = new Setting();
+            counter = new ScoreCounter(new TargetSetting(countSetting), toolbarItems, setting);
+
             target = new Mock<Target>();
             scorelist = ScoreListFactory.Create(target.Object, counter, list, setting);
             a1 = new Arrow(1, 0);

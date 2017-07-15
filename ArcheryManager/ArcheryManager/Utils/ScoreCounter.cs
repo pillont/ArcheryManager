@@ -155,8 +155,8 @@ namespace ArcheryManager.Utils
             {
                 UpdateOrder();
             }
-            else if (e.PropertyName == nameof(setting.HaveMaxArrowsCount)
-                || e.PropertyName == nameof(setting.ArrowsCount))
+            else if (e.PropertyName == nameof(setting.CountSetting.HaveMaxArrowsCount)
+                || e.PropertyName == nameof(setting.CountSetting.ArrowsCount))
             {
                 RemoveNewFlightButton();
                 AddNewFlightIfCanValidFlight();
@@ -272,7 +272,8 @@ namespace ArcheryManager.Utils
         private bool CanValidFlight()
         {
             return CurrentArrows.Count > 0 && (
-                (!setting.HaveMaxArrowsCount) || CurrentArrows.Count >= setting.ArrowsCount);
+                (!setting.CountSetting.HaveMaxArrowsCount)
+                || CurrentArrows.Count >= setting.CountSetting.ArrowsCount);
         }
 
         public void UpdateOrder()

@@ -21,7 +21,8 @@ namespace ArcheryManager.Pages
         {
             InitializeComponent();
 
-            this.Setting = new TargetSetting();
+            var countSetting = new Setting();
+            this.Setting = new TargetSetting(countSetting);
             Counter = new ScoreCounter(Setting, ToolbarItems, setting);
 
             #region view setup

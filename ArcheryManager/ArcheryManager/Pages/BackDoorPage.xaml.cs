@@ -45,7 +45,12 @@ namespace ArcheryManager.Pages
 
         private async void ButtonCounter_Clicked(object sender, EventArgs e)
         {
-            await App.NavigationPage.PushAsync(new CounterPage());
+            await App.NavigationPage.PushAsync(new CounterButtonPage());
+        }
+
+        private async void CounterSelector_Clicked(object sender, EventArgs e)
+        {
+            await App.NavigationPage.PushAsync(new CounterSelectorPage());
         }
     }
 }
