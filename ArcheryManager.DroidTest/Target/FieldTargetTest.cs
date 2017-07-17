@@ -2,6 +2,7 @@
 using System.Linq;
 using ArcheryManager.Resources;
 using Xamarin.UITest.Android;
+using ArcheryManager.DroidTest.Helpers;
 
 namespace ArcheryManager.DroidTest.Target
 {
@@ -31,19 +32,7 @@ namespace ArcheryManager.DroidTest.Target
         [Test]
         public void InitTargetElement()
         {
-            Assert.AreEqual(639, app.WaitForElement("zone1").First().Rect.Height);
-            Assert.AreEqual(530, app.WaitForElement("zone2").First().Rect.Height);
-            Assert.AreEqual(421, app.WaitForElement("zone3").First().Rect.Height);
-            Assert.AreEqual(312, app.WaitForElement("zone4").First().Rect.Height);
-            Assert.AreEqual(203, app.WaitForElement("zone5").First().Rect.Height);
-            Assert.AreEqual(94, app.WaitForElement("zone6").First().Rect.Height);
-
-            Assert.AreEqual(639, app.WaitForElement("zone1").First().Rect.Width);
-            Assert.AreEqual(530, app.WaitForElement("zone2").First().Rect.Width);
-            Assert.AreEqual(421, app.WaitForElement("zone3").First().Rect.Width);
-            Assert.AreEqual(312, app.WaitForElement("zone4").First().Rect.Width);
-            Assert.AreEqual(203, app.WaitForElement("zone5").First().Rect.Width);
-            Assert.AreEqual(94, app.WaitForElement("zone6").First().Rect.Width);
+            TargetHelper.ShouldHaveFieldTarget();
         }
 
         [Test]

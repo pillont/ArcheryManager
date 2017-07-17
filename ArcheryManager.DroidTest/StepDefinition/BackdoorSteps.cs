@@ -1,5 +1,4 @@
-﻿using System;
-using TechTalk.SpecFlow;
+﻿using TechTalk.SpecFlow;
 
 namespace ArcheryManager.DroidTest.StepDefinition
 {
@@ -32,6 +31,14 @@ namespace ArcheryManager.DroidTest.StepDefinition
         {
             TestSetting.InitTestApplication();
             TestSetting.App.Tap("ButtonCounterButton");
+        }
+
+        [When(@"J'ouvre une page de sélection de cible")]
+        public void QuandJOuvreUnePageDeSelectionDeCible()
+        {
+            TestSetting.InitTestApplication();
+            TestSetting.App.WaitForElement("CounterSelectorButton");
+            TestSetting.App.Tap("CounterSelectorButton");
         }
     }
 }

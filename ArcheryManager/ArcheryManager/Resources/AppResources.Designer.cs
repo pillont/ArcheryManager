@@ -449,6 +449,15 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Valid.
+        /// </summary>
+        internal static string Valid {
+            get {
+                return ResourceManager.GetString("Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Yes.
         /// </summary>
         internal static string Yes {

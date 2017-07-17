@@ -111,6 +111,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TargetRotationFeature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Targets\TargetSelectorFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TargetSelectorFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Timer\MultiwaveFeatures.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -128,11 +133,13 @@
     </Compile>
     <Compile Include="GenericCountable\ArrowsListTest.cs" />
     <Compile Include="GenericCountable\ArrowsSelectionTest.cs" />
+    <Compile Include="Helpers\TargetHelper.cs" />
     <Compile Include="StepDefinition\BackdoorSteps.cs" />
     <Compile Include="StepDefinition\CounterButtonsSteps.cs" />
     <Compile Include="StepDefinition\GenericSearchElement.cs" />
     <Compile Include="StepDefinition\DeviceInteractionSteps.cs" />
     <Compile Include="StepDefinition\PickerSteps.cs" />
+    <Compile Include="StepDefinition\TargetSelectorSteps.cs" />
     <Compile Include="StepDefinition\TargetSettingSteps.cs" />
     <Compile Include="StepDefinition\TargetSteps.cs" />
     <Compile Include="StepDefinition\TimerPageSteps.cs" />
@@ -174,6 +181,10 @@
     <None Include="Features\Targets\TargetRotationFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>TargetRotationFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Targets\TargetSelectorFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>TargetSelectorFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Timer\MultiwaveFeatures.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

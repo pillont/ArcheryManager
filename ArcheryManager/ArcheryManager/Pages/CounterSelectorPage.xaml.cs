@@ -1,5 +1,6 @@
 ﻿using ArcheryManager.CustomControls;
 using ArcheryManager.Factories;
+using ArcheryManager.Resources;
 using ArcheryManager.Utils;
 using System;
 using System.Linq;
@@ -28,6 +29,13 @@ namespace ArcheryManager.Pages
 
             var first = imageGrid.Children.First() as TargetImage;
             SelectTarget(first);
+
+            var validButton = new ToolbarItem()
+            {
+                Text = AppResources.Valid,
+                Command = new Command(Valid_Clicked),
+            };
+            ToolbarItems.Add(validButton);
         }
 
         private void Image_Tapped(object sender, EventArgs e)
@@ -62,7 +70,7 @@ namespace ArcheryManager.Pages
             }
         }
 
-        private async void Valid_Clicked(object sender, EventArgs e)
+        private async void Valid_Clicked()
         {
             var page = CounterPageFactory.Create(_setting);
             await App.NavigationPage.PushAsync(page);

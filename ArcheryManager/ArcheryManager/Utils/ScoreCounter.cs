@@ -380,8 +380,12 @@ namespace ArcheryManager.Utils
 
         public void AddArrow(Arrow arrow)
         {
-            CurrentArrows?.Add(arrow);
-            UpdateOrder();
+            bool canAddArrow = CurrentArrows.Count < setting.CountSetting.ArrowsCount;
+            if (canAddArrow)
+            {
+                CurrentArrows?.Add(arrow);
+                UpdateOrder();
+            }
         }
 
         public void ClearArrows()

@@ -1,4 +1,5 @@
-﻿using ArcheryManager.Resources;
+﻿using ArcheryManager.DroidTest.Helpers;
+using ArcheryManager.Resources;
 using NUnit.Framework;
 using System.Linq;
 using Xamarin.UITest.Android;
@@ -31,31 +32,7 @@ namespace ArcheryManager.DroidTest.Target
         [Test]
         public void InitTargetElement()
         {
-            Assert.AreEqual(684, app.WaitForElement("zone1").First().Rect.Height);
-            Assert.AreEqual(621, app.WaitForElement("zone2").First().Rect.Height);
-            Assert.AreEqual(557, app.WaitForElement("zone3").First().Rect.Height);
-            Assert.AreEqual(494, app.WaitForElement("zone4").First().Rect.Height);
-            Assert.AreEqual(430, app.WaitForElement("zone5").First().Rect.Height);
-            Assert.AreEqual(367, app.WaitForElement("zone6").First().Rect.Height);
-            Assert.AreEqual(303, app.WaitForElement("zone7").First().Rect.Height);
-            Assert.AreEqual(239, app.WaitForElement("zone8").First().Rect.Height);
-            Assert.AreEqual(176, app.WaitForElement("zone9").First().Rect.Height);
-            Assert.AreEqual(112, app.WaitForElement("zone10").First().Rect.Height);
-            Assert.AreEqual(49, app.WaitForElement("zone11").First().Rect.Height);
-            Assert.AreEqual(4, app.WaitForElement("center").First().Rect.Height);
-
-            Assert.AreEqual(684, app.WaitForElement("zone1").First().Rect.Width);
-            Assert.AreEqual(621, app.WaitForElement("zone2").First().Rect.Width);
-            Assert.AreEqual(557, app.WaitForElement("zone3").First().Rect.Width);
-            Assert.AreEqual(494, app.WaitForElement("zone4").First().Rect.Width);
-            Assert.AreEqual(430, app.WaitForElement("zone5").First().Rect.Width);
-            Assert.AreEqual(367, app.WaitForElement("zone6").First().Rect.Width);
-            Assert.AreEqual(303, app.WaitForElement("zone7").First().Rect.Width);
-            Assert.AreEqual(239, app.WaitForElement("zone8").First().Rect.Width);
-            Assert.AreEqual(176, app.WaitForElement("zone9").First().Rect.Width);
-            Assert.AreEqual(112, app.WaitForElement("zone10").First().Rect.Width);
-            Assert.AreEqual(49, app.WaitForElement("zone11").First().Rect.Width);
-            Assert.AreEqual(4, app.WaitForElement("center").First().Rect.Width);
+            TargetHelper.ShouldHaveEnglishTarget();
         }
 
         [Test]

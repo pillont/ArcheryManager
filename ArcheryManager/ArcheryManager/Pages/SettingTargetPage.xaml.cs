@@ -31,5 +31,21 @@ namespace ArcheryManager.Pages
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// limit min of Arrow count to const
+        /// </summary>
+        private void ArrowCount_Unfocused(object sender, FocusEventArgs e)
+        {
+            var entry = sender as Entry;
+            int val = Convert.ToInt32(entry.Text);
+            if (val < CountSetting.MinArrowCount)
+            {
+                if (BindingContext != null)
+                {
+                    BindingContext.CountSetting.ArrowsCount = CountSetting.MinArrowCount;
+                }
+            }
+        }
     }
 }

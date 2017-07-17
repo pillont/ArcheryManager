@@ -16,7 +16,6 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="4*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -94,10 +93,8 @@
         </Grid>
 
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Grid.Row="2">
-            <Switch VerticalOptions="Center"  IsToggled="{Binding WantTarget}" />
+            <Switch VerticalOptions="Center"  IsToggled="{Binding WantTarget}" AutomationId="wantTargetSwitch" />
             <Label Text="{resources:Translate TargetWanted}" VerticalOptions="Center" VerticalTextAlignment="Center" />
         </StackLayout>
-
-        <Button Text="valid" Grid.Row="3" Margin="5" Clicked="Valid_Clicked" />
     </Grid>
 </ContentPage>

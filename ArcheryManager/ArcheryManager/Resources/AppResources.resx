@@ -249,4 +249,7 @@
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="Valid" xml:space="preserve">
+    <value>Valid</value>
+  </data>
 </root>
