@@ -68,6 +68,13 @@ namespace ArcheryManager.Pages
             timer.GestureRecognizers.Add(recognizer);
 
             PauseReplayText = AppResources.Pause;
+
+            songPicker.SelectedIndexChanged += SongPicker_SelectedIndexChanged1;
+        }
+
+        private void SongPicker_SelectedIndexChanged1(object sender, EventArgs e)
+        {
+            Behavior.PlaySong();
         }
 
         private void TimerSetting_PropertyChanged(object sender, PropertyChangedEventArgs e)

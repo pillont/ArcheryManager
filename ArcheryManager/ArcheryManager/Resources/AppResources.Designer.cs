@@ -98,11 +98,38 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Coq.
+        /// </summary>
+        internal static string Coq {
+            get {
+                return ResourceManager.GetString("Coq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Duck.
+        /// </summary>
+        internal static string Duck {
+            get {
+                return ResourceManager.GetString("Duck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Duel.
         /// </summary>
         internal static string Duel {
             get {
                 return ResourceManager.GetString("Duel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à End Point.
+        /// </summary>
+        internal static string EndPoint {
+            get {
+                return ResourceManager.GetString("EndPoint", resourceCulture);
             }
         }
         
@@ -193,6 +220,15 @@ namespace ArcheryManager.Resources {
         internal static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Not Kiddin.
+        /// </summary>
+        internal static string NotKiddin {
+            get {
+                return ResourceManager.GetString("NotKiddin", resourceCulture);
             }
         }
         
@@ -341,6 +377,15 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Strike.
+        /// </summary>
+        internal static string Strike {
+            get {
+                return ResourceManager.GetString("Strike", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Time.
         /// </summary>
         internal static string Time {
@@ -364,6 +409,15 @@ namespace ArcheryManager.Resources {
         internal static string Total {
             get {
                 return ResourceManager.GetString("Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Train.
+        /// </summary>
+        internal static string Train {
+            get {
+                return ResourceManager.GetString("Train", resourceCulture);
             }
         }
         

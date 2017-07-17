@@ -129,8 +129,17 @@
   <data name="ButtonCounter" xml:space="preserve">
     <value>Button counter</value>
   </data>
+  <data name="Coq" xml:space="preserve">
+    <value>Coq</value>
+  </data>
+  <data name="Duck" xml:space="preserve">
+    <value>Duck</value>
+  </data>
   <data name="Duel" xml:space="preserve">
     <value>Duel</value>
+  </data>
+  <data name="EndPoint" xml:space="preserve">
+    <value>End Point</value>
   </data>
   <data name="EnglishTarget" xml:space="preserve">
     <value>English target</value>
@@ -161,6 +170,9 @@
   </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
+  </data>
+  <data name="NotKiddin" xml:space="preserve">
+    <value>Not Kiddin</value>
   </data>
   <data name="NumberOfArrows" xml:space="preserve">
     <value>Number of arrows</value>
@@ -210,6 +222,9 @@
   <data name="Song" xml:space="preserve">
     <value>Song</value>
   </data>
+  <data name="Strike" xml:space="preserve">
+    <value>Strike</value>
+  </data>
   <data name="Time" xml:space="preserve">
     <value>Time</value>
   </data>
@@ -218,6 +233,9 @@
   </data>
   <data name="Total" xml:space="preserve">
     <value>Total</value>
+  </data>
+  <data name="Train" xml:space="preserve">
+    <value>Train</value>
   </data>
   <data name="UnSelect" xml:space="preserve">
     <value>UnSelect</value>

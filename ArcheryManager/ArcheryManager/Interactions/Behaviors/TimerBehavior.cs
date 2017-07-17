@@ -112,7 +112,7 @@ namespace ArcheryManager.Interactions.Behaviors
             _waveBehavior.NextWave();
         }
 
-        private void PlaySong()
+        public void PlaySong()
         {
             string songFileName = Setting.SongFileName;
             DependencyService.Get<IAudioPlayer>().PlayAudioFile(songFileName);
