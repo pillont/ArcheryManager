@@ -78,7 +78,9 @@ namespace ArcheryManager.DroidTest.Target
             app.DragCoordinates(300, 800, 400, 800);
             app.WaitForElement("averageCanvas");
 
+            app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
             app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
+            app.Tap(e => e.Text(TranslateExtension.GetTextResource("Yes")));
             app.WaitForNoElement("averageCanvas");
         }
 
@@ -139,6 +141,7 @@ namespace ArcheryManager.DroidTest.Target
             app.DragCoordinates(400, 800, 770, 800);
 
             app.Tap(TranslateExtension.GetTextResource("NewFlight"));
+            app.Tap(e => e.Text(TranslateExtension.GetTextResource("Yes")));
 
             app.DragCoordinates(300, 800, 400, 900);
             app.DragCoordinates(400, 800, 300, 700);
@@ -197,6 +200,7 @@ namespace ArcheryManager.DroidTest.Target
             Assert.GreaterOrEqual(348, average.Rect.Width);
 
             app.Tap(TranslateExtension.GetTextResource("NewFlight"));
+            app.Tap(e => e.Text(TranslateExtension.GetTextResource("Yes")));
 
             app.DragCoordinates(300, 800, 600, 1000);
             app.DragCoordinates(400, 800, 800, 700);

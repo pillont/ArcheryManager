@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ArcheryManager.Interactions.Behaviors;
 using ArcheryManager.Resources;
+using System;
 
 namespace ArcheryManager.Pages
 {

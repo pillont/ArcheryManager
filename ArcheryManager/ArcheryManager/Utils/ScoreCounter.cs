@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using ArcheryManager.Resources;
 using ArcheryManager.Interfaces;
+using System;
 
 namespace ArcheryManager.Utils
 {
@@ -176,15 +177,15 @@ namespace ArcheryManager.Utils
             toolbarItems.Add(new ToolbarItem()
             {
                 Text = AppResources.RemoveAll,
-                Order = ToolbarItemOrder.Primary,
-                Command = new Command(ClearArrows)
+                Order = ToolbarItemOrder.Secondary,
+                Command = new Command(() => AskValidation(AppResources.RemoveAllQuestion, ClearArrows))
             });
 
             toolbarItems.Add(new ToolbarItem()
             {
-                Text = "Restart",
+                Text = AppResources.Restart,
                 Order = ToolbarItemOrder.Secondary,
-                Command = new Command(RestartCount)
+                Command = new Command(() => AskValidation(AppResources.RestartQuestion, RestartCount))
             });
         }
 
@@ -194,7 +195,7 @@ namespace ArcheryManager.Utils
             {
                 Text = AppResources.NewFlight,
                 Order = ToolbarItemOrder.Primary,
-                Command = new Command(NewFlight),
+                Command = new Command(() => AskValidation(AppResources.NewFlightQuestion, NewFlight)),
             });
         }
 
@@ -216,6 +217,15 @@ namespace ArcheryManager.Utils
             if (button != null)
             {
                 toolbarItems.Remove(button);
+            }
+        }
+
+        private async void AskValidation(string message, Action action)
+        {
+            var valid = await App.NavigationPage.DisplayAlert(AppResources.Question, message, AppResources.Yes, AppResources.No);
+            if (valid)
+            {
+                action?.Invoke();
             }
         }
 

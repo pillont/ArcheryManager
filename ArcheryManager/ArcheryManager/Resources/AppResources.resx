@@ -156,6 +156,12 @@
   <data name="NewFlight" xml:space="preserve">
     <value>New Flight</value>
   </data>
+  <data name="NewFlightQuestion" xml:space="preserve">
+    <value>Would you valid the flight ?</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
   <data name="NumberOfArrows" xml:space="preserve">
     <value>Number of arrows</value>
   </data>
@@ -165,8 +171,14 @@
   <data name="Pause" xml:space="preserve">
     <value>Pause</value>
   </data>
+  <data name="Question" xml:space="preserve">
+    <value>Question</value>
+  </data>
   <data name="RemoveAll" xml:space="preserve">
     <value>Remove all</value>
+  </data>
+  <data name="RemoveAllQuestion" xml:space="preserve">
+    <value>Would you remove all arrows of this flight</value>
   </data>
   <data name="RemoveLast" xml:space="preserve">
     <value>Remove last</value>
@@ -176,6 +188,12 @@
   </data>
   <data name="Replay" xml:space="preserve">
     <value>Replay</value>
+  </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Restart</value>
+  </data>
+  <data name="RestartQuestion" xml:space="preserve">
+    <value>Would you restart the count ?</value>
   </data>
   <data name="SeeAllArrows" xml:space="preserve">
     <value>See all arrows</value>
@@ -203,5 +221,8 @@
   </data>
   <data name="UnSelect" xml:space="preserve">
     <value>UnSelect</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>

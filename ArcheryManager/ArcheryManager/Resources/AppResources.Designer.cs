@@ -179,6 +179,24 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Would you valid the flight ?.
+        /// </summary>
+        internal static string NewFlightQuestion {
+            get {
+                return ResourceManager.GetString("NewFlightQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à No.
+        /// </summary>
+        internal static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Number of arrows.
         /// </summary>
         internal static string NumberOfArrows {
@@ -206,11 +224,29 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Question.
+        /// </summary>
+        internal static string Question {
+            get {
+                return ResourceManager.GetString("Question", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Remove all.
         /// </summary>
         internal static string RemoveAll {
             get {
                 return ResourceManager.GetString("RemoveAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Would you remove all arrows of this flight.
+        /// </summary>
+        internal static string RemoveAllQuestion {
+            get {
+                return ResourceManager.GetString("RemoveAllQuestion", resourceCulture);
             }
         }
         
@@ -238,6 +274,24 @@ namespace ArcheryManager.Resources {
         internal static string Replay {
             get {
                 return ResourceManager.GetString("Replay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Restart.
+        /// </summary>
+        internal static string Restart {
+            get {
+                return ResourceManager.GetString("Restart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Would you restart the count ?.
+        /// </summary>
+        internal static string RestartQuestion {
+            get {
+                return ResourceManager.GetString("RestartQuestion", resourceCulture);
             }
         }
         
@@ -319,6 +373,15 @@ namespace ArcheryManager.Resources {
         internal static string UnSelect {
             get {
                 return ResourceManager.GetString("UnSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Yes.
+        /// </summary>
+        internal static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

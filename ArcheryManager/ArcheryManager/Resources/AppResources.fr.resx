@@ -156,6 +156,12 @@
   <data name="NewFlight" xml:space="preserve">
     <value>Volée suivante</value>
   </data>
+  <data name="NewFlightQuestion" xml:space="preserve">
+    <value>Voulez-vous valider la volée ?</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Non</value>
+  </data>
   <data name="NumberOfArrows" xml:space="preserve">
     <value>Nombre de flèche</value>
   </data>
@@ -165,8 +171,14 @@
   <data name="Pause" xml:space="preserve">
     <value>Pause</value>
   </data>
+  <data name="Question" xml:space="preserve">
+    <value>Question</value>
+  </data>
   <data name="RemoveAll" xml:space="preserve">
-    <value>Tout suppr </value>
+    <value>Tout supprimer</value>
+  </data>
+  <data name="RemoveAllQuestion" xml:space="preserve">
+    <value>Voulez-vous supprimer toutes les flèches de cette volée?</value>
   </data>
   <data name="RemoveLast" xml:space="preserve">
     <value>Supprimer</value>
@@ -176,6 +188,12 @@
   </data>
   <data name="Replay" xml:space="preserve">
     <value>Relancer</value>
+  </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Redémarrer</value>
+  </data>
+  <data name="RestartQuestion" xml:space="preserve">
+    <value>Voulez-vous recommencer le tir compté ?</value>
   </data>
   <data name="SeeAllArrows" xml:space="preserve">
     <value>Voir toutes les flèches</value>
@@ -203,5 +221,8 @@
   </data>
   <data name="UnSelect" xml:space="preserve">
     <value>Désélectionner</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Oui</value>
   </data>
 </root>
