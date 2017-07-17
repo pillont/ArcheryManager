@@ -20,12 +20,12 @@ namespace ArcheryManager.Utils
 
         public static readonly Dictionary<string, string> AllSongFiles = new Dictionary<string, string>
         {
-            {    "coq" , coqFileName },
-            {    "duck", DuckFileName },
-            {    "end point",EndPointFileName },
-            {    "not kiddin",NotKiddingFileName },
-            {    "strike",StrikeFileName },
-            {    "train",TrainFileName },
+            {    AppResources.Coq , coqFileName },
+            {    AppResources.Duck, DuckFileName },
+            {    AppResources.EndPoint,EndPointFileName },
+            {    AppResources.NotKiddin,NotKiddingFileName },
+            {    AppResources.Strike,StrikeFileName },
+            {    AppResources.Train,TrainFileName },
         };
 
         public static List<string> AllSongFilesNames
