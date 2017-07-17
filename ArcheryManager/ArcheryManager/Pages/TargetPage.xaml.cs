@@ -22,7 +22,7 @@ namespace ArcheryManager.Pages
             InitializeComponent();
 
             this.Setting = new TargetSetting();
-            Counter = new ScoreCounter(Setting, ToolbarItems, setting, MessageToConfirm);
+            Counter = new ScoreCounter(Setting, ToolbarItems, setting);
 
             #region view setup
 
@@ -47,15 +47,6 @@ namespace ArcheryManager.Pages
             totalCounter.BindingContext = Counter;
 
             #endregion total score
-        }
-
-        private async void MessageToConfirm(string message, Action action)
-        {
-            var valid = await DisplayAlert(AppResources.Question, message, AppResources.Yes, AppResources.No);
-            if (valid)
-            {
-                action?.Invoke();
-            }
         }
 
         private void SetupToolbarItems()

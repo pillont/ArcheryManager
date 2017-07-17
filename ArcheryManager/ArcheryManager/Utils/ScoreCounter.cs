@@ -15,8 +15,6 @@ namespace ArcheryManager.Utils
         private const string NewFlightText = "New Flight";
         private const string ScoreFormat = "{0}/{1}";
 
-        private Action<string, Action> AskValidation;
-
         #region properties
 
         #region Arrows list
@@ -138,10 +136,9 @@ namespace ArcheryManager.Utils
         /// score counter with associated target
         /// </summary>
         /// <param name="setting"></param>
-        public ScoreCounter(TargetSetting setting, IList<ToolbarItem> toolbarItems, IArrowSetting ArrowSetting, Action<string, Action> askValidation)// TODO : make FlightSetting ancestor of Target setting =>remove this ctor and change the second to accept FlightSetting
+        public ScoreCounter(TargetSetting setting, IList<ToolbarItem> toolbarItems, IArrowSetting ArrowSetting)// TODO : make FlightSetting ancestor of Target setting =>remove this ctor and change the second to accept FlightSetting
         {
             this.ArrowSetting = ArrowSetting;
-            this.AskValidation = askValidation;
             CurrentArrows = new ObservableCollection<Arrow>();
             AllArrows = new ObservableCollection<Arrow>();
             PreviousArrows = new ObservableCollection<Arrow>();
@@ -220,6 +217,15 @@ namespace ArcheryManager.Utils
             if (button != null)
             {
                 toolbarItems.Remove(button);
+            }
+        }
+
+        private async void AskValidation(string message, Action action)
+        {
+            var valid = await App.NavigationPage.DisplayAlert(AppResources.Question, message, AppResources.Yes, AppResources.No);
+            if (valid)
+            {
+                action?.Invoke();
             }
         }
 

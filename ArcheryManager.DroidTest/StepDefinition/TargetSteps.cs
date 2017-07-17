@@ -40,6 +40,7 @@ namespace ArcheryManager.DroidTest.StepDefinition
         public void QuandJeClickSurLeBoutonNouvelleVolee()
         {
             TestSetting.App.Tap(TranslateExtension.GetTextResource("NewFlight"));
+            TestSetting.App.Tap(e => e.Text(TranslateExtension.GetTextResource("Yes")));
         }
 
         [Then(@"le bouton nouvelle volée est désactivé")]
@@ -83,13 +84,13 @@ namespace ArcheryManager.DroidTest.StepDefinition
             Assert.GreaterOrEqual(p2 + 5, rect.CenterY);
         }
 
-
         [When(@"je click sur le bouton de restart")]
         public void QuandJeClickSurLeBoutonDeRestart()
         {
             TestSetting.App.WaitForElement(TranslateExtension.GetTextResource("MoreOptions"));
             TestSetting.App.Tap(TranslateExtension.GetTextResource("MoreOptions"));
-            TestSetting.App.Tap("Restart");
+            TestSetting.App.Tap(TranslateExtension.GetTextResource("Restart"));
+            TestSetting.App.Tap(e => e.Text(TranslateExtension.GetTextResource("Yes")));
         }
 
         [Then(@"le score de la volée est (.*)")]

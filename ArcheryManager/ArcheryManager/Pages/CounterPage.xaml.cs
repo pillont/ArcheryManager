@@ -21,7 +21,7 @@ namespace ArcheryManager.Pages
             InitializeComponent();
 
             this.Setting = new TargetSetting() { HaveTarget = false };
-            Counter = new ScoreCounter(Setting, ToolbarItems, EnglishSetting, MessageToConfirm);
+            Counter = new ScoreCounter(Setting, ToolbarItems, EnglishSetting);
             totalCounter.BindingContext = Counter;
             scoreList.Setting = Counter.ArrowSetting;
             scoreList.SizeChanged += ScoreList_SizeChanged;
@@ -38,15 +38,6 @@ namespace ArcheryManager.Pages
         private void ScoreList_SizeChanged(object sender, System.EventArgs e)
         {
             scrollArrows.ScrollToAsync(scoreList, ScrollToPosition.End, true);
-        }
-
-        private async void MessageToConfirm(string message, Action action)
-        {
-            var valid = await DisplayAlert("title", message, "yes", "no");
-            if (valid)
-            {
-                action?.Invoke();
-            }
         }
 
         private void SetupToolbarItems()

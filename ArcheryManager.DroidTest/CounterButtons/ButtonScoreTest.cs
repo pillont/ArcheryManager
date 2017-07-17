@@ -75,6 +75,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
             Assert.AreEqual(2, app.Query(e => e.Marked("scoreList").Child()).Count());
 
             app.Tap(TranslateExtension.GetTextResource("NewFlight"));
+            app.Tap(e => e.Text(TranslateExtension.GetTextResource("Yes")));
 
             Assert.AreEqual(0, app.Query(e => e.Marked("scoreList").Child()).Count());
         }
@@ -126,6 +127,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
 
             app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
             app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
+            app.Tap(e => e.Text(TranslateExtension.GetTextResource("Yes")));
 
             Assert.AreEqual(0, app.Query(e => e.Marked("scoreList").Child()).Count());
         }
@@ -139,6 +141,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
             Assert.AreEqual(2, app.Query(e => e.Marked("scoreList").Child()).Count());
 
             app.Tap(TranslateExtension.GetTextResource("NewFlight"));
+            app.Tap(e => e.Text(TranslateExtension.GetTextResource("Yes")));
 
             Assert.AreEqual(0, app.Query(e => e.Marked("scoreList").Child()).Count());
         }
@@ -168,6 +171,8 @@ namespace ArcheryManager.DroidTest.GenericCountable
             //remove all
             app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
             app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
+            app.Tap(e => e.Text(TranslateExtension.GetTextResource("Yes")));
+
             Assert.AreEqual("0/0", app.Query("FlightScore").First().Text);
         }
 
@@ -186,6 +191,7 @@ namespace ArcheryManager.DroidTest.GenericCountable
             Assert.AreEqual("18/20", app.Query("TotalScore").First().Text);
 
             app.Tap(TranslateExtension.GetTextResource("NewFlight"));
+            app.Tap(e => e.Text(TranslateExtension.GetTextResource("Yes")));
 
             Assert.AreEqual("0/0", app.Query("FlightScore").First().Text);
             Assert.AreEqual("18/20", app.Query("TotalScore").First().Text);
@@ -208,6 +214,8 @@ namespace ArcheryManager.DroidTest.GenericCountable
             //remove all
             app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
             app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
+            app.Tap(e => e.Text(TranslateExtension.GetTextResource("Yes")));
+
             Assert.AreEqual("0/0", app.Query("FlightScore").First().Text);
             Assert.AreEqual("18/20", app.Query("TotalScore").First().Text);
         }

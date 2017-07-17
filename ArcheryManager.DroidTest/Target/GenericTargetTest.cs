@@ -125,6 +125,7 @@ namespace ArcheryManager.DroidTest.Target
 
             app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
             app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
+            app.Tap(e => e.Text(TranslateExtension.GetTextResource("Yes")));
 
             list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(0, list.Count()); // have one arrow in target
@@ -145,6 +146,7 @@ namespace ArcheryManager.DroidTest.Target
             Assert.AreEqual(2, app.Query(e => e.Marked("scoreList").Child()).Count());
 
             app.Tap(TranslateExtension.GetTextResource("NewFlight"));
+            app.Tap(e => e.Text(TranslateExtension.GetTextResource("Yes")));
 
             Assert.AreEqual(0, app.Query(e => e.Marked("scoreList").Child()).Count());
         }
@@ -159,6 +161,7 @@ namespace ArcheryManager.DroidTest.Target
 
             app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
             app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
+            app.Tap(e => e.Text(TranslateExtension.GetTextResource("Yes")));
 
             Assert.AreEqual(0, app.Query(e => e.Marked("scoreList").Child()).Count());
         }
@@ -172,6 +175,7 @@ namespace ArcheryManager.DroidTest.Target
             Assert.AreEqual(2, app.Query(e => e.Marked("scoreList").Child()).Count());
 
             app.Tap(TranslateExtension.GetTextResource("NewFlight"));
+            app.Tap(e => e.Text(TranslateExtension.GetTextResource("Yes")));
 
             Assert.AreEqual(0, app.Query(e => e.Marked("scoreList").Child()).Count());
         }

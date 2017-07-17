@@ -124,6 +124,8 @@ namespace ArcheryManager.DroidTest.Target
             //remove all
             app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
             app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
+            app.Tap(e => e.Text(TranslateExtension.GetTextResource("Yes")));
+
             Assert.AreEqual("0/0", app.Query("FlightScore").First().Text);
         }
 
@@ -142,6 +144,7 @@ namespace ArcheryManager.DroidTest.Target
             Assert.AreEqual("19/20", app.Query("TotalScore").First().Text);
 
             app.Tap(TranslateExtension.GetTextResource("NewFlight"));
+            app.Tap(e => e.Text(TranslateExtension.GetTextResource("Yes")));
 
             Assert.AreEqual("0/0", app.Query("FlightScore").First().Text);
             Assert.AreEqual("19/20", app.Query("TotalScore").First().Text);
@@ -164,6 +167,8 @@ namespace ArcheryManager.DroidTest.Target
             //remove all
             app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
             app.Tap(TranslateExtension.GetTextResource("RemoveAll"));
+            app.Tap(e => e.Text(TranslateExtension.GetTextResource("Yes")));
+
             Assert.AreEqual("0/0", app.Query("FlightScore").First().Text);
             Assert.AreEqual("19/20", app.Query("TotalScore").First().Text);
         }

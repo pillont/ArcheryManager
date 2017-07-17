@@ -33,7 +33,7 @@ namespace ArcheryManager.UnitTest.Factories
             toolbarItems = new List<ToolbarItem>();
             setting = EnglishArrowSetting.Instance;
             list = new List<ToolbarItem>();
-            counter = new ScoreCounter(new TargetSetting(), toolbarItems, setting, null);
+            counter = new ScoreCounter(new TargetSetting(), toolbarItems, setting);
             target = new Mock<Target>();
             scorelist = ScoreListFactory.Create(target.Object, counter, list, setting);
             a1 = new Arrow(1, 0);
