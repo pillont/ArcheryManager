@@ -147,6 +147,17 @@ namespace ArcheryManager.Utils
             this.setting = setting;
 
             setting.PropertyChanged += Setting_PropertyChanged;
+            setting.CountSetting.PropertyChanged += CountSetting_PropertyChanged;
+        }
+
+        private void CountSetting_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(setting.CountSetting.HaveMaxArrowsCount)
+                || e.PropertyName == nameof(setting.CountSetting.ArrowsCount))
+            {
+                RemoveNewFlightButton();
+                AddNewFlightIfCanValidFlight();
+            }
         }
 
         private void Setting_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -154,12 +165,6 @@ namespace ArcheryManager.Utils
             if (e.PropertyName == nameof(setting.IsDecreasingOrder))
             {
                 UpdateOrder();
-            }
-            else if (e.PropertyName == nameof(setting.CountSetting.HaveMaxArrowsCount)
-                || e.PropertyName == nameof(setting.CountSetting.ArrowsCount))
-            {
-                RemoveNewFlightButton();
-                AddNewFlightIfCanValidFlight();
             }
         }
 
@@ -380,7 +385,8 @@ namespace ArcheryManager.Utils
 
         public void AddArrow(Arrow arrow)
         {
-            bool canAddArrow = CurrentArrows.Count < setting.CountSetting.ArrowsCount;
+            bool canAddArrow = (!setting.CountSetting.HaveMaxArrowsCount) ||
+                                CurrentArrows.Count < setting.CountSetting.ArrowsCount;
             if (canAddArrow)
             {
                 CurrentArrows?.Add(arrow);

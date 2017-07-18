@@ -1,4 +1,5 @@
-﻿using ArcheryManager.Pages;
+﻿using System.Runtime.CompilerServices;
+using ArcheryManager.Pages;
 using Xamarin.Forms;
 
 namespace ArcheryManager.Utils

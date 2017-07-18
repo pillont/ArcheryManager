@@ -34,7 +34,6 @@ namespace ArcheryManager.Interactions.Behaviors
             base.OnAttachedTo(list);
 
             associatedObject.ItemAdded += AssociatedObject_ItemAdded;
-
             associatedObject.Items.CollectionChanged += Items_CollectionChanged;
         }
 
@@ -143,6 +142,7 @@ namespace ArcheryManager.Interactions.Behaviors
             }
         }
 
+        // TODO : view function !
         private void SelectArrow(View container)
         {
             var shape = ArrowUniformGridHelper.ShapeOfArrow(container);

@@ -26,7 +26,6 @@ namespace ArcheryManager.DroidTest.Target
             app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
             app.Tap(TranslateExtension.GetTextResource("Settings"));
 
-            app.WaitForElement("numberArrowEntry");
             app.WaitForElement("ArrowsOrderSwitch");
             app.WaitForElement("ShowAllArrowsSwitch");
             app.WaitForElement("VisibilityAverageSwitch");
