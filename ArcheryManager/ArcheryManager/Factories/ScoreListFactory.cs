@@ -26,6 +26,8 @@ namespace ArcheryManager.Factories
             var selectBehavior = new SelectableArrowInListBehavior(toolbarItems);
             scoreList.Behaviors.Add(selectBehavior);
 
+            var orderBehavior = new ArrowListOrderedBehavior(generalCounterSetting);
+            scoreList.Behaviors.Add(orderBehavior);
             return scoreList;
         }
 

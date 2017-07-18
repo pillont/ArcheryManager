@@ -46,6 +46,7 @@ namespace ArcheryManager.UnitTest.Factories
 
             target = new Mock<Target>(new[] { generalCounterSetting });
             scorelist = ScoreListFactory.Create(target.Object, generalCounterSetting, list);
+
             a1 = new Arrow(1, 0);
             a2 = new Arrow(2, 0);
             a3 = new Arrow(3, 0);

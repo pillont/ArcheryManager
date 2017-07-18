@@ -40,7 +40,7 @@ namespace ArcheryManager.Interactions.Behaviors
         protected override void OnAttachedTo(Target bindable)
         {
             base.OnAttachedTo(bindable);
-            GestureHelper.AddPanGestureOn(associatedObject.TargetGrid, OnPanUpdated);
+            GestureHelper.AddPanGestureOn(AssociatedObject.TargetGrid, OnPanUpdated);
         }
 
         /// <summary>
@@ -73,22 +73,22 @@ namespace ArcheryManager.Interactions.Behaviors
         /// </summary>
         private void EndPanGesture(object sender, CustomPanUpdatedEventArgs e)
         {
-            associatedObject.TargetGrid.Scale = 1;
+            AssociatedObject.TargetGrid.Scale = 1;
 
-            var position = new Point(associatedObject.ArrowSetter.TranslationX,
-                                        associatedObject.ArrowSetter.TranslationY);
+            var position = new Point(AssociatedObject.ArrowSetter.TranslationX,
+                                        AssociatedObject.ArrowSetter.TranslationY);
 
             var numberInFlight = ScoreResult.CurrentArrows.Count;
-            var arrow = associatedObject.Factory.Create(position, numberInFlight, associatedObject.TargetSize);
+            var arrow = AssociatedObject.Factory.Create(position, numberInFlight, AssociatedObject.TargetSize);
             Counter.AddArrow(arrow);
 
-            associatedObject.TargetGrid.TranslationX = 0;
-            associatedObject.TargetGrid.TranslationY = 0;
+            AssociatedObject.TargetGrid.TranslationX = 0;
+            AssociatedObject.TargetGrid.TranslationY = 0;
 
-            associatedObject.ArrowSetter.TranslationX = 0;
-            associatedObject.ArrowSetter.TranslationY = 0;
+            AssociatedObject.ArrowSetter.TranslationX = 0;
+            AssociatedObject.ArrowSetter.TranslationY = 0;
 
-            associatedObject.ArrowSetter.IsVisible = false;
+            AssociatedObject.ArrowSetter.IsVisible = false;
         }
 
         /// <summary>
@@ -97,11 +97,11 @@ namespace ArcheryManager.Interactions.Behaviors
         /// </summary>
         private void UpdatePanGesture(object sender, CustomPanUpdatedEventArgs e)
         {
-            associatedObject.TargetGrid.TranslationX = e.TotalX * TargetTranslationRate;
-            associatedObject.TargetGrid.TranslationY = e.TotalY * TargetTranslationRate;
+            AssociatedObject.TargetGrid.TranslationX = e.TotalX * TargetTranslationRate;
+            AssociatedObject.TargetGrid.TranslationY = e.TotalY * TargetTranslationRate;
 
-            associatedObject.ArrowSetter.TranslationX = e.TotalX;
-            associatedObject.ArrowSetter.TranslationY = e.TotalY;
+            AssociatedObject.ArrowSetter.TranslationX = e.TotalX;
+            AssociatedObject.ArrowSetter.TranslationY = e.TotalY;
         }
 
         /// <summary>
@@ -133,17 +133,17 @@ namespace ArcheryManager.Interactions.Behaviors
 
         private void StartInteraction()
         {
-            associatedObject.ArrowSetter.IsVisible = true;
-            associatedObject.TargetGrid.Scale = TargetScale;
+            AssociatedObject.ArrowSetter.IsVisible = true;
+            AssociatedObject.TargetGrid.Scale = TargetScale;
         }
 
         private void CleanTranslation()
         {
-            associatedObject.TargetGrid.TranslationX = 0;
-            associatedObject.TargetGrid.TranslationY = 0;
+            AssociatedObject.TargetGrid.TranslationX = 0;
+            AssociatedObject.TargetGrid.TranslationY = 0;
 
-            associatedObject.ArrowSetter.TranslationX = 0;
-            associatedObject.ArrowSetter.TranslationY = 0;
+            AssociatedObject.ArrowSetter.TranslationX = 0;
+            AssociatedObject.ArrowSetter.TranslationY = 0;
         }
     }
 }

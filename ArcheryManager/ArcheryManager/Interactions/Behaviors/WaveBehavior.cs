@@ -13,7 +13,7 @@ namespace ArcheryManager.Interactions.Behaviors
 
         public void StopWave()
         {
-            associatedObject.Text = string.Empty;
+            AssociatedObject.Text = string.Empty;
         }
 
         public void NextWave()
@@ -35,10 +35,10 @@ namespace ArcheryManager.Interactions.Behaviors
 
         private void changeWaveText()
         {
-            if (!string.IsNullOrWhiteSpace(associatedObject.Text))
+            if (!string.IsNullOrWhiteSpace(AssociatedObject.Text))
             {
-                associatedObject.Text =
-                    (associatedObject.Text == AB) ?
+                AssociatedObject.Text =
+                    (AssociatedObject.Text == AB) ?
                                                 CD :
                                                     AB;
             }
@@ -46,7 +46,7 @@ namespace ArcheryManager.Interactions.Behaviors
 
         public void StartWave()
         {
-            associatedObject.Text = AB;
+            AssociatedObject.Text = AB;
             changeWave = false;
         }
     }

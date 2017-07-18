@@ -8,12 +8,12 @@ namespace ArcheryManager.Interactions.Behaviors
     /// <typeparam name="T"></typeparam>
     public abstract class CustomBehavior<T> : Behavior<T> where T : BindableObject
     {
-        protected T associatedObject;
+        protected T AssociatedObject { get; private set; }
 
         protected override void OnAttachedTo(T bindable)
         {
             base.OnAttachedTo(bindable);
-            associatedObject = bindable;
+            AssociatedObject = bindable;
         }
     }
 }

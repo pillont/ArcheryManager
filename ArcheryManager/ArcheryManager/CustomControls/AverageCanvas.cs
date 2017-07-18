@@ -12,81 +12,34 @@ namespace ArcheryManager.CustomControls
     /// </summary>
     public class AverageCanvas : ContentView
     {
-        private const int MinArrowForAverage = 2;
-        private Point averageCenter;
-
-        public readonly ScoreCounter Counter;
-
-        public AverageCanvas(IGeneralCounterSetting generalCounterSetting)
+        public new CountSetting BindingContext
         {
-            Counter = new ScoreCounter(generalCounterSetting);
-            var countSetting = generalCounterSetting.CountSetting;
-            BindingContext = countSetting;
-
-            countSetting.PropertyChanged += Setting_PropertyChanged;
-            generalCounterSetting.ScoreResult.AllArrows.CollectionChanged += AllArrows_CollectionChanged;
-        }
-
-        /// <summary>
-        /// update average during AllArrowShowed changing
-        /// </summary>
-        private void Setting_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            try
+            get
             {
-                if (e.PropertyName == nameof(CountSetting.ShowAllArrows))
+                if (base.BindingContext is CountSetting)
                 {
-                    if (Counter.ArrowsShowed.Count > MinArrowForAverage)
-                    {
-                        UpdateAverage();
-                    }
+                    return base.BindingContext as CountSetting;
+                }
+                else
+                {
+                    throw new InvalidCastException("binding target of average canvas must be Target setting");
                 }
             }
-            catch (Exception)
+            set
             {
-                throw;
+                base.BindingContext = value;
             }
         }
 
-        /// <summary>
-        /// update average when AllArrow of the counter changing
-        /// </summary>
-        private void AllArrows_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        public View CreateAverageVisual(double standartDeviationX, double standartDeviationY, Point center)
         {
-            if (Counter.ArrowsShowed.Count < MinArrowForAverage)
-            {
-                Content = null;
-            }
-            else
-            {
-                UpdateAverage();
-            }
-        }
-
-        #region average update
-
-        private void UpdateAverage()// TODO make behavior
-        {
-            UpdateAverageCenter();
-            UpdateAverageForm();
-        }
-
-        private void UpdateAverageForm()
-        {
-            double standartDeviationX = StatisticHelper.CalculateStdDev(Counter.ArrowsShowed.Select(a => a.TranslationX));
-            double standartDeviationY = StatisticHelper.CalculateStdDev(Counter.ArrowsShowed.Select(a => a.TranslationY));
-            Content = CreateAverageVisual(standartDeviationX, standartDeviationY);
-        }
-
-        private View CreateAverageVisual(double standartDeviationX, double standartDeviationY)
-        {
-            var center = new ShapeView()
+            var centerVisual = new ShapeView()
             {
                 ShapeType = ShapeType.Circle,
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center,
-                TranslationX = averageCenter.X,
-                TranslationY = averageCenter.Y,
+                TranslationX = center.X,
+                TranslationY = center.Y,
                 Color = Color.HotPink,
                 BorderWidth = 2,
                 BorderColor = Color.HotPink,
@@ -102,8 +55,8 @@ namespace ArcheryManager.CustomControls
                 WidthRequest = standartDeviationX * 2,
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center,
-                TranslationX = averageCenter.X,
-                TranslationY = averageCenter.Y,
+                TranslationX = center.X,
+                TranslationY = center.Y,
                 Color = Color.LightPink,
                 BorderWidth = 2,
                 BorderColor = Color.HotPink,
@@ -115,23 +68,9 @@ namespace ArcheryManager.CustomControls
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
             };
             grid.Children.Add(big);
-            grid.Children.Add(center);
+            grid.Children.Add(centerVisual);
 
             return grid;
         }
-
-        private void UpdateAverageCenter()
-        {
-            if (Counter.ArrowsShowed.Count == 0)
-            {
-                throw new InvalidOperationException();
-            }
-
-            double averageX = Counter.ArrowsShowed.Average(a => a.TranslationX);
-            double averageY = Counter.ArrowsShowed.Average(a => a.TranslationY);
-            averageCenter = new Point(averageX, averageY);
-        }
-
-        #endregion average update
     }
 }

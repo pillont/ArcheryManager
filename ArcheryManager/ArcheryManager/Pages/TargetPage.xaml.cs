@@ -13,7 +13,7 @@ namespace ArcheryManager.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TargetPage : ContentPageWithOverridableToolBar
     {
-        private readonly GeneralCounterSetting GeneralCounterSetting;
+        private readonly IGeneralCounterSetting GeneralCounterSetting;
 
         private CountSetting CountSetting => GeneralCounterSetting.CountSetting;
         private ScoreCounter Counter { get; set; }
@@ -21,12 +21,11 @@ namespace ArcheryManager.Pages
         private readonly ScreenRotationWatcher RotationWatcher;
         private readonly Target customTarget;
 
-        public TargetPage(GeneralCounterSetting generalCounterSetting)
+        public TargetPage(IGeneralCounterSetting generalCounterSetting)
         {
             InitializeComponent();
 
             GeneralCounterSetting = generalCounterSetting;
-            GeneralCounterSetting.ScoreResult = new ScoreResult();
             Counter = new ScoreCounter(GeneralCounterSetting);
 
             #region view setup

@@ -6,18 +6,19 @@ namespace ArcheryManager.Factories
 {
     public class CounterPageFactory
     {
-        public static Page Create(GeneralCounterSetting GeneralCounterSetting)
+        public static Page Create(GeneralCounterSetting generalCounterSetting)
         {
-            bool wantTarget = GeneralCounterSetting.CountSetting.WantTarget;
+            bool wantTarget = generalCounterSetting.CountSetting.WantTarget;
+            generalCounterSetting.ScoreResult = new ScoreResult();
 
             if (wantTarget)
             {
-                var Page = new TargetPage(GeneralCounterSetting);
+                var Page = new TargetPage(generalCounterSetting);
                 return Page;
             }
             else
             {
-                var Page = new CounterButtonPage(GeneralCounterSetting);
+                var Page = new CounterButtonPage(generalCounterSetting);
                 return Page;
             }
         }

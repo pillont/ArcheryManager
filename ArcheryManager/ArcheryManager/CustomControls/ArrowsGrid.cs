@@ -118,13 +118,5 @@ namespace ArcheryManager.CustomControls
                 container.Color = ArrowColor;
             }
         }
-
-        public void ResetSelection()
-        {
-            foreach (var arrow in Items)
-            {
-                UnSelectArrow(arrow);
-            }
-        }
     }
 }

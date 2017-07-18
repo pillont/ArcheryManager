@@ -53,6 +53,7 @@
     <Compile Include="Factories\ArrowsettingFactory.cs" />
     <Compile Include="Factories\CounterPageFactory.cs" />
     <Compile Include="Interactions\Behaviors\CounterToolbarItemsBehavior.cs" />
+    <Compile Include="Interactions\Behaviors\ArrowListOrderedBehavior.cs" />
     <Compile Include="Pages\CounterSelectorPage.xaml.cs">
       <DependentUpon>CounterSelectorPage.xaml</DependentUpon>
     </Compile>
@@ -60,6 +61,7 @@
       <DependentUpon>GeneralMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PageWithOverridableToolBar.cs" />
+    <Compile Include="Interactions\Behaviors\AverageBehavior.cs" />
     <Compile Include="Resources\AppResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
