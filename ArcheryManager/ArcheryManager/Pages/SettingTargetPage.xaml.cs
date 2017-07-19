@@ -39,11 +39,11 @@ namespace ArcheryManager.Pages
         {
             var entry = sender as Entry;
             int val = Convert.ToInt32(entry.Text);
-            if (val < TargetSetting.MinArrowCount)
+            if (val < CountSetting.MinArrowCount)
             {
                 if (BindingContext != null)
                 {
-                    BindingContext.ArrowsCount = TargetSetting.MinArrowCount;
+                    BindingContext.CountSetting.ArrowsCount = CountSetting.MinArrowCount;
                 }
             }
         }

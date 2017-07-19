@@ -10,18 +10,18 @@ using System;
 namespace ArcheryManager.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CounterPage : ContentPage
+    public partial class CounterButtonPage : ContentPage
     {
         private readonly TargetSetting Setting;
-        private static readonly IArrowSetting EnglishSetting = EnglishArrowSetting.Instance;
         private readonly ScoreCounter Counter;
+        private EnglishArrowSetting instance;
 
-        public CounterPage()
+        public CounterButtonPage(IArrowSetting arrowSetting, CountSetting countSetting)
         {
             InitializeComponent();
 
-            this.Setting = new TargetSetting() { HaveTarget = false };
-            Counter = new ScoreCounter(Setting, ToolbarItems, EnglishSetting);
+            this.Setting = new TargetSetting(countSetting) { HaveTarget = false };
+            Counter = new ScoreCounter(Setting, ToolbarItems, arrowSetting);
             totalCounter.BindingContext = Counter;
             scoreList.Setting = Counter.ArrowSetting;
             scoreList.SizeChanged += ScoreList_SizeChanged;
@@ -33,6 +33,11 @@ namespace ArcheryManager.Pages
             scoreList.Behaviors.Add(selectBehavior);
 
             SetupToolbarItems();
+        }
+
+        public CounterButtonPage(EnglishArrowSetting instance)
+        {
+            this.instance = instance;
         }
 
         private void ScoreList_SizeChanged(object sender, System.EventArgs e)

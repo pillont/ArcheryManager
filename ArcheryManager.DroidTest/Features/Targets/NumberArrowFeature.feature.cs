@@ -183,6 +183,41 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test la non possibilité de tirer plus du max dans la vue de bouton")]
+        public virtual void TestLaNonPossibiliteDeTirerPlusDuMaxDansLaVueDeBouton()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test la non possibilité de tirer plus du max dans la vue de bouton", ((string[])(null)));
+#line 64
+this.ScenarioSetup(scenarioInfo);
+#line 65
+ testRunner.When("J\'ouvre une page zappette", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 66
+ testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 67
+ testRunner.And("je click sur le check nombre de flèches défini", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 68
+ testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 69
+ testRunner.And("je click sur le boutton 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 70
+ testRunner.And("je click sur le boutton 9", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 71
+ testRunner.And("je click sur le boutton 8", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 72
+ testRunner.And("je click sur le boutton 7", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 73
+ testRunner.And("je click sur le boutton 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 74
+ testRunner.And("je click sur le boutton 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 77
+ testRunner.And("je click sur le boutton X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 79
+ testRunner.Then("le nombre de flèches dans la liste est de 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

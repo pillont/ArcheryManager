@@ -16,30 +16,41 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Label AutomationId="NumberOfArrowsLabel" Text="{resources:Translate NumberOfArrows}" Grid.Column="0" Grid.Row="0" />
+        <Label AutomationId="NumberOfArrowsLabel"
+                   Text="{resources:Translate NumberOfArrows}"
+                   Grid.Column="0"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center" />
 
-        <StackLayout Grid.Column="1" Grid.Row="0" Orientation="Vertical">
-            <StackLayout>
-                <Label Text="{resources:Translate HaveFixNumber}" />
-                <Switch IsToggled="{Binding HaveMaxArrowsCount}"
-                        AutomationId="maxArrowsSwitch" />
-            </StackLayout>
-            <Entry Keyboard="Numeric"
-                IsEnabled="{Binding HaveMaxArrowsCount}"
-               Text="{Binding ArrowsCount}"
-               Unfocused="ArrowCount_Unfocused"
-               AutomationId="numberArrowEntry"
-               x:Name="numberArrowEntry" />
+        <StackLayout Grid.Column="1"
+                         Orientation="Vertical"
+                         HorizontalOptions="Center"
+                         VerticalOptions="End">
+            <Label Text="{resources:Translate HaveFixNumber}" />
+            <Switch IsToggled="{Binding CountSetting.HaveMaxArrowsCount}"
+                                HorizontalOptions="End"
+                         AutomationId="maxArrowsSwitch" />
         </StackLayout>
+        <Entry Keyboard="Numeric"
+                   Grid.Column="2"
+                   IsVisible="{Binding CountSetting.HaveMaxArrowsCount}"
+                   Text="{Binding CountSetting.ArrowsCount}"
+                   Unfocused="ArrowCount_Unfocused"
+                   VerticalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   AutomationId="numberArrowEntry"
+                   x:Name="numberArrowEntry" />
 
         <Label Text="{resources:Translate ArrowsInDecreasingOrder}" Grid.Column="0" Grid.Row="1" VerticalTextAlignment="Center" />
         <Switch IsToggled="{Binding IsDecreasingOrder}"
-                Grid.Column="1"
+                Grid.Column="2"
                 Grid.Row="1"
                 AutomationId="ArrowsOrderSwitch" />
         <Label  Text="{resources:Translate SeeAllArrows}" Grid.Column="0" Grid.Row="2" VerticalTextAlignment="Center" IsVisible="{Binding HaveTarget}" />
-        <Switch IsToggled="{Binding ShowAllArrows}" Grid.Column="1" Grid.Row="2" AutomationId="ShowAllArrowsSwitch" IsVisible="{Binding HaveTarget}" />
+        <Switch IsToggled="{Binding ShowAllArrows}" Grid.Column="2" Grid.Row="2" AutomationId="ShowAllArrowsSwitch" IsVisible="{Binding HaveTarget}" />
         <Label Text="{resources:Translate SeeAverage}" Grid.Column="0" Grid.Row="3" VerticalTextAlignment="Center" IsVisible="{Binding HaveTarget}" />
-        <Switch IsToggled="{Binding AverageIsVisible}" Grid.Column="1" Grid.Row="3" AutomationId="VisibilityAverageSwitch" IsVisible="{Binding HaveTarget}" />
+        <Switch IsToggled="{Binding AverageIsVisible}" Grid.Column="2" Grid.Row="3" AutomationId="VisibilityAverageSwitch" IsVisible="{Binding HaveTarget}" />
     </Grid>
 </ContentPage>

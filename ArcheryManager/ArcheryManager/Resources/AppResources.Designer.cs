@@ -107,6 +107,15 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Selector of counter.
+        /// </summary>
+        internal static string CounterSelector {
+            get {
+                return ResourceManager.GetString("CounterSelector", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Duck.
         /// </summary>
         internal static string Duck {
@@ -386,6 +395,15 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Target wanted.
+        /// </summary>
+        internal static string TargetWanted {
+            get {
+                return ResourceManager.GetString("TargetWanted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Time.
         /// </summary>
         internal static string Time {
@@ -427,6 +445,15 @@ namespace ArcheryManager.Resources {
         internal static string UnSelect {
             get {
                 return ResourceManager.GetString("UnSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Valid.
+        /// </summary>
+        internal static string Valid {
+            get {
+                return ResourceManager.GetString("Valid", resourceCulture);
             }
         }
         

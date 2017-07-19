@@ -47,8 +47,7 @@ namespace ArcheryManager.DroidTest.StepDefinition
         [Then(@"le nombre de flèche est désactivé")]
         public void AlorsLeNombreDeFlecheEstDesactive()
         {
-            TestSetting.App.WaitForElement("numberArrowEntry");
-            Assert.IsFalse(TestSetting.App.Query("numberArrowEntry").First().Enabled);
+            TestSetting.App.WaitForNoElement("numberArrowEntry");
         }
     }
 }

@@ -147,6 +147,17 @@ namespace ArcheryManager.Utils
             this.setting = setting;
 
             setting.PropertyChanged += Setting_PropertyChanged;
+            setting.CountSetting.PropertyChanged += CountSetting_PropertyChanged;
+        }
+
+        private void CountSetting_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(setting.CountSetting.HaveMaxArrowsCount)
+                || e.PropertyName == nameof(setting.CountSetting.ArrowsCount))
+            {
+                RemoveNewFlightButton();
+                AddNewFlightIfCanValidFlight();
+            }
         }
 
         private void Setting_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -154,12 +165,6 @@ namespace ArcheryManager.Utils
             if (e.PropertyName == nameof(setting.IsDecreasingOrder))
             {
                 UpdateOrder();
-            }
-            else if (e.PropertyName == nameof(setting.HaveMaxArrowsCount)
-                || e.PropertyName == nameof(setting.ArrowsCount))
-            {
-                RemoveNewFlightButton();
-                AddNewFlightIfCanValidFlight();
             }
         }
 
@@ -272,7 +277,8 @@ namespace ArcheryManager.Utils
         private bool CanValidFlight()
         {
             return CurrentArrows.Count > 0 && (
-                (!setting.HaveMaxArrowsCount) || CurrentArrows.Count >= setting.ArrowsCount);
+                (!setting.CountSetting.HaveMaxArrowsCount)
+                || CurrentArrows.Count >= setting.CountSetting.ArrowsCount);
         }
 
         public void UpdateOrder()
@@ -379,8 +385,13 @@ namespace ArcheryManager.Utils
 
         public void AddArrow(Arrow arrow)
         {
-            CurrentArrows?.Add(arrow);
-            UpdateOrder();
+            bool canAddArrow = (!setting.CountSetting.HaveMaxArrowsCount) ||
+                                CurrentArrows.Count < setting.CountSetting.ArrowsCount;
+            if (canAddArrow)
+            {
+                CurrentArrows?.Add(arrow);
+                UpdateOrder();
+            }
         }
 
         public void ClearArrows()

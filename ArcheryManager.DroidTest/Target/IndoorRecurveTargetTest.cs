@@ -1,4 +1,5 @@
-﻿using ArcheryManager.Resources;
+﻿using ArcheryManager.DroidTest.Helpers;
+using ArcheryManager.Resources;
 using NUnit.Framework;
 using System.Linq;
 using Xamarin.UITest.Android;
@@ -31,17 +32,7 @@ namespace ArcheryManager.DroidTest.Target
         [Test]
         public void InitTargetElement()
         {
-            Assert.AreEqual(621, app.WaitForElement("zone1").First().Rect.Height);
-            Assert.AreEqual(494, app.WaitForElement("zone2").First().Rect.Height);
-            Assert.AreEqual(367, app.WaitForElement("zone3").First().Rect.Height);
-            Assert.AreEqual(239, app.WaitForElement("zone4").First().Rect.Height);
-            Assert.AreEqual(112, app.WaitForElement("zone5").First().Rect.Height);
-
-            Assert.AreEqual(621, app.WaitForElement("zone1").First().Rect.Width);
-            Assert.AreEqual(494, app.WaitForElement("zone2").First().Rect.Width);
-            Assert.AreEqual(367, app.WaitForElement("zone3").First().Rect.Width);
-            Assert.AreEqual(239, app.WaitForElement("zone4").First().Rect.Width);
-            Assert.AreEqual(112, app.WaitForElement("zone5").First().Rect.Width);
+            TargetHelper.ShouldHaveIndoorRecurveTarget();
         }
 
         [Test]

@@ -17,11 +17,11 @@ namespace ArcheryManager.Pages
         private readonly TargetSetting Setting;
         private readonly Target customTarget;
 
-        public TargetPage(IArrowSetting setting)
+        public TargetPage(IArrowSetting setting, CountSetting countSetting)
         {
             InitializeComponent();
 
-            this.Setting = new TargetSetting();
+            this.Setting = new TargetSetting(countSetting);
             Counter = new ScoreCounter(Setting, ToolbarItems, setting);
 
             #region view setup

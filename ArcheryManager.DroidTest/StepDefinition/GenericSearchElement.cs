@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using ArcheryManager.Resources;
+using NUnit.Framework;
 using System.Linq;
 using TechTalk.SpecFlow;
 using Xamarin.UITest.Android;
@@ -21,6 +22,13 @@ namespace ArcheryManager.DroidTest.StepDefinition
         public void QuandQueJAttendUnTexteEqualA(string p0)
         {
             TestSetting.App.WaitForElement(e => e.Text(p0));
+        }
+
+        [When(@"je click sur le texte (.*)")]
+        public void QuandJeClickSurLeTexte(string target)
+        {
+            var targetName = TranslateExtension.GetTextResource(target);
+            TestSetting.App.Tap(e => e.Text(targetName));
         }
     }
 }

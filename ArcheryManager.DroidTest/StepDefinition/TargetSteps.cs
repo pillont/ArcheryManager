@@ -1,8 +1,10 @@
+using ArcheryManager.DroidTest.Helpers;
 using ArcheryManager.Resources;
 using NUnit.Framework;
 using System;
 using System.Linq;
 using TechTalk.SpecFlow;
+using static ArcheryManager.CustomControls.TargetImage;
 
 namespace ArcheryManager.DroidTest.StepDefinition
 {
@@ -58,12 +60,13 @@ namespace ArcheryManager.DroidTest.StepDefinition
         [Then(@"le nombre de flèches dans la liste est de (.*)")]
         public void AlorsLeNombreDeFlechesDansLaListeEstDe(int p0)
         {
-            Assert.AreEqual(p0, TestSetting.App.Query(e => e.Marked("arrowInTargetGrid").Child()).Count());
+            Assert.AreEqual(p0, TestSetting.App.Query(e => e.Marked("scoreList").Child()).Count());
         }
 
         [Then(@"le nombre de flèches actuelles sur la cible est de (.*)")]
         public void AlorsLeNombreDeFlechesActuellesSurLaCibleEstDe(int p0)
         {
+            TestSetting.App.WaitForElement("arrowInTargetGrid");
             Assert.AreEqual(p0, TestSetting.App.Query(e => e.Marked("arrowInTargetGrid").Child()).Count());
         }
 
@@ -105,6 +108,13 @@ namespace ArcheryManager.DroidTest.StepDefinition
         {
             TestSetting.App.WaitForElement("TotalScore");
             Assert.AreEqual(text, TestSetting.App.Query("TotalScore").First().Text);
+        }
+
+        [Then(@"il y a une cible (.*)")]
+        public void AlorsIlYAUneCibleAnglaise(string target)
+        {
+            var enumeration = (TargetStyle)Enum.Parse(typeof(TargetStyle), target, true);
+            TargetHelper.ShouldHaveTarget(enumeration);
         }
     }
 }

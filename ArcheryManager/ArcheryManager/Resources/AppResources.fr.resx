@@ -135,6 +135,9 @@
   <data name="Duck" xml:space="preserve">
     <value>Canard</value>
   </data>
+  <data name="CounterSelector" xml:space="preserve">
+    <value>Sélecteur de compteur</value>
+  </data>
   <data name="Duel" xml:space="preserve">
     <value>Duel</value>
   </data>
@@ -225,6 +228,9 @@
   <data name="Strike" xml:space="preserve">
     <value>Strike</value>
   </data>
+  <data name="TargetWanted" xml:space="preserve">
+    <value>Cible voulue</value>
+  </data>
   <data name="Time" xml:space="preserve">
     <value>Temps</value>
   </data>
@@ -242,5 +248,8 @@
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Oui</value>
+  </data>
+  <data name="Valid" xml:space="preserve">
+    <value>Valider</value>
   </data>
 </root>

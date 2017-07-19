@@ -57,3 +57,23 @@ Scénario: test la non possibilité de tirer plus du max
 	
 	Alors le nombre de flèches dans la liste est de 6
 	Et le nombre de flèches actuelles sur la cible est de 6
+
+
+
+	
+Scénario: test la non possibilité de tirer plus du max dans la vue de bouton
+	Quand J'ouvre une page zappette
+	Et j'ouvre le menu de paramètre
+	Et je click sur le check nombre de flèches défini
+	Et je reviens à la page d'avant
+	Et je click sur le boutton 10
+	Et je click sur le boutton 9
+	Et je click sur le boutton 8
+	Et je click sur le boutton 7
+	Et je click sur le boutton 6
+	Et je click sur le boutton 5
+	
+	#le nombre de flèche défini est atteint
+	Et je click sur le boutton X10
+	
+	Alors le nombre de flèches dans la liste est de 6
