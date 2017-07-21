@@ -8,9 +8,9 @@ namespace ArcheryManager.CustomControls
     public class ArrowUniformGrid : UniformGrid<Arrow>
     {
         public static readonly BindableProperty SettingProperty =
-                      BindableProperty.Create(nameof(Setting), typeof(IArrowSetting), typeof(ArrowUniformGrid), null);
+                      BindableProperty.Create(nameof(ArrowSetting), typeof(IArrowSetting), typeof(ArrowUniformGrid), null);
 
-        public IArrowSetting Setting
+        public IArrowSetting ArrowSetting
         {
             get { return (IArrowSetting)GetValue(SettingProperty); }
             set { SetValue(SettingProperty, value); }
@@ -23,7 +23,7 @@ namespace ArcheryManager.CustomControls
         {
             var grid = new Grid();
             int index = arrow.Index;
-            var score = Setting.ScoreByIndex(index);
+            var score = ArrowSetting.ScoreByIndex(index);
             var shape = new ShapeView()
             {
                 Margin = new Thickness(2),
@@ -32,7 +32,7 @@ namespace ArcheryManager.CustomControls
                 ShapeType = ShapeType.Circle,
                 BorderWidth = DefaultBorderWidth,
                 BorderColor = DefaultBorderColor,
-                Color = Setting.ColorOf(score),
+                Color = ArrowSetting.ColorOf(score),
             };
 
             var label = new Label()
@@ -42,7 +42,7 @@ namespace ArcheryManager.CustomControls
                 VerticalTextAlignment = TextAlignment.Center,
                 FontAttributes = FontAttributes.Bold,
                 HorizontalTextAlignment = TextAlignment.Center,
-                Text = Setting.ScoreByIndex(index),
+                Text = ArrowSetting.ScoreByIndex(index),
             };
 
             //NOTE : ArrowUniformGridController is helper to find element in the kind of container

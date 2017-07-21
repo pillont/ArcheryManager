@@ -5,6 +5,7 @@ using ArcheryManager.Utils;
 using Xamarin.Forms;
 using XFShapeView;
 using ArcheryManager.Interactions.Behaviors;
+using ArcheryManager.Settings.ArrowSettings;
 
 namespace ArcheryManager.CustomControls
 {
@@ -54,34 +55,6 @@ namespace ArcheryManager.CustomControls
 
         #endregion constants
 
-        public static readonly BindableProperty SettingProperty =
-                      BindableProperty.Create(nameof(Setting), typeof(IArrowSetting), typeof(Target), null);
-
-        public IArrowSetting Setting
-        {
-            get { return (IArrowSetting)GetValue(SettingProperty); }
-            set
-            {
-                SetValue(SettingProperty, value);
-                Factory = new ArrowFactory(this, Setting);
-            }
-        }
-
-        public ArrowFactory factory;
-
-        public ArrowFactory Factory
-        {
-            get
-            {
-                return factory;
-            }
-            private set
-            {
-                factory = value;
-                DrawTargetVisual();
-            }
-        }
-
         public double TargetSize
         {
             get { return (double)GetValue(TargetSizeProperty); }
@@ -100,6 +73,8 @@ namespace ArcheryManager.CustomControls
         public readonly ArrowsGrid PreviousArrowGrid;
 
         public readonly AverageCanvas AverageCanvas; // TODO set private with layout builder
+        private readonly IArrowSetting ArrowSetting;
+        public readonly ArrowFactory Factory;
 
         #endregion target layout
 
@@ -113,11 +88,7 @@ namespace ArcheryManager.CustomControls
         /// </summary>
         public Grid TargetGrid { get; private set; }
 
-        public Target()
-            : this(EnglishArrowSetting.Instance)
-        { }
-
-        public Target(IArrowSetting setting)
+        public Target(IGeneralCounterSetting generalCounterSetting)
         {
             /*
              * target layout
@@ -128,7 +99,7 @@ namespace ArcheryManager.CustomControls
                 ArrowWidth = ArrowWidth,
                 ArrowColor = PreviousArrowsColor
             };
-            AverageCanvas = new AverageCanvas()
+            AverageCanvas = new AverageCanvas(generalCounterSetting)
             {
                 AutomationId = "averageCanvas",
                 VerticalOptions = LayoutOptions.CenterAndExpand,
@@ -142,8 +113,9 @@ namespace ArcheryManager.CustomControls
             };
 
             CreateContent();
-
-            Setting = setting;
+            ArrowSetting = generalCounterSetting.ArrowSetting;
+            Factory = new ArrowFactory(this, ArrowSetting);
+            DrawTargetVisual();
         }
 
         #region visual of the target
@@ -200,8 +172,8 @@ namespace ArcheryManager.CustomControls
                     HeightRequest = TargetSize * rate, //TODO
                     WidthRequest = TargetSize * rate, //TODO
                     ShapeType = ShapeType.Circle,
-                    BorderColor = Setting.BorderColorZone(i),
-                    Color = Setting.ColorofTargetZone(i),
+                    BorderColor = ArrowSetting.BorderColorZone(i),
+                    Color = ArrowSetting.ColorofTargetZone(i),
                     BorderWidth = StringWidth,
                     VerticalOptions = LayoutOptions.Center,
                     HorizontalOptions = LayoutOptions.Center,

@@ -6,12 +6,12 @@ using System.Linq;
 using ArcheryManager.Resources;
 using ArcheryManager.Interfaces;
 using System;
+using ArcheryManager.Utils;
 
-namespace ArcheryManager.Utils
+namespace ArcheryManager.Settings
 {
     public class ScoreCounter : BindableObject
     {
-        public readonly IArrowSetting ArrowSetting;
         private const string NewFlightText = "New Flight";
         private const string ScoreFormat = "{0}/{1}";
 
@@ -41,7 +41,7 @@ namespace ArcheryManager.Utils
         {
             get
             {
-                if (setting.ShowAllArrows)
+                if (CountSetting.ShowAllArrows)
                 {
                     return AllArrows;
                 }
@@ -127,8 +127,9 @@ namespace ArcheryManager.Utils
         private readonly List<Flight> FlightsSaved = new List<Flight>();
 
         private int lastTotal = 0;
-        private readonly TargetSetting setting;
         private readonly IList<ToolbarItem> toolbarItems;
+        private readonly IArrowSetting ArrowSetting;
+        private readonly CountSetting CountSetting;
 
         #endregion properties
 
@@ -136,33 +137,27 @@ namespace ArcheryManager.Utils
         /// score counter with associated target
         /// </summary>
         /// <param name="setting"></param>
-        public ScoreCounter(TargetSetting setting, IList<ToolbarItem> toolbarItems, IArrowSetting ArrowSetting)// TODO : make FlightSetting ancestor of Target setting =>remove this ctor and change the second to accept FlightSetting
+        public ScoreCounter(CountSetting countSetting, IArrowSetting arrowSetting, IList<ToolbarItem> toolbarItems)// TODO : make FlightSetting ancestor of Target setting =>remove this ctor and change the second to accept FlightSetting
         {
-            this.ArrowSetting = ArrowSetting;
+            CountSetting = countSetting;
+            ArrowSetting = arrowSetting;
             CurrentArrows = new ObservableCollection<Arrow>();
             AllArrows = new ObservableCollection<Arrow>();
             PreviousArrows = new ObservableCollection<Arrow>();
 
             this.toolbarItems = toolbarItems;
-            this.setting = setting;
-
-            setting.PropertyChanged += Setting_PropertyChanged;
-            setting.CountSetting.PropertyChanged += CountSetting_PropertyChanged;
+            CountSetting.PropertyChanged += CountSetting_PropertyChanged;
         }
 
         private void CountSetting_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(setting.CountSetting.HaveMaxArrowsCount)
-                || e.PropertyName == nameof(setting.CountSetting.ArrowsCount))
+            if (e.PropertyName == nameof(CountSetting.HaveMaxArrowsCount)
+                || e.PropertyName == nameof(CountSetting.ArrowsCount))
             {
                 RemoveNewFlightButton();
                 AddNewFlightIfCanValidFlight();
             }
-        }
-
-        private void Setting_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(setting.IsDecreasingOrder))
+            else if (e.PropertyName == nameof(CountSetting.IsDecreasingOrder))
             {
                 UpdateOrder();
             }
@@ -277,14 +272,14 @@ namespace ArcheryManager.Utils
         private bool CanValidFlight()
         {
             return CurrentArrows.Count > 0 && (
-                (!setting.CountSetting.HaveMaxArrowsCount)
-                || CurrentArrows.Count >= setting.CountSetting.ArrowsCount);
+                (!CountSetting.HaveMaxArrowsCount)
+                || CurrentArrows.Count >= CountSetting.ArrowsCount);
         }
 
         public void UpdateOrder()
         {
             IEnumerable<Arrow> orderedList;
-            if (setting.IsDecreasingOrder)
+            if (CountSetting.IsDecreasingOrder)
             {
                 orderedList = CurrentArrows.OrderByDescending(a => a.Index).ToList();
             }
@@ -385,8 +380,8 @@ namespace ArcheryManager.Utils
 
         public void AddArrow(Arrow arrow)
         {
-            bool canAddArrow = (!setting.CountSetting.HaveMaxArrowsCount) ||
-                                CurrentArrows.Count < setting.CountSetting.ArrowsCount;
+            bool canAddArrow = (!CountSetting.HaveMaxArrowsCount) ||
+                                CurrentArrows.Count < CountSetting.ArrowsCount;
             if (canAddArrow)
             {
                 CurrentArrows?.Add(arrow);

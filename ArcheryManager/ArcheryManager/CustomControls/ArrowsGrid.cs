@@ -1,4 +1,4 @@
-﻿using ArcheryManager.Settings;
+﻿using ArcheryManager.Settings.ArrowSettings;
 using ArcheryManager.Utils;
 using Xamarin.Forms;
 using XFShapeView;

@@ -1,4 +1,5 @@
 ﻿using ArcheryManager.Pages;
+using ArcheryManager.Settings;
 using Xamarin.Forms;
 
 namespace ArcheryManager
@@ -25,9 +26,18 @@ namespace ArcheryManager
 
         public App()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-            MainPage = NavigationPage;
+                DependencyService.Register<GeneralCounterSetting>();
+
+                MainPage = NavigationPage;
+            }
+            catch (System.Exception e)
+            {
+                throw;
+            }
         }
 
         protected override void OnStart()

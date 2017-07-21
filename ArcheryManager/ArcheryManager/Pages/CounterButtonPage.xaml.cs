@@ -1,43 +1,39 @@
 ﻿using ArcheryManager.Settings;
-using ArcheryManager.Interfaces;
-using ArcheryManager.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ArcheryManager.Interactions.Behaviors;
 using ArcheryManager.Resources;
-using System;
 
 namespace ArcheryManager.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CounterButtonPage : ContentPage
     {
-        private readonly TargetSetting Setting;
         private readonly ScoreCounter Counter;
-        private EnglishArrowSetting instance;
+        private readonly CountSetting CountSetting;
 
-        public CounterButtonPage(IArrowSetting arrowSetting, CountSetting countSetting)
+        public CounterButtonPage(IGeneralCounterSetting generalCounterSetting)
         {
             InitializeComponent();
+            var arrowSetting = generalCounterSetting.ArrowSetting;
+            var countSetting = generalCounterSetting.CountSetting;
+            countSetting.HaveTarget = false;
+            CountSetting = countSetting;
 
-            this.Setting = new TargetSetting(countSetting) { HaveTarget = false };
-            Counter = new ScoreCounter(Setting, ToolbarItems, arrowSetting);
+            Counter = new ScoreCounter(countSetting, arrowSetting, ToolbarItems);
             totalCounter.BindingContext = Counter;
-            scoreList.Setting = Counter.ArrowSetting;
+            generalCounterSetting.ScoreCounter = Counter;
+
+            scoreList.ArrowSetting = generalCounterSetting.ArrowSetting;
             scoreList.SizeChanged += ScoreList_SizeChanged;
             scoreList.Items = Counter.CurrentArrows;
 
-            counterButtons.Counter = Counter;
+            counterButtons.GeneralCounterSetting = generalCounterSetting;
 
             var selectBehavior = new SelectableArrowInListBehavior(this.ToolbarItems);
             scoreList.Behaviors.Add(selectBehavior);
 
             SetupToolbarItems();
-        }
-
-        public CounterButtonPage(EnglishArrowSetting instance)
-        {
-            this.instance = instance;
         }
 
         private void ScoreList_SizeChanged(object sender, System.EventArgs e)
@@ -64,7 +60,7 @@ namespace ArcheryManager.Pages
 
         private void OpenSettingPage(object obj)
         {
-            var page = new SettingTargetPage() { BindingContext = Setting };
+            var page = new SettingTargetPage() { BindingContext = CountSetting };
             App.NavigationPage.PushAsync(page);
         }
     }

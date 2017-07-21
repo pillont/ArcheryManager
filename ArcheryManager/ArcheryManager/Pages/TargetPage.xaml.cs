@@ -1,28 +1,34 @@
 ﻿using ArcheryManager.Factories;
-using ArcheryManager.Interfaces;
 using ArcheryManager.Utils;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ArcheryManager.CustomControls;
 using ArcheryManager.Resources;
+using ArcheryManager.Settings;
 
 namespace ArcheryManager.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TargetPage : ContentPage
     {
+        private readonly IGeneralCounterSetting GeneralCounterSetting;
+
+        private CountSetting CountSetting => GeneralCounterSetting.CountSetting;
+        private ScoreCounter Counter => GeneralCounterSetting.ScoreCounter;
+
         private readonly ScreenRotationWatcher RotationWatcher;
-        private readonly ScoreCounter Counter;
-        private readonly TargetSetting Setting;
         private readonly Target customTarget;
 
-        public TargetPage(IArrowSetting setting, CountSetting countSetting)
+        public TargetPage(IGeneralCounterSetting generalCounterSetting)
         {
             InitializeComponent();
 
-            this.Setting = new TargetSetting(countSetting);
-            Counter = new ScoreCounter(Setting, ToolbarItems, setting);
+            GeneralCounterSetting = generalCounterSetting;
+            GeneralCounterSetting.ScoreCounter
+                                    = new ScoreCounter(GeneralCounterSetting.CountSetting,
+                                                        generalCounterSetting.ArrowSetting,
+                                                        ToolbarItems);
 
             #region view setup
 
@@ -31,12 +37,12 @@ namespace ArcheryManager.Pages
 
             #endregion view setup
 
-            customTarget = TargetFactory.Create(Counter, Setting);
+            customTarget = TargetFactory.Create(generalCounterSetting);
             targetGrid.Children.Add(customTarget);
 
             #region ScoreList
 
-            var scoreList = ScoreListFactory.Create(customTarget, Counter, ToolbarItems, setting);
+            var scoreList = ScoreListFactory.Create(customTarget, generalCounterSetting, ToolbarItems);
             scoreList.SizeChanged += ScoreList_SizeChanged;
             scrollArrows.Content = scoreList;
 
@@ -68,7 +74,7 @@ namespace ArcheryManager.Pages
 
         private void OpenSettingPage(object obj)
         {
-            var page = new SettingTargetPage() { BindingContext = Setting };
+            var page = new SettingTargetPage() { BindingContext = CountSetting };
             App.NavigationPage.PushAsync(page);
         }
 

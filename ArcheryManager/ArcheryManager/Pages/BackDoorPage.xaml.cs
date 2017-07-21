@@ -1,7 +1,9 @@
-﻿using ArcheryManager.Interfaces;
+﻿using ArcheryManager.Factories;
+using ArcheryManager.Interfaces;
 using ArcheryManager.Settings;
-using ArcheryManager.Utils;
+using ArcheryManager.Settings.ArrowSettings;
 using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,6 +12,8 @@ namespace ArcheryManager.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BackDoorPage : ContentPage
     {
+        private static readonly IGeneralCounterSetting GeneralCounterSetting = DependencyService.Get<IGeneralCounterSetting>();
+
         public BackDoorPage()
         {
             InitializeComponent();
@@ -22,39 +26,60 @@ namespace ArcheryManager.Pages
 
         private async void Target_Click(object sender, EventArgs e)
         {
-            IArrowSetting setting;
-            if (sender == EnglishTargetButton)
+            try
             {
-                setting = EnglishArrowSetting.Instance;
-            }
-            else if (sender == fieldTargetButton)
-            {
-                setting = FieldArrowSetting.Instance;
-            }
-            else if (sender == indoorCompoundTargetButton)
-            {
-                setting = IndoorCompoundArrowSetting.Instance;
-            }
-            else // indoorRecurveTargetButton
-            {
-                setting = IndoorRecurveArrowSetting.Instance;
-            }
+                IArrowSetting setting;
+                if (sender == EnglishTargetButton)
+                {
+                    setting = EnglishArrowSetting.Instance;
+                }
+                else if (sender == fieldTargetButton)
+                {
+                    setting = FieldArrowSetting.Instance;
+                }
+                else if (sender == indoorCompoundTargetButton)
+                {
+                    setting = IndoorCompoundArrowSetting.Instance;
+                }
+                else // indoorRecurveTargetButton
+                {
+                    setting = IndoorRecurveArrowSetting.Instance;
+                }
 
-            var countSetting = new CountSetting();
-            TargetPage target = new TargetPage(setting, countSetting);
-            await App.NavigationPage.PushAsync(target);
+                var countSetting = new CountSetting() { WantTarget = true };
+
+                UpdateGeneralCounterSetting(setting, countSetting);
+                await OpenNewCounterView();
+            }
+            catch (Exception ee)
+            {
+                throw;
+            }
+        }
+
+        private async Task OpenNewCounterView()
+        {
+            var page = CounterPageFactory.Create(GeneralCounterSetting);
+            await App.NavigationPage.PushAsync(page);
+        }
+
+        private static void UpdateGeneralCounterSetting(IArrowSetting setting, CountSetting countSetting)
+        {
+            GeneralCounterSetting.CountSetting = countSetting;
+            GeneralCounterSetting.ArrowSetting = setting;
         }
 
         private async void ButtonCounter_Clicked(object sender, EventArgs e)
         {
-            var countSetting = new CountSetting();
+            var countSetting = new CountSetting() { WantTarget = false };
             var arrowSetting = EnglishArrowSetting.Instance;
-            await App.NavigationPage.PushAsync(new CounterButtonPage(arrowSetting, countSetting));
+            UpdateGeneralCounterSetting(arrowSetting, countSetting);
+            await OpenNewCounterView();
         }
 
         private async void CounterSelector_Clicked(object sender, EventArgs e)
         {
-            await App.NavigationPage.PushAsync(new CounterSelectorPage());
+            await App.NavigationPage.PushAsync(new CounterSelectorPage(GeneralCounterSetting));
         }
     }
 }

@@ -29,14 +29,14 @@
                          HorizontalOptions="Center"
                          VerticalOptions="End">
             <Label Text="{resources:Translate HaveFixNumber}" />
-            <Switch IsToggled="{Binding CountSetting.HaveMaxArrowsCount}"
+            <Switch IsToggled="{Binding HaveMaxArrowsCount}"
                                 HorizontalOptions="End"
                          AutomationId="maxArrowsSwitch" />
         </StackLayout>
         <Entry Keyboard="Numeric"
                    Grid.Column="2"
-                   IsVisible="{Binding CountSetting.HaveMaxArrowsCount}"
-                   Text="{Binding CountSetting.ArrowsCount}"
+                   IsVisible="{Binding HaveMaxArrowsCount}"
+                   Text="{Binding ArrowsCount}"
                    Unfocused="ArrowCount_Unfocused"
                    VerticalOptions="Center"
                    HorizontalTextAlignment="Center"

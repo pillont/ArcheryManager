@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ArcheryManager.Settings
+namespace ArcheryManager.Settings.ArrowSettings
 {
     public static class CommonConstant
     {

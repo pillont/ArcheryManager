@@ -1,6 +1,5 @@
 ﻿using ArcheryManager.CustomControls;
 using ArcheryManager.Helpers;
-using ArcheryManager.Settings;
 using ArcheryManager.Utils;
 using System.Linq;
 using System.Collections.ObjectModel;
@@ -8,6 +7,7 @@ using System.Collections.Specialized;
 using Xamarin.Forms;
 using System.Collections.Generic;
 using ArcheryManager.Resources;
+using ArcheryManager.Settings.ArrowSettings;
 
 namespace ArcheryManager.Interactions.Behaviors
 {

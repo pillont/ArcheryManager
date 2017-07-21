@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ArcheryManager.Utils
+namespace ArcheryManager.Helpers
 {
     public class StatisticHelper
     {

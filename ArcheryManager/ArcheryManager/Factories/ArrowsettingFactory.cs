@@ -1,8 +1,6 @@
-﻿using System;
-using ArcheryManager.CustomControls;
-using ArcheryManager.Interfaces;
+﻿using ArcheryManager.Interfaces;
 using static ArcheryManager.CustomControls.TargetImage;
-using ArcheryManager.Settings;
+using ArcheryManager.Settings.ArrowSettings;
 
 namespace ArcheryManager.Factories
 {

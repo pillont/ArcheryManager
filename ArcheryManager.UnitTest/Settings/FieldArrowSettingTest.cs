@@ -1,5 +1,5 @@
 ﻿using ArcheryManager.Interfaces;
-using ArcheryManager.Settings;
+using ArcheryManager.Settings.ArrowSettings;
 using NUnit.Framework;
 using System;
 using Xamarin.Forms;

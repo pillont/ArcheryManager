@@ -1,8 +1,8 @@
 ﻿using ArcheryManager.CustomControls;
 using ArcheryManager.Helpers;
-using ArcheryManager.Utils;
 using Xamarin.Forms;
 using System.Linq;
+using ArcheryManager.Settings;
 
 namespace ArcheryManager.Interactions.Behaviors
 {
@@ -21,18 +21,18 @@ namespace ArcheryManager.Interactions.Behaviors
         /// <summary>
         /// score counter where add new arrows
         /// </summary>
-        private ScoreCounter counter;
+        private readonly ScoreCounter Counter;
 
-        private readonly TargetSetting setting;
+        private readonly CountSetting CountSetting;
 
         /// <summary>
         /// behavior to add interaction of pan on movable target
         /// </summary>
         /// <param name="counter">score counter where add new arrows</param>
-        public MovableTargetBehavior(ScoreCounter counter, TargetSetting setting)
+        public MovableTargetBehavior(IGeneralCounterSetting generalCounterSetting)
         {
-            this.setting = setting;
-            this.counter = counter;
+            this.CountSetting = generalCounterSetting.CountSetting;
+            this.Counter = generalCounterSetting.ScoreCounter;
         }
 
         protected override void OnAttachedTo(Target bindable)
@@ -76,9 +76,9 @@ namespace ArcheryManager.Interactions.Behaviors
             var position = new Point(associatedObject.ArrowSetter.TranslationX,
                                         associatedObject.ArrowSetter.TranslationY);
 
-            var numberInFlight = counter.CurrentArrows.Count;
+            var numberInFlight = Counter.CurrentArrows.Count;
             var arrow = associatedObject.Factory.Create(position, numberInFlight, associatedObject.TargetSize);
-            counter.AddArrow(arrow);
+            Counter.AddArrow(arrow);
 
             associatedObject.TargetGrid.TranslationX = 0;
             associatedObject.TargetGrid.TranslationY = 0;
@@ -110,8 +110,8 @@ namespace ArcheryManager.Interactions.Behaviors
         {
             CleanTranslation();
 
-            bool canShootNewArrow = (!setting.CountSetting.HaveMaxArrowsCount)
-                                    || counter.CurrentArrows.Count < setting.CountSetting.ArrowsCount;
+            bool canShootNewArrow = (!CountSetting.HaveMaxArrowsCount)
+                                    || Counter.CurrentArrows.Count < CountSetting.ArrowsCount;
             if (canShootNewArrow)
             {
                 StartInteraction();
