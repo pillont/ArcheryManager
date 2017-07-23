@@ -6,38 +6,40 @@ using Xamarin.Forms.Xaml;
 using ArcheryManager.CustomControls;
 using ArcheryManager.Resources;
 using ArcheryManager.Settings;
+using ArcheryManager.Interactions.Behaviors;
 
 namespace ArcheryManager.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TargetPage : ContentPage
     {
-        private readonly IGeneralCounterSetting GeneralCounterSetting;
+        private readonly GeneralCounterSetting GeneralCounterSetting;
 
         private CountSetting CountSetting => GeneralCounterSetting.CountSetting;
-        private ScoreCounter Counter => GeneralCounterSetting.ScoreCounter;
+        private ScoreCounter Counter { get; set; }
 
         private readonly ScreenRotationWatcher RotationWatcher;
         private readonly Target customTarget;
 
-        public TargetPage(IGeneralCounterSetting generalCounterSetting)
+        public TargetPage(GeneralCounterSetting generalCounterSetting)
         {
             InitializeComponent();
 
             GeneralCounterSetting = generalCounterSetting;
-            GeneralCounterSetting.ScoreCounter
-                                    = new ScoreCounter(GeneralCounterSetting.CountSetting,
-                                                        generalCounterSetting.ArrowSetting,
-                                                        ToolbarItems);
+            GeneralCounterSetting.ScoreResult = new ScoreResult();
+            Counter = new ScoreCounter(GeneralCounterSetting);
 
             #region view setup
 
+            var behavior = new CounterToolbarItemsBehavior(generalCounterSetting, Counter);
+            this.Behaviors.Add(behavior);
+
             RotationWatcher = new ScreenRotationWatcher(SetupGridForVerticalDevice, SetupGridForHorizontalDevice);
-            SetupToolbarItems();
+            SetupToolbarItems(behavior);
 
             #endregion view setup
 
-            customTarget = TargetFactory.Create(generalCounterSetting);
+            customTarget = TargetFactory.Create(generalCounterSetting, Counter);
             targetGrid.Children.Add(customTarget);
 
             #region ScoreList
@@ -55,10 +57,10 @@ namespace ArcheryManager.Pages
             #endregion total score
         }
 
-        private void SetupToolbarItems()
+        private void SetupToolbarItems(CounterToolbarItemsBehavior behavior)
         {
             ToolbarItems.Clear();
-            Counter.AddDefaultToolbarItems();
+            behavior.AddDefaultToolbarItems();
             AddTargetToolbarItems();
         }
 

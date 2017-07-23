@@ -34,15 +34,15 @@ namespace ArcheryManager.UnitTest.Factories
             list = new List<ToolbarItem>();
 
             var countSetting = new CountSetting();
-            var ScoreCounter = new ScoreCounter(countSetting, arrowSetting, toolbarItems);
 
             generalCounterSetting = new GeneralCounterSetting()
             {
                 CountSetting = countSetting,
                 ArrowSetting = arrowSetting,
-                ScoreCounter = ScoreCounter
-            }
-            ;
+            };
+
+            var ScoreCounter = new ScoreCounter(generalCounterSetting);
+
             target = new Mock<Target>(new[] { generalCounterSetting });
             scorelist = ScoreListFactory.Create(target.Object, generalCounterSetting, list);
             a1 = new Arrow(1, 0);

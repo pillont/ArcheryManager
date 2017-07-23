@@ -88,7 +88,7 @@ namespace ArcheryManager.CustomControls
         /// </summary>
         public Grid TargetGrid { get; private set; }
 
-        public Target(IGeneralCounterSetting generalCounterSetting)
+        public Target(GeneralCounterSetting generalCounterSetting)
         {
             /*
              * target layout

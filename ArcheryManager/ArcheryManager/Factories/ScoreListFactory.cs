@@ -18,11 +18,10 @@ namespace ArcheryManager.Factories
         /// </summary>
         public static ArrowUniformGrid Create(IGeneralCounterSetting generalCounterSetting, IList<ToolbarItem> toolbarItems)
         {
-            var counter = generalCounterSetting.ScoreCounter;
             var arrowSetting = generalCounterSetting.ArrowSetting;
 
             var scoreList = new ArrowUniformGrid { AutomationId = "scoreList", CountByRow = 6, ArrowSetting = arrowSetting };
-            scoreList.Items = counter.CurrentArrows;
+            scoreList.Items = generalCounterSetting.ScoreResult.CurrentArrows;
 
             var selectBehavior = new SelectableArrowInListBehavior(toolbarItems);
             scoreList.Behaviors.Add(selectBehavior);

@@ -19,12 +19,12 @@ namespace ArcheryManager.CustomControls
 
         public AverageCanvas(IGeneralCounterSetting generalCounterSetting)
         {
-            Counter = generalCounterSetting.ScoreCounter;
+            Counter = new ScoreCounter(generalCounterSetting);
             var countSetting = generalCounterSetting.CountSetting;
             BindingContext = countSetting;
 
             countSetting.PropertyChanged += Setting_PropertyChanged;
-            Counter.AllArrows.CollectionChanged += AllArrows_CollectionChanged;
+            Counter.Result.AllArrows.CollectionChanged += AllArrows_CollectionChanged;
         }
 
         /// <summary>

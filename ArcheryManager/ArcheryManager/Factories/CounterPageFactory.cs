@@ -6,7 +6,7 @@ namespace ArcheryManager.Factories
 {
     public class CounterPageFactory
     {
-        public static Page Create(IGeneralCounterSetting GeneralCounterSetting)
+        public static Page Create(GeneralCounterSetting GeneralCounterSetting)
         {
             bool wantTarget = GeneralCounterSetting.CountSetting.WantTarget;
 
