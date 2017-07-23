@@ -1,7 +1,4 @@
-﻿using ArcheryManager.Helpers;
-using ArcheryManager.Settings;
-using System;
-using System.Linq;
+﻿using ArcheryManager.Settings;
 using Xamarin.Forms;
 using XFShapeView;
 
@@ -12,73 +9,19 @@ namespace ArcheryManager.CustomControls
     /// </summary>
     public class AverageCanvas : ContentView
     {
-        private const int MinArrowForAverage = 2;
-        private Point averageCenter;
-
-        public readonly ScoreCounter Counter;
-
         public AverageCanvas(IGeneralCounterSetting generalCounterSetting)
         {
-            Counter = new ScoreCounter(generalCounterSetting);
             var countSetting = generalCounterSetting.CountSetting;
             BindingContext = countSetting;
-
-            countSetting.PropertyChanged += Setting_PropertyChanged;
-            Counter.Result.AllArrows.CollectionChanged += AllArrows_CollectionChanged;
         }
 
-        /// <summary>
-        /// update average during AllArrowShowed changing
-        /// </summary>
-        private void Setting_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        public void ShowAverageVisual(Point averageCenter, double standartDeviationX, double standartDeviationY)
         {
-            try
-            {
-                if (e.PropertyName == nameof(CountSetting.ShowAllArrows))
-                {
-                    if (Counter.ArrowsShowed.Count > MinArrowForAverage)
-                    {
-                        UpdateAverage();
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var grid = CreateAverageVisual(averageCenter, standartDeviationX, standartDeviationY);
+            Content = grid;
         }
 
-        /// <summary>
-        /// update average when AllArrow of the counter changing
-        /// </summary>
-        private void AllArrows_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if (Counter.ArrowsShowed.Count < MinArrowForAverage)
-            {
-                Content = null;
-            }
-            else
-            {
-                UpdateAverage();
-            }
-        }
-
-        #region average update
-
-        private void UpdateAverage()// TODO make behavior
-        {
-            UpdateAverageCenter();
-            UpdateAverageForm();
-        }
-
-        private void UpdateAverageForm()
-        {
-            double standartDeviationX = StatisticHelper.CalculateStdDev(Counter.ArrowsShowed.Select(a => a.TranslationX));
-            double standartDeviationY = StatisticHelper.CalculateStdDev(Counter.ArrowsShowed.Select(a => a.TranslationY));
-            Content = CreateAverageVisual(standartDeviationX, standartDeviationY);
-        }
-
-        private View CreateAverageVisual(double standartDeviationX, double standartDeviationY)
+        private static Grid CreateAverageVisual(Point averageCenter, double standartDeviationX, double standartDeviationY)
         {
             var center = new ShapeView()
             {
@@ -116,22 +59,12 @@ namespace ArcheryManager.CustomControls
             };
             grid.Children.Add(big);
             grid.Children.Add(center);
-
             return grid;
         }
 
-        private void UpdateAverageCenter()
+        public void RemoveAverage()
         {
-            if (Counter.ArrowsShowed.Count == 0)
-            {
-                throw new InvalidOperationException();
-            }
-
-            double averageX = Counter.ArrowsShowed.Average(a => a.TranslationX);
-            double averageY = Counter.ArrowsShowed.Average(a => a.TranslationY);
-            averageCenter = new Point(averageX, averageY);
+            Content = null;
         }
-
-        #endregion average update
     }
 }

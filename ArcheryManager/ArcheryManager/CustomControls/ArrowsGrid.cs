@@ -54,10 +54,6 @@ namespace ArcheryManager.CustomControls
             }
         }
 
-        public ArrowsGrid()
-        {
-        }
-
         protected override View CreateItemContainer(Arrow arrow)
         {
             var ctn = new ShapeView

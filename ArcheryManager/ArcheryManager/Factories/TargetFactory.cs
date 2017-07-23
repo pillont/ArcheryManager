@@ -22,6 +22,9 @@ namespace ArcheryManager.Factories
 
             var customTarget = new Target(generalCounterSetting) { MinimumHeightRequest = 1200, MinimumWidthRequest = 1200 };
 
+            var averageBehavior = new AverageCounterBehavior(counter, countSetting);
+            customTarget.AverageCanvas.Behaviors.Add(averageBehavior);
+
             customTarget.ArrowGrid.Items = result.CurrentArrows;
             customTarget.PreviousArrowGrid.Items = result.PreviousArrows;
 
