@@ -1,10 +1,16 @@
 ﻿using System.Collections.Generic;
 using Xamarin.Forms;
 
-namespace ArcheryManager.UnitTest.Mockables
+namespace ArcheryManager.Pages
 {
-    public class PageWithOverridableToolBar : Page
+    public abstract class ContentPageWithOverridableToolBar : ContentPage
     {
-        public new virtual IList<ToolbarItem> ToolbarItems { get; set; }
+        public new virtual IList<ToolbarItem> ToolbarItems
+        {
+            get
+            {
+                return base.ToolbarItems;
+            }
+        }
     }
 }

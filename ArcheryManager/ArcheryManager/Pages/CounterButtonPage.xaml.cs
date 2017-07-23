@@ -7,7 +7,7 @@ using ArcheryManager.Resources;
 namespace ArcheryManager.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CounterButtonPage : ContentPage
+    public partial class CounterButtonPage : ContentPageWithOverridableToolBar
     {
         private readonly ScoreCounter Counter;
         private readonly CountSetting CountSetting;

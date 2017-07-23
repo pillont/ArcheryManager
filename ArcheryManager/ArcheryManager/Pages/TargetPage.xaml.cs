@@ -11,7 +11,7 @@ using ArcheryManager.Interactions.Behaviors;
 namespace ArcheryManager.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TargetPage : ContentPage
+    public partial class TargetPage : ContentPageWithOverridableToolBar
     {
         private readonly GeneralCounterSetting GeneralCounterSetting;
 
