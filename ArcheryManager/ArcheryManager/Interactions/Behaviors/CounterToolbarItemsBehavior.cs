@@ -1,6 +1,6 @@
-﻿using ArcheryManager.Resources;
+﻿using ArcheryManager.Pages;
+using ArcheryManager.Resources;
 using ArcheryManager.Settings;
-using ArcheryManager.UnitTest.Mockables;
 using System;
 using System.Collections.Specialized;
 using System.Linq;
@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace ArcheryManager.Interactions.Behaviors
 {
-    public class CounterToolbarItemsBehavior : CustomBehavior<PageWithOverridableToolBar>
+    public class CounterToolbarItemsBehavior : CustomBehavior<ContentPageWithOverridableToolBar>
     {
         #region toolbar item
 

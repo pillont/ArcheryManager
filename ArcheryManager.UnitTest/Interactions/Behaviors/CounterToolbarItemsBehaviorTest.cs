@@ -1,7 +1,7 @@
 ﻿using ArcheryManager.Interactions.Behaviors;
+using ArcheryManager.Pages;
 using ArcheryManager.Settings;
 using ArcheryManager.Settings.ArrowSettings;
-using ArcheryManager.UnitTest.Mockables;
 using ArcheryManager.Utils;
 using Moq;
 using NUnit.Framework;
@@ -13,7 +13,7 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
     [TestFixture]
     public class CounterToolbarItemsBehaviorTest
     {
-        private Mock<PageWithOverridableToolBar> _page;
+        private Mock<ContentPageWithOverridableToolBar> _page;
         private CounterToolbarItemsBehavior behavior;
         private List<ToolbarItem> toolBarList;
         private CountSetting countSetting;
@@ -30,7 +30,7 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
             var scoreResult = new ScoreResult();
             var generalCounterSetting = new GeneralCounterSetting() { CountSetting = countSetting, ArrowSetting = arrowSetting, ScoreResult = scoreResult };
             counter = new ScoreCounter(generalCounterSetting);
-            _page = new Mock<PageWithOverridableToolBar>();
+            _page = new Mock<ContentPageWithOverridableToolBar>();
             _page.CallBase = true;
             _page.SetupGet(e => e.ToolbarItems).Returns(toolBarList);
             behavior = new CounterToolbarItemsBehavior(generalCounterSetting, counter);
