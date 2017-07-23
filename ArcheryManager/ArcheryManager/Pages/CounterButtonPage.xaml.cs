@@ -30,7 +30,7 @@ namespace ArcheryManager.Pages
             scoreList.SizeChanged += ScoreList_SizeChanged;
             scoreList.Items = Counter.Result.CurrentArrows;
 
-            counterButtons.GeneralCounterSetting = generalCounterSetting;
+            counterButtons.GeneralCounterSetting = generalCounterSetting; // TODO check how pass argument to ctor in xaml
 
             var selectBehavior = new SelectableArrowInListBehavior(this.ToolbarItems);
             scoreList.Behaviors.Add(selectBehavior);
