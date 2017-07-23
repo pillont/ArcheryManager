@@ -1,4 +1,4 @@
-﻿using ArcheryManager.Utils;
+﻿using ArcheryManager.Helpers;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
 
-namespace ArcheryManager.Settings
+namespace ArcheryManager.Settings.ArrowSettings
 {
-    public class IndoorCompoundArrowSetting : IArrowSetting
+    public class IndoorRecurveArrowSetting : IArrowSetting
     {
         public const string MissScore = "M";
         public const string SixScore = "6";
@@ -14,8 +14,8 @@ namespace ArcheryManager.Settings
         public const string HeightScore = "8";
         public const string NineScore = "9";
         public const string TenScore = "10";
-        private const int IndoorRecurveZoneCount = 7;
-        private const int IndoorCounpoundMaxValue = 10;
+        private const int IndoorRecurveZoneCount = 6;
+        private const int IndoorRecurveMaxValue = 10;
 
         private static Dictionary<string, Color> IndoorRecurveColorOf = new Dictionary<string, Color>()
         {
@@ -27,30 +27,29 @@ namespace ArcheryManager.Settings
             { TenScore, Color.Yellow},
         };
 
-        private static readonly Dictionary<int, string> IndoorCompoundScoreByIndex = new Dictionary<int, string>()
+        private static readonly Dictionary<int, string> IndoorRecurveScoreByIndex = new Dictionary<int, string>()
         {
             { 0, MissScore },
             { 1 , SixScore },
             { 2 , SevenScore },
             { 3 , HeightScore },
             { 4 , NineScore },
-            { 5 , NineScore },
-            { 6 , TenScore },
+            { 5 , TenScore },
         };
+
+        public int MaxScore
+        {
+            get
+            {
+                return IndoorRecurveMaxValue;
+            }
+        }
 
         public int ZoneCount
         {
             get
             {
                 return IndoorRecurveZoneCount;
-            }
-        }
-
-        public int MaxScore
-        {
-            get
-            {
-                return IndoorCounpoundMaxValue;
             }
         }
 
@@ -62,21 +61,21 @@ namespace ArcheryManager.Settings
             {
                 if (instance == null)
                 {
-                    instance = new IndoorCompoundArrowSetting();
+                    instance = new IndoorRecurveArrowSetting();
                 }
                 return instance;
             }
         }
 
-        private IndoorCompoundArrowSetting()
+        private IndoorRecurveArrowSetting()
         {
         }
 
         public string ScoreByIndex(int i)
         {
-            if (IndoorCompoundScoreByIndex.ContainsKey(i))
+            if (IndoorRecurveScoreByIndex.ContainsKey(i))
             {
-                return IndoorCompoundScoreByIndex[i];
+                return IndoorRecurveScoreByIndex[i];
             }
             else
             {
@@ -98,16 +97,14 @@ namespace ArcheryManager.Settings
 
         public int ValueByScore(string score)
         {
-            var index = IndoorCompoundScoreByIndex.Where(val => val.Value == score).FirstOrDefault().Key;
-            if (index == 0) // miss
+            var index = IndoorRecurveScoreByIndex.Where(val => val.Value == score).FirstOrDefault().Key;
+            if (index == 0)
                 return index;
             else
             {
                 index += 5;
-                if (index < 10) // 6 to 9
+                if (index < 11)
                     return index;
-                else if (index == 10 || index == 11) // second nine and ten
-                    return index - 1;
                 else
                     throw new IndexOutOfRangeException();
             }
@@ -146,10 +143,6 @@ namespace ArcheryManager.Settings
         /// <param name="i">score zone</param>
         public Color BorderColorZone(int i)
         {
-            if (i == 5)
-            {
-                return Color.Yellow; // border to not see defferent between first and second nine
-            }
             return Color.Black;
         }
     }

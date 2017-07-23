@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
 
-namespace ArcheryManager.Settings
+namespace ArcheryManager.Settings.ArrowSettings
 {
     public class EnglishArrowSetting : IArrowSetting
     {

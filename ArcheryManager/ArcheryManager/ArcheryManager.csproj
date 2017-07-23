@@ -106,22 +106,24 @@
     </Compile>
     <Compile Include="Resources\TranslateExtension.cs" />
     <Compile Include="Services\IAudioPlayer.cs" />
-    <Compile Include="Settings\CommonConstant.cs" />
-    <Compile Include="Settings\IndoorCompoundArrowSetting.cs" />
-    <Compile Include="Settings\IndoorRecurveArrowSetting.cs" />
-    <Compile Include="Settings\EnglishArrowSetting.cs" />
+    <Compile Include="Settings\ArrowSettings\CommonConstant.cs" />
+    <Compile Include="Settings\ArrowSettings\IndoorCompoundArrowSetting.cs" />
+    <Compile Include="Settings\ArrowSettings\IndoorRecurveArrowSetting.cs" />
+    <Compile Include="Settings\ArrowSettings\EnglishArrowSetting.cs" />
     <Compile Include="Interfaces\IArrowSetting.cs" />
     <Compile Include="Interfaces\IMovableTarget.cs" />
     <Compile Include="Interfaces\ITargetWithInteraction.cs" />
     <Compile Include="Pages\CounterButtonPage.xaml.cs">
       <DependentUpon>CounterButtonPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Settings\FieldArrowSetting.cs" />
+    <Compile Include="Settings\ArrowSettings\FieldArrowSetting.cs" />
+    <Compile Include="Settings\GeneralCounterSetting.cs" />
+    <Compile Include="Services\IGeneralCounterSetting.cs" />
     <Compile Include="Utils\Arrow.cs" />
-    <Compile Include="Utils\CountSetting.cs" />
+    <Compile Include="Settings\CountSetting.cs" />
     <Compile Include="Utils\Flight.cs" />
     <Compile Include="Utils\ScreenRotationWatcher.cs" />
-    <Compile Include="Utils\ScoreCounter.cs" />
+    <Compile Include="Settings\ScoreCounter.cs" />
     <Compile Include="Interactions\Behaviors\TimerBehavior.cs" />
     <Compile Include="CustomControls\Target.cs" />
     <Compile Include="CustomControls\CustomTimer.cs" />
@@ -135,8 +137,7 @@
       <DependentUpon>TimerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\StatisticHelper.cs" />
-    <Compile Include="Utils\TargetSetting.cs" />
+    <Compile Include="Helpers\StatisticHelper.cs" />
     <Compile Include="Utils\TimerPageSetting.cs" />
   </ItemGroup>
   <ItemGroup>

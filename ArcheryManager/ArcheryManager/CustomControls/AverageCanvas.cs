@@ -1,4 +1,5 @@
-﻿using ArcheryManager.Utils;
+﻿using ArcheryManager.Helpers;
+using ArcheryManager.Settings;
 using System;
 using System.Linq;
 using Xamarin.Forms;
@@ -12,65 +13,18 @@ namespace ArcheryManager.CustomControls
     public class AverageCanvas : ContentView
     {
         private const int MinArrowForAverage = 2;
-        private ScoreCounter counter;
         private Point averageCenter;
-        private TargetSetting Setting;
 
-        public new TargetSetting BindingContext
+        public readonly ScoreCounter Counter;
+
+        public AverageCanvas(IGeneralCounterSetting generalCounterSetting)
         {
-            get
-            {
-                if (base.BindingContext is TargetSetting)
-                {
-                    return base.BindingContext as TargetSetting;
-                }
-                else
-                {
-                    throw new InvalidCastException("binding target of average canvas must be Target setting");
-                }
-            }
-            set
-            {
-                base.BindingContext = value;
-            }
-        }
+            Counter = generalCounterSetting.ScoreCounter;
+            var countSetting = generalCounterSetting.CountSetting;
+            BindingContext = countSetting;
 
-        public ScoreCounter Counter
-        {
-            get
-            {
-                return counter;
-            }
-            set
-            {
-                if (counter != null)
-                {
-                    counter.AllArrows.CollectionChanged -= AllArrows_CollectionChanged;
-                }
-                counter = value;
-                if (value != null)
-                {
-                    counter.AllArrows.CollectionChanged += AllArrows_CollectionChanged;
-                }
-            }
-        }
-
-        #region target setting
-
-        /// <summary>
-        /// get target setting by bindingcontext
-        /// </summary>
-        protected override void OnBindingContextChanged()
-        {
-            base.OnBindingContextChanged();
-
-            if (Setting != null)
-            {
-                Setting.PropertyChanged -= Setting_PropertyChanged;
-            }
-
-            Setting = BindingContext;
-            Setting.PropertyChanged += Setting_PropertyChanged;
+            countSetting.PropertyChanged += Setting_PropertyChanged;
+            Counter.AllArrows.CollectionChanged += AllArrows_CollectionChanged;
         }
 
         /// <summary>
@@ -80,7 +34,7 @@ namespace ArcheryManager.CustomControls
         {
             try
             {
-                if (e.PropertyName == nameof(TargetSetting.ShowAllArrows))
+                if (e.PropertyName == nameof(CountSetting.ShowAllArrows))
                 {
                     if (Counter.ArrowsShowed.Count > MinArrowForAverage)
                     {
@@ -93,8 +47,6 @@ namespace ArcheryManager.CustomControls
                 throw;
             }
         }
-
-        #endregion target setting
 
         /// <summary>
         /// update average when AllArrow of the counter changing

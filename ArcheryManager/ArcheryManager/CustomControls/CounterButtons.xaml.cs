@@ -1,21 +1,38 @@
 ﻿using ArcheryManager.Utils;
 using System;
 using System.Collections.ObjectModel;
-
 using Xamarin.Forms;
 using System.Runtime.CompilerServices;
+using ArcheryManager.Settings;
+using ArcheryManager.Interfaces;
 
 namespace ArcheryManager.CustomControls
 {
     public partial class CounterButtons : ContentView
     {
-        public static readonly BindableProperty CounterProperty =
-                      BindableProperty.Create(nameof(Counter), typeof(ScoreCounter), typeof(CounterButtons), null);
+        public static readonly BindableProperty GeneralCounterSettingProperty =
+                              BindableProperty.Create(nameof(GeneralCounterSetting), typeof(IGeneralCounterSetting), typeof(CounterButtons), null);
 
-        public ScoreCounter Counter
+        public IGeneralCounterSetting GeneralCounterSetting
         {
-            get { return (ScoreCounter)GetValue(CounterProperty); }
-            set { SetValue(CounterProperty, value); }
+            get { return (IGeneralCounterSetting)GetValue(GeneralCounterSettingProperty); }
+            set { SetValue(GeneralCounterSettingProperty, value); }
+        }
+
+        private ScoreCounter Counter
+        {
+            get
+            {
+                return GeneralCounterSetting.ScoreCounter;
+            }
+        }
+
+        private IArrowSetting ArrowSetting
+        {
+            get
+            {
+                return GeneralCounterSetting.ArrowSetting;
+            }
         }
 
         public CounterButtons()
@@ -28,11 +45,17 @@ namespace ArcheryManager.CustomControls
         {
             base.OnPropertyChanged(propertyName);
 
-            if (propertyName == nameof(Counter))
+            if (propertyName == nameof(GeneralCounterSetting) && GeneralCounterSetting != null)
             {
-                buttonGrid.Setting = Counter.ArrowSetting;
-
-                DrawButtons();
+                try
+                {
+                    buttonGrid.ArrowSetting = ArrowSetting;
+                    DrawButtons();
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
             }
         }
 
@@ -63,7 +86,7 @@ namespace ArcheryManager.CustomControls
         {
             var buttonsData = new ObservableCollection<Arrow>();
 
-            for (int i = 1; i < Counter.ArrowSetting.ZoneCount; i++)
+            for (int i = 1; i < ArrowSetting.ZoneCount; i++)
             {
                 Arrow arrow = GetArrow(i);
                 buttonsData.Add(arrow);

@@ -1,9 +1,8 @@
 ﻿using ArcheryManager.CustomControls;
 using ArcheryManager.Factories;
 using ArcheryManager.Interactions.Behaviors;
-using ArcheryManager.Interfaces;
-using ArcheryManager.Pages;
 using ArcheryManager.Settings;
+using ArcheryManager.Settings.ArrowSettings;
 using ArcheryManager.Utils;
 using Moq;
 using NUnit.Framework;
@@ -16,8 +15,7 @@ namespace ArcheryManager.UnitTest.Factories
     [TestFixture]
     public class ScoreListFactoryTest
     {
-        private IArrowSetting setting;
-        private ScoreCounter counter;
+        private GeneralCounterSetting generalCounterSetting;
         private List<ToolbarItem> list;
         private Mock<Target> target;
         private ArrowUniformGrid scorelist;
@@ -26,21 +24,27 @@ namespace ArcheryManager.UnitTest.Factories
         private Arrow a2;
         private Arrow a1;
         private IList<ToolbarItem> toolbarItems;
-        private CountSetting countSetting;
 
         [SetUp]
         public void Init()
         {
             Xamarin.Forms.Mocks.MockForms.Init();
             toolbarItems = new List<ToolbarItem>();
-            setting = EnglishArrowSetting.Instance;
+            var arrowSetting = EnglishArrowSetting.Instance;
             list = new List<ToolbarItem>();
 
-            countSetting = new CountSetting();
-            counter = new ScoreCounter(new TargetSetting(countSetting), toolbarItems, setting);
+            var countSetting = new CountSetting();
+            var ScoreCounter = new ScoreCounter(countSetting, arrowSetting, toolbarItems);
 
-            target = new Mock<Target>();
-            scorelist = ScoreListFactory.Create(target.Object, counter, list, setting);
+            generalCounterSetting = new GeneralCounterSetting()
+            {
+                CountSetting = countSetting,
+                ArrowSetting = arrowSetting,
+                ScoreCounter = ScoreCounter
+            }
+            ;
+            target = new Mock<Target>(new[] { generalCounterSetting });
+            scorelist = ScoreListFactory.Create(target.Object, generalCounterSetting, list);
             a1 = new Arrow(1, 0);
             a2 = new Arrow(2, 0);
             a3 = new Arrow(3, 0);

@@ -1,7 +1,7 @@
 ﻿using ArcheryManager.CustomControls;
 using ArcheryManager.Factories;
 using ArcheryManager.Resources;
-using ArcheryManager.Utils;
+using ArcheryManager.Settings;
 using System;
 using System.Linq;
 using Xamarin.Forms;
@@ -12,13 +12,17 @@ namespace ArcheryManager.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CounterSelectorPage : ContentPage
     {
-        private CountSetting _setting;
+        private CountSetting CountSetting => GeneralCounterSetting.CountSetting;
 
-        public CounterSelectorPage()
+        private readonly IGeneralCounterSetting GeneralCounterSetting;
+
+        public CounterSelectorPage(IGeneralCounterSetting generalCounterSetting)
         {
             InitializeComponent();
-            _setting = new CountSetting();
-            this.BindingContext = _setting;
+            GeneralCounterSetting = generalCounterSetting;
+            GeneralCounterSetting.CountSetting = new CountSetting();
+
+            this.BindingContext = CountSetting;
 
             foreach (var image in imageGrid.Children)
             {
@@ -50,7 +54,8 @@ namespace ArcheryManager.Pages
                 i.IsSelected = false;
             }
 
-            _setting.TargetStyle = image.StyleTarget;
+            CountSetting.TargetStyle = image.StyleTarget;
+
             image.IsSelected = true;
         }
 
@@ -65,15 +70,24 @@ namespace ArcheryManager.Pages
             {
                 if (BindingContext != null)
                 {
-                    _setting.ArrowsCount = CountSetting.MinArrowCount;
+                    CountSetting.ArrowsCount = CountSetting.MinArrowCount;
                 }
             }
         }
 
         private async void Valid_Clicked()
         {
-            var page = CounterPageFactory.Create(_setting);
-            await App.NavigationPage.PushAsync(page);
+            try
+            {
+                GeneralCounterSetting.ArrowSetting = ArrowsettingFactory.Create(CountSetting.TargetStyle);
+
+                var page = CounterPageFactory.Create(GeneralCounterSetting);
+                await App.NavigationPage.PushAsync(page);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
     }
 }

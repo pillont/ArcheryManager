@@ -2,7 +2,7 @@
 using System;
 using Xamarin.Forms;
 
-namespace ArcheryManager.Settings
+namespace ArcheryManager.Settings.ArrowSettings
 {
     public class FieldArrowSetting : IArrowSetting
     {

@@ -1,5 +1,4 @@
-﻿using ArcheryManager.Settings;
-using System;
+﻿using ArcheryManager.Settings.ArrowSettings;
 using TechTalk.SpecFlow;
 
 namespace ArcheryManager.DroidTest.StepDefinition

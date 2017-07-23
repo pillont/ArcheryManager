@@ -1,6 +1,6 @@
 ﻿using ArcheryManager.Interfaces;
-using ArcheryManager.Pages;
 using ArcheryManager.Settings;
+using ArcheryManager.Settings.ArrowSettings;
 using ArcheryManager.Utils;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -14,19 +14,16 @@ namespace ArcheryManager.UnitTest.Utils
         private List<ToolbarItem> toolBarList;
 
         private ScoreCounter counter;
-        private TargetSetting targetSetting;
-
         private IArrowSetting arrowSetting;
-        private CountSetting setting;
+        private CountSetting countSetting;
 
         [SetUp]
         public void Init()
         {
-            setting = new CountSetting();
+            countSetting = new CountSetting();
             toolBarList = new List<ToolbarItem>();
-            targetSetting = new TargetSetting(setting);
             arrowSetting = EnglishArrowSetting.Instance;
-            counter = new ScoreCounter(targetSetting, toolBarList, arrowSetting);
+            counter = new ScoreCounter(countSetting, arrowSetting, toolBarList);
         }
 
         [Test]
@@ -307,14 +304,14 @@ namespace ArcheryManager.UnitTest.Utils
             counter.AddArrow(a4);
 
             Assert.AreEqual(counter.CurrentArrows, counter.ArrowsShowed);
-            targetSetting.ShowAllArrows = true;
+            countSetting.ShowAllArrows = true;
             Assert.AreEqual(counter.AllArrows, counter.ArrowsShowed);
         }
 
         [Test]
         public void UpdateOrderBeforeTest()
         {
-            targetSetting.IsDecreasingOrder = true;
+            countSetting.IsDecreasingOrder = true;
             var a1 = new Arrow(1, 0);
             var a2 = new Arrow(8, 0);
             var a3 = new Arrow(5, 0);
@@ -336,7 +333,7 @@ namespace ArcheryManager.UnitTest.Utils
             counter.AddArrow(a1);
             counter.AddArrow(a2);
             counter.AddArrow(a3);
-            targetSetting.IsDecreasingOrder = true;
+            countSetting.IsDecreasingOrder = true;
 
             Assert.AreEqual(a2, counter.CurrentArrows[0]);
             Assert.AreEqual(a3, counter.CurrentArrows[1]);
@@ -346,7 +343,7 @@ namespace ArcheryManager.UnitTest.Utils
         [Test]
         public void UpdateOrderbeforeAndAfetrTest()
         {
-            targetSetting.IsDecreasingOrder = true;
+            countSetting.IsDecreasingOrder = true;
 
             var a1 = new Arrow(1, 0);
             var a2 = new Arrow(8, 1);
@@ -354,7 +351,7 @@ namespace ArcheryManager.UnitTest.Utils
             counter.AddArrow(a1);
             counter.AddArrow(a2);
             counter.AddArrow(a3);
-            targetSetting.IsDecreasingOrder = false;
+            countSetting.IsDecreasingOrder = false;
 
             // keep the same order
             Assert.AreEqual(a1, counter.CurrentArrows[0]);
@@ -365,7 +362,7 @@ namespace ArcheryManager.UnitTest.Utils
         [Test]
         public void UpdateOrderWithSameScoreTest()
         {
-            targetSetting.IsDecreasingOrder = true;
+            countSetting.IsDecreasingOrder = true;
 
             var a1 = new Arrow(11, 0);
             var a2 = new Arrow(10, 0);
@@ -383,9 +380,9 @@ namespace ArcheryManager.UnitTest.Utils
         [Test]
         public void ToolBarItems_HaveMaxTest()
         {
-            targetSetting.CountSetting.HaveMaxArrowsCount = true;
+            countSetting.HaveMaxArrowsCount = true;
             counter.AddDefaultToolbarItems();
-            setting.ArrowsCount = 2;
+            countSetting.ArrowsCount = 2;
             Assert.AreEqual(3, toolBarList.Count);
 
             counter.AddArrow(new Arrow(0, 0));
@@ -398,11 +395,11 @@ namespace ArcheryManager.UnitTest.Utils
         [Test]
         public void ToolBarItems_AddTest()
         {
-            targetSetting.CountSetting.HaveMaxArrowsCount = false;
+            countSetting.HaveMaxArrowsCount = false;
             counter.AddDefaultToolbarItems();
             Assert.AreEqual(3, toolBarList.Count);
 
-            setting.ArrowsCount = 2;
+            countSetting.ArrowsCount = 2;
             counter.AddArrow(new Arrow(0, 0));
             Assert.AreEqual(4, toolBarList.Count);
         }
@@ -410,10 +407,10 @@ namespace ArcheryManager.UnitTest.Utils
         [Test]
         public void ToolBarItems_RemoveTest()
         {
-            targetSetting.CountSetting.HaveMaxArrowsCount = true;
+            countSetting.HaveMaxArrowsCount = true;
             counter.AddDefaultToolbarItems();
             Assert.AreEqual(3, toolBarList.Count);
-            setting.ArrowsCount = 2;
+            countSetting.ArrowsCount = 2;
 
             counter.AddArrow(new Arrow(0, 0));
             counter.AddArrow(new Arrow(0, 0));
@@ -425,10 +422,10 @@ namespace ArcheryManager.UnitTest.Utils
         [Test]
         public void ToolBarItems_RemoveWithoutMaxTest()
         {
-            targetSetting.CountSetting.HaveMaxArrowsCount = false;
+            countSetting.HaveMaxArrowsCount = false;
             counter.AddDefaultToolbarItems();
             Assert.AreEqual(3, toolBarList.Count);
-            setting.ArrowsCount = 2;
+            countSetting.ArrowsCount = 2;
 
             counter.AddArrow(new Arrow(0, 0));
             counter.AddArrow(new Arrow(0, 0));

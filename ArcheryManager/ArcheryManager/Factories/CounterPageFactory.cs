@@ -1,23 +1,23 @@
 ﻿using ArcheryManager.Pages;
-using ArcheryManager.Utils;
+using ArcheryManager.Settings;
 using Xamarin.Forms;
 
 namespace ArcheryManager.Factories
 {
-    internal class CounterPageFactory
+    public class CounterPageFactory
     {
-        public static Page Create(CountSetting setting)
+        public static Page Create(IGeneralCounterSetting GeneralCounterSetting)
         {
-            var arrowSetting = ArrowsettingFactory.Create(setting.TargetStyle);
+            bool wantTarget = GeneralCounterSetting.CountSetting.WantTarget;
 
-            if (setting.WantTarget)
+            if (wantTarget)
             {
-                var Page = new TargetPage(arrowSetting, setting);
+                var Page = new TargetPage(GeneralCounterSetting);
                 return Page;
             }
             else
             {
-                var Page = new CounterButtonPage(arrowSetting, setting);
+                var Page = new CounterButtonPage(GeneralCounterSetting);
                 return Page;
             }
         }

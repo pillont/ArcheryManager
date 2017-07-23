@@ -1,4 +1,4 @@
-﻿using ArcheryManager.Utils;
+﻿using ArcheryManager.Settings;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -8,13 +8,13 @@ namespace ArcheryManager.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingTargetPage : ContentPage
     {
-        public new TargetSetting BindingContext
+        public new CountSetting BindingContext
         {
             get
             {
-                if (base.BindingContext is TargetSetting)
+                if (base.BindingContext is CountSetting)
                 {
-                    return base.BindingContext as TargetSetting;
+                    return base.BindingContext as CountSetting;
                 }
                 else
                 {
@@ -43,7 +43,7 @@ namespace ArcheryManager.Pages
             {
                 if (BindingContext != null)
                 {
-                    BindingContext.CountSetting.ArrowsCount = CountSetting.MinArrowCount;
+                    BindingContext.ArrowsCount = CountSetting.MinArrowCount;
                 }
             }
         }
