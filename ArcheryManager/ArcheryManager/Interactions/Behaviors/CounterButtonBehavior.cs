@@ -24,21 +24,21 @@ namespace ArcheryManager.Interactions.Behaviors
         {
             GeneralCounterSetting = generalCounterSetting;
             Counter = scoreCounter;
+        }
+
+        protected override void OnAttachedTo(CounterButtons bindable)
+        {
+            base.OnAttachedTo(bindable);
 
             try
             {
+                AssociatedObject.ButtonTap += AssociatedObject_ButtonTapped;
                 AssociatedObject.GeneralCounterSetting = GeneralCounterSetting;
             }
             catch (Exception e)
             {
                 throw;
             }
-        }
-
-        protected override void OnAttachedTo(CounterButtons bindable)
-        {
-            base.OnAttachedTo(bindable);
-            AssociatedObject.ButtonTap += AssociatedObject_ButtonTapped;
         }
 
         private void AssociatedObject_ButtonTapped(object sender, EventArgs e)

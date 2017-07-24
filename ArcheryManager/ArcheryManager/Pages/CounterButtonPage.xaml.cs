@@ -29,27 +29,21 @@ namespace ArcheryManager.Pages
             scoreList.SizeChanged += ScoreList_SizeChanged;
             scoreList.Items = generalCounterSetting.ScoreResult.CurrentArrows;
 
-            counterButtons.GeneralCounterSetting = generalCounterSetting;
-
             var selectBehavior = new SelectableArrowInListBehavior(this.ToolbarItems);
             scoreList.Behaviors.Add(selectBehavior);
 
-            var behavior = new CounterToolbarItemsBehavior(generalCounterSetting, Counter);
-            this.Behaviors.Add(behavior);
+            var behavior = new CounterButtonBehavior(generalCounterSetting, Counter);
+            counterButtons.Behaviors.Add(behavior);
 
-            SetupToolbarItems(behavior);
+            var toolbarBehavior = new CounterToolbarItemsBehavior(generalCounterSetting, Counter);
+            this.Behaviors.Add(toolbarBehavior);
+            toolbarBehavior.AddDefaultToolbarItems();
+            AddCounterButtonsToolbarItems();
         }
 
         private void ScoreList_SizeChanged(object sender, System.EventArgs e)
         {
             scrollArrows.ScrollToAsync(scoreList, ScrollToPosition.End, true);
-        }
-
-        private void SetupToolbarItems(CounterToolbarItemsBehavior behavior)
-        {
-            ToolbarItems.Clear();
-            behavior.AddDefaultToolbarItems();
-            AddCounterButtonsToolbarItems();
         }
 
         private void AddCounterButtonsToolbarItems()

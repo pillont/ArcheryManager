@@ -20,8 +20,6 @@ namespace ArcheryManager.Factories
             else
             {
                 var Page = new CounterButtonPage(generalCounterSetting);
-                var behavior = new CounterButtonBehavior(generalCounterSetting, Page.Counter);
-                Page.Behaviors.Add(behavior);
                 return Page;
             }
         }

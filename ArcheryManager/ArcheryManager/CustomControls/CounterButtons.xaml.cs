@@ -20,6 +20,7 @@ namespace ArcheryManager.CustomControls
             set
             {
                 SetValue(GeneralCounterSettingProperty, value);
+                ButtonCounterGenerator = new CounterButtonGenerator(GeneralCounterSetting.ArrowSetting);
                 buttonGrid.ArrowSetting = ArrowSetting;
                 buttonGrid.Items = ButtonCounterGenerator.GeneralButton();
             }
@@ -36,7 +37,6 @@ namespace ArcheryManager.CustomControls
         public CounterButtons()
         {
             InitializeComponent();
-            ButtonCounterGenerator = new CounterButtonGenerator(GeneralCounterSetting);
             buttonGrid.ItemAdded += ButtonGrid_ItemAdded;
         }
 

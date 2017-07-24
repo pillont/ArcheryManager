@@ -1,24 +1,17 @@
 ﻿using ArcheryManager.Interfaces;
-using ArcheryManager.Settings;
+using ArcheryManager.Settings.ArrowSettings;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace ArcheryManager.Utils
 {
-    internal class CounterButtonGenerator
+    public class CounterButtonGenerator
     {
-        private readonly IGeneralCounterSetting GeneralCounterSetting;
+        private IArrowSetting ArrowSetting { get; set; }
 
-        public CounterButtonGenerator(IGeneralCounterSetting generalCounterSetting)
+        public CounterButtonGenerator(IArrowSetting arrowSetting)
         {
-            GeneralCounterSetting = generalCounterSetting;
-        }
-
-        private IArrowSetting ArrowSetting
-        {
-            get
-            {
-                return GeneralCounterSetting.ArrowSetting;
-            }
+            ArrowSetting = arrowSetting;
         }
 
         public ObservableCollection<Arrow> GeneralButton()
@@ -30,6 +23,13 @@ namespace ArcheryManager.Utils
                 Arrow arrow = GetArrow(i);
                 buttonsData.Add(arrow);
             }
+
+            //NOTE : remove second 9 zone on indoor compound target
+            if (ArrowSetting is IndoorCompoundArrowSetting)
+            {
+                buttonsData.Remove(buttonsData.Last());
+            }
+
             var missArrow = GetArrow(0);
             buttonsData.Add(missArrow);
 
@@ -38,8 +38,7 @@ namespace ArcheryManager.Utils
 
         private Arrow GetArrow(int i)
         {
-            int numberInFlight = GeneralCounterSetting.ScoreResult.CurrentArrows.Count;
-            var arrow = new Arrow(i, numberInFlight);
+            var arrow = new Arrow(i, -1);
             return arrow;
         }
     }
