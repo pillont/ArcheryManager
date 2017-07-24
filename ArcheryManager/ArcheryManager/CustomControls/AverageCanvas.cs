@@ -24,7 +24,7 @@ namespace ArcheryManager.CustomControls
             BindingContext = countSetting;
 
             countSetting.PropertyChanged += Setting_PropertyChanged;
-            Counter.Result.AllArrows.CollectionChanged += AllArrows_CollectionChanged;
+            generalCounterSetting.ScoreResult.AllArrows.CollectionChanged += AllArrows_CollectionChanged;
         }
 
         /// <summary>

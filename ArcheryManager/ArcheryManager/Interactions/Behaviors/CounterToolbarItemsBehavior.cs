@@ -25,8 +25,10 @@ namespace ArcheryManager.Interactions.Behaviors
         {
             base.OnAttachedTo(bindable);
 
+            var countSetting = GeneralCounterSetting.CountSetting;
             var result = GeneralCounterSetting.ScoreResult;
             result.CurrentArrows.CollectionChanged += Arrows_CollectionChanged;
+            countSetting.PropertyChanged += CountSetting_PropertyChanged;
         }
 
         private void Arrows_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

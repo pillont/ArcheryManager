@@ -72,7 +72,7 @@ namespace ArcheryManager.CustomControls
 
                 if (view.BindingContext is Arrow buttonArrow)
                 {
-                    var arrow = new Arrow(buttonArrow.Index, Counter.Result.CurrentArrows.Count);
+                    var arrow = new Arrow(buttonArrow.Index, GeneralCounterSetting.ScoreResult.CurrentArrows.Count);
                     Counter.AddArrow(arrow);
                 }
             }
@@ -95,7 +95,7 @@ namespace ArcheryManager.CustomControls
 
         private Arrow GetArrow(int i)
         {
-            int numberInFlight = Counter.Result.CurrentArrows.Count;
+            int numberInFlight = GeneralCounterSetting.ScoreResult.CurrentArrows.Count;
             var arrow = new Arrow(i, numberInFlight);
             return arrow;
         }

@@ -24,6 +24,7 @@ namespace ArcheryManager.Interactions.Behaviors
         private readonly ScoreCounter Counter;
 
         private readonly CountSetting CountSetting;
+        private readonly ScoreResult ScoreResult;
 
         /// <summary>
         /// behavior to add interaction of pan on movable target
@@ -31,6 +32,7 @@ namespace ArcheryManager.Interactions.Behaviors
         /// <param name="counter">score counter where add new arrows</param>
         public MovableTargetBehavior(IGeneralCounterSetting generalCounterSetting, ScoreCounter counter)
         {
+            ScoreResult = generalCounterSetting.ScoreResult;
             this.CountSetting = generalCounterSetting.CountSetting;
             this.Counter = counter;
         }
@@ -76,7 +78,7 @@ namespace ArcheryManager.Interactions.Behaviors
             var position = new Point(associatedObject.ArrowSetter.TranslationX,
                                         associatedObject.ArrowSetter.TranslationY);
 
-            var numberInFlight = Counter.Result.CurrentArrows.Count;
+            var numberInFlight = ScoreResult.CurrentArrows.Count;
             var arrow = associatedObject.Factory.Create(position, numberInFlight, associatedObject.TargetSize);
             Counter.AddArrow(arrow);
 
@@ -111,7 +113,7 @@ namespace ArcheryManager.Interactions.Behaviors
             CleanTranslation();
 
             bool canShootNewArrow = (!CountSetting.HaveMaxArrowsCount)
-                                    || Counter.Result.CurrentArrows.Count < CountSetting.ArrowsCount;
+                                    || ScoreResult.CurrentArrows.Count < CountSetting.ArrowsCount;
             if (canShootNewArrow)
             {
                 StartInteraction();

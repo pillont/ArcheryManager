@@ -40,7 +40,7 @@ namespace ArcheryManager.Settings
             }
         }
 
-        public ScoreResult Result
+        private ScoreResult Result
         {
             get
             {

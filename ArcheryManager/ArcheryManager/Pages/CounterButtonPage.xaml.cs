@@ -28,7 +28,7 @@ namespace ArcheryManager.Pages
 
             scoreList.ArrowSetting = generalCounterSetting.ArrowSetting;
             scoreList.SizeChanged += ScoreList_SizeChanged;
-            scoreList.Items = Counter.Result.CurrentArrows;
+            scoreList.Items = generalCounterSetting.ScoreResult.CurrentArrows;
 
             counterButtons.GeneralCounterSetting = generalCounterSetting;
 
