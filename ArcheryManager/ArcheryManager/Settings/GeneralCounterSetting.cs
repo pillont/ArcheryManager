@@ -7,7 +7,7 @@ namespace ArcheryManager.Settings
 {
     public class GeneralCounterSetting : IGeneralCounterSetting
     {
-        public ScoreCounter ScoreCounter { get; set; }
+        public ScoreResult ScoreResult { get; set; }
         public CountSetting CountSetting { get; set; }
         public IArrowSetting ArrowSetting { get; set; }
     }

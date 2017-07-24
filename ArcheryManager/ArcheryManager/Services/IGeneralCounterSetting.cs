@@ -4,8 +4,8 @@ namespace ArcheryManager.Settings
 {
     public interface IGeneralCounterSetting
     {
-        IArrowSetting ArrowSetting { get; set; }
-        CountSetting CountSetting { get; set; }
-        ScoreCounter ScoreCounter { get; set; }
+        ScoreResult ScoreResult { get; }
+        IArrowSetting ArrowSetting { get; }
+        CountSetting CountSetting { get; }
     }
 }

@@ -32,17 +32,18 @@ namespace ArcheryManager.UnitTest.Factories
             toolbarItems = new List<ToolbarItem>();
             var arrowSetting = EnglishArrowSetting.Instance;
             list = new List<ToolbarItem>();
-
+            var scoreResult = new ScoreResult();
             var countSetting = new CountSetting();
-            var ScoreCounter = new ScoreCounter(countSetting, arrowSetting, toolbarItems);
 
             generalCounterSetting = new GeneralCounterSetting()
             {
                 CountSetting = countSetting,
                 ArrowSetting = arrowSetting,
-                ScoreCounter = ScoreCounter
-            }
-            ;
+                ScoreResult = scoreResult,
+            };
+
+            var ScoreCounter = new ScoreCounter(generalCounterSetting);
+
             target = new Mock<Target>(new[] { generalCounterSetting });
             scorelist = ScoreListFactory.Create(target.Object, generalCounterSetting, list);
             a1 = new Arrow(1, 0);

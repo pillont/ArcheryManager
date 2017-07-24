@@ -1,7 +1,9 @@
-﻿using ArcheryManager.Interfaces;
+﻿using ArcheryManager.Interactions.Behaviors;
+using ArcheryManager.Interfaces;
 using ArcheryManager.Settings;
 using ArcheryManager.Settings.ArrowSettings;
 using ArcheryManager.Utils;
+using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
 using Xamarin.Forms;
@@ -11,27 +13,32 @@ namespace ArcheryManager.UnitTest.Utils
     [TestFixture]
     public class ScoreCounterTest
     {
-        private List<ToolbarItem> toolBarList;
-
         private ScoreCounter counter;
         private IArrowSetting arrowSetting;
         private CountSetting countSetting;
+        private GeneralCounterSetting generalCounterSetting;
 
         [SetUp]
         public void Init()
         {
             countSetting = new CountSetting();
-            toolBarList = new List<ToolbarItem>();
             arrowSetting = EnglishArrowSetting.Instance;
-            counter = new ScoreCounter(countSetting, arrowSetting, toolBarList);
+            var result = new ScoreResult();
+            generalCounterSetting = new GeneralCounterSetting()
+            {
+                CountSetting = countSetting,
+                ArrowSetting = arrowSetting,
+                ScoreResult = result
+            };
+            counter = new ScoreCounter(generalCounterSetting);
         }
 
         [Test]
         public void Counter_initTest()
         {
-            Assert.IsEmpty(counter.CurrentArrows);
-            Assert.Zero(counter.FlightScore);
-            Assert.Zero(counter.TotalScore);
+            Assert.IsEmpty(generalCounterSetting.ScoreResult.CurrentArrows);
+            Assert.Zero(generalCounterSetting.ScoreResult.FlightScore);
+            Assert.Zero(generalCounterSetting.ScoreResult.TotalScore);
         }
 
         #region total calcul
@@ -47,10 +54,10 @@ namespace ArcheryManager.UnitTest.Utils
             counter.AddArrow(arrow2);
             counter.AddArrow(arrow3);
 
-            Assert.AreEqual(3, counter.CurrentArrows.Count);
-            Assert.AreEqual(arrow1, counter.CurrentArrows[0]);
-            Assert.AreEqual(arrow2, counter.CurrentArrows[1]);
-            Assert.AreEqual(arrow3, counter.CurrentArrows[2]);
+            Assert.AreEqual(3, generalCounterSetting.ScoreResult.CurrentArrows.Count);
+            Assert.AreEqual(arrow1, generalCounterSetting.ScoreResult.CurrentArrows[0]);
+            Assert.AreEqual(arrow2, generalCounterSetting.ScoreResult.CurrentArrows[1]);
+            Assert.AreEqual(arrow3, generalCounterSetting.ScoreResult.CurrentArrows[2]);
         }
 
         [Test]
@@ -65,19 +72,19 @@ namespace ArcheryManager.UnitTest.Utils
             counter.AddArrow(arrow3);
 
             counter.RemoveLastArrow();
-            Assert.AreEqual(2, counter.CurrentArrows.Count);
-            Assert.AreEqual(arrow1, counter.CurrentArrows[0]);
-            Assert.AreEqual(arrow2, counter.CurrentArrows[1]);
+            Assert.AreEqual(2, generalCounterSetting.ScoreResult.CurrentArrows.Count);
+            Assert.AreEqual(arrow1, generalCounterSetting.ScoreResult.CurrentArrows[0]);
+            Assert.AreEqual(arrow2, generalCounterSetting.ScoreResult.CurrentArrows[1]);
 
             counter.RemoveLastArrow();
-            Assert.AreEqual(1, counter.CurrentArrows.Count);
-            Assert.AreEqual(arrow1, counter.CurrentArrows[0]);
+            Assert.AreEqual(1, generalCounterSetting.ScoreResult.CurrentArrows.Count);
+            Assert.AreEqual(arrow1, generalCounterSetting.ScoreResult.CurrentArrows[0]);
 
             counter.RemoveLastArrow();
-            Assert.AreEqual(0, counter.CurrentArrows.Count);
+            Assert.AreEqual(0, generalCounterSetting.ScoreResult.CurrentArrows.Count);
 
             counter.RemoveLastArrow();
-            Assert.AreEqual(0, counter.CurrentArrows.Count);
+            Assert.AreEqual(0, generalCounterSetting.ScoreResult.CurrentArrows.Count);
         }
 
         [Test]
@@ -92,7 +99,7 @@ namespace ArcheryManager.UnitTest.Utils
             counter.AddArrow(arrow3);
 
             counter.ClearArrows();
-            Assert.AreEqual(0, counter.CurrentArrows.Count);
+            Assert.AreEqual(0, generalCounterSetting.ScoreResult.CurrentArrows.Count);
         }
 
         [Test]
@@ -106,84 +113,84 @@ namespace ArcheryManager.UnitTest.Utils
             counter.AddArrow(arrow2);
             counter.AddArrow(arrow3);
 
-            Assert.AreEqual(3, counter.CurrentArrows.Count);
+            Assert.AreEqual(3, generalCounterSetting.ScoreResult.CurrentArrows.Count);
             counter.NewFlight();
-            Assert.AreEqual(0, counter.CurrentArrows.Count);
+            Assert.AreEqual(0, generalCounterSetting.ScoreResult.CurrentArrows.Count);
         }
 
         [Test]
         public void Counter_ScoreUpdateTest()
         {
-            Assert.AreEqual(0, counter.FlightScore);
-            Assert.AreEqual(0, counter.TotalScore);
-            Assert.AreEqual(0, counter.CurrentArrows.Count);
+            Assert.AreEqual(0, generalCounterSetting.ScoreResult.FlightScore);
+            Assert.AreEqual(0, generalCounterSetting.ScoreResult.TotalScore);
+            Assert.AreEqual(0, generalCounterSetting.ScoreResult.CurrentArrows.Count);
 
             var arrow1 = new Arrow(10, 0);
             counter.AddArrow(arrow1);
 
-            Assert.AreEqual(10, counter.FlightScore);
-            Assert.AreEqual(10, counter.TotalScore);
-            Assert.AreEqual(1, counter.CurrentArrows.Count);
+            Assert.AreEqual(10, generalCounterSetting.ScoreResult.FlightScore);
+            Assert.AreEqual(10, generalCounterSetting.ScoreResult.TotalScore);
+            Assert.AreEqual(1, generalCounterSetting.ScoreResult.CurrentArrows.Count);
 
             var arrow2 = new Arrow(9, 1);
             counter.AddArrow(arrow2);
 
-            Assert.AreEqual(19, counter.FlightScore);
-            Assert.AreEqual(19, counter.TotalScore);
-            Assert.AreEqual(2, counter.CurrentArrows.Count);
+            Assert.AreEqual(19, generalCounterSetting.ScoreResult.FlightScore);
+            Assert.AreEqual(19, generalCounterSetting.ScoreResult.TotalScore);
+            Assert.AreEqual(2, generalCounterSetting.ScoreResult.CurrentArrows.Count);
 
             var arrow3 = new Arrow(7, 2);
             counter.AddArrow(arrow3);
 
-            Assert.AreEqual(26, counter.FlightScore);
-            Assert.AreEqual(26, counter.TotalScore);
-            Assert.AreEqual(3, counter.CurrentArrows.Count);
+            Assert.AreEqual(26, generalCounterSetting.ScoreResult.FlightScore);
+            Assert.AreEqual(26, generalCounterSetting.ScoreResult.TotalScore);
+            Assert.AreEqual(3, generalCounterSetting.ScoreResult.CurrentArrows.Count);
 
             counter.RemoveLastArrow();
-            Assert.AreEqual(19, counter.FlightScore);
-            Assert.AreEqual(19, counter.TotalScore);
-            Assert.AreEqual(2, counter.CurrentArrows.Count);
+            Assert.AreEqual(19, generalCounterSetting.ScoreResult.FlightScore);
+            Assert.AreEqual(19, generalCounterSetting.ScoreResult.TotalScore);
+            Assert.AreEqual(2, generalCounterSetting.ScoreResult.CurrentArrows.Count);
 
             counter.ClearArrows();
-            Assert.AreEqual(0, counter.FlightScore);
-            Assert.AreEqual(0, counter.TotalScore);
-            Assert.AreEqual(0, counter.CurrentArrows.Count);
+            Assert.AreEqual(0, generalCounterSetting.ScoreResult.FlightScore);
+            Assert.AreEqual(0, generalCounterSetting.ScoreResult.TotalScore);
+            Assert.AreEqual(0, generalCounterSetting.ScoreResult.CurrentArrows.Count);
         }
 
         [Test]
         public void Counter_TotalScoreUpdateTest()
         {
-            Assert.AreEqual(0, counter.FlightScore);
-            Assert.AreEqual(0, counter.TotalScore);
-            Assert.AreEqual(0, counter.CurrentArrows.Count);
+            Assert.AreEqual(0, generalCounterSetting.ScoreResult.FlightScore);
+            Assert.AreEqual(0, generalCounterSetting.ScoreResult.TotalScore);
+            Assert.AreEqual(0, generalCounterSetting.ScoreResult.CurrentArrows.Count);
 
             var arrow1 = new Arrow(10, 0);
             counter.AddArrow(arrow1);
 
-            Assert.AreEqual(10, counter.FlightScore);
-            Assert.AreEqual(10, counter.TotalScore);
-            Assert.AreEqual(1, counter.CurrentArrows.Count);
+            Assert.AreEqual(10, generalCounterSetting.ScoreResult.FlightScore);
+            Assert.AreEqual(10, generalCounterSetting.ScoreResult.TotalScore);
+            Assert.AreEqual(1, generalCounterSetting.ScoreResult.CurrentArrows.Count);
 
             counter.NewFlight();
 
-            Assert.AreEqual(0, counter.FlightScore);
-            Assert.AreEqual(10, counter.TotalScore);
-            Assert.AreEqual(0, counter.CurrentArrows.Count);
+            Assert.AreEqual(0, generalCounterSetting.ScoreResult.FlightScore);
+            Assert.AreEqual(10, generalCounterSetting.ScoreResult.TotalScore);
+            Assert.AreEqual(0, generalCounterSetting.ScoreResult.CurrentArrows.Count);
 
             var arrow2 = new Arrow(9, 1);
             counter.AddArrow(arrow2);
 
-            Assert.AreEqual(9, counter.FlightScore);
-            Assert.AreEqual(19, counter.TotalScore);
-            Assert.AreEqual(1, counter.CurrentArrows.Count);
+            Assert.AreEqual(9, generalCounterSetting.ScoreResult.FlightScore);
+            Assert.AreEqual(19, generalCounterSetting.ScoreResult.TotalScore);
+            Assert.AreEqual(1, generalCounterSetting.ScoreResult.CurrentArrows.Count);
 
             var arrow3 = new Arrow(7, 2);
             counter.AddArrow(arrow3);
             counter.NewFlight();
 
-            Assert.AreEqual(0, counter.FlightScore);
-            Assert.AreEqual(26, counter.TotalScore);
-            Assert.AreEqual(0, counter.CurrentArrows.Count);
+            Assert.AreEqual(0, generalCounterSetting.ScoreResult.FlightScore);
+            Assert.AreEqual(26, generalCounterSetting.ScoreResult.TotalScore);
+            Assert.AreEqual(0, generalCounterSetting.ScoreResult.CurrentArrows.Count);
         }
 
         #endregion total calcul
@@ -199,26 +206,26 @@ namespace ArcheryManager.UnitTest.Utils
 
             counter.AddArrow(a1);
             counter.AddArrow(a2);
-            Assert.AreEqual(2, counter.CurrentArrows.Count);
-            Assert.IsTrue(counter.CurrentArrows.Contains(a1));
-            Assert.IsTrue(counter.CurrentArrows.Contains(a2));
+            Assert.AreEqual(2, generalCounterSetting.ScoreResult.CurrentArrows.Count);
+            Assert.IsTrue(generalCounterSetting.ScoreResult.CurrentArrows.Contains(a1));
+            Assert.IsTrue(generalCounterSetting.ScoreResult.CurrentArrows.Contains(a2));
 
             counter.NewFlight();
-            Assert.AreEqual(0, counter.CurrentArrows.Count);
+            Assert.AreEqual(0, generalCounterSetting.ScoreResult.CurrentArrows.Count);
 
             counter.AddArrow(a3);
-            Assert.AreEqual(1, counter.CurrentArrows.Count);
-            Assert.IsTrue(counter.CurrentArrows.Contains(a3));
+            Assert.AreEqual(1, generalCounterSetting.ScoreResult.CurrentArrows.Count);
+            Assert.IsTrue(generalCounterSetting.ScoreResult.CurrentArrows.Contains(a3));
 
             counter.RemoveLastArrow();
-            Assert.AreEqual(0, counter.CurrentArrows.Count);
+            Assert.AreEqual(0, generalCounterSetting.ScoreResult.CurrentArrows.Count);
 
             counter.AddArrow(a4);
-            Assert.AreEqual(1, counter.CurrentArrows.Count);
-            Assert.IsTrue(counter.CurrentArrows.Contains(a4));
+            Assert.AreEqual(1, generalCounterSetting.ScoreResult.CurrentArrows.Count);
+            Assert.IsTrue(generalCounterSetting.ScoreResult.CurrentArrows.Contains(a4));
 
             counter.ClearArrows();
-            Assert.AreEqual(0, counter.CurrentArrows.Count);
+            Assert.AreEqual(0, generalCounterSetting.ScoreResult.CurrentArrows.Count);
         }
 
         [Test]
@@ -232,17 +239,17 @@ namespace ArcheryManager.UnitTest.Utils
 
             counter.AddArrow(a1);
             counter.AddArrow(a2);
-            Assert.AreEqual(0, counter.PreviousArrows.Count);
+            Assert.AreEqual(0, generalCounterSetting.ScoreResult.PreviousArrows.Count);
 
             counter.NewFlight();
-            Assert.AreEqual(2, counter.PreviousArrows.Count);
-            Assert.IsTrue(counter.PreviousArrows.Contains(a1));
-            Assert.IsTrue(counter.PreviousArrows.Contains(a2));
+            Assert.AreEqual(2, generalCounterSetting.ScoreResult.PreviousArrows.Count);
+            Assert.IsTrue(generalCounterSetting.ScoreResult.PreviousArrows.Contains(a1));
+            Assert.IsTrue(generalCounterSetting.ScoreResult.PreviousArrows.Contains(a2));
 
             counter.AddArrow(a3);
-            Assert.AreEqual(2, counter.PreviousArrows.Count);
-            Assert.IsTrue(counter.PreviousArrows.Contains(a1));
-            Assert.IsTrue(counter.PreviousArrows.Contains(a2));
+            Assert.AreEqual(2, generalCounterSetting.ScoreResult.PreviousArrows.Count);
+            Assert.IsTrue(generalCounterSetting.ScoreResult.PreviousArrows.Contains(a1));
+            Assert.IsTrue(generalCounterSetting.ScoreResult.PreviousArrows.Contains(a2));
         }
 
         [Test]
@@ -256,36 +263,36 @@ namespace ArcheryManager.UnitTest.Utils
 
             counter.AddArrow(a1);
             counter.AddArrow(a2);
-            Assert.AreEqual(2, counter.AllArrows.Count);
-            Assert.IsTrue(counter.AllArrows.Contains(a1));
-            Assert.IsTrue(counter.AllArrows.Contains(a2));
+            Assert.AreEqual(2, generalCounterSetting.ScoreResult.AllArrows.Count);
+            Assert.IsTrue(generalCounterSetting.ScoreResult.AllArrows.Contains(a1));
+            Assert.IsTrue(generalCounterSetting.ScoreResult.AllArrows.Contains(a2));
 
             counter.NewFlight();
-            Assert.AreEqual(2, counter.AllArrows.Count);
-            Assert.IsTrue(counter.AllArrows.Contains(a1));
-            Assert.IsTrue(counter.AllArrows.Contains(a2));
+            Assert.AreEqual(2, generalCounterSetting.ScoreResult.AllArrows.Count);
+            Assert.IsTrue(generalCounterSetting.ScoreResult.AllArrows.Contains(a1));
+            Assert.IsTrue(generalCounterSetting.ScoreResult.AllArrows.Contains(a2));
 
             counter.AddArrow(a3);
-            Assert.AreEqual(3, counter.AllArrows.Count);
-            Assert.IsTrue(counter.AllArrows.Contains(a1));
-            Assert.IsTrue(counter.AllArrows.Contains(a2));
-            Assert.IsTrue(counter.AllArrows.Contains(a3));
+            Assert.AreEqual(3, generalCounterSetting.ScoreResult.AllArrows.Count);
+            Assert.IsTrue(generalCounterSetting.ScoreResult.AllArrows.Contains(a1));
+            Assert.IsTrue(generalCounterSetting.ScoreResult.AllArrows.Contains(a2));
+            Assert.IsTrue(generalCounterSetting.ScoreResult.AllArrows.Contains(a3));
 
             counter.RemoveLastArrow();
-            Assert.AreEqual(2, counter.AllArrows.Count);
-            Assert.IsTrue(counter.AllArrows.Contains(a1));
-            Assert.IsTrue(counter.AllArrows.Contains(a2));
+            Assert.AreEqual(2, generalCounterSetting.ScoreResult.AllArrows.Count);
+            Assert.IsTrue(generalCounterSetting.ScoreResult.AllArrows.Contains(a1));
+            Assert.IsTrue(generalCounterSetting.ScoreResult.AllArrows.Contains(a2));
 
             counter.AddArrow(a4);
-            Assert.AreEqual(3, counter.AllArrows.Count);
-            Assert.IsTrue(counter.AllArrows.Contains(a1));
-            Assert.IsTrue(counter.AllArrows.Contains(a2));
-            Assert.IsTrue(counter.AllArrows.Contains(a4));
+            Assert.AreEqual(3, generalCounterSetting.ScoreResult.AllArrows.Count);
+            Assert.IsTrue(generalCounterSetting.ScoreResult.AllArrows.Contains(a1));
+            Assert.IsTrue(generalCounterSetting.ScoreResult.AllArrows.Contains(a2));
+            Assert.IsTrue(generalCounterSetting.ScoreResult.AllArrows.Contains(a4));
 
             counter.ClearArrows();
-            Assert.AreEqual(2, counter.AllArrows.Count);
-            Assert.IsTrue(counter.AllArrows.Contains(a1));
-            Assert.IsTrue(counter.AllArrows.Contains(a2));
+            Assert.AreEqual(2, generalCounterSetting.ScoreResult.AllArrows.Count);
+            Assert.IsTrue(generalCounterSetting.ScoreResult.AllArrows.Contains(a1));
+            Assert.IsTrue(generalCounterSetting.ScoreResult.AllArrows.Contains(a2));
         }
 
         [Test]
@@ -303,9 +310,9 @@ namespace ArcheryManager.UnitTest.Utils
             counter.AddArrow(a3);
             counter.AddArrow(a4);
 
-            Assert.AreEqual(counter.CurrentArrows, counter.ArrowsShowed);
+            Assert.AreEqual(generalCounterSetting.ScoreResult.CurrentArrows, counter.ArrowsShowed);
             countSetting.ShowAllArrows = true;
-            Assert.AreEqual(counter.AllArrows, counter.ArrowsShowed);
+            Assert.AreEqual(generalCounterSetting.ScoreResult.AllArrows, counter.ArrowsShowed);
         }
 
         [Test]
@@ -319,9 +326,9 @@ namespace ArcheryManager.UnitTest.Utils
             counter.AddArrow(a2);
             counter.AddArrow(a3);
 
-            Assert.AreEqual(a2, counter.CurrentArrows[0]);
-            Assert.AreEqual(a3, counter.CurrentArrows[1]);
-            Assert.AreEqual(a1, counter.CurrentArrows[2]);
+            Assert.AreEqual(a2, generalCounterSetting.ScoreResult.CurrentArrows[0]);
+            Assert.AreEqual(a3, generalCounterSetting.ScoreResult.CurrentArrows[1]);
+            Assert.AreEqual(a1, generalCounterSetting.ScoreResult.CurrentArrows[2]);
         }
 
         [Test]
@@ -335,9 +342,9 @@ namespace ArcheryManager.UnitTest.Utils
             counter.AddArrow(a3);
             countSetting.IsDecreasingOrder = true;
 
-            Assert.AreEqual(a2, counter.CurrentArrows[0]);
-            Assert.AreEqual(a3, counter.CurrentArrows[1]);
-            Assert.AreEqual(a1, counter.CurrentArrows[2]);
+            Assert.AreEqual(a2, generalCounterSetting.ScoreResult.CurrentArrows[0]);
+            Assert.AreEqual(a3, generalCounterSetting.ScoreResult.CurrentArrows[1]);
+            Assert.AreEqual(a1, generalCounterSetting.ScoreResult.CurrentArrows[2]);
         }
 
         [Test]
@@ -354,9 +361,9 @@ namespace ArcheryManager.UnitTest.Utils
             countSetting.IsDecreasingOrder = false;
 
             // keep the same order
-            Assert.AreEqual(a1, counter.CurrentArrows[0]);
-            Assert.AreEqual(a2, counter.CurrentArrows[1]);
-            Assert.AreEqual(a3, counter.CurrentArrows[2]);
+            Assert.AreEqual(a1, generalCounterSetting.ScoreResult.CurrentArrows[0]);
+            Assert.AreEqual(a2, generalCounterSetting.ScoreResult.CurrentArrows[1]);
+            Assert.AreEqual(a3, generalCounterSetting.ScoreResult.CurrentArrows[2]);
         }
 
         [Test]
@@ -372,68 +379,9 @@ namespace ArcheryManager.UnitTest.Utils
             counter.AddArrow(a3);
 
             // keep the same order
-            Assert.AreEqual(a1, counter.CurrentArrows[0]);
-            Assert.AreEqual(a3, counter.CurrentArrows[1]);
-            Assert.AreEqual(a2, counter.CurrentArrows[2]);
-        }
-
-        [Test]
-        public void ToolBarItems_HaveMaxTest()
-        {
-            countSetting.HaveMaxArrowsCount = true;
-            counter.AddDefaultToolbarItems();
-            countSetting.ArrowsCount = 2;
-            Assert.AreEqual(3, toolBarList.Count);
-
-            counter.AddArrow(new Arrow(0, 0));
-            Assert.AreEqual(3, toolBarList.Count);
-
-            counter.AddArrow(new Arrow(0, 0));
-            Assert.AreEqual(4, toolBarList.Count);
-        }
-
-        [Test]
-        public void ToolBarItems_AddTest()
-        {
-            countSetting.HaveMaxArrowsCount = false;
-            counter.AddDefaultToolbarItems();
-            Assert.AreEqual(3, toolBarList.Count);
-
-            countSetting.ArrowsCount = 2;
-            counter.AddArrow(new Arrow(0, 0));
-            Assert.AreEqual(4, toolBarList.Count);
-        }
-
-        [Test]
-        public void ToolBarItems_RemoveTest()
-        {
-            countSetting.HaveMaxArrowsCount = true;
-            counter.AddDefaultToolbarItems();
-            Assert.AreEqual(3, toolBarList.Count);
-            countSetting.ArrowsCount = 2;
-
-            counter.AddArrow(new Arrow(0, 0));
-            counter.AddArrow(new Arrow(0, 0));
-
-            counter.RemoveLastArrow();
-            Assert.AreEqual(3, toolBarList.Count);
-        }
-
-        [Test]
-        public void ToolBarItems_RemoveWithoutMaxTest()
-        {
-            countSetting.HaveMaxArrowsCount = false;
-            counter.AddDefaultToolbarItems();
-            Assert.AreEqual(3, toolBarList.Count);
-            countSetting.ArrowsCount = 2;
-
-            counter.AddArrow(new Arrow(0, 0));
-            counter.AddArrow(new Arrow(0, 0));
-
-            counter.RemoveLastArrow();
-            Assert.AreEqual(4, toolBarList.Count);
-            counter.RemoveLastArrow();
-            Assert.AreEqual(3, toolBarList.Count);
+            Assert.AreEqual(a1, generalCounterSetting.ScoreResult.CurrentArrows[0]);
+            Assert.AreEqual(a3, generalCounterSetting.ScoreResult.CurrentArrows[1]);
+            Assert.AreEqual(a2, generalCounterSetting.ScoreResult.CurrentArrows[2]);
         }
 
         [Test]
@@ -452,9 +400,9 @@ namespace ArcheryManager.UnitTest.Utils
 
             counter.RestartCount();
 
-            Assert.IsEmpty(counter.AllArrows);
-            Assert.Zero(counter.TotalScore);
-            Assert.Zero(counter.FlightScore);
+            Assert.IsEmpty(generalCounterSetting.ScoreResult.AllArrows);
+            Assert.Zero(generalCounterSetting.ScoreResult.TotalScore);
+            Assert.Zero(generalCounterSetting.ScoreResult.FlightScore);
         }
 
         [Test]
@@ -479,11 +427,11 @@ namespace ArcheryManager.UnitTest.Utils
             counter.NewFlight();
             counter.AddArrow(a4);
 
-            Assert.AreEqual(4, counter.AllArrows.Count);
-            Assert.AreEqual(1, counter.CurrentArrows.Count);
-            Assert.AreEqual(3, counter.PreviousArrows.Count);
-            Assert.AreEqual(10, counter.TotalScore);
-            Assert.AreEqual(4, counter.FlightScore);
+            Assert.AreEqual(4, generalCounterSetting.ScoreResult.AllArrows.Count);
+            Assert.AreEqual(1, generalCounterSetting.ScoreResult.CurrentArrows.Count);
+            Assert.AreEqual(3, generalCounterSetting.ScoreResult.PreviousArrows.Count);
+            Assert.AreEqual(10, generalCounterSetting.ScoreResult.TotalScore);
+            Assert.AreEqual(4, generalCounterSetting.ScoreResult.FlightScore);
         }
 
         [Test]

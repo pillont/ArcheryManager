@@ -3,10 +3,9 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using ArcheryManager.Resources;
 using ArcheryManager.Interfaces;
-using System;
 using ArcheryManager.Utils;
+using System.ComponentModel;
 
 namespace ArcheryManager.Settings
 {
@@ -17,102 +16,11 @@ namespace ArcheryManager.Settings
 
         #region properties
 
-        #region Arrows list
-
-        public static readonly BindableProperty CurrentArrowsProperty =
-                      BindableProperty.Create(nameof(CurrentArrows), typeof(ObservableCollection<Arrow>), typeof(ScoreCounter), null);
-
-        public ObservableCollection<Arrow> CurrentArrows
-        {
-            get { return (ObservableCollection<Arrow>)GetValue(CurrentArrowsProperty); }
-            private set
-            {
-                if (CurrentArrows != null)
-                {
-                    CurrentArrows.CollectionChanged -= Arrows_CollectionChanged;
-                }
-
-                SetValue(CurrentArrowsProperty, value);
-                value.CollectionChanged += Arrows_CollectionChanged;
-            }
-        }
-
-        public ObservableCollection<Arrow> ArrowsShowed
-        {
-            get
-            {
-                if (CountSetting.ShowAllArrows)
-                {
-                    return AllArrows;
-                }
-                else
-                {
-                    return CurrentArrows;
-                }
-            }
-        }
-
-        public static readonly BindableProperty PreviousArrowsProperty =
-                      BindableProperty.Create(nameof(PreviousArrows), typeof(ObservableCollection<Arrow>), typeof(ScoreCounter), null);
-
-        public ObservableCollection<Arrow> PreviousArrows
-        {
-            get { return (ObservableCollection<Arrow>)GetValue(PreviousArrowsProperty); }
-            set { SetValue(PreviousArrowsProperty, value); }
-        }
-
-        public static readonly BindableProperty AllArrowsProperty =
-                      BindableProperty.Create(nameof(AllArrows), typeof(ObservableCollection<Arrow>), typeof(ScoreCounter), null);
-
-        public ObservableCollection<Arrow> AllArrows
-        {
-            get { return (ObservableCollection<Arrow>)GetValue(AllArrowsProperty); }
-            set { SetValue(AllArrowsProperty, value); }
-        }
-
-        #endregion Arrows list
-
-        #region bindable prop
-
-        public static readonly BindableProperty FlightScoreProperty =
-                      BindableProperty.Create(nameof(FlightScore), typeof(int), typeof(ScoreCounter), 0);
-
-        public int FlightScore
-        {
-            get { return (int)GetValue(FlightScoreProperty); }
-            private set
-            {
-                SetValue(FlightScoreProperty, value);
-                OnPropertyChanged(nameof(FlightScoreString));
-            }
-        }
-
-        public string FlightScoreString
-        {
-            get
-            {
-                return ScoreString(FlightScore, CurrentArrows);
-            }
-        }
-
-        public static readonly BindableProperty TotalScoreProperty =
-                      BindableProperty.Create(nameof(TotalScore), typeof(int), typeof(ScoreCounter), 0);
-
-        public int TotalScore
-        {
-            get { return (int)GetValue(TotalScoreProperty); }
-            private set
-            {
-                SetValue(TotalScoreProperty, value);
-                OnPropertyChanged(nameof(TotalScoreString));
-            }
-        }
-
         public string TotalScoreString
         {
             get
             {
-                return ScoreString(TotalScore, AllArrows);
+                return ScoreString(Result.TotalScore, Result.AllArrows);
             }
         }
 
@@ -122,176 +30,123 @@ namespace ArcheryManager.Settings
             return string.Format(ScoreFormat, score, maxScore);
         }
 
-        #endregion bindable prop
-
-        private readonly List<Flight> FlightsSaved = new List<Flight>();
-
-        private int lastTotal = 0;
-        private readonly IList<ToolbarItem> toolbarItems;
-        private readonly IArrowSetting ArrowSetting;
-        private readonly CountSetting CountSetting;
-
         #endregion properties
 
+        private IArrowSetting ArrowSetting
+        {
+            get
+            {
+                return GeneralCounterSetting.ArrowSetting;
+            }
+        }
+
+        private ScoreResult Result
+        {
+            get
+            {
+                return GeneralCounterSetting.ScoreResult;
+            }
+        }
+
+        private CountSetting CountSetting
+        {
+            get
+            {
+                return GeneralCounterSetting.CountSetting;
+            }
+        }
+
+        private readonly IGeneralCounterSetting GeneralCounterSetting;
+
         /// <summary>
-        /// score counter with associated target
+        /// NOTE : mst have not null value in generalCounterSetting.ScoreResult
+        /// else exception not understandable on the ctor :
+        /// StackTrace	" ArcheryManager.Settings.ScoreCounter..ctor(IGeneralCounterSetting generalCounterSetting)
+        /// TODO : understand why !
         /// </summary>
-        /// <param name="setting"></param>
-        public ScoreCounter(CountSetting countSetting, IArrowSetting arrowSetting, IList<ToolbarItem> toolbarItems)// TODO : make FlightSetting ancestor of Target setting =>remove this ctor and change the second to accept FlightSetting
+        /// <param name="generalCounterSetting"></param>
+        public ScoreCounter(IGeneralCounterSetting generalCounterSetting)
         {
-            CountSetting = countSetting;
-            ArrowSetting = arrowSetting;
-            CurrentArrows = new ObservableCollection<Arrow>();
-            AllArrows = new ObservableCollection<Arrow>();
-            PreviousArrows = new ObservableCollection<Arrow>();
+            GeneralCounterSetting = generalCounterSetting;
+            Result.PropertyChanged += Result_PropertyChanged;
+            Result.CurrentArrows.Clear();
+            Result.AllArrows.Clear();
+            Result.PreviousArrows.Clear();
 
-            this.toolbarItems = toolbarItems;
             CountSetting.PropertyChanged += CountSetting_PropertyChanged;
+            Result.CurrentArrows.CollectionChanged += Arrows_CollectionChanged;
         }
 
-        private void CountSetting_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        public ObservableCollection<Arrow> ArrowsShowed
         {
-            if (e.PropertyName == nameof(CountSetting.HaveMaxArrowsCount)
-                || e.PropertyName == nameof(CountSetting.ArrowsCount))
+            get
             {
-                RemoveNewFlightButton();
-                AddNewFlightIfCanValidFlight();
-            }
-            else if (e.PropertyName == nameof(CountSetting.IsDecreasingOrder))
-            {
-                UpdateOrder();
-            }
-        }
-
-        #region toolbar item
-
-        public void AddDefaultToolbarItems()
-        {
-            toolbarItems.Add(new ToolbarItem()
-            {
-                Text = AppResources.RemoveLast,
-                Order = ToolbarItemOrder.Primary,
-                Command = new Command(RemoveLastArrow)
-            });
-
-            toolbarItems.Add(new ToolbarItem()
-            {
-                Text = AppResources.RemoveAll,
-                Order = ToolbarItemOrder.Secondary,
-                Command = new Command(() => AskValidation(AppResources.RemoveAllQuestion, ClearArrows))
-            });
-
-            toolbarItems.Add(new ToolbarItem()
-            {
-                Text = AppResources.Restart,
-                Order = ToolbarItemOrder.Secondary,
-                Command = new Command(() => AskValidation(AppResources.RestartQuestion, RestartCount))
-            });
-        }
-
-        private void AddNewFlightButton()
-        {
-            toolbarItems.Add(new ToolbarItem()
-            {
-                Text = AppResources.NewFlight,
-                Order = ToolbarItemOrder.Primary,
-                Command = new Command(() => AskValidation(AppResources.NewFlightQuestion, NewFlight)),
-            });
-        }
-
-        private bool ContainsNewFlightButton()
-        {
-            var button = GetCurrentNewFlightButton();
-            return button != null;
-        }
-
-        private ToolbarItem GetCurrentNewFlightButton()
-        {
-            string newFlightText = AppResources.NewFlight;
-            return toolbarItems.Where(i => i.Text == newFlightText).FirstOrDefault();
-        }
-
-        private void RemoveNewFlightButton()
-        {
-            var button = GetCurrentNewFlightButton();
-            if (button != null)
-            {
-                toolbarItems.Remove(button);
+                if (CountSetting.ShowAllArrows)
+                {
+                    return Result.AllArrows;
+                }
+                else
+                {
+                    return Result.CurrentArrows;
+                }
             }
         }
 
-        private async void AskValidation(string message, Action action)
+        public string FlightScoreString
         {
-            var valid = await App.NavigationPage.DisplayAlert(AppResources.Question, message, AppResources.Yes, AppResources.No);
-            if (valid)
+            get
             {
-                action?.Invoke();
+                return ScoreString(Result.FlightScore, Result.CurrentArrows);
             }
         }
-
-        #endregion toolbar item
-
-        #region update when arrows change
 
         private void Arrows_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             UpdateAllArrow();
             UpdatePreviousArrow();
             UpdateTotal();
-
-            if (e.Action == NotifyCollectionChangedAction.Add)
-            {
-                AddNewFlightIfCanValidFlight();
-            }
-            else if (e.Action == NotifyCollectionChangedAction.Remove
-                || e.Action == NotifyCollectionChangedAction.Reset)
-            {
-                RemoveNewFlightIfCantValidFlight();
-            }
         }
 
-        private void RemoveNewFlightIfCantValidFlight()
+        private void Result_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (!CanValidFlight())
+            switch (e.PropertyName)
             {
-                RemoveNewFlightButton();
+                case nameof(ScoreResult.FlightScore):
+                    OnPropertyChanged(nameof(FlightScoreString));
+                    break;
+
+                case nameof(ScoreResult.TotalScore):
+                    OnPropertyChanged(nameof(TotalScoreString));
+                    break;
             }
         }
 
-        private void AddNewFlightIfCanValidFlight()
+        private void CountSetting_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (CanValidFlight())
+            if (e.PropertyName == nameof(CountSetting.IsDecreasingOrder))
             {
-                if (!ContainsNewFlightButton())
-                {
-                    AddNewFlightButton();
-                }
+                UpdateOrder();
             }
         }
 
-        private bool CanValidFlight()
-        {
-            return CurrentArrows.Count > 0 && (
-                (!CountSetting.HaveMaxArrowsCount)
-                || CurrentArrows.Count >= CountSetting.ArrowsCount);
-        }
+        #region update when arrows change
 
         public void UpdateOrder()
         {
             IEnumerable<Arrow> orderedList;
             if (CountSetting.IsDecreasingOrder)
             {
-                orderedList = CurrentArrows.OrderByDescending(a => a.Index).ToList();
+                orderedList = Result.CurrentArrows.OrderByDescending(a => a.Index).ToList();
             }
             else
             {
-                orderedList = CurrentArrows.OrderBy(a => a.NumberInFlight).ToList();
+                orderedList = Result.CurrentArrows.OrderBy(a => a.NumberInFlight).ToList();
             }
 
-            CurrentArrows.Clear();
+            Result.CurrentArrows.Clear();
             foreach (var a in orderedList)
             {
-                CurrentArrows.Add(a);
+                Result.CurrentArrows.Add(a);
             }
         }
 
@@ -299,24 +154,24 @@ namespace ArcheryManager.Settings
         {
             var all = GetArrows(getCurrent: false);
 
-            PreviousArrows.Clear();
+            Result.PreviousArrows.Clear();
 
             foreach (var a in all)
             {
-                PreviousArrows.Add(a);
+                Result.PreviousArrows.Add(a);
             }
         }
 
         private void UpdateTotal()
         {
-            FlightScore = 0;
-            foreach (var a in CurrentArrows)
+            Result.FlightScore = 0;
+            foreach (var a in Result.CurrentArrows)
             {
-                FlightScore += ValueOf(a);
+                Result.FlightScore += ValueOf(a);
             }
 
-            TotalScore = lastTotal;
-            TotalScore += FlightScore;
+            Result.TotalScore = Result.LastTotal;
+            Result.TotalScore += Result.FlightScore;
         }
 
         #endregion update when arrows change
@@ -327,11 +182,11 @@ namespace ArcheryManager.Settings
         {
             var all = GetArrows(getCurrent: true);
 
-            AllArrows.Clear();
+            Result.AllArrows.Clear();
 
             foreach (var a in all)
             {
-                AllArrows.Add(a);
+                Result.AllArrows.Add(a);
             }
         }
 
@@ -340,14 +195,14 @@ namespace ArcheryManager.Settings
             List<Arrow> all;
             if (getCurrent)
             {
-                all = new List<Arrow>(CurrentArrows);
+                all = new List<Arrow>(Result.CurrentArrows);
             }
             else
             {
                 all = new List<Arrow>();
             }
 
-            foreach (var f in FlightsSaved)
+            foreach (var f in Result.FlightsSaved)
             {
                 all.AddRange(f);
             }
@@ -361,9 +216,9 @@ namespace ArcheryManager.Settings
 
         public void RestartCount()
         {
-            lastTotal = 0;
-            FlightsSaved.Clear();
-            CurrentArrows.Clear();
+            Result.LastTotal = 0;
+            Result.FlightsSaved.Clear();
+            Result.CurrentArrows.Clear();
             UpdatePreviousArrow();
             UpdateAllArrow();
             UpdateTotal();
@@ -371,34 +226,35 @@ namespace ArcheryManager.Settings
 
         public void NewFlight()
         {
-            FlightsSaved.Add(new Flight(CurrentArrows) { Number = FlightsSaved.Count + 1 });
+            Result.FlightsSaved.Add(new Flight(Result.CurrentArrows) { Number = Result.FlightsSaved.Count + 1 });
 
-            lastTotal += FlightScore;
-            FlightScore = 0;
-            CurrentArrows.Clear();
+            Result.LastTotal += Result.FlightScore;
+            Result.CurrentArrows.Clear();
+
+            Result.FlightScore = 0;
         }
 
         public void AddArrow(Arrow arrow)
         {
             bool canAddArrow = (!CountSetting.HaveMaxArrowsCount) ||
-                                CurrentArrows.Count < CountSetting.ArrowsCount;
+                                Result.CurrentArrows.Count < CountSetting.ArrowsCount;
             if (canAddArrow)
             {
-                CurrentArrows?.Add(arrow);
+                Result.CurrentArrows?.Add(arrow);
                 UpdateOrder();
             }
         }
 
         public void ClearArrows()
         {
-            CurrentArrows?.Clear();
+            Result.CurrentArrows?.Clear();
         }
 
         public void RemoveLastArrow()
         {
-            if (CurrentArrows.Count > 0)
+            if (Result.CurrentArrows.Count > 0)
             {
-                CurrentArrows.RemoveAt(CurrentArrows.Count - 1);
+                Result.CurrentArrows.RemoveAt(Result.CurrentArrows.Count - 1);
             }
         }
 

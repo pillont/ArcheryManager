@@ -19,13 +19,7 @@ namespace ArcheryManager.CustomControls
             set { SetValue(GeneralCounterSettingProperty, value); }
         }
 
-        private ScoreCounter Counter
-        {
-            get
-            {
-                return GeneralCounterSetting.ScoreCounter;
-            }
-        }
+        public ScoreCounter Counter { get; set; }
 
         private IArrowSetting ArrowSetting
         {
@@ -38,6 +32,7 @@ namespace ArcheryManager.CustomControls
         public CounterButtons()
         {
             InitializeComponent();
+
             buttonGrid.ItemAdded += ButtonGrid_ItemAdded;
         }
 
@@ -49,6 +44,7 @@ namespace ArcheryManager.CustomControls
             {
                 try
                 {
+                    Counter = new ScoreCounter(GeneralCounterSetting);
                     buttonGrid.ArrowSetting = ArrowSetting;
                     DrawButtons();
                 }
@@ -76,7 +72,7 @@ namespace ArcheryManager.CustomControls
 
                 if (view.BindingContext is Arrow buttonArrow)
                 {
-                    var arrow = new Arrow(buttonArrow.Index, Counter.CurrentArrows.Count);
+                    var arrow = new Arrow(buttonArrow.Index, GeneralCounterSetting.ScoreResult.CurrentArrows.Count);
                     Counter.AddArrow(arrow);
                 }
             }
@@ -99,7 +95,7 @@ namespace ArcheryManager.CustomControls
 
         private Arrow GetArrow(int i)
         {
-            int numberInFlight = Counter.CurrentArrows.Count;
+            int numberInFlight = GeneralCounterSetting.ScoreResult.CurrentArrows.Count;
             var arrow = new Arrow(i, numberInFlight);
             return arrow;
         }
