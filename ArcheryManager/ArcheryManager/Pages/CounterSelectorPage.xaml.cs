@@ -14,9 +14,9 @@ namespace ArcheryManager.Pages
     {
         private CountSetting CountSetting => GeneralCounterSetting.CountSetting;
 
-        private readonly IGeneralCounterSetting GeneralCounterSetting;
+        private readonly GeneralCounterSetting GeneralCounterSetting;
 
-        public CounterSelectorPage(IGeneralCounterSetting generalCounterSetting)
+        public CounterSelectorPage(GeneralCounterSetting generalCounterSetting)
         {
             InitializeComponent();
             GeneralCounterSetting = generalCounterSetting;

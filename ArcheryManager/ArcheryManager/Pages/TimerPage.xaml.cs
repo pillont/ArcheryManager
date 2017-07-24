@@ -59,6 +59,9 @@ namespace ArcheryManager.Pages
 
             BindingContext = this;
             InitializeComponent();
+
+            var numericBehavior = new NumericPickerBehavior(40, 300, 5);
+            timePicker.Behaviors.Add(numericBehavior);
             Behavior = new TimerBehavior(TimerSetting);
             timer.Behaviors.Add(Behavior);
             timer.PropertyChanged += Timer_PropertyChanged;

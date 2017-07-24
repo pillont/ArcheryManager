@@ -47,17 +47,21 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Interactions\Behaviors\NumericPickerBehavior.cs" />
     <Compile Include="CustomControls\TargetImage.xaml.cs">
       <DependentUpon>TargetImage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Factories\ArrowsettingFactory.cs" />
     <Compile Include="Factories\CounterPageFactory.cs" />
+    <Compile Include="Interactions\Behaviors\AverageCounterBehavior.cs" />
+    <Compile Include="Interactions\Behaviors\CounterToolbarItemsBehavior.cs" />
     <Compile Include="Pages\CounterSelectorPage.xaml.cs">
       <DependentUpon>CounterSelectorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\GeneralMenu.xaml.cs">
       <DependentUpon>GeneralMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PageWithOverridableToolBar.cs" />
     <Compile Include="Resources\AppResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -69,7 +73,6 @@
       <DependentUpon>AppResources.fr.resx</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\AverageCanvas.cs" />
-    <Compile Include="CustomControls\NumericPicker.cs" />
     <Compile Include="Factories\ScoreListFactory.cs" />
     <Compile Include="Factories\TargetFactory.cs" />
     <Compile Include="Interactions\Behaviors\CustomBehavior.cs" />
@@ -119,6 +122,7 @@
     <Compile Include="Settings\ArrowSettings\FieldArrowSetting.cs" />
     <Compile Include="Settings\GeneralCounterSetting.cs" />
     <Compile Include="Services\IGeneralCounterSetting.cs" />
+    <Compile Include="Settings\ScoreResult.cs" />
     <Compile Include="Utils\Arrow.cs" />
     <Compile Include="Settings\CountSetting.cs" />
     <Compile Include="Utils\Flight.cs" />

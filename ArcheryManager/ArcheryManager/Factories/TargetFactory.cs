@@ -14,16 +14,19 @@ namespace ArcheryManager.Factories
         /// <param name="targetSetting"></param>
         /// <param name="arrowSetting"></param>
         /// <returns></returns>
-        public static Target Create(IGeneralCounterSetting generalCounterSetting)
+        public static Target Create(GeneralCounterSetting generalCounterSetting, ScoreCounter counter)
         {
             var countSetting = generalCounterSetting.CountSetting;
-            var counter = generalCounterSetting.ScoreCounter;
+            var result = generalCounterSetting.ScoreResult;
             var arrowSetting = generalCounterSetting.ArrowSetting;
 
             var customTarget = new Target(generalCounterSetting) { MinimumHeightRequest = 1200, MinimumWidthRequest = 1200 };
 
-            customTarget.ArrowGrid.Items = counter.CurrentArrows;
-            customTarget.PreviousArrowGrid.Items = counter.PreviousArrows;
+            var averageBehavior = new AverageCounterBehavior(counter, countSetting);
+            customTarget.AverageCanvas.Behaviors.Add(averageBehavior);
+
+            customTarget.ArrowGrid.Items = result.CurrentArrows;
+            customTarget.PreviousArrowGrid.Items = result.PreviousArrows;
 
             var lastArrowsGrid = customTarget.PreviousArrowGrid;
             lastArrowsGrid.BindingContext = countSetting;
@@ -33,7 +36,7 @@ namespace ArcheryManager.Factories
             average.BindingContext = countSetting;
             average.SetBinding(View.IsVisibleProperty, nameof(CountSetting.AverageIsVisible));
 
-            var behavior = new MovableTargetBehavior(generalCounterSetting);
+            var behavior = new MovableTargetBehavior(generalCounterSetting, counter);
             customTarget.Behaviors.Add(behavior);
 
             return customTarget;
