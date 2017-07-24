@@ -2,11 +2,22 @@
 using System.Linq;
 using System.Collections.Specialized;
 using System.Runtime.CompilerServices;
+using System;
+using System.Collections.Generic;
 
 namespace ArcheryManager.CustomControls
 {
     public abstract class UniformGrid<T> : ItemsGrid<T>
     {
+        public static readonly BindableProperty OrderSelectorProperty =
+                      BindableProperty.Create(nameof(OrderSelector), typeof(Func<T, object>), typeof(UniformGrid<T>), null);
+
+        public Func<T, object> OrderSelector
+        {
+            get { return (Func<T, object>)GetValue(OrderSelectorProperty); }
+            set { SetValue(OrderSelectorProperty, value); }
+        }
+
         public static readonly BindableProperty HeightCellProperty =
                       BindableProperty.Create(nameof(HeightCell), typeof(double), typeof(UniformGrid<T>), 50d);
 
@@ -30,12 +41,16 @@ namespace ArcheryManager.CustomControls
             resetDimension();
             this.ItemAdded += UniformGrid_ItemAdded;
             this.ItemRemoved += UniformGrid_ItemRemoved;
-            this.Items.CollectionChanged += Items_CollectionChanged;
         }
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
+
+            if (propertyName == nameof(Items))
+            {
+                this.Items.CollectionChanged += Items_CollectionChanged;
+            }
 
             if (propertyName == nameof(HeightCell))
             {
@@ -44,21 +59,44 @@ namespace ArcheryManager.CustomControls
                     row.Height = new GridLength(HeightCell);
                 }
             }
+
+            if (propertyName == nameof(OrderSelector))
+            {
+                ResetPosition();
+            }
         }
 
         private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Reset)
+            {
                 resetDimension();
+            }
         }
 
         private void UniformGrid_ItemRemoved(BindableObject obj)
         {
+            ResetPosition();
+        }
+
+        private void ResetPosition()
+        {
             resetDimension();
 
-            int indexChild = 0;
-            foreach (var child in Children)
+            IEnumerable<T> ordered;
+            if (OrderSelector != null)
             {
+                ordered = Items.OrderBy(OrderSelector);
+            }
+            else
+            {
+                ordered = Items;
+            }
+
+            int indexChild = 0;
+            foreach (var data in ordered)
+            {
+                var child = FindContainer(data);
                 ApplyPosition(child, indexChild);
                 indexChild++;
             }
@@ -73,7 +111,7 @@ namespace ArcheryManager.CustomControls
 
         private void UniformGrid_ItemAdded(BindableObject obj)
         {
-            ApplyPosition(obj, Children.Count - 1);
+            ResetPosition();
         }
 
         private void ApplyPosition(BindableObject obj, int childIndex)

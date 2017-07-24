@@ -47,14 +47,14 @@ namespace ArcheryManager.Interactions.Behaviors
             set
             {
                 _current = value;
-                associatedObject.Text = value.ToString();
+                AssociatedObject.Text = value.ToString();
                 if (_currentMax != 0)
                 {
-                    associatedObject.Progress = _current * associatedObject.MaxProgress / _currentMax;
+                    AssociatedObject.Progress = _current * AssociatedObject.MaxProgress / _currentMax;
                 }
                 else
                 {
-                    associatedObject.Progress = 0;
+                    AssociatedObject.Progress = 0;
                 }
             }
         }
@@ -73,16 +73,16 @@ namespace ArcheryManager.Interactions.Behaviors
         protected override void OnAttachedTo(CustomTimer bindable)
         {
             base.OnAttachedTo(bindable);
-            _waveBehavior = associatedObject.WaveBehavior;
+            _waveBehavior = AssociatedObject.WaveBehavior;
         }
 
         #region public function
 
         public void Start()
         {
-            if (associatedObject.IsStopped)
+            if (AssociatedObject.IsStopped)
             {
-                if (associatedObject.ShowWaitingTime)
+                if (AssociatedObject.ShowWaitingTime)
                 {
                     StartWaitingFunction();
                 }
@@ -95,18 +95,18 @@ namespace ArcheryManager.Interactions.Behaviors
 
         private void StartWaitingFunction()
         {
-            associatedObject.IsWaitingTime = true;
-            associatedObject.IsStopped = false;
-            associatedObject.IsPaused = false;
-            _currentMax = associatedObject.WaitingTime;
-            this.Current = associatedObject.WaitingTime;
+            AssociatedObject.IsWaitingTime = true;
+            AssociatedObject.IsStopped = false;
+            AssociatedObject.IsPaused = false;
+            _currentMax = AssociatedObject.WaitingTime;
+            this.Current = AssociatedObject.WaitingTime;
             Device.StartTimer(TimeSpan.FromSeconds(1), WaitingTimerFunction);
             PlaySong();
         }
 
         public void Stop()
         {
-            associatedObject.IsStopped = true;
+            AssociatedObject.IsStopped = true;
             //TODO wait one second to be sure the current timer while stopped
 
             _waveBehavior.NextWave();
@@ -120,15 +120,15 @@ namespace ArcheryManager.Interactions.Behaviors
 
         public void Pause()
         {
-            associatedObject.IsPaused = true;
+            AssociatedObject.IsPaused = true;
             //TODO wait one second to be sure the current timer while paused
         }
 
         public void Continue()
         {
-            if (associatedObject.IsPaused && !associatedObject.IsStopped)
+            if (AssociatedObject.IsPaused && !AssociatedObject.IsStopped)
             {
-                associatedObject.IsPaused = false;
+                AssociatedObject.IsPaused = false;
                 Device.StartTimer(TimeSpan.FromSeconds(1), TimerFunction);
             }
         }
@@ -142,14 +142,14 @@ namespace ArcheryManager.Interactions.Behaviors
         /// </summary>
         private bool WaitingTimerFunction()
         {
-            if (associatedObject.IsStopped || associatedObject.IsPaused) // timer was stop
+            if (AssociatedObject.IsStopped || AssociatedObject.IsPaused) // timer was stop
             {
                 SettingStop();
                 PlaySong();
                 return false;
             }
 
-            associatedObject.Color = associatedObject.WaitingColor;
+            AssociatedObject.Color = AssociatedObject.WaitingColor;
             this.Current--;
 
             bool res = ShouldContinueTimer(avoidZero: true);
@@ -164,11 +164,11 @@ namespace ArcheryManager.Interactions.Behaviors
 
         private void StartTimerFunction()
         {
-            associatedObject.IsStopped = false;
-            _currentMax = associatedObject.Time;
-            this.Current = associatedObject.Time;
+            AssociatedObject.IsStopped = false;
+            _currentMax = AssociatedObject.Time;
+            this.Current = AssociatedObject.Time;
             UpdateColor();
-            associatedObject.IsWaitingTime = false;
+            AssociatedObject.IsWaitingTime = false;
             Device.StartTimer(TimeSpan.FromSeconds(1), TimerFunction);
             PlaySong();
         }
@@ -178,14 +178,14 @@ namespace ArcheryManager.Interactions.Behaviors
         /// </summary>
         private bool TimerFunction()
         {
-            if (associatedObject.IsStopped) // timer was stop
+            if (AssociatedObject.IsStopped) // timer was stop
             {
                 SettingStop();
                 PlaySong();
                 return false;
             }
 
-            if (associatedObject.IsPaused) // timer was paused
+            if (AssociatedObject.IsPaused) // timer was paused
             {
                 return false;
             }
@@ -207,10 +207,10 @@ namespace ArcheryManager.Interactions.Behaviors
 
         private void SettingStop()
         {
-            associatedObject.IsStopped = true;
-            associatedObject.IsPaused = false;
-            this.Current = associatedObject.Time;
-            associatedObject.Color = StopTimeColor;
+            AssociatedObject.IsStopped = true;
+            AssociatedObject.IsPaused = false;
+            this.Current = AssociatedObject.Time;
+            AssociatedObject.Color = StopTimeColor;
         }
 
         /// <summary>
@@ -219,14 +219,14 @@ namespace ArcheryManager.Interactions.Behaviors
         private void UpdateColor()
         {
             // general time
-            if (this.Current > associatedObject.LimitTime)
-                associatedObject.Color = Color.Green;
+            if (this.Current > AssociatedObject.LimitTime)
+                AssociatedObject.Color = Color.Green;
             // limit time
             else if (ShouldContinueTimer())
-                associatedObject.Color = LimitTimeColor;
+                AssociatedObject.Color = LimitTimeColor;
             // stop time
             else
-                associatedObject.Color = StopTimeColor;
+                AssociatedObject.Color = StopTimeColor;
         }
 
         /// <summary>

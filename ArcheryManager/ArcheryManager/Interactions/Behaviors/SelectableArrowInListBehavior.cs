@@ -33,8 +33,8 @@ namespace ArcheryManager.Interactions.Behaviors
         {
             base.OnAttachedTo(list);
 
-            associatedObject.ItemAdded += AssociatedObject_ItemAdded;
-            associatedObject.Items.CollectionChanged += Items_CollectionChanged;
+            AssociatedObject.ItemAdded += AssociatedObject_ItemAdded;
+            AssociatedObject.Items.CollectionChanged += Items_CollectionChanged;
         }
 
         private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -50,7 +50,7 @@ namespace ArcheryManager.Interactions.Behaviors
 
         private bool ContainsInAssociatedObject(View a)
         {
-            return associatedObject.Items.Contains(a.BindingContext as Arrow);
+            return AssociatedObject.Items.Contains(a.BindingContext as Arrow);
         }
 
         /// <summary>
@@ -87,8 +87,8 @@ namespace ArcheryManager.Interactions.Behaviors
         {
             foreach (var arrow in selectedArrows.ToList())
             {
-                int index = associatedObject.Children.IndexOf(arrow);
-                associatedObject.Items.RemoveAt(index);
+                int index = AssociatedObject.Children.IndexOf(arrow);
+                AssociatedObject.Items.RemoveAt(index);
             }
         }
 

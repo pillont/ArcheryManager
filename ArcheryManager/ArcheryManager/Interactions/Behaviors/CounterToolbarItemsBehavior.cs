@@ -12,10 +12,10 @@ namespace ArcheryManager.Interactions.Behaviors
     {
         #region toolbar item
 
-        private readonly GeneralCounterSetting GeneralCounterSetting;
+        private readonly IGeneralCounterSetting GeneralCounterSetting;
         private readonly ScoreCounter Counter;
 
-        public CounterToolbarItemsBehavior(GeneralCounterSetting generalCounterSetting, ScoreCounter counter)
+        public CounterToolbarItemsBehavior(IGeneralCounterSetting generalCounterSetting, ScoreCounter counter)
         {
             GeneralCounterSetting = generalCounterSetting;
             Counter = counter;
@@ -87,21 +87,21 @@ namespace ArcheryManager.Interactions.Behaviors
 
         public void AddDefaultToolbarItems()
         {
-            associatedObject.ToolbarItems.Add(new ToolbarItem()
+            AssociatedObject.ToolbarItems.Add(new ToolbarItem()
             {
                 Text = AppResources.RemoveLast,
                 Order = ToolbarItemOrder.Primary,
                 Command = new Command(Counter.RemoveLastArrow)
             });
 
-            associatedObject.ToolbarItems.Add(new ToolbarItem()
+            AssociatedObject.ToolbarItems.Add(new ToolbarItem()
             {
                 Text = AppResources.RemoveAll,
                 Order = ToolbarItemOrder.Secondary,
                 Command = new Command(() => AskValidation(AppResources.RemoveAllQuestion, Counter.ClearArrows))
             });
 
-            associatedObject.ToolbarItems.Add(new ToolbarItem()
+            AssociatedObject.ToolbarItems.Add(new ToolbarItem()
             {
                 Text = AppResources.Restart,
                 Order = ToolbarItemOrder.Secondary,
@@ -111,7 +111,7 @@ namespace ArcheryManager.Interactions.Behaviors
 
         private void AddNewFlightButton()
         {
-            associatedObject.ToolbarItems.Add(new ToolbarItem()
+            AssociatedObject.ToolbarItems.Add(new ToolbarItem()
             {
                 Text = AppResources.NewFlight,
                 Order = ToolbarItemOrder.Primary,
@@ -128,7 +128,7 @@ namespace ArcheryManager.Interactions.Behaviors
         private ToolbarItem GetCurrentNewFlightButton()
         {
             string newFlightText = AppResources.NewFlight;
-            return associatedObject.ToolbarItems.Where(i => i.Text == newFlightText).FirstOrDefault();
+            return AssociatedObject.ToolbarItems.Where(i => i.Text == newFlightText).FirstOrDefault();
         }
 
         private void RemoveNewFlightButton()
@@ -136,7 +136,7 @@ namespace ArcheryManager.Interactions.Behaviors
             var button = GetCurrentNewFlightButton();
             if (button != null)
             {
-                associatedObject.ToolbarItems.Remove(button);
+                AssociatedObject.ToolbarItems.Remove(button);
             }
         }
 

@@ -12,10 +12,9 @@ namespace ArcheryManager.Pages
         private readonly ScoreCounter Counter;
         private readonly CountSetting CountSetting;
 
-        public CounterButtonPage(GeneralCounterSetting generalCounterSetting)
+        public CounterButtonPage(IGeneralCounterSetting generalCounterSetting)
         {
             InitializeComponent();
-            generalCounterSetting.ScoreResult = new ScoreResult();
 
             var arrowSetting = generalCounterSetting.ArrowSetting;
             var countSetting = generalCounterSetting.CountSetting;

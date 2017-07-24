@@ -14,7 +14,7 @@ namespace ArcheryManager.Factories
         /// <param name="targetSetting"></param>
         /// <param name="arrowSetting"></param>
         /// <returns></returns>
-        public static Target Create(GeneralCounterSetting generalCounterSetting, ScoreCounter counter)
+        public static Target Create(IGeneralCounterSetting generalCounterSetting, ScoreCounter counter)
         {
             var countSetting = generalCounterSetting.CountSetting;
             var result = generalCounterSetting.ScoreResult;
@@ -32,6 +32,8 @@ namespace ArcheryManager.Factories
             var average = customTarget.AverageCanvas;
             average.BindingContext = countSetting;
             average.SetBinding(View.IsVisibleProperty, nameof(CountSetting.AverageIsVisible));
+            var averagebehavior = new AverageBehavior(counter, generalCounterSetting);
+            average.Behaviors.Add(averagebehavior);
 
             var behavior = new MovableTargetBehavior(generalCounterSetting, counter);
             customTarget.Behaviors.Add(behavior);

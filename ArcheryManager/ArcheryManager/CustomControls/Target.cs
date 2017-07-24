@@ -68,13 +68,14 @@ namespace ArcheryManager.CustomControls
 
         #region target layout
 
-        public readonly ArrowsGrid ArrowGrid;
+        internal readonly ArrowsGrid ArrowGrid;
 
-        public readonly ArrowsGrid PreviousArrowGrid;
+        internal readonly ArrowsGrid PreviousArrowGrid;
 
-        public readonly AverageCanvas AverageCanvas; // TODO set private with layout builder
         private readonly IArrowSetting ArrowSetting;
         public readonly ArrowFactory Factory;
+
+        internal readonly AverageCanvas AverageCanvas; // TODO set private with layout builder
 
         #endregion target layout
 
@@ -88,7 +89,7 @@ namespace ArcheryManager.CustomControls
         /// </summary>
         public Grid TargetGrid { get; private set; }
 
-        public Target(GeneralCounterSetting generalCounterSetting)
+        public Target(IGeneralCounterSetting generalCounterSetting)
         {
             /*
              * target layout
@@ -99,12 +100,13 @@ namespace ArcheryManager.CustomControls
                 ArrowWidth = ArrowWidth,
                 ArrowColor = PreviousArrowsColor
             };
-            AverageCanvas = new AverageCanvas(generalCounterSetting)
+            AverageCanvas = new AverageCanvas()
             {
                 AutomationId = "averageCanvas",
                 VerticalOptions = LayoutOptions.CenterAndExpand,
                 HorizontalOptions = LayoutOptions.CenterAndExpand
             };
+
             ArrowGrid = new ArrowsGrid()
             {
                 AutomationId = "arrowInTargetGrid",
@@ -218,7 +220,10 @@ namespace ArcheryManager.CustomControls
 
         public virtual void ResetSelection()
         {
-            ArrowGrid.ResetSelection();
+            foreach (var arrow in ArrowGrid.Items)
+            {
+                UnSelectArrow(arrow);
+            }
         }
 
         #endregion selection interactions

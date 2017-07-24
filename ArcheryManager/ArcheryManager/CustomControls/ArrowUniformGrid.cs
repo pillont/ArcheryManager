@@ -1,4 +1,6 @@
-﻿using ArcheryManager.Interfaces;
+﻿using System.Linq;
+using System.Runtime.CompilerServices;
+using ArcheryManager.Interfaces;
 using ArcheryManager.Utils;
 using Xamarin.Forms;
 using XFShapeView;
