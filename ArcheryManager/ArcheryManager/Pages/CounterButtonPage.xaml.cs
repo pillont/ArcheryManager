@@ -9,7 +9,7 @@ namespace ArcheryManager.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CounterButtonPage : ContentPageWithOverridableToolBar
     {
-        private readonly ScoreCounter Counter;
+        public readonly ScoreCounter Counter;
         private readonly CountSetting CountSetting;
 
         public CounterButtonPage(IGeneralCounterSetting generalCounterSetting)
