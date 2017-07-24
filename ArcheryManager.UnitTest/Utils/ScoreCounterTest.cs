@@ -23,7 +23,13 @@ namespace ArcheryManager.UnitTest.Utils
         {
             countSetting = new CountSetting();
             arrowSetting = EnglishArrowSetting.Instance;
-            generalCounterSetting = new GeneralCounterSetting() { CountSetting = countSetting, ArrowSetting = arrowSetting };
+            var result = new ScoreResult();
+            generalCounterSetting = new GeneralCounterSetting()
+            {
+                CountSetting = countSetting,
+                ArrowSetting = arrowSetting,
+                ScoreResult = result
+            };
             counter = new ScoreCounter(generalCounterSetting);
         }
 

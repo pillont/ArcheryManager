@@ -9,6 +9,15 @@ namespace ArcheryManager.Settings
     {
         #region Arrows list
 
+        public static readonly BindableProperty LastTotalProperty =
+                      BindableProperty.Create(nameof(LastTotal), typeof(int), typeof(ScoreResult), 0);
+
+        public int LastTotal
+        {
+            get { return (int)GetValue(LastTotalProperty); }
+            set { SetValue(LastTotalProperty, value); }
+        }
+
         public static readonly BindableProperty FlightSavedProperty =
                       BindableProperty.Create(nameof(FlightsSaved), typeof(List<Flight>), typeof(ScoreResult), null);
 

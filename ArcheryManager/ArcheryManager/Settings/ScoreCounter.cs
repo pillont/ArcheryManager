@@ -14,8 +14,6 @@ namespace ArcheryManager.Settings
         private const string NewFlightText = "New Flight";
         private const string ScoreFormat = "{0}/{1}";
 
-        private int lastTotal;
-
         #region properties
 
         public string TotalScoreString
@@ -60,10 +58,15 @@ namespace ArcheryManager.Settings
 
         private readonly IGeneralCounterSetting GeneralCounterSetting;
 
+        /// <summary>
+        /// NOTE : mst have not null value in generalCounterSetting.ScoreResult
+        /// else exception not understandable on the ctor :
+        /// StackTrace	" ArcheryManager.Settings.ScoreCounter..ctor(IGeneralCounterSetting generalCounterSetting)
+        /// TODO : understand why !
+        /// </summary>
+        /// <param name="generalCounterSetting"></param>
         public ScoreCounter(IGeneralCounterSetting generalCounterSetting)
         {
-            lastTotal = 0;
-
             GeneralCounterSetting = generalCounterSetting;
             Result.PropertyChanged += Result_PropertyChanged;
             Result.CurrentArrows.Clear();
@@ -167,7 +170,7 @@ namespace ArcheryManager.Settings
                 Result.FlightScore += ValueOf(a);
             }
 
-            Result.TotalScore = lastTotal;
+            Result.TotalScore = Result.LastTotal;
             Result.TotalScore += Result.FlightScore;
         }
 
@@ -213,7 +216,7 @@ namespace ArcheryManager.Settings
 
         public void RestartCount()
         {
-            lastTotal = 0;
+            Result.LastTotal = 0;
             Result.FlightsSaved.Clear();
             Result.CurrentArrows.Clear();
             UpdatePreviousArrow();
@@ -225,9 +228,10 @@ namespace ArcheryManager.Settings
         {
             Result.FlightsSaved.Add(new Flight(Result.CurrentArrows) { Number = Result.FlightsSaved.Count + 1 });
 
-            lastTotal += Result.FlightScore;
-            Result.FlightScore = 0;
+            Result.LastTotal += Result.FlightScore;
             Result.CurrentArrows.Clear();
+
+            Result.FlightScore = 0;
         }
 
         public void AddArrow(Arrow arrow)
