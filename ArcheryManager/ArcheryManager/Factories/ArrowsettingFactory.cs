@@ -4,7 +4,7 @@ using ArcheryManager.Settings.ArrowSettings;
 
 namespace ArcheryManager.Factories
 {
-    internal class ArrowsettingFactory
+    public class ArrowsettingFactory
     {
         public static IArrowSetting Create(TargetStyle targetStyle)
         {

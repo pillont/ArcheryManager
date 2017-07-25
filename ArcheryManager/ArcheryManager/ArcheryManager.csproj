@@ -52,6 +52,7 @@
     </Compile>
     <Compile Include="Factories\ArrowsettingFactory.cs" />
     <Compile Include="Factories\CounterPageFactory.cs" />
+    <Compile Include="Interactions\Behaviors\CounterButtonBehavior.cs" />
     <Compile Include="Interactions\Behaviors\CounterToolbarItemsBehavior.cs" />
     <Compile Include="Interactions\Behaviors\ArrowListOrderedBehavior.cs" />
     <Compile Include="Pages\CounterSelectorPage.xaml.cs">
@@ -126,6 +127,7 @@
     <Compile Include="Settings\ScoreResult.cs" />
     <Compile Include="Utils\Arrow.cs" />
     <Compile Include="Settings\CountSetting.cs" />
+    <Compile Include="Utils\CounterButtonGenerator.cs" />
     <Compile Include="Utils\Flight.cs" />
     <Compile Include="Utils\ScreenRotationWatcher.cs" />
     <Compile Include="Settings\ScoreCounter.cs" />

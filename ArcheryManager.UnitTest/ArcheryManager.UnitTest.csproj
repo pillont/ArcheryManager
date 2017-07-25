@@ -86,6 +86,7 @@
     <Compile Include="Settings\FieldArrowSettingTest.cs" />
     <Compile Include="Settings\IndoorCompoundArrowSettingTest.cs" />
     <Compile Include="Settings\IndoorRecurveArrowSettingTest.cs" />
+    <Compile Include="Utils\CounterButtonGeneratorTest.cs" />
     <Compile Include="Utils\ScoreCounterTest.cs" />
     <Compile Include="Utils\StatisticHelperTest.cs" />
   </ItemGroup>

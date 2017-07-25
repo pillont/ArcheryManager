@@ -97,8 +97,11 @@ namespace ArcheryManager.CustomControls
             foreach (var data in ordered)
             {
                 var child = FindContainer(data);
-                ApplyPosition(child, indexChild);
-                indexChild++;
+                if (child != null)
+                {
+                    ApplyPosition(child, indexChild);
+                    indexChild++;
+                }
             }
         }
 

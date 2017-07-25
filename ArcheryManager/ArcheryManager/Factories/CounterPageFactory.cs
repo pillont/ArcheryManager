@@ -1,4 +1,5 @@
-﻿using ArcheryManager.Pages;
+﻿using ArcheryManager.Interactions.Behaviors;
+using ArcheryManager.Pages;
 using ArcheryManager.Settings;
 using Xamarin.Forms;
 
