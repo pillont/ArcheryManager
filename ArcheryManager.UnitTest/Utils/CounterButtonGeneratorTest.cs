@@ -68,7 +68,7 @@ namespace ArcheryManager.UnitTest.Utils
             Assert.AreEqual(2, buttons[1].Index);
             Assert.AreEqual(3, buttons[2].Index);
             Assert.AreEqual(4, buttons[3].Index);
-            Assert.AreEqual(5, buttons[4].Index);
+            Assert.AreEqual(6, buttons[4].Index);
             Assert.AreEqual(0, buttons[5].Index);
         }
 

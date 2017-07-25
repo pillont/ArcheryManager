@@ -27,7 +27,7 @@ namespace ArcheryManager.Utils
             //NOTE : remove second 9 zone on indoor compound target
             if (ArrowSetting is IndoorCompoundArrowSetting)
             {
-                buttonsData.Remove(buttonsData.Last());
+                buttonsData.RemoveAt(buttonsData.Count - 2);
             }
 
             var missArrow = GetArrow(0);

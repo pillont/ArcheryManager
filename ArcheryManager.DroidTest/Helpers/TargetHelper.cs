@@ -62,8 +62,8 @@ namespace ArcheryManager.DroidTest.Helpers
             TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(1).Child(1).Child().Text("7"));
             TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(2).Child(1).Child().Text("8"));
             TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(3).Child(1).Child().Text("9"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(5).Child(1).Child().Text("10"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(6).Child(1).Child().Text("M"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(4).Child(1).Child().Text("10"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(5).Child(1).Child().Text("M"));
         }
 
         private static void ShouldHaveIndoorRecurveButtons()
