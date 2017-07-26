@@ -78,6 +78,8 @@
     <Compile Include="ClassTest.cs" />
     <Compile Include="Factories\ArrowFactoryTest.cs" />
     <Compile Include="Factories\ScoreListFactoryTest.cs" />
+    <Compile Include="Interactions\Behaviors\ArrowListOrderedBehaviorTest.cs" />
+    <Compile Include="Interactions\Behaviors\AverageBehaviorTest.cs" />
     <Compile Include="Interactions\Behaviors\CounterToolbarItemsBehaviorTest.cs" />
     <Compile Include="Pages\TimerPageTest.cs" />
     <Compile Include="Interactions\Behaviors\WaveBehaviorTest.cs" />

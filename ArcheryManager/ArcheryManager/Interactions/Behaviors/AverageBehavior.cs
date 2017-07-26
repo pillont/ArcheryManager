@@ -14,7 +14,7 @@ namespace ArcheryManager.Interactions.Behaviors
     {
         private const int MinArrowForAverage = 2;
         private readonly ScoreCounter Counter;
-        private Point AverageCenter;
+        public Point? AverageCenter { get; private set; }
         private readonly IGeneralCounterSetting GeneralCounterSetting;
 
         private ScoreResult Result
@@ -75,7 +75,7 @@ namespace ArcheryManager.Interactions.Behaviors
 
         #region average update
 
-        private async void UpdateAverageAsync()// TODO make behavior
+        public async void UpdateAverageAsync()
         {
             var list = Counter.ArrowsShowed.ToList();
 
@@ -89,8 +89,13 @@ namespace ArcheryManager.Interactions.Behaviors
                         double standartDeviationX = StatisticHelper.CalculateStdDev(list.Select(a => a.TranslationX));
                         double standartDeviationY = StatisticHelper.CalculateStdDev(list.Select(a => a.TranslationY));
 
+                        if (!AverageCenter.HasValue)
+                        {
+                            throw new NullReferenceException("average center hasn't value");
+                        }
+
                         Device.BeginInvokeOnMainThread(() =>
-                            AssociatedObject.Content = AssociatedObject.CreateAverageVisual(standartDeviationX, standartDeviationY, AverageCenter));
+                            AssociatedObject.Content = AssociatedObject.CreateAverageVisual(standartDeviationX, standartDeviationY, AverageCenter.Value));
                     }
                 }
                 catch (Exception e)
@@ -104,12 +109,14 @@ namespace ArcheryManager.Interactions.Behaviors
         {
             if (list.Count == 0)
             {
-                throw new InvalidOperationException();
+                AverageCenter = null;
             }
-
-            double averageX = list.Average(a => a.TranslationX);
-            double averageY = list.Average(a => a.TranslationY);
-            AverageCenter = new Point(averageX, averageY);
+            else
+            {
+                double averageX = list.Average(a => a.TranslationX);
+                double averageY = list.Average(a => a.TranslationY);
+                AverageCenter = new Point(averageX, averageY);
+            }
         }
 
         /// <summary>
