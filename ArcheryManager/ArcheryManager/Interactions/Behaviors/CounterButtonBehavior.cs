@@ -43,15 +43,16 @@ namespace ArcheryManager.Interactions.Behaviors
 
         private void AssociatedObject_ButtonTapped(object sender, EventArgs e)
         {
-            if (Counter != null)
-            {
-                var view = sender as BindableObject;
+            ButtonTap(sender as BindableObject);
+        }
 
-                if (view.BindingContext is Arrow buttonArrow)
-                {
-                    var arrow = new Arrow(buttonArrow.Index, GeneralCounterSetting.ScoreResult.CurrentArrows.Count);
-                    Counter.AddArrow(arrow);
-                }
+        public void ButtonTap(BindableObject button)
+        {
+            if (Counter != null &&
+                button.BindingContext is Arrow buttonArrow)
+            {
+                var arrow = new Arrow(buttonArrow.Index, GeneralCounterSetting.ScoreResult.CurrentArrows.Count);
+                Counter.AddArrow(arrow);
             }
         }
     }

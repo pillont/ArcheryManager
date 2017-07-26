@@ -80,8 +80,10 @@
     <Compile Include="Factories\ScoreListFactoryTest.cs" />
     <Compile Include="Interactions\Behaviors\ArrowListOrderedBehaviorTest.cs" />
     <Compile Include="Interactions\Behaviors\AverageBehaviorTest.cs" />
+    <Compile Include="Interactions\Behaviors\CounterButtonBehaviorTest.cs" />
     <Compile Include="Interactions\Behaviors\CounterToolbarItemsBehaviorTest.cs" />
     <Compile Include="Mockables\ContentPageWithOverridableToolBar.cs" />
+    <Compile Include="MockableBindableObject.cs" />
     <Compile Include="Pages\TimerPageTest.cs" />
     <Compile Include="Interactions\Behaviors\WaveBehaviorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
