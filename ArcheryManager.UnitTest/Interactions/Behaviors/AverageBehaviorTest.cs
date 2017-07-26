@@ -72,14 +72,15 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
         public void UpdateAverageAsync_EmptyTest()
         {
             _canvas.Setup(mock => mock.CreateAverageVisual(It.IsAny<double>(), It.IsAny<double>(), It.IsAny<Point>()));
-            _behavior.UpdateAverageAsync();
+            _behavior.UpdateAverage();
             _canvas.Verify(mock => mock.CreateAverageVisual(It.IsAny<double>(), It.IsAny<double>(), It.IsAny<Point>()),
                     Times.Never());
         }
 
         [Test]
-        public void UpdateAverageAsyncTest()
+        public void UpdateAverageTest()
         {
+            _generalCounterSetting.CountSetting.AverageIsVisible = true;
             _canvas.Setup(mock => mock.CreateAverageVisual(It.IsAny<double>(), It.IsAny<double>(), It.IsAny<Point>()));
 
             _counter.AddArrow(new Arrow(0, 0, new Point(50, 100), 0));
@@ -88,7 +89,7 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
             var X = StatisticHelper.CalculateStdDev(_counter.ArrowsShowed.Select(a => a.TranslationX));
             var Y = StatisticHelper.CalculateStdDev(_counter.ArrowsShowed.Select(a => a.TranslationY));
             _canvas.Setup(mock => mock.CreateAverageVisual(X, Y, new Point(75, 150)));
-            _behavior.UpdateAverageAsync();
+            _behavior.UpdateAverage();
             _canvas.Verify(mock => mock.CreateAverageVisual(X, Y, new Point(75, 150)),
                     Times.AtLeast(1));
 
@@ -96,9 +97,23 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
             X = StatisticHelper.CalculateStdDev(_counter.ArrowsShowed.Select(a => a.TranslationX));
             Y = StatisticHelper.CalculateStdDev(_counter.ArrowsShowed.Select(a => a.TranslationY));
             _canvas.Setup(mock => mock.CreateAverageVisual(X, Y, new Point(150, 300)));
-            _behavior.UpdateAverageAsync();
+            _behavior.UpdateAverage();
             _canvas.Verify(mock => mock.CreateAverageVisual(X, Y, new Point(150, 300)),
                     Times.AtLeast(1));
+        }
+
+        [Test]
+        public void UpdateAverage_NoSeeAverageTest()
+        {
+            _generalCounterSetting.CountSetting.AverageIsVisible = false;
+            _canvas.Setup(mock => mock.CreateAverageVisual(It.IsAny<double>(), It.IsAny<double>(), It.IsAny<Point>()));
+
+            _counter.AddArrow(new Arrow(0, 0, new Point(50, 100), 0));
+            _counter.AddArrow(new Arrow(0, 0, new Point(100, 200), 0));
+            _counter.AddArrow(new Arrow(0, 0, new Point(300, 600), 0));
+
+            _canvas.Verify(mock => mock.CreateAverageVisual(It.IsAny<double>(), It.IsAny<double>(), It.IsAny<Point>()),
+            Times.Never());
         }
     }
 }

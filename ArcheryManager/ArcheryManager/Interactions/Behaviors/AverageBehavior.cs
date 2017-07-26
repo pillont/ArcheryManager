@@ -43,13 +43,17 @@ namespace ArcheryManager.Interactions.Behaviors
         {
             base.OnAttachedTo(bindable);
             CountSetting.PropertyChanged += Setting_PropertyChanged;
-            Result.AllArrows.CollectionChanged += AllArrows_CollectionChanged;
+            Counter.ArrowsChanged += Counter_ArrowsChanged;
+        }
+
+        private void Counter_ArrowsChanged()
+        {
+            UpdateAverage();
         }
 
         protected override void OnDetachingFrom(AverageCanvas bindable)
         {
             CountSetting.PropertyChanged -= Setting_PropertyChanged;
-            Result.AllArrows.CollectionChanged -= AllArrows_CollectionChanged;
         }
 
         /// <summary>
@@ -63,8 +67,13 @@ namespace ArcheryManager.Interactions.Behaviors
                 {
                     if (Counter.ArrowsShowed.Count > MinArrowForAverage)
                     {
-                        UpdateAverageAsync();
+                        UpdateAverage();
                     }
+                }
+
+                if (e.PropertyName == nameof(CountSetting.AverageIsVisible))
+                {
+                    UpdateAverage();
                 }
             }
             catch (Exception)
@@ -75,7 +84,7 @@ namespace ArcheryManager.Interactions.Behaviors
 
         #region average update
 
-        public async void UpdateAverageAsync()
+        private async void UpdateAverageAsync()
         {
             var list = Counter.ArrowsShowed.ToList();
 
@@ -94,8 +103,9 @@ namespace ArcheryManager.Interactions.Behaviors
                             throw new NullReferenceException("average center hasn't value");
                         }
 
+                        var visual = AssociatedObject.CreateAverageVisual(standartDeviationX, standartDeviationY, AverageCenter.Value);
                         Device.BeginInvokeOnMainThread(() =>
-                            AssociatedObject.Content = AssociatedObject.CreateAverageVisual(standartDeviationX, standartDeviationY, AverageCenter.Value));
+                                                    AssociatedObject.Content = visual);
                     }
                 }
                 catch (Exception e)
@@ -122,9 +132,12 @@ namespace ArcheryManager.Interactions.Behaviors
         /// <summary>
         /// update average when AllArrow of the counter changing
         /// </summary>
-        private void AllArrows_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        public void UpdateAverage()
         {
-            if (Counter.ArrowsShowed.Count < MinArrowForAverage)
+            bool seeAverage = CountSetting.AverageIsVisible == false
+                            || Counter.ArrowsShowed.Count < MinArrowForAverage;
+
+            if (seeAverage)
             {
                 AssociatedObject.Content = null;
             }

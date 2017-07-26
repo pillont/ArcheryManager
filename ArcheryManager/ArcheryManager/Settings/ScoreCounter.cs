@@ -6,6 +6,7 @@ using System.Linq;
 using ArcheryManager.Interfaces;
 using ArcheryManager.Utils;
 using System.ComponentModel;
+using System;
 
 namespace ArcheryManager.Settings
 {
@@ -13,6 +14,8 @@ namespace ArcheryManager.Settings
     {
         private const string NewFlightText = "New Flight";
         private const string ScoreFormat = "{0}/{1}";
+
+        public event Action ArrowsChanged;
 
         #region properties
 
@@ -74,7 +77,6 @@ namespace ArcheryManager.Settings
             Result.PreviousArrows.Clear();
 
             CountSetting.PropertyChanged += CountSetting_PropertyChanged;
-            Result.CurrentArrows.CollectionChanged += Arrows_CollectionChanged;
         }
 
         public ObservableCollection<Arrow> ArrowsShowed
@@ -98,13 +100,6 @@ namespace ArcheryManager.Settings
             {
                 return ScoreString(Result.FlightScore, Result.CurrentArrows);
             }
-        }
-
-        private void Arrows_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            UpdateAllArrow();
-            UpdatePreviousArrow();
-            UpdateTotal();
         }
 
         private void Result_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -222,6 +217,7 @@ namespace ArcheryManager.Settings
             UpdatePreviousArrow();
             UpdateAllArrow();
             UpdateTotal();
+            ArrowsChanged?.Invoke();
         }
 
         public void NewFlight()
@@ -232,6 +228,12 @@ namespace ArcheryManager.Settings
             Result.CurrentArrows.Clear();
 
             Result.FlightScore = 0;
+
+            UpdateAllArrow();
+            UpdatePreviousArrow();
+            UpdateTotal();
+
+            ArrowsChanged?.Invoke();
         }
 
         public void AddArrow(Arrow arrow)
@@ -242,12 +244,22 @@ namespace ArcheryManager.Settings
             {
                 Result.CurrentArrows?.Add(arrow);
                 UpdateOrder();
+
+                UpdateAllArrow();
+                UpdateTotal();
+
+                ArrowsChanged?.Invoke();
             }
         }
 
         public void ClearArrows()
         {
             Result.CurrentArrows?.Clear();
+
+            UpdateAllArrow();
+            UpdateTotal();
+
+            ArrowsChanged?.Invoke();
         }
 
         public void RemoveLastArrow()
@@ -255,6 +267,10 @@ namespace ArcheryManager.Settings
             if (Result.CurrentArrows.Count > 0)
             {
                 Result.CurrentArrows.RemoveAt(Result.CurrentArrows.Count - 1);
+
+                UpdateAllArrow();
+                UpdateTotal();
+                ArrowsChanged?.Invoke();
             }
         }
 
