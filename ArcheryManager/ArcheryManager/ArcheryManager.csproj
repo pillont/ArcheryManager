@@ -55,6 +55,7 @@
     <Compile Include="Interactions\Behaviors\CounterButtonBehavior.cs" />
     <Compile Include="Interactions\Behaviors\CounterToolbarItemsBehavior.cs" />
     <Compile Include="Interactions\Behaviors\ArrowListOrderedBehavior.cs" />
+    <Compile Include="Interactions\Behaviors\NumericPickerBehavior.cs" />
     <Compile Include="Pages\CounterSelectorPage.xaml.cs">
       <DependentUpon>CounterSelectorPage.xaml</DependentUpon>
     </Compile>
@@ -74,7 +75,6 @@
       <DependentUpon>AppResources.fr.resx</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\AverageCanvas.cs" />
-    <Compile Include="CustomControls\NumericPicker.cs" />
     <Compile Include="Factories\ScoreListFactory.cs" />
     <Compile Include="Factories\TargetFactory.cs" />
     <Compile Include="Interactions\Behaviors\CustomBehavior.cs" />

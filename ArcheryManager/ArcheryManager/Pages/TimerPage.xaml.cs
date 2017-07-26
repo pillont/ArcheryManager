@@ -23,6 +23,9 @@ namespace ArcheryManager.Pages
         };
 
         private const int ShootoutTime = 40;
+        private const int MinTime = 40;
+        private const int MaxTime = 300;
+        private const int StepTime = 5;
         private static readonly Color DefaultbackgroundColor = Color.White;
 
         private readonly TimerBehavior Behavior;
@@ -62,7 +65,6 @@ namespace ArcheryManager.Pages
             Behavior = new TimerBehavior(TimerSetting);
             timer.Behaviors.Add(Behavior);
             timer.PropertyChanged += Timer_PropertyChanged;
-            AddToolbarItems();
 
             var recognizer = new TapGestureRecognizer() { Command = new Command(Timer_Tap) };
             timer.GestureRecognizers.Add(recognizer);
@@ -70,6 +72,11 @@ namespace ArcheryManager.Pages
             PauseReplayText = AppResources.Pause;
 
             songPicker.SelectedIndexChanged += SongPicker_SelectedIndexChanged1;
+
+            var behavior = new NumericPickerBehavior(MinTime, MaxTime, StepTime);
+            timePicker.Behaviors.Add(behavior);
+
+            AddToolbarItems();
         }
 
         private void SongPicker_SelectedIndexChanged1(object sender, EventArgs e)

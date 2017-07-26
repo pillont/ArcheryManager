@@ -12,12 +12,9 @@
                 IsVisible="False"
                 SelectedIndexChanged="SongPicker_SelectedIndexChanged" />
 
-        <ctl:NumericPicker x:Name="timePicker"
+        <Picker x:Name="timePicker"
                            IsVisible="False"
-                           SelectedIndexChanged="TimerPicker_SelectedIndexChanged"
-                           Min="40"
-                           Max="300"
-                           Step="5" />
+                           SelectedIndexChanged="TimerPicker_SelectedIndexChanged" />
 
         <ctl:CustomTimer x:Name="timer" FontSize="72" AutomationId="CustomTimer" />
         <Button Text="{Binding PauseReplayText}" AutomationId="PauseButton" Clicked="ButtonPause_Clicked" IsEnabled="{Binding IsPauseEnabled}" />
