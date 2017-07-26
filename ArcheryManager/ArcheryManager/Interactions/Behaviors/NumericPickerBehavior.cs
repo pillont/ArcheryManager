@@ -22,15 +22,10 @@ namespace ArcheryManager.Interactions.Behaviors
             Step = step;
         }
 
-        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected override void OnAttachedTo(Picker bindable)
         {
-            base.OnPropertyChanged(propertyName);
-            if (propertyName == nameof(Min)
-            || propertyName == nameof(Max)
-            || propertyName == nameof(Step))
-            {
-                AssociatedObject.ItemsSource = GenerateItems(Min, Max, Step);
-            }
+            base.OnAttachedTo(bindable);
+            AssociatedObject.ItemsSource = GenerateItems(Min, Max, Step);
         }
 
         public static IList GenerateItems(double min, double max, double step)
