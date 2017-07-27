@@ -3,11 +3,13 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ArcheryManager.Interactions.Behaviors;
 using ArcheryManager.Resources;
+using ArcheryManager.Pages.PagesTemplates;
+using ArcheryManager.Interfaces;
 
 namespace ArcheryManager.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CounterButtonPage : ContentPageWithOverridableToolBar
+    public partial class CounterButtonPage : ContentPage, IToolbarItemsHolder
     {
         public readonly ScoreCounter Counter;
         private readonly CountSetting CountSetting;
@@ -29,13 +31,13 @@ namespace ArcheryManager.Pages
             scoreList.SizeChanged += ScoreList_SizeChanged;
             scoreList.Items = generalCounterSetting.ScoreResult.CurrentArrows;
 
-            var selectBehavior = new SelectableArrowInListBehavior(this.ToolbarItems);
+            var selectBehavior = new SelectableArrowInListBehavior(this.ToolbarItems, generalCounterSetting);
             scoreList.Behaviors.Add(selectBehavior);
 
             var behavior = new CounterButtonBehavior(generalCounterSetting, Counter);
             counterButtons.Behaviors.Add(behavior);
 
-            var toolbarBehavior = new CounterToolbarItemsBehavior(generalCounterSetting, Counter);
+            var toolbarBehavior = new CounterToolbarItemsBehavior<CounterButtonPage>(generalCounterSetting, Counter);
             this.Behaviors.Add(toolbarBehavior);
             toolbarBehavior.AddDefaultToolbarItems();
             AddCounterButtonsToolbarItems();

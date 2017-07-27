@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using System.Collections.Generic;
 using ArcheryManager.Resources;
 using ArcheryManager.Settings.ArrowSettings;
+using ArcheryManager.Settings;
 
 namespace ArcheryManager.Interactions.Behaviors
 {
@@ -18,11 +19,13 @@ namespace ArcheryManager.Interactions.Behaviors
         private ObservableCollection<View> selectedArrows;
         private readonly IList<ToolbarItem> toolbarItems;
         private readonly List<ToolbarItem> DefaultToolbarItems;
+        private readonly IGeneralCounterSetting GeneralCountSetting;
 
         public event NotifyCollectionChangedEventHandler ItemsSelectedChange;
 
-        public SelectableArrowInListBehavior(IList<ToolbarItem> toolbarItems)
+        public SelectableArrowInListBehavior(IList<ToolbarItem> toolbarItems, IGeneralCounterSetting generalCountSetting)
         {
+            GeneralCountSetting = generalCountSetting;
             this.toolbarItems = toolbarItems;
             DefaultToolbarItems = new List<ToolbarItem>(toolbarItems);
             selectedArrows = new ObservableCollection<View>();
@@ -90,6 +93,7 @@ namespace ArcheryManager.Interactions.Behaviors
                 int index = AssociatedObject.Children.IndexOf(arrow);
                 AssociatedObject.Items.RemoveAt(index);
             }
+            GeneralCountSetting.ScoreResult.OnArrowsChanged();
         }
 
         #endregion tap remove

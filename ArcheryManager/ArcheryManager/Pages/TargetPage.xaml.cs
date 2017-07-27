@@ -1,5 +1,4 @@
 ﻿using ArcheryManager.Factories;
-using ArcheryManager.Utils;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -7,18 +6,19 @@ using ArcheryManager.CustomControls;
 using ArcheryManager.Resources;
 using ArcheryManager.Settings;
 using ArcheryManager.Interactions.Behaviors;
+using ArcheryManager.Pages.PagesTemplates;
+using ArcheryManager.Interfaces;
 
 namespace ArcheryManager.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TargetPage : ContentPageWithOverridableToolBar
+    public partial class TargetPage : ContentPageWithRotationEvent, IToolbarItemsHolder
     {
         private readonly IGeneralCounterSetting GeneralCounterSetting;
 
         private CountSetting CountSetting => GeneralCounterSetting.CountSetting;
         private ScoreCounter Counter { get; set; }
 
-        private readonly ScreenRotationWatcher RotationWatcher;
         private readonly Target customTarget;
 
         public TargetPage(IGeneralCounterSetting generalCounterSetting)
@@ -30,10 +30,12 @@ namespace ArcheryManager.Pages
 
             #region view setup
 
-            var behavior = new CounterToolbarItemsBehavior(generalCounterSetting, Counter);
+            var behavior = new CounterToolbarItemsBehavior<TargetPage>(generalCounterSetting, Counter);
             this.Behaviors.Add(behavior);
 
-            RotationWatcher = new ScreenRotationWatcher(SetupGridForVerticalDevice, SetupGridForHorizontalDevice);
+            VerticalScreenRotation += SetupGridForVerticalDevice;
+            HorizontalScreenRotation += SetupGridForHorizontalDevice;
+
             SetupToolbarItems(behavior);
 
             #endregion view setup
@@ -56,7 +58,7 @@ namespace ArcheryManager.Pages
             #endregion total score
         }
 
-        private void SetupToolbarItems(CounterToolbarItemsBehavior behavior)
+        private void SetupToolbarItems(CounterToolbarItemsBehavior<TargetPage> behavior)
         {
             ToolbarItems.Clear();
             behavior.AddDefaultToolbarItems();
@@ -80,15 +82,6 @@ namespace ArcheryManager.Pages
         }
 
         #region rotation device
-
-        /// <summary>
-        /// event when device rotate
-        /// </summary>
-        protected override void OnSizeAllocated(double width, double height)
-        {
-            base.OnSizeAllocated(width, height);
-            RotationWatcher.UpdateView(width, height);
-        }
 
         private void SetupGridForHorizontalDevice(Size screenSize)
         {

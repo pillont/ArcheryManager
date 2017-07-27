@@ -1,13 +1,26 @@
-﻿using System;
+﻿using ArcheryManager.Utils;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ArcheryManager.Utils
+namespace ArcheryManager.Pages.PagesTemplates
 {
-    /// <summary>
-    /// watcher to change view during rotation of the device
-    /// </summary>
-    public class ScreenRotationWatcher
+    public class ContentPageWithRotationEvent : ContentPage
     {
+        public event Action<double, double> ScreenRotate;
+
+        /// <summary>
+        /// event when device rotate
+        /// </summary>
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+            UpdateView(width, height);
+        }
+
         /// <summary>
         /// last width watched
         /// </summary>
@@ -21,30 +34,19 @@ namespace ArcheryManager.Utils
         /// <summary>
         /// callback to setup view in vertical device
         /// </summary>
-        private Action<Size> setupViewForVerticalDevice;
+        public event Action<Size> VerticalScreenRotation;
 
         /// <summary>
         /// callback to setup view in Horizontal device
         /// </summary>
-        private Action<Size> setupViewForHorizontalDevice;
-
-        /// <summary>
-        /// ctor
-        /// </summary>
-        /// <param name="setupGridForVerticalDevice">callback to setup view in vertical device</param>
-        /// <param name="setupGridForHorizontalDevice">callback to setup view in Horizontal device</param>
-        public ScreenRotationWatcher(Action<Size> setupGridForVerticalDevice, Action<Size> setupGridForHorizontalDevice)
-        {
-            this.setupViewForVerticalDevice = setupGridForVerticalDevice;
-            this.setupViewForHorizontalDevice = setupGridForHorizontalDevice;
-        }
+        public event Action<Size> HorizontalScreenRotation;
 
         /// <summary>
         /// function to call in function "OnSizeAllocated" of a page
         /// </summary>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        public void UpdateView(double width, double height)
+        private void UpdateView(double width, double height)
         {
             if (width != this.lastWidth || height != this.lastHeight)
             {
@@ -53,12 +55,14 @@ namespace ArcheryManager.Utils
                 var size = new Size(width, height);
                 if (width < height)
                 {
-                    setupViewForVerticalDevice(size);
+                    VerticalScreenRotation(size);
                 }
                 else
                 {
-                    setupViewForHorizontalDevice(size);
+                    HorizontalScreenRotation(size);
                 }
+
+                ScreenRotate?.Invoke(width, height);
             }
         }
     }

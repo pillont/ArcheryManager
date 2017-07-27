@@ -1,12 +1,10 @@
 ﻿using Xamarin.Forms;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
 using ArcheryManager.Interfaces;
 using ArcheryManager.Utils;
 using System.ComponentModel;
-using System;
 
 namespace ArcheryManager.Settings
 {
@@ -14,8 +12,6 @@ namespace ArcheryManager.Settings
     {
         private const string NewFlightText = "New Flight";
         private const string ScoreFormat = "{0}/{1}";
-
-        public event Action ArrowsChanged;
 
         #region properties
 
@@ -217,7 +213,7 @@ namespace ArcheryManager.Settings
             UpdatePreviousArrow();
             UpdateAllArrow();
             UpdateTotal();
-            ArrowsChanged?.Invoke();
+            Result.OnArrowsChanged();
         }
 
         public void NewFlight()
@@ -233,7 +229,7 @@ namespace ArcheryManager.Settings
             UpdatePreviousArrow();
             UpdateTotal();
 
-            ArrowsChanged?.Invoke();
+            Result.OnArrowsChanged();
         }
 
         public void AddArrow(Arrow arrow)
@@ -248,7 +244,7 @@ namespace ArcheryManager.Settings
                 UpdateAllArrow();
                 UpdateTotal();
 
-                ArrowsChanged?.Invoke();
+                Result.OnArrowsChanged();
             }
         }
 
@@ -259,7 +255,7 @@ namespace ArcheryManager.Settings
             UpdateAllArrow();
             UpdateTotal();
 
-            ArrowsChanged?.Invoke();
+            Result.OnArrowsChanged();
         }
 
         public void RemoveLastArrow()
@@ -270,7 +266,7 @@ namespace ArcheryManager.Settings
 
                 UpdateAllArrow();
                 UpdateTotal();
-                ArrowsChanged?.Invoke();
+                Result.OnArrowsChanged();
             }
         }
 

@@ -43,7 +43,7 @@ namespace ArcheryManager.Interactions.Behaviors
         {
             base.OnAttachedTo(bindable);
             CountSetting.PropertyChanged += Setting_PropertyChanged;
-            Counter.ArrowsChanged += Counter_ArrowsChanged;
+            Result.ArrowsChanged += Counter_ArrowsChanged;
         }
 
         private void Counter_ArrowsChanged()
@@ -134,16 +134,16 @@ namespace ArcheryManager.Interactions.Behaviors
         /// </summary>
         public void UpdateAverage()
         {
-            bool seeAverage = CountSetting.AverageIsVisible == false
-                            || Counter.ArrowsShowed.Count < MinArrowForAverage;
+            bool seeAverage = CountSetting.AverageIsVisible
+                            && Counter.ArrowsShowed.Count >= MinArrowForAverage;
 
             if (seeAverage)
             {
-                AssociatedObject.Content = null;
+                UpdateAverageAsync();
             }
             else
             {
-                UpdateAverageAsync();
+                AssociatedObject.Content = null;
             }
         }
 
