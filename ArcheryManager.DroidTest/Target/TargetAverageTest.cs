@@ -253,10 +253,10 @@ namespace ArcheryManager.DroidTest.Target
 
             Thread.Sleep(500);
             var average = app.Query(e => e.Marked("averageCanvas").Child().Child(0)).First();
-            Assert.AreEqual(47, average.Rect.CenterX, 5);
-            Assert.AreEqual(47, average.Rect.CenterY, 5);
-            Assert.AreEqual(47, average.Rect.Width, 5);
-            Assert.AreEqual(47, average.Rect.Height, 5);
+            Assert.AreEqual(295, average.Rect.CenterX, 5);
+            Assert.AreEqual(455, average.Rect.CenterY, 5);
+            Assert.AreEqual(267, average.Rect.Width, 5);
+            Assert.AreEqual(267, average.Rect.Height, 5);
         }
     }
 }
