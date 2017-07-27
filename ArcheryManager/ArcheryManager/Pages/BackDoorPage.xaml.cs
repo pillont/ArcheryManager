@@ -46,7 +46,7 @@ namespace ArcheryManager.Pages
                     setting = IndoorRecurveArrowSetting.Instance;
                 }
 
-                var countSetting = new CountSetting() { WantTarget = true };
+                var countSetting = new CountSetting() { HaveTarget = true };
 
                 UpdateGeneralCounterSetting(setting, countSetting);
                 await OpenNewCounterView();
@@ -71,7 +71,7 @@ namespace ArcheryManager.Pages
 
         private async void ButtonCounter_Clicked(object sender, EventArgs e)
         {
-            var countSetting = new CountSetting() { WantTarget = false };
+            var countSetting = new CountSetting() { HaveTarget = false };
             var arrowSetting = EnglishArrowSetting.Instance;
             UpdateGeneralCounterSetting(arrowSetting, countSetting);
             await OpenNewCounterView();

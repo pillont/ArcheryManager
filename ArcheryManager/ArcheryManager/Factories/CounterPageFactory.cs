@@ -9,7 +9,7 @@ namespace ArcheryManager.Factories
     {
         public static Page Create(GeneralCounterSetting generalCounterSetting)
         {
-            bool wantTarget = generalCounterSetting.CountSetting.WantTarget;
+            bool wantTarget = generalCounterSetting.CountSetting.HaveTarget;
             generalCounterSetting.ScoreResult = new ScoreResult();
 
             if (wantTarget)

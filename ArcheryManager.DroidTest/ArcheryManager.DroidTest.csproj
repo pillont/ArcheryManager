@@ -81,6 +81,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\Counters\CounterSettingUpdateFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CounterSettingUpdateFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Targets\NewFlightFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -157,6 +162,10 @@
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Features\Counters\CounterSettingUpdateFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CounterSettingUpdateFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Targets\NewFlightFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
