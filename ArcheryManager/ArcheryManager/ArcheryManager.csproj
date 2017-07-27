@@ -131,6 +131,7 @@
     <Compile Include="Settings\ScoreResult.cs" />
     <Compile Include="Utils\Arrow.cs" />
     <Compile Include="Settings\CountSetting.cs" />
+    <Compile Include="Utils\ArrowTranslationHelper.cs" />
     <Compile Include="Utils\CounterButtonGenerator.cs" />
     <Compile Include="Utils\Flight.cs" />
     <Compile Include="Settings\ScoreCounter.cs" />

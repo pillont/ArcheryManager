@@ -36,7 +36,7 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
             };
 
             _counter = new ScoreCounter(_generalCounterSetting);
-            _behavior = new AverageBehavior(_counter, _generalCounterSetting);
+            _behavior = new AverageBehavior(null, _counter, _generalCounterSetting);
             _canvas = new Mock<AverageCanvas>();
             _canvas.Object.Behaviors.Add(_behavior);
         }

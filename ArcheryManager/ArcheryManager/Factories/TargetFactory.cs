@@ -1,7 +1,9 @@
-﻿using ArcheryManager.CustomControls;
+﻿using System;
+using ArcheryManager.CustomControls;
 using ArcheryManager.Interactions.Behaviors;
 using ArcheryManager.Settings;
 using Xamarin.Forms;
+using System.ComponentModel;
 
 namespace ArcheryManager.Factories
 {
@@ -32,13 +34,24 @@ namespace ArcheryManager.Factories
             var average = customTarget.AverageCanvas;
             average.BindingContext = countSetting;
             average.SetBinding(View.IsVisibleProperty, nameof(CountSetting.AverageIsVisible));
-            var averagebehavior = new AverageBehavior(counter, generalCounterSetting);
+            var averagebehavior = new AverageBehavior(customTarget, counter, generalCounterSetting);
             average.Behaviors.Add(averagebehavior);
 
             var behavior = new MovableTargetBehavior(generalCounterSetting, counter);
             customTarget.Behaviors.Add(behavior);
 
+            PropertyChangedEventHandler arg = null;
+            arg = (t, e) => updateAverageWhenTargetSizeChange(e, averagebehavior);
+            customTarget.PropertyChanged += arg;
             return customTarget;
+        }
+
+        private static void updateAverageWhenTargetSizeChange(PropertyChangedEventArgs e, AverageBehavior behavior)
+        {
+            if (e.PropertyName == nameof(Target.TargetSize))
+            {
+                behavior.UpdateAverage();
+            }
         }
     }
 }

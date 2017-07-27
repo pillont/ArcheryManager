@@ -33,8 +33,11 @@ namespace ArcheryManager.Interactions.Behaviors
             }
         }
 
-        public AverageBehavior(ScoreCounter counter, IGeneralCounterSetting generalCounterSetting)
+        private readonly Target Target;
+
+        public AverageBehavior(Target target, ScoreCounter counter, IGeneralCounterSetting generalCounterSetting)
         {
+            Target = target;
             Counter = counter;
             GeneralCounterSetting = generalCounterSetting;
         }
@@ -95,8 +98,8 @@ namespace ArcheryManager.Interactions.Behaviors
                     if (list.Count != 0)
                     {
                         UpdateAverageCenter(list);
-                        double standartDeviationX = StatisticHelper.CalculateStdDev(list.Select(a => a.TranslationX));
-                        double standartDeviationY = StatisticHelper.CalculateStdDev(list.Select(a => a.TranslationY));
+                        double standartDeviationX = StatisticHelper.CalculateStdDev(list.Select(a => ArrowTranslationHelper.TranslationXOf(a, Target.TargetSize)));
+                        double standartDeviationY = StatisticHelper.CalculateStdDev(list.Select(a => ArrowTranslationHelper.TranslationXOf(a, Target.TargetSize)));
 
                         if (!AverageCenter.HasValue)
                         {
@@ -123,8 +126,8 @@ namespace ArcheryManager.Interactions.Behaviors
             }
             else
             {
-                double averageX = list.Average(a => a.TranslationX);
-                double averageY = list.Average(a => a.TranslationY);
+                double averageX = list.Average(a => ArrowTranslationHelper.TranslationXOf(a, Target.TargetSize));
+                double averageY = list.Average(a => ArrowTranslationHelper.TranslationYOf(a, Target.TargetSize));
                 AverageCenter = new Point(averageX, averageY);
             }
         }

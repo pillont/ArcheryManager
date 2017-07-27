@@ -70,8 +70,8 @@ namespace ArcheryManager.CustomControls
                 BorderWidth = 1,
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Center,
-                TranslationX = TranslationXOf(arrow),
-                TranslationY = TranslationYOf(arrow),
+                TranslationX = ArrowTranslationHelper.TranslationXOf(arrow, TargetSize),
+                TranslationY = ArrowTranslationHelper.TranslationYOf(arrow, TargetSize),
             };
             return ctn;
         }
@@ -81,24 +81,9 @@ namespace ArcheryManager.CustomControls
             foreach (var a in Items)
             {
                 var container = FindContainer(a);
-                container.TranslationX = TranslationXOf(a);
-                container.TranslationY = TranslationYOf(a);
+                container.TranslationX = ArrowTranslationHelper.TranslationXOf(a, TargetSize);
+                container.TranslationY = ArrowTranslationHelper.TranslationYOf(a, TargetSize);
             }
-        }
-
-        private double TranslationYOf(Arrow arrow)
-        {
-            return TransformTranslation(arrow.TranslationY, arrow.TargetSize);
-        }
-
-        private double TranslationXOf(Arrow arrow)
-        {
-            return TransformTranslation(arrow.TranslationX, arrow.TargetSize);
-        }
-
-        private double TransformTranslation(double translation, double targetSize)
-        {
-            return TargetSize / targetSize * translation;
         }
 
         public void SelectArrow(Arrow arrow)

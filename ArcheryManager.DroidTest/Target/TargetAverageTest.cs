@@ -2,6 +2,7 @@
 using Xamarin.UITest.Android;
 using System.Linq;
 using ArcheryManager.Resources;
+using System.Threading;
 
 namespace ArcheryManager.DroidTest.Target
 {
@@ -231,6 +232,31 @@ namespace ArcheryManager.DroidTest.Target
             Assert.GreaterOrEqual(698, average.Rect.CenterY);
             Assert.GreaterOrEqual(320, average.Rect.Height);
             Assert.GreaterOrEqual(705, average.Rect.Width);
+        }
+
+        [Test]
+        public void AveragePositionAfterRotationTest()
+        {
+            app.WaitForElement("scoreList"); //update visual
+            app.Tap(TranslateExtension.GetTextResource("MoreOptions"));
+            app.Tap(TranslateExtension.GetTextResource("Settings"));
+            app.Tap("VisibilityAverageSwitch");
+            app.Back();
+
+            app.WaitForElement("scoreList"); //update visual
+
+            app.DragCoordinates(300, 800, 400, 900);
+            app.DragCoordinates(400, 800, 300, 700);
+
+            app.SetOrientationLandscape();
+            app.WaitForElement("averageCanvas");
+
+            Thread.Sleep(500);
+            var average = app.Query(e => e.Marked("averageCanvas").Child().Child(0)).First();
+            Assert.AreEqual(47, average.Rect.CenterX, 5);
+            Assert.AreEqual(47, average.Rect.CenterY, 5);
+            Assert.AreEqual(47, average.Rect.Width, 5);
+            Assert.AreEqual(47, average.Rect.Height, 5);
         }
     }
 }
