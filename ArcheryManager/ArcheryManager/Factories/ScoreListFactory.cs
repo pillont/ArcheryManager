@@ -23,7 +23,7 @@ namespace ArcheryManager.Factories
             var scoreList = new ArrowUniformGrid { AutomationId = "scoreList", CountByRow = 6, ArrowSetting = arrowSetting };
             scoreList.Items = generalCounterSetting.ScoreResult.CurrentArrows;
 
-            var selectBehavior = new SelectableArrowInListBehavior(toolbarItems);
+            var selectBehavior = new SelectableArrowInListBehavior(toolbarItems, generalCounterSetting);
             scoreList.Behaviors.Add(selectBehavior);
 
             var orderBehavior = new ArrowListOrderedBehavior(generalCounterSetting);

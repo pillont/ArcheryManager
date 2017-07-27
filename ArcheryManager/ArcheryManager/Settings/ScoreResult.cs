@@ -1,4 +1,5 @@
 ﻿using ArcheryManager.Utils;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
@@ -7,6 +8,13 @@ namespace ArcheryManager.Settings
 {
     public class ScoreResult : BindableObject
     {
+        public event Action ArrowsChanged;
+
+        public void OnArrowsChanged()
+        {
+            ArrowsChanged?.Invoke();
+        }
+
         #region Arrows list
 
         public static readonly BindableProperty LastTotalProperty =

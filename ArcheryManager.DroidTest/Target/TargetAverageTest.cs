@@ -97,6 +97,7 @@ namespace ArcheryManager.DroidTest.Target
             app.DragCoordinates(300, 800, 400, 900);
             app.DragCoordinates(400, 800, 300, 700);
 
+            app.WaitForElement("averageCanvas");
             var average = app.Query(e => e.Marked("averageCanvas").Child().Child(0)).First();
 
             Assert.LessOrEqual(378, average.Rect.CenterX);

@@ -1,7 +1,6 @@
 ﻿using Xamarin.Forms;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
 using ArcheryManager.Interfaces;
 using ArcheryManager.Utils;
@@ -74,7 +73,6 @@ namespace ArcheryManager.Settings
             Result.PreviousArrows.Clear();
 
             CountSetting.PropertyChanged += CountSetting_PropertyChanged;
-            Result.CurrentArrows.CollectionChanged += Arrows_CollectionChanged;
         }
 
         public ObservableCollection<Arrow> ArrowsShowed
@@ -98,13 +96,6 @@ namespace ArcheryManager.Settings
             {
                 return ScoreString(Result.FlightScore, Result.CurrentArrows);
             }
-        }
-
-        private void Arrows_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            UpdateAllArrow();
-            UpdatePreviousArrow();
-            UpdateTotal();
         }
 
         private void Result_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -222,6 +213,7 @@ namespace ArcheryManager.Settings
             UpdatePreviousArrow();
             UpdateAllArrow();
             UpdateTotal();
+            Result.OnArrowsChanged();
         }
 
         public void NewFlight()
@@ -232,6 +224,12 @@ namespace ArcheryManager.Settings
             Result.CurrentArrows.Clear();
 
             Result.FlightScore = 0;
+
+            UpdateAllArrow();
+            UpdatePreviousArrow();
+            UpdateTotal();
+
+            Result.OnArrowsChanged();
         }
 
         public void AddArrow(Arrow arrow)
@@ -242,12 +240,22 @@ namespace ArcheryManager.Settings
             {
                 Result.CurrentArrows?.Add(arrow);
                 UpdateOrder();
+
+                UpdateAllArrow();
+                UpdateTotal();
+
+                Result.OnArrowsChanged();
             }
         }
 
         public void ClearArrows()
         {
             Result.CurrentArrows?.Clear();
+
+            UpdateAllArrow();
+            UpdateTotal();
+
+            Result.OnArrowsChanged();
         }
 
         public void RemoveLastArrow()
@@ -255,6 +263,10 @@ namespace ArcheryManager.Settings
             if (Result.CurrentArrows.Count > 0)
             {
                 Result.CurrentArrows.RemoveAt(Result.CurrentArrows.Count - 1);
+
+                UpdateAllArrow();
+                UpdateTotal();
+                Result.OnArrowsChanged();
             }
         }
 

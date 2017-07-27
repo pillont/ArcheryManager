@@ -14,7 +14,7 @@ namespace ArcheryManager.Interactions.Behaviors
     {
         private const int MinArrowForAverage = 2;
         private readonly ScoreCounter Counter;
-        private Point AverageCenter;
+        public Point? AverageCenter { get; private set; }
         private readonly IGeneralCounterSetting GeneralCounterSetting;
 
         private ScoreResult Result
@@ -43,13 +43,17 @@ namespace ArcheryManager.Interactions.Behaviors
         {
             base.OnAttachedTo(bindable);
             CountSetting.PropertyChanged += Setting_PropertyChanged;
-            Result.AllArrows.CollectionChanged += AllArrows_CollectionChanged;
+            Result.ArrowsChanged += Counter_ArrowsChanged;
+        }
+
+        private void Counter_ArrowsChanged()
+        {
+            UpdateAverage();
         }
 
         protected override void OnDetachingFrom(AverageCanvas bindable)
         {
             CountSetting.PropertyChanged -= Setting_PropertyChanged;
-            Result.AllArrows.CollectionChanged -= AllArrows_CollectionChanged;
         }
 
         /// <summary>
@@ -63,8 +67,13 @@ namespace ArcheryManager.Interactions.Behaviors
                 {
                     if (Counter.ArrowsShowed.Count > MinArrowForAverage)
                     {
-                        UpdateAverageAsync();
+                        UpdateAverage();
                     }
+                }
+
+                if (e.PropertyName == nameof(CountSetting.AverageIsVisible))
+                {
+                    UpdateAverage();
                 }
             }
             catch (Exception)
@@ -75,7 +84,7 @@ namespace ArcheryManager.Interactions.Behaviors
 
         #region average update
 
-        private async void UpdateAverageAsync()// TODO make behavior
+        private async void UpdateAverageAsync()
         {
             var list = Counter.ArrowsShowed.ToList();
 
@@ -89,8 +98,14 @@ namespace ArcheryManager.Interactions.Behaviors
                         double standartDeviationX = StatisticHelper.CalculateStdDev(list.Select(a => a.TranslationX));
                         double standartDeviationY = StatisticHelper.CalculateStdDev(list.Select(a => a.TranslationY));
 
+                        if (!AverageCenter.HasValue)
+                        {
+                            throw new NullReferenceException("average center hasn't value");
+                        }
+
+                        var visual = AssociatedObject.CreateAverageVisual(standartDeviationX, standartDeviationY, AverageCenter.Value);
                         Device.BeginInvokeOnMainThread(() =>
-                            AssociatedObject.Content = AssociatedObject.CreateAverageVisual(standartDeviationX, standartDeviationY, AverageCenter));
+                                                    AssociatedObject.Content = visual);
                     }
                 }
                 catch (Exception e)
@@ -104,26 +119,31 @@ namespace ArcheryManager.Interactions.Behaviors
         {
             if (list.Count == 0)
             {
-                throw new InvalidOperationException();
+                AverageCenter = null;
             }
-
-            double averageX = list.Average(a => a.TranslationX);
-            double averageY = list.Average(a => a.TranslationY);
-            AverageCenter = new Point(averageX, averageY);
+            else
+            {
+                double averageX = list.Average(a => a.TranslationX);
+                double averageY = list.Average(a => a.TranslationY);
+                AverageCenter = new Point(averageX, averageY);
+            }
         }
 
         /// <summary>
         /// update average when AllArrow of the counter changing
         /// </summary>
-        private void AllArrows_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        public void UpdateAverage()
         {
-            if (Counter.ArrowsShowed.Count < MinArrowForAverage)
+            bool seeAverage = CountSetting.AverageIsVisible
+                            && Counter.ArrowsShowed.Count >= MinArrowForAverage;
+
+            if (seeAverage)
             {
-                AssociatedObject.Content = null;
+                UpdateAverageAsync();
             }
             else
             {
-                UpdateAverageAsync();
+                AssociatedObject.Content = null;
             }
         }
 

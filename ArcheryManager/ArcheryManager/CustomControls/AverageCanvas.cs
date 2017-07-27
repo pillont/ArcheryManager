@@ -31,7 +31,7 @@ namespace ArcheryManager.CustomControls
             }
         }
 
-        public View CreateAverageVisual(double standartDeviationX, double standartDeviationY, Point center)
+        public virtual View CreateAverageVisual(double standartDeviationX, double standartDeviationY, Point center)
         {
             var centerVisual = new ShapeView()
             {

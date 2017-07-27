@@ -12,7 +12,7 @@ namespace ArcheryManager.CustomControls
         public static readonly BindableProperty OrderSelectorProperty =
                       BindableProperty.Create(nameof(OrderSelector), typeof(Func<T, object>), typeof(UniformGrid<T>), null);
 
-        public Func<T, object> OrderSelector
+        public virtual Func<T, object> OrderSelector
         {
             get { return (Func<T, object>)GetValue(OrderSelectorProperty); }
             set { SetValue(OrderSelectorProperty, value); }
