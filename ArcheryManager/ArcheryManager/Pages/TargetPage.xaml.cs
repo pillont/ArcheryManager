@@ -77,7 +77,7 @@ namespace ArcheryManager.Pages
 
         private void OpenSettingPage(object obj)
         {
-            var page = new SettingTargetPage() { BindingContext = CountSetting };
+            var page = new SettingTargetPage(GeneralCounterSetting) { BindingContext = CountSetting };
             App.NavigationPage.PushAsync(page);
         }
 

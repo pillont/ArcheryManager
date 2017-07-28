@@ -95,6 +95,78 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test nombre de flèche endessous de l\'actuel")]
+        public virtual void TestNombreDeFlecheEndessousDeLActuel()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test nombre de flèche endessous de l\'actuel", ((string[])(null)));
+#line 19
+this.ScenarioSetup(scenarioInfo);
+#line 20
+  testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 21
+  testRunner.And("je tire une flèche en 30, 40", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 22
+  testRunner.And("je tire une flèche en 80, 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 23
+  testRunner.And("je tire une flèche en 30, 80", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 24
+  testRunner.And("je tire une flèche en 30, 80", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 25
+  testRunner.And("je tire une flèche en 30, 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 26
+  testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 27
+  testRunner.And("je click sur le check nombre de flèches défini", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 28
+  testRunner.And("je rentre 4 en nombre de flèche", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 29
+  testRunner.And("je click sur le texte NumberOfArrows", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 30
+  testRunner.Then("il y a un message d\'erreur", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 31
+  testRunner.And("je click sur ok", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 32
+  testRunner.Then("le nombre de flèches est de 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test nombre de flèche endessous de l\'actuel et du minimum")]
+        public virtual void TestNombreDeFlecheEndessousDeLActuelEtDuMinimum()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test nombre de flèche endessous de l\'actuel et du minimum", ((string[])(null)));
+#line 36
+this.ScenarioSetup(scenarioInfo);
+#line 37
+  testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 38
+  testRunner.And("je tire une flèche en 30, 40", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 39
+  testRunner.And("je tire une flèche en 80, 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 40
+  testRunner.And("je tire une flèche en 30, 80", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 41
+  testRunner.And("je tire une flèche en 30, 80", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 42
+  testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 43
+  testRunner.And("je click sur le check nombre de flèches défini", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 44
+  testRunner.And("je rentre 1 en nombre de flèche", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 45
+  testRunner.And("je click sur le texte NumberOfArrows", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 46
+  testRunner.Then("il y a un message d\'erreur", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 47
+  testRunner.And("je click sur ok", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 48
+  testRunner.Then("le nombre de flèches est de 4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

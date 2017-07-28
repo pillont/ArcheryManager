@@ -120,4 +120,10 @@
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="ErrorDuringChangeOfTime" xml:space="preserve">
+    <value>Erreur pendant le changement de temps</value>
+  </data>
+  <data name="FlightMoreArrowThanNewLimit" xml:space="preserve">
+    <value>La volée actuelle contient plus de flèche que la nouvelle limite</value>
+  </data>
 </root>

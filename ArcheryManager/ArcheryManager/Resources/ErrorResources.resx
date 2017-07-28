@@ -123,4 +123,7 @@
   <data name="ErrorDuringChangeOfTime" xml:space="preserve">
     <value>Error during the change of time</value>
   </data>
+  <data name="FlightMoreArrowThanNewLimit" xml:space="preserve">
+    <value>current flight contain more arrow than the new limit</value>
+  </data>
 </root>

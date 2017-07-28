@@ -14,10 +14,12 @@ namespace ArcheryManager.Pages
         public readonly ScoreCounter Counter;
         private readonly CountSetting CountSetting;
 
+        private readonly IGeneralCounterSetting GeneralCounterSetting;
+
         public CounterButtonPage(IGeneralCounterSetting generalCounterSetting)
         {
             InitializeComponent();
-
+            GeneralCounterSetting = generalCounterSetting;
             var arrowSetting = generalCounterSetting.ArrowSetting;
             var countSetting = generalCounterSetting.CountSetting;
             countSetting.HaveTarget = false;
@@ -60,7 +62,7 @@ namespace ArcheryManager.Pages
 
         private void OpenSettingPage(object obj)
         {
-            var page = new SettingTargetPage() { BindingContext = CountSetting };
+            var page = new SettingTargetPage(GeneralCounterSetting) { BindingContext = CountSetting };
             App.NavigationPage.PushAsync(page);
         }
     }

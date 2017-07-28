@@ -78,5 +78,14 @@ namespace ArcheryManager.Resources {
                 return ResourceManager.GetString("ErrorDuringChangeOfTime", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à current flight contain more arrow than the new limit.
+        /// </summary>
+        internal static string FlightMoreArrowThanNewLimit {
+            get {
+                return ResourceManager.GetString("FlightMoreArrowThanNewLimit", resourceCulture);
+            }
+        }
     }
 }

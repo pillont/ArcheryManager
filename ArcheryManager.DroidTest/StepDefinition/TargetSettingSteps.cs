@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using ArcheryManager.Resources;
+using NUnit.Framework;
 using System.Linq;
 using TechTalk.SpecFlow;
 
@@ -60,6 +61,18 @@ namespace ArcheryManager.DroidTest.StepDefinition
         public void AlorsIlYALeSwitchDeMoyenne()
         {
             TestSetting.App.WaitForElement("VisibilityAverageSwitch");
+        }
+
+        [Then(@"il y a un message d'erreur")]
+        public void AlorsIlYAUnMessageDErreur()
+        {
+            TestSetting.App.WaitForElement(e => e.Text(TranslateExtension.GetTextResource("Error")));
+        }
+
+        [Then(@"je click sur ok")]
+        public void AlorsJeClickSurOk()
+        {
+            TestSetting.App.Tap(e => e.Text(TranslateExtension.GetTextResource("Ok")));
         }
     }
 }

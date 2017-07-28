@@ -1,4 +1,5 @@
-﻿using ArcheryManager.Settings;
+﻿using ArcheryManager.Resources;
+using ArcheryManager.Settings;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -8,6 +9,8 @@ namespace ArcheryManager.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingTargetPage : ContentPage
     {
+        private readonly IGeneralCounterSetting GeneralCountSetting;
+
         public new CountSetting BindingContext
         {
             get
@@ -27,8 +30,9 @@ namespace ArcheryManager.Pages
             }
         }
 
-        public SettingTargetPage()
+        public SettingTargetPage(IGeneralCounterSetting generalCountSetting)
         {
+            GeneralCountSetting = generalCountSetting;
             InitializeComponent();
         }
 
@@ -38,13 +42,20 @@ namespace ArcheryManager.Pages
         private void ArrowCount_Unfocused(object sender, FocusEventArgs e)
         {
             var entry = sender as Entry;
-            int val = Convert.ToInt32(entry.Text);
+            int val = BindingContext.ArrowsCount;
             if (val < CountSetting.MinArrowCount)
             {
                 if (BindingContext != null)
                 {
                     BindingContext.ArrowsCount = CountSetting.MinArrowCount;
                 }
+            }
+
+            int currentFlightArrowNumber = GeneralCountSetting.ScoreResult.CurrentArrows.Count;
+            if (BindingContext.ArrowsCount < currentFlightArrowNumber)
+            {
+                DisplayAlert(ErrorResources.Error, ErrorResources.FlightMoreArrowThanNewLimit, AppResources.OK);
+                BindingContext.ArrowsCount = currentFlightArrowNumber;
             }
         }
     }
