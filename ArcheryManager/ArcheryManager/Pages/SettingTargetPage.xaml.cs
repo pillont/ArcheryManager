@@ -55,8 +55,8 @@ namespace ArcheryManager.Pages
             if (BindingContext.ArrowsCount < currentFlightArrowNumber)
             {
                 DisplayAlert(ErrorResources.Error, ErrorResources.FlightMoreArrowThanNewLimit, AppResources.OK);
+                BindingContext.ArrowsCount = currentFlightArrowNumber;
             }
-            BindingContext.ArrowsCount = currentFlightArrowNumber;
         }
     }
 }
