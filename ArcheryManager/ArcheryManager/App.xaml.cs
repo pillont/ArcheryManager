@@ -6,21 +6,21 @@ namespace ArcheryManager
 {
     public partial class App : Application
     {
-        private static NavigationPage navigationPage;
+        private static NavigationPage _navigationPage;
 
         public static NavigationPage NavigationPage
         {
             get
             {
-                if (navigationPage == null)
+                if (_navigationPage == null)
                 {
                     //#if TEST
-                    navigationPage = new NavigationPage(new BackDoorPage());
+                    _navigationPage = new NavigationPage(new BackDoorPage());
                     //#else
                     //                    navigationPage = new NavigationPage(new GeneralMenu());
                     //#endif
                 }
-                return navigationPage;
+                return _navigationPage;
             }
         }
 

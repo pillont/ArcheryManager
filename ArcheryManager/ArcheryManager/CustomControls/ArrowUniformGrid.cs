@@ -25,7 +25,7 @@ namespace ArcheryManager.CustomControls
         {
             var grid = new Grid();
             int index = arrow.Index;
-            var score = ArrowSetting.ScoreByIndex(index);
+            string score = ArrowSetting.ScoreByIndex(index);
             var shape = new ShapeView()
             {
                 Margin = new Thickness(2),

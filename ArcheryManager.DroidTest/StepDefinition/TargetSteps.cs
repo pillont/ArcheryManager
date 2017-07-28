@@ -15,7 +15,9 @@ namespace ArcheryManager.DroidTest.StepDefinition
         public void WhenJeTireUneFlecheEn(int p0, int p1)
         {
             TestSetting.App.WaitForElement("arrowInTargetGrid");
+
             TestSetting.App.DragCoordinates(500, 800, 500 + p0, 800 + p1);
+
             TestSetting.App.WaitForElement("arrowInTargetGrid");
         }
 
