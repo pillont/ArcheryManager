@@ -93,7 +93,7 @@
         </Grid>
 
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Grid.Row="2">
-            <Switch VerticalOptions="Center"  IsToggled="{Binding WantTarget}" AutomationId="wantTargetSwitch" />
+            <Switch VerticalOptions="Center"  IsToggled="{Binding HaveTarget}" AutomationId="wantTargetSwitch" />
             <Label Text="{resources:Translate TargetWanted}" VerticalOptions="Center" VerticalTextAlignment="Center" />
         </StackLayout>
     </Grid>

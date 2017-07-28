@@ -49,5 +49,17 @@ namespace ArcheryManager.DroidTest.StepDefinition
         {
             TestSetting.App.WaitForNoElement("numberArrowEntry");
         }
+
+        [Then(@"il n'y a pas le switch de moyenne")]
+        public void AlorsIlNYAPasLeSwitchDeMoyenne()
+        {
+            TestSetting.App.WaitForNoElement("VisibilityAverageSwitch");
+        }
+
+        [Then(@"il y a le switch de moyenne")]
+        public void AlorsIlYALeSwitchDeMoyenne()
+        {
+            TestSetting.App.WaitForElement("VisibilityAverageSwitch");
+        }
     }
 }

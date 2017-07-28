@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System.Runtime.CompilerServices;
+using Xamarin.Forms;
 using static ArcheryManager.CustomControls.TargetImage;
 
 namespace ArcheryManager.Settings
@@ -27,15 +28,6 @@ namespace ArcheryManager.Settings
         {
             get { return (bool)GetValue(HaveMaxArrowsCountProperty); }
             set { SetValue(HaveMaxArrowsCountProperty, value); }
-        }
-
-        public static readonly BindableProperty WantTargetProperty =
-                      BindableProperty.Create(nameof(WantTarget), typeof(bool), typeof(CountSetting), DefaultWantTarget);
-
-        public bool WantTarget
-        {
-            get { return (bool)GetValue(WantTargetProperty); }
-            set { SetValue(WantTargetProperty, value); }
         }
 
         public static readonly BindableProperty HaveTargetProperty =
@@ -72,6 +64,11 @@ namespace ArcheryManager.Settings
         {
             get { return (bool)GetValue(AverageIsVisibleProperty); }
             set { SetValue(AverageIsVisibleProperty, value); }
+        }
+
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
         }
     }
 }
