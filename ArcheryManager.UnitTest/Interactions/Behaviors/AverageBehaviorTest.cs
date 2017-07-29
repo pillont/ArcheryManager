@@ -25,14 +25,10 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
         public void Init()
         {
             Xamarin.Forms.Mocks.MockForms.Init();
-            _generalCounterSetting = new GeneralCounterSetting()
-            {
-                ArrowSetting = EnglishArrowSetting.Instance,
-                CountSetting = new CountSetting(),
-                ScoreResult = new ScoreResult()
-            };
+            _generalCounterSetting = new GeneralCounterSetting();
             var _target = new Mock<Target>(new object[] { _generalCounterSetting });
             _target.SetupProperty(t => t.TargetSize, TargetSize);
+
             _counter = new ScoreCounter(_generalCounterSetting);
             _behavior = new AverageBehavior(_target.Object, _counter, _generalCounterSetting);
             _canvas = new Mock<AverageCanvas>();

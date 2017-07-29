@@ -26,11 +26,9 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
         {
             Xamarin.Forms.Mocks.MockForms.Init();
 
-            countSetting = new CountSetting();
             toolBarList = new List<ToolbarItem>();
-            var arrowSetting = EnglishArrowSetting.Instance;
-            var scoreResult = new ScoreResult();
-            var generalCounterSetting = new GeneralCounterSetting() { CountSetting = countSetting, ArrowSetting = arrowSetting, ScoreResult = scoreResult };
+            var generalCounterSetting = new GeneralCounterSetting();
+            countSetting = generalCounterSetting.CountSetting;
             counter = new ScoreCounter(generalCounterSetting);
             _page = new Mock<ContentPageWithOverridableToolBar>();
             _page.CallBase = true;

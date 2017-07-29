@@ -27,7 +27,7 @@ namespace ArcheryManager.Pages
 
         private async void Counter_Tapped(object sender, System.EventArgs e)
         {
-            await App.NavigationPage.PushAsync(new CounterSelectorPage(GeneralCounterSetting));
+            await App.NavigationPage.PushAsync(new CounterSelectorPage());
         }
     }
 }
