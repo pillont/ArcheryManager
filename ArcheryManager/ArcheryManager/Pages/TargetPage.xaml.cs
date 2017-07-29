@@ -14,23 +14,22 @@ namespace ArcheryManager.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TargetPage : ContentPageWithRotationEvent, IToolbarItemsHolder
     {
-        private readonly IGeneralCounterSetting GeneralCounterSetting;
+        private static readonly IGeneralCounterSetting GeneralCounterSetting = DependencyService.Get<IGeneralCounterSetting>();
 
         private CountSetting CountSetting => GeneralCounterSetting.CountSetting;
         private ScoreCounter Counter { get; set; }
 
         private readonly Target customTarget;
 
-        public TargetPage(IGeneralCounterSetting generalCounterSetting)
+        public TargetPage()
         {
             InitializeComponent();
 
-            GeneralCounterSetting = generalCounterSetting;
             Counter = new ScoreCounter(GeneralCounterSetting);
 
             #region view setup
 
-            var behavior = new CounterToolbarItemsBehavior<TargetPage>(generalCounterSetting, Counter);
+            var behavior = new CounterToolbarItemsBehavior<TargetPage>(GeneralCounterSetting, Counter);
             this.Behaviors.Add(behavior);
 
             VerticalScreenRotation += SetupGridForVerticalDevice;
@@ -40,12 +39,12 @@ namespace ArcheryManager.Pages
 
             #endregion view setup
 
-            customTarget = TargetFactory.Create(generalCounterSetting, Counter);
+            customTarget = TargetFactory.Create(GeneralCounterSetting, Counter);
             targetGrid.Children.Add(customTarget);
 
             #region ScoreList
 
-            var scoreList = ScoreListFactory.Create(customTarget, generalCounterSetting, ToolbarItems);
+            var scoreList = ScoreListFactory.Create(customTarget, GeneralCounterSetting, ToolbarItems);
             scoreList.SizeChanged += ScoreList_SizeChanged;
             scrollArrows.Content = scoreList;
 
@@ -77,7 +76,7 @@ namespace ArcheryManager.Pages
 
         private void OpenSettingPage(object obj)
         {
-            var page = new SettingTargetPage(GeneralCounterSetting) { BindingContext = CountSetting };
+            var page = new SettingTargetPage() { BindingContext = CountSetting };
             App.NavigationPage.PushAsync(page);
         }
 

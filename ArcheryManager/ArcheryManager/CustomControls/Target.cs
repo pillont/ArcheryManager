@@ -55,6 +55,8 @@ namespace ArcheryManager.CustomControls
 
         #endregion constants
 
+        private static readonly IGeneralCounterSetting GeneralCounterSetting = DependencyService.Get<IGeneralCounterSetting>();
+
         public double TargetSize
         {
             get { return (double)GetValue(TargetSizeProperty); }
@@ -89,7 +91,7 @@ namespace ArcheryManager.CustomControls
         /// </summary>
         public Grid TargetGrid { get; private set; }
 
-        public Target(IGeneralCounterSetting generalCounterSetting)
+        public Target()
         {
             /*
              * target layout
@@ -115,7 +117,7 @@ namespace ArcheryManager.CustomControls
             };
 
             CreateContent();
-            ArrowSetting = generalCounterSetting.ArrowSetting;
+            ArrowSetting = GeneralCounterSetting.ArrowSetting;
             Factory = new ArrowFactory(this, ArrowSetting);
             DrawTargetVisual();
         }

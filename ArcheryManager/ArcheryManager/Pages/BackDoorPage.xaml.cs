@@ -79,7 +79,7 @@ namespace ArcheryManager.Pages
 
         private async void CounterSelector_Clicked(object sender, EventArgs e)
         {
-            await App.NavigationPage.PushAsync(new CounterSelectorPage(GeneralCounterSetting));
+            await App.NavigationPage.PushAsync(new CounterSelectorPage());
         }
     }
 }

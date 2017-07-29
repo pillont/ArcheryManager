@@ -14,12 +14,12 @@ namespace ArcheryManager.Factories
 
             if (wantTarget)
             {
-                var Page = new TargetPage(generalCounterSetting);
+                var Page = new TargetPage();
                 return Page;
             }
             else
             {
-                var Page = new CounterButtonPage(generalCounterSetting);
+                var Page = new CounterButtonPage();
                 return Page;
             }
         }

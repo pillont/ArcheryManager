@@ -33,7 +33,6 @@ namespace ArcheryManager.Interactions.Behaviors
             try
             {
                 AssociatedObject.ButtonTap += AssociatedObject_ButtonTapped;
-                AssociatedObject.GeneralCounterSetting = GeneralCounterSetting;
             }
             catch (Exception e)
             {
