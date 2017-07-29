@@ -9,7 +9,7 @@ namespace ArcheryManager.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingTargetPage : ContentPage
     {
-        private readonly IGeneralCounterSetting GeneralCountSetting;
+        private static readonly IGeneralCounterSetting GeneralCounterSetting = DependencyService.Get<IGeneralCounterSetting>();
 
         public new CountSetting BindingContext
         {
@@ -30,9 +30,8 @@ namespace ArcheryManager.Pages
             }
         }
 
-        public SettingTargetPage(IGeneralCounterSetting generalCountSetting)
+        public SettingTargetPage()
         {
-            GeneralCountSetting = generalCountSetting;
             InitializeComponent();
 
             var finishButton = new ToolbarItem()
@@ -64,7 +63,7 @@ namespace ArcheryManager.Pages
                 }
             }
 
-            int currentFlightArrowNumber = GeneralCountSetting.ScoreResult.CurrentArrows.Count;
+            int currentFlightArrowNumber = GeneralCounterSetting.ScoreResult.CurrentArrows.Count;
             if (BindingContext.ArrowsCount < currentFlightArrowNumber)
             {
                 DisplayAlert(ErrorResources.Error, ErrorResources.FlightMoreArrowThanNewLimit, AppResources.OK);

@@ -55,7 +55,13 @@ namespace ArcheryManager.CustomControls
 
         #endregion constants
 
+<<<<<<< HEAD
         public virtual double TargetSize
+=======
+        private static readonly IGeneralCounterSetting GeneralCounterSetting = DependencyService.Get<IGeneralCounterSetting>();
+
+        public double TargetSize
+>>>>>>> use dependency setting in visuals classes
         {
             get { return (double)GetValue(TargetSizeProperty); }
             set
@@ -89,7 +95,7 @@ namespace ArcheryManager.CustomControls
         /// </summary>
         public Grid TargetGrid { get; private set; }
 
-        public Target(IGeneralCounterSetting generalCounterSetting)
+        public Target()
         {
             /*
              * target layout
@@ -115,7 +121,7 @@ namespace ArcheryManager.CustomControls
             };
 
             CreateContent();
-            ArrowSetting = generalCounterSetting.ArrowSetting;
+            ArrowSetting = GeneralCounterSetting.ArrowSetting;
             Factory = new ArrowFactory(this, ArrowSetting);
             DrawTargetVisual();
         }

@@ -14,32 +14,31 @@ namespace ArcheryManager.Pages
         public readonly ScoreCounter Counter;
         private readonly CountSetting CountSetting;
 
-        private readonly IGeneralCounterSetting GeneralCounterSetting;
+        private static readonly IGeneralCounterSetting GeneralCounterSetting = DependencyService.Get<IGeneralCounterSetting>();
 
-        public CounterButtonPage(IGeneralCounterSetting generalCounterSetting)
+        public CounterButtonPage()
         {
             InitializeComponent();
-            GeneralCounterSetting = generalCounterSetting;
-            var arrowSetting = generalCounterSetting.ArrowSetting;
-            var countSetting = generalCounterSetting.CountSetting;
+            var arrowSetting = GeneralCounterSetting.ArrowSetting;
+            var countSetting = GeneralCounterSetting.CountSetting;
             countSetting.HaveTarget = false;
             CountSetting = countSetting;
 
-            Counter = new ScoreCounter(generalCounterSetting);
+            Counter = new ScoreCounter(GeneralCounterSetting);
 
             totalCounter.BindingContext = Counter;
 
-            scoreList.ArrowSetting = generalCounterSetting.ArrowSetting;
+            scoreList.ArrowSetting = GeneralCounterSetting.ArrowSetting;
             scoreList.SizeChanged += ScoreList_SizeChanged;
-            scoreList.Items = generalCounterSetting.ScoreResult.CurrentArrows;
+            scoreList.Items = GeneralCounterSetting.ScoreResult.CurrentArrows;
 
-            var selectBehavior = new SelectableArrowInListBehavior(this.ToolbarItems, generalCounterSetting);
+            var selectBehavior = new SelectableArrowInListBehavior(this.ToolbarItems, GeneralCounterSetting);
             scoreList.Behaviors.Add(selectBehavior);
 
-            var behavior = new CounterButtonBehavior(generalCounterSetting, Counter);
+            var behavior = new CounterButtonBehavior(GeneralCounterSetting, Counter);
             counterButtons.Behaviors.Add(behavior);
 
-            var toolbarBehavior = new CounterToolbarItemsBehavior<CounterButtonPage>(generalCounterSetting, Counter);
+            var toolbarBehavior = new CounterToolbarItemsBehavior<CounterButtonPage>(GeneralCounterSetting, Counter);
             this.Behaviors.Add(toolbarBehavior);
             toolbarBehavior.AddDefaultToolbarItems();
             AddCounterButtonsToolbarItems();
@@ -62,7 +61,7 @@ namespace ArcheryManager.Pages
 
         private void OpenSettingPage(object obj)
         {
-            var page = new SettingTargetPage(GeneralCounterSetting) { BindingContext = CountSetting };
+            var page = new SettingTargetPage() { BindingContext = CountSetting };
             App.NavigationPage.PushAsync(page);
         }
     }
