@@ -30,17 +30,9 @@ namespace ArcheryManager.UnitTest.Factories
         {
             Xamarin.Forms.Mocks.MockForms.Init();
             toolbarItems = new List<ToolbarItem>();
-            var arrowSetting = EnglishArrowSetting.Instance;
             list = new List<ToolbarItem>();
-            var scoreResult = new ScoreResult();
-            var countSetting = new CountSetting();
 
-            generalCounterSetting = new GeneralCounterSetting()
-            {
-                CountSetting = countSetting,
-                ArrowSetting = arrowSetting,
-                ScoreResult = scoreResult,
-            };
+            generalCounterSetting = new GeneralCounterSetting();
 
             var ScoreCounter = new ScoreCounter(generalCounterSetting);
 
