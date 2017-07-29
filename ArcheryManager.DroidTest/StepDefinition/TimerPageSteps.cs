@@ -27,6 +27,12 @@ namespace ArcheryManager.DroidTest.StepDefinition
             TestSetting.App.Tap("CustomTimer");
         }
 
+        [Then(@"la page timer s'affiche")]
+        public void AlorsLaPageTimerSAffiche()
+        {
+            TestSetting.App.WaitForElement("CustomTimer");
+        }
+
         [When(@"j'arrete le timer")]
         public void QuandJarreteLeTimer()
         {

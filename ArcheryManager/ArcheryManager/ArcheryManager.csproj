@@ -47,6 +47,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\CustomShapeButton.xaml.cs">
+      <DependentUpon>CustomShapeButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\TargetImage.xaml.cs">
       <DependentUpon>TargetImage.xaml</DependentUpon>
     </Compile>
@@ -269,6 +272,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\GeneralMenu.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CustomControls\CustomShapeButton.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

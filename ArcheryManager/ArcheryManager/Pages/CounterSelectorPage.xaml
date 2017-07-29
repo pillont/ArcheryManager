@@ -55,6 +55,7 @@
 
         <!-- images -->
         <Grid Grid.Row="1"
+              AutomationId="imageGrid"
               x:Name="imageGrid"
               VerticalOptions="CenterAndExpand"
               HorizontalOptions="CenterAndExpand">

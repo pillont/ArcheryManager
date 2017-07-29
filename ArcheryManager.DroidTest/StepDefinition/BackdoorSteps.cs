@@ -33,6 +33,13 @@ namespace ArcheryManager.DroidTest.StepDefinition
             TestSetting.App.Tap("ButtonCounterButton");
         }
 
+        [When(@"J'ouvre une page de menu general")]
+        public void QuandJOuvreUnePageDeMenuGeneral()
+        {
+            TestSetting.InitTestApplication();
+            TestSetting.App.Tap("GeneralMenuButton");
+        }
+
         [When(@"J'ouvre une page de sélection de cible")]
         public void QuandJOuvreUnePageDeSelectionDeCible()
         {

@@ -252,4 +252,10 @@
   <data name="Valid" xml:space="preserve">
     <value>Valid</value>
   </data>
+  <data name="GeneralMenu" xml:space="preserve">
+    <value>General menu</value>
+  </data>
+  <data name="CountShoot" xml:space="preserve">
+    <value>Count shoot</value>
+  </data>
 </root>

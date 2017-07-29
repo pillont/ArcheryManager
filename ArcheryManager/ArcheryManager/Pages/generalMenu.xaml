@@ -1,39 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:shape="clr-namespace:XFShapeView;assembly=XFShapeView"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:ArcheryManager.Resources"
+             xmlns:custom="clr-namespace:ArcheryManager.CustomControls"
              x:Class="ArcheryManager.Pages.GeneralMenu"
-             Title="archery manager">
-    <Grid>
+             Title="Archery Manager">
+    <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
         <Image Source="TargetImage.jpg"  Aspect="Fill" />
-        <Grid>
+        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="8*" />
                 </Grid.RowDefinitions>
             </Grid>
-            <Label Text="archery manager" FontSize="Large" Grid.Row="0" />
+            <Label Text="Archery Manager" Scale="2"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"
+                   VerticalTextAlignment="Center"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   Grid.Row="0"
+                   TextColor="Black" />
 
-            <StackLayout Padding="10" Grid.Row="1">
-                <Grid>
-                    <shape:ShapeView ShapeType="Oval"
-                                     HeightRequest="50"
+            <StackLayout Grid.Row="1">
+                <custom:CustomShapeButton HeightRequest="50"
+                                          AutomationId="CounterButton"
                                      WidthRequest="200"
-                                     Color="LightGray"
-                                     
                                      VerticalOptions="Center"
-                                     HorizontalOptions="Center" />
-                    <Label Text="Click Me"
-                           FontAttributes="Bold"
-                           VerticalOptions="Center"
-                           HorizontalOptions="Center"
-                           VerticalTextAlignment="Center"
-                           HorizontalTextAlignment="Center" />
-                </Grid>
-
-                <Button Text="Click Me" />
-                <Button Text="Click Me" />
+                                     HorizontalOptions="Center"
+                                     Text="{resources:Translate CountShoot}"
+                                     Tapped="Counter_Tapped" />
+                <custom:CustomShapeButton HeightRequest="50"
+                                          AutomationId="TimerButton"
+                                     WidthRequest="200"
+                                     VerticalOptions="Center"
+                                     HorizontalOptions="Center"
+                                     Text="{resources:Translate Timer}"
+                                     Tapped="Timer_Tapped" />
             </StackLayout>
         </Grid>
     </Grid>
