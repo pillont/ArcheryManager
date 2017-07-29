@@ -22,6 +22,12 @@ namespace ArcheryManager.Pages
 
         private readonly TimerBehavior Behavior;
 
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            Behavior.Stop(playSong: false);
+        }
+
         public Color Color
         {
             get { return timer.Color; }
