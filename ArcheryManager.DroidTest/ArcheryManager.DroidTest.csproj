@@ -31,7 +31,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
     <OutputPath>bin\Test\</OutputPath>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
@@ -85,6 +85,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CounterSettingUpdateFeature.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Counters\SpecificCounterSettingFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SpecificCounterSettingFeature.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\GeneralMenuFeature.feature.cs">
       <AutoGen>True</AutoGen>
@@ -172,6 +177,10 @@
     <None Include="Features\Counters\CounterSettingUpdateFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CounterSettingUpdateFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Counters\SpecificCounterSettingFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SpecificCounterSettingFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\GeneralMenuFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

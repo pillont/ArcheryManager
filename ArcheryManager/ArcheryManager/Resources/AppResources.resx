@@ -258,6 +258,9 @@
   <data name="CountShoot" xml:space="preserve">
     <value>Count shoot</value>
   </data>
+  <data name="Finish" xml:space="preserve">
+    <value>Finish</value>
+  </data>
   <data name="Selection" xml:space="preserve">
     <value>Selection</value>
   </data>
