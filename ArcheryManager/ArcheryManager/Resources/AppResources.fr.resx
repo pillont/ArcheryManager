@@ -252,4 +252,16 @@
   <data name="Valid" xml:space="preserve">
     <value>Valider</value>
   </data>
+  <data name="GeneralMenu" xml:space="preserve">
+    <value>Menu général</value>
+  </data>
+  <data name="CountShoot" xml:space="preserve">
+    <value>Tir compté</value>
+  </data>
+  <data name="Finish" xml:space="preserve">
+    <value>Terminer</value>
+  </data>
+  <data name="Selection" xml:space="preserve">
+    <value>Sélection</value>
+  </data>
 </root>

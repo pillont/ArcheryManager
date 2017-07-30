@@ -31,7 +31,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
     <OutputPath>bin\Test\</OutputPath>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
@@ -85,6 +85,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CounterSettingUpdateFeature.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Counters\SpecificCounterSettingFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SpecificCounterSettingFeature.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\GeneralMenuFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeneralMenuFeature.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Targets\NewFlightFeature.feature.cs">
       <AutoGen>True</AutoGen>
@@ -148,6 +158,7 @@
     <Compile Include="StepDefinition\TargetSettingSteps.cs" />
     <Compile Include="StepDefinition\TargetSteps.cs" />
     <Compile Include="StepDefinition\TimerPageSteps.cs" />
+    <Compile Include="Target\GeneralMenuSteps.cs" />
     <Compile Include="Target\IndoorCompoundTargetTest.cs" />
     <Compile Include="Target\IndoorRecurveTargetTest.cs" />
     <Compile Include="Target\GenericTargetTest.cs" />
@@ -166,6 +177,14 @@
     <None Include="Features\Counters\CounterSettingUpdateFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CounterSettingUpdateFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Counters\SpecificCounterSettingFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SpecificCounterSettingFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\GeneralMenuFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>GeneralMenuFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Targets\NewFlightFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

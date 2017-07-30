@@ -4,7 +4,8 @@
              xmlns:converter="clr-namespace:XLabs.Forms.Converter;assembly=XLabs.Forms"
              xmlns:scr="clr-namespace:ArcheryManager.CustomControls"
              xmlns:resources="clr-namespace:ArcheryManager.Resources"
-             x:Class="ArcheryManager.Pages.CounterSelectorPage">
+             x:Class="ArcheryManager.Pages.CounterSelectorPage"
+             Title="{resources:Translate Selection}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -55,6 +56,7 @@
 
         <!-- images -->
         <Grid Grid.Row="1"
+              AutomationId="imageGrid"
               x:Name="imageGrid"
               VerticalOptions="CenterAndExpand"
               HorizontalOptions="CenterAndExpand">

@@ -34,6 +34,19 @@ namespace ArcheryManager.Pages
         {
             GeneralCountSetting = generalCountSetting;
             InitializeComponent();
+
+            var finishButton = new ToolbarItem()
+            {
+                Text = AppResources.Finish,
+                Order = ToolbarItemOrder.Primary,
+                Command = new Command(Finish),
+            };
+            ToolbarItems.Add(finishButton);
+        }
+
+        private void Finish()
+        {
+            App.NavigationPage.SendBackButtonPressed();
         }
 
         /// <summary>

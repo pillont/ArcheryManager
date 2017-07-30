@@ -11,6 +11,12 @@ namespace ArcheryManager.DroidTest.StepDefinition
     [Binding]
     public class TargetSelectorSteps
     {
+        [Then(@"la page de tir compté s'affiche")]
+        public void AlorsLaPageDeTirCompteSAffiche()
+        {
+            TestSetting.App.WaitForElement("imageGrid");
+        }
+
         [When(@"je valide la sélection de cible")]
         public void QuandJeValideLaSelectionDeCible()
         {

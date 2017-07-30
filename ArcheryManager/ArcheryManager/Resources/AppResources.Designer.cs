@@ -116,6 +116,15 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Count shoot.
+        /// </summary>
+        internal static string CountShoot {
+            get {
+                return ResourceManager.GetString("CountShoot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Duck.
         /// </summary>
         internal static string Duck {
@@ -161,11 +170,29 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Finish.
+        /// </summary>
+        internal static string Finish {
+            get {
+                return ResourceManager.GetString("Finish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Flight.
         /// </summary>
         internal static string Flight {
             get {
                 return ResourceManager.GetString("Flight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à General menu.
+        /// </summary>
+        internal static string GeneralMenu {
+            get {
+                return ResourceManager.GetString("GeneralMenu", resourceCulture);
             }
         }
         
@@ -355,6 +382,15 @@ namespace ArcheryManager.Resources {
         internal static string SeeAverage {
             get {
                 return ResourceManager.GetString("SeeAverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Selection.
+        /// </summary>
+        internal static string Selection {
+            get {
+                return ResourceManager.GetString("Selection", resourceCulture);
             }
         }
         

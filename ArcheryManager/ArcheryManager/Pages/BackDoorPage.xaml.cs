@@ -81,5 +81,11 @@ namespace ArcheryManager.Pages
         {
             await App.NavigationPage.PushAsync(new CounterSelectorPage(GeneralCounterSetting));
         }
+
+        private async void GeneralMenu_Clicked(object sender, EventArgs e)
+        {
+            var generalMenu = new GeneralMenu();
+            await App.NavigationPage.PushAsync(generalMenu);
+        }
     }
 }

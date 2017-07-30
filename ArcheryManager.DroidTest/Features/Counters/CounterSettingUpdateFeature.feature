@@ -16,6 +16,7 @@ Scénario: test passage de zappette à cible
 		Alors il y a le switch de moyenne
 
 
+
 Scénario: test nombre de flèche endessous de l'actuel
 		Quand J'ouvre une page de cible fita
 		Et je tire une flèche en 30, 40
