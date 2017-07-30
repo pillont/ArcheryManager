@@ -212,27 +212,5 @@ namespace ArcheryManager.CustomControls
         }
 
         #endregion visual of the target
-
-        #region selection interactions
-
-        public virtual void SelectArrow(Arrow arrow)
-        {
-            ArrowGrid.SelectArrow(arrow);
-        }
-
-        public virtual void UnSelectArrow(Arrow arrow)
-        {
-            ArrowGrid.UnSelectArrow(arrow);
-        }
-
-        public virtual void ResetSelection()
-        {
-            foreach (var arrow in ArrowGrid.Items)
-            {
-                UnSelectArrow(arrow);
-            }
-        }
-
-        #endregion selection interactions
     }
 }

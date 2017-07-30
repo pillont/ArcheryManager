@@ -41,39 +41,8 @@ namespace ArcheryManager.Factories
         {
             var scoreList = Create(generalCounterSetting, toolbarItems);
             var selectBehavior = scoreList.Behaviors.OfType<SelectableArrowInListBehavior>().First();
-            selectBehavior.ItemsSelectedChange += (s, e) => SelectBehavior_ItemsSelectedChange(customTarget, e);
 
             return scoreList;
-        }
-
-        /// <summary>
-        /// update color of arrows in the target during the selection
-        /// </summary>
-        private static void SelectBehavior_ItemsSelectedChange(Target customTarget, NotifyCollectionChangedEventArgs e)
-        {
-            //reset selection
-            if (e.Action == NotifyCollectionChangedAction.Reset)
-            {
-                customTarget.ResetSelection();
-            }
-            // new selected element
-            if (e.NewItems != null)
-            {
-                foreach (View v in e.NewItems)
-                {
-                    var a = v.BindingContext as Arrow;
-                    customTarget.SelectArrow(a);
-                }
-            }
-            // remove selected element
-            if (e.OldItems != null)
-            {
-                foreach (View v in e.OldItems)
-                {
-                    var a = v.BindingContext as Arrow;
-                    customTarget.UnSelectArrow(a);
-                }
-            }
         }
     }
 }
