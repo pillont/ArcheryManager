@@ -155,7 +155,7 @@ namespace ArcheryManager.DroidTest.Target
 
             Assert.GreaterOrEqual(385, average.Rect.CenterX);
             Assert.GreaterOrEqual(674, average.Rect.CenterY);
-            Assert.GreaterOrEqual(346, average.Rect.Height);
+            Assert.GreaterOrEqual(348, average.Rect.Height);
             Assert.GreaterOrEqual(345, average.Rect.Width);
 
             app.DragCoordinates(400, 800, 100, 800);

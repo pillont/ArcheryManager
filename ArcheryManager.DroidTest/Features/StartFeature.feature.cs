@@ -73,7 +73,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 7
  testRunner.When("J\'ouvre une page de backdoor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 8
- testRunner.Then("il y a 7 boutons", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("il y a 8 boutons", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
