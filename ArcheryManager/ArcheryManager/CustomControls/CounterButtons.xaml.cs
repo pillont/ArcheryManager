@@ -34,8 +34,13 @@ namespace ArcheryManager.CustomControls
         private void ButtonGrid_ItemAdded(View ctn)
         {
             var recognizer = new TapGestureRecognizer();
-            recognizer.Tapped += ButtonTap;
+            recognizer.Tapped += Recognizer_Tapped;
             ctn.GestureRecognizers.Add(recognizer);
+        }
+
+        private void Recognizer_Tapped(object sender, EventArgs e)
+        {
+            ButtonTap(sender, e);
         }
     }
 }
