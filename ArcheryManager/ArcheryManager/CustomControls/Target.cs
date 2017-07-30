@@ -148,7 +148,7 @@ namespace ArcheryManager.CustomControls
                 HeightRequest = ArrowWidthZommed,
                 WidthRequest = ArrowWidth * MovableTargetBehavior.TargetScale,
                 ShapeType = ShapeType.Circle,
-                BorderColor = ArrowSetterColor,
+                BorderColor = Color.Black,
                 Color = ArrowSetterColor,
                 BorderWidth = 1,
                 VerticalOptions = LayoutOptions.Center,
