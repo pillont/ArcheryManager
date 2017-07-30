@@ -264,4 +264,10 @@
   <data name="Selection" xml:space="preserve">
     <value>Selection</value>
   </data>
+  <data name="Mode" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="ModeFormat" xml:space="preserve">
+    <value>Mode : {0:N}</value>
+  </data>
 </root>

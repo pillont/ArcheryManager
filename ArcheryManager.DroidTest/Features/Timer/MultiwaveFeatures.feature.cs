@@ -88,7 +88,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 11
  testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 12
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 13
  testRunner.Then("l\'option de vague est en ABCD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
@@ -105,11 +105,11 @@ this.ScenarioSetup(scenarioInfo);
 #line 17
  testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 18
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 19
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 20
- testRunner.Then("l\'option de vague est en VS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("l\'option de vague est en Duel", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -124,9 +124,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 24
  testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 25
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 26
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 28
  testRunner.Then("le texte de vague contient AB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
@@ -143,9 +143,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 32
  testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 33
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 34
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 35
  testRunner.And("je lance le timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 36
@@ -166,9 +166,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 41
  testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 42
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 43
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 44
  testRunner.And("je lance le timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 45
@@ -193,11 +193,11 @@ this.ScenarioSetup(scenarioInfo);
 #line 52
  testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 53
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 54
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 55
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 56
  testRunner.Then("l\'option de vague est en Shootout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
@@ -214,13 +214,13 @@ this.ScenarioSetup(scenarioInfo);
 #line 60
  testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 61
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 62
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 63
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 64
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 65
  testRunner.Then("l\'option de vague est en ABC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
@@ -237,11 +237,11 @@ this.ScenarioSetup(scenarioInfo);
 #line 69
  testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 70
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 71
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 72
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 73
  testRunner.Then("le timer est à 40 sec", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
@@ -258,11 +258,11 @@ this.ScenarioSetup(scenarioInfo);
 #line 77
  testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 78
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 79
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 80
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 81
  testRunner.And("je lance le timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 82
@@ -296,7 +296,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 90
  testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 91
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 92
  testRunner.And("je lance le timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 93
@@ -317,7 +317,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 97
  testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 98
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 99
  testRunner.Then("le texte de vague contient AB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
@@ -334,7 +334,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 102
  testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 103
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 104
  testRunner.And("je lance le timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 105
@@ -359,7 +359,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 113
  testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 114
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 115
  testRunner.And("je lance le timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 116
@@ -392,7 +392,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 127
  testRunner.When("J\'ouvre une page timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 128
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 129
  testRunner.And("je lance le timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 130
@@ -434,7 +434,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 144
  testRunner.And("je lance le timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 145
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 146
  testRunner.And("j\'attend 10 secondes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 148

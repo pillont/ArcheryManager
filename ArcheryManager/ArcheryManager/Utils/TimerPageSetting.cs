@@ -18,6 +18,14 @@ namespace ArcheryManager.Utils
         private const int DefaultWaitingTime = 10;
         private const int DefaultTime = 120;
 
+        public static readonly List<string> TimerModes = new List<string>
+        {
+            AppResources.ABC,
+            AppResources.ABCD,
+            AppResources.Duel,
+            AppResources.ShootOut,
+        };
+
         public static readonly Dictionary<string, string> AllSongFiles = new Dictionary<string, string>
         {
             {    AppResources.Coq , coqFileName },

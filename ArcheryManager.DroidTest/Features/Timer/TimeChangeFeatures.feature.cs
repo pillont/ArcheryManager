@@ -112,7 +112,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 22
  testRunner.And(string.Format("je selectionne {0} dans le picker", time), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 23
- testRunner.And("je click sur l\'option de vague", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 25
  testRunner.Then(string.Format("le timer est à {0} sec", time), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
