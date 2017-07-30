@@ -18,8 +18,8 @@ namespace ArcheryManager.DroidTest.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("tes du menu général")]
-    public partial class TesDuMenuGeneralFeature
+    [NUnit.Framework.DescriptionAttribute("test du menu général")]
+    public partial class TestDuMenuGeneralFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -31,7 +31,7 @@ namespace ArcheryManager.DroidTest.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("fr-FR"), "tes du menu général", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("fr-FR"), "test du menu général", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -64,17 +64,36 @@ namespace ArcheryManager.DroidTest.Features
         }
         
         [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test des boutons présents")]
+        public virtual void TestDesBoutonsPresents()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test des boutons présents", ((string[])(null)));
+#line 4
+this.ScenarioSetup(scenarioInfo);
+#line 5
+testRunner.When("J\'ouvre une page de menu general", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 7
+testRunner.Then("il y a le texte Timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 8
+testRunner.Then("il y a le texte CountShoot", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 9
+testRunner.Then("il n\'y a pas de barre de navigation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("test du bouton timer")]
         public virtual void TestDuBoutonTimer()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test du bouton timer", ((string[])(null)));
-#line 5
+#line 11
 this.ScenarioSetup(scenarioInfo);
-#line 6
+#line 12
 testRunner.When("J\'ouvre une page de menu general", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
-#line 7
+#line 13
 testRunner.And("je click sur le bouton de timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 9
+#line 15
 testRunner.Then("la page timer s\'affiche", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
@@ -85,13 +104,13 @@ testRunner.Then("la page timer s\'affiche", ((string)(null)), ((TechTalk.SpecFlo
         public virtual void TestDuBoutonTirCompte()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test du bouton tir compté", ((string[])(null)));
-#line 11
+#line 17
 this.ScenarioSetup(scenarioInfo);
-#line 12
+#line 18
 testRunner.When("J\'ouvre une page de menu general", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
-#line 13
+#line 19
 testRunner.And("je click sur le bouton de tir compté", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 15
+#line 21
 testRunner.Then("la page de tir compté s\'affiche", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();

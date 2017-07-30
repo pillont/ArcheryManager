@@ -14,6 +14,12 @@ namespace ArcheryManager.Pages
             InitializeComponent();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            NavigationPage.SetHasNavigationBar(this, false);
+        }
+
         private async void Timer_Tapped(object sender, System.EventArgs e)
         {
             await App.NavigationPage.PushAsync(new TimerPage());

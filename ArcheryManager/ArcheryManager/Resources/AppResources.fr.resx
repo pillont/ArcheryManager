@@ -258,4 +258,7 @@
   <data name="CountShoot" xml:space="preserve">
     <value>Tir compté</value>
   </data>
+  <data name="Selection" xml:space="preserve">
+    <value>Sélection</value>
+  </data>
 </root>

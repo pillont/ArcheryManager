@@ -14,11 +14,11 @@ namespace ArcheryManager
             {
                 if (_navigationPage == null)
                 {
-                    //#if TEST
+#if RELEASE
+                    _navigationPage = new NavigationPage(new GeneralMenu());
+#else
                     _navigationPage = new NavigationPage(new BackDoorPage());
-                    //#else
-                    //                    navigationPage = new NavigationPage(new GeneralMenu());
-                    //#endif
+#endif
                 }
                 return _navigationPage;
             }

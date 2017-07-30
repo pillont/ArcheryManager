@@ -1,5 +1,4 @@
-﻿using System;
-using TechTalk.SpecFlow;
+﻿using TechTalk.SpecFlow;
 
 namespace ArcheryManager.DroidTest.Target
 {
@@ -9,13 +8,13 @@ namespace ArcheryManager.DroidTest.Target
         [When(@"je click sur le bouton de timer")]
         public void QuandJeClickSurLeBoutonDeTimer()
         {
-            TestSetting.App.Tap("CounterButton");
+            TestSetting.App.Tap("TimerButton");
         }
 
         [When(@"je click sur le bouton de tir compté")]
         public void QuandJeClickSurLeBoutonDeTirCompte()
         {
-            TestSetting.App.Tap("TimerButton");
+            TestSetting.App.Tap("CounterButton");
         }
     }
 }

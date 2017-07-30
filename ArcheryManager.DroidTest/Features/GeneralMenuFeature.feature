@@ -1,6 +1,12 @@
 ﻿# language: fr-FR
-Fonctionnalité: tes du menu général
+Fonctionnalité: test du menu général
 
+Scénario: test des boutons présents
+Quand J'ouvre une page de menu general
+
+Alors il y a le texte Timer
+Alors il y a le texte CountShoot
+Alors il n'y a pas de barre de navigation
 
 Scénario: test du bouton timer
 Quand J'ouvre une page de menu general
