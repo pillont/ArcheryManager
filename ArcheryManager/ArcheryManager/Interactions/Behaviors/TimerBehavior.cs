@@ -32,6 +32,7 @@ namespace ArcheryManager.Interactions.Behaviors
 
         #region logical properties
 
+        private bool _playSong;
         private int _current;
         private int _currentMax;
 
@@ -95,21 +96,31 @@ namespace ArcheryManager.Interactions.Behaviors
 
         private void StartWaitingFunction()
         {
+            _playSong = true;
             AssociatedObject.IsWaitingTime = true;
             AssociatedObject.IsStopped = false;
             AssociatedObject.IsPaused = false;
             _currentMax = AssociatedObject.WaitingTime;
             this.Current = AssociatedObject.WaitingTime;
             Device.StartTimer(TimeSpan.FromSeconds(1), WaitingTimerFunction);
-            PlaySong();
+            PlaySongIfNeeded();
         }
 
-        public void Stop()
+        public void Stop(bool playSong = true)
         {
+            _playSong = playSong;
             AssociatedObject.IsStopped = true;
             //TODO wait one second to be sure the current timer while stopped
 
             _waveBehavior.NextWave();
+        }
+
+        private void PlaySongIfNeeded()
+        {
+            if (_playSong)
+            {
+                PlaySong();
+            }
         }
 
         public void PlaySong()
@@ -145,7 +156,7 @@ namespace ArcheryManager.Interactions.Behaviors
             if (AssociatedObject.IsStopped || AssociatedObject.IsPaused) // timer was stop
             {
                 SettingStop();
-                PlaySong();
+                PlaySongIfNeeded();
                 return false;
             }
 
@@ -156,7 +167,7 @@ namespace ArcheryManager.Interactions.Behaviors
 
             if (!res) // start timerFunction in the end of this function
             {
-                PlaySong();
+                PlaySongIfNeeded();
                 StartTimerFunction();
             }
             return res;
@@ -164,13 +175,14 @@ namespace ArcheryManager.Interactions.Behaviors
 
         private void StartTimerFunction()
         {
+            _playSong = true;
             AssociatedObject.IsStopped = false;
             _currentMax = AssociatedObject.Time;
             this.Current = AssociatedObject.Time;
             UpdateColor();
             AssociatedObject.IsWaitingTime = false;
             Device.StartTimer(TimeSpan.FromSeconds(1), TimerFunction);
-            PlaySong();
+            PlaySongIfNeeded();
         }
 
         /// <summary>
@@ -181,7 +193,7 @@ namespace ArcheryManager.Interactions.Behaviors
             if (AssociatedObject.IsStopped) // timer was stop
             {
                 SettingStop();
-                PlaySong();
+                PlaySongIfNeeded();
                 return false;
             }
 
@@ -199,7 +211,7 @@ namespace ArcheryManager.Interactions.Behaviors
                 SettingStop();
 
                 _waveBehavior.NextWave();
-                PlaySong();
+                PlaySongIfNeeded();
             }
 
             return res;
