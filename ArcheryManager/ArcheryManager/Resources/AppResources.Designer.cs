@@ -224,6 +224,24 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Mode.
+        /// </summary>
+        internal static string Mode {
+            get {
+                return ResourceManager.GetString("Mode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Mode : {0:N}.
+        /// </summary>
+        internal static string ModeFormat {
+            get {
+                return ResourceManager.GetString("ModeFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à More options.
         /// </summary>
         internal static string MoreOptions {

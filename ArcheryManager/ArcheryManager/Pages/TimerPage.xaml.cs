@@ -14,14 +14,6 @@ namespace ArcheryManager.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TimerPage : ContentPage
     {
-        public List<string> TimerMode = new List<string>
-        {
-            AppResources.ABC,
-            AppResources.ABCD,
-            AppResources.Duel,
-            AppResources.ShootOut,
-        };
-
         private const int ShootoutTime = 40;
         private const int MinTime = 40;
         private const int MaxTime = 300;
@@ -33,6 +25,14 @@ namespace ArcheryManager.Pages
         public Color Color
         {
             get { return timer.Color; }
+        }
+
+        public string Mode
+        {
+            get
+            {
+                return TimerSetting.Mode;
+            }
         }
 
         public static readonly BindableProperty PauseReplayTextProperty =
@@ -71,17 +71,10 @@ namespace ArcheryManager.Pages
 
             PauseReplayText = AppResources.Pause;
 
-            songPicker.SelectedIndexChanged += SongPicker_SelectedIndexChanged1;
-
             var behavior = new NumericPickerBehavior(MinTime, MaxTime, StepTime);
             timePicker.Behaviors.Add(behavior);
 
             AddToolbarItems();
-        }
-
-        private void SongPicker_SelectedIndexChanged1(object sender, EventArgs e)
-        {
-            Behavior.PlaySong();
         }
 
         private void TimerSetting_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -89,6 +82,10 @@ namespace ArcheryManager.Pages
             if (e.PropertyName == nameof(TimerSetting.Time))
             {
                 timer.Time = TimerSetting.Time;
+            }
+            else if (e.PropertyName == nameof(TimerSetting.Mode))
+            {
+                OnPropertyChanged(e.PropertyName);
             }
         }
 
@@ -152,11 +149,10 @@ namespace ArcheryManager.Pages
         {
             var waveButton = new ToolbarItem()
             {
+                Text = AppResources.Mode,
                 Command = new Command(WaveButton_Click),
                 BindingContext = TimerSetting,
             };
-
-            waveButton.SetBinding(MenuItem.TextProperty, nameof(TimerSetting.Mode));
 
             return waveButton;
         }
@@ -175,37 +171,7 @@ namespace ArcheryManager.Pages
 
         private void WaveButton_Click()
         {
-            Behavior.Stop();
-
-            int currentIndex = TimerMode.IndexOf(TimerSetting.Mode);
-            TimerSetting.Mode = TimerMode[(int)(currentIndex + 1) % TimerMode.Count];
-
-            if (TimerSetting.Mode == AppResources.ABC)
-            {
-                timer.Time = TimerSetting.Time;
-                timer.ShowWaitingTime = true;
-                timer.WaveBehavior.StopWave();
-            }
-            else if (TimerSetting.Mode == AppResources.ABCD)
-            {
-                timer.WaveBehavior.StartWave();
-                timer.WaveBehavior.DuelMode = false;
-                timer.Time = TimerSetting.Time;
-                timer.ShowWaitingTime = true;
-            }
-            else if (TimerSetting.Mode == AppResources.Duel)
-            {
-                timer.WaveBehavior.StartWave();
-                timer.WaveBehavior.DuelMode = true;
-                timer.Time = TimerSetting.Time;
-                timer.ShowWaitingTime = true;
-            }
-            else if (TimerSetting.Mode == AppResources.ShootOut)
-            {
-                timer.Time = ShootoutTime;
-                timer.ShowWaitingTime = false;
-                timer.WaveBehavior.StopWave();
-            }
+            modePicker.Focus();
         }
 
         #endregion toolbar items
@@ -283,6 +249,47 @@ namespace ArcheryManager.Pages
             string name = songPicker.ItemsSource[songPicker.SelectedIndex] as string;
             string fileName = TimerPageSetting.AllSongFiles.Where(pair => pair.Key == name).First().Value;
             TimerSetting.SongFileName = fileName;
+
+            Behavior.PlaySong();
+        }
+
+        private void modePicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string mode = modePicker.SelectedItem as string;
+            TimerSetting.Mode = mode;
+
+            SetupWaveMode();
+        }
+
+        private void SetupWaveMode()
+        {
+            Behavior.Stop();
+            if (TimerSetting.Mode == AppResources.ABC)
+            {
+                timer.Time = TimerSetting.Time;
+                timer.ShowWaitingTime = true;
+                timer.WaveBehavior.StopWave();
+            }
+            else if (TimerSetting.Mode == AppResources.ABCD)
+            {
+                timer.WaveBehavior.StartWave();
+                timer.WaveBehavior.DuelMode = false;
+                timer.Time = TimerSetting.Time;
+                timer.ShowWaitingTime = true;
+            }
+            else if (TimerSetting.Mode == AppResources.Duel)
+            {
+                timer.WaveBehavior.StartWave();
+                timer.WaveBehavior.DuelMode = true;
+                timer.Time = TimerSetting.Time;
+                timer.ShowWaitingTime = true;
+            }
+            else if (TimerSetting.Mode == AppResources.ShootOut)
+            {
+                timer.Time = ShootoutTime;
+                timer.ShowWaitingTime = false;
+                timer.WaveBehavior.StopWave();
+            }
         }
     }
 }

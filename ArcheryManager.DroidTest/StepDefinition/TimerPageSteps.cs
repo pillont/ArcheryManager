@@ -1,4 +1,5 @@
 ﻿using ArcheryManager.Resources;
+using ArcheryManager.Utils;
 using NUnit.Framework;
 using System.Linq;
 using TechTalk.SpecFlow;
@@ -8,17 +9,17 @@ namespace ArcheryManager.DroidTest.StepDefinition
     [Binding]
     public class TimerMultiWaveFeaturesSteps
     {
-        [When(@"je click sur l'option de vague")]
-        public void QuandJeClickSurLOptionDeVague()
+        [When(@"je passe à l'option de vague suivante")]
+        public void JePasseALOptionDeVagueSuivante()
         {
-            TestSetting.App.Tap(
-                        TestSetting.App.Query("ABC").Count() != 0//ABC check
-                            ? "ABC" // abc click if true
-                                : TestSetting.App.Query("ABCD").Count() != 0 ? // ABCD check
-                                                                            "ABCD"  //ABCD click if true
-                                : TestSetting.App.Query(TranslateExtension.GetTextResource("Duel")).Count() != 0 ? // VS check
-                                                                            TranslateExtension.GetTextResource("Duel") :
-                                                                                TranslateExtension.GetTextResource("ShootOut")); // else shootoff
+            TestSetting.App.Tap("Mode");
+
+            var text = TestSetting.App.Query("labelMode").First().Text;
+            string mode = text.Split(' ').Last();
+
+            int current = TimerPageSetting.TimerModes.IndexOf(mode);
+            string wanted = TimerPageSetting.TimerModes[(current + 1) % TimerPageSetting.TimerModes.Count];
+            TestSetting.App.Tap(e => e.Text(wanted));
         }
 
         [When(@"je lance le timer")]
@@ -39,28 +40,12 @@ namespace ArcheryManager.DroidTest.StepDefinition
             TestSetting.App.Tap("CustomTimer");
         }
 
-        [Then(@"l'option de vague est en ABC")]
-        public void AlorsLOptionDeVagueEstEnABC()
+        [Then(@"l'option de vague est en (.*)")]
+        public void AlorsLOptionDeVagueEstEn(string mode)
         {
-            Assert.AreEqual(1, TestSetting.App.Query(TranslateExtension.GetTextResource("ABC")).Count());
-        }
-
-        [Then(@"l'option de vague est en ABCD")]
-        public void AlorsLOptionDeVagueEstEnABCD()
-        {
-            Assert.AreEqual(1, TestSetting.App.Query(TranslateExtension.GetTextResource("ABCD")).Count());
-        }
-
-        [Then(@"l'option de vague est en Shootout")]
-        public void AlorsLOptionDeVagueEstEnShootout()
-        {
-            Assert.AreEqual(1, TestSetting.App.Query(TranslateExtension.GetTextResource("ShootOut")).Count());
-        }
-
-        [Then(@"l'option de vague est en VS")]
-        public void AlorsLOptionDeVagueEstEnVS()
-        {
-            TestSetting.App.WaitForElement(TranslateExtension.GetTextResource("Duel"));
+            string pure = string.Format(TranslateExtension.GetTextResource("ModeFormat"), TranslateExtension.GetTextResource(mode));
+            TestSetting.App.WaitForElement("labelMode");
+            Assert.AreEqual(pure, TestSetting.App.Query("labelMode").First().Text);
         }
 
         [Then(@"le timer est à (.*) sec")]

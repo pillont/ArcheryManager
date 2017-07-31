@@ -20,7 +20,7 @@ Plan du scénario: test de changement de temps avant changement de vague
 	Quand J'ouvre une page timer
 	Et Je click sur le bouton de réglage de temps
 	Et je selectionne <time> dans le picker
-	Et je click sur l'option de vague
+	Et je passe à l'option de vague suivante
 
 	Alors le timer est à <time> sec
 	
