@@ -55,7 +55,7 @@ namespace ArcheryManager.CustomControls
 
         #endregion constants
 
-        public double TargetSize
+        public virtual double TargetSize
         {
             get { return (double)GetValue(TargetSizeProperty); }
             set

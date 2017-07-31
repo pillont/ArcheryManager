@@ -99,7 +99,7 @@ namespace ArcheryManager.Interactions.Behaviors
                     {
                         UpdateAverageCenter(list);
                         double standartDeviationX = StatisticHelper.CalculateStdDev(list.Select(a => ArrowTranslationHelper.TranslationXOf(a, Target.TargetSize)));
-                        double standartDeviationY = StatisticHelper.CalculateStdDev(list.Select(a => ArrowTranslationHelper.TranslationXOf(a, Target.TargetSize)));
+                        double standartDeviationY = StatisticHelper.CalculateStdDev(list.Select(a => ArrowTranslationHelper.TranslationYOf(a, Target.TargetSize)));
 
                         if (!AverageCenter.HasValue)
                         {
