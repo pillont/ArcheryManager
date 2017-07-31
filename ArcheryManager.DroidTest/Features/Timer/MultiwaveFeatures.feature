@@ -53,7 +53,7 @@ Scénario: test de changement d'option en Shootout
 	Et je passe à l'option de vague suivante
 	Et je passe à l'option de vague suivante
 	Et je passe à l'option de vague suivante
-	Alors l'option de vague est en Shootout
+	Alors l'option de vague est en ShootOut
 
 
 Scénario: test de changement d'option retour en ABC

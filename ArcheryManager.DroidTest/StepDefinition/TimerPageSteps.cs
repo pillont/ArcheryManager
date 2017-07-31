@@ -10,12 +10,15 @@ namespace ArcheryManager.DroidTest.StepDefinition
     public class TimerMultiWaveFeaturesSteps
     {
         [When(@"je passe à l'option de vague suivante")]
-        public void JePasseALOptionDeVagueSuivante(string mode)
+        public void JePasseALOptionDeVagueSuivante()
         {
             TestSetting.App.Tap("Mode");
 
+            var text = TestSetting.App.Query("labelMode").First().Text;
+            string mode = text.Split(' ').Last();
+
             int current = TimerPageSetting.TimerModes.IndexOf(mode);
-            string wanted = TimerPageSetting.TimerModes[current + 1];
+            string wanted = TimerPageSetting.TimerModes[(current + 1) % TimerPageSetting.TimerModes.Count];
             TestSetting.App.Tap(e => e.Text(wanted));
         }
 
@@ -40,7 +43,8 @@ namespace ArcheryManager.DroidTest.StepDefinition
         [Then(@"l'option de vague est en (.*)")]
         public void AlorsLOptionDeVagueEstEn(string mode)
         {
-            string pure = string.Format(TranslateExtension.GetTextResource("ModeFormat"), mode);
+            string pure = string.Format(TranslateExtension.GetTextResource("ModeFormat"), TranslateExtension.GetTextResource(mode));
+            TestSetting.App.WaitForElement("labelMode");
             Assert.AreEqual(pure, TestSetting.App.Query("labelMode").First().Text);
         }
 

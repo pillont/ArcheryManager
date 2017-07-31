@@ -199,7 +199,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 55
  testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 56
- testRunner.Then("l\'option de vague est en Shootout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("l\'option de vague est en ShootOut", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
         }
