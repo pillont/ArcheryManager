@@ -57,6 +57,7 @@ Scénario: test la non possibilité de tirer plus du max
 	
 	Alors le nombre de flèches dans la liste est de 6
 	Et le nombre de flèches actuelles sur la cible est de 6
+	Et le message d'erreur du nombre de flèche est affiché
 
 
 
@@ -77,3 +78,4 @@ Scénario: test la non possibilité de tirer plus du max dans la vue de bouton
 	Et je click sur le boutton X10
 	
 	Alors le nombre de flèches dans la liste est de 6
+	Et le message d'erreur du nombre de flèche est affiché

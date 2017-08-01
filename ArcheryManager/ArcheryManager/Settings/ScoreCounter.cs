@@ -5,6 +5,8 @@ using System.Linq;
 using ArcheryManager.Interfaces;
 using ArcheryManager.Utils;
 using System.ComponentModel;
+using System;
+using ArcheryManager.Helpers;
 
 namespace ArcheryManager.Settings
 {
@@ -12,6 +14,8 @@ namespace ArcheryManager.Settings
     {
         private const string NewFlightText = "New Flight";
         private const string ScoreFormat = "{0}/{1}";
+
+        private readonly GeneralCounterHelper GeneralCounterManager;
 
         #region properties
 
@@ -73,6 +77,8 @@ namespace ArcheryManager.Settings
             Result.PreviousArrows.Clear();
 
             CountSetting.PropertyChanged += CountSetting_PropertyChanged;
+
+            GeneralCounterManager = new GeneralCounterHelper(Result, CountSetting, App.NavigationPage);
         }
 
         public ObservableCollection<Arrow> ArrowsShowed
@@ -232,7 +238,13 @@ namespace ArcheryManager.Settings
             Result.OnArrowsChanged();
         }
 
-        public void AddArrow(Arrow arrow)
+        public void AddArrowIfPossible(Arrow arrow)
+        {
+            Action addArrow = () => AddArrow(arrow);
+            GeneralCounterManager.AddArrowOrShowError(addArrow);
+        }
+
+        private void AddArrow(Arrow arrow)
         {
             bool canAddArrow = (!CountSetting.HaveMaxArrowsCount) ||
                                 Result.CurrentArrows.Count < CountSetting.ArrowsCount;

@@ -55,6 +55,7 @@
     </Compile>
     <Compile Include="Factories\ArrowsettingFactory.cs" />
     <Compile Include="Factories\CounterPageFactory.cs" />
+    <Compile Include="Helpers\GeneralCounterHelper.cs" />
     <Compile Include="Interactions\Behaviors\CounterButtonBehavior.cs" />
     <Compile Include="Interactions\Behaviors\CounterToolbarItemsBehavior.cs" />
     <Compile Include="Interactions\Behaviors\ArrowListOrderedBehavior.cs" />

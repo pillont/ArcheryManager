@@ -118,5 +118,11 @@ namespace ArcheryManager.DroidTest.StepDefinition
             var enumeration = (TargetStyle)Enum.Parse(typeof(TargetStyle), target, true);
             TargetHelper.ShouldHaveTarget(enumeration);
         }
+
+        [Then(@"le message d'erreur du nombre de flèche est affiché")]
+        public void AlorsLeMessageDErreurDuNombreDeFlecheEstAffiche()
+        {
+            TestSetting.App.WaitForElement(e => e.Text(TranslateExtension.GetTextResource("CantAddMoreThanMaxArrow")));
+        }
     }
 }

@@ -45,10 +45,10 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
             countSetting.ArrowsCount = 2;
             Assert.AreEqual(3, toolBarList.Count);
 
-            counter.AddArrow(new Arrow(0, 0));
+            counter.AddArrowIfPossible(new Arrow(0, 0));
             Assert.AreEqual(3, toolBarList.Count);
 
-            counter.AddArrow(new Arrow(0, 0));
+            counter.AddArrowIfPossible(new Arrow(0, 0));
             Assert.AreEqual(4, toolBarList.Count);
         }
 
@@ -60,7 +60,7 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
             Assert.AreEqual(3, toolBarList.Count);
 
             countSetting.ArrowsCount = 2;
-            counter.AddArrow(new Arrow(0, 0));
+            counter.AddArrowIfPossible(new Arrow(0, 0));
             Assert.AreEqual(4, toolBarList.Count);
         }
 
@@ -72,8 +72,8 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
             Assert.AreEqual(3, toolBarList.Count);
             countSetting.ArrowsCount = 2;
 
-            counter.AddArrow(new Arrow(0, 0));
-            counter.AddArrow(new Arrow(0, 0));
+            counter.AddArrowIfPossible(new Arrow(0, 0));
+            counter.AddArrowIfPossible(new Arrow(0, 0));
 
             counter.RemoveLastArrow();
             Assert.AreEqual(3, toolBarList.Count);
@@ -87,8 +87,8 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
             Assert.AreEqual(3, toolBarList.Count);
             countSetting.ArrowsCount = 2;
 
-            counter.AddArrow(new Arrow(0, 0));
-            counter.AddArrow(new Arrow(0, 0));
+            counter.AddArrowIfPossible(new Arrow(0, 0));
+            counter.AddArrowIfPossible(new Arrow(0, 0));
 
             counter.RemoveLastArrow();
             Assert.AreEqual(4, toolBarList.Count);
