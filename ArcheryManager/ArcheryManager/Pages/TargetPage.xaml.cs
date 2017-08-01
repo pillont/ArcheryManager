@@ -44,7 +44,7 @@ namespace ArcheryManager.Pages
 
             #region ScoreList
 
-            var scoreList = ScoreListFactory.Create(customTarget, GeneralCounterSetting, ToolbarItems);
+            var scoreList = ScoreListFactory.Create(GeneralCounterSetting, ToolbarItems);
             scoreList.SizeChanged += ScoreList_SizeChanged;
             scrollArrows.Content = scoreList;
 

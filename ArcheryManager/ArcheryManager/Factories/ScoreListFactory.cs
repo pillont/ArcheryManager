@@ -30,19 +30,5 @@ namespace ArcheryManager.Factories
             scoreList.Behaviors.Add(orderBehavior);
             return scoreList;
         }
-
-        /// <summary>
-        /// create score list
-        /// scoreList items is currentarrows of counter
-        /// Add selectableArrowInListBehavior to change the toolbar Items during selection
-        /// change the color of arrows in the target during the selection of arrow
-        /// </summary>
-        public static ArrowUniformGrid Create(Target customTarget, IGeneralCounterSetting generalCounterSetting, IList<ToolbarItem> toolbarItems)
-        {
-            var scoreList = Create(generalCounterSetting, toolbarItems);
-            var selectBehavior = scoreList.Behaviors.OfType<SelectableArrowInListBehavior>().First();
-
-            return scoreList;
-        }
     }
 }

@@ -53,6 +53,8 @@ namespace ArcheryManager.Interactions.Behaviors
                 AssociatedObject.Items.Remove(a);
             }
             UpdateToolBarItems();
+
+            GeneralCountSetting.ScoreResult.OnArrowsChanged();
         }
 
         #endregion tap remove

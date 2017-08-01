@@ -77,7 +77,7 @@
   <ItemGroup>
     <Compile Include="ClassTest.cs" />
     <Compile Include="Factories\ArrowFactoryTest.cs" />
-    <Compile Include="Factories\ScoreListFactoryTest.cs" />
+    <Compile Include="Interactions\Behaviors\SelectableArrowInListBehaviorTest.cs" />
     <Compile Include="Interactions\Behaviors\ArrowListOrderedBehaviorTest.cs" />
     <Compile Include="Interactions\Behaviors\AverageBehaviorTest.cs" />
     <Compile Include="Interactions\Behaviors\CounterButtonBehaviorTest.cs" />
