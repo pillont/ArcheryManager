@@ -1,21 +1,18 @@
 ﻿using ArcheryManager.Resources;
 using ArcheryManager.Settings;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ArcheryManager.Helpers
+namespace ArcheryManager.Utils
 {
-    public class GeneralCounterHelper
+    public class CounterMessageManager
     {
         private readonly ScoreResult ScoreResult;
         private readonly CountSetting CountSetting;
         private readonly Page Page;
 
-        public GeneralCounterHelper(ScoreResult scoreResult, CountSetting countSetting, Page page)
+        public CounterMessageManager(ScoreResult scoreResult, CountSetting countSetting, Page page)
         {
             ScoreResult = scoreResult;
             CountSetting = countSetting;

@@ -8,11 +8,12 @@ using ArcheryManager.Settings;
 using ArcheryManager.Interactions.Behaviors;
 using ArcheryManager.Pages.PagesTemplates;
 using ArcheryManager.Interfaces;
+using ArcheryManager.Utils;
 
 namespace ArcheryManager.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TargetPage : ContentPageWithRotationEvent, IToolbarItemsHolder
+    public partial class TargetPage : ContentPageWithGeneralEvent, IToolbarItemsHolder
     {
         private static readonly IGeneralCounterSetting GeneralCounterSetting = DependencyService.Get<IGeneralCounterSetting>();
 

@@ -119,6 +119,13 @@ namespace ArcheryManager.DroidTest.StepDefinition
             TargetHelper.ShouldHaveTarget(enumeration);
         }
 
+        [Then(@"il n'y a pas de cible (.*)")]
+        public void AlorsIlNYAPasDeCible(string target)
+        {
+            var enumeration = (TargetStyle)Enum.Parse(typeof(TargetStyle), target, true);
+            TargetHelper.ShouldHaveTarget(enumeration);
+        }
+
         [Then(@"le message d'erreur du nombre de flèche est affiché")]
         public void AlorsLeMessageDErreurDuNombreDeFlecheEstAffiche()
         {

@@ -86,6 +86,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CounterBoutonAddArrowFeature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Counters\CounterQuitMessageFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CounterQuitMessageFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Counters\CounterSettingUpdateFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -188,6 +193,10 @@
     <None Include="Features\Counters\CounterBoutonAddArrowFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CounterBoutonAddArrowFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Counters\CounterQuitMessageFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CounterQuitMessageFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Counters\CounterSettingUpdateFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

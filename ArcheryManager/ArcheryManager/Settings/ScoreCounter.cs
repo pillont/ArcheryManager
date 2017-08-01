@@ -15,7 +15,7 @@ namespace ArcheryManager.Settings
         private const string NewFlightText = "New Flight";
         private const string ScoreFormat = "{0}/{1}";
 
-        private readonly GeneralCounterHelper GeneralCounterManager;
+        private readonly CounterMessageManager GeneralCounterManager;
 
         #region properties
 
@@ -78,7 +78,7 @@ namespace ArcheryManager.Settings
 
             CountSetting.PropertyChanged += CountSetting_PropertyChanged;
 
-            GeneralCounterManager = new GeneralCounterHelper(Result, CountSetting, App.NavigationPage);
+            GeneralCounterManager = new CounterMessageManager(Result, CountSetting, App.NavigationPage);
         }
 
         public ObservableCollection<Arrow> ArrowsShowed

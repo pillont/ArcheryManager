@@ -5,6 +5,7 @@
              x:Class="ArcheryManager.Pages.BackDoorPage">
 
     <StackLayout>
+        <Label x:Name="backdoorType" Text="Backdoors" />
         <Button Text="{resources:Translate Timer}" AutomationId="TimerButton" Clicked="Timer_Click" />
         <Button Text="{resources:Translate EnglishTarget}" AutomationId="EnglishTargetButton" x:Name="EnglishTargetButton" Clicked="Target_Click" />
         <Button Text="{resources:Translate FieldTarget}" AutomationId="fieldTargetButton" x:Name="fieldTargetButton" Clicked="Target_Click" />

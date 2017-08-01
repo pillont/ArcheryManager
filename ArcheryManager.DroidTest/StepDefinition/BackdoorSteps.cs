@@ -47,5 +47,11 @@ namespace ArcheryManager.DroidTest.StepDefinition
             TestSetting.App.WaitForElement("CounterSelectorButton");
             TestSetting.App.Tap("CounterSelectorButton");
         }
+
+        [Then(@"il y a le titre de backdoor")]
+        public void AlorsIlYALeTitreDeBackdoor()
+        {
+            TestSetting.App.WaitForElement("backdoorType");
+        }
     }
 }

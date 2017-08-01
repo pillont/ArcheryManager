@@ -270,4 +270,7 @@
   <data name="ModeFormat" xml:space="preserve">
     <value>Mode : {0:N}</value>
   </data>
+  <data name="SureQuitCount" xml:space="preserve">
+    <value>Do you realy want to quit the shoot ?</value>
+  </data>
 </root>

@@ -161,15 +161,6 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à .
-        /// </summary>
-        internal static string Error {
-            get {
-                return ResourceManager.GetString("Error", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Field target.
         /// </summary>
         internal static string FieldTarget {
@@ -454,6 +445,15 @@ namespace ArcheryManager.Resources {
         internal static string Strike {
             get {
                 return ResourceManager.GetString("Strike", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Do you realy want to quit the shoot ?.
+        /// </summary>
+        internal static string SureQuitCount {
+            get {
+                return ResourceManager.GetString("SureQuitCount", resourceCulture);
             }
         }
         

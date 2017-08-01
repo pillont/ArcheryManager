@@ -3,14 +3,14 @@ using ArcheryManager.Helpers;
 using Xamarin.Forms;
 using System.Linq;
 using ArcheryManager.Settings;
-using ArcheryManager.Resources;
 using System;
+using ArcheryManager.Utils;
 
 namespace ArcheryManager.Interactions.Behaviors
 {
     public class MovableTargetBehavior : CustomBehavior<Target>
     {
-        private readonly GeneralCounterHelper GeneralCounterManager;
+        private readonly CounterMessageManager GeneralCounterManager;
 
         /// <summary>
         /// scale of the target during manipulation to set arrow
@@ -40,7 +40,7 @@ namespace ArcheryManager.Interactions.Behaviors
             this.CountSetting = generalCounterSetting.CountSetting;
             this.Counter = counter;
 
-            GeneralCounterManager = new GeneralCounterHelper(ScoreResult, CountSetting, App.NavigationPage);
+            GeneralCounterManager = new CounterMessageManager(ScoreResult, CountSetting, App.NavigationPage);
         }
 
         protected override void OnAttachedTo(Target bindable)

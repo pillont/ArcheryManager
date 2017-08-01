@@ -9,7 +9,7 @@ using ArcheryManager.Interfaces;
 namespace ArcheryManager.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CounterButtonPage : ContentPage, IToolbarItemsHolder
+    public partial class CounterButtonPage : ContentPageWithGeneralEvent, IToolbarItemsHolder
     {
         public readonly ScoreCounter Counter;
         private readonly CountSetting CountSetting;

@@ -1,5 +1,6 @@
 ﻿using ArcheryManager.Interactions.Behaviors;
 using ArcheryManager.Pages;
+using ArcheryManager.Pages.PagesTemplates;
 using ArcheryManager.Settings;
 using Xamarin.Forms;
 
@@ -12,16 +13,19 @@ namespace ArcheryManager.Factories
             bool wantTarget = generalCounterSetting.CountSetting.HaveTarget;
             generalCounterSetting.ScoreResult = new ScoreResult();
 
+            ContentPageWithGeneralEvent Page;
             if (wantTarget)
             {
-                var Page = new TargetPage();
-                return Page;
+                Page = new TargetPage();
             }
             else
             {
-                var Page = new CounterButtonPage();
-                return Page;
+                Page = new CounterButtonPage();
             }
+
+            var behavior = new BackMessageBehavior();
+            Page.Behaviors.Add(behavior);
+            return Page;
         }
     }
 }
