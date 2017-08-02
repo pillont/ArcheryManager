@@ -13,14 +13,20 @@ namespace ArcheryManager.Pages.PagesTemplates
         protected override bool OnBackButtonPressed()
         {
             base.OnBackButtonPressed();
+
             var arg = new BackButtonPressedArg();
-            BackButtonPressed?.Invoke(this, arg); NOT WORK...
-            return arg.ValidPress;
+            BackButtonPressed?.Invoke(this, arg);
+            return !arg.ValidPress; //NOTE : must have "!" to work : why microsoft...
         }
     }
 
     public class BackButtonPressedArg
     {
         public bool ValidPress { get; set; }
+
+        public BackButtonPressedArg()
+        {
+            ValidPress = true;
+        }
     }
 }

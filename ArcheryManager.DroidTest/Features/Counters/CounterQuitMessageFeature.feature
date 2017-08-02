@@ -2,7 +2,7 @@
 Fonctionnalité: CounterQuitMessageFeature
 	test le message de confirmation pour quitter une page de compté
 
-Scénario: test le message pour quitter une cible
+Scénario: test le message pour quitter une cible bouton navigation
 	Quand J'ouvre une page de cible fita
 	Et je reviens à la page d'avant
 
@@ -17,7 +17,7 @@ Scénario: test le message pour quitter une cible
 
 	Alors il y a le titre de backdoor
 
-Scénario: test le message pour quitter une zapette
+Scénario: test le message pour quitter une zapette bouton navigation
 	Quand J'ouvre une page zappette
 	Et je reviens à la page d'avant
 

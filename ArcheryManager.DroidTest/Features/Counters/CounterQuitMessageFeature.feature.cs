@@ -64,10 +64,10 @@ namespace ArcheryManager.DroidTest.Features.Counters
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("test le message pour quitter une cible")]
-        public virtual void TestLeMessagePourQuitterUneCible()
+        [NUnit.Framework.DescriptionAttribute("test le message pour quitter une cible bouton navigation")]
+        public virtual void TestLeMessagePourQuitterUneCibleBoutonNavigation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test le message pour quitter une cible", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test le message pour quitter une cible bouton navigation", ((string[])(null)));
 #line 5
 this.ScenarioSetup(scenarioInfo);
 #line 6
@@ -91,10 +91,10 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("test le message pour quitter une zapette")]
-        public virtual void TestLeMessagePourQuitterUneZapette()
+        [NUnit.Framework.DescriptionAttribute("test le message pour quitter une zapette bouton navigation")]
+        public virtual void TestLeMessagePourQuitterUneZapetteBoutonNavigation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test le message pour quitter une zapette", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test le message pour quitter une zapette bouton navigation", ((string[])(null)));
 #line 20
 this.ScenarioSetup(scenarioInfo);
 #line 21

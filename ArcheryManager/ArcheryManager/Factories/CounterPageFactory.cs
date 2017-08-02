@@ -1,6 +1,7 @@
 ﻿using ArcheryManager.Interactions.Behaviors;
 using ArcheryManager.Pages;
 using ArcheryManager.Pages.PagesTemplates;
+using ArcheryManager.Resources;
 using ArcheryManager.Settings;
 using Xamarin.Forms;
 
@@ -23,7 +24,14 @@ namespace ArcheryManager.Factories
                 Page = new CounterButtonPage();
             }
 
-            var behavior = new BackMessageBehavior();
+            var arg = new AlertArg()
+            {
+                Title = AppResources.Question,
+                Message = AppResources.SureQuitCount,
+                Accept = AppResources.Yes,
+                Cancel = AppResources.No
+            };
+            var behavior = new BackMessageBehavior(App.NavigationPage, arg);
             Page.Behaviors.Add(behavior);
             return Page;
         }
