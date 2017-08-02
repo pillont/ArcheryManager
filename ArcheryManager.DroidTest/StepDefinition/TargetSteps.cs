@@ -130,6 +130,23 @@ namespace ArcheryManager.DroidTest.StepDefinition
         public void AlorsLeMessageDErreurDuNombreDeFlecheEstAffiche()
         {
             TestSetting.App.WaitForElement(e => e.Text(TranslateExtension.GetTextResource("CantAddMoreThanMaxArrow")));
+
+
+        [Then(@"la moyenne est centrée en (.*), (.*)")]
+        public void AlorsLaMoyenneEstCentreeEn(double x, double y)
+        {
+            TestSetting.App.WaitForElement(e => e.Marked("averageCanvas").Child(0));
+            var average = TestSetting.App.Query(e => e.Marked("averageCanvas").Child(0)).Single();
+            Assert.AreEqual(x, average.Rect.CenterX, 7);
+            Assert.AreEqual(y, average.Rect.CenterY, 7);
+        }
+
+        [Then(@"la moyenne est de taille (.*), (.*)")]
+        public void AlorsLaMoyenneEstDeTaille(double width, double height)
+        {
+            var average = TestSetting.App.Query(e => e.Marked("averageCanvas").Child(0)).Single();
+            Assert.AreEqual(width, average.Rect.Width, 7);
+            Assert.AreEqual(height, average.Rect.Height, 7);
         }
     }
 }
