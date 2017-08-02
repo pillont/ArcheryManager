@@ -58,22 +58,6 @@ namespace ArcheryManager.Pages
             image.IsSelected = true;
         }
 
-        /// <summary>
-        /// limit min of Arrow count to const
-        /// </summary>
-        private void ArrowCount_Unfocused(object sender, FocusEventArgs e)
-        {
-            var entry = sender as Entry;
-            int val = Convert.ToInt32(entry.Text);
-            if (val < CountSetting.MinArrowCount)
-            {
-                if (BindingContext != null)
-                {
-                    CountSetting.ArrowsCount = CountSetting.MinArrowCount;
-                }
-            }
-        }
-
         private async void Valid_Clicked()
         {
             try
