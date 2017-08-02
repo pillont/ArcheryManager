@@ -22,5 +22,6 @@
         <Button Text="{resources:Translate ButtonCounter}" AutomationId="ButtonCounterButton" Clicked="ButtonCounter_Clicked" />
         <Button Text="{resources:Translate CounterSelector}" AutomationId="CounterSelectorButton" Clicked="CounterSelector_Clicked" />
         <Button Text="{resources:Translate GeneralMenu}" AutomationId="GeneralMenuButton" Clicked="GeneralMenu_Clicked" />
+        <Button Text="tabbed pages" AutomationId="tabbedCountButton" Clicked="tabbedCount_Clicked" />
     </StackLayout>
 </ContentPage>

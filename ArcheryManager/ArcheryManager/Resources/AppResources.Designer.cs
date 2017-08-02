@@ -422,6 +422,15 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Shoot.
+        /// </summary>
+        internal static string Shoot {
+            get {
+                return ResourceManager.GetString("Shoot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à ShoutOut.
         /// </summary>
         internal static string ShootOut {

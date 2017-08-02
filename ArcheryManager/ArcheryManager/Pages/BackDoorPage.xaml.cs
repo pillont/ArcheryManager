@@ -59,7 +59,7 @@ namespace ArcheryManager.Pages
 
         private async Task OpenNewCounterView()
         {
-            var page = CounterPageFactory.Create(GeneralCounterSetting);
+            var page = CounterPageFactory.CreateSimpleCounter(GeneralCounterSetting);
             await App.NavigationPage.PushAsync(page);
         }
 
@@ -86,6 +86,17 @@ namespace ArcheryManager.Pages
         {
             var generalMenu = new GeneralMenu();
             await App.NavigationPage.PushAsync(generalMenu);
+        }
+
+        private async void tabbedCount_Clicked(object sender, EventArgs e)
+        {
+            GeneralCounterSetting.ScoreResult = new ScoreResult();
+            GeneralCounterSetting.CountSetting = new CountSetting();
+            GeneralCounterSetting.ArrowSetting = EnglishArrowSetting.Instance;
+
+            var count = CounterPageFactory.CreateSimpleCounter(GeneralCounterSetting);
+            var tabbledCount = new CountTabbedPage(count);
+            await App.NavigationPage.PushAsync(tabbledCount);
         }
     }
 }

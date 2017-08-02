@@ -66,6 +66,7 @@
     <Compile Include="Interactions\Behaviors\ArrowListOrderedBehavior.cs" />
     <Compile Include="Interactions\Behaviors\NumericPickerBehavior.cs" />
     <Compile Include="Interfaces\IToolbarItemsHolder.cs" />
+    <Compile Include="Pages\CountTabbedPage.cs" />
     <Compile Include="Pages\PagesTemplates\ContentPageWithRotationEvent.cs" />
     <Compile Include="Pages\CounterSelectorPage.xaml.cs">
       <DependentUpon>CounterSelectorPage.xaml</DependentUpon>

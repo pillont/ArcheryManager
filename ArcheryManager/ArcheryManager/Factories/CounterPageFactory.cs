@@ -9,7 +9,7 @@ namespace ArcheryManager.Factories
 {
     public class CounterPageFactory
     {
-        public static Page Create(GeneralCounterSetting generalCounterSetting)
+        public static Page CreateSimpleCounter(GeneralCounterSetting generalCounterSetting)
         {
             bool wantTarget = generalCounterSetting.CountSetting.HaveTarget;
             generalCounterSetting.ScoreResult = new ScoreResult();
@@ -34,6 +34,13 @@ namespace ArcheryManager.Factories
             var behavior = new BackMessageBehavior(App.NavigationPage, arg);
             Page.Behaviors.Add(behavior);
             return Page;
+        }
+
+        public static Page CreateTabbedCounter(GeneralCounterSetting generalCounterSetting)
+        {
+            var counter = CreateSimpleCounter(generalCounterSetting);
+            var tabbed = new CountTabbedPage(counter);
+            return tabbed;
         }
     }
 }

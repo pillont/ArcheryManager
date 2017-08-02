@@ -5,7 +5,8 @@
              xmlns:resources="clr-namespace:ArcheryManager.Resources"
              xmlns:ctl="clr-namespace:ArcheryManager.CustomControls"
              xmlns:utl="clr-namespace:ArcheryManager.Utils"
-             x:Class="ArcheryManager.Pages.TimerPage" BackgroundColor="{Binding Color}">
+             x:Class="ArcheryManager.Pages.TimerPage"
+             BackgroundColor="{Binding Color}">
 
     <StackLayout HorizontalOptions="Center" VerticalOptions="Center" AutomationId="test">
         <Picker x:Name="songPicker"

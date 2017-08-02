@@ -273,4 +273,7 @@
   <data name="SureQuitCount" xml:space="preserve">
     <value>Etes vous sûre de vouloir quitter le tir ?</value>
   </data>
+  <data name="Shoot" xml:space="preserve">
+    <value>Tir</value>
+  </data>
 </root>
