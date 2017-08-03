@@ -130,7 +130,7 @@ namespace ArcheryManager.DroidTest.StepDefinition
         public void AlorsLeMessageDErreurDuNombreDeFlecheEstAffiche()
         {
             TestSetting.App.WaitForElement(e => e.Text(TranslateExtension.GetTextResource("CantAddMoreThanMaxArrow")));
-
+        }
 
         [Then(@"la moyenne est centrée en (.*), (.*)")]
         public void AlorsLaMoyenneEstCentreeEn(double x, double y)
