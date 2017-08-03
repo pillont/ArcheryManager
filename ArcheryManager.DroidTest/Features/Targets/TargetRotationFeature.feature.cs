@@ -106,6 +106,35 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test la position de moyenne après rotation")]
+        public virtual void TestLaPositionDeMoyenneApresRotation()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test la position de moyenne après rotation", ((string[])(null)));
+#line 25
+this.ScenarioSetup(scenarioInfo);
+#line 26
+ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 27
+ testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 28
+ testRunner.And("je click sur l\'option de moyenne", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 29
+ testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 30
+ testRunner.And("je tire une flèche en 200, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 31
+ testRunner.And("je tire une flèche en 150, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 32
+ testRunner.And("je tourne le téléphone", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 34
+ testRunner.Then("la moyenne est centrée en 295, 455", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 35
+ testRunner.And("la moyenne est de taille 68, 134", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
