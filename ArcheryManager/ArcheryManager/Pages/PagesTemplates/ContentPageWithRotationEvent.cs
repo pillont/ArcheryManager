@@ -55,11 +55,11 @@ namespace ArcheryManager.Pages.PagesTemplates
                 var size = new Size(width, height);
                 if (width < height)
                 {
-                    VerticalScreenRotation(size);
+                    VerticalScreenRotation?.Invoke(size);
                 }
                 else
                 {
-                    HorizontalScreenRotation(size);
+                    HorizontalScreenRotation?.Invoke(size);
                 }
 
                 ScreenRotate?.Invoke(width, height);

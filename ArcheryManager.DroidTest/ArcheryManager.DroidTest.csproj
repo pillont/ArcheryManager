@@ -81,10 +81,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\Counters\CounterBoutonAddArrowFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CounterBoutonAddArrowFeature.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Counters\CounterQuitMessageFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CounterQuitMessageFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Counters\CounterSettingUpdateFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CounterSettingUpdateFeature.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Counters\SelectionArrowFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SelectionArrowFeature.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Counters\SpecificCounterSettingFeature.feature.cs">
       <AutoGen>True</AutoGen>
@@ -151,6 +166,7 @@
     <Compile Include="Helpers\TargetHelper.cs" />
     <Compile Include="StepDefinition\BackdoorSteps.cs" />
     <Compile Include="StepDefinition\CounterButtonsSteps.cs" />
+    <Compile Include="StepDefinition\GeneralCounterStep.cs" />
     <Compile Include="StepDefinition\GenericSearchElement.cs" />
     <Compile Include="StepDefinition\DeviceInteractionSteps.cs" />
     <Compile Include="StepDefinition\PickerSteps.cs" />
@@ -174,9 +190,21 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Features\Counters\CounterBoutonAddArrowFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CounterBoutonAddArrowFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Counters\CounterQuitMessageFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CounterQuitMessageFeature.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\Counters\CounterSettingUpdateFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CounterSettingUpdateFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Counters\SelectionArrowFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SelectionArrowFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Counters\SpecificCounterSettingFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

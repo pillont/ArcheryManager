@@ -16,12 +16,7 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
 
         public ArrowListOrderedBehaviorTest()
         {
-            GeneralCountSetting = new GeneralCounterSetting()
-            {
-                ArrowSetting = EnglishArrowSetting.Instance,
-                CountSetting = new CountSetting(),
-                ScoreResult = new ScoreResult(),
-            };
+            GeneralCountSetting = new GeneralCounterSetting();
         }
 
         [SetUp]

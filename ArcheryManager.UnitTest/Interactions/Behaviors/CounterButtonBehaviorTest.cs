@@ -25,12 +25,7 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
             _arrow1 = new Arrow(1, 0);
             _arrow2 = new Arrow(2, 0);
             _arrow3 = new Arrow(3, 0);
-            _generalSetting = new GeneralCounterSetting()
-            {
-                ArrowSetting = EnglishArrowSetting.Instance,
-                CountSetting = new CountSetting(),
-                ScoreResult = new ScoreResult(),
-            };
+            _generalSetting = new GeneralCounterSetting();
             _counter = new ScoreCounter(_generalSetting);
 
             _behavior = new CounterButtonBehavior(_generalSetting, _counter);

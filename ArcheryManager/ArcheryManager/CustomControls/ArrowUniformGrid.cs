@@ -4,11 +4,17 @@ using ArcheryManager.Interfaces;
 using ArcheryManager.Utils;
 using Xamarin.Forms;
 using XFShapeView;
+using System.ComponentModel;
+using System.Collections.Specialized;
+using ArcheryManager.Helpers;
+using ArcheryManager.Settings.ArrowSettings;
 
 namespace ArcheryManager.CustomControls
 {
     public class ArrowUniformGrid : UniformGrid<Arrow>
     {
+        private const int WidthOfSelectedBorder = 10;
+
         public static readonly BindableProperty SettingProperty =
                       BindableProperty.Create(nameof(ArrowSetting), typeof(IArrowSetting), typeof(ArrowUniformGrid), null);
 
@@ -51,7 +57,43 @@ namespace ArcheryManager.CustomControls
             //       If this structure change, think to change in the helper to
             grid.Children.Add(shape);
             grid.Children.Add(label);
+
+            arrow.PropertyChanged += Arrow_PropertyChanged;
+
             return grid;
+        }
+
+        private void Arrow_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Arrow.IsSelected))
+            {
+                var arrow = sender as Arrow;
+                var container = FindContainer(arrow);
+
+                if (arrow.IsSelected)
+                {
+                    SelectArrow(container);
+                }
+                else
+                {
+                    UnSelectArrow(container);
+                }
+            }
+        }
+
+        private void SelectArrow(View container)
+        {
+            var shape = ArrowUniformGridHelper.ShapeOfArrow(container);
+
+            shape.BorderColor = CommonConstant.DefaultSelectedArrowColor;
+            shape.BorderWidth = WidthOfSelectedBorder;
+        }
+
+        private void UnSelectArrow(View container)
+        {
+            var shape = ArrowUniformGridHelper.ShapeOfArrow(container);
+            shape.BorderColor = ArrowUniformGrid.DefaultBorderColor;
+            shape.BorderWidth = ArrowUniformGrid.DefaultBorderWidth;
         }
     }
 }

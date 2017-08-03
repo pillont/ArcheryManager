@@ -3,8 +3,17 @@ using Xamarin.Forms;
 
 namespace ArcheryManager.Utils
 {
-    public class Arrow
+    public class Arrow : BindableObject
     {
+        public static readonly BindableProperty IsSelectedProperty =
+                      BindableProperty.Create(nameof(IsSelected), typeof(bool), typeof(Arrow), false);
+
+        public bool IsSelected
+        {
+            get { return (bool)GetValue(IsSelectedProperty); }
+            set { SetValue(IsSelectedProperty, value); }
+        }
+
         public int NumberInFlight { get; private set; }
         public double TranslationX { get; private set; }
         public double TranslationY { get; private set; }

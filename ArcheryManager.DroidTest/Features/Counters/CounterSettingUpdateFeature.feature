@@ -10,6 +10,8 @@ Scénario: test passage de zappette à cible
 
 		Quand je reviens à la page d'avant
 		Quand je reviens à la page d'avant
+		Et je click sur le texte Yes
+
 		Et je click sur l'option cible
 		Et je valide la sélection de cible
 		Et j'ouvre le menu de paramètre

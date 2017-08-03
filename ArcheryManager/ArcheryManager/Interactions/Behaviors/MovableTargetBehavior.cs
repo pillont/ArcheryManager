@@ -3,11 +3,15 @@ using ArcheryManager.Helpers;
 using Xamarin.Forms;
 using System.Linq;
 using ArcheryManager.Settings;
+using System;
+using ArcheryManager.Utils;
 
 namespace ArcheryManager.Interactions.Behaviors
 {
     public class MovableTargetBehavior : CustomBehavior<Target>
     {
+        private readonly CounterMessageManager GeneralCounterManager;
+
         /// <summary>
         /// scale of the target during manipulation to set arrow
         /// </summary>
@@ -35,6 +39,8 @@ namespace ArcheryManager.Interactions.Behaviors
             ScoreResult = generalCounterSetting.ScoreResult;
             this.CountSetting = generalCounterSetting.CountSetting;
             this.Counter = counter;
+
+            GeneralCounterManager = new CounterMessageManager(ScoreResult, CountSetting, App.NavigationPage);
         }
 
         protected override void OnAttachedTo(Target bindable)
@@ -80,7 +86,7 @@ namespace ArcheryManager.Interactions.Behaviors
 
             var numberInFlight = ScoreResult.CurrentArrows.Count;
             var arrow = AssociatedObject.Factory.Create(position, numberInFlight, AssociatedObject.TargetSize);
-            Counter.AddArrow(arrow);
+            Counter.AddArrowIfPossible(arrow);
 
             AssociatedObject.TargetGrid.TranslationX = 0;
             AssociatedObject.TargetGrid.TranslationY = 0;
@@ -112,16 +118,8 @@ namespace ArcheryManager.Interactions.Behaviors
         {
             CleanTranslation();
 
-            bool canShootNewArrow = (!CountSetting.HaveMaxArrowsCount)
-                                    || ScoreResult.CurrentArrows.Count < CountSetting.ArrowsCount;
-            if (canShootNewArrow)
-            {
-                StartInteraction();
-            }
-            else
-            {
-                CancelInteraction(sender);
-            }
+            Action cancel = () => CancelInteraction(sender);
+            GeneralCounterManager.AddArrowOrShowError(StartInteraction, cancel);
         }
 
         private static void CancelInteraction(object sender)

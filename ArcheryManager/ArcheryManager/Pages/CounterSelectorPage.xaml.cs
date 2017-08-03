@@ -14,12 +14,11 @@ namespace ArcheryManager.Pages
     {
         private CountSetting CountSetting => GeneralCounterSetting.CountSetting;
 
-        private readonly GeneralCounterSetting GeneralCounterSetting;
+        private static readonly GeneralCounterSetting GeneralCounterSetting = DependencyService.Get<IGeneralCounterSetting>() as GeneralCounterSetting;
 
-        public CounterSelectorPage(GeneralCounterSetting generalCounterSetting)
+        public CounterSelectorPage()
         {
             InitializeComponent();
-            GeneralCounterSetting = generalCounterSetting;
             GeneralCounterSetting.CountSetting = new CountSetting();
 
             this.BindingContext = CountSetting;

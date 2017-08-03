@@ -22,7 +22,7 @@ namespace ArcheryManager.Factories
             var result = generalCounterSetting.ScoreResult;
             var arrowSetting = generalCounterSetting.ArrowSetting;
 
-            var customTarget = new Target(generalCounterSetting) { MinimumHeightRequest = 1200, MinimumWidthRequest = 1200 };
+            var customTarget = new Target() { MinimumHeightRequest = 1200, MinimumWidthRequest = 1200 };
 
             customTarget.ArrowGrid.Items = result.CurrentArrows;
             customTarget.PreviousArrowGrid.Items = result.PreviousArrows;

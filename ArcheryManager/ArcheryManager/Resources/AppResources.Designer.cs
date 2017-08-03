@@ -449,6 +449,15 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Do you realy want to quit the shoot ?.
+        /// </summary>
+        internal static string SureQuitCount {
+            get {
+                return ResourceManager.GetString("SureQuitCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Target wanted.
         /// </summary>
         internal static string TargetWanted {

@@ -21,12 +21,22 @@ namespace ArcheryManager.Resources
                 return null;
             }
 
-            return AppResources.ResourceManager.GetString(Text, CultureInfo.CurrentCulture);
+            string text = AppResources.ResourceManager.GetString(Text, CultureInfo.CurrentCulture);
+            if (text == null)
+            {
+                text = ErrorResources.ResourceManager.GetString(Text, CultureInfo.CurrentCulture);
+            }
+            return text;
         }
 
         public static string GetTextResource(string key)
         {
-            return AppResources.ResourceManager.GetString(key);
+            string text = AppResources.ResourceManager.GetString(key);
+            if (text == null)
+            {
+                text = ErrorResources.ResourceManager.GetString(key);
+            }
+            return text;
         }
     }
 }

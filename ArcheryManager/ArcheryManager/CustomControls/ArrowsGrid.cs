@@ -1,5 +1,6 @@
 ﻿using ArcheryManager.Settings.ArrowSettings;
 using ArcheryManager.Utils;
+using System.ComponentModel;
 using Xamarin.Forms;
 using XFShapeView;
 
@@ -73,7 +74,26 @@ namespace ArcheryManager.CustomControls
                 TranslationX = ArrowTranslationHelper.TranslationXOf(arrow, TargetSize),
                 TranslationY = ArrowTranslationHelper.TranslationYOf(arrow, TargetSize),
             };
+
+            arrow.PropertyChanged += Arrow_PropertyChanged;
             return ctn;
+        }
+
+        private void Arrow_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Arrow.IsSelected))
+            {
+                var arrow = sender as Arrow;
+
+                if (arrow.IsSelected)
+                {
+                    SelectArrow(arrow);
+                }
+                else
+                {
+                    UnSelectArrow(arrow);
+                }
+            }
         }
 
         private void UpdateAllTransforms()
@@ -86,7 +106,22 @@ namespace ArcheryManager.CustomControls
             }
         }
 
-        public void SelectArrow(Arrow arrow)
+        private double TranslationYOf(Arrow arrow)
+        {
+            return TransformTranslation(arrow.TranslationY, arrow.TargetSize);
+        }
+
+        private double TranslationXOf(Arrow arrow)
+        {
+            return TransformTranslation(arrow.TranslationX, arrow.TargetSize);
+        }
+
+        private double TransformTranslation(double translation, double targetSize)
+        {
+            return TargetSize / targetSize * translation;
+        }
+
+        private void SelectArrow(Arrow arrow)
         {
             var container = FindContainer(arrow) as ShapeView;
             if (container != null)
@@ -95,7 +130,7 @@ namespace ArcheryManager.CustomControls
             }
         }
 
-        public void UnSelectArrow(Arrow arrow)
+        private void UnSelectArrow(Arrow arrow)
         {
             var container = FindContainer(arrow) as ShapeView;
             if (container != null)

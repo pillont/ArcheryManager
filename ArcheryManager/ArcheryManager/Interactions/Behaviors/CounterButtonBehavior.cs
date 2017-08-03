@@ -33,7 +33,6 @@ namespace ArcheryManager.Interactions.Behaviors
             try
             {
                 AssociatedObject.ButtonTap += AssociatedObject_ButtonTapped;
-                AssociatedObject.GeneralCounterSetting = GeneralCounterSetting;
             }
             catch (Exception e)
             {
@@ -52,7 +51,7 @@ namespace ArcheryManager.Interactions.Behaviors
                 button.BindingContext is Arrow buttonArrow)
             {
                 var arrow = new Arrow(buttonArrow.Index, GeneralCounterSetting.ScoreResult.CurrentArrows.Count);
-                Counter.AddArrow(arrow);
+                Counter.AddArrowIfPossible(arrow);
             }
         }
     }

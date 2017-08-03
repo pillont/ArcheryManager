@@ -62,6 +62,15 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Can&apos;t add more arrow than the max.
+        /// </summary>
+        internal static string CantAddMoreThanMaxArrow {
+            get {
+                return ResourceManager.GetString("CantAddMoreThanMaxArrow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Error.
         /// </summary>
         internal static string Error {
@@ -80,11 +89,20 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à current flight contain more arrow than the new limit.
+        ///   Recherche une chaîne localisée semblable à Current flight contain more arrow than the new limit.
         /// </summary>
         internal static string FlightMoreArrowThanNewLimit {
             get {
                 return ResourceManager.GetString("FlightMoreArrowThanNewLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Can&apos;t add arrow during selection.
+        /// </summary>
+        internal static string NoAddingDuringSelection {
+            get {
+                return ResourceManager.GetString("NoAddingDuringSelection", resourceCulture);
             }
         }
     }

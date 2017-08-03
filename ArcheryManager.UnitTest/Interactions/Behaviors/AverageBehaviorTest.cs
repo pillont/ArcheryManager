@@ -25,14 +25,10 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
         public void Init()
         {
             Xamarin.Forms.Mocks.MockForms.Init();
-            _generalCounterSetting = new GeneralCounterSetting()
-            {
-                ArrowSetting = EnglishArrowSetting.Instance,
-                CountSetting = new CountSetting(),
-                ScoreResult = new ScoreResult()
-            };
+            _generalCounterSetting = new GeneralCounterSetting();
             var _target = new Mock<Target>(new object[] { _generalCounterSetting });
             _target.SetupProperty(t => t.TargetSize, TargetSize);
+
             _counter = new ScoreCounter(_generalCounterSetting);
             _behavior = new AverageBehavior(_target.Object, _counter, _generalCounterSetting);
             _canvas = new Mock<AverageCanvas>();
@@ -81,8 +77,8 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
             _generalCounterSetting.CountSetting.AverageIsVisible = true;
             _canvas.Setup(mock => mock.CreateAverageVisual(It.IsAny<double>(), It.IsAny<double>(), It.IsAny<Point>()));
 
-            _counter.AddArrow(new Arrow(0, 0, new Point(50, 100), TargetSize));
-            _counter.AddArrow(new Arrow(0, 0, new Point(100, 200), TargetSize));
+            _counter.AddArrowIfPossible(new Arrow(0, 0, new Point(50, 100), TargetSize));
+            _counter.AddArrowIfPossible(new Arrow(0, 0, new Point(100, 200), TargetSize));
 
             var X = StatisticHelper.CalculateStdDev(_counter.ArrowsShowed.Select(a => a.TranslationX));
             var Y = StatisticHelper.CalculateStdDev(_counter.ArrowsShowed.Select(a => a.TranslationY));
@@ -91,7 +87,7 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
             _canvas.Verify(mock => mock.CreateAverageVisual(X, Y, new Point(75, 150)),
                     Times.AtLeast(1));
 
-            _counter.AddArrow(new Arrow(0, 0, new Point(300, 600), TargetSize));
+            _counter.AddArrowIfPossible(new Arrow(0, 0, new Point(300, 600), TargetSize));
             X = StatisticHelper.CalculateStdDev(_counter.ArrowsShowed.Select(a => a.TranslationX));
             Y = StatisticHelper.CalculateStdDev(_counter.ArrowsShowed.Select(a => a.TranslationY));
             _canvas.Setup(mock => mock.CreateAverageVisual(X, Y, new Point(150, 300)));
@@ -106,9 +102,9 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
             _generalCounterSetting.CountSetting.AverageIsVisible = false;
             _canvas.Setup(mock => mock.CreateAverageVisual(It.IsAny<double>(), It.IsAny<double>(), It.IsAny<Point>()));
 
-            _counter.AddArrow(new Arrow(0, 0, new Point(50, 100), TargetSize));
-            _counter.AddArrow(new Arrow(0, 0, new Point(100, 200), TargetSize));
-            _counter.AddArrow(new Arrow(0, 0, new Point(300, 600), TargetSize));
+            _counter.AddArrowIfPossible(new Arrow(0, 0, new Point(50, 100), TargetSize));
+            _counter.AddArrowIfPossible(new Arrow(0, 0, new Point(100, 200), TargetSize));
+            _counter.AddArrowIfPossible(new Arrow(0, 0, new Point(300, 600), TargetSize));
 
             _canvas.Verify(mock => mock.CreateAverageVisual(It.IsAny<double>(), It.IsAny<double>(), It.IsAny<Point>()),
             Times.Never());

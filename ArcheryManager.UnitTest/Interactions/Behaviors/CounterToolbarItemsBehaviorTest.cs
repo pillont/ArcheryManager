@@ -26,11 +26,9 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
         {
             Xamarin.Forms.Mocks.MockForms.Init();
 
-            countSetting = new CountSetting();
             toolBarList = new List<ToolbarItem>();
-            var arrowSetting = EnglishArrowSetting.Instance;
-            var scoreResult = new ScoreResult();
-            var generalCounterSetting = new GeneralCounterSetting() { CountSetting = countSetting, ArrowSetting = arrowSetting, ScoreResult = scoreResult };
+            var generalCounterSetting = new GeneralCounterSetting();
+            countSetting = generalCounterSetting.CountSetting;
             counter = new ScoreCounter(generalCounterSetting);
             _page = new Mock<ContentPageWithOverridableToolBar>();
             _page.CallBase = true;
@@ -47,10 +45,10 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
             countSetting.ArrowsCount = 2;
             Assert.AreEqual(3, toolBarList.Count);
 
-            counter.AddArrow(new Arrow(0, 0));
+            counter.AddArrowIfPossible(new Arrow(0, 0));
             Assert.AreEqual(3, toolBarList.Count);
 
-            counter.AddArrow(new Arrow(0, 0));
+            counter.AddArrowIfPossible(new Arrow(0, 0));
             Assert.AreEqual(4, toolBarList.Count);
         }
 
@@ -62,7 +60,7 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
             Assert.AreEqual(3, toolBarList.Count);
 
             countSetting.ArrowsCount = 2;
-            counter.AddArrow(new Arrow(0, 0));
+            counter.AddArrowIfPossible(new Arrow(0, 0));
             Assert.AreEqual(4, toolBarList.Count);
         }
 
@@ -74,8 +72,8 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
             Assert.AreEqual(3, toolBarList.Count);
             countSetting.ArrowsCount = 2;
 
-            counter.AddArrow(new Arrow(0, 0));
-            counter.AddArrow(new Arrow(0, 0));
+            counter.AddArrowIfPossible(new Arrow(0, 0));
+            counter.AddArrowIfPossible(new Arrow(0, 0));
 
             counter.RemoveLastArrow();
             Assert.AreEqual(3, toolBarList.Count);
@@ -89,8 +87,8 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
             Assert.AreEqual(3, toolBarList.Count);
             countSetting.ArrowsCount = 2;
 
-            counter.AddArrow(new Arrow(0, 0));
-            counter.AddArrow(new Arrow(0, 0));
+            counter.AddArrowIfPossible(new Arrow(0, 0));
+            counter.AddArrowIfPossible(new Arrow(0, 0));
 
             counter.RemoveLastArrow();
             Assert.AreEqual(4, toolBarList.Count);

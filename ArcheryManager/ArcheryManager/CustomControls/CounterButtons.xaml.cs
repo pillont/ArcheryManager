@@ -11,20 +11,7 @@ namespace ArcheryManager.CustomControls
         private CounterButtonGenerator ButtonCounterGenerator;
         public EventHandler ButtonTap;
 
-        public static readonly BindableProperty GeneralCounterSettingProperty =
-                      BindableProperty.Create(nameof(GeneralCounterSetting), typeof(IGeneralCounterSetting), typeof(CounterButtons), null);
-
-        public IGeneralCounterSetting GeneralCounterSetting
-        {
-            get { return (IGeneralCounterSetting)GetValue(GeneralCounterSettingProperty); }
-            set
-            {
-                SetValue(GeneralCounterSettingProperty, value);
-                ButtonCounterGenerator = new CounterButtonGenerator(GeneralCounterSetting.ArrowSetting);
-                buttonGrid.ArrowSetting = ArrowSetting;
-                buttonGrid.Items = ButtonCounterGenerator.GeneralButton();
-            }
-        }
+        private static readonly IGeneralCounterSetting GeneralCounterSetting = DependencyService.Get<IGeneralCounterSetting>();
 
         private IArrowSetting ArrowSetting
         {
@@ -38,13 +25,22 @@ namespace ArcheryManager.CustomControls
         {
             InitializeComponent();
             buttonGrid.ItemAdded += ButtonGrid_ItemAdded;
+
+            ButtonCounterGenerator = new CounterButtonGenerator(GeneralCounterSetting.ArrowSetting);
+            buttonGrid.ArrowSetting = ArrowSetting;
+            buttonGrid.Items = ButtonCounterGenerator.GeneralButton();
         }
 
         private void ButtonGrid_ItemAdded(View ctn)
         {
             var recognizer = new TapGestureRecognizer();
-            recognizer.Tapped += ButtonTap;
+            recognizer.Tapped += Recognizer_Tapped;
             ctn.GestureRecognizers.Add(recognizer);
+        }
+
+        private void Recognizer_Tapped(object sender, EventArgs e)
+        {
+            ButtonTap(sender, e);
         }
     }
 }

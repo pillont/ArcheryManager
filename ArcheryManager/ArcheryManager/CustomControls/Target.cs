@@ -89,7 +89,14 @@ namespace ArcheryManager.CustomControls
         /// </summary>
         public Grid TargetGrid { get; private set; }
 
-        public Target(IGeneralCounterSetting generalCounterSetting)
+        private readonly IGeneralCounterSetting GeneralCounterSetting;
+
+        public Target()
+            : this(DependencyService.Get<IGeneralCounterSetting>())
+        {
+        }
+
+        public Target(IGeneralCounterSetting GeneralCounterSetting)
         {
             /*
              * target layout
@@ -115,7 +122,7 @@ namespace ArcheryManager.CustomControls
             };
 
             CreateContent();
-            ArrowSetting = generalCounterSetting.ArrowSetting;
+            ArrowSetting = GeneralCounterSetting.ArrowSetting;
             Factory = new ArrowFactory(this, ArrowSetting);
             DrawTargetVisual();
         }
@@ -205,27 +212,5 @@ namespace ArcheryManager.CustomControls
         }
 
         #endregion visual of the target
-
-        #region selection interactions
-
-        public virtual void SelectArrow(Arrow arrow)
-        {
-            ArrowGrid.SelectArrow(arrow);
-        }
-
-        public virtual void UnSelectArrow(Arrow arrow)
-        {
-            ArrowGrid.UnSelectArrow(arrow);
-        }
-
-        public virtual void ResetSelection()
-        {
-            foreach (var arrow in ArrowGrid.Items)
-            {
-                UnSelectArrow(arrow);
-            }
-        }
-
-        #endregion selection interactions
     }
 }
