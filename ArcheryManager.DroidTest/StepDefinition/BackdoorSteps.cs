@@ -51,7 +51,7 @@ namespace ArcheryManager.DroidTest.StepDefinition
         [Then(@"il y a le titre de backdoor")]
         public void AlorsIlYALeTitreDeBackdoor()
         {
-            TestSetting.App.WaitForElement("backdoorType");
+            TestSetting.App.WaitForElement("backdoorTitle");
         }
     }
 }

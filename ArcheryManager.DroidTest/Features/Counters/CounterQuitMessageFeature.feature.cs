@@ -77,13 +77,13 @@ this.ScenarioSetup(scenarioInfo);
 #line 9
  testRunner.Then("il y a le texte SureQuitCount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 11
- testRunner.When("je click sur le boutton No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+ testRunner.When("je click sur le texte No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 13
  testRunner.Then("il y a une cible EnglishTarget", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 15
  testRunner.When("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 16
- testRunner.And("je click sur le boutton Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.When("je click sur le texte Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 18
  testRunner.Then("il y a le titre de backdoor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
@@ -104,13 +104,13 @@ this.ScenarioSetup(scenarioInfo);
 #line 24
  testRunner.Then("il y a le texte SureQuitCount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 26
- testRunner.When("je click sur le boutton No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+ testRunner.When("je click sur le texte No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 28
  testRunner.Then("il y a des boutons de EnglishTarget", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 30
  testRunner.When("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 31
- testRunner.And("je click sur le boutton Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.When("je click sur le texte Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 33
  testRunner.Then("il y a le titre de backdoor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
