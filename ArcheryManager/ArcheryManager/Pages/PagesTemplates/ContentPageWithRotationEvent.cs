@@ -59,7 +59,7 @@ namespace ArcheryManager.Pages.PagesTemplates
                 }
                 else
                 {
-                    HorizontalScreenRotation(size);
+                    HorizontalScreenRotation?.Invoke(size);
                 }
 
                 ScreenRotate?.Invoke(width, height);
