@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:resources="clr-namespace:ArcheryManager.Resources"
+             x:Class="ArcheryManager.CustomControls.LimitArrowNumberSelector">
+    <ContentView.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label AutomationId="NumberOfArrowsLabel"
+                   Text="{resources:Translate NumberOfArrows}"
+                   Grid.Column="0"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center" />
+
+            <StackLayout Grid.Column="1"
+                         Orientation="Vertical"
+                         HorizontalOptions="Center"
+                         VerticalOptions="End">
+                <Label Text="{resources:Translate HaveFixNumber}" />
+                <Switch IsToggled="{Binding HaveMaxArrowsCount}"
+                                HorizontalOptions="End"
+                         AutomationId="maxArrowsSwitch" />
+            </StackLayout>
+            <Entry Keyboard="Numeric"
+                   Grid.Column="2"
+                   IsVisible="{Binding HaveMaxArrowsCount}"
+                   Text="{Binding ArrowsCount}"
+                   Unfocused="ArrowCount_Unfocused"
+                   VerticalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   AutomationId="numberArrowEntry"
+                   x:Name="numberArrowEntry" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>

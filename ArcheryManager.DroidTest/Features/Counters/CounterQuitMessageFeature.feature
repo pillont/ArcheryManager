@@ -8,12 +8,12 @@ Scénario: test le message pour quitter une cible bouton navigation
 
 	Alors il y a le texte SureQuitCount
 
-	Quand je click sur le boutton No
+	Quand je click sur le texte No
 
 	Alors il y a une cible EnglishTarget
 
 	Quand je reviens à la page d'avant
-	Et je click sur le boutton Yes
+	Quand je click sur le texte Yes
 
 	Alors il y a le titre de backdoor
 
@@ -23,11 +23,11 @@ Scénario: test le message pour quitter une zapette bouton navigation
 
 	Alors il y a le texte SureQuitCount
 
-	Quand je click sur le boutton No
+	Quand je click sur le texte No
 
 	Alors il y a des boutons de EnglishTarget
 
 	Quand je reviens à la page d'avant
-	Et je click sur le boutton Yes
+	Quand je click sur le texte Yes
 
 	Alors il y a le titre de backdoor

@@ -50,6 +50,9 @@
     <Compile Include="CustomControls\CustomShapeButton.xaml.cs">
       <DependentUpon>CustomShapeButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\LimitArrowNumberSelector.xaml.cs">
+      <DependentUpon>LimitArrowNumberSelector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\TargetImage.xaml.cs">
       <DependentUpon>TargetImage.xaml</DependentUpon>
     </Compile>
@@ -282,6 +285,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CustomControls\CustomShapeButton.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CustomControls\LimitArrowNumberSelector.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

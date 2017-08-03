@@ -5,7 +5,15 @@
              x:Class="ArcheryManager.Pages.BackDoorPage">
 
     <StackLayout>
-        <Label x:Name="backdoorType" Text="Backdoors" />
+        <Label x:Name="backdoorTitle"
+               Text="Backdoors"
+               AutomationId="backdoorTitle"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               FontAttributes="Bold"
+               FontSize="Large" />
         <Button Text="{resources:Translate Timer}" AutomationId="TimerButton" Clicked="Timer_Click" />
         <Button Text="{resources:Translate EnglishTarget}" AutomationId="EnglishTargetButton" x:Name="EnglishTargetButton" Clicked="Target_Click" />
         <Button Text="{resources:Translate FieldTarget}" AutomationId="fieldTargetButton" x:Name="fieldTargetButton" Clicked="Target_Click" />

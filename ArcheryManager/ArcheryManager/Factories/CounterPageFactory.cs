@@ -1,4 +1,4 @@
-﻿using ArcheryManager.Interactions.Behaviors;
+using ArcheryManager.Interactions.Behaviors;
 using ArcheryManager.Pages;
 using ArcheryManager.Pages.PagesTemplates;
 using ArcheryManager.Resources;

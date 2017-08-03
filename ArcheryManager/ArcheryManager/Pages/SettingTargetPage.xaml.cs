@@ -47,28 +47,5 @@ namespace ArcheryManager.Pages
         {
             App.NavigationPage.SendBackButtonPressed();
         }
-
-        /// <summary>
-        /// limit min of Arrow count to const
-        /// </summary>
-        private void ArrowCount_Unfocused(object sender, FocusEventArgs e)
-        {
-            var entry = sender as Entry;
-            int val = BindingContext.ArrowsCount;
-            if (val < CountSetting.MinArrowCount)
-            {
-                if (BindingContext != null)
-                {
-                    BindingContext.ArrowsCount = CountSetting.MinArrowCount;
-                }
-            }
-
-            int currentFlightArrowNumber = GeneralCounterSetting.ScoreResult.CurrentArrows.Count;
-            if (BindingContext.ArrowsCount < currentFlightArrowNumber)
-            {
-                DisplayAlert(ErrorResources.Error, ErrorResources.FlightMoreArrowThanNewLimit, AppResources.OK);
-                BindingContext.ArrowsCount = currentFlightArrowNumber;
-            }
-        }
     }
 }

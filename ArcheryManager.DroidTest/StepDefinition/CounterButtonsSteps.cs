@@ -11,7 +11,7 @@ namespace ArcheryManager.DroidTest.StepDefinition
         {
             if (!EnglishArrowSetting.Instance.IsScoreExisted(p0))
             {
-                ScenarioContext.Current.Pending();
+                throw new System.Exception();
             }
             TestSetting.App.Tap(e => e.Marked("buttonGrid").Child().Child().Child().Text(p0));
         }
