@@ -188,6 +188,15 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Remarks of the flight.
+        /// </summary>
+        internal static string FlightRemarks {
+            get {
+                return ResourceManager.GetString("FlightRemarks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à General menu.
         /// </summary>
         internal static string GeneralMenu {
@@ -197,11 +206,29 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à General remarks.
+        /// </summary>
+        internal static string GeneralRemarks {
+            get {
+                return ResourceManager.GetString("GeneralRemarks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Have fixe number.
         /// </summary>
         internal static string HaveFixNumber {
             get {
                 return ResourceManager.GetString("HaveFixNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à History.
+        /// </summary>
+        internal static string History {
+            get {
+                return ResourceManager.GetString("History", resourceCulture);
             }
         }
         
@@ -314,11 +341,29 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Previous.
+        /// </summary>
+        internal static string Previous {
+            get {
+                return ResourceManager.GetString("Previous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Question.
         /// </summary>
         internal static string Question {
             get {
                 return ResourceManager.GetString("Question", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Remarks.
+        /// </summary>
+        internal static string Remarks {
+            get {
+                return ResourceManager.GetString("Remarks", resourceCulture);
             }
         }
         
@@ -463,6 +508,24 @@ namespace ArcheryManager.Resources {
         internal static string SureQuitCount {
             get {
                 return ResourceManager.GetString("SureQuitCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Count button in tab.
+        /// </summary>
+        internal static string TabbedButtonCount {
+            get {
+                return ResourceManager.GetString("TabbedButtonCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Target in tab.
+        /// </summary>
+        internal static string TabbedTarget {
+            get {
+                return ResourceManager.GetString("TabbedTarget", resourceCulture);
             }
         }
         

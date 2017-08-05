@@ -1,13 +1,10 @@
-﻿using System.Linq;
-using System.Runtime.CompilerServices;
-using ArcheryManager.Interfaces;
-using ArcheryManager.Utils;
+﻿using ArcheryManager.Interfaces;
 using Xamarin.Forms;
 using XFShapeView;
 using System.ComponentModel;
-using System.Collections.Specialized;
 using ArcheryManager.Helpers;
 using ArcheryManager.Settings.ArrowSettings;
+using ArcheryManager.Models;
 
 namespace ArcheryManager.CustomControls
 {

@@ -1,7 +1,7 @@
 ﻿using ArcheryManager.CustomControls;
 using ArcheryManager.Interfaces;
+using ArcheryManager.Models;
 using ArcheryManager.Settings;
-using ArcheryManager.Utils;
 using System;
 using Xamarin.Forms;
 

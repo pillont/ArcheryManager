@@ -1,5 +1,6 @@
 ﻿using ArcheryManager.CustomControls;
 using ArcheryManager.Helpers;
+using ArcheryManager.Models;
 using ArcheryManager.Settings;
 using ArcheryManager.Utils;
 using System;

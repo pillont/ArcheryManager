@@ -1,4 +1,5 @@
-﻿using ArcheryManager.Utils;
+﻿using ArcheryManager.Models;
+using ArcheryManager.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

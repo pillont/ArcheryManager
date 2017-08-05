@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace ArcheryManager.DroidTest.Features
+namespace ArcheryManager.DroidTest.Features.Remarks
 {
     using TechTalk.SpecFlow;
     
@@ -18,20 +18,20 @@ namespace ArcheryManager.DroidTest.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("StartFeature")]
-    public partial class StartFeatureFeature
+    [NUnit.Framework.DescriptionAttribute("ListRemarksContentFeatures")]
+    public partial class ListRemarksContentFeaturesFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "StartFeature.feature"
+#line 1 "ListRemarksContentFeatures.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "StartFeature", "\t\ttest de feature avec UiTest", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("fr-FR"), "ListRemarksContentFeatures", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -64,16 +64,14 @@ namespace ArcheryManager.DroidTest.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("test le nombre de bouton dans la page de backdoor")]
-        public virtual void TestLeNombreDeBoutonDansLaPageDeBackdoor()
+        [NUnit.Framework.DescriptionAttribute("TODO")]
+        public virtual void TODO()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test le nombre de bouton dans la page de backdoor", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TODO", ((string[])(null)));
+#line 4
+ this.ScenarioSetup(scenarioInfo);
 #line 5
-this.ScenarioSetup(scenarioInfo);
-#line 7
- testRunner.When("J\'ouvre une page de backdoor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 8
- testRunner.Then("il y a 9 boutons", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("TODO", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line hidden
             this.ScenarioCleanup();
         }

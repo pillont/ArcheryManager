@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resources="clr-namespace:ArcheryManager.Resources"
              x:Class="ArcheryManager.Pages.BackDoorPage">
-
-    <StackLayout>
-        <Label x:Name="backdoorTitle"
+    <ScrollView>
+        <StackLayout>
+            <Label x:Name="backdoorTitle"
                Text="Backdoors"
                AutomationId="backdoorTitle"
                HorizontalOptions="Center"
@@ -14,14 +14,17 @@
                VerticalTextAlignment="Center"
                FontAttributes="Bold"
                FontSize="Large" />
-        <Button Text="{resources:Translate Timer}" AutomationId="TimerButton" Clicked="Timer_Click" />
-        <Button Text="{resources:Translate EnglishTarget}" AutomationId="EnglishTargetButton" x:Name="EnglishTargetButton" Clicked="Target_Click" />
-        <Button Text="{resources:Translate FieldTarget}" AutomationId="fieldTargetButton" x:Name="fieldTargetButton" Clicked="Target_Click" />
-        <Button Text="{resources:Translate IndoorRecurveTarget}" AutomationId="indoorRecurveTargetButton" x:Name="indoorRecurveTargetButton" Clicked="Target_Click" />
-        <Button Text="{resources:Translate IndoorCompoundTarget}" AutomationId="indoorCompoundTargetButton" x:Name="indoorCompoundTargetButton" Clicked="Target_Click" />
-        <Button Text="{resources:Translate ButtonCounter}" AutomationId="ButtonCounterButton" Clicked="ButtonCounter_Clicked" />
-        <Button Text="{resources:Translate CounterSelector}" AutomationId="CounterSelectorButton" Clicked="CounterSelector_Clicked" />
-        <Button Text="{resources:Translate GeneralMenu}" AutomationId="GeneralMenuButton" Clicked="GeneralMenu_Clicked" />
-        <Button Text="tabbed pages" AutomationId="tabbedCountButton" Clicked="tabbedCount_Clicked" />
-    </StackLayout>
+            <Button Text="{resources:Translate Timer}" AutomationId="TimerButton" Clicked="Timer_Click" />
+            <Button Text="{resources:Translate EnglishTarget}" AutomationId="EnglishTargetButton" x:Name="EnglishTargetButton" Clicked="Target_Click" />
+            <Button Text="{resources:Translate FieldTarget}" AutomationId="fieldTargetButton" x:Name="fieldTargetButton" Clicked="Target_Click" />
+            <Button Text="{resources:Translate IndoorRecurveTarget}" AutomationId="indoorRecurveTargetButton" x:Name="indoorRecurveTargetButton" Clicked="Target_Click" />
+            <Button Text="{resources:Translate IndoorCompoundTarget}" AutomationId="indoorCompoundTargetButton" x:Name="indoorCompoundTargetButton" Clicked="Target_Click" />
+            <Button Text="{resources:Translate ButtonCounter}" AutomationId="ButtonCounterButton" Clicked="ButtonCounter_Clicked" />
+            <Button Text="{resources:Translate CounterSelector}" AutomationId="CounterSelectorButton" Clicked="CounterSelector_Clicked" />
+            <Button Text="{resources:Translate GeneralMenu}" AutomationId="GeneralMenuButton" Clicked="GeneralMenu_Clicked" />
+            <Button Text="{resources:Translate TabbedTarget}" AutomationId="tabbedTargetButton" Clicked="TabbedTarget_Clicked" />
+            <Button Text="{resources:Translate TabbedButtonCount}" AutomationId="tabbedZapetteButton" Clicked="TabbedZapette_Clicked" />
+            <Button Text="{resources:Translate Remarks}" AutomationId="remarksButton" Clicked="Remarks_Clicked" />
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

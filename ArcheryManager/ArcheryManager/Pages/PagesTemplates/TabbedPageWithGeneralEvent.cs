@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ArcheryManager.Pages.PagesTemplates
 {
-    public class ContentPageWithGeneralEvent : ContentPageWithRotationEvent, IGeneralEventHolder
+    public class TabbedPageWithGeneralEvent : TabbedPage, IGeneralEventHolder
     {
         public event EventHandler<BackButtonPressedArg> BackButtonPressed;
 

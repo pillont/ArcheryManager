@@ -7,6 +7,7 @@ using ArcheryManager.Utils;
 using System.ComponentModel;
 using System;
 using ArcheryManager.Helpers;
+using ArcheryManager.Models;
 
 namespace ArcheryManager.Settings
 {

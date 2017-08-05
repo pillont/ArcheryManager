@@ -1,7 +1,6 @@
-﻿using ArcheryManager.Interfaces;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
-namespace ArcheryManager.Utils
+namespace ArcheryManager.Models
 {
     public class Arrow : BindableObject
     {

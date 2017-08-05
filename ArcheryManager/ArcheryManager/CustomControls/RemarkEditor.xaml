@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:ArcheryManager.Resources"
+             x:Class="ArcheryManager.CustomControls.RemarkEditor">
+    <ContentView.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" VerticalOptions="End">
+                <Label Text="{Binding Title}"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="End"
+                           VerticalTextAlignment="End" />
+                <Button Text="{resources:Translate History}"
+                        FontSize="Micro"
+                        VerticalOptions="End"
+                        Clicked="Previous_Click" />
+                <Button Text="{resources:Translate Valid}"
+                        FontSize="Micro"
+                        VerticalOptions="End"
+                        Clicked="Valid_Click" IsEnabled="{Binding HaveText}" />
+            </StackLayout>
+            <Editor VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                         BackgroundColor="AliceBlue" Text="{Binding CurrentText}" />
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

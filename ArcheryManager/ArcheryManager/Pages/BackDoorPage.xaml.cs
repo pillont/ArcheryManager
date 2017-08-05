@@ -16,7 +16,14 @@ namespace ArcheryManager.Pages
 
         public BackDoorPage()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
 
         private async void Timer_Click(object sender, EventArgs e)
@@ -88,15 +95,44 @@ namespace ArcheryManager.Pages
             await App.NavigationPage.PushAsync(generalMenu);
         }
 
-        private async void tabbedCount_Clicked(object sender, EventArgs e)
+        private async void TabbedTarget_Clicked(object sender, EventArgs e)
         {
-            GeneralCounterSetting.ScoreResult = new ScoreResult();
-            GeneralCounterSetting.CountSetting = new CountSetting();
-            GeneralCounterSetting.ArrowSetting = EnglishArrowSetting.Instance;
+            try
+            {
+                GeneralCounterSetting.ScoreResult = new ScoreResult();
+                GeneralCounterSetting.CountSetting = new CountSetting();
+                GeneralCounterSetting.ArrowSetting = EnglishArrowSetting.Instance;
 
-            var count = CounterPageFactory.CreateSimpleCounter(GeneralCounterSetting);
-            var tabbledCount = new CountTabbedPage(count);
-            await App.NavigationPage.PushAsync(tabbledCount);
+                var tabbledCount = CounterPageFactory.CreateTabbedCounter(GeneralCounterSetting);
+                await App.NavigationPage.PushAsync(tabbledCount);
+            }
+            catch (Exception ee)
+            {
+                throw;
+            }
+        }
+
+        private async void TabbedZapette_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                GeneralCounterSetting.ScoreResult = new ScoreResult();
+                GeneralCounterSetting.CountSetting = new CountSetting() { HaveTarget = false };
+                GeneralCounterSetting.ArrowSetting = EnglishArrowSetting.Instance;
+
+                var tabbledCount = CounterPageFactory.CreateTabbedCounter(GeneralCounterSetting);
+                await App.NavigationPage.PushAsync(tabbledCount);
+            }
+            catch (Exception ee)
+            {
+                throw;
+            }
+        }
+
+        private async void Remarks_Clicked(object sender, EventArgs e)
+        {
+            var page = new RemarksPage();
+            await App.NavigationPage.PushAsync(page);
         }
     }
 }

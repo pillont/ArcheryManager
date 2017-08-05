@@ -1,10 +1,7 @@
 ﻿using ArcheryManager.Interactions.Behaviors;
-using ArcheryManager.Pages;
-using ArcheryManager.Pages.PagesTemplates;
+using ArcheryManager.Models;
 using ArcheryManager.Settings;
-using ArcheryManager.Settings.ArrowSettings;
 using ArcheryManager.UnitTest.Mockables;
-using ArcheryManager.Utils;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;

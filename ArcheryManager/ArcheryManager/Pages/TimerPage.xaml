@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<page:ContentPageWithGeneralEvent xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ArcheryManager.Pages"
+             xmlns:page="clr-namespace:ArcheryManager.Pages.PagesTemplates"
              xmlns:resources="clr-namespace:ArcheryManager.Resources"
              xmlns:ctl="clr-namespace:ArcheryManager.CustomControls"
              xmlns:utl="clr-namespace:ArcheryManager.Utils"
@@ -28,4 +29,4 @@
         <ctl:CustomTimer x:Name="timer" FontSize="72" AutomationId="CustomTimer" />
         <Button Text="{Binding PauseReplayText}" AutomationId="PauseButton" Clicked="ButtonPause_Clicked" IsEnabled="{Binding IsPauseEnabled}" />
     </StackLayout>
-</ContentPage>
+</page:ContentPageWithGeneralEvent>

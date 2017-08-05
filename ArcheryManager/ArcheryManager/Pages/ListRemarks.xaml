@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:resources="clr-namespace:ArcheryManager.Resources"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArcheryManager.Pages.ListRemarks"
+             Title="{resources:Translate Remarks}">
+    <!--ItemSelected="Handle_ItemSelected"-->
+    <ListView ItemsSource="{Binding Items}"
+            IsPullToRefreshEnabled="true"
+              HasUnevenRows="True"
+              x:Name="listView">
+        <ListView.Header>
+            <Label Text="no items in the list" IsVisible="{Binding IsEmptyList}" />
+        </ListView.Header>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout VerticalOptions="StartAndExpand" Orientation="Horizontal">
+                        <Label Text="{Binding FlightIndex, StringFormat='flight : {0}'}"
+                               WidthRequest="80"
+                               IsVisible=" {Binding BindingContext.AreNotGeneralRemarks, Source={x:Reference Name=listView}}"
+                               VerticalOptions="FillAndExpand"
+                               VerticalTextAlignment="Center"
+                               BackgroundColor="CornflowerBlue"
+                               HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center"
+                               TextColor="White" />
+                        <Label Text="{Binding Text}"
+                                Style="{DynamicResource ListItemTextStyle}"
+                               VerticalOptions="Center"
+                               VerticalTextAlignment="Center" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>

@@ -111,6 +111,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GeneralMenuFeature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Remarks\ListRemarksContentFeatures.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListRemarksContentFeatures.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Remarks\RemarksEditionFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RemarksEditionFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Targets\NewFlightFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -213,6 +223,14 @@
     <None Include="Features\GeneralMenuFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>GeneralMenuFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Remarks\ListRemarksContentFeatures.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ListRemarksContentFeatures.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Remarks\RemarksEditionFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>RemarksEditionFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Targets\NewFlightFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

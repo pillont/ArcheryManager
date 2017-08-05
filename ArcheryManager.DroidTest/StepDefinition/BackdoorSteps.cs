@@ -53,5 +53,22 @@ namespace ArcheryManager.DroidTest.StepDefinition
         {
             TestSetting.App.WaitForElement("backdoorTitle");
         }
+
+        [When(@"J'ouvre une page tabbed de cible fita")]
+        public void QuandJOuvreUnePageTabbedDeCibleFita()
+        {
+            TestSetting.InitTestApplication();
+            TestSetting.App.ScrollDownTo("tabbedTargetButton");
+            TestSetting.App.Tap("tabbedTargetButton");
+            TestSetting.App.WaitForElement("arrowInTargetGrid");
+        }
+
+        [When(@"J'ouvre une page tabbed de zappette")]
+        public void QuandJOuvreUnePageTabbedDeZappette()
+        {
+            TestSetting.InitTestApplication();
+            TestSetting.App.ScrollDownTo("tabbedZapetteButton");
+            TestSetting.App.Tap("tabbedZapetteButton");
+        }
     }
 }

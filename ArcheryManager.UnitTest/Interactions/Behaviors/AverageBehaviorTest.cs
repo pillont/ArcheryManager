@@ -1,9 +1,8 @@
 ﻿using ArcheryManager.CustomControls;
 using ArcheryManager.Helpers;
 using ArcheryManager.Interactions.Behaviors;
+using ArcheryManager.Models;
 using ArcheryManager.Settings;
-using ArcheryManager.Settings.ArrowSettings;
-using ArcheryManager.Utils;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;

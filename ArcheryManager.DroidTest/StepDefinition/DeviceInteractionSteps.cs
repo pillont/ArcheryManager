@@ -23,5 +23,11 @@ namespace ArcheryManager.DroidTest.StepDefinition
         {
             Thread.Sleep(p0 * 1000);
         }
+
+        [When(@"je scrool en haut")]
+        public void QuandJeScroolEnHaut()
+        {
+            TestSetting.App.ScrollToVerticalStart();
+        }
     }
 }

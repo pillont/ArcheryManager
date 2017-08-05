@@ -24,6 +24,12 @@ namespace ArcheryManager.Factories
                 Page = new CounterButtonPage();
             }
 
+            ApplyBackMessageBehavior(Page);
+            return Page;
+        }
+
+        private static void ApplyBackMessageBehavior<T>(T Page) where T : Page, IGeneralEventHolder
+        {
             var arg = new AlertArg()
             {
                 Title = AppResources.Question,
@@ -31,15 +37,16 @@ namespace ArcheryManager.Factories
                 Accept = AppResources.Yes,
                 Cancel = AppResources.No
             };
-            var behavior = new BackMessageBehavior(App.NavigationPage, arg);
+            var behavior = new BackMessageBehavior<T>(App.NavigationPage, arg);
             Page.Behaviors.Add(behavior);
-            return Page;
         }
 
         public static Page CreateTabbedCounter(GeneralCounterSetting generalCounterSetting)
         {
             var counter = CreateSimpleCounter(generalCounterSetting);
             var tabbed = new CountTabbedPage(counter);
+
+            ApplyBackMessageBehavior(tabbed);
             return tabbed;
         }
     }

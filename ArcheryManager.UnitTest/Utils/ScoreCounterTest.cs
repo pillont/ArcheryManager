@@ -1,12 +1,8 @@
-﻿using ArcheryManager.Interactions.Behaviors;
-using ArcheryManager.Interfaces;
+﻿using ArcheryManager.Interfaces;
+using ArcheryManager.Models;
 using ArcheryManager.Settings;
 using ArcheryManager.Settings.ArrowSettings;
-using ArcheryManager.Utils;
-using Moq;
 using NUnit.Framework;
-using System.Collections.Generic;
-using Xamarin.Forms;
 
 namespace ArcheryManager.UnitTest.Utils
 {

@@ -1,6 +1,7 @@
 ﻿using ArcheryManager.CustomControls;
 using ArcheryManager.Factories;
 using ArcheryManager.Interactions.Behaviors;
+using ArcheryManager.Models;
 using ArcheryManager.Settings;
 using ArcheryManager.Utils;
 using NUnit.Framework;
