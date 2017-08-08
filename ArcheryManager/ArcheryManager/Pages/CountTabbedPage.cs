@@ -1,13 +1,8 @@
-﻿using ArcheryManager.Interactions.Behaviors;
-using ArcheryManager.Pages.PagesTemplates;
+﻿using ArcheryManager.Pages.PagesTemplates;
 using ArcheryManager.Resources;
-using ArcheryManager.Settings;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
 
 namespace ArcheryManager.Pages
 {
@@ -17,21 +12,38 @@ namespace ArcheryManager.Pages
         {
             try
             {
-                var timer = new TimerPage() { Title = AppResources.Timer };
-                counter.Title = AppResources.Shoot;
-                this.Children.Add(counter);
-                this.Children.Add(timer);
+                InsertTabPages(counter);
             }
             catch (Exception e)
             {
                 throw;
             }
+
+            //    On<Android>().SetIsSwipePagingEnabled(!On<Android>().IsSwipePagingEnabled());
+
+            App.NavigationPage.Popped += NavigationPage_Popped;
         }
 
-        protected override void OnAppearing()
+        private void InsertTabPages(Page counter)
         {
-            base.OnAppearing();
-            CurrentPage = Children[0];
+            var timer = new TimerPage() { Title = AppResources.Timer };
+            var remark = new RemarksPage();
+            counter.Title = AppResources.Shoot;
+            this.Children.Add(counter);
+            this.Children.Add(timer);
+            this.Children.Add(remark);
+        }
+
+        /// <summary>
+        /// curren tab is counter if the page is popped
+        /// NOTE : when return to this page by the back message, the counter is visible
+        /// </summary>
+        private void NavigationPage_Popped(object sender, NavigationEventArgs e)
+        {
+            if (e.Page == this)
+            {
+                CurrentPage = Children[0];
+            }
         }
     }
 }

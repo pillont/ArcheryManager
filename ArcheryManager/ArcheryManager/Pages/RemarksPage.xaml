@@ -7,12 +7,14 @@
              Title="{resources:Translate Remarks}">
     <ScrollView>
         <Grid>
-            <custom:RemarkEditor Grid.Row="0"
+            <custom:RemarkEditor AutomationId="flightRemarkEditor"
+                                 Grid.Row="0"
                                  x:Name="FlightRemarksEditor"
                                  Title="{resources:Translate FlightRemarks}"
                                  Margin="0,30" />
 
-            <custom:RemarkEditor Grid.Row="1"
+            <custom:RemarkEditor AutomationId="generalRemarkEditor"
+                                 Grid.Row="1"
                                  x:Name="GeneralRemarksEditor"
                                  Title="{resources:Translate GeneralRemarks}"
                                  Margin="0,30"

@@ -179,11 +179,14 @@
     <Compile Include="StepDefinition\GeneralCounterStep.cs" />
     <Compile Include="StepDefinition\GenericSearchElement.cs" />
     <Compile Include="StepDefinition\DeviceInteractionSteps.cs" />
+    <Compile Include="StepDefinition\ListRemarksSteps.cs" />
     <Compile Include="StepDefinition\PickerSteps.cs" />
+    <Compile Include="StepDefinition\RemarksEditionSteps.cs" />
     <Compile Include="StepDefinition\TargetSelectorSteps.cs" />
     <Compile Include="StepDefinition\TargetSettingSteps.cs" />
     <Compile Include="StepDefinition\TargetSteps.cs" />
     <Compile Include="StepDefinition\TimerPageSteps.cs" />
+    <Compile Include="TabbedCounterSteps.cs" />
     <Compile Include="Target\GeneralMenuSteps.cs" />
     <Compile Include="Target\IndoorCompoundTargetTest.cs" />
     <Compile Include="Target\IndoorRecurveTargetTest.cs" />

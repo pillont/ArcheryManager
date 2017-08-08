@@ -77,9 +77,13 @@ this.ScenarioSetup(scenarioInfo);
 #line 8
  testRunner.And("il y a l\'éditeur de remarques générales", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 9
- testRunner.Then("le text de l\'éditeur de remarque générales est emptyMessage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.And("le text de l\'éditeur de remarque générales est emptyMessage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 10
- testRunner.Then("le text de l\'éditeur de remarque générales est emptyMessage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.And("le text de l\'éditeur de remarque générales est emptyMessage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 11
+ testRunner.And("il y a le bouton d\'historique de remarque générales", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 12
+ testRunner.And("il y a le bouton d\'historique de remarque de volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -89,46 +93,67 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TestDuBoutonValider()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test du bouton valider", ((string[])(null)));
-#line 12
-this.ScenarioSetup(scenarioInfo);
-#line 13
- testRunner.When("J\'ouvre une page d\'édition de remarque", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
-#line 14
- testRunner.Then("le bouton validé des remarques de la volée n\'est pas utilisable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 15
- testRunner.Then("le bouton validé des remarques général n\'est pas utilisable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+this.ScenarioSetup(scenarioInfo);
+#line 16
+ testRunner.When("J\'ouvre une page d\'édition de remarque", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 17
- testRunner.When("je rentre \"aaa\" dans l\'éditeur de remarque de la volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
-#line 18
- testRunner.Then("le bouton validé des remarques de la volée est utilisable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
-#line 19
- testRunner.Then("le bouton validé des remarques général n\'est pas utilisable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
-#line 21
- testRunner.When("je rentre \"aaa\" dans l\'éditeur de remarque générales", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
-#line 22
- testRunner.Then("le bouton validé des remarques de la volée est utilisable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
-#line 23
- testRunner.Then("le bouton validé des remarques général est utilisable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
-#line 25
- testRunner.When("je click sur le bouton de validation des remarques générales", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
-#line 26
- testRunner.Then("le bouton validé des remarques général n\'est pas utilisable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
-#line 27
- testRunner.Then("le bouton validé des remarques de la volée est utilisable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
-#line 28
- testRunner.Then("le text de l\'éditeur de remarque générales est emptyMessage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
-#line 29
- testRunner.Then("le text de l\'éditeur de remarque générales est \"aaa\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
-#line 31
- testRunner.When("je click sur le bouton de validation des remarques de la volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
-#line 32
- testRunner.Then("le bouton validé des remarques général n\'est pas utilisable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
-#line 33
  testRunner.Then("le bouton validé des remarques de la volée n\'est pas utilisable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 18
+ testRunner.Then("le bouton validé des remarques général n\'est pas utilisable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 20
+ testRunner.When("je rentre \"aaa\" dans l\'éditeur de remarque de la volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 21
+ testRunner.Then("le bouton validé des remarques de la volée est utilisable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 22
+ testRunner.Then("le bouton validé des remarques général n\'est pas utilisable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 24
+ testRunner.When("je rentre \"bbb\" dans l\'éditeur de remarque générales", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 25
+ testRunner.Then("le bouton validé des remarques de la volée est utilisable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 26
+ testRunner.Then("le bouton validé des remarques général est utilisable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 28
+ testRunner.When("je click sur le bouton de validation des remarques générales", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 29
+ testRunner.Then("le bouton validé des remarques général n\'est pas utilisable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 30
+ testRunner.Then("le bouton validé des remarques de la volée est utilisable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 32
+ testRunner.When("je click sur le bouton de validation des remarques de la volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 33
+ testRunner.Then("le bouton validé des remarques général n\'est pas utilisable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 34
+ testRunner.Then("le bouton validé des remarques de la volée n\'est pas utilisable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test du text des editors")]
+        public virtual void TestDuTextDesEditors()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test du text des editors", ((string[])(null)));
+#line 37
+this.ScenarioSetup(scenarioInfo);
+#line 38
+ testRunner.When("J\'ouvre une page d\'édition de remarque", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 39
+ testRunner.When("je rentre \"aaa\" dans l\'éditeur de remarque de la volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 40
+ testRunner.When("je rentre \"bbb\" dans l\'éditeur de remarque générales", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 41
+ testRunner.When("je click sur le bouton de validation des remarques générales", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 43
  testRunner.Then("le text de l\'éditeur de remarque générales est emptyMessage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
-#line 35
+#line 44
+ testRunner.Then("le text de l\'éditeur de remarque de la volée est \"bbb\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 46
+ testRunner.When("je click sur le bouton de validation des remarques de la volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 47
  testRunner.Then("le text de l\'éditeur de remarque générales est emptyMessage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 48
+ testRunner.Then("le text de l\'éditeur de remarque de la volée est emptyMessage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
         }

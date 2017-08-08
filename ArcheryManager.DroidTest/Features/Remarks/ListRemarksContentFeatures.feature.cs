@@ -64,14 +64,99 @@ namespace ArcheryManager.DroidTest.Features.Remarks
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("TODO")]
-        public virtual void TODO()
+        [NUnit.Framework.DescriptionAttribute("test de sauvegarde des remarques générales")]
+        public virtual void TestDeSauvegardeDesRemarquesGenerales()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TODO", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test de sauvegarde des remarques générales", ((string[])(null)));
 #line 4
  this.ScenarioSetup(scenarioInfo);
 #line 5
- testRunner.When("TODO", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+ testRunner.When("J\'ouvre une page tabbed de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 6
+ testRunner.And("je click sur l\'onglet de remarque", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 7
+ testRunner.And("je rentre \"aaa\" dans l\'éditeur de remarque générales", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 8
+ testRunner.And("je click sur le bouton de validation des remarques générales", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 9
+ testRunner.And("je click sur l\'onglet de compté", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 10
+ testRunner.And("je tire une flèche en -10, 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 11
+ testRunner.And("Je click sur le bouton nouvelle volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 12
+ testRunner.And("je click sur l\'onglet de remarque", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 13
+ testRunner.And("je rentre \"bbb\" dans l\'éditeur de remarque générales", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 14
+ testRunner.And("je click sur le bouton de validation des remarques générales", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 16
+ testRunner.And("je rentre \"ccc\" dans l\'éditeur de remarque générales", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 17
+ testRunner.And("je click sur le bouton de validation des remarques générales", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 19
+ testRunner.And("je click sur le bouton d\'historique de remarque générales", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 21
+ testRunner.Then("la remarque 0 est \"aaa\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 22
+ testRunner.Then("la remarque 1 est \"bbb\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 23
+ testRunner.Then("la remarque 2 est \"ccc\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 24
+ testRunner.And("la volée de la remarque 0 n\'est pas visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 25
+ testRunner.And("la volée de la remarque 1 n\'est pas visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 26
+ testRunner.And("la volée de la remarque 2 n\'est pas visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test de sauvegarde des remarques de volées")]
+        public virtual void TestDeSauvegardeDesRemarquesDeVolees()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test de sauvegarde des remarques de volées", ((string[])(null)));
+#line 30
+ this.ScenarioSetup(scenarioInfo);
+#line 31
+ testRunner.When("J\'ouvre une page tabbed de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 32
+ testRunner.And("je click sur l\'onglet de remarque", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 33
+ testRunner.And("je rentre \"aaa\" dans l\'éditeur de remarque de la volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 34
+ testRunner.And("je click sur le bouton de validation des remarques de la volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 35
+ testRunner.And("je click sur l\'onglet de compté", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 36
+ testRunner.And("je tire une flèche en -10, 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 37
+ testRunner.And("Je click sur le bouton nouvelle volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 38
+ testRunner.And("je click sur l\'onglet de remarque", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 39
+ testRunner.And("je rentre \"bbb\" dans l\'éditeur de remarque de la volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 40
+ testRunner.And("je click sur le bouton de validation des remarques de la volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 42
+ testRunner.And("je rentre \"ccc\" dans l\'éditeur de remarque de la volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 43
+ testRunner.And("je click sur le bouton de validation des remarques de la volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 45
+ testRunner.And("je click sur le bouton d\'historique de remarque de la volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 47
+ testRunner.Then("la remarque 0 est \"aaa\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 48
+ testRunner.And("la remarque 1 est \"bbb\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 49
+ testRunner.And("la remarque 2 est \"ccc\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 50
+ testRunner.And("la volée de la remarque 0 est 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 51
+ testRunner.And("la volée de la remarque 1 est 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 52
+ testRunner.And("la volée de la remarque 2 est 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line hidden
             this.ScenarioCleanup();
         }

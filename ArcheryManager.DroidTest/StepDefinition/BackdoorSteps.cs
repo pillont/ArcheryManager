@@ -70,5 +70,13 @@ namespace ArcheryManager.DroidTest.StepDefinition
             TestSetting.App.ScrollDownTo("tabbedZapetteButton");
             TestSetting.App.Tap("tabbedZapetteButton");
         }
+
+        [When(@"J'ouvre une page d'édition de remarque")]
+        public void QuandJEditionDeRemarque()
+        {
+            TestSetting.InitTestApplication();
+            TestSetting.App.ScrollDownTo("remarksButton");
+            TestSetting.App.Tap("remarksButton");
+        }
     }
 }
