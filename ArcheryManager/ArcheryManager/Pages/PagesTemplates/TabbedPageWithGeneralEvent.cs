@@ -1,9 +1,9 @@
 ﻿using System;
-using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 namespace ArcheryManager.Pages.PagesTemplates
 {
-    public class TabbedPageWithGeneralEvent : TabbedPage, IGeneralEventHolder
+    public class TabbedPageWithGeneralEvent : Xamarin.Forms.TabbedPage, IGeneralEventHolder
     {
         public event EventHandler<BackButtonPressedArg> BackButtonPressed;
 

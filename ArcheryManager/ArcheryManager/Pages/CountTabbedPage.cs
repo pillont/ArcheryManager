@@ -10,6 +10,8 @@ namespace ArcheryManager.Pages
     {
         public CountTabbedPage(Page counter)
         {
+            this.On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(false);
+
             try
             {
                 InsertTabPages(counter);
@@ -18,8 +20,6 @@ namespace ArcheryManager.Pages
             {
                 throw;
             }
-
-            //    On<Android>().SetIsSwipePagingEnabled(!On<Android>().IsSwipePagingEnabled());
 
             App.NavigationPage.Popped += NavigationPage_Popped;
         }
