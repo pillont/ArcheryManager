@@ -1,8 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Linq;
 using static ArcheryManager.CustomControls.TargetImage;
-using ArcheryManager.CustomControls;
-using System;
 
 namespace ArcheryManager.DroidTest.Helpers
 {

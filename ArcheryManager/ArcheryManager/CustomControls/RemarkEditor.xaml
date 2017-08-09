@@ -2,6 +2,7 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resources="clr-namespace:ArcheryManager.Resources"
+             xmlns:ctm="clr-namespace:ArcheryManager.CustomControls"
              x:Class="ArcheryManager.CustomControls.RemarkEditor">
     <ContentView.Content>
         <StackLayout>
@@ -20,9 +21,12 @@
                         VerticalOptions="End"
                         Clicked="Valid_Click" IsEnabled="{Binding HaveText}" />
             </StackLayout>
-            <Editor VerticalOptions="FillAndExpand"
-                        HorizontalOptions="FillAndExpand"
-                         BackgroundColor="AliceBlue" Text="{Binding CurrentText}" />
+            <Editor x:Name="editor" Completed="editor_Completed"
+                    VerticalOptions="FillAndExpand"
+                    Focused="Editor_Focused"
+                    Unfocused="Editor_Unfocused"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="AliceBlue" Text="{Binding CurrentText}" />
         </StackLayout>
     </ContentView.Content>
 </ContentView>

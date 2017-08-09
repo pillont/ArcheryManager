@@ -1,5 +1,6 @@
 ﻿using ArcheryManager.Models;
 using ArcheryManager.Pages;
+using ArcheryManager.Resources;
 using ArcheryManager.Settings;
 using System;
 using System.Collections.ObjectModel;
@@ -9,6 +10,8 @@ namespace ArcheryManager.CustomControls
 {
     public partial class RemarkEditor : ContentView
     {
+        private readonly string EmptyMessage;
+
         private const int BaseFlightIndex = 1;
 
         private static readonly IGeneralCounterSetting GeneralCounterSetting = DependencyService.Get<IGeneralCounterSetting>();
@@ -17,7 +20,7 @@ namespace ArcheryManager.CustomControls
         {
             get
             {
-                return !string.IsNullOrWhiteSpace(CurrentText);
+                return !string.IsNullOrWhiteSpace(CurrentText) && CurrentText != EmptyMessage;
             }
         }
 
@@ -63,9 +66,18 @@ namespace ArcheryManager.CustomControls
 
         public RemarkEditor()
         {
-            InitializeComponent();
-            BindingContext = this;
-            Previous = new ObservableCollection<Remark>();
+            try
+            {
+                EmptyMessage = AppResources.EnterRemarksHere;
+                InitializeComponent();
+                BindingContext = this;
+                Previous = new ObservableCollection<Remark>();
+                Editor_Unfocused(editor, null);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
 
         private void Valid_Click(object sender, EventArgs e)
@@ -78,6 +90,8 @@ namespace ArcheryManager.CustomControls
             Previous.Add(remark);
 
             CurrentText = string.Empty;
+
+            Editor_Unfocused(editor, null);
         }
 
         private async void Previous_Click(object sender, EventArgs e)
@@ -91,6 +105,30 @@ namespace ArcheryManager.CustomControls
             {
                 throw;
             }
+        }
+
+        private void Editor_Focused(object sender, FocusEventArgs e)
+        {
+            var editor = sender as Editor;
+            if (CurrentText == EmptyMessage)
+            {
+                CurrentText = string.Empty;
+                editor.TextColor = Color.Black;
+            }
+        }
+
+        private void Editor_Unfocused(object sender, FocusEventArgs e)
+        {
+            var editor = sender as Editor;
+            if (string.IsNullOrWhiteSpace(CurrentText))
+            {
+                CurrentText = EmptyMessage;
+                editor.TextColor = Color.Gray;
+            }
+        }
+
+        private void editor_Completed(object sender, EventArgs e)
+        {
         }
     }
 }

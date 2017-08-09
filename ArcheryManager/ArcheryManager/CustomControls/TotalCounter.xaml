@@ -8,6 +8,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -34,10 +35,28 @@
                    VerticalOptions="Start"
                    FontSize="Large" />
 
+            <Label Grid.Column="1"
+                   Text="flight :"
+                   VerticalOptions="End"
+                   HorizontalOptions="Center"
+                   VerticalTextAlignment="End"
+                   HorizontalTextAlignment="Center" />
+
+            <Label Grid.Row="1"
+                   Grid.Column="1"
+                   Text="{Binding FlightNumber}"
+                   VerticalOptions="Start"
+                   HorizontalOptions="Center"
+                   VerticalTextAlignment="Start"
+                   HorizontalTextAlignment="Center"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   FontSize="Large" />
+
             <Label AutomationId="TotalScoreTitle"
                    HorizontalOptions="Center"
                    Text="{resources:Translate Total}"
-                   Grid.Column="1"
+                   Grid.Column="2"
                    Grid.Row="0"
                    VerticalTextAlignment="End"
                    VerticalOptions="End" />
@@ -45,7 +64,7 @@
             <Label AutomationId="TotalScore"
                    HorizontalOptions="Center"
                    FontAttributes="Bold"
-                   Grid.Column="1"
+                   Grid.Column="2"
                    Grid.Row="1"
                    TextColor="Black"
                    HorizontalTextAlignment="Center"

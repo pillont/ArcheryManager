@@ -161,11 +161,5 @@ namespace ArcheryManager.DroidTest.StepDefinition
             Assert.AreEqual(x, rect.X, 7);
             Assert.AreEqual(y, rect.Y, 7);
         }
-
-        [When(@"je click sur le tab timer")]
-        public void QuandJeClickSurLeTabTimer()
-        {
-            TestSetting.App.Tap(e => e.Text(TranslateExtension.GetTextResource("Timer")));
-        }
     }
 }

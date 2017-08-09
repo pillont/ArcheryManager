@@ -5,19 +5,29 @@
              x:Class="ArcheryManager.Pages.ListRemarks"
              Title="{resources:Translate Remarks}">
     <!--ItemSelected="Handle_ItemSelected"-->
-    <ListView ItemsSource="{Binding Items}"
-            IsPullToRefreshEnabled="true"
+    <ListView AutomationId="remarksList"
+              ItemsSource="{Binding Items}"
+              IsPullToRefreshEnabled="true"
               HasUnevenRows="True"
               x:Name="listView">
         <ListView.Header>
-            <Label Text="no items in the list" IsVisible="{Binding IsEmptyList}" />
+            <!-- header not visible if have item
+                else is visible to inform haven't items -->
+            <Label Text="{resources:Translate EmptyList}"
+                   IsVisible="{Binding IsEmptyList}"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center" />
         </ListView.Header>
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <StackLayout VerticalOptions="StartAndExpand" Orientation="Horizontal">
-                        <Label Text="{Binding FlightIndex, StringFormat='flight : {0}'}"
-                               WidthRequest="80"
+                    <Grid VerticalOptions="StartAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="{Binding FlightIndex, StringFormat={resources:Translate FlightNumber}}"
+                               Grid.Column="0"
                                IsVisible=" {Binding BindingContext.AreNotGeneralRemarks, Source={x:Reference Name=listView}}"
                                VerticalOptions="FillAndExpand"
                                VerticalTextAlignment="Center"
@@ -26,10 +36,11 @@
                                HorizontalTextAlignment="Center"
                                TextColor="White" />
                         <Label Text="{Binding Text}"
-                                Style="{DynamicResource ListItemTextStyle}"
+                               Grid.Column="1"
+                               Style="{DynamicResource ListItemTextStyle}"
                                VerticalOptions="Center"
                                VerticalTextAlignment="Center" />
-                    </StackLayout>
+                    </Grid>
                 </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>

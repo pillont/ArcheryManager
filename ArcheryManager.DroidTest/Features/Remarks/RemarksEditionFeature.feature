@@ -41,7 +41,7 @@ Scénario: test du text des editors
 	Quand je click sur le bouton de validation des remarques générales
 	
 	Alors le text de l'éditeur de remarque générales est emptyMessage
-	Alors le text de l'éditeur de remarque de la volée est "bbb"
+	Alors le text de l'éditeur de remarque de la volée est "aaa"
 	
 	Quand je click sur le bouton de validation des remarques de la volée
 	Alors le text de l'éditeur de remarque générales est emptyMessage

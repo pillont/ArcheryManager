@@ -61,6 +61,7 @@
     </Compile>
     <Compile Include="Factories\ArrowsettingFactory.cs" />
     <Compile Include="Factories\CounterPageFactory.cs" />
+    <Compile Include="Helpers\AndroidTabbedPageHelper.cs" />
     <Compile Include="Interactions\Behaviors\BackMessageBehavior.cs" />
     <Compile Include="Models\Remark.cs" />
     <Compile Include="Pages\ListRemarks.xaml.cs">

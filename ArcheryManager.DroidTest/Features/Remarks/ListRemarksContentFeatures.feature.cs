@@ -69,7 +69,7 @@ namespace ArcheryManager.DroidTest.Features.Remarks
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test de sauvegarde des remarques générales", ((string[])(null)));
 #line 4
- this.ScenarioSetup(scenarioInfo);
+this.ScenarioSetup(scenarioInfo);
 #line 5
  testRunner.When("J\'ouvre une page tabbed de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 6
@@ -118,7 +118,7 @@ namespace ArcheryManager.DroidTest.Features.Remarks
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test de sauvegarde des remarques de volées", ((string[])(null)));
 #line 30
- this.ScenarioSetup(scenarioInfo);
+this.ScenarioSetup(scenarioInfo);
 #line 31
  testRunner.When("J\'ouvre une page tabbed de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 32
@@ -157,6 +157,76 @@ namespace ArcheryManager.DroidTest.Features.Remarks
  testRunner.And("la volée de la remarque 1 est 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 52
  testRunner.And("la volée de la remarque 2 est 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test de la taille des ligne de la list")]
+        public virtual void TestDeLaTailleDesLigneDeLaList()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test de la taille des ligne de la list", ((string[])(null)));
+#line 55
+this.ScenarioSetup(scenarioInfo);
+#line 56
+ testRunner.When("J\'ouvre une page tabbed de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 57
+ testRunner.And("je click sur l\'onglet de remarque", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 58
+ testRunner.And(@"je rentre ""Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nibh eros, vehicula at rhoncus at, egestas non felis. Maecenas pulvinar feugiat mollis. In sed nisl dui. Nam magna urna, congue ut maximus at, feugiat vitae sem. Aenean fringilla nibh ac urna sodales, in efficitur tellus sollicitudin. Vivamus gravida semper mi, sit amet maximus justo posuere vel. Fusce id purus nec nunc ultrices pulvinar vel sit amet ex. Fusce a tincidunt enim. Aliquam commodo nisl eros, vel luctus dui consequat id. Nullam egestas vel purus id ultrices. Vestibulum dictum laoreet augue vitae rhoncus. Nullam vestibulum tellus et tortor hendrerit sodales."" dans l'éditeur de remarque de la volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 59
+ testRunner.And("je click sur le bouton de validation des remarques de la volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 60
+ testRunner.And("je click sur l\'onglet de compté", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 61
+ testRunner.And("je tire une flèche en -10, 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 62
+ testRunner.And("Je click sur le bouton nouvelle volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 63
+ testRunner.And("je click sur l\'onglet de remarque", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 64
+ testRunner.And(@"je rentre ""Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nibh eros, vehicula at rhoncus at, egestas non felis. Maecenas pulvinar feugiat mollis. In sed nisl dui. Nam magna urna, congue ut maximus at, feugiat vitae sem. Aenean fringilla nibh ac urna sodales, in efficitur tellus sollicitudin. Vivamus gravida semper mi, sit amet maximus j"" dans l'éditeur de remarque de la volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 65
+ testRunner.And("je click sur le bouton de validation des remarques de la volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 67
+ testRunner.And("je rentre \"Lorem ipsum \" dans l\'éditeur de remarque de la volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 68
+ testRunner.And("je click sur le bouton de validation des remarques de la volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 70
+ testRunner.And("je click sur le bouton d\'historique de remarque de la volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 72
+ testRunner.Then("la volée de la remarque 0 a comme taille 107", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 73
+ testRunner.And("la volée de la remarque 1 a comme taille 107", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 74
+ testRunner.And("la remarque 0 a comme taille 651", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 75
+ testRunner.And("la remarque 1 a comme taille 347", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 77
+ testRunner.When("je scrool en bas", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 79
+ testRunner.Then("la volée de la remarque 1 a comme taille 107", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 80
+ testRunner.And("la remarque 1 a comme taille 43", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test du text par défault pour une liste vide")]
+        public virtual void TestDuTextParDefaultPourUneListeVide()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test du text par défault pour une liste vide", ((string[])(null)));
+#line 83
+this.ScenarioSetup(scenarioInfo);
+#line 84
+ testRunner.When("J\'ouvre une page tabbed de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 85
+ testRunner.And("je click sur l\'onglet de remarque", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 86
+ testRunner.And("je click sur le bouton d\'historique de remarque générales", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 88
+ testRunner.Then("il y a le texte EmptyList", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
         }

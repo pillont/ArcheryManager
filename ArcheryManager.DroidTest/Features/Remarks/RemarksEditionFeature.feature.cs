@@ -147,7 +147,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 43
  testRunner.Then("le text de l\'éditeur de remarque générales est emptyMessage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 44
- testRunner.Then("le text de l\'éditeur de remarque de la volée est \"bbb\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("le text de l\'éditeur de remarque de la volée est \"aaa\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 46
  testRunner.When("je click sur le bouton de validation des remarques de la volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 47

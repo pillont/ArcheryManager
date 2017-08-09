@@ -1,29 +1,43 @@
-﻿using ArcheryManager.Pages.PagesTemplates;
+﻿using ArcheryManager.Helpers;
+using ArcheryManager.Pages.PagesTemplates;
 using ArcheryManager.Resources;
 using System;
 using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration;
 
 namespace ArcheryManager.Pages
 {
     public class CountTabbedPage : TabbedPageWithGeneralEvent
     {
+        /// <summary>
+        /// initial index to the target page in the children
+        /// So index of the tab
+        /// </summary>
+        private readonly int TargetIndex;
+
         public CountTabbedPage(Page counter)
         {
-            this.On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(false);
-
             try
             {
+                //NOTE : swipe must be removed on a target
+                //MISTAKE : have conflict with target gesture to create arrows
+                AndroidTabbedPageHelper.RemoveSwipe(this);
+
                 InsertTabPages(counter);
+                TargetIndex = Children.IndexOf(counter);
+
+                App.NavigationPage.Popped += NavigationPage_Popped;
             }
             catch (Exception e)
             {
                 throw;
             }
-
-            App.NavigationPage.Popped += NavigationPage_Popped;
         }
 
+        /// <summary>
+        /// insert counter page in args
+        /// insert new timer page
+        /// insert new remarks page
+        /// </summary>
         private void InsertTabPages(Page counter)
         {
             var timer = new TimerPage() { Title = AppResources.Timer };
@@ -42,7 +56,7 @@ namespace ArcheryManager.Pages
         {
             if (e.Page == this)
             {
-                CurrentPage = Children[0];
+                CurrentPage = Children[TargetIndex];
             }
         }
     }

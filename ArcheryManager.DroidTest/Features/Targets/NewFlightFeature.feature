@@ -3,7 +3,7 @@ Fonctionnalité: NewFlightFeature
 	test la possibilité de passer ou non à une nouvelle volée
 
 Scénario: test l'impossibilité de passer à une nouvelle volée sans avoir tiré de flèche
-	Quand J'ouvre une page de cible fita
+	Quand J'ouvre une page de cible fita 
 	# pas de flèches tiré
 	Alors le bouton nouvelle volée est désactivé
 

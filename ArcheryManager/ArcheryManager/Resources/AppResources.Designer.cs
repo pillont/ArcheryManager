@@ -143,6 +143,15 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à List is empty.
+        /// </summary>
+        internal static string EmptyList {
+            get {
+                return ResourceManager.GetString("EmptyList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à End Point.
         /// </summary>
         internal static string EndPoint {
@@ -157,6 +166,15 @@ namespace ArcheryManager.Resources {
         internal static string EnglishTarget {
             get {
                 return ResourceManager.GetString("EnglishTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter your remarks here.
+        /// </summary>
+        internal static string EnterRemarksHere {
+            get {
+                return ResourceManager.GetString("EnterRemarksHere", resourceCulture);
             }
         }
         
@@ -184,6 +202,15 @@ namespace ArcheryManager.Resources {
         internal static string Flight {
             get {
                 return ResourceManager.GetString("Flight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à flight : {0}.
+        /// </summary>
+        internal static string FlightNumber {
+            get {
+                return ResourceManager.GetString("FlightNumber", resourceCulture);
             }
         }
         

@@ -29,5 +29,11 @@ namespace ArcheryManager.DroidTest.StepDefinition
         {
             TestSetting.App.ScrollToVerticalStart();
         }
+
+        [When(@"je scrool en bas")]
+        public void QuandJeScroolEnBas()
+        {
+            TestSetting.App.ScrollToVerticalEnd();
+        }
     }
 }

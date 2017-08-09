@@ -146,6 +146,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RestartCounter.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Targets\TargetInTabbedPage.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TargetInTabbedPage.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Targets\TargetRotationFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -254,6 +259,10 @@
     <None Include="Features\Targets\RestartCounter.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>RestartCounter.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Targets\TargetInTabbedPage.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>TargetInTabbedPage.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Targets\TargetRotationFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

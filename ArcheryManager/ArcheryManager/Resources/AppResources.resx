@@ -297,4 +297,13 @@
   <data name="Previous" xml:space="preserve">
     <value>Previous</value>
   </data>
+  <data name="EmptyList" xml:space="preserve">
+    <value>List is empty</value>
+  </data>
+  <data name="EnterRemarksHere" xml:space="preserve">
+    <value>Enter your remarks here</value>
+  </data>
+  <data name="FlightNumber" xml:space="preserve">
+    <value>flight : {0}</value>
+  </data>
 </root>

@@ -44,6 +44,7 @@ namespace ArcheryManager.DroidTest.StepDefinition
         [Then(@"le text de l'éditeur de remarque de la volée est emptyMessage")]
         public void AlorsLeTextDeLEditeurDeRemarqueDeLaVoleeEstEmptyMessage()
         {
+            TestSetting.App.WaitForElement("flightRemarkEditor");
             var emptyT = TranslateExtension.GetTextResource("EnterRemarksHere");
             ChecktextOfEditor("flightRemarkEditor", emptyT);
         }
@@ -130,7 +131,7 @@ namespace ArcheryManager.DroidTest.StepDefinition
 
         private static void ChecktextOfEditor(string parentName, string wantedText)
         {
-            var text = TestSetting.App.Query(e => e.Marked(parentName).Child(0).Child(1)).First().Text;
+            var text = TestSetting.App.Query(e => e.Marked(parentName).Child(0).Child().Child()).Last().Text;
             Assert.AreEqual(wantedText, text);
         }
     }
