@@ -16,7 +16,7 @@ namespace ArcheryManager.Factories
         /// <param name="targetSetting"></param>
         /// <param name="arrowSetting"></param>
         /// <returns></returns>
-        public static Target Create(IGeneralCounterSetting generalCounterSetting, ScoreCounter counter)
+        public static Target Create(IGeneralCounterSetting generalCounterSetting, ScoreCounter counter, View gestureMoveTarget)
         {
             var countSetting = generalCounterSetting.CountSetting;
             var result = generalCounterSetting.ScoreResult;
@@ -37,7 +37,7 @@ namespace ArcheryManager.Factories
             var averagebehavior = new AverageBehavior(customTarget, counter, generalCounterSetting);
             average.Behaviors.Add(averagebehavior);
 
-            var behavior = new MovableTargetBehavior(generalCounterSetting, counter);
+            var behavior = new MovableTargetBehavior(generalCounterSetting, counter, gestureMoveTarget);
             customTarget.Behaviors.Add(behavior);
 
             PropertyChangedEventHandler arg = null;

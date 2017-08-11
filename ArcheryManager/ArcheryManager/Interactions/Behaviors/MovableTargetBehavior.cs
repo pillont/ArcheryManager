@@ -29,16 +29,18 @@ namespace ArcheryManager.Interactions.Behaviors
 
         private readonly CountSetting CountSetting;
         private readonly ScoreResult ScoreResult;
+        private readonly View GestureTarget;
 
         /// <summary>
         /// behavior to add interaction of pan on movable target
         /// </summary>
         /// <param name="counter">score counter where add new arrows</param>
-        public MovableTargetBehavior(IGeneralCounterSetting generalCounterSetting, ScoreCounter counter)
+        public MovableTargetBehavior(IGeneralCounterSetting generalCounterSetting, ScoreCounter counter, View gestureTarget)
         {
             ScoreResult = generalCounterSetting.ScoreResult;
             this.CountSetting = generalCounterSetting.CountSetting;
             this.Counter = counter;
+            GestureTarget = gestureTarget;
 
             GeneralCounterManager = new CounterMessageManager(ScoreResult, CountSetting, App.NavigationPage);
         }
@@ -46,7 +48,7 @@ namespace ArcheryManager.Interactions.Behaviors
         protected override void OnAttachedTo(Target bindable)
         {
             base.OnAttachedTo(bindable);
-            GestureHelper.AddPanGestureOn(AssociatedObject.TargetGrid, OnPanUpdated);
+            GestureHelper.AddPanGestureOn(GestureTarget, OnPanUpdated);
         }
 
         /// <summary>

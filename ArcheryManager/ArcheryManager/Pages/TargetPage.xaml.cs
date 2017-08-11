@@ -40,7 +40,7 @@ namespace ArcheryManager.Pages
 
             #endregion view setup
 
-            customTarget = TargetFactory.Create(GeneralCounterSetting, Counter);
+            customTarget = TargetFactory.Create(GeneralCounterSetting, Counter, globalGrid);
             targetGrid.Children.Add(customTarget);
 
             #region ScoreList

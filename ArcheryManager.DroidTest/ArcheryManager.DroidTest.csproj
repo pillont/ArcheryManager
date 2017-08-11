@@ -96,6 +96,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CounterSettingUpdateFeature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Counters\FlightNumberFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FlightNumberFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Counters\SelectionArrowFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -219,6 +224,10 @@
     <None Include="Features\Counters\CounterSettingUpdateFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CounterSettingUpdateFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Counters\FlightNumberFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>FlightNumberFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Counters\SelectionArrowFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

@@ -34,13 +34,14 @@
             </StackLayout>
             <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
                 <Label Text="{Binding FlightNumber}"
-                   VerticalOptions="Center"
-                   FontSize="Large"
-                   HorizontalOptions="Center"
-                   VerticalTextAlignment="Center"
-                   HorizontalTextAlignment="Center"
-                   FontAttributes="Bold"
-                   TextColor="Black" />
+                       AutomationId="FlightNumber"
+                        VerticalOptions="Center"
+                        FontSize="Large"
+                        HorizontalOptions="Center"
+                        VerticalTextAlignment="Center"
+                        HorizontalTextAlignment="Center"
+                        FontAttributes="Bold"
+                        TextColor="Black" />
             </StackLayout>
             <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="Center">
                 <Label AutomationId="TotalScoreTitle"
