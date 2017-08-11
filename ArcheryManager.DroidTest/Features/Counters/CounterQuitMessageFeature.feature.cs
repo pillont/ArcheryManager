@@ -238,11 +238,11 @@ this.ScenarioSetup(scenarioInfo);
 #line 89
  testRunner.And("la fleche 2 de la liste est un 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 91
- testRunner.And("la fleche 0 de la cible est en 376, 713", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("la fleche 0 de la cible est en 376, 684", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 92
- testRunner.And("la fleche 1 de la cible est en 437, 798", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("la fleche 1 de la cible est en 437, 769", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 93
- testRunner.And("la fleche 2 de la cible est en 415, 737", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("la fleche 2 de la cible est en 415, 709", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line hidden
             this.ScenarioCleanup();
         }

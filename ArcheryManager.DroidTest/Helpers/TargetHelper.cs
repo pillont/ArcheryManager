@@ -188,51 +188,5 @@ namespace ArcheryManager.DroidTest.Helpers
         }
 
         #endregion buttons
-
-        #region target in tab
-
-        public static void ShouldHaveTargetInTab(TargetStyle enumeration)
-        {
-            switch (enumeration)
-            {
-                case TargetStyle.EnglishTarget:
-                    ShouldHaveEnglishTargetInTab();
-                    break;
-
-                default:
-                    goto case TargetStyle.EnglishTarget;
-            }
-        }
-
-        private static void ShouldHaveEnglishTargetInTab()
-        {
-            Assert.AreEqual(619, TestSetting.App.WaitForElement("zone1").First().Rect.Height);
-            Assert.AreEqual(561, TestSetting.App.WaitForElement("zone2").First().Rect.Height);
-            Assert.AreEqual(504, TestSetting.App.WaitForElement("zone3").First().Rect.Height);
-            Assert.AreEqual(446, TestSetting.App.WaitForElement("zone4").First().Rect.Height);
-            Assert.AreEqual(389, TestSetting.App.WaitForElement("zone5").First().Rect.Height);
-            Assert.AreEqual(331, TestSetting.App.WaitForElement("zone6").First().Rect.Height);
-            Assert.AreEqual(274, TestSetting.App.WaitForElement("zone7").First().Rect.Height);
-            Assert.AreEqual(216, TestSetting.App.WaitForElement("zone8").First().Rect.Height);
-            Assert.AreEqual(159, TestSetting.App.WaitForElement("zone9").First().Rect.Height);
-            Assert.AreEqual(101, TestSetting.App.WaitForElement("zone10").First().Rect.Height);
-            Assert.AreEqual(44, TestSetting.App.WaitForElement("zone11").First().Rect.Height);
-            Assert.AreEqual(4, TestSetting.App.WaitForElement("center").First().Rect.Height);
-
-            Assert.AreEqual(619, TestSetting.App.WaitForElement("zone1").First().Rect.Width);
-            Assert.AreEqual(561, TestSetting.App.WaitForElement("zone2").First().Rect.Width);
-            Assert.AreEqual(504, TestSetting.App.WaitForElement("zone3").First().Rect.Width);
-            Assert.AreEqual(446, TestSetting.App.WaitForElement("zone4").First().Rect.Width);
-            Assert.AreEqual(389, TestSetting.App.WaitForElement("zone5").First().Rect.Width);
-            Assert.AreEqual(331, TestSetting.App.WaitForElement("zone6").First().Rect.Width);
-            Assert.AreEqual(274, TestSetting.App.WaitForElement("zone7").First().Rect.Width);
-            Assert.AreEqual(216, TestSetting.App.WaitForElement("zone8").First().Rect.Width);
-            Assert.AreEqual(159, TestSetting.App.WaitForElement("zone9").First().Rect.Width);
-            Assert.AreEqual(101, TestSetting.App.WaitForElement("zone10").First().Rect.Width);
-            Assert.AreEqual(44, TestSetting.App.WaitForElement("zone11").First().Rect.Width);
-            Assert.AreEqual(4, TestSetting.App.WaitForElement("center").First().Rect.Width);
-        }
-
-        #endregion target in tab
     }
 }

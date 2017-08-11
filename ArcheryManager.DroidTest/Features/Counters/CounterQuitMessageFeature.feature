@@ -88,8 +88,8 @@ Scénario: test la restitution de score après le message d'erreur dans une cibl
 	Et la fleche 1 de la liste est un 8
 	Et la fleche 2 de la liste est un 10
 	
-	Et la fleche 0 de la cible est en 376, 713
-	Et la fleche 1 de la cible est en 437, 798
-	Et la fleche 2 de la cible est en 415, 737
+	Et la fleche 0 de la cible est en 376, 684
+	Et la fleche 1 de la cible est en 437, 769
+	Et la fleche 2 de la cible est en 415, 709
 
 

@@ -58,8 +58,8 @@ namespace ArcheryManager.DroidTest.StepDefinition
         public void QuandJOuvreUnePageTabbedDeCibleFita()
         {
             TestSetting.InitTestApplication();
-            TestSetting.App.ScrollDownTo("tabbedTargetButton");
-            TestSetting.App.Tap("tabbedTargetButton");
+            TestSetting.App.ScrollDownTo("EnglishTargetButton");
+            TestSetting.App.Tap("EnglishTargetButton");
             TestSetting.App.WaitForElement("arrowInTargetGrid");
         }
 
@@ -67,8 +67,8 @@ namespace ArcheryManager.DroidTest.StepDefinition
         public void QuandJOuvreUnePageTabbedDeZappette()
         {
             TestSetting.InitTestApplication();
-            TestSetting.App.ScrollDownTo("tabbedZapetteButton");
-            TestSetting.App.Tap("tabbedZapetteButton");
+            TestSetting.App.ScrollDownTo("ButtonCounterButton");
+            TestSetting.App.Tap("ButtonCounterButton");
         }
 
         [When(@"J'ouvre une page d'édition de remarque")]

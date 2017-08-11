@@ -77,9 +77,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 9
  testRunner.And("je tire une flèche en 150, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 11
- testRunner.Then("la flèche numéro 0 est en 629, 795", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("la flèche numéro 0 est en 629, 814", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 12
- testRunner.Then("la flèche numéro 1 est en 566, 916", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("la flèche numéro 1 est en 566, 935", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -100,9 +100,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 19
  testRunner.And("je tourne le téléphone", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 21
- testRunner.Then("la flèche numéro 0 est en 484, 550", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("la flèche numéro 0 est en 462, 586", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 22
- testRunner.And("la flèche numéro 1 est en 436, 643", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("la flèche numéro 1 est en 418, 668", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -129,9 +129,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 32
  testRunner.And("je tourne le téléphone", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 34
- testRunner.Then("la moyenne est centrée en 295, 455", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("la moyenne est centrée en 295, 502", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 35
- testRunner.And("la moyenne est de taille 68, 134", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("la moyenne est de taille 59, 115", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line hidden
             this.ScenarioCleanup();
         }

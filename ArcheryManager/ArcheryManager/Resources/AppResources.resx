@@ -306,4 +306,7 @@
   <data name="FlightNumber" xml:space="preserve">
     <value>flight : {0}</value>
   </data>
+  <data name="FlightNumberTitle" xml:space="preserve">
+    <value>Number of the flight</value>
+  </data>
 </root>

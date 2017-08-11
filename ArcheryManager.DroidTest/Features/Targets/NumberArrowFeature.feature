@@ -46,18 +46,18 @@ Scénario: test la non possibilité de tirer plus du max
 	Et je click sur le check nombre de flèches défini
 	Et je reviens à la page d'avant
 	Et je tire une flèche en 200, 100
-	Et je tire une flèche en 100, 300
+	Et je tire une flèche en -200, -200
 	Et je tire une flèche en 0, 0
 	Et je tire une flèche en 100, 200
-	Et je tire une flèche en 300, 100
+	Et je tire une flèche en 200, 200
 	Et je tire une flèche en 100, 100
 	
 	#le nombre de flèche défini est atteint
 	Et je tire une flèche en 100, 200
 	
-	Alors le nombre de flèches dans la liste est de 6
+	Alors le message d'erreur du nombre de flèche est affiché
+	Et le nombre de flèches dans la liste est de 6
 	Et le nombre de flèches actuelles sur la cible est de 6
-	Et le message d'erreur du nombre de flèche est affiché
 
 
 

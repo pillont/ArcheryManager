@@ -115,10 +115,10 @@ namespace ArcheryManager.Pages
             globalGrid.RowDefinitions.Clear();
             globalGrid.ColumnDefinitions.Clear();
 
-            int targetRate = 6;
-            globalGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+            int targetRate = 52;
+            globalGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(5, GridUnitType.Star) });
             globalGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(targetRate, GridUnitType.Star) });
-            globalGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+            globalGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(9, GridUnitType.Star) });
 
             Grid.SetColumn(totalCounter, 0);
             Grid.SetColumn(targetGrid, 0);

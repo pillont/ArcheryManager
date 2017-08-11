@@ -13,6 +13,6 @@
         <ctl:TotalCounter x:Name="totalCounter" Grid.Row="0" />
         <Grid x:Name="targetGrid" />
 
-        <ScrollView x:Name="scrollArrows" MinimumHeightRequest="60"  BackgroundColor="AliceBlue" />
+        <ScrollView x:Name="scrollArrows"  BackgroundColor="AliceBlue" />
     </Grid>
 </page:ContentPageWithGeneralEvent>

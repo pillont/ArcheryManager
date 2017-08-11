@@ -22,8 +22,6 @@
             <Button Text="{resources:Translate ButtonCounter}" AutomationId="ButtonCounterButton" Clicked="ButtonCounter_Clicked" />
             <Button Text="{resources:Translate CounterSelector}" AutomationId="CounterSelectorButton" Clicked="CounterSelector_Clicked" />
             <Button Text="{resources:Translate GeneralMenu}" AutomationId="GeneralMenuButton" Clicked="GeneralMenu_Clicked" />
-            <Button Text="{resources:Translate TabbedTarget}" AutomationId="tabbedTargetButton" Clicked="TabbedTarget_Clicked" />
-            <Button Text="{resources:Translate TabbedButtonCount}" AutomationId="tabbedZapetteButton" Clicked="TabbedZapette_Clicked" />
             <Button Text="{resources:Translate Remarks}" AutomationId="remarksButton" Clicked="Remarks_Clicked" />
         </StackLayout>
     </ScrollView>

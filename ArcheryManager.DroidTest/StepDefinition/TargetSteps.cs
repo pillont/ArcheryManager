@@ -121,7 +121,7 @@ namespace ArcheryManager.DroidTest.StepDefinition
         public void AlorsIlYADansUnOngletUneCibleEnglishTarget(string target)
         {
             var enumeration = (TargetStyle)Enum.Parse(typeof(TargetStyle), target, true);
-            TargetHelper.ShouldHaveTargetInTab(enumeration);
+            TargetHelper.ShouldHaveTarget(enumeration);
         }
 
         [Then(@"il n'y a pas de cible (.*)")]

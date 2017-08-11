@@ -21,10 +21,11 @@
                         VerticalOptions="End"
                         Clicked="Valid_Click" IsEnabled="{Binding HaveText}" />
             </StackLayout>
-            <Editor x:Name="editor" Completed="editor_Completed"
+            <Editor x:Name="editor"
                     VerticalOptions="FillAndExpand"
                     Focused="Editor_Focused"
                     Unfocused="Editor_Unfocused"
+                    Completed="editor_Completed"
                     HorizontalOptions="FillAndExpand"
                     BackgroundColor="AliceBlue" Text="{Binding CurrentText}" />
         </StackLayout>

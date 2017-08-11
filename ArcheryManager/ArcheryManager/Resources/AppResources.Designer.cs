@@ -215,6 +215,15 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Number of the flight.
+        /// </summary>
+        internal static string FlightNumberTitle {
+            get {
+                return ResourceManager.GetString("FlightNumberTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Remarks of the flight.
         /// </summary>
         internal static string FlightRemarks {

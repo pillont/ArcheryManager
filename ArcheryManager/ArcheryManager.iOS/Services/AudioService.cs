@@ -1,13 +1,13 @@
-﻿using ArcheryManager.Services;
-using System.IO;
+﻿using System.IO;
 using Foundation;
 using AVFoundation;
-using ArcheryManager.iOS.Services;
 using Xamarin.Forms;
+using ArcheryManager.iOS;
+using ArcheryManager.Services;
 
 [assembly: Dependency(typeof(AudioService))]
 
-namespace ArcheryManager.iOS.Services
+namespace ArcheryManager.iOS
 {
     public class AudioService : IAudioPlayer
     {

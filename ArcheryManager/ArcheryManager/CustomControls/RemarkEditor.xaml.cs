@@ -10,6 +10,12 @@ namespace ArcheryManager.CustomControls
 {
     public partial class RemarkEditor : ContentView
     {
+        public event EventHandler Completed
+        {
+            add { editor.Completed += value; }
+            remove { editor.Completed -= value; }
+        }
+
         private readonly string EmptyMessage;
 
         private const int BaseFlightIndex = 1;
@@ -129,6 +135,7 @@ namespace ArcheryManager.CustomControls
 
         private void editor_Completed(object sender, EventArgs e)
         {
+            this.Unfocus();
         }
     }
 }

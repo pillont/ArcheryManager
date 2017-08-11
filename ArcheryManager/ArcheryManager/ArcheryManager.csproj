@@ -74,6 +74,7 @@
     <Compile Include="Pages\RemarksPage.xaml.cs">
       <DependentUpon>RemarksPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\IKeyboardHelper.cs" />
     <Compile Include="Settings\RemarksSaved.cs" />
     <Compile Include="Utils\CounterMessageManager.cs" />
     <Compile Include="Interactions\Behaviors\CounterButtonBehavior.cs" />
