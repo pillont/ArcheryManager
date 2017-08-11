@@ -99,9 +99,9 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.And("Je click sur le bouton nouvelle volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 17
  testRunner.Then("le numero de la volée est 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
-#line 20
- testRunner.When("je click sur le bouton de restart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 21
+ testRunner.When("je click sur le bouton de restart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 22
  testRunner.Then("le numero de la volée est 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
