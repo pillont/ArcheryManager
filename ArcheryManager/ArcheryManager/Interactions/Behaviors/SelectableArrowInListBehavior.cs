@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using ArcheryManager.Resources;
 using ArcheryManager.Settings;
 using System.Linq;
+using ArcheryManager.Models;
 
 namespace ArcheryManager.Interactions.Behaviors
 {

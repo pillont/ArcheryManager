@@ -26,6 +26,8 @@ namespace ArcheryManager.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.ApplicationName = global::ArcheryManager.Droid.Resource.String.ApplicationName;
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.Hello = global::ArcheryManager.Droid.Resource.String.Hello;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::ArcheryManager.Droid.Resource.Attribute.actionBarSize;
 			global::XFShapeView.Droid.Resource.Animation.abc_fade_in = global::ArcheryManager.Droid.Resource.Animation.abc_fade_in;
 			global::XFShapeView.Droid.Resource.Animation.abc_fade_out = global::ArcheryManager.Droid.Resource.Animation.abc_fade_out;

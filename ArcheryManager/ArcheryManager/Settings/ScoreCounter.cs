@@ -7,6 +7,7 @@ using ArcheryManager.Utils;
 using System.ComponentModel;
 using System;
 using ArcheryManager.Helpers;
+using ArcheryManager.Models;
 
 namespace ArcheryManager.Settings
 {
@@ -14,7 +15,7 @@ namespace ArcheryManager.Settings
     {
         private const string NewFlightText = "New Flight";
         private const string ScoreFormat = "{0}/{1}";
-
+        private const int BaseFlightNumber = 1;
         private readonly CounterMessageManager GeneralCounterManager;
 
         #region properties
@@ -31,6 +32,14 @@ namespace ArcheryManager.Settings
         {
             int maxScore = arrows.Count * ArrowSetting.MaxScore;
             return string.Format(ScoreFormat, score, maxScore);
+        }
+
+        public int FlightNumber
+        {
+            get
+            {
+                return Result.FlightsSaved.Count + BaseFlightNumber;
+            }
         }
 
         #endregion properties
@@ -79,6 +88,13 @@ namespace ArcheryManager.Settings
             CountSetting.PropertyChanged += CountSetting_PropertyChanged;
 
             GeneralCounterManager = new CounterMessageManager(Result, CountSetting, App.NavigationPage);
+
+            Result.FlightsSaved.CollectionChanged += FlightsSaved_CollectionChanged;
+        }
+
+        private void FlightsSaved_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(FlightNumber));
         }
 
         public ObservableCollection<Arrow> ArrowsShowed
@@ -114,6 +130,10 @@ namespace ArcheryManager.Settings
 
                 case nameof(ScoreResult.TotalScore):
                     OnPropertyChanged(nameof(TotalScoreString));
+                    break;
+
+                case nameof(ScoreResult.FlightsSaved):
+                    OnPropertyChanged(nameof(FlightNumber));
                     break;
             }
         }

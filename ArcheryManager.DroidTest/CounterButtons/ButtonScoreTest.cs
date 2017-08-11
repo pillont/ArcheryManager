@@ -232,10 +232,10 @@ namespace ArcheryManager.DroidTest.GenericCountable
             var list = app.Query("scoreList").First().Rect;
 
             Assert.AreEqual(598, count.CenterX);
-            Assert.AreEqual(244, count.CenterY);
+            Assert.AreEqual(340, count.CenterY);
 
             Assert.AreEqual(598, list.CenterX);
-            Assert.AreEqual(456, list.CenterY);
+            Assert.AreEqual(552, list.CenterY);
 
             app.ScrollToVerticalEnd();
 

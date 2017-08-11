@@ -1,7 +1,7 @@
 ﻿using ArcheryManager.Interfaces;
+using ArcheryManager.Models;
 using ArcheryManager.Settings.ArrowSettings;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace ArcheryManager.Utils
 {

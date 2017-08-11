@@ -1,5 +1,6 @@
 ﻿using ArcheryManager.Interactions.Behaviors;
 using ArcheryManager.Interfaces;
+using ArcheryManager.Models;
 using ArcheryManager.Utils;
 using System;
 using Xamarin.Forms;

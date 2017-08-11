@@ -1,9 +1,6 @@
 ﻿using ArcheryManager.Resources;
-using System;
-using System.Collections.Generic;
+using NUnit.Framework;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
 namespace ArcheryManager.DroidTest.StepDefinition
@@ -28,6 +25,14 @@ namespace ArcheryManager.DroidTest.StepDefinition
         public void AlorsLeMessageDAjoutPendantSelectionNEstPasAffiche(string p0)
         {
             TestSetting.App.WaitForNoElement(e => e.Text(TranslateExtension.GetTextResource("NoAddingDuringSelection")));
+        }
+
+        [Then(@"le numero de la volée est (.*)")]
+        public void AlorsLeNumeroDeLaVoleeEst(int wanted)
+        {
+            TestSetting.App.WaitForElement("FlightNumber");
+            var text = TestSetting.App.Query("FlightNumber").First().Text;
+            Assert.AreEqual(wanted.ToString(), text);
         }
     }
 }

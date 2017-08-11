@@ -8,51 +8,58 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Label AutomationId="FlightScoreTitle"
-                   HorizontalOptions="Center"
-                   Grid.Column="0"
-                   Grid.Row="0"
-                   Text="{resources:Translate Flight}"
-                   VerticalTextAlignment="End"
-                   VerticalOptions="End" />
+            <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="Center">
 
-            <Label AutomationId="FlightScore"
+                <Label AutomationId="FlightScoreTitle"
                    HorizontalOptions="Center"
-                   Grid.Column="0"
-                   Grid.Row="1"
+                   Text="{resources:Translate Flight}"
+                   VerticalTextAlignment="Center"
+                   VerticalOptions="Center" />
+
+                <Label AutomationId="FlightScore"
+                   HorizontalOptions="Center"
                    FontAttributes="Bold"
                    TextColor="Black"
+                   FontSize="Large"
                    HorizontalTextAlignment="Center"
                    Text="{Binding FlightScoreString}"
-                   VerticalTextAlignment="Start"
-                   VerticalOptions="Start"
-                   FontSize="Large" />
-
-            <Label AutomationId="TotalScoreTitle"
+                   VerticalTextAlignment="Center"
+                   VerticalOptions="Center" />
+            </StackLayout>
+            <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="{Binding FlightNumber}"
+                       AutomationId="FlightNumber"
+                        VerticalOptions="Center"
+                        FontSize="Large"
+                        HorizontalOptions="Center"
+                        VerticalTextAlignment="Center"
+                        HorizontalTextAlignment="Center"
+                        FontAttributes="Bold"
+                        TextColor="Black" />
+            </StackLayout>
+            <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="Center">
+                <Label AutomationId="TotalScoreTitle"
                    HorizontalOptions="Center"
                    Text="{resources:Translate Total}"
-                   Grid.Column="1"
-                   Grid.Row="0"
-                   VerticalTextAlignment="End"
-                   VerticalOptions="End" />
+                   VerticalTextAlignment="Center"
+                   VerticalOptions="Center" />
 
-            <Label AutomationId="TotalScore"
+                <Label AutomationId="TotalScore"
                    HorizontalOptions="Center"
+                   FontSize="Large"
                    FontAttributes="Bold"
-                   Grid.Column="1"
-                   Grid.Row="1"
                    TextColor="Black"
                    HorizontalTextAlignment="Center"
                    Text="{Binding TotalScoreString}"
-                   VerticalTextAlignment="Start"
-                   VerticalOptions="Start"
-                   FontSize="Large" />
+                   VerticalTextAlignment="Center"
+                   VerticalOptions="Center" />
+            </StackLayout>
         </Grid>
     </ContentView.Content>
 </ContentView>

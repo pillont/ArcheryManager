@@ -16,7 +16,14 @@ namespace ArcheryManager.Pages
 
         public BackDoorPage()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
 
         private async void Timer_Click(object sender, EventArgs e)
@@ -59,7 +66,7 @@ namespace ArcheryManager.Pages
 
         private async Task OpenNewCounterView()
         {
-            var page = CounterPageFactory.Create(GeneralCounterSetting);
+            var page = CounterPageFactory.CreateTabbedCounter(GeneralCounterSetting);
             await App.NavigationPage.PushAsync(page);
         }
 
@@ -86,6 +93,12 @@ namespace ArcheryManager.Pages
         {
             var generalMenu = new GeneralMenu();
             await App.NavigationPage.PushAsync(generalMenu);
+        }
+
+        private async void Remarks_Clicked(object sender, EventArgs e)
+        {
+            var page = new RemarksPage();
+            await App.NavigationPage.PushAsync(page);
         }
     }
 }

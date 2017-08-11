@@ -1,4 +1,5 @@
 ﻿using ArcheryManager.Interactions.Behaviors;
+using ArcheryManager.Models;
 using ArcheryManager.Settings;
 using ArcheryManager.Settings.ArrowSettings;
 using ArcheryManager.Utils;

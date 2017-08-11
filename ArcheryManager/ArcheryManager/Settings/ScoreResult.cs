@@ -1,4 +1,5 @@
-﻿using ArcheryManager.Utils;
+﻿using ArcheryManager.Models;
+using ArcheryManager.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,11 +28,11 @@ namespace ArcheryManager.Settings
         }
 
         public static readonly BindableProperty FlightSavedProperty =
-                      BindableProperty.Create(nameof(FlightsSaved), typeof(List<Flight>), typeof(ScoreResult), null);
+                      BindableProperty.Create(nameof(FlightsSaved), typeof(ObservableCollection<Flight>), typeof(ScoreResult), null);
 
-        public List<Flight> FlightsSaved
+        public ObservableCollection<Flight> FlightsSaved
         {
-            get { return (List<Flight>)GetValue(FlightSavedProperty); }
+            get { return (ObservableCollection<Flight>)GetValue(FlightSavedProperty); }
             private set { SetValue(FlightSavedProperty, value); }
         }
 
@@ -94,7 +95,7 @@ namespace ArcheryManager.Settings
             AllArrows = new ObservableCollection<Arrow>();
             PreviousArrows = new ObservableCollection<Arrow>();
 
-            FlightsSaved = new List<Flight>();
+            FlightsSaved = new ObservableCollection<Flight>();
         }
     }
 }

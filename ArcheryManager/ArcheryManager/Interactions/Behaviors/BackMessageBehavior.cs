@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace ArcheryManager.Interactions.Behaviors
 {
-    public class BackMessageBehavior : CustomBehavior<ContentPageWithGeneralEvent>
+    public class BackMessageBehavior<T> : CustomBehavior<T> where T : Page, IGeneralEventHolder
     {
         private readonly AlertArg AlertArg;
         private readonly NavigationPage NavigationReference;
@@ -18,7 +18,7 @@ namespace ArcheryManager.Interactions.Behaviors
             AlertArg = alertArg;
         }
 
-        protected override void OnAttachedTo(ContentPageWithGeneralEvent bindable)
+        protected override void OnAttachedTo(T bindable)
         {
             base.OnAttachedTo(bindable);
             NavigationReference.Popped += NavigationPage_Popped;

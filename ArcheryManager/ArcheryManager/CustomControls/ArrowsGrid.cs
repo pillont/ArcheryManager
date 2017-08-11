@@ -1,4 +1,5 @@
-﻿using ArcheryManager.Settings.ArrowSettings;
+﻿using ArcheryManager.Models;
+using ArcheryManager.Settings.ArrowSettings;
 using ArcheryManager.Utils;
 using System.ComponentModel;
 using Xamarin.Forms;

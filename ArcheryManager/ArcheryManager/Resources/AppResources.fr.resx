@@ -273,4 +273,40 @@
   <data name="SureQuitCount" xml:space="preserve">
     <value>Etes vous sûre de vouloir quitter le tir ?</value>
   </data>
+  <data name="Shoot" xml:space="preserve">
+    <value>Tir</value>
+  </data>
+  <data name="Remarks" xml:space="preserve">
+    <value>Remarques</value>
+  </data>
+  <data name="TabbedButtonCount" xml:space="preserve">
+    <value>Zapette avec onglets</value>
+  </data>
+  <data name="TabbedTarget" xml:space="preserve">
+    <value>Cible avec onglets</value>
+  </data>
+  <data name="FlightRemarks" xml:space="preserve">
+    <value>Remarques de la volée</value>
+  </data>
+  <data name="GeneralRemarks" xml:space="preserve">
+    <value>Remarques général</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>Historique</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Précédente</value>
+  </data>
+  <data name="EmptyList" xml:space="preserve">
+    <value>la liste est vide</value>
+  </data>
+  <data name="EnterRemarksHere" xml:space="preserve">
+    <value>Entrez vos remarques ici</value>
+  </data>
+  <data name="FlightNumber" xml:space="preserve">
+    <value>Volée : {0}</value>
+  </data>
+  <data name="FlightNumberTitle" xml:space="preserve">
+    <value>Numéro de la volée</value>
+  </data>
 </root>

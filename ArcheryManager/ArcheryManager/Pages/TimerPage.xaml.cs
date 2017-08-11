@@ -8,11 +8,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ArcheryManager.Pages.PagesTemplates;
 
 namespace ArcheryManager.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TimerPage : ContentPage
+    public partial class TimerPage : ContentPageWithGeneralEvent
     {
         private const int ShootoutTime = 40;
         private const int MinTime = 40;

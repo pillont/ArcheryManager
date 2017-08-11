@@ -6,6 +6,8 @@ namespace ArcheryManager.DroidTest.Helpers
 {
     public static class TargetHelper
     {
+        #region target
+
         public static void ShouldHaveTarget(TargetStyle enumeration)
         {
             switch (enumeration)
@@ -29,78 +31,6 @@ namespace ArcheryManager.DroidTest.Helpers
                 default:
                     goto case TargetStyle.EnglishTarget;
             }
-        }
-
-        public static void ShouldHaveButton(TargetStyle enumeration)
-        {
-            switch (enumeration)
-            {
-                case TargetStyle.EnglishTarget:
-                    ShouldHaveEnglishButtons();
-                    break;
-
-                case TargetStyle.FieldTarget:
-                    ShouldHaveFieldButtons();
-                    break;
-
-                case TargetStyle.IndoorRecurveTarget:
-                    ShouldHaveIndoorRecurveButtons();
-                    break;
-
-                case TargetStyle.IndoorCompoundTarget:
-                    ShouldHaveIndoorCompoundButtons();
-                    break;
-
-                default:
-                    goto case TargetStyle.EnglishTarget;
-            }
-        }
-
-        private static void ShouldHaveIndoorCompoundButtons()
-        {
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(0).Child(1).Child().Text("6"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(1).Child(1).Child().Text("7"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(2).Child(1).Child().Text("8"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(3).Child(1).Child().Text("9"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(4).Child(1).Child().Text("10"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(5).Child(1).Child().Text("M"));
-        }
-
-        private static void ShouldHaveIndoorRecurveButtons()
-        {
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(0).Child(1).Child().Text("6"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(1).Child(1).Child().Text("7"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(2).Child(1).Child().Text("8"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(3).Child(1).Child().Text("9"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(4).Child(1).Child().Text("10"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(5).Child(1).Child().Text("M"));
-        }
-
-        private static void ShouldHaveFieldButtons()
-        {
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(0).Child(1).Child().Text("1"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(1).Child(1).Child().Text("2"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(2).Child(1).Child().Text("3"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(3).Child(1).Child().Text("4"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(4).Child(1).Child().Text("5"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(5).Child(1).Child().Text("6"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(6).Child(1).Child().Text("M"));
-        }
-
-        private static void ShouldHaveEnglishButtons()
-        {
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(0).Child(1).Child().Text("1"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(1).Child(1).Child().Text("2"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(2).Child(1).Child().Text("3"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(3).Child(1).Child().Text("4"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(4).Child(1).Child().Text("5"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(5).Child(1).Child().Text("6"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(6).Child(1).Child().Text("7"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(7).Child(1).Child().Text("8"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(8).Child(1).Child().Text("9"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(9).Child(1).Child().Text("10"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(10).Child(1).Child().Text("X10"));
-            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(11).Child(1).Child().Text("M"));
         }
 
         public static void ShouldHaveIndoorCompoundTarget()
@@ -180,5 +110,83 @@ namespace ArcheryManager.DroidTest.Helpers
             Assert.AreEqual(49, TestSetting.App.WaitForElement("zone11").First().Rect.Width);
             Assert.AreEqual(4, TestSetting.App.WaitForElement("center").First().Rect.Width);
         }
+
+        #endregion target
+
+        #region buttons
+
+        public static void ShouldHaveButton(TargetStyle enumeration)
+        {
+            switch (enumeration)
+            {
+                case TargetStyle.EnglishTarget:
+                    ShouldHaveEnglishButtons();
+                    break;
+
+                case TargetStyle.FieldTarget:
+                    ShouldHaveFieldButtons();
+                    break;
+
+                case TargetStyle.IndoorRecurveTarget:
+                    ShouldHaveIndoorRecurveButtons();
+                    break;
+
+                case TargetStyle.IndoorCompoundTarget:
+                    ShouldHaveIndoorCompoundButtons();
+                    break;
+
+                default:
+                    goto case TargetStyle.EnglishTarget;
+            }
+        }
+
+        private static void ShouldHaveIndoorCompoundButtons()
+        {
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(0).Child(1).Child().Text("6"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(1).Child(1).Child().Text("7"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(2).Child(1).Child().Text("8"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(3).Child(1).Child().Text("9"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(4).Child(1).Child().Text("10"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(5).Child(1).Child().Text("M"));
+        }
+
+        private static void ShouldHaveIndoorRecurveButtons()
+        {
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(0).Child(1).Child().Text("6"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(1).Child(1).Child().Text("7"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(2).Child(1).Child().Text("8"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(3).Child(1).Child().Text("9"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(4).Child(1).Child().Text("10"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(5).Child(1).Child().Text("M"));
+        }
+
+        private static void ShouldHaveFieldButtons()
+        {
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(0).Child(1).Child().Text("1"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(1).Child(1).Child().Text("2"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(2).Child(1).Child().Text("3"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(3).Child(1).Child().Text("4"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(4).Child(1).Child().Text("5"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(5).Child(1).Child().Text("6"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(6).Child(1).Child().Text("M"));
+        }
+
+        private static void ShouldHaveEnglishButtons()
+        {
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(0).Child(1).Child().Text("1"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(1).Child(1).Child().Text("2"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(2).Child(1).Child().Text("3"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(3).Child(1).Child().Text("4"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(4).Child(1).Child().Text("5"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(5).Child(1).Child().Text("6"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(6).Child(1).Child().Text("7"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(7).Child(1).Child().Text("8"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(8).Child(1).Child().Text("9"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(9).Child(1).Child().Text("10"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(10).Child(1).Child().Text("X10"));
+            TestSetting.App.WaitForElement(c => c.Marked("buttonGrid").Child(11).Child(1).Child().Text("M"));
+        }
+
+        #endregion buttons
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ArcheryManager.Utils
+namespace ArcheryManager.Models
 {
     public class Flight : List<Arrow>
     {

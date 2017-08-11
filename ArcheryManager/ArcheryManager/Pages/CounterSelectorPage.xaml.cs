@@ -64,7 +64,7 @@ namespace ArcheryManager.Pages
             {
                 GeneralCounterSetting.ArrowSetting = ArrowsettingFactory.Create(CountSetting.TargetStyle);
 
-                var page = CounterPageFactory.Create(GeneralCounterSetting);
+                var page = CounterPageFactory.CreateTabbedCounter(GeneralCounterSetting);
                 await App.NavigationPage.PushAsync(page);
             }
             catch (Exception e)

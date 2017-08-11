@@ -15,9 +15,7 @@ namespace ArcheryManager.DroidTest.StepDefinition
         public void WhenJeTireUneFlecheEn(int p0, int p1)
         {
             TestSetting.App.WaitForElement("arrowInTargetGrid");
-
             TestSetting.App.DragCoordinates(500, 800, 500 + p0, 800 + p1);
-
             TestSetting.App.WaitForElement("arrowInTargetGrid");
         }
 
@@ -119,6 +117,13 @@ namespace ArcheryManager.DroidTest.StepDefinition
             TargetHelper.ShouldHaveTarget(enumeration);
         }
 
+        [Then(@"il y a dans un onglet une cible (.*)")]
+        public void AlorsIlYADansUnOngletUneCibleEnglishTarget(string target)
+        {
+            var enumeration = (TargetStyle)Enum.Parse(typeof(TargetStyle), target, true);
+            TargetHelper.ShouldHaveTarget(enumeration);
+        }
+
         [Then(@"il n'y a pas de cible (.*)")]
         public void AlorsIlNYAPasDeCible(string target)
         {
@@ -147,6 +152,14 @@ namespace ArcheryManager.DroidTest.StepDefinition
             var average = TestSetting.App.Query(e => e.Marked("averageCanvas").Child(0)).Single();
             Assert.AreEqual(width, average.Rect.Width, 7);
             Assert.AreEqual(height, average.Rect.Height, 7);
+        }
+
+        [Then(@"la fleche (.*) de la cible est en (.*), (.*)")]
+        public void AlorsLaFlecheDeLaCibleEstEn(int index, int x, int y)
+        {
+            var rect = TestSetting.App.Query(e => e.Marked("arrowInTargetGrid").Child(index)).First().Rect;
+            Assert.AreEqual(x, rect.X, 7);
+            Assert.AreEqual(y, rect.Y, 7);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ArcheryManager.Pages.PagesTemplates
 {
-    public class ContentPageWithGeneralEvent : ContentPageWithRotationEvent
+    public class ContentPageWithGeneralEvent : ContentPageWithRotationEvent, IGeneralEventHolder
     {
         public event EventHandler<BackButtonPressedArg> BackButtonPressed;
 
@@ -17,16 +17,6 @@ namespace ArcheryManager.Pages.PagesTemplates
             var arg = new BackButtonPressedArg();
             BackButtonPressed?.Invoke(this, arg);
             return !arg.ValidPress; //NOTE : must have "!" to work : why microsoft...
-        }
-    }
-
-    public class BackButtonPressedArg
-    {
-        public bool ValidPress { get; set; }
-
-        public BackButtonPressedArg()
-        {
-            ValidPress = true;
         }
     }
 }

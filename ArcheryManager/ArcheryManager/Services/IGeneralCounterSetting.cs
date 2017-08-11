@@ -7,5 +7,6 @@ namespace ArcheryManager.Settings
         ScoreResult ScoreResult { get; }
         IArrowSetting ArrowSetting { get; }
         CountSetting CountSetting { get; }
+        RemarksSaved RemarksSaved { get; }
     }
 }

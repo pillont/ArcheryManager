@@ -165,23 +165,23 @@ this.ScenarioSetup(scenarioInfo);
 #line 48
  testRunner.And("je tire une flèche en 200, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 49
- testRunner.And("je tire une flèche en 100, 300", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en -200, -200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 50
  testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 51
  testRunner.And("je tire une flèche en 100, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 52
- testRunner.And("je tire une flèche en 300, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 200, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 53
  testRunner.And("je tire une flèche en 100, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 56
  testRunner.And("je tire une flèche en 100, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 58
- testRunner.Then("le nombre de flèches dans la liste est de 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("le message d\'erreur du nombre de flèche est affiché", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 59
- testRunner.And("le nombre de flèches actuelles sur la cible est de 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("le nombre de flèches dans la liste est de 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 60
- testRunner.And("le message d\'erreur du nombre de flèche est affiché", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("le nombre de flèches actuelles sur la cible est de 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line hidden
             this.ScenarioCleanup();
         }

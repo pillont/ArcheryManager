@@ -29,7 +29,7 @@ namespace ArcheryManager.DroidTest.Target
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 600, 900);
-            var pure = new AppRect() { Width = 14, Height = 14, X = 499, Y = 788, CenterX = 506, CenterY = 795 };
+            var pure = new AppRect() { Width = 14, Height = 14, X = 499, Y = 807, CenterX = 506, CenterY = 814 };
 
             var list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(1, list.Count()); // have one arrow in target
@@ -50,7 +50,7 @@ namespace ArcheryManager.DroidTest.Target
 
             // drag to create arrow
             app.DragCoordinates(500, 800, 450, 750);
-            pure = new AppRect() { Width = 14, Height = 14, X = 315, Y = 604, CenterX = 322, CenterY = 611 };
+            pure = new AppRect() { Width = 14, Height = 14, X = 315, Y = 623, CenterX = 322, CenterY = 630 };
 
             list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(2, list.Count()); // have one arrow in target
@@ -79,7 +79,7 @@ namespace ArcheryManager.DroidTest.Target
             app.DragCoordinates(500, 800, 475, 775);
             // drag to create arrow
             app.DragCoordinates(500, 800, 550, 850);
-            var pure = new AppRect() { Width = 14, Height = 14, X = 346, Y = 635, CenterX = 353, CenterY = 642 };
+            var pure = new AppRect() { Width = 14, Height = 14, X = 346, Y = 654, CenterX = 353, CenterY = 661 };
 
             var list = app.Query(e => e.Marked("arrowInTargetGrid").Child());
             Assert.AreEqual(2, list.Count()); // have one arrow in target
@@ -191,13 +191,13 @@ namespace ArcheryManager.DroidTest.Target
             var list = app.Query("scoreList").First().Rect;
 
             Assert.AreEqual(296, tar.CenterX);
-            Assert.AreEqual(456, tar.CenterY);
+            Assert.AreEqual(504, tar.CenterY);
 
             Assert.AreEqual(900, count.CenterX);
-            Assert.AreEqual(297, count.CenterY);
+            Assert.AreEqual(369, count.CenterY);
 
             Assert.AreEqual(900, list.CenterX);
-            Assert.AreEqual(615, list.CenterY);
+            Assert.AreEqual(639, list.CenterY);
         }
     }
 }
