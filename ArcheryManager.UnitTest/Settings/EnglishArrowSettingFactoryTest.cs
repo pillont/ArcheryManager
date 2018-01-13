@@ -11,21 +11,12 @@ namespace ArcheryManager.UnitTest.Settings
         private readonly IArrowSetting Setting = EnglishArrowSetting.Instance;
 
         [Test]
-        public void ColorOfTest()
+        public void BorderColorZoneTest()
         {
-            Assert.AreEqual(Color.Green, Setting.ColorOf("M"));
-            Assert.AreEqual(Color.White, Setting.ColorOf("1"));
-            Assert.AreEqual(Color.White, Setting.ColorOf("2"));
-            Assert.AreEqual(Color.Gray, Setting.ColorOf("3"));
-            Assert.AreEqual(Color.Gray, Setting.ColorOf("4"));
-            Assert.AreEqual(Color.CornflowerBlue, Setting.ColorOf("5"));
-            Assert.AreEqual(Color.CornflowerBlue, Setting.ColorOf("6"));
-            Assert.AreEqual(Color.Red, Setting.ColorOf("7"));
-            Assert.AreEqual(Color.Red, Setting.ColorOf("8"));
-            Assert.AreEqual(Color.Yellow, Setting.ColorOf("9"));
-            Assert.AreEqual(Color.Yellow, Setting.ColorOf("10"));
-            Assert.AreEqual(Color.Yellow, Setting.ColorOf("X10"));
-            Assert.AreEqual(Color.Green, Setting.ColorOf("Test"));
+            Assert.AreEqual(Color.White, Setting.BorderColorZone(3));
+            Assert.AreEqual(Color.White, Setting.BorderColorZone(4));
+            Assert.AreEqual(Color.Black, Setting.BorderColorZone(7));
+            Assert.AreEqual(Color.Black, Setting.BorderColorZone(42));
         }
 
         [Test]
@@ -47,12 +38,21 @@ namespace ArcheryManager.UnitTest.Settings
         }
 
         [Test]
-        public void BorderColorZoneTest()
+        public void ColorOfTest()
         {
-            Assert.AreEqual(Color.White, Setting.BorderColorZone(3));
-            Assert.AreEqual(Color.White, Setting.BorderColorZone(4));
-            Assert.AreEqual(Color.Black, Setting.BorderColorZone(7));
-            Assert.AreEqual(Color.Black, Setting.BorderColorZone(42));
+            Assert.AreEqual(Color.Green, Setting.ColorOf("M"));
+            Assert.AreEqual(Color.White, Setting.ColorOf("1"));
+            Assert.AreEqual(Color.White, Setting.ColorOf("2"));
+            Assert.AreEqual(Color.Gray, Setting.ColorOf("3"));
+            Assert.AreEqual(Color.Gray, Setting.ColorOf("4"));
+            Assert.AreEqual(Color.CornflowerBlue, Setting.ColorOf("5"));
+            Assert.AreEqual(Color.CornflowerBlue, Setting.ColorOf("6"));
+            Assert.AreEqual(Color.Red, Setting.ColorOf("7"));
+            Assert.AreEqual(Color.Red, Setting.ColorOf("8"));
+            Assert.AreEqual(Color.Yellow, Setting.ColorOf("9"));
+            Assert.AreEqual(Color.Yellow, Setting.ColorOf("10"));
+            Assert.AreEqual(Color.Yellow, Setting.ColorOf("X10"));
+            Assert.AreEqual(Color.Green, Setting.ColorOf("Test"));
         }
 
         [Test]

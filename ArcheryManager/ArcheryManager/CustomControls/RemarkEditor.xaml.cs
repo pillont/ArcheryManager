@@ -1,13 +1,15 @@
-﻿using ArcheryManager.Models;
+﻿using ArcheryManager.Entities;
+using ArcheryManager.Helpers;
 using ArcheryManager.Pages;
 using ArcheryManager.Resources;
-using ArcheryManager.Settings;
 using System;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace ArcheryManager.CustomControls
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RemarkEditor : ContentView
     {
         public event EventHandler Completed
@@ -16,31 +18,25 @@ namespace ArcheryManager.CustomControls
             remove { editor.Completed -= value; }
         }
 
-        private readonly string EmptyMessage;
-
-        private const int BaseFlightIndex = 1;
-
-        private static readonly IGeneralCounterSetting GeneralCounterSetting = DependencyService.Get<IGeneralCounterSetting>();
-
-        public bool HaveText
-        {
-            get
-            {
-                return !string.IsNullOrWhiteSpace(CurrentText) && CurrentText != EmptyMessage;
-            }
-        }
-
         public static readonly BindableProperty AreGeneralRemarksProperty =
                       BindableProperty.Create(nameof(AreGeneralRemarks), typeof(bool), typeof(RemarkEditor), false);
+
+        public static readonly BindableProperty CurrentTextProperty =
+                      BindableProperty.Create(nameof(CurrentText), typeof(string), typeof(RemarkEditor), string.Empty);
+
+        public static readonly BindableProperty PreviousProperty =
+                      BindableProperty.Create(nameof(Previous), typeof(ObservableCollection<Remark>), typeof(RemarkEditor), null);
+
+        public static readonly BindableProperty TitleProperty =
+                      BindableProperty.Create(nameof(Title), typeof(string), typeof(RemarkEditor), string.Empty);
+
+        private readonly string EmptyMessage;
 
         public bool AreGeneralRemarks
         {
             get { return (bool)GetValue(AreGeneralRemarksProperty); }
             set { SetValue(AreGeneralRemarksProperty, value); }
         }
-
-        public static readonly BindableProperty CurrentTextProperty =
-                      BindableProperty.Create(nameof(CurrentText), typeof(string), typeof(RemarkEditor), string.Empty);
 
         public string CurrentText
         {
@@ -52,17 +48,13 @@ namespace ArcheryManager.CustomControls
             }
         }
 
-        public static readonly BindableProperty TitleProperty =
-                      BindableProperty.Create(nameof(Title), typeof(string), typeof(RemarkEditor), string.Empty);
-
-        public string Title
+        public bool HaveText
         {
-            get { return (string)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
+            get
+            {
+                return !string.IsNullOrWhiteSpace(CurrentText) && CurrentText != EmptyMessage;
+            }
         }
-
-        public static readonly BindableProperty PreviousProperty =
-                      BindableProperty.Create(nameof(Previous), typeof(ObservableCollection<Remark>), typeof(RemarkEditor), null);
 
         public ObservableCollection<Remark> Previous
         {
@@ -70,47 +62,24 @@ namespace ArcheryManager.CustomControls
             set { SetValue(PreviousProperty, value); }
         }
 
-        public RemarkEditor()
+        public string Title
         {
-            try
-            {
-                EmptyMessage = AppResources.EnterRemarksHere;
-                InitializeComponent();
-                BindingContext = this;
-                Previous = new ObservableCollection<Remark>();
-                Editor_Unfocused(editor, null);
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
         }
 
-        private void Valid_Click(object sender, EventArgs e)
+        public RemarkEditor()
         {
-            var remark = new Remark() { Text = CurrentText };
-            if (!AreGeneralRemarks)
-            {
-                remark.FlightIndex = GeneralCounterSetting.ScoreResult.FlightsSaved.Count + BaseFlightIndex;
-            }
-            Previous.Add(remark);
-
-            CurrentText = string.Empty;
-
+            EmptyMessage = AppResources.EnterRemarksHere;
+            InitializeComponent();
+            generalLayer.BindingContext = this;
+            Previous = new ObservableCollection<Remark>();
             Editor_Unfocused(editor, null);
         }
 
-        private async void Previous_Click(object sender, EventArgs e)
+        private void editor_Completed(object sender, EventArgs e)
         {
-            try
-            {
-                var page = new ListRemarks(Previous, AreGeneralRemarks) { Title = Title };
-                await App.NavigationPage.PushAsync(page);
-            }
-            catch (Exception ee)
-            {
-                throw;
-            }
+            this.Unfocus();
         }
 
         private void Editor_Focused(object sender, FocusEventArgs e)
@@ -125,17 +94,29 @@ namespace ArcheryManager.CustomControls
 
         private void Editor_Unfocused(object sender, FocusEventArgs e)
         {
-            var editor = sender as Editor;
             if (string.IsNullOrWhiteSpace(CurrentText))
             {
+                var editor = sender as Editor;
+
                 CurrentText = EmptyMessage;
                 editor.TextColor = Color.Gray;
             }
         }
 
-        private void editor_Completed(object sender, EventArgs e)
+        private async void Previous_Click(object sender, EventArgs e)
         {
-            this.Unfocus();
+            var page = new ListRemarks(Previous, AreGeneralRemarks) { Title = Title };
+            MessagingCenterHelper.PushInNavigationPage(this, page);
+        }
+
+        private void Valid_Click(object sender, EventArgs e)
+        {
+            var remark = new Remark() { Text = CurrentText };
+            Previous.Add(remark);
+
+            CurrentText = string.Empty;
+
+            Editor_Unfocused(editor, null);
         }
     }
 }

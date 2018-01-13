@@ -1,8 +1,8 @@
-﻿using ArcheryManager.Interactions.Behaviors;
-using ArcheryManager.Models;
-using ArcheryManager.Settings;
-using ArcheryManager.UnitTest.Mockables;
-using Moq;
+﻿using ArcheryManager.Entities;
+using ArcheryManager.Helpers;
+using ArcheryManager.Interactions.Behaviors;
+using ArcheryManager.Pages.PagesTemplates;
+using ArcheryManager.Utils;
 using NUnit.Framework;
 using System.Collections.Generic;
 using Xamarin.Forms;
@@ -12,85 +12,97 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
     [TestFixture]
     public class CounterToolbarItemsBehaviorTest
     {
-        private Mock<ContentPageWithOverridableToolBar> _page;
-        private CounterToolbarItemsBehavior<ContentPageWithOverridableToolBar> behavior;
+        private ContentPageWithGeneralEvent _page;
+        private CounterToolbarItemsBehavior behavior;
+        private CounterManager Manager;
         private List<ToolbarItem> toolBarList;
-        private CountSetting countSetting;
-        private ScoreCounter counter;
+
+        public void ApplyEvent(List<ToolbarItem> toolBarList)
+        {
+            MessagingCenterHelper.Instance.AddedToolbarItem += (s, e) => toolBarList.Add(e.ToolbarItem);
+            MessagingCenterHelper.Instance.RemovedToolbarItem += (s, e) => toolBarList.Remove(e.ToolbarItem);
+            MessagingCenterHelper.Instance.ClearedToolbarItem += (s, e) => toolBarList.Clear();
+
+            _page.OnPagePushed(this, null);
+        }
+
+        [Test]
+        public void AskAndApplyTest()
+        {
+            Manager.Counter.AddArrowIfPossible(new Arrow());
+            var newFlight = toolBarList[0];
+        }
 
         [SetUp]
         public void Init()
         {
             Xamarin.Forms.Mocks.MockForms.Init();
 
+            Manager = new CounterManager() { CurrentShoot = new CountedShoot() };
+            Manager.Counter.NewFlight();
+
+            _page = new ContentPageWithGeneralEvent();
+
+            behavior = new CounterToolbarItemsBehavior(Manager, new CounterToolbarGenerator(Manager.Counter));
+            _page.Behaviors.Add(behavior);
+
             toolBarList = new List<ToolbarItem>();
-            var generalCounterSetting = new GeneralCounterSetting();
-            countSetting = generalCounterSetting.CountSetting;
-            counter = new ScoreCounter(generalCounterSetting);
-            _page = new Mock<ContentPageWithOverridableToolBar>();
-            _page.CallBase = true;
-            _page.SetupGet(e => e.ToolbarItems).Returns(toolBarList);
-            behavior = new CounterToolbarItemsBehavior<ContentPageWithOverridableToolBar>(generalCounterSetting, counter);
-            _page.Object.Behaviors.Add(behavior);
-        }
-
-        [Test]
-        public void ToolBarItems_HaveMaxTest()
-        {
-            countSetting.HaveMaxArrowsCount = true;
-            behavior.AddDefaultToolbarItems();
-            countSetting.ArrowsCount = 2;
-            Assert.AreEqual(3, toolBarList.Count);
-
-            counter.AddArrowIfPossible(new Arrow(0, 0));
-            Assert.AreEqual(3, toolBarList.Count);
-
-            counter.AddArrowIfPossible(new Arrow(0, 0));
-            Assert.AreEqual(4, toolBarList.Count);
+            ApplyEvent(toolBarList);
         }
 
         [Test]
         public void ToolBarItems_AddTest()
         {
-            countSetting.HaveMaxArrowsCount = false;
-            behavior.AddDefaultToolbarItems();
-            Assert.AreEqual(3, toolBarList.Count);
-
-            countSetting.ArrowsCount = 2;
-            counter.AddArrowIfPossible(new Arrow(0, 0));
+            Manager.CurrentShoot.HaveMaxArrowsCount = false;
             Assert.AreEqual(4, toolBarList.Count);
+
+            Manager.Counter.AddArrowIfPossible(new Arrow());
+            Assert.AreEqual(5, toolBarList.Count);
+        }
+
+        [Test]
+        public void ToolBarItems_HaveMaxTest()
+        {
+            Manager.CurrentShoot.HaveMaxArrowsCount = true;
+            Manager.CurrentShoot.ArrowsCount = 2;
+            Assert.AreEqual(4, toolBarList.Count);
+
+            Manager.Counter.AddArrowIfPossible(new Arrow());
+            Assert.AreEqual(4, toolBarList.Count);
+
+            Manager.Counter.AddArrowIfPossible(new Arrow());
+            Assert.AreEqual(5, toolBarList.Count);
         }
 
         [Test]
         public void ToolBarItems_RemoveTest()
         {
-            countSetting.HaveMaxArrowsCount = true;
-            behavior.AddDefaultToolbarItems();
-            Assert.AreEqual(3, toolBarList.Count);
-            countSetting.ArrowsCount = 2;
+            Manager.CurrentShoot.HaveMaxArrowsCount = true;
+            Assert.AreEqual(4, toolBarList.Count);
+            Manager.CurrentShoot.ArrowsCount = 2;
 
-            counter.AddArrowIfPossible(new Arrow(0, 0));
-            counter.AddArrowIfPossible(new Arrow(0, 0));
+            Manager.Counter.AddArrowIfPossible(new Arrow());
+            Manager.Counter.AddArrowIfPossible(new Arrow());
 
-            counter.RemoveLastArrow();
-            Assert.AreEqual(3, toolBarList.Count);
+            Manager.Counter.RemoveLastArrow();
+            Assert.AreEqual(4, toolBarList.Count);
         }
 
         [Test]
         public void ToolBarItems_RemoveWithoutMaxTest()
         {
-            countSetting.HaveMaxArrowsCount = false;
-            behavior.AddDefaultToolbarItems();
-            Assert.AreEqual(3, toolBarList.Count);
-            countSetting.ArrowsCount = 2;
+            Manager.CurrentShoot.HaveMaxArrowsCount = false;
 
-            counter.AddArrowIfPossible(new Arrow(0, 0));
-            counter.AddArrowIfPossible(new Arrow(0, 0));
-
-            counter.RemoveLastArrow();
             Assert.AreEqual(4, toolBarList.Count);
-            counter.RemoveLastArrow();
-            Assert.AreEqual(3, toolBarList.Count);
+
+            Manager.Counter.AddArrowIfPossible(new Arrow());
+            Manager.Counter.AddArrowIfPossible(new Arrow());
+
+            Manager.Counter.RemoveLastArrow();
+            Assert.AreEqual(5, toolBarList.Count);
+
+            Manager.Counter.RemoveLastArrow();
+            Assert.AreEqual(4, toolBarList.Count);
         }
     }
 }

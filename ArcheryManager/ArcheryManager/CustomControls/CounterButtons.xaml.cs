@@ -1,37 +1,28 @@
-﻿using ArcheryManager.Utils;
-using Xamarin.Forms;
-using ArcheryManager.Settings;
+﻿using ArcheryManager.Entities;
+using ArcheryManager.Factories;
 using ArcheryManager.Interfaces;
+using ArcheryManager.Utils;
 using System;
+using System.Collections.ObjectModel;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+using XLabs.Forms.Mvvm;
 
 namespace ArcheryManager.CustomControls
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CounterButtons : ContentView
     {
-        private CounterButtonGenerator ButtonCounterGenerator;
         public EventHandler ButtonTap;
-
-        private static readonly IGeneralCounterSetting GeneralCounterSetting = DependencyService.Get<IGeneralCounterSetting>();
-
-        private IArrowSetting ArrowSetting
-        {
-            get
-            {
-                return GeneralCounterSetting.ArrowSetting;
-            }
-        }
 
         public CounterButtons()
         {
             InitializeComponent();
-            buttonGrid.ItemAdded += ButtonGrid_ItemAdded;
 
-            ButtonCounterGenerator = new CounterButtonGenerator(GeneralCounterSetting.ArrowSetting);
-            buttonGrid.ArrowSetting = ArrowSetting;
-            buttonGrid.Items = ButtonCounterGenerator.GeneralButton();
+            buttonGrid.ItemAdded += ButtonGrid_ItemAdded;
         }
 
-        private void ButtonGrid_ItemAdded(View ctn)
+        public void ButtonGrid_ItemAdded(View ctn)
         {
             var recognizer = new TapGestureRecognizer();
             recognizer.Tapped += Recognizer_Tapped;
@@ -41,6 +32,19 @@ namespace ArcheryManager.CustomControls
         private void Recognizer_Tapped(object sender, EventArgs e)
         {
             ButtonTap(sender, e);
+        }
+    }
+
+    public class CounterButtonsViewModel : ViewModel
+    {
+        public IArrowSetting ArrowSetting { get; private set; }
+        public ObservableCollection<Arrow> Buttons { get; private set; }
+
+        public CounterButtonsViewModel(CountedShoot shoot)
+        {
+            ArrowSetting = ArrowSettingFactory.Create(shoot.TargetStyle);
+
+            Buttons = CounterButtonGenerator.GeneralButton(ArrowSetting);
         }
     }
 }

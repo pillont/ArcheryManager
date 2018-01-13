@@ -1,28 +1,54 @@
-﻿using ArcheryManager.CustomControls;
+﻿using ArcheryManager.Controllers;
+using ArcheryManager.CustomControls;
+using ArcheryManager.Entities;
 using ArcheryManager.Factories;
+using ArcheryManager.Helpers;
+using ArcheryManager.Pages.PagesTemplates;
 using ArcheryManager.Resources;
-using ArcheryManager.Settings;
+using ArcheryManager.Utils;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XLabs.Forms.Mvvm;
+using static ArcheryManager.CustomControls.TargetImage;
 
 namespace ArcheryManager.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CounterSelectorPage : ContentPage
+    public partial class CounterSelectorPage : ContentPageWithGeneralEvent
     {
-        private CountSetting CountSetting => GeneralCounterSetting.CountSetting;
-
-        private static readonly GeneralCounterSetting GeneralCounterSetting = DependencyService.Get<IGeneralCounterSetting>() as GeneralCounterSetting;
+        public new CounterSelectorPageViewModel BindingContext
+        {
+            get
+            {
+                return base.BindingContext as CounterSelectorPageViewModel;
+            }
+        }
 
         public CounterSelectorPage()
         {
             InitializeComponent();
-            GeneralCounterSetting.CountSetting = new CountSetting();
+            PagePushed += OnPushed;
+        }
 
-            this.BindingContext = CountSetting;
+        public void SelectTarget(TargetImage image)
+        {
+            image.Color = Color.Aquamarine;
+            BindingContext.TargetStyle = image.StyleTarget;
 
+            var others = imageGrid.Children.Where(i => i != image);
+            foreach (TargetImage i in others)
+            {
+                i.Color = Color.Transparent;
+            }
+        }
+
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+            //TODO : use mvvm for manage imageGrid items
             foreach (var image in imageGrid.Children)
             {
                 var tap = new TapGestureRecognizer();
@@ -32,45 +58,72 @@ namespace ArcheryManager.Pages
 
             var first = imageGrid.Children.First() as TargetImage;
             SelectTarget(first);
+        }
 
+        protected void OnPushed(object sender, EventArgs arg)
+        {
             var validButton = new ToolbarItem()
             {
                 Text = AppResources.Valid,
-                Command = new Command(Valid_Clicked),
+                Command = new Command(() => BindingContext.Valid()),
             };
-            ToolbarItems.Add(validButton);
+
+            var argEvent = new ToolbarItemsArg()
+            {
+                PageType = typeof(CounterSelectorPage),
+                ToolbarItem = validButton
+            };
+            MessagingCenterHelper.AddToolbarItem(this, argEvent);
         }
 
         private void Image_Tapped(object sender, EventArgs e)
         {
             SelectTarget(sender as TargetImage);
         }
+    }
 
-        public void SelectTarget(TargetImage image)
+    public class CounterSelectorPageViewModel : ViewModel
+    {
+        private readonly CounterManager CounterManager;
+        private readonly TargetStarterController TargetStarterController;
+
+        public bool HaveTarget
         {
-            foreach (TargetImage i in imageGrid.Children)
-            {
-                i.IsSelected = false;
-            }
-
-            CountSetting.TargetStyle = image.StyleTarget;
-
-            image.IsSelected = true;
+            get { return Shoot.HaveTarget; }
+            set { Shoot.HaveTarget = value; }
         }
 
-        private async void Valid_Clicked()
-        {
-            try
-            {
-                GeneralCounterSetting.ArrowSetting = ArrowsettingFactory.Create(CountSetting.TargetStyle);
+        public bool IsWaiting { get; private set; }
 
-                var page = CounterPageFactory.CreateTabbedCounter(GeneralCounterSetting);
-                await App.NavigationPage.PushAsync(page);
-            }
-            catch (Exception e)
+        public LimitArrowNumberSelectorViewModel LimitArrowNumberSelectorViewModel
+        {
+            get
             {
-                throw;
+                return new LimitArrowNumberSelectorViewModel(Shoot);
             }
+        }
+
+        public CountedShoot Shoot => CounterManager.CurrentShoot;
+
+        internal TargetStyle TargetStyle
+        {
+            set
+            {
+                CounterManager.CurrentShoot.TargetStyle = value;
+            }
+        }
+
+        public CounterSelectorPageViewModel(CounterManager counterManager, TargetStarterController starter)
+        {
+            TargetStarterController = starter;
+            IsWaiting = false;
+            CounterManager = counterManager;
+            CounterManager.CurrentShoot = new CountedShoot();
+        }
+
+        public void Valid()
+        {
+            TargetStarterController.StartPage();
         }
     }
 }

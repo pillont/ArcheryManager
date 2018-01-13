@@ -1,16 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace ArcheryManager.Interactions.Behaviors
 {
     public class NumericPickerBehavior : CustomBehavior<Picker>
     {
-        private const double DefaultStep = 5;
         private const double DefaultfMin = 0;
         private const double DefaultMax = 10;
-
+        private const double DefaultStep = 5;
         private readonly double Max;
         private readonly double Min;
         private readonly double Step;
@@ -20,12 +18,6 @@ namespace ArcheryManager.Interactions.Behaviors
             Min = min;
             Max = max;
             Step = step;
-        }
-
-        protected override void OnAttachedTo(Picker bindable)
-        {
-            base.OnAttachedTo(bindable);
-            AssociatedObject.ItemsSource = GenerateItems(Min, Max, Step);
         }
 
         public static IList GenerateItems(double min, double max, double step)
@@ -38,6 +30,12 @@ namespace ArcheryManager.Interactions.Behaviors
             }
 
             return list;
+        }
+
+        protected override void OnAttachedTo(Picker bindable)
+        {
+            base.OnAttachedTo(bindable);
+            AssociatedObject.ItemsSource = GenerateItems(Min, Max, Step);
         }
     }
 }

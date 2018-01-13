@@ -1,63 +1,75 @@
-﻿using ArcheryManager.Interfaces;
+﻿using ArcheryManager.Entities;
+using ArcheryManager.Helpers;
+using ArcheryManager.Interfaces;
+using ArcheryManager.Settings.ArrowSettings;
+using System.ComponentModel;
+using System.Linq;
 using Xamarin.Forms;
 using XFShapeView;
-using System.ComponentModel;
-using ArcheryManager.Helpers;
-using ArcheryManager.Settings.ArrowSettings;
-using ArcheryManager.Models;
 
 namespace ArcheryManager.CustomControls
 {
     public class ArrowUniformGrid : UniformGrid<Arrow>
     {
-        private const int WidthOfSelectedBorder = 10;
+        public const int DefaultBorderWidth = 1;
 
-        public static readonly BindableProperty SettingProperty =
+        public static readonly BindableProperty ArrowSettingProperty =
                       BindableProperty.Create(nameof(ArrowSetting), typeof(IArrowSetting), typeof(ArrowUniformGrid), null);
+
+        public static readonly Color DefaultBorderColor = Color.Black;
+        private const int ShapeSize = 20;
+        private const int WidthOfSelectedBorder = 10;
 
         public IArrowSetting ArrowSetting
         {
-            get { return (IArrowSetting)GetValue(SettingProperty); }
-            set { SetValue(SettingProperty, value); }
+            get { return (IArrowSetting)GetValue(ArrowSettingProperty); }
+            set { SetValue(ArrowSettingProperty, value); }
         }
 
-        public const int DefaultBorderWidth = 1;
-        public static readonly Color DefaultBorderColor = Color.Black;
+        public ArrowUniformGrid()
+        {
+            PropertyChanged += ArrowUniformGrid_PropertyChanged;
+        }
 
         protected override View CreateItemContainer(Arrow arrow)
         {
-            var grid = new Grid();
-            int index = arrow.Index;
-            string score = ArrowSetting.ScoreByIndex(index);
-            var shape = new ShapeView()
+            if (ArrowSetting != null)
             {
-                Margin = new Thickness(2),
-                HeightRequest = 20,
-                WidthRequest = 20,
-                ShapeType = ShapeType.Circle,
-                BorderWidth = DefaultBorderWidth,
-                BorderColor = DefaultBorderColor,
-                Color = ArrowSetting.ColorOf(score),
-            };
+                var grid = new Grid();
+                int index = arrow.Index;
 
-            var label = new Label()
-            {
-                HorizontalOptions = LayoutOptions.CenterAndExpand,
-                VerticalOptions = LayoutOptions.CenterAndExpand,
-                VerticalTextAlignment = TextAlignment.Center,
-                FontAttributes = FontAttributes.Bold,
-                HorizontalTextAlignment = TextAlignment.Center,
-                Text = ArrowSetting.ScoreByIndex(index),
-            };
+                string score = ArrowSetting.ScoreByIndex(index);
+                var shape = new ShapeView()
+                {
+                    Margin = new Thickness(2),
+                    HeightRequest = ShapeSize,
+                    WidthRequest = ShapeSize,
+                    ShapeType = ShapeType.Circle,
+                    BorderWidth = DefaultBorderWidth,
+                    BorderColor = DefaultBorderColor,
+                    Color = ArrowSetting.ColorOf(score),
+                };
 
-            //NOTE : ArrowUniformGridController is helper to find element in the kind of container
-            //       If this structure change, think to change in the helper to
-            grid.Children.Add(shape);
-            grid.Children.Add(label);
+                var label = new Label()
+                {
+                    HorizontalOptions = LayoutOptions.CenterAndExpand,
+                    VerticalOptions = LayoutOptions.CenterAndExpand,
+                    VerticalTextAlignment = TextAlignment.Center,
+                    FontAttributes = FontAttributes.Bold,
+                    HorizontalTextAlignment = TextAlignment.Center,
+                    Text = ArrowSetting.ScoreByIndex(index),
+                };
 
-            arrow.PropertyChanged += Arrow_PropertyChanged;
+                //NOTE : ArrowUniformGridController is helper to find element in the kind of container
+                //       If this structure change, think to change in the helper to
+                grid.Children.Add(shape);
+                grid.Children.Add(label);
 
-            return grid;
+                arrow.PropertyChanged += Arrow_PropertyChanged;
+
+                return grid;
+            }
+            return null;
         }
 
         private void Arrow_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -74,6 +86,21 @@ namespace ArcheryManager.CustomControls
                 else
                 {
                     UnSelectArrow(container);
+                }
+            }
+        }
+
+        private void ArrowUniformGrid_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ArrowSetting))
+            {
+                //TODO : Tolist() is needed to create new reference of list
+                var values = Items.ToList();
+                Items.Clear();
+
+                foreach (var v in values)
+                {
+                    Items.Add(v);
                 }
             }
         }

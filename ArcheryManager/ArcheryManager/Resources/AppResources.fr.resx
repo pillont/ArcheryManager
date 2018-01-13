@@ -259,7 +259,7 @@
     <value>Tir compté</value>
   </data>
   <data name="Finish" xml:space="preserve">
-    <value>Terminer</value>
+    <value>Terminé</value>
   </data>
   <data name="Selection" xml:space="preserve">
     <value>Sélection</value>
@@ -308,5 +308,35 @@
   </data>
   <data name="FlightNumberTitle" xml:space="preserve">
     <value>Numéro de la volée</value>
+  </data>
+  <data name="Count" xml:space="preserve">
+    <value>Compté</value>
+  </data>
+  <data name="Saves" xml:space="preserve">
+    <value>Tirs sauvegardés</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Ouvrir</value>
+  </data>
+  <data name="InProgress" xml:space="preserve">
+    <value>En cours</value>
+  </data>
+  <data name="Finished" xml:space="preserve">
+    <value>Terminé</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Adresse mail</value>
+  </data>
+  <data name="Connect" xml:space="preserve">
+    <value>Connecter</value>
+  </data>
+  <data name="AverageStringFormat" xml:space="preserve">
+    <value>Moyenne : </value>
+  </data>
+  <data name="TotalStringFormat" xml:space="preserve">
+    <value>Total : {0:F0}</value>
+  </data>
+  <data name="TenCountFormat" xml:space="preserve">
+    <value>Nombre de {0} :</value>
   </data>
 </root>

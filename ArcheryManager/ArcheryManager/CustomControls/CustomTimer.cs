@@ -6,15 +6,16 @@ namespace ArcheryManager.CustomControls
 {
     public partial class CustomTimer : ContentView
     {
+        private const int CircleSize = 300;
+        private const float DefaultBorderWidth = 2f;
+        private const int DefaultFontSize = 24;
+        private const float DefaultProgressBorderWidth = 10f;
         private const bool DefaultShowWaitingTime = true;
         /*
          * Sizes
          */
-        private const float DefaultBorderWidth = 2f;
-        private const float DefaultProgressBorderWidth = 10f;
-        private const int DefaultFontSize = 24;
         private const int maxProgress = 100;
-        private const int CircleSize = 300; //TODO
+        //TODO
 
         /// <summary>
         /// max of progress in the circle
@@ -29,14 +30,11 @@ namespace ArcheryManager.CustomControls
 
         #region visual properties
 
-        public static readonly BindableProperty FontAttributesProperty =
-                      BindableProperty.Create(nameof(FontAttributes), typeof(FontAttributes), typeof(CustomTimer), FontAttributes.Bold);
+        public static readonly BindableProperty BorderColorProperty =
+                     BindableProperty.Create(nameof(BorderColor), typeof(Color), typeof(CustomTimer), TimerBehavior.DefaultBorderColor);
 
-        public FontAttributes FontAttributes
-        {
-            get { return (FontAttributes)GetValue(FontAttributesProperty); }
-            set { SetValue(FontAttributesProperty, value); }
-        }
+        public static readonly BindableProperty FontAttributesProperty =
+                              BindableProperty.Create(nameof(FontAttributes), typeof(FontAttributes), typeof(CustomTimer), FontAttributes.Bold);
 
         /// <summary>
         /// font size of the label
@@ -44,23 +42,11 @@ namespace ArcheryManager.CustomControls
         public static readonly BindableProperty FontSizeProperty =
                       BindableProperty.Create(nameof(FontSize), typeof(int), typeof(CustomTimer), DefaultFontSize);
 
-        public int FontSize
-        {
-            get { return (int)GetValue(FontSizeProperty); }
-            set { SetValue(FontSizeProperty, value); }
-        }
-
         /// <summary>
         /// color of the progress border
         /// </summary>
         public static readonly BindableProperty ProgressBorderColorProperty =
                       BindableProperty.Create(nameof(ProgressBorderColor), typeof(Color), typeof(CustomTimer), TimerBehavior.DefaultProgressBorderColor);
-
-        public Color ProgressBorderColor
-        {
-            get { return (Color)GetValue(ProgressBorderColorProperty); }
-            set { SetValue(ProgressBorderColorProperty, value); }
-        }
 
         /// <summary>
         /// width of the progress border
@@ -68,23 +54,8 @@ namespace ArcheryManager.CustomControls
         public static readonly BindableProperty ProgressBorderWidthProperty =
                       BindableProperty.Create(nameof(ProgressBorderWidth), typeof(float), typeof(CustomTimer), DefaultProgressBorderWidth);
 
-        public float ProgressBorderWidth
-        {
-            get { return (float)GetValue(ProgressBorderWidthProperty); }
-            set { SetValue(ProgressBorderWidthProperty, value); }
-        }
-
         private static readonly BindableProperty BorderWidthProperty =
                       BindableProperty.Create(nameof(BorderWidth), typeof(float), typeof(CustomTimer), DefaultBorderWidth);
-
-        public float BorderWidth
-        {
-            get { return (float)GetValue(BorderWidthProperty); }
-            set { SetValue(BorderWidthProperty, value); }
-        }
-
-        public static readonly BindableProperty BorderColorProperty =
-                     BindableProperty.Create(nameof(BorderColor), typeof(Color), typeof(CustomTimer), TimerBehavior.DefaultBorderColor);
 
         public Color BorderColor
         {
@@ -92,42 +63,42 @@ namespace ArcheryManager.CustomControls
             set { SetValue(BorderColorProperty, value); }
         }
 
+        public float BorderWidth
+        {
+            get { return (float)GetValue(BorderWidthProperty); }
+            set { SetValue(BorderWidthProperty, value); }
+        }
+
+        public FontAttributes FontAttributes
+        {
+            get { return (FontAttributes)GetValue(FontAttributesProperty); }
+            set { SetValue(FontAttributesProperty, value); }
+        }
+
+        public int FontSize
+        {
+            get { return (int)GetValue(FontSizeProperty); }
+            set { SetValue(FontSizeProperty, value); }
+        }
+
+        public Color ProgressBorderColor
+        {
+            get { return (Color)GetValue(ProgressBorderColorProperty); }
+            set { SetValue(ProgressBorderColorProperty, value); }
+        }
+
+        public float ProgressBorderWidth
+        {
+            get { return (float)GetValue(ProgressBorderWidthProperty); }
+            set { SetValue(ProgressBorderWidthProperty, value); }
+        }
+
         #endregion visual properties
 
         #region timer setting
 
-        internal static readonly BindableProperty ShowWaitingTimeProperty =
-                      BindableProperty.Create(nameof(ShowWaitingTime), typeof(bool), typeof(CustomTimer), DefaultShowWaitingTime);
-
-        internal bool ShowWaitingTime
-        {
-            get { return (bool)GetValue(ShowWaitingTimeProperty); }
-            set { SetValue(ShowWaitingTimeProperty, value); }
-        }
-
-        /// <summary>
-        /// limit time of the timer
-        /// </summary>
-        internal static readonly BindableProperty LimitTimeProperty =
-                      BindableProperty.Create(nameof(LimitTime), typeof(int), typeof(CustomTimer), TimerBehavior.DefaultLimitTime);
-
-        internal int LimitTime
-        {
-            get { return (int)GetValue(LimitTimeProperty); }
-            set { SetValue(LimitTimeProperty, value); }
-        }
-
-        /// <summary>
-        /// color during the waiting time
-        /// </summary>
-        internal static readonly BindableProperty WaitingColorProperty =
-                      BindableProperty.Create(nameof(WaitingColor), typeof(Color), typeof(CustomTimer), TimerBehavior.DefaultWaitingColor);
-
-        internal Color WaitingColor
-        {
-            get { return (Color)GetValue(WaitingColorProperty); }
-            set { SetValue(WaitingColorProperty, value); }
-        }
+        public static readonly BindableProperty TimeProperty =
+                      BindableProperty.Create(nameof(Time), typeof(int), typeof(CustomTimer), TimerBehavior.DefaultTime);
 
         /// <summary>
         /// time of the wainting period
@@ -135,14 +106,20 @@ namespace ArcheryManager.CustomControls
         public static readonly BindableProperty WaitingTimeProperty =
                       BindableProperty.Create(nameof(WaitingTime), typeof(int), typeof(CustomTimer), TimerBehavior.DefaultWaitingTime);
 
-        public int WaitingTime
-        {
-            get { return (int)GetValue(WaitingTimeProperty); }
-            set { SetValue(WaitingTimeProperty, value); }
-        }
+        /// <summary>
+        /// limit time of the timer
+        /// </summary>
+        internal static readonly BindableProperty LimitTimeProperty =
+                      BindableProperty.Create(nameof(LimitTime), typeof(int), typeof(CustomTimer), TimerBehavior.DefaultLimitTime);
 
-        public static readonly BindableProperty TimeProperty =
-                      BindableProperty.Create(nameof(Time), typeof(int), typeof(CustomTimer), TimerBehavior.DefaultTime);
+        internal static readonly BindableProperty ShowWaitingTimeProperty =
+                                              BindableProperty.Create(nameof(ShowWaitingTime), typeof(bool), typeof(CustomTimer), DefaultShowWaitingTime);
+
+        /// <summary>
+        /// color during the waiting time
+        /// </summary>
+        internal static readonly BindableProperty WaitingColorProperty =
+                      BindableProperty.Create(nameof(WaitingColor), typeof(Color), typeof(CustomTimer), TimerBehavior.DefaultWaitingColor);
 
         /// <summary>
         /// general time of the timer
@@ -161,11 +138,49 @@ namespace ArcheryManager.CustomControls
             }
         }
 
+        public int WaitingTime
+        {
+            get { return (int)GetValue(WaitingTimeProperty); }
+            set { SetValue(WaitingTimeProperty, value); }
+        }
+
+        internal int LimitTime
+        {
+            get { return (int)GetValue(LimitTimeProperty); }
+            set { SetValue(LimitTimeProperty, value); }
+        }
+
+        internal bool ShowWaitingTime
+        {
+            get { return (bool)GetValue(ShowWaitingTimeProperty); }
+            set { SetValue(ShowWaitingTimeProperty, value); }
+        }
+
+        internal Color WaitingColor
+        {
+            get { return (Color)GetValue(WaitingColorProperty); }
+            set { SetValue(WaitingColorProperty, value); }
+        }
+
         #endregion timer setting
 
         #region values properties
 
         internal static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Color), typeof(CustomTimer), TimerBehavior.DefaultColor);
+
+        internal static readonly BindableProperty IsPausedProperty =
+                              BindableProperty.Create(nameof(IsPaused), typeof(bool), typeof(CustomTimer), false);
+
+        internal static readonly BindableProperty IsStoppedProperty =
+                              BindableProperty.Create(nameof(IsStopped), typeof(bool), typeof(CustomTimer), true);
+
+        internal static readonly BindableProperty IsWaitingTimeProperty =
+                              BindableProperty.Create(nameof(IsWaitingTime), typeof(bool), typeof(CustomTimer), false);
+
+        internal static readonly BindableProperty ProgressProperty =
+                              BindableProperty.Create(nameof(Progress), typeof(int), typeof(CustomTimer), 0);
+
+        internal static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(CustomTimer), TimerBehavior.DefaultTime.ToString());
 
         /// <summary>
         /// color of the timer
@@ -182,19 +197,23 @@ namespace ArcheryManager.CustomControls
             }
         }
 
-        internal static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(CustomTimer), TimerBehavior.DefaultTime.ToString());
-
-        /// <summary>
-        /// text of the timer
-        /// </summary>
-        public string Text
+        public bool IsPaused
         {
-            get { return (string)GetValue(TextProperty); }
-            internal set { SetValue(TextProperty, value); }
+            get { return (bool)GetValue(IsPausedProperty); }
+            internal set { SetValue(IsPausedProperty, value); }
         }
 
-        internal static readonly BindableProperty ProgressProperty =
-                      BindableProperty.Create(nameof(Progress), typeof(int), typeof(CustomTimer), 0);
+        public bool IsStopped
+        {
+            get { return (bool)GetValue(IsStoppedProperty); }
+            internal set { SetValue(IsStoppedProperty, value); }
+        }
+
+        public bool IsWaitingTime
+        {
+            get { return (bool)GetValue(IsWaitingTimeProperty); }
+            internal set { SetValue(IsWaitingTimeProperty, value); }
+        }
 
         /// <summary>
         /// Progress of the timer
@@ -205,31 +224,13 @@ namespace ArcheryManager.CustomControls
             internal set { SetValue(ProgressProperty, value); }
         }
 
-        internal static readonly BindableProperty IsStoppedProperty =
-                      BindableProperty.Create(nameof(IsStopped), typeof(bool), typeof(CustomTimer), true);
-
-        public bool IsStopped
+        /// <summary>
+        /// text of the timer
+        /// </summary>
+        public string Text
         {
-            get { return (bool)GetValue(IsStoppedProperty); }
-            internal set { SetValue(IsStoppedProperty, value); }
-        }
-
-        internal static readonly BindableProperty IsPausedProperty =
-                      BindableProperty.Create(nameof(IsPaused), typeof(bool), typeof(CustomTimer), false);
-
-        public bool IsPaused
-        {
-            get { return (bool)GetValue(IsPausedProperty); }
-            internal set { SetValue(IsPausedProperty, value); }
-        }
-
-        internal static readonly BindableProperty IsWaitingTimeProperty =
-                      BindableProperty.Create(nameof(IsWaitingTime), typeof(bool), typeof(CustomTimer), false);
-
-        public bool IsWaitingTime
-        {
-            get { return (bool)GetValue(IsWaitingTimeProperty); }
-            internal set { SetValue(IsWaitingTimeProperty, value); }
+            get { return (string)GetValue(TextProperty); }
+            internal set { SetValue(TextProperty, value); }
         }
 
         #endregion values properties

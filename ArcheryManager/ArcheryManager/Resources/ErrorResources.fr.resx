@@ -120,6 +120,15 @@
   <data name="CantAddMoreThanMaxArrow" xml:space="preserve">
     <value>Impossible d'ajouter plus de flèche que le maximum</value>
   </data>
+  <data name="CantFinishEmptyCount" xml:space="preserve">
+    <value>Impossible de terminer un tir vide</value>
+  </data>
+  <data name="EmailMissing" xml:space="preserve">
+    <value>Email manquant</value>
+  </data>
+  <data name="EmailNotFound" xml:space="preserve">
+    <value>Email inexistant</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Erreur</value>
   </data>
@@ -131,5 +140,11 @@
   </data>
   <data name="NoAddingDuringSelection" xml:space="preserve">
     <value>Impossible d'ajouter une flèche pendant une sélection</value>
+  </data>
+  <data name="ShootNameEmpty" xml:space="preserve">
+    <value>Nom du tir vide</value>
+  </data>
+  <data name="ShootNameExist" xml:space="preserve">
+    <value>Nom du tir déjà existant</value>
   </data>
 </root>

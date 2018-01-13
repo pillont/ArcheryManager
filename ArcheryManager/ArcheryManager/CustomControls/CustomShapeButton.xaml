@@ -4,21 +4,21 @@
              xmlns:shape="clr-namespace:XFShapeView;assembly=XFShapeView"
              x:Class="ArcheryManager.CustomControls.CustomShapeButton">
     <ContentView.Content>
-        <Grid>
+        <Grid x:Name="generalGrid">
             <shape:ShapeView ShapeType="{Binding ShapeType}"
                             BorderColor="{Binding BorderColor}"
-                            BorderWidth="{Binding BorderWidth}" 
+                            BorderWidth="{Binding BorderWidth}"
                             HeightRequest="{Binding HeightRequest}"
                             WidthRequest="{Binding WidthRequest}"
                             Color="{Binding Color}"
                             VerticalOptions="Center"
                             HorizontalOptions="Center" />
             <Label Text="{Binding Text}"
-                           FontAttributes="{Binding FontAttributes}"
-                           VerticalOptions="Center"
-                           HorizontalOptions="Center"
-                           VerticalTextAlignment="Center"
-                           HorizontalTextAlignment="Center" />
+                    FontAttributes="{Binding FontAttributes}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center" />
         </Grid>
     </ContentView.Content>
 </ContentView>

@@ -1,8 +1,9 @@
 ﻿using ArcheryManager.CustomControls;
+using ArcheryManager.Entities;
 using ArcheryManager.Factories;
+using ArcheryManager.Helpers;
 using ArcheryManager.Interactions.Behaviors;
-using ArcheryManager.Models;
-using ArcheryManager.Settings;
+using ArcheryManager.UnitTest.TestSettings;
 using ArcheryManager.Utils;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -14,45 +15,54 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
     [TestFixture]
     public class SelectableArrowInListBehaviorTest
     {
-        private GeneralCounterSetting generalCounterSetting;
-        private List<ToolbarItem> list;
-        private ArrowUniformGrid scorelist;
-        private Arrow a4;
-        private Arrow a3;
-        private Arrow a2;
         private Arrow a1;
+        private Arrow a2;
+        private Arrow a3;
+        private Arrow a4;
         private SelectableArrowInListBehavior behavior;
+        private List<ToolbarItem> list;
+        private CounterManager Manager;
+        private ArrowUniformGrid scorelist;
 
         [SetUp]
         public void Init()
         {
-            Xamarin.Forms.Mocks.MockForms.Init();
-            list = new List<ToolbarItem>();
-            generalCounterSetting = new GeneralCounterSetting();
-            scorelist = ScoreListFactory.Create(generalCounterSetting, list);
+            Manager = new CounterManager() { CurrentShoot = new CountedShoot() };
+            RegisterHelperTest.InitTestRegister(Manager);
 
-            a1 = new Arrow(1, 0);
-            a2 = new Arrow(2, 0);
-            a3 = new Arrow(3, 0);
-            a4 = new Arrow(4, 0);
-            scorelist.Items.Add(a1);
-            scorelist.Items.Add(a2);
-            scorelist.Items.Add(a3);
-            scorelist.Items.Add(a4);
+            list = new List<ToolbarItem>();
+            MessagingCenterHelper.Instance.AddedToolbarItem += (s, e) => list.Add(e.ToolbarItem);
+            MessagingCenterHelper.Instance.RemovedToolbarItem += (s, e) => list.Remove(e.ToolbarItem);
+            MessagingCenterHelper.Instance.ClearedToolbarItem += (s, e) => list.Clear();
+
+            Manager.Counter.NewFlight();
+            scorelist = ScoreListFactory.CreateScoreList();
+
+            a1 = new Arrow() { Index = 1 };
+            a2 = new Arrow() { Index = 2 };
+            a3 = new Arrow() { Index = 3 };
+            a4 = new Arrow() { Index = 4 };
+            Manager.Counter.AddArrowIfPossible(a1);
+            Manager.Counter.AddArrowIfPossible(a2);
+            Manager.Counter.AddArrowIfPossible(a3);
+            Manager.Counter.AddArrowIfPossible(a4);
 
             behavior = scorelist.Behaviors.OfType<SelectableArrowInListBehavior>().First();
         }
 
         [Test]
-        public void SelectTest()
+        public void SelectAndRemoveTest()
         {
+            //select
             behavior.ArrowRecognizer_Tapped(scorelist.Children[0], null);
-            behavior.ArrowRecognizer_Tapped(scorelist.Children[1], null);
             behavior.ArrowRecognizer_Tapped(scorelist.Children[2], null);
 
-            Assert.IsTrue(a1.IsSelected);
-            Assert.IsTrue(a2.IsSelected);
-            Assert.IsTrue(a3.IsSelected);
+            // remove
+            list[1].Command.Execute(null);
+
+            Assert.IsFalse(scorelist.Items.Contains(a1));
+            Assert.IsTrue(scorelist.Items.Contains(a2));
+            Assert.IsFalse(scorelist.Items.Contains(a3));
         }
 
         [Test]
@@ -89,18 +99,15 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
         }
 
         [Test]
-        public void SelectAndRemoveTest()
+        public void SelectTest()
         {
-            //select
             behavior.ArrowRecognizer_Tapped(scorelist.Children[0], null);
+            behavior.ArrowRecognizer_Tapped(scorelist.Children[1], null);
             behavior.ArrowRecognizer_Tapped(scorelist.Children[2], null);
 
-            // remove
-            list[1].Command.Execute(null);
-
-            Assert.IsFalse(scorelist.Items.Contains(a1));
-            Assert.IsTrue(scorelist.Items.Contains(a2));
-            Assert.IsFalse(scorelist.Items.Contains(a3));
+            Assert.IsTrue(a1.IsSelected);
+            Assert.IsTrue(a2.IsSelected);
+            Assert.IsTrue(a3.IsSelected);
         }
     }
 }

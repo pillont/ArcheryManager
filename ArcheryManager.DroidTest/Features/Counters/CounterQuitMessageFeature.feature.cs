@@ -114,25 +114,25 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TestLeMessagePourQuitterUneZapetteBoutonNavigation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test le message pour quitter une zapette bouton navigation", ((string[])(null)));
-#line 28
-this.ScenarioSetup(scenarioInfo);
 #line 29
- testRunner.When("J\'ouvre une page tabbed de zappette", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+this.ScenarioSetup(scenarioInfo);
 #line 30
+ testRunner.When("J\'ouvre une page tabbed de zappette", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 31
  testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 32
+#line 33
  testRunner.Then("il y a le texte SureQuitCount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
-#line 34
+#line 35
  testRunner.When("je click sur le texte No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
-#line 36
+#line 37
  testRunner.Then("il y a des boutons de EnglishTarget", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
-#line 38
- testRunner.When("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 39
- testRunner.And("je click sur le texte Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.When("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 40
- testRunner.And("je scrool en haut", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je click sur le texte Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 41
+ testRunner.And("je scrool en haut", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 42
  testRunner.Then("il y a le titre de backdoor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
@@ -143,33 +143,33 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TestLaRestitutionDesOptionDUnTimerApresLeMessageDErreur()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test la restitution des option d\'un timer après le message d\'erreur", ((string[])(null)));
-#line 43
-this.ScenarioSetup(scenarioInfo);
 #line 44
- testRunner.When("J\'ouvre une page tabbed de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+this.ScenarioSetup(scenarioInfo);
 #line 45
- testRunner.And("je click sur le tab timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.When("J\'ouvre une page tabbed de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 46
- testRunner.And("Je click sur le bouton de réglage de temps", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 47
- testRunner.And("je selectionne 200 dans le picker", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 48
- testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 49
- testRunner.And("je lance le timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 50
- testRunner.And("j\'attend 5 secondes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 51
- testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 52
- testRunner.And("je click sur le texte No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 53
  testRunner.And("je click sur le tab timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 55
- testRunner.Then("le timer est à 200 sec", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 47
+ testRunner.And("Je click sur le bouton de réglage de temps", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 48
+ testRunner.And("je selectionne 200 dans le picker", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 49
+ testRunner.And("je passe à l\'option de vague suivante", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 50
+ testRunner.And("je lance le timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 51
+ testRunner.And("j\'attend 5 secondes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 52
+ testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 53
+ testRunner.And("je click sur le texte No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 54
+ testRunner.And("je click sur le tab timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 56
- testRunner.And("l\'option de vague est en ABCD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.Then("le timer est à 200 sec", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 57
+ testRunner.And("l\'option de vague est en ABCD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 58
  testRunner.And("le texte de vague contient CD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line hidden
             this.ScenarioCleanup();
@@ -180,31 +180,31 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TestLaRestitutionDeScoreApresLeMessageDErreurDansUneZapette()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test la restitution de score après le message d\'erreur dans une zapette", ((string[])(null)));
-#line 59
-this.ScenarioSetup(scenarioInfo);
 #line 60
- testRunner.When("J\'ouvre une page tabbed de zappette", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+this.ScenarioSetup(scenarioInfo);
 #line 61
- testRunner.And("je click sur le boutton 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.When("J\'ouvre une page tabbed de zappette", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 62
- testRunner.And("je click sur le boutton 8", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je click sur le boutton 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 63
- testRunner.And("je click sur le boutton 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je click sur le boutton 8", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 64
+ testRunner.And("je click sur le boutton 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 65
  testRunner.And("je click sur le boutton 7", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 66
- testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 67
+ testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 68
  testRunner.And("je click sur le texte No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 69
- testRunner.Then("le nombre de flèches dans la liste est de 4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 70
- testRunner.And("la fleche 0 de la liste est un 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.Then("le nombre de flèches dans la liste est de 4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 71
- testRunner.And("la fleche 1 de la liste est un 8", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("la fleche 0 de la liste est un 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 72
- testRunner.And("la fleche 2 de la liste est un 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("la fleche 1 de la liste est un 8", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 73
+ testRunner.And("la fleche 2 de la liste est un 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 74
  testRunner.And("la fleche 3 de la liste est un 7", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line hidden
             this.ScenarioCleanup();
@@ -215,34 +215,34 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TestLaRestitutionDeScoreApresLeMessageDErreurDansUneCible()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test la restitution de score après le message d\'erreur dans une cible", ((string[])(null)));
-#line 77
-this.ScenarioSetup(scenarioInfo);
 #line 78
- testRunner.When("J\'ouvre une page tabbed de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+this.ScenarioSetup(scenarioInfo);
 #line 79
- testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.When("J\'ouvre une page tabbed de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 80
- testRunner.And("je tire une flèche en 50, 70", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 81
- testRunner.And("je tire une flèche en 30, 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 83
- testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 60, 80", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 82
+ testRunner.And("je tire une flèche en 45, 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 84
+ testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 85
  testRunner.And("je click sur le texte No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 86
- testRunner.Then("le nombre de flèches dans la liste est de 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 87
- testRunner.And("la fleche 0 de la liste est un X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.Then("le nombre de flèches dans la liste est de 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 88
- testRunner.And("la fleche 1 de la liste est un 8", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("la fleche 0 de la liste est un X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 89
+ testRunner.And("la fleche 1 de la liste est un 9", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 90
  testRunner.And("la fleche 2 de la liste est un 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 91
- testRunner.And("la fleche 0 de la cible est en 376, 684", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 92
- testRunner.And("la fleche 1 de la cible est en 437, 769", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("la fleche 0 de la cible est en 528, 1027", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 93
- testRunner.And("la fleche 2 de la cible est en 415, 709", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("la fleche 1 de la cible est en 589, 1109", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 94
+ testRunner.And("la fleche 2 de la cible est en 574, 1047", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line hidden
             this.ScenarioCleanup();
         }

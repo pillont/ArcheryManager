@@ -14,7 +14,7 @@ Scénario: test la possibilité de passer à une nouvelle volée après avoir ti
 	# flèches tiré, possibilité de changer de volée
 	Alors le bouton nouvelle volée est activé
 	
-
+	#TODO
 Scénario: test l'impossibilité de passer à une nouvelle volée après avoir supprimé une flèche
 	Quand J'ouvre une page de cible fita
 	Et je tire une flèche en 200, 100
@@ -28,7 +28,7 @@ Scénario: test la desactivation du bouton nouvelle volée avec un nombre défin
 	Et j'ouvre le menu de paramètre
 	Et je click sur le check nombre de flèches défini
 	Et je remplit le nombre de flèche par 5
-	Et je reviens à la page d'avant
+	Et je click sur le texte Finish
 	Et je tire une flèche en 200, 100
 	Et je tire une flèche en 100, 300
 	Et je tire une flèche en 0, 0
@@ -53,12 +53,13 @@ Scénario: test l'activation du bouton nouvelle volée avec un nombre défini de
 	Alors le bouton nouvelle volée est activé
 
 
+ #TODO
 Scénario: test désactiviation du bouton nouvelle volée lorsque le nombre de flèche à changé
 	Quand J'ouvre une page de cible fita
 	Et j'ouvre le menu de paramètre
 	Et je click sur le check nombre de flèches défini
 	Et je remplit le nombre de flèche par 5
-	Et je reviens à la page d'avant
+	Et je click sur le texte Finish
 	Et je tire une flèche en 200, 100
 	Et je tire une flèche en 100, 300
 	Et je tire une flèche en 0, 0
@@ -67,7 +68,7 @@ Scénario: test désactiviation du bouton nouvelle volée lorsque le nombre de f
 	
 	Et j'ouvre le menu de paramètre
 	Et je remplit le nombre de flèche par 6
-	Et je reviens à la page d'avant
+	Et je click sur le texte Finish
 	
 	#le nombre de flèche défini est atteint
 	Alors le bouton nouvelle volée est désactivé

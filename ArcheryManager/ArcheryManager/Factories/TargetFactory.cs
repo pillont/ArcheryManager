@@ -1,14 +1,16 @@
-﻿using System;
-using ArcheryManager.CustomControls;
+﻿using ArcheryManager.CustomControls;
 using ArcheryManager.Interactions.Behaviors;
-using ArcheryManager.Settings;
+using ArcheryManager.Utils;
 using Xamarin.Forms;
-using System.ComponentModel;
+using XLabs.Forms.Mvvm;
+using XLabs.Ioc;
 
 namespace ArcheryManager.Factories
 {
     public class TargetFactory
     {
+        private const int MinimumTargetSize = 1200;
+
         /// <summary>
         /// create Target
         /// </summary>
@@ -16,42 +18,21 @@ namespace ArcheryManager.Factories
         /// <param name="targetSetting"></param>
         /// <param name="arrowSetting"></param>
         /// <returns></returns>
-        public static Target Create(IGeneralCounterSetting generalCounterSetting, ScoreCounter counter, View gestureMoveTarget)
+        public static Target Create(View gestureMoveTarget)
         {
-            var countSetting = generalCounterSetting.CountSetting;
-            var result = generalCounterSetting.ScoreResult;
-            var arrowSetting = generalCounterSetting.ArrowSetting;
+            var manager = Resolver.Resolve<CounterManager>();
+            var messageManager = Resolver.Resolve<MessageManager>();
+            var customTarget = ViewFactory.CreatePage<TargetViewModel, Target>() as Target;
+            customTarget.MinimumHeightRequest = MinimumTargetSize;
+            customTarget.MinimumWidthRequest = MinimumTargetSize;
 
-            var customTarget = new Target() { MinimumHeightRequest = 1200, MinimumWidthRequest = 1200 };
+            var averageBehavior = new AverageBehavior(manager, customTarget);
+            customTarget.AverageCanvas.Behaviors.Add(averageBehavior);
 
-            customTarget.ArrowGrid.Items = result.CurrentArrows;
-            customTarget.PreviousArrowGrid.Items = result.PreviousArrows;
-
-            var lastArrowsGrid = customTarget.PreviousArrowGrid;
-            lastArrowsGrid.BindingContext = countSetting;
-            lastArrowsGrid.SetBinding(View.IsVisibleProperty, nameof(CountSetting.ShowAllArrows));
-
-            var average = customTarget.AverageCanvas;
-            average.BindingContext = countSetting;
-            average.SetBinding(View.IsVisibleProperty, nameof(CountSetting.AverageIsVisible));
-            var averagebehavior = new AverageBehavior(customTarget, counter, generalCounterSetting);
-            average.Behaviors.Add(averagebehavior);
-
-            var behavior = new MovableTargetBehavior(generalCounterSetting, counter, gestureMoveTarget);
+            var behavior = new MovableTargetBehavior(gestureMoveTarget, manager, messageManager);
             customTarget.Behaviors.Add(behavior);
 
-            PropertyChangedEventHandler arg = null;
-            arg = (t, e) => updateAverageWhenTargetSizeChange(e, averagebehavior);
-            customTarget.PropertyChanged += arg;
             return customTarget;
-        }
-
-        private static void updateAverageWhenTargetSizeChange(PropertyChangedEventArgs e, AverageBehavior behavior)
-        {
-            if (e.PropertyName == nameof(Target.TargetSize))
-            {
-                behavior.UpdateAverage();
-            }
         }
     }
 }

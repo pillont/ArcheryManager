@@ -166,11 +166,115 @@ this.ScenarioSetup(scenarioInfo);
 #line 47
  testRunner.And("je sélectionne la flèche 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 48
-  testRunner.And("je tire une flèche en 50, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 50, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 51
  testRunner.Then("le nombre de flèches dans la liste est de 4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 52
  testRunner.And("le message d\'erreur d\'ajout pendant sélection n\'est pas affiché", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test de retour des boutons apres une sélection sur une cible")]
+        public virtual void TestDeRetourDesBoutonsApresUneSelectionSurUneCible()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test de retour des boutons apres une sélection sur une cible", ((string[])(null)));
+#line 56
+this.ScenarioSetup(scenarioInfo);
+#line 57
+ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 58
+ testRunner.And("je tire une flèche en 0, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 59
+ testRunner.And("je sélectionne la flèche 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 60
+ testRunner.And("je sélectionne la flèche 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 62
+ testRunner.Then("il y a 3 boutons dans la barre de menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test de retour des boutons apres une sélection sur une zapette")]
+        public virtual void TestDeRetourDesBoutonsApresUneSelectionSurUneZapette()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test de retour des boutons apres une sélection sur une zapette", ((string[])(null)));
+#line 65
+this.ScenarioSetup(scenarioInfo);
+#line 66
+ testRunner.When("J\'ouvre une page zappette", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 67
+ testRunner.And("je click sur le boutton 4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 68
+ testRunner.And("je sélectionne la flèche 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 69
+ testRunner.And("je sélectionne la flèche 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 71
+ testRunner.Then("il y a 3 boutons dans la barre de menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test de changement des boutons lors d\'un changement de page apres une sélection s" +
+            "ur une zapette")]
+        public virtual void TestDeChangementDesBoutonsLorsDUnChangementDePageApresUneSelectionSurUneZapette()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test de changement des boutons lors d\'un changement de page apres une sélection s" +
+                    "ur une zapette", ((string[])(null)));
+#line 74
+this.ScenarioSetup(scenarioInfo);
+#line 75
+ testRunner.When("J\'ouvre une page zappette", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 76
+ testRunner.And("je click sur le boutton 4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 77
+ testRunner.And("je sélectionne la flèche 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 78
+    testRunner.And("je click sur l\'onglet de remarque", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 80
+ testRunner.Then("il y a 0 boutons dans la barre de menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 82
+ testRunner.When("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 83
+ testRunner.And("je click sur le texte Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 84
+ testRunner.And("J\'ouvre une page tabbed de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 85
+ testRunner.And("je tire une flèche en 10, 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 86
+ testRunner.And("je sélectionne la flèche 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 87
+    testRunner.And("je click sur l\'onglet de remarque", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 89
+ testRunner.Then("il y a 0 boutons dans la barre de menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("test de boutons de sélection apres un retour")]
+        public virtual void TestDeBoutonsDeSelectionApresUnRetour()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test de boutons de sélection apres un retour", ((string[])(null)));
+#line 91
+this.ScenarioSetup(scenarioInfo);
+#line 92
+ testRunner.When("J\'ouvre une page tabbed de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 93
+ testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 94
+ testRunner.And("je sélectionne la flèche 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 95
+ testRunner.And("je click sur le tab timer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 96
+ testRunner.Then("il y a 3 boutons dans la barre de menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 98
+ testRunner.When("je click sur l\'onglet de compté", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 99
+ testRunner.Then("il y a 2 boutons dans la barre de navigation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
         }

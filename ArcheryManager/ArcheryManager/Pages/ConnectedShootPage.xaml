@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<page:ContentPageWithGeneralEvent xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:resources="clr-namespace:ArcheryManager.Resources"
+             xmlns:page="clr-namespace:ArcheryManager.Pages.PagesTemplates"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ArcheryManager.ViewModels"
+             xmlns:bhv="clr-namespace:ArcheryManager.Interactions.Behaviors"
+             x:Class="ArcheryManager.Pages.ConnectedShootPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{resources:Translate Connect}" Command="{Binding ConnectCommand}" x:Name="InternalConnectButton" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+
+            <Label Text="A :"
+                   Grid.Row="0"
+                   Grid.Column="0" />
+            <Picker ItemsSource="{Binding Registereds}"
+                    SelectedItem="{Binding SelectedA}"
+                    Grid.Row="0"
+                    Grid.Column="1" />
+
+            <Label Text="B :"
+                   Grid.Row="1"
+                   Grid.Column="0" />
+            <Picker ItemsSource="{Binding Registereds}"
+                    SelectedItem="{Binding SelectedB}"
+                    Grid.Row="1"
+                    Grid.Column="1" />
+
+            <Label Text="C :"
+                   Grid.Row="2"
+                   Grid.Column="0" />
+            <Picker ItemsSource="{Binding Registereds}"
+                    SelectedItem="{Binding SelectedC}"
+                    Grid.Row="2"
+                    Grid.Column="1" />
+
+            <Label Text="D :"
+                   Grid.Row="3"
+                   Grid.Column="0" />
+            <Picker ItemsSource="{Binding Registereds}"
+                    SelectedItem="{Binding SelectedD}"
+                    Grid.Row="3"
+                    Grid.Column="1" />
+        </Grid>
+    </ContentPage.Content>
+</page:ContentPageWithGeneralEvent>

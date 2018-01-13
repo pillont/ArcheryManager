@@ -20,7 +20,7 @@ namespace ArcheryManager.Resources {
     // à l'aide d'un outil, tel que ResGen ou Visual Studio.
     // Pour ajouter ou supprimer un membre, modifiez votre fichier .ResX, puis réexécutez ResGen
     // avec l'option /str ou régénérez votre projet VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class ErrorResources {
@@ -71,6 +71,33 @@ namespace ArcheryManager.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Can&apos;t finish empty count.
+        /// </summary>
+        internal static string CantFinishEmptyCount {
+            get {
+                return ResourceManager.GetString("CantFinishEmptyCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Email missing.
+        /// </summary>
+        internal static string EmailMissing {
+            get {
+                return ResourceManager.GetString("EmailMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Email not found.
+        /// </summary>
+        internal static string EmailNotFound {
+            get {
+                return ResourceManager.GetString("EmailNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Error.
         /// </summary>
         internal static string Error {
@@ -103,6 +130,24 @@ namespace ArcheryManager.Resources {
         internal static string NoAddingDuringSelection {
             get {
                 return ResourceManager.GetString("NoAddingDuringSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Name of the shoot empty.
+        /// </summary>
+        internal static string ShootNameEmpty {
+            get {
+                return ResourceManager.GetString("ShootNameEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Name of the shoot already existing.
+        /// </summary>
+        internal static string ShootNameExist {
+            get {
+                return ResourceManager.GetString("ShootNameExist", resourceCulture);
             }
         }
     }

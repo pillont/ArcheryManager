@@ -4,14 +4,20 @@ namespace ArcheryManager.Interfaces
 {
     public interface IArrowSetting
     {
-        int ZoneCount { get; }
         int MaxScore { get; }
+        string MaxValue { get; }
+        string PreMaxValue { get; }
+        int ZoneCount { get; }
 
-        string ScoreByIndex(int i);
+        /// <summary>
+        /// determine the color of the zone string
+        /// </summary>
+        /// <param name="i">score zone</param>
+        Color BorderColorZone(int i);
 
         Color ColorOf(string score);
 
-        int ValueByScore(string score);
+        Color ColorOf(int value);
 
         /// <summary>
         ///determine the color associated to the score zone
@@ -21,10 +27,8 @@ namespace ArcheryManager.Interfaces
         /// <returns>default white</returns>
         Color ColorofTargetZone(int i);
 
-        /// <summary>
-        /// determine the color of the zone string
-        /// </summary>
-        /// <param name="i">score zone</param>
-        Color BorderColorZone(int i);
+        string ScoreByIndex(int i);
+
+        int ValueByScore(string score);
     }
 }

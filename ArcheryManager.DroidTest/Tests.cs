@@ -8,16 +8,16 @@ namespace ArcheryManager.DroidTest
     {
         private AndroidApp app;
 
-        [SetUp]
-        public void BeforeEachTest()
-        {
-            app = TestSetting.InitTestApplication();
-        }
-
         [Test]
         public void AppLaunches()
         {
             app.Screenshot("First screen.");
+        }
+
+        [SetUp]
+        public void BeforeEachTest()
+        {
+            app = TestSetting.InitTestApplication();
         }
     }
 }

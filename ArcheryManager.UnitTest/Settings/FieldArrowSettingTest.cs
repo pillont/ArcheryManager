@@ -12,16 +12,12 @@ namespace ArcheryManager.UnitTest.Settings
         private readonly IArrowSetting Setting = FieldArrowSetting.Instance;
 
         [Test]
-        public void ColorOfTest()
+        public void BorderColorZoneTest()
         {
-            Assert.AreEqual(Color.Green, Setting.ColorOf("M"));
-            Assert.AreEqual(Color.Gray, Setting.ColorOf("1"));
-            Assert.AreEqual(Color.Gray, Setting.ColorOf("2"));
-            Assert.AreEqual(Color.Gray, Setting.ColorOf("3"));
-            Assert.AreEqual(Color.Gray, Setting.ColorOf("4"));
-            Assert.AreEqual(Color.Yellow, Setting.ColorOf("5"));
-            Assert.AreEqual(Color.Yellow, Setting.ColorOf("6"));
-            Assert.AreEqual(Color.White, Setting.ColorOf("test"));
+            Assert.AreEqual(Color.White, Setting.BorderColorZone(3));
+            Assert.AreEqual(Color.White, Setting.BorderColorZone(4));
+            Assert.AreEqual(Color.Black, Setting.BorderColorZone(5));
+            Assert.AreEqual(Color.Black, Setting.BorderColorZone(6));
         }
 
         [Test]
@@ -37,12 +33,16 @@ namespace ArcheryManager.UnitTest.Settings
         }
 
         [Test]
-        public void BorderColorZoneTest()
+        public void ColorOfTest()
         {
-            Assert.AreEqual(Color.White, Setting.BorderColorZone(3));
-            Assert.AreEqual(Color.White, Setting.BorderColorZone(4));
-            Assert.AreEqual(Color.Black, Setting.BorderColorZone(5));
-            Assert.AreEqual(Color.Black, Setting.BorderColorZone(6));
+            Assert.AreEqual(Color.Green, Setting.ColorOf("M"));
+            Assert.AreEqual(Color.Gray, Setting.ColorOf("1"));
+            Assert.AreEqual(Color.Gray, Setting.ColorOf("2"));
+            Assert.AreEqual(Color.Gray, Setting.ColorOf("3"));
+            Assert.AreEqual(Color.Gray, Setting.ColorOf("4"));
+            Assert.AreEqual(Color.Yellow, Setting.ColorOf("5"));
+            Assert.AreEqual(Color.Yellow, Setting.ColorOf("6"));
+            Assert.AreEqual(Color.White, Setting.ColorOf("test"));
         }
 
         [Test]

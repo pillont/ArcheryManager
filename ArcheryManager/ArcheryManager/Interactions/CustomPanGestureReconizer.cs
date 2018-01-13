@@ -5,21 +5,41 @@ namespace ArcheryManager.Interactions
 {
     public class CustomPanGestureReconizer : PanGestureRecognizer
     {
+        public new event EventHandler<CustomPanUpdatedEventArgs> PanUpdated;
+
+        private int countUpdate;
+
+        private bool isCancel;
+
+        private Point startPosition;
+
         /// <summary>
         /// start position of the pan
         /// Not sure if the move is very fast
         /// </summary>
         public Point StartTapPosition { get; set; }
 
-        private int countUpdate;
-        private Point startPosition;
-        private bool isCancel;
-
-        public new event EventHandler<CustomPanUpdatedEventArgs> PanUpdated;
-
         public CustomPanGestureReconizer()
         {
             base.PanUpdated += OnPanUpdated;
+        }
+
+        public void CancelGesture()
+        {
+            isCancel = true;
+        }
+
+        private void CallEventPanGesture(object sender, PanUpdatedEventArgs e)
+        {
+            var newArgs = new CustomPanUpdatedEventArgs(e.StatusType, e.GestureId, e.TotalX, e.TotalY, StartTapPosition);
+            this.PanUpdated?.Invoke(sender, newArgs);
+        }
+
+        private void InitPanGesture(object sender, PanUpdatedEventArgs e)
+        {
+            StartTapPosition = default(Point);
+            countUpdate = 0;
+            isCancel = false;
         }
 
         /// <summary>
@@ -53,13 +73,6 @@ namespace ArcheryManager.Interactions
             }
         }
 
-        private void InitPanGesture(object sender, PanUpdatedEventArgs e)
-        {
-            StartTapPosition = default(Point);
-            countUpdate = 0;
-            isCancel = false;
-        }
-
         private void UpdatePanGesture(object sender, PanUpdatedEventArgs e)
         {
             CustomPanUpdatedEventArgs newArgs;
@@ -85,17 +98,6 @@ namespace ArcheryManager.Interactions
                     this.PanUpdated?.Invoke(sender, newArgs);
                     break;
             }
-        }
-
-        private void CallEventPanGesture(object sender, PanUpdatedEventArgs e)
-        {
-            var newArgs = new CustomPanUpdatedEventArgs(e.StatusType, e.GestureId, e.TotalX, e.TotalY, StartTapPosition);
-            this.PanUpdated?.Invoke(sender, newArgs);
-        }
-
-        public void CancelGesture()
-        {
-            isCancel = true;
         }
     }
 }

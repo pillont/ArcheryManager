@@ -2,6 +2,7 @@
 Fonctionnalité: TargetSelectorFeature
 	test du selecteur de cible
 
+#
 Plan du scénario: Test de sélection de cible
 	Quand J'ouvre une page de sélection de cible
 	Et je click sur le texte <type>
@@ -73,3 +74,14 @@ Plan du scénario: Test de sélection de bouton de cible
 	| FieldTarget    |  
 	| IndoorRecurveTarget    |  
 	| IndoorCompoundTarget    |  
+
+
+Scénario: Test de retour après un selector 
+	Quand J'ouvre une page de menu general
+	Et je click sur le bouton de tir compté
+	Et je valide la sélection de cible
+	Et j'attend 5 secondes
+	Et je reviens à la page d'avant
+	Et je click sur le texte Yes
+
+	Alors il y a le titre de backdoor

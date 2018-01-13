@@ -1,30 +1,37 @@
 ﻿using ArcheryManager.Interfaces;
-using static ArcheryManager.CustomControls.TargetImage;
 using ArcheryManager.Settings.ArrowSettings;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using static ArcheryManager.CustomControls.TargetImage;
 
 namespace ArcheryManager.Factories
 {
-    public class ArrowsettingFactory
+    public class ArrowSettingFactory
     {
+        public static readonly Dictionary<TargetStyle, IArrowSetting> Values = new Dictionary<TargetStyle, IArrowSetting>()
+        {
+            {TargetStyle.EnglishTarget, EnglishArrowSetting.Instance},
+            {TargetStyle.FieldTarget, FieldArrowSetting.Instance },
+            {TargetStyle.IndoorRecurveTarget, IndoorRecurveArrowSetting.Instance},
+            {TargetStyle.IndoorCompoundTarget, IndoorCompoundArrowSetting.Instance},
+        };
+
         public static IArrowSetting Create(TargetStyle targetStyle)
         {
-            switch (targetStyle)
-            {
-                case TargetStyle.EnglishTarget:
-                    return EnglishArrowSetting.Instance;
+            return Values[targetStyle];
+        }
 
-                case TargetStyle.FieldTarget:
-                    return FieldArrowSetting.Instance;
+        public static TargetStyle GetTargetStyle(IArrowSetting arrowSetting)
+        {
+            return Values.Where(pair => pair.Value == arrowSetting).Single().Key;
+        }
 
-                case TargetStyle.IndoorRecurveTarget:
-                    return IndoorRecurveArrowSetting.Instance;
-
-                case TargetStyle.IndoorCompoundTarget:
-                    return IndoorCompoundArrowSetting.Instance;
-
-                default:
-                    goto case TargetStyle.EnglishTarget;
-            }
+        internal static IArrowSetting Create(string targetStyleString)
+        {
+            TargetStyle style;
+            Enum.TryParse(targetStyleString, out style);
+            return Create(style);
         }
     }
 }

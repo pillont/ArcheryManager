@@ -1,8 +1,8 @@
-﻿using System;
-using Xamarin.Forms;
-using ArcheryManager.CustomControls;
+﻿using ArcheryManager.CustomControls;
 using ArcheryManager.Services;
 using ArcheryManager.Utils;
+using System;
+using Xamarin.Forms;
 
 namespace ArcheryManager.Interactions.Behaviors
 {
@@ -11,16 +11,15 @@ namespace ArcheryManager.Interactions.Behaviors
         /*
          * Times
          */
+        public const int DefaultLimitTime = 30;
         public const int DefaultTime = 120;
         public const int DefaultWaitingTime = 10;
-        public const int DefaultLimitTime = 30;
-
         /*
          * Colors
          */
+        public static readonly Color DefaultBorderColor = Color.Gray;
         public static readonly Color DefaultColor = Color.Red;
         public static readonly Color DefaultProgressBorderColor = Color.Gray;
-        public static readonly Color DefaultBorderColor = Color.Gray;
         public static readonly Color DefaultWaitingColor = Color.Red;
         public static readonly Color GeneralTimeColor = Color.Green;
         public static readonly Color LimitTimeColor = Color.Orange;
@@ -32,9 +31,9 @@ namespace ArcheryManager.Interactions.Behaviors
 
         #region logical properties
 
-        private bool _playSong;
         private int _current;
         private int _currentMax;
+        private bool _playSong;
 
         /// <summary>
         /// current time to show
@@ -64,12 +63,12 @@ namespace ArcheryManager.Interactions.Behaviors
 
         private readonly TimerPageSetting Setting;
 
+        private WaveBehavior _waveBehavior;
+
         public TimerBehavior(TimerPageSetting setting)
         {
             this.Setting = setting;
         }
-
-        private WaveBehavior _waveBehavior;
 
         protected override void OnAttachedTo(CustomTimer bindable)
         {
@@ -78,6 +77,27 @@ namespace ArcheryManager.Interactions.Behaviors
         }
 
         #region public function
+
+        public void Continue()
+        {
+            if (AssociatedObject.IsPaused && !AssociatedObject.IsStopped)
+            {
+                AssociatedObject.IsPaused = false;
+                Device.StartTimer(TimeSpan.FromSeconds(1), TimerFunction);
+            }
+        }
+
+        public void Pause()
+        {
+            AssociatedObject.IsPaused = true;
+            //TODO wait one second to be sure the current timer while paused
+        }
+
+        public void PlaySong()
+        {
+            string songFileName = Setting.SongFileName;
+            DependencyService.Get<IAudioPlayer>().PlayAudioFile(songFileName);
+        }
 
         public void Start()
         {
@@ -92,18 +112,6 @@ namespace ArcheryManager.Interactions.Behaviors
                     StartTimerFunction();
                 }
             }
-        }
-
-        private void StartWaitingFunction()
-        {
-            _playSong = true;
-            AssociatedObject.IsWaitingTime = true;
-            AssociatedObject.IsStopped = false;
-            AssociatedObject.IsPaused = false;
-            _currentMax = AssociatedObject.WaitingTime;
-            this.Current = AssociatedObject.WaitingTime;
-            Device.StartTimer(TimeSpan.FromSeconds(1), WaitingTimerFunction);
-            PlaySongIfNeeded();
         }
 
         public void Stop(bool playSong = true)
@@ -123,54 +131,40 @@ namespace ArcheryManager.Interactions.Behaviors
             }
         }
 
-        public void PlaySong()
+        private void StartWaitingFunction()
         {
-            string songFileName = Setting.SongFileName;
-            DependencyService.Get<IAudioPlayer>().PlayAudioFile(songFileName);
-        }
-
-        public void Pause()
-        {
-            AssociatedObject.IsPaused = true;
-            //TODO wait one second to be sure the current timer while paused
-        }
-
-        public void Continue()
-        {
-            if (AssociatedObject.IsPaused && !AssociatedObject.IsStopped)
-            {
-                AssociatedObject.IsPaused = false;
-                Device.StartTimer(TimeSpan.FromSeconds(1), TimerFunction);
-            }
+            _playSong = true;
+            AssociatedObject.IsWaitingTime = true;
+            AssociatedObject.IsStopped = false;
+            AssociatedObject.IsPaused = false;
+            _currentMax = AssociatedObject.WaitingTime;
+            this.Current = AssociatedObject.WaitingTime;
+            Device.StartTimer(TimeSpan.FromSeconds(1), WaitingTimerFunction);
+            PlaySongIfNeeded();
         }
 
         #endregion public function
 
         #region private functions
 
-        /// <summary>
-        /// function of the timer to make the waiting period
-        /// </summary>
-        private bool WaitingTimerFunction()
+        private void SettingStop()
         {
-            if (AssociatedObject.IsStopped || AssociatedObject.IsPaused) // timer was stop
-            {
-                SettingStop();
-                PlaySongIfNeeded();
-                return false;
-            }
+            AssociatedObject.IsStopped = true;
+            AssociatedObject.IsPaused = false;
+            this.Current = AssociatedObject.Time;
+            AssociatedObject.Color = StopTimeColor;
+        }
 
-            AssociatedObject.Color = AssociatedObject.WaitingColor;
-            this.Current--;
-
-            bool res = ShouldContinueTimer(avoidZero: true);
-
-            if (!res) // start timerFunction in the end of this function
-            {
-                PlaySongIfNeeded();
-                StartTimerFunction();
-            }
-            return res;
+        /// <summary>
+        /// function to know if the timer must stop of not
+        /// </summary>
+        /// <returns></returns>
+        private bool ShouldContinueTimer(bool avoidZero = false)
+        {
+            if (avoidZero)
+                return this.Current > 0; // end of the timer
+            else
+                return this.Current >= 0; // end of the timer
         }
 
         private void StartTimerFunction()
@@ -217,14 +211,6 @@ namespace ArcheryManager.Interactions.Behaviors
             return res;
         }
 
-        private void SettingStop()
-        {
-            AssociatedObject.IsStopped = true;
-            AssociatedObject.IsPaused = false;
-            this.Current = AssociatedObject.Time;
-            AssociatedObject.Color = StopTimeColor;
-        }
-
         /// <summary>
         /// function to update the color during the time period
         /// </summary>
@@ -242,15 +228,28 @@ namespace ArcheryManager.Interactions.Behaviors
         }
 
         /// <summary>
-        /// function to know if the timer must stop of not
+        /// function of the timer to make the waiting period
         /// </summary>
-        /// <returns></returns>
-        private bool ShouldContinueTimer(bool avoidZero = false)
+        private bool WaitingTimerFunction()
         {
-            if (avoidZero)
-                return this.Current > 0; // end of the timer
-            else
-                return this.Current >= 0; // end of the timer
+            if (AssociatedObject.IsStopped || AssociatedObject.IsPaused) // timer was stop
+            {
+                SettingStop();
+                PlaySongIfNeeded();
+                return false;
+            }
+
+            AssociatedObject.Color = AssociatedObject.WaitingColor;
+            this.Current--;
+
+            bool res = ShouldContinueTimer(avoidZero: true);
+
+            if (!res) // start timerFunction in the end of this function
+            {
+                PlaySongIfNeeded();
+                StartTimerFunction();
+            }
+            return res;
         }
 
         #endregion private functions

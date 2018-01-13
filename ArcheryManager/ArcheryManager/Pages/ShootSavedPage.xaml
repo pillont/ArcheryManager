@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:ArcheryManager.Resources"
+             x:Class="ArcheryManager.Pages.ShootSavedPage"
+             Title="{resources:Translate Saves}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{resources:Translate Open}" Command="{Binding OpenCommand}" />
+    </ContentPage.ToolbarItems>
+    <StackLayout Orientation="Vertical">
+        <Grid Margin="0,20,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Orientation="Vertical" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">
+                <Label Text="finish" VerticalTextAlignment="Center" />
+                <Switch AutomationId="finishSwitch" IsToggled="{Binding ShownFinish}" />
+            </StackLayout>
+            <StackLayout Orientation="Vertical" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
+                <Label Text="notFinish" VerticalTextAlignment="Center" />
+                <Switch AutomationId="notFinishSwitch" IsToggled="{Binding ShownNotFinish}" />
+            </StackLayout>
+        </Grid>
+        <!--ItemSelected="Handle_ItemSelected"-->
+        <ListView AutomationId="shootList"
+              ItemsSource="{Binding GroupedItems}"
+              IsPullToRefreshEnabled="true"
+              HasUnevenRows="True"
+              x:Name="listView"
+              SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+              IsRefreshing="{Binding IsRefreshing}"
+              RefreshCommand="{Binding RefreshCommand}"
+              SeparatorColor="Black"
+              IsGroupingEnabled="true"
+              GroupDisplayBinding="{ Binding Name }">
+            <ListView.Header>
+                <!-- header not visible if have item
+                else is visible to inform haven't items -->
+                <Label Text="{resources:Translate EmptyList}"
+                   IsVisible="{Binding IsEmptyList}"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center" />
+            </ListView.Header>
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <Label Text="{Binding Name}"
+                                   VerticalTextAlignment="End"
+                                   FontSize="Medium"
+                                   FontAttributes="Bold" />
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid VerticalOptions="StartAndExpand"
+                           BackgroundColor="{Binding Color}"
+                           HeightRequest="50">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding ShootType}"
+                               Grid.Column="0"
+                               HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center"
+                               VerticalOptions="FillAndExpand"
+                               VerticalTextAlignment="Center" />
+                            <Label Text="{Binding ScoreString}"
+                               Grid.Column="1"
+                               HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center"
+                               VerticalOptions="FillAndExpand"
+                               VerticalTextAlignment="Center" />
+
+                            <Label BackgroundColor="{Binding StateColor}"
+                               Grid.Column="2"
+                               HorizontalOptions="FillAndExpand"
+                               HorizontalTextAlignment="Center"
+                               VerticalOptions="FillAndExpand"
+                               VerticalTextAlignment="Center" Margin="5">
+                                <Label.Triggers>
+                                    <!--is finish : text = finish
+                                                    background = Green -->
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding IsFinished}"
+                                                 Value="True">
+                                        <Setter Property="Text" Value="{resources:Translate Finished}" />
+                                        <Setter Property="BackgroundColor" Value="Green" />
+                                    </DataTrigger>
+                                    <!--is not finish : text = Not finish
+                                                        background = Yellow -->
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding IsFinished}"
+                                                 Value="False">
+                                        <Setter Property="Text" Value="{resources:Translate InProgress}" />
+                                        <Setter Property="BackgroundColor" Value="Yellow" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

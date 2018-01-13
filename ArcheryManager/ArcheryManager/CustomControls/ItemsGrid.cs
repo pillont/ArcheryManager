@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArcheryManager.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -22,32 +23,8 @@ namespace ArcheryManager.CustomControls
         /// </summary>
         public ObservableCollection<T> Items
         {
-            get
-            {
-                return (ObservableCollection<T>)GetValue(ItemsProperty);
-            }
-            set
-            {
-                try
-                {
-                    if (value == null)
-                    {
-                        throw new NullReferenceException();
-                    }
-
-                    if (Items != null)
-                    {
-                        Items.CollectionChanged -= Items_CollectionChanged;
-                    }
-
-                    SetValue(ItemsProperty, value);
-                    value.CollectionChanged += Items_CollectionChanged;
-                }
-                catch (Exception e)
-                {
-                    throw;
-                }
-            }
+            get { return (ObservableCollection<T>)GetValue(ItemsProperty); }
+            set { SetValue(ItemsProperty, value); }
         }
 
         public ItemsGrid()
@@ -56,11 +33,6 @@ namespace ArcheryManager.CustomControls
         }
 
         #region container of the items
-
-        /// <summary>
-        /// function to create the container of the items
-        /// </summary>
-        protected abstract View CreateItemContainer(T data);
 
         /// <summary>
         /// function to find the container of the object
@@ -75,6 +47,11 @@ namespace ArcheryManager.CustomControls
         {
             return this.Children[i];
         }
+
+        /// <summary>
+        /// function to create the container of the items
+        /// </summary>
+        protected abstract View CreateItemContainer(T data);
 
         #endregion container of the items
 
@@ -94,9 +71,25 @@ namespace ArcheryManager.CustomControls
             {
                 if (Items != null)
                 {
-                    // set first add to apply event on the item in the new list
-                    Items_CollectionChanged(Items, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, Items));
+                    if (Items == null)
+                    {
+                        throw new NullReferenceException();
+                    }
+                    Items.CollectionChanged += Items_CollectionChanged;
+                    Items_CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                    Items_CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, Items));
                 }
+            }
+        }
+
+        protected override void OnPropertyChanging([CallerMemberName] string propertyName = null)
+        {
+            base.OnPropertyChanging(propertyName);
+
+            if (propertyName == nameof(Items)
+            && Items != null)
+            {
+                Items.CollectionChanged -= Items_CollectionChanged;
             }
         }
 
@@ -125,9 +118,12 @@ namespace ArcheryManager.CustomControls
                     foreach (T item in e.NewItems)
                     {
                         var container = CreateItemContainer(item);
-                        container.BindingContext = item;
-                        this.Children.Add(container);
-                        ItemAdded?.Invoke(container);
+                        if (container != null)
+                        {
+                            container.BindingContext = item;
+                            this.Children.Add(container);
+                            ItemAdded?.Invoke(container);
+                        }
                     }
                 }
                 // items removed

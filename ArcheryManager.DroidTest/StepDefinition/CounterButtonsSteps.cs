@@ -13,6 +13,7 @@ namespace ArcheryManager.DroidTest.StepDefinition
             {
                 throw new System.Exception();
             }
+            TestSetting.App.WaitForElement("buttonGrid");
             TestSetting.App.Tap(e => e.Marked("buttonGrid").Child().Child().Child().Text(p0));
         }
     }

@@ -161,7 +161,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 46
  testRunner.And("je click sur le check nombre de flèches défini", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 47
- testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je click sur le texte Finish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 48
  testRunner.And("je tire une flèche en 200, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 49
@@ -191,33 +191,33 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TestLaNonPossibiliteDeTirerPlusDuMaxDansLaVueDeBouton()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test la non possibilité de tirer plus du max dans la vue de bouton", ((string[])(null)));
-#line 65
+#line 63
 this.ScenarioSetup(scenarioInfo);
-#line 66
+#line 64
  testRunner.When("J\'ouvre une page zappette", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
-#line 67
+#line 65
  testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 68
+#line 66
  testRunner.And("je click sur le check nombre de flèches défini", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 69
- testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 70
+#line 67
+ testRunner.And("je click sur le texte Finish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 68
  testRunner.And("je click sur le boutton 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 71
+#line 69
  testRunner.And("je click sur le boutton 9", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 72
+#line 70
  testRunner.And("je click sur le boutton 8", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 73
+#line 71
  testRunner.And("je click sur le boutton 7", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 74
+#line 72
  testRunner.And("je click sur le boutton 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 75
+#line 73
  testRunner.And("je click sur le boutton 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 78
+#line 76
  testRunner.And("je click sur le boutton X10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 80
+#line 78
  testRunner.Then("le nombre de flèches dans la liste est de 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
-#line 81
+#line 79
  testRunner.And("le message d\'erreur du nombre de flèche est affiché", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line hidden
             this.ScenarioCleanup();

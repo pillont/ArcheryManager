@@ -1,7 +1,6 @@
-﻿using ArcheryManager.Interactions.Behaviors;
+﻿using ArcheryManager.Entities;
+using ArcheryManager.Interactions.Behaviors;
 using ArcheryManager.Interfaces;
-using ArcheryManager.Models;
-using ArcheryManager.Utils;
 using System;
 using Xamarin.Forms;
 
@@ -24,20 +23,21 @@ namespace ArcheryManager.Factories
             int index = IndexByPosition(position);
             var x = transformPosition(position.X);
             var y = transformPosition(position.Y);
-            var point = new Point(x, y);
-            var res = new Arrow(index, numberInFlight, point, targetSize);
+            var res = new Arrow()
+            {
+                Index = index,
+                NumberInFlight = numberInFlight,
+                TranslationX = x,
+                TranslationY = y,
+                TargetSize = targetSize
+            };
 
             return res;
         }
 
-        private double transformPosition(double val)
+        protected Color ColorOf(string value)
         {
-            return (val + val * Math.Abs(MovableTargetBehavior.TargetTranslationRate)) / MovableTargetBehavior.TargetScale;
-        }
-
-        protected string ScoreByIndex(int i)
-        {
-            return Setting.ScoreByIndex(i);
+            return Setting.ColorOf(value);
         }
 
         protected int IndexByPosition(Point position)
@@ -59,14 +59,19 @@ namespace ArcheryManager.Factories
             return 0;
         }
 
-        protected Color ColorOf(string value)
+        protected string ScoreByIndex(int i)
         {
-            return Setting.ColorOf(value);
+            return Setting.ScoreByIndex(i);
         }
 
         protected int ValueByScore(string score)
         {
             return Setting.ValueByScore(score);
+        }
+
+        private double transformPosition(double val)
+        {
+            return (val + val * Math.Abs(MovableTargetBehavior.TargetTranslationRate)) / MovableTargetBehavior.TargetScale;
         }
     }
 }

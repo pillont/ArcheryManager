@@ -68,18 +68,18 @@ namespace ArcheryManager.DroidTest.Features.Targets
         public virtual void TestLaPositionDesFlechesAvantRotation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test la position des flèches avant rotation", ((string[])(null)));
-#line 6
-this.ScenarioSetup(scenarioInfo);
 #line 7
- testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+this.ScenarioSetup(scenarioInfo);
 #line 8
- testRunner.And("je tire une flèche en 200, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 9
+ testRunner.And("je tire une flèche en 200, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 10
  testRunner.And("je tire une flèche en 150, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 11
- testRunner.Then("la flèche numéro 0 est en 629, 814", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 12
- testRunner.Then("la flèche numéro 1 est en 566, 935", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("la flèche numéro 0 est en 749, 1142", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 13
+ testRunner.Then("la flèche numéro 1 est en 695, 1246", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -89,20 +89,20 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TestLaPositionDesFlechesApresRotation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test la position des flèches après rotation", ((string[])(null)));
-#line 15
-this.ScenarioSetup(scenarioInfo);
-#line 16
- testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 17
- testRunner.And("je tire une flèche en 200, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+this.ScenarioSetup(scenarioInfo);
 #line 18
- testRunner.And("je tire une flèche en 150, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 19
- testRunner.And("je tourne le téléphone", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 200, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 20
+ testRunner.And("je tire une flèche en 150, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 21
- testRunner.Then("la flèche numéro 0 est en 462, 586", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
-#line 22
- testRunner.And("la flèche numéro 1 est en 418, 668", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tourne le téléphone", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 23
+ testRunner.Then("la flèche numéro 0 est en 581, 787", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 24
+ testRunner.And("la flèche numéro 1 est en 546, 857", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -112,26 +112,26 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TestLaPositionDeMoyenneApresRotation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test la position de moyenne après rotation", ((string[])(null)));
-#line 25
-this.ScenarioSetup(scenarioInfo);
-#line 26
- testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
-#line 27
- testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 28
- testRunner.And("je click sur l\'option de moyenne", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+this.ScenarioSetup(scenarioInfo);
 #line 29
- testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 30
- testRunner.And("je tire une flèche en 200, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 31
- testRunner.And("je tire une flèche en 150, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je click sur l\'option de moyenne", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 32
- testRunner.And("je tourne le téléphone", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je click sur le texte Finish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 33
+ testRunner.And("je tire une flèche en 200, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 34
- testRunner.Then("la moyenne est centrée en 295, 502", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.And("je tire une flèche en 150, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 35
- testRunner.And("la moyenne est de taille 59, 115", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tourne le téléphone", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 37
+ testRunner.Then("la moyenne est centrée en 442, 719", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 38
+ testRunner.And("la moyenne est de taille 51, 95", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line hidden
             this.ScenarioCleanup();
         }

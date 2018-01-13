@@ -1,4 +1,4 @@
-﻿using ArcheryManager.Models;
+﻿using ArcheryManager.Entities;
 using ArcheryManager.Settings.ArrowSettings;
 using ArcheryManager.Utils;
 using System.ComponentModel;
@@ -9,22 +9,21 @@ namespace ArcheryManager.CustomControls
 {
     public class ArrowsGrid : ItemsGrid<Arrow>
     {
+        public static readonly BindableProperty ArrowColorProperty =
+                              BindableProperty.Create(nameof(ArrowColor), typeof(Color), typeof(ArrowsGrid), CommonConstant.DefaultArrowColor);
+
+        public static readonly BindableProperty ArrowWidthProperty =
+                              BindableProperty.Create(nameof(ArrowWidth), typeof(double), typeof(ArrowsGrid), DefaultArrowWidth);
+
+        public static readonly BindableProperty SelectedArrowColorProperty =
+                              BindableProperty.Create(nameof(SelectedArrowColor), typeof(Color), typeof(ArrowsGrid), CommonConstant.DefaultSelectedArrowColor);
+
         /// <summary>
         /// width of the arrow in the target
         /// </summary>
         private const double DefaultArrowWidth = 10;
 
-        public static readonly BindableProperty ArrowWidthProperty =
-                      BindableProperty.Create(nameof(ArrowWidth), typeof(double), typeof(ArrowsGrid), DefaultArrowWidth);
-
-        public double ArrowWidth
-        {
-            get { return (double)GetValue(ArrowWidthProperty); }
-            set { SetValue(ArrowWidthProperty, value); }
-        }
-
-        public static readonly BindableProperty ArrowColorProperty =
-                      BindableProperty.Create(nameof(ArrowColor), typeof(Color), typeof(ArrowsGrid), CommonConstant.DefaultArrowColor);
+        private double targetSize;
 
         public Color ArrowColor
         {
@@ -32,16 +31,17 @@ namespace ArcheryManager.CustomControls
             set { SetValue(ArrowColorProperty, value); }
         }
 
-        public static readonly BindableProperty SelectedArrowColorProperty =
-                      BindableProperty.Create(nameof(SelectedArrowColor), typeof(Color), typeof(ArrowsGrid), CommonConstant.DefaultSelectedArrowColor);
+        public double ArrowWidth
+        {
+            get { return (double)GetValue(ArrowWidthProperty); }
+            set { SetValue(ArrowWidthProperty, value); }
+        }
 
         public Color SelectedArrowColor
         {
             get { return (Color)GetValue(SelectedArrowColorProperty); }
             set { SetValue(SelectedArrowColorProperty, value); }
         }
-
-        private double targetSize;
 
         public double TargetSize
         {
@@ -97,31 +97,6 @@ namespace ArcheryManager.CustomControls
             }
         }
 
-        private void UpdateAllTransforms()
-        {
-            foreach (var a in Items)
-            {
-                var container = FindContainer(a);
-                container.TranslationX = ArrowTranslationHelper.TranslationXOf(a, TargetSize);
-                container.TranslationY = ArrowTranslationHelper.TranslationYOf(a, TargetSize);
-            }
-        }
-
-        private double TranslationYOf(Arrow arrow)
-        {
-            return TransformTranslation(arrow.TranslationY, arrow.TargetSize);
-        }
-
-        private double TranslationXOf(Arrow arrow)
-        {
-            return TransformTranslation(arrow.TranslationX, arrow.TargetSize);
-        }
-
-        private double TransformTranslation(double translation, double targetSize)
-        {
-            return TargetSize / targetSize * translation;
-        }
-
         private void SelectArrow(Arrow arrow)
         {
             var container = FindContainer(arrow) as ShapeView;
@@ -131,12 +106,37 @@ namespace ArcheryManager.CustomControls
             }
         }
 
+        private double TransformTranslation(double translation, double targetSize)
+        {
+            return TargetSize / targetSize * translation;
+        }
+
+        private double TranslationXOf(Arrow arrow)
+        {
+            return TransformTranslation(arrow.TranslationX, arrow.TargetSize);
+        }
+
+        private double TranslationYOf(Arrow arrow)
+        {
+            return TransformTranslation(arrow.TranslationY, arrow.TargetSize);
+        }
+
         private void UnSelectArrow(Arrow arrow)
         {
             var container = FindContainer(arrow) as ShapeView;
             if (container != null)
             {
                 container.Color = ArrowColor;
+            }
+        }
+
+        private void UpdateAllTransforms()
+        {
+            foreach (var a in Items)
+            {
+                var container = FindContainer(a);
+                container.TranslationX = ArrowTranslationHelper.TranslationXOf(a, TargetSize);
+                container.TranslationY = ArrowTranslationHelper.TranslationYOf(a, TargetSize);
             }
         }
     }

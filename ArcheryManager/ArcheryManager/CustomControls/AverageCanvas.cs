@@ -1,8 +1,4 @@
-﻿using ArcheryManager.Helpers;
-using ArcheryManager.Settings;
-using System;
-using System.Linq;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using XFShapeView;
 
 namespace ArcheryManager.CustomControls
@@ -12,25 +8,6 @@ namespace ArcheryManager.CustomControls
     /// </summary>
     public class AverageCanvas : ContentView
     {
-        public new CountSetting BindingContext
-        {
-            get
-            {
-                if (base.BindingContext is CountSetting)
-                {
-                    return base.BindingContext as CountSetting;
-                }
-                else
-                {
-                    throw new InvalidCastException("binding target of average canvas must be Target setting");
-                }
-            }
-            set
-            {
-                base.BindingContext = value;
-            }
-        }
-
         public virtual View CreateAverageVisual(double standartDeviationX, double standartDeviationY, Point center)
         {
             var centerVisual = new ShapeView()

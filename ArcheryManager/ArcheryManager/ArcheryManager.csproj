@@ -47,23 +47,61 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\PageOpenerController.cs" />
+    <Compile Include="Controllers\RestController.cs" />
+    <Compile Include="Controllers\TargetStarterController.cs" />
     <Compile Include="CustomControls\CustomShapeButton.xaml.cs">
       <DependentUpon>CustomShapeButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Factories\ResultPageFactory.cs" />
+    <Compile Include="Helpers\RegisterHelper.cs" />
+    <Compile Include="Interfaces\IScoreListViewModel.cs" />
     <Compile Include="CustomControls\LimitArrowNumberSelector.xaml.cs">
       <DependentUpon>LimitArrowNumberSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\RemarkEditor.xaml.cs">
       <DependentUpon>RemarkEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\ScoreList.cs" />
+    <Compile Include="CustomControls\ShootGrid.cs" />
     <Compile Include="CustomControls\TargetImage.xaml.cs">
       <DependentUpon>TargetImage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Arrow.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Factories\CounterSelectorPageFactory.cs" />
+    <Compile Include="Factories\ShootSavedPageFactory.cs" />
+    <Compile Include="Helpers\LoggerHelper.cs" />
+    <Compile Include="Helpers\MessagingCenterHelper.cs" />
+    <Compile Include="Interactions\Behaviors\RemoveWhenQuitBehavior.cs" />
+    <Compile Include="Interactions\Behaviors\ToolBarItemsBehavior.cs" />
+    <Compile Include="Interactions\Behaviors\TransfertToolbarItemsBehavior.cs" />
+    <Compile Include="Interfaces\ICounterPage.cs" />
+    <Compile Include="Interfaces\IPushablePage.cs" />
+    <Compile Include="Interfaces\IToolbarItemsGenerator.cs" />
+    <Compile Include="Interfaces\IViewGeneralEvent.cs" />
+    <Compile Include="ModelViews\ShootInList.cs" />
+    <Compile Include="Pages\ConnectedShootPage.xaml.cs">
+      <DependentUpon>ConnectedShootPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LogPage.xaml.cs">
+      <DependentUpon>LogPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PagesTemplates\NavigationPageWithInterface.cs" />
+    <Compile Include="Pages\ResultPage.xaml.cs">
+      <DependentUpon>ResultPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ShootSavedPage.xaml.cs">
+      <DependentUpon>ShootSavedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Remark.cs" />
+    <Compile Include="Interactions\Behaviors\EventToCommandBehavior.cs" />
+    <Compile Include="Interfaces\IArrowNumberHolder.cs" />
     <Compile Include="Factories\ArrowsettingFactory.cs" />
     <Compile Include="Factories\CounterPageFactory.cs" />
     <Compile Include="Helpers\AndroidTabbedPageHelper.cs" />
     <Compile Include="Interactions\Behaviors\BackMessageBehavior.cs" />
-    <Compile Include="Models\Remark.cs" />
+    <Compile Include="Entities\CountedShoot.cs" />
     <Compile Include="Pages\ListRemarks.xaml.cs">
       <DependentUpon>ListRemarks.xaml</DependentUpon>
     </Compile>
@@ -74,9 +112,16 @@
     <Compile Include="Pages\RemarksPage.xaml.cs">
       <DependentUpon>RemarksPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\IFileManager.cs" />
     <Compile Include="Services\IKeyboardHelper.cs" />
-    <Compile Include="Settings\RemarksSaved.cs" />
-    <Compile Include="Utils\CounterMessageManager.cs" />
+    <Compile Include="Services\ISqliteService.cs" />
+    <Compile Include="Upjv\FakeApi.cs" />
+    <Compile Include="Upjv\IUpjvScore.cs" />
+    <Compile Include="Upjv\JsonRegistered.cs" />
+    <Compile Include="Upjv\JsonShoot.cs" />
+    <Compile Include="Upjv\JsonUpdate.cs" />
+    <Compile Include="Upjv\UpjvScore.cs" />
+    <Compile Include="Utils\ClearArg.cs" />
     <Compile Include="Interactions\Behaviors\CounterButtonBehavior.cs" />
     <Compile Include="Interactions\Behaviors\CounterToolbarItemsBehavior.cs" />
     <Compile Include="Interactions\Behaviors\ArrowListOrderedBehavior.cs" />
@@ -149,15 +194,15 @@
       <DependentUpon>CounterButtonPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings\ArrowSettings\FieldArrowSetting.cs" />
-    <Compile Include="Settings\GeneralCounterSetting.cs" />
-    <Compile Include="Services\IGeneralCounterSetting.cs" />
-    <Compile Include="Settings\ScoreResult.cs" />
-    <Compile Include="Models\Arrow.cs" />
-    <Compile Include="Settings\CountSetting.cs" />
     <Compile Include="Utils\ArrowTranslationHelper.cs" />
     <Compile Include="Utils\CounterButtonGenerator.cs" />
-    <Compile Include="Models\Flight.cs" />
-    <Compile Include="Settings\ScoreCounter.cs" />
+    <Compile Include="Entities\Flight.cs" />
+    <Compile Include="Utils\CounterManager.cs" />
+    <Compile Include="Utils\CounterToolbarGenerator.cs" />
+    <Compile Include="Utils\ISQLiteConnectionManager.cs" />
+    <Compile Include="Utils\ListViewGroup.cs" />
+    <Compile Include="Utils\MessageManager.cs" />
+    <Compile Include="Utils\ScoreCounter.cs" />
     <Compile Include="Interactions\Behaviors\TimerBehavior.cs" />
     <Compile Include="CustomControls\Target.cs" />
     <Compile Include="CustomControls\CustomTimer.cs" />
@@ -172,7 +217,14 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\StatisticHelper.cs" />
+    <Compile Include="Utils\SelectionToolbarItemsController.cs" />
+    <Compile Include="Utils\SelectionToolbarItemsGenerator.cs" />
+    <Compile Include="Utils\SQLiteConnectionManager.cs" />
     <Compile Include="Utils\TimerPageSetting.cs" />
+    <Compile Include="Utils\ToolbarItemsArg.cs" />
+    <Compile Include="ViewModels\ConnectedShootPageViewModel.cs" />
+    <Compile Include="ViewModels\ResultPageViewModel.cs" />
+    <Compile Include="ViewModels\ResultScoreListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.resx">
@@ -202,17 +254,32 @@
     <Reference Include="ExifLib, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\ExifLib.PCL.1.0.1\lib\portable-net45+sl50+win+WindowsPhoneApp81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\ExifLib.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Android">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v6.0\Mono.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="SkiaSharp, Version=1.58.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SkiaSharp.1.58.0\lib\portable-net45+win8+wpa81+wp8\SkiaSharp.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp.Views.Forms, Version=1.58.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SkiaSharp.Views.Forms.1.58.0\lib\portable-net45+win8+wpa81+wp8\SkiaSharp.Views.Forms.dll</HintPath>
     </Reference>
-    <Reference Include="SQLite.Net, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SQLite.Net-PCL.3.1.1\lib\portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1\SQLite.Net.dll</HintPath>
+    <Reference Include="SQLite.Net, Version=3.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SQLite.Net-PCL.3.0.5\lib\portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1\SQLite.Net.dll</HintPath>
     </Reference>
-    <Reference Include="SQLite.Net.Async, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SQLite.Net.Async-PCL.3.1.1\lib\portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1\SQLite.Net.Async.dll</HintPath>
+    <Reference Include="SQLite.Net.Async, Version=3.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SQLite.Net.Async-PCL.3.0.5\lib\portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1\SQLite.Net.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLiteNetExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SQLiteNetExtensions.1.3.0\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\SQLiteNetExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLiteNetExtensionsAsync, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SQLiteNetExtensions.Async.1.3.0\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\SQLiteNetExtensionsAsync.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.4.247\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
@@ -244,7 +311,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="Diagrams\CountedShoot.cd" />
+    <None Include="Helpers\MessagingCenterHelper.cd" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Utils\DatabaseCounterSaver.cd" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\TimerPage.xaml">
@@ -332,6 +404,33 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CustomControls\RemarkEditor.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Diagrams\CountedShoot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\ShootSavedPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\LogPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\ResultPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\ConnectedShootPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

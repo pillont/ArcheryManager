@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<page:ContentPageWithGeneralEvent xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converter="clr-namespace:XLabs.Forms.Converter;assembly=XLabs.Forms"
+             xmlns:page="clr-namespace:ArcheryManager.Pages.PagesTemplates"
              xmlns:scr="clr-namespace:ArcheryManager.CustomControls"
              xmlns:resources="clr-namespace:ArcheryManager.Resources"
              x:Class="ArcheryManager.Pages.CounterSelectorPage"
@@ -13,56 +14,61 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="4*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <scr:LimitArrowNumberSelector Grid.Row="0" />
-        <!-- images -->
-        <Grid Grid.Row="1"
+            <scr:LimitArrowNumberSelector BindingContext="{Binding LimitArrowNumberSelectorViewModel}" Grid.Row="0" />
+            <!-- images -->
+            <Grid Grid.Row="1"
               AutomationId="imageGrid"
               x:Name="imageGrid"
               VerticalOptions="CenterAndExpand"
               HorizontalOptions="CenterAndExpand">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <scr:TargetImage Source="EnglishTarget.png"
+                <scr:TargetImage Source="EnglishTarget.png"
                              Text="{resources:Translate EnglishTarget}"
                              StyleTarget="EnglishTarget"
                              Grid.Row="0"
                              Grid.Column="0" />
 
-            <scr:TargetImage Source="FieldTarget.png"
+                <scr:TargetImage Source="FieldTarget.png"
                              Text="{resources:Translate FieldTarget}"
                              StyleTarget="FieldTarget"
                              Grid.Row="0"
                              Grid.Column="1" />
 
-            <scr:TargetImage Source="IndoorTarget.png"
+                <scr:TargetImage Source="IndoorTarget.png"
                              Text="{resources:Translate IndoorRecurveTarget}"
                              StyleTarget="IndoorRecurveTarget"
                              Grid.Row="1"
                              Grid.Column="0" />
 
-            <scr:TargetImage Source="IndoorTarget.png"
+                <scr:TargetImage Source="IndoorTarget.png"
                              Text="{resources:Translate IndoorCompoundTarget}"
                              StyleTarget="IndoorCompoundTarget"
                              Grid.Row="1"
                              Grid.Column="1" />
-        </Grid>
+            </Grid>
 
-        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Grid.Row="2">
-            <Switch VerticalOptions="Center"  IsToggled="{Binding HaveTarget}" AutomationId="wantTargetSwitch" />
-            <Label Text="{resources:Translate TargetWanted}" VerticalOptions="Center" VerticalTextAlignment="Center" />
-        </StackLayout>
+            <StackLayout VerticalOptions="CenterAndExpand"
+                     HorizontalOptions="CenterAndExpand"
+                     Orientation="Horizontal" Grid.Row="2">
+                <Switch VerticalOptions="Center"  IsToggled="{Binding HaveTarget}" AutomationId="wantTargetSwitch" />
+                <Label Text="{resources:Translate TargetWanted}" VerticalOptions="Center" VerticalTextAlignment="Center" />
+            </StackLayout>
+        </Grid>
+        <Image IsVisible="{Binding IsWaiting}" Source="icon.png" />
     </Grid>
-</ContentPage>
+</page:ContentPageWithGeneralEvent>

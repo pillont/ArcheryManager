@@ -1,84 +1,47 @@
-﻿using ArcheryManager.Factories;
+﻿using ArcheryManager.CustomControls;
+using ArcheryManager.Factories;
+using ArcheryManager.Interactions.Behaviors;
+using ArcheryManager.Interfaces;
+using ArcheryManager.Pages.PagesTemplates;
+using ArcheryManager.Utils;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using ArcheryManager.CustomControls;
-using ArcheryManager.Resources;
-using ArcheryManager.Settings;
-using ArcheryManager.Interactions.Behaviors;
-using ArcheryManager.Pages.PagesTemplates;
-using ArcheryManager.Interfaces;
-using ArcheryManager.Utils;
+using XLabs.Forms.Mvvm;
 
 namespace ArcheryManager.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TargetPage : ContentPageWithGeneralEvent, IToolbarItemsHolder
+    public partial class TargetPage : ContentPageWithGeneralEvent, IToolbarItemsHolder, ICounterPage
     {
-        private static readonly IGeneralCounterSetting GeneralCounterSetting = DependencyService.Get<IGeneralCounterSetting>();
-
-        private CountSetting CountSetting => GeneralCounterSetting.CountSetting;
-        private ScoreCounter Counter { get; set; }
-
-        private readonly Target customTarget;
+        private Target customTarget { get; set; }
 
         public TargetPage()
         {
             InitializeComponent();
 
-            Counter = new ScoreCounter(GeneralCounterSetting);
+            ApplyRotationEvent();
+        }
 
-            #region view setup
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
 
-            var behavior = new CounterToolbarItemsBehavior<TargetPage>(GeneralCounterSetting, Counter);
-            this.Behaviors.Add(behavior);
-
-            VerticalScreenRotation += SetupGridForVerticalDevice;
-            HorizontalScreenRotation += SetupGridForHorizontalDevice;
-
-            SetupToolbarItems(behavior);
-
-            #endregion view setup
-
-            customTarget = TargetFactory.Create(GeneralCounterSetting, Counter, globalGrid);
+            customTarget = TargetFactory.Create(globalGrid);
             targetGrid.Children.Add(customTarget);
 
-            #region ScoreList
-
-            var scoreList = ScoreListFactory.Create(GeneralCounterSetting, ToolbarItems);
-            scoreList.SizeChanged += ScoreList_SizeChanged;
-            scrollArrows.Content = scoreList;
-
-            #endregion ScoreList
-
-            #region total score
-
-            totalCounter.BindingContext = Counter;
-
-            #endregion total score
+            AddScoreList();
         }
 
-        private void SetupToolbarItems(CounterToolbarItemsBehavior<TargetPage> behavior)
+        private void AddScoreList()
         {
-            ToolbarItems.Clear();
-            behavior.AddDefaultToolbarItems();
-            AddTargetToolbarItems();
+            ScoreListFactory.AddInScrollView(scrollArrows);
         }
 
-        private void AddTargetToolbarItems()
+        private void ApplyRotationEvent()
         {
-            ToolbarItems.Add(new ToolbarItem()
-            {
-                Text = AppResources.Settings,
-                Order = ToolbarItemOrder.Secondary,
-                Command = new Command(OpenSettingPage)
-            });
-        }
-
-        private void OpenSettingPage(object obj)
-        {
-            var page = new SettingTargetPage() { BindingContext = CountSetting };
-            App.NavigationPage.PushAsync(page);
+            VerticalScreenRotation += SetupGridForVerticalDevice;
+            HorizontalScreenRotation += SetupGridForHorizontalDevice;
         }
 
         #region rotation device
@@ -138,19 +101,17 @@ namespace ArcheryManager.Pages
         }
 
         #endregion rotation device
+    }
 
-        #region scrool list
+    public partial class TargetPageViewModel : ViewModel
+    {
+        public ScoreCounter Counter { get; }
+        public CounterToolbarItemsBehavior CounterToolbarItemsBehavior { get; private set; }
 
-        /// <summary>
-        /// scroll down in list of arrow each time arrowList update
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ScoreList_SizeChanged(object sender, System.EventArgs e)
+        public TargetPageViewModel(ScoreCounter counter, CounterToolbarItemsBehavior behavior)
         {
-            scrollArrows.ScrollToAsync(scrollArrows.Content, ScrollToPosition.End, true);
+            Counter = counter;
+            CounterToolbarItemsBehavior = behavior;
         }
-
-        #endregion scrool list
     }
 }

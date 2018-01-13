@@ -1,34 +1,50 @@
+using ArcheryManager.Entities;
 using ArcheryManager.Interactions.Behaviors;
 using ArcheryManager.Pages;
 using ArcheryManager.Pages.PagesTemplates;
 using ArcheryManager.Resources;
-using ArcheryManager.Settings;
 using Xamarin.Forms;
+using XLabs.Forms.Mvvm;
+using XLabs.Ioc;
 
 namespace ArcheryManager.Factories
 {
-    public class CounterPageFactory
+    public static class CounterPageFactory
     {
-        public static Page CreateSimpleCounter(GeneralCounterSetting generalCounterSetting)
+        public static ContentPageWithGeneralEvent CreateSimpleCounter(CountedShoot shoot)
         {
-            bool wantTarget = generalCounterSetting.CountSetting.HaveTarget;
-            generalCounterSetting.ScoreResult = new ScoreResult();
+            bool wantTarget = shoot.HaveTarget;
 
             ContentPageWithGeneralEvent Page;
             if (wantTarget)
             {
-                Page = new TargetPage();
+                Page = ViewFactory.CreatePage<TargetPageViewModel, TargetPage>() as ContentPageWithGeneralEvent;
             }
             else
             {
-                Page = new CounterButtonPage();
+                Page = ViewFactory.CreatePage<CounterButtonPageViewModel, CounterButtonPage>() as ContentPageWithGeneralEvent;
             }
+
+            var behavior = Resolver.Resolve<CounterToolbarItemsBehavior>();
+            Page.Behaviors.Add(behavior);
 
             ApplyBackMessageBehavior(Page);
             return Page;
         }
 
-        private static void ApplyBackMessageBehavior<T>(T Page) where T : Page, IGeneralEventHolder
+        public static Page CreateTabbedCounter(CountedShoot shoot)
+        {
+            var counter = CreateSimpleCounter(shoot);
+            var tabbed = new CountTabbedPage(counter);
+
+            var behavior = new TransfertToolbarItemsBehavior();
+            tabbed.Behaviors.Add(behavior);
+
+            ApplyBackMessageBehavior(tabbed);
+            return tabbed;
+        }
+
+        private static BackMessageBehavior<T> ApplyBackMessageBehavior<T>(T Page) where T : Page, IGeneralEventHolder
         {
             var arg = new AlertArg()
             {
@@ -37,17 +53,9 @@ namespace ArcheryManager.Factories
                 Accept = AppResources.Yes,
                 Cancel = AppResources.No
             };
-            var behavior = new BackMessageBehavior<T>(App.NavigationPage, arg);
+            var behavior = new BackMessageBehavior<T>(arg);
             Page.Behaviors.Add(behavior);
-        }
-
-        public static Page CreateTabbedCounter(GeneralCounterSetting generalCounterSetting)
-        {
-            var counter = CreateSimpleCounter(generalCounterSetting);
-            var tabbed = new CountTabbedPage(counter);
-
-            ApplyBackMessageBehavior(tabbed);
-            return tabbed;
+            return behavior;
         }
     }
 }

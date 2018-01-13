@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="save the counter durring the validation">
+    <Position X="8.706" Y="8.18" Height="0.507" Width="1.7" />
+  </Comment>
+  <Comment CommentText="save the flights and arrows durring changes">
+    <Position X="5" Y="8" Height="0.507" Width="1.7" />
+  </Comment>
+  <Comment CommentText="update the counter during the change of setting is finish">
+    <Position X="16.684" Y="7.838" Height="0.653" Width="1.7" />
+  </Comment>
+  <Comment CommentText="save the remarks during added in the editor">
+    <Position X="1.777" Y="8.179" Height="0.507" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Collect the shoots inside DB to list">
+    <Position X="13.054" Y="7.89" Height="0.653" Width="1.7" />
+  </Comment>
+  <Class Name="ArcheryManager.Utils.CounterManager">
+    <Position X="8.75" Y="4.5" Width="1.5" />
+    <AssociationLine Name="Counter" Type="ArcheryManager.Utils.ScoreCounter" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8.75" Y="5.938" />
+        <Point X="5.781" Y="5.938" />
+        <Point X="5.781" Y="9" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAQAAAAAAAAAABIAAABA=</HashCode>
+      <FileName>Utils\CounterManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Counter" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SQLite.Net.Async.SQLiteAsyncConnection" Collapsed="true">
+    <Position X="8.25" Y="0.75" Width="3" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ArcheryManager.Pages.CounterSelectorPageViewModel">
+    <Position X="8.25" Y="9" Width="2.5" />
+    <Members>
+      <Method Name="ChangePage" Hidden="true" />
+      <Method Name="CounterSelectorPageViewModel" Hidden="true" />
+      <Property Name="HaveTarget" Hidden="true" />
+      <Property Name="IsWaiting" Hidden="true" />
+      <Property Name="LimitArrowNumberSelectorViewModel" Hidden="true" />
+      <Property Name="Shoot" Hidden="true" />
+      <Method Name="StartShoot" Hidden="true" />
+      <Property Name="TargetStyle" Hidden="true" />
+    </Members>
+    <AssociationLine Name="CounterManager" Type="ArcheryManager.Utils.CounterManager" FixedFromPoint="true">
+      <Path>
+        <Point X="9.5" Y="9" />
+        <Point X="9.5" Y="6.891" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.789" Y="-1.437" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAEABAAAAAAAIAAAAAICAAAAAAAABgAAQgA=</HashCode>
+      <FileName>Pages\CounterSelectorPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="CounterManager" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ArcheryManager.Utils.ScoreCounter">
+    <Position X="4.75" Y="9" Width="2.5" />
+    <Members>
+      <Method Name="AddArrowIfPossible" Hidden="true" />
+      <Property Name="ArrowSetting" Hidden="true" />
+      <Property Name="ArrowsSelected" Hidden="true" />
+      <Property Name="ArrowsShowed" Hidden="true" />
+      <Field Name="BaseFlightNumber" Hidden="true" />
+      <Method Name="ClearArrows" Hidden="true" />
+      <Method Name="ColorOf" Hidden="true" />
+      <Field Name="CountedShoot" Hidden="true" />
+      <Method Name="CountedShoot_PropertyChanged" Hidden="true" />
+      <Property Name="CurrentArrows" Hidden="true" />
+      <Property Name="FlightNumber" Hidden="true" />
+      <Property Name="FlightScoreString" Hidden="true" />
+      <Method Name="FlightsSaved_CollectionChanged" Hidden="true" />
+      <Field Name="GeneralCounterManager" Hidden="true" />
+      <Field Name="NewFlightText" Hidden="true" />
+      <Property Name="PreviousArrow" Hidden="true" />
+      <Method Name="RemoveLastArrow" Hidden="true" />
+      <Method Name="ScoreCounter" Hidden="true" />
+      <Method Name="ScoreCounter_PropertyChanged" Hidden="true" />
+      <Field Name="ScoreFormat" Hidden="true" />
+      <Method Name="ScoreOf" Hidden="true" />
+      <Method Name="ScoreString" Hidden="true" />
+      <Property Name="TotalScoreString" Hidden="true" />
+      <Method Name="UpdateArrowSetting" Hidden="true" />
+      <Method Name="UpdateOrder" Hidden="true" />
+      <Method Name="ValueOf" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AUACSgBAAEAEAiBABAAACIgAACgAEQIAACCLABChGFA=</HashCode>
+      <FileName>Utils\ScoreCounter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArcheryManager.Pages.SettingTargetPageViewModel">
+    <Position X="16.25" Y="9" Width="2.25" />
+    <Members>
+      <Property Name="ArrowsCount" Hidden="true" />
+      <Property Name="AverageIsVisible" Hidden="true" />
+      <Property Name="Flights" Hidden="true" />
+      <Property Name="HaveMaxArrowsCount" Hidden="true" />
+      <Property Name="HaveTarget" Hidden="true" />
+      <Property Name="IsDecreasingOrder" Hidden="true" />
+      <Property Name="LimitArrowNumberSelectorViewModel" Hidden="true" />
+      <Method Name="SettingTargetPageViewModel" Hidden="true" />
+      <Field Name="Shoot" Hidden="true" />
+      <Property Name="ShowAllArrows" Hidden="true" />
+      <Method Name="UpdateGeneralSetting" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAUAAQhAAAACAAIAAEAAACAAgAAAAAAIAAAAg=</HashCode>
+      <FileName>Pages\SettingTargetPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ArcheryManager.Pages.RemarksPageViewModel">
+    <Position X="1.5" Y="9" Width="2.5" />
+    <Members>
+      <Property Name="FlightRemarksPrevious" Hidden="true" />
+      <Property Name="GeneralRemarksPrevious" Hidden="true" />
+      <Method Name="RemarksPageViewModel" Hidden="true" />
+      <Property Name="Shoot" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Manager" Type="ArcheryManager.Utils.CounterManager" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2.438" Y="9" />
+        <Point X="2.438" Y="5.188" />
+        <Point X="8.75" Y="5.188" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>EAAgIAgAAAAABAAAAAAAAAAIAAAABAAAAAAAAIAAAAI=</HashCode>
+      <FileName>Pages\RemarksPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Manager" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ArcheryManager.Utils.SQLiteConnectionManager">
+    <Position X="9" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAIAAAAEAAAAACAAAAAAAAAAAIBQAAAAAAAA=</HashCode>
+      <FileName>Utils\SQLiteConnectionManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Connection" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ArcheryManager.Pages.ShootSavedPageViewModel">
+    <Position X="12.5" Y="9" Width="2.25" />
+    <Members>
+      <Field Name="_items" Hidden="true" />
+      <Property Name="IsEmptyList" Hidden="true" />
+      <Property Name="Items" Hidden="true" />
+      <Method Name="ShootSavedPageViewModel" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Manager" Type="ArcheryManager.Utils.CounterManager" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="13.625" Y="9" />
+        <Point X="13.625" Y="5.655" />
+        <Point X="10.25" Y="5.655" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAABAABACAAAAAAQAAAAA=</HashCode>
+      <FileName>Pages\ShootSavedPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Manager" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

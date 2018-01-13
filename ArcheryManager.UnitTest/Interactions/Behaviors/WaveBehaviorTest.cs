@@ -8,8 +8,8 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
     [TestFixture]
     public class WaveBehaviorTest
     {
-        private WaveBehavior behavior;
         private readonly Mock<Label> LabelMock;
+        private WaveBehavior behavior;
 
         public WaveBehaviorTest()
         {
@@ -27,21 +27,6 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
             Assert.AreEqual(null, LabelMock.Object.Text);
         }
 
-        [Test]
-        public void StartWaveTest()
-        {
-            behavior.StartWave();
-            Assert.AreEqual(WaveBehavior.AB, LabelMock.Object.Text);
-        }
-
-        [Test]
-        public void StopWaveTest()
-        {
-            behavior.StartWave();
-            behavior.StopWave();
-            Assert.AreEqual(string.Empty, LabelMock.Object.Text);
-        }
-
         [Test, Sequential]
         public void DuelWaveTest([Values(1, 2, 3, 4)]int wave,
             [Values(WaveBehavior.AB, WaveBehavior.CD, WaveBehavior.AB, WaveBehavior.CD)] string text)
@@ -56,6 +41,21 @@ namespace ArcheryManager.UnitTest.Interactions.Behaviors
         {
             behavior.DuelMode = false;
             TestWave(wave, text);
+        }
+
+        [Test]
+        public void StartWaveTest()
+        {
+            behavior.StartWave();
+            Assert.AreEqual(WaveBehavior.AB, LabelMock.Object.Text);
+        }
+
+        [Test]
+        public void StopWaveTest()
+        {
+            behavior.StartWave();
+            behavior.StopWave();
+            Assert.AreEqual(string.Empty, LabelMock.Object.Text);
         }
 
         private void TestWave(int wave, string text)

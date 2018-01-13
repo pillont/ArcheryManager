@@ -1,4 +1,5 @@
-﻿using ArcheryManager.Resources;
+﻿using ArcheryManager.DroidTest.Helpers;
+using ArcheryManager.Resources;
 using NUnit.Framework;
 using System;
 using System.Linq;
@@ -10,6 +11,20 @@ namespace ArcheryManager.DroidTest.StepDefinition
     [Binding]
     public class RemarksEditionSteps
     {
+        [Then(@"il y a le bouton d'historique de remarque de volée")]
+        public void AlorsIlYALeBoutonDHistoriqueDeRemarqueDeVolee()
+        {
+            string history = TranslationHelper.GetTextResource("History");
+            TestSetting.App.WaitForElement(e => e.Marked("generalRemarkEditor").Child().Child().Child().Child().Text(history));
+        }
+
+        [Then(@"il y a le bouton d'historique de remarque générales")]
+        public void AlorsIlYALeBoutonDHistoriqueDeRemarqueGenerales()
+        {
+            string history = TranslationHelper.GetTextResource("History");
+            TestSetting.App.WaitForElement(e => e.Marked("generalRemarkEditor").Child().Child().Child().Child().Text(history));
+        }
+
         [Then(@"il y a l'éditeur de remarques de la volée")]
         public void AlorsIlYALEditeurDeRemarquesDeLaVolee()
         {
@@ -22,17 +37,28 @@ namespace ArcheryManager.DroidTest.StepDefinition
             TestSetting.App.WaitForElement("generalRemarkEditor");
         }
 
-        [Then(@"le text de l'éditeur de remarque générales est emptyMessage")]
-        public void AlorsLeTextDeLEditeurDeRemarqueGeneralesEstEmptyMessage()
+        [Then(@"le bouton validé des remarques de la volée est utilisable")]
+        public void AlorsLeBoutonValideDesRemarquesDeLaVoleeEstUtilisable()
         {
-            var emptyT = TranslateExtension.GetTextResource("EnterRemarksHere");
-            ChecktextOfEditor("generalRemarkEditor", emptyT);
+            ButtonValidCheck("flightRemarkEditor", enabledWanted: true);
         }
 
-        [Then(@"le text de l'éditeur de remarque générales est ""(.*)""")]
-        public void AlorsLeTextDeLEditeurDeRemarqueGeneralesEst(string text)
+        [Then(@"le bouton validé des remarques de la volée n'est pas utilisable")]
+        public void AlorsLeBoutonValideDesRemarquesDeLaVoleeNEstPasUtilisable()
         {
-            ChecktextOfEditor("generalRemarkEditor", text);
+            ButtonValidCheck("flightRemarkEditor", enabledWanted: false);
+        }
+
+        [Then(@"le bouton validé des remarques général est utilisable")]
+        public void AlorsLeBoutonValideDesRemarquesGeneralEstUtilisable()
+        {
+            ButtonValidCheck("generalRemarkEditor", enabledWanted: true);
+        }
+
+        [Then(@"le bouton validé des remarques général n'est pas utilisable")]
+        public void AlorsLeBoutonValideDesRemarquesGeneralNEstPasUtilisable()
+        {
+            ButtonValidCheck("generalRemarkEditor", enabledWanted: false);
         }
 
         [Then(@"le text de l'éditeur de remarque de la volée est ""(.*)""")]
@@ -45,46 +71,33 @@ namespace ArcheryManager.DroidTest.StepDefinition
         public void AlorsLeTextDeLEditeurDeRemarqueDeLaVoleeEstEmptyMessage()
         {
             TestSetting.App.WaitForElement("flightRemarkEditor");
-            var emptyT = TranslateExtension.GetTextResource("EnterRemarksHere");
+            var emptyT = TranslationHelper.GetTextResource("EnterRemarksHere");
             ChecktextOfEditor("flightRemarkEditor", emptyT);
         }
 
-        [Then(@"il y a le bouton d'historique de remarque générales")]
-        public void AlorsIlYALeBoutonDHistoriqueDeRemarqueGenerales()
+        [Then(@"le text de l'éditeur de remarque générales est ""(.*)""")]
+        public void AlorsLeTextDeLEditeurDeRemarqueGeneralesEst(string text)
         {
-            string history = TranslateExtension.GetTextResource("History");
-            TestSetting.App.WaitForElement(e => e.Marked("generalRemarkEditor").Child().Child().Child().Child().Text(history));
+            ChecktextOfEditor("generalRemarkEditor", text);
         }
 
-        [Then(@"il y a le bouton d'historique de remarque de volée")]
-        public void AlorsIlYALeBoutonDHistoriqueDeRemarqueDeVolee()
+        [Then(@"le text de l'éditeur de remarque générales est emptyMessage")]
+        public void AlorsLeTextDeLEditeurDeRemarqueGeneralesEstEmptyMessage()
         {
-            string history = TranslateExtension.GetTextResource("History");
-            TestSetting.App.WaitForElement(e => e.Marked("generalRemarkEditor").Child().Child().Child().Child().Text(history));
+            var emptyT = TranslationHelper.GetTextResource("EnterRemarksHere");
+            ChecktextOfEditor("generalRemarkEditor", emptyT);
         }
 
-        [Then(@"le bouton validé des remarques de la volée n'est pas utilisable")]
-        public void AlorsLeBoutonValideDesRemarquesDeLaVoleeNEstPasUtilisable()
+        [When(@"je click sur le bouton de validation des remarques de la volée")]
+        public void QuandJeClickSurLeBoutonDeValidationDesRemarquesDeLaVolee()
         {
-            ButtonValidCheck("flightRemarkEditor", enabledWanted: false);
+            TestSetting.App.Tap(GetValidButtonQuery("flightRemarkEditor"));
         }
 
-        [Then(@"le bouton validé des remarques général n'est pas utilisable")]
-        public void AlorsLeBoutonValideDesRemarquesGeneralNEstPasUtilisable()
+        [When(@"je click sur le bouton de validation des remarques générales")]
+        public void QuandJeClickSurLeBoutonDeValidationDesRemarquesGenerales()
         {
-            ButtonValidCheck("generalRemarkEditor", enabledWanted: false);
-        }
-
-        [Then(@"le bouton validé des remarques de la volée est utilisable")]
-        public void AlorsLeBoutonValideDesRemarquesDeLaVoleeEstUtilisable()
-        {
-            ButtonValidCheck("flightRemarkEditor", enabledWanted: true);
-        }
-
-        [Then(@"le bouton validé des remarques général est utilisable")]
-        public void AlorsLeBoutonValideDesRemarquesGeneralEstUtilisable()
-        {
-            ButtonValidCheck("generalRemarkEditor", enabledWanted: true);
+            TestSetting.App.Tap(GetValidButtonQuery("generalRemarkEditor"));
         }
 
         [When(@"je rentre ""(.*)"" dans l'éditeur de remarque de la volée")]
@@ -100,18 +113,6 @@ namespace ArcheryManager.DroidTest.StepDefinition
             TestSetting.App.DismissKeyboard();
         }
 
-        [When(@"je click sur le bouton de validation des remarques de la volée")]
-        public void QuandJeClickSurLeBoutonDeValidationDesRemarquesDeLaVolee()
-        {
-            TestSetting.App.Tap(GetValidButtonQuery("flightRemarkEditor"));
-        }
-
-        [When(@"je click sur le bouton de validation des remarques générales")]
-        public void QuandJeClickSurLeBoutonDeValidationDesRemarquesGenerales()
-        {
-            TestSetting.App.Tap(GetValidButtonQuery("generalRemarkEditor"));
-        }
-
         private static void ButtonValidCheck(string parentName, bool enabledWanted)
         {
             var query = GetValidButtonQuery(parentName);
@@ -122,17 +123,17 @@ namespace ArcheryManager.DroidTest.StepDefinition
             Assert.AreEqual(enabledWanted, enabled);
         }
 
-        private static Func<AppQuery, AppQuery> GetValidButtonQuery(string parentName)
-        {
-            string valid = TranslateExtension.GetTextResource("Valid");
-            Func<AppQuery, AppQuery> query = e => e.Marked(parentName).Child().Child().Child().Child().Text(valid);
-            return query;
-        }
-
         private static void ChecktextOfEditor(string parentName, string wantedText)
         {
             var text = TestSetting.App.Query(e => e.Marked(parentName).Child(0).Child().Child()).Last().Text;
             Assert.AreEqual(wantedText, text);
+        }
+
+        private static Func<AppQuery, AppQuery> GetValidButtonQuery(string parentName)
+        {
+            string valid = TranslationHelper.GetTextResource("Valid");
+            Func<AppQuery, AppQuery> query = e => e.Marked(parentName).Child().Child().Child().Child().Text(valid);
+            return query;
         }
     }
 }

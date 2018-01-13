@@ -20,6 +20,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -38,6 +39,10 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="nunit.core, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.core.dll</HintPath>
       <Private>False</Private>
@@ -56,6 +61,24 @@
     <Reference Include="NUnit.VisualStudio.TestAdapter, Version=2.0.0.0, Culture=neutral, PublicKeyToken=4cb40d35494691ac, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\NUnit.VisualStudio.TestAdapter.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="SQLite.Net, Version=3.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLite.Net-PCL.3.0.5\lib\net40\SQLite.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLite.Net.Async, Version=3.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLite.Net.Async-PCL.3.0.5\lib\portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1\SQLite.Net.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLite.Net.Platform.Generic, Version=3.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLite.Net-PCL.3.0.5\lib\net40\SQLite.Net.Platform.Generic.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLite.Net.Platform.Win32, Version=3.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLite.Net-PCL.3.0.5\lib\net4\SQLite.Net.Platform.Win32.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLiteNetExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLiteNetExtensions.1.3.0\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\SQLiteNetExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLiteNetExtensionsAsync, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLiteNetExtensions.Async.1.3.0\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\SQLiteNetExtensionsAsync.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="TechTalk.SpecFlow, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
@@ -81,6 +104,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\ConnectedShoot\StartConnectedShoot.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StartConnectedShoot.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Counters\CounterBoutonAddArrowFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -96,15 +124,30 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CounterSettingUpdateFeature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Counters\FinishCounter.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinishCounter.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Counters\FlightNumberFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FlightNumberFeature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Counters\OpenSavedCounterFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OpenSavedCounterFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Counters\SelectionArrowFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SelectionArrowFeature.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Counters\ToolbarItemsCounter1.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ToolbarItemsCounter.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Counters\SpecificCounterSettingFeature.feature.cs">
       <AutoGen>True</AutoGen>
@@ -116,12 +159,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GeneralMenuFeature.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Remarks\ListRemarksContentFeatures.feature.cs">
+    <Compile Include="Features\Remarks\ListRemarksContentFeatures1.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ListRemarksContentFeatures.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Remarks\RemarksEditionFeature.feature.cs">
+    <Compile Include="Features\Remarks\RemarksEditionFeature1.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RemarksEditionFeature.feature</DependentUpon>
@@ -166,6 +209,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TargetSelectorFeature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Targets\ToolbarItemsKeepingFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ToolbarItemsKeepingFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Timer\MultiwaveFeatures.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -183,15 +231,22 @@
     </Compile>
     <Compile Include="GenericCountable\ArrowsListTest.cs" />
     <Compile Include="GenericCountable\ArrowsSelectionTest.cs" />
+    <Compile Include="Helpers\ArrowListHelper.cs" />
+    <Compile Include="Helpers\DeviceHelper.cs" />
     <Compile Include="Helpers\TargetHelper.cs" />
+    <Compile Include="Helpers\TranslationHelper.cs" />
     <Compile Include="StepDefinition\BackdoorSteps.cs" />
+    <Compile Include="StepDefinition\ConnectedShootSteps.cs" />
     <Compile Include="StepDefinition\CounterButtonsSteps.cs" />
+    <Compile Include="StepDefinition\CountsSavedSteps.cs" />
     <Compile Include="StepDefinition\GeneralCounterStep.cs" />
     <Compile Include="StepDefinition\GenericSearchElement.cs" />
     <Compile Include="StepDefinition\DeviceInteractionSteps.cs" />
     <Compile Include="StepDefinition\ListRemarksSteps.cs" />
     <Compile Include="StepDefinition\PickerSteps.cs" />
     <Compile Include="StepDefinition\RemarksEditionSteps.cs" />
+    <Compile Include="StepDefinition\ResultPageSteps.cs" />
+    <Compile Include="StepDefinition\TabbedCounterSteps.cs" />
     <Compile Include="StepDefinition\TargetSelectorSteps.cs" />
     <Compile Include="StepDefinition\TargetSettingSteps.cs" />
     <Compile Include="StepDefinition\TargetSteps.cs" />
@@ -213,6 +268,10 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Features\ConnectedShoot\StartConnectedShoot.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>StartConnectedShoot.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\Counters\CounterBoutonAddArrowFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CounterBoutonAddArrowFeature.feature.cs</LastGenOutput>
@@ -225,13 +284,25 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CounterSettingUpdateFeature.feature.cs</LastGenOutput>
     </None>
+    <None Include="Features\Counters\FinishCounter.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>FinishCounter.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\Counters\FlightNumberFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>FlightNumberFeature.feature.cs</LastGenOutput>
     </None>
+    <None Include="Features\Counters\OpenSavedCounterFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>OpenSavedCounterFeature.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\Counters\SelectionArrowFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>SelectionArrowFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Counters\ToolbarItemsCounter.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ToolbarItemsCounter1.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Counters\SpecificCounterSettingFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
@@ -243,11 +314,11 @@
     </None>
     <None Include="Features\Remarks\ListRemarksContentFeatures.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>ListRemarksContentFeatures.feature.cs</LastGenOutput>
+      <LastGenOutput>ListRemarksContentFeatures1.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Remarks\RemarksEditionFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>RemarksEditionFeature.feature.cs</LastGenOutput>
+      <LastGenOutput>RemarksEditionFeature1.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Targets\NewFlightFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
@@ -280,6 +351,10 @@
     <None Include="Features\Targets\TargetSelectorFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>TargetSelectorFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Targets\ToolbarItemsKeepingFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ToolbarItemsKeepingFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Timer\MultiwaveFeatures.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

@@ -4,19 +4,9 @@
              xmlns:page="clr-namespace:ArcheryManager.Pages.PagesTemplates"
              xmlns:ctl="clr-namespace:ArcheryManager.CustomControls"
              x:Class="ArcheryManager.Pages.CounterButtonPage">
-    <ScrollView AutomationId="generalScroolViewer">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="3*" />
-            </Grid.RowDefinitions>
-
-            <ctl:TotalCounter x:Name="totalCounter" Grid.Row="0" />
-            <ScrollView x:Name="scrollArrows" BackgroundColor="AliceBlue" Grid.Row="1">
-                <ctl:ArrowUniformGrid x:Name="scoreList" AutomationId="scoreList" Grid.Column="0" CountByRow="6" />
-            </ScrollView>
-            <ctl:CounterButtons x:Name="counterButtons" Grid.Row="2" />
-        </Grid>
-    </ScrollView>
+    <Grid x:Name="globalGrid">
+        <ctl:TotalCounter x:Name="totalCounter" Grid.Row="0" BindingContext="{Binding Counter}" />
+        <ScrollView x:Name="scrollArrows" BackgroundColor="AliceBlue" Grid.Row="1" />
+        <ctl:CounterButtons x:Name="counterButtons" Grid.Row="2" BindingContext="{Binding CounterButtonsViewModel}" />
+    </Grid>
 </page:ContentPageWithGeneralEvent>

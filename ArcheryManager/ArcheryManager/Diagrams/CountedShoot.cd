@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="MODELS">
+    <Position X="7.333" Y="3.167" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="ModelView">
+    <Position X="7.542" Y="8.468" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Controller&#xD;&#xA;">
+    <Position X="7.372" Y="15.865" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="View&#xD;&#xA;">
+    <Position X="7.25" Y="25.5" Height="0.75" Width="1.7" />
+  </Comment>
+  <Class Name="ArcheryManager.Entities.Arrow">
+    <Position X="12.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAACAAAAAAAAAAAAAAAEAAEAQAAAgAA=</HashCode>
+      <FileName>Entities\Arrow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArcheryManager.Entities.BaseEntity">
+    <Position X="16" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\BaseEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArcheryManager.Entities.CountedShoot">
+    <Position X="19.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAQAAQgAAAAAAAAIAEAAACAAgAAAAAAIAAAAA=</HashCode>
+      <FileName>Entities\CountedShoot.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Flights" />
+      <Property Name="GeneralRemarks" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ArcheryManager.Entities.Flight">
+    <Position X="15" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAIAAAAQAAAAAAAgAAAAgAAA=</HashCode>
+      <FileName>Entities\Flight.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Arrows" />
+      <Property Name="Remarks" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ArcheryManager.Entities.Remark">
+    <Position X="17" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAACAAggAA=</HashCode>
+      <FileName>Entities\Remark.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArcheryManager.ModelViews.ArrowModelView">
+    <Position X="11" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>ModelViews\ArrowModelView.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Arrow" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ArcheryManager.ModelViews.FlightModelView">
+    <Position X="12.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABIAAAAAAAAAAAAAAAAAAAAADAAgBAAAAgAA=</HashCode>
+      <FileName>ModelViews\FlightModelView.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Arrows" />
+      <Property Name="Flight" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ArcheryManager.ModelViews.RemarkModelView">
+    <Position X="16.75" Y="8" Width="1.5" />
+    <AssociationLine Name="Remark" Type="ArcheryManager.Entities.Remark" FixedFromPoint="true">
+      <Path>
+        <Point X="17.812" Y="8" />
+        <Point X="17.812" Y="6.752" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAEAAAAAAQAAAAIAAAAAEAAACAAAAQA=</HashCode>
+      <FileName>ModelViews\RemarkModelView.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Remark" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ArcheryManager.Settings.GeneralCounterSetting">
+    <Position X="25.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAQAAAAAABAAAAACAgIQAAAAAEAQACBKIAAAAAAI=</HashCode>
+      <FileName>Settings\GeneralCounterSetting.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Shoot" />
+      <Property Name="ScoreResult" />
+      <Property Name="GeneralRemarks" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ArcheryManager.Settings.ScoreResult">
+    <Position X="21.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BiACIAEAAAAAIQAAgAMAAgAAAEAAAAYSAAAEAEARCBQ=</HashCode>
+      <FileName>Settings\ScoreResult.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="FlightsSaved" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="System.Collections.ObjectModel.ObservableCollection&lt;T&gt;" Collapsed="true">
+    <Position X="18.25" Y="12" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ArcheryManager.Settings.ScoreCounter">
+    <Position X="13.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQBCDyAAAEAEAAAABEDACIxABCAAEAIAAACJAACAEFA=</HashCode>
+      <FileName>Settings\ScoreCounter.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Result" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ArcheryManager.CustomControls.Target">
+    <Position X="13.5" Y="25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAABAAUGggQAIADAAABABAEAAAAAAACERACAAAA=</HashCode>
+      <FileName>CustomControls\Target.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ArcheryManager.CustomControls.RemarkEditor">
+    <Position X="22.25" Y="27" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAoAQQAAAAAkIAAALAAAABUIAAAAAAACAAAAAAABE=</HashCode>
+      <FileName>CustomControls\RemarkEditor.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArcheryManager.CustomControls.TotalCounter">
+    <Position X="25.25" Y="27" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomControls\TotalCounter.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArcheryManager.CustomControls.ArrowsGrid">
+    <Position X="17.25" Y="27" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAIAARAAAAAEASAAAAAAQBAAgAAAABAAAEQDAAAEA=</HashCode>
+      <FileName>CustomControls\ArrowsGrid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArcheryManager.CustomControls.ArrowUniformGrid">
+    <Position X="19" Y="27" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAACAABAAAQAAAAAAQAAAgAAAABAAKAAAAAAAA=</HashCode>
+      <FileName>CustomControls\ArrowUniformGrid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

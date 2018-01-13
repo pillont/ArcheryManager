@@ -1,88 +1,19 @@
 ﻿using ArcheryManager.CustomControls;
+using ArcheryManager.Entities;
 using ArcheryManager.Helpers;
 using ArcheryManager.Utils;
 using Xamarin.Forms;
-using System.Collections.Generic;
-using ArcheryManager.Resources;
-using ArcheryManager.Settings;
-using System.Linq;
-using ArcheryManager.Models;
 
 namespace ArcheryManager.Interactions.Behaviors
 {
     public class SelectableArrowInListBehavior : CustomBehavior<ArrowUniformGrid>
     {
-        private IEnumerable<Arrow> ArrowsSelected
+        internal SelectionToolbarItemsController ToolbarItemsController;
+        private readonly ScoreCounter Counter;
+
+        public SelectableArrowInListBehavior(ScoreCounter counter)
         {
-            get
-            {
-                return AssociatedObject.Items.Where(a => a.IsSelected);
-            }
-        }
-
-        private readonly IList<ToolbarItem> toolbarItems;
-        private readonly List<ToolbarItem> DefaultToolbarItems;
-        private readonly IGeneralCounterSetting GeneralCountSetting;
-
-        public SelectableArrowInListBehavior(IList<ToolbarItem> toolbarItems, IGeneralCounterSetting generalCountSetting)
-        {
-            GeneralCountSetting = generalCountSetting;
-            this.toolbarItems = toolbarItems;
-            DefaultToolbarItems = new List<ToolbarItem>(toolbarItems);
-        }
-
-        protected override void OnAttachedTo(ArrowUniformGrid list)
-        {
-            base.OnAttachedTo(list);
-
-            AssociatedObject.ItemAdded += AssociatedObject_ItemAdded;
-        }
-
-        private bool ContainsInAssociatedObject(View a)
-        {
-            return AssociatedObject.Items.Contains(a.BindingContext as Arrow);
-        }
-
-        #region tap remove
-
-        private void RemoveSelection()
-        {
-            //NOTE : toList to allow removed during browse by foreach
-            var toRemove = ArrowsSelected.ToList();
-            foreach (var a in toRemove)
-            {
-                AssociatedObject.Items.Remove(a);
-            }
-            UpdateToolBarItems();
-
-            GeneralCountSetting.ScoreResult.OnArrowsChanged();
-        }
-
-        #endregion tap remove
-
-        #region tap unselect
-
-        private void UnSelect()
-        {
-            UnSelectSelection();
-        }
-
-        private void UnSelectSelection()
-        {
-            foreach (var arrow in AssociatedObject.Items)
-            {
-                arrow.IsSelected = false;
-            }
-            UpdateToolBarItems();
-        }
-
-        #endregion tap unselect
-
-        #region gesture to item added in list
-
-        private void AssociatedObject_ItemAdded(View obj)
-        {
-            GestureHelper.AddTapGestureOn(obj, ArrowRecognizer_Tapped);
+            Counter = counter;
         }
 
         public void ArrowRecognizer_Tapped(object sender, System.EventArgs e)
@@ -92,66 +23,28 @@ namespace ArcheryManager.Interactions.Behaviors
             var arrow = container.BindingContext as Arrow;
             arrow.IsSelected = !arrow.IsSelected;
 
-            UpdateToolBarItems();
+            ToolbarItemsController.UpdateToolBarItems();
         }
 
-        #endregion gesture to item added in list
-
-        #region toolbar items
-
-        public void UpdateToolBarItems()
+        protected override void OnAttachedTo(ArrowUniformGrid list)
         {
-            // have selected element
-            if (ArrowsSelected.Count() != 0)
-            {
-                ChangeButtonsFor(GetSelectionTitleButtons());
-            }
-            // have not selected element
-            else
-            {
-                ChangeButtonsFor(DefaultToolbarItems);
-            }
+            base.OnAttachedTo(list);
+
+            var generator = new SelectionToolbarItemsGenerator(Counter, AssociatedObject);
+            ToolbarItemsController = new SelectionToolbarItemsController(Counter, generator);
+            generator.ButtonPressed += ToolbarItemsController.UpdateToolBarItems;
+
+            AssociatedObject.ItemAdded += AssociatedObject_ItemAdded;
         }
 
-        private void ChangeButtonsFor(List<ToolbarItem> list)
+        private void AssociatedObject_ItemAdded(View obj)
         {
-            toolbarItems.Clear();
-
-            foreach (var item in list)
-            {
-                toolbarItems.Add(item);
-            }
+            GestureHelper.AddTapGestureOn(obj, ArrowRecognizer_Tapped);
         }
 
-        private void ShowSelectionButtonsInTitle()
+        private bool ContainsInAssociatedObject(View a)
         {
-            toolbarItems.Clear();
-
-            foreach (var item in GetSelectionTitleButtons())
-            {
-                toolbarItems.Add(item);
-            }
+            return AssociatedObject.Items.Contains(a.BindingContext as Arrow);
         }
-
-        private List<ToolbarItem> GetSelectionTitleButtons()
-        {
-            return new List<ToolbarItem>()
-            {
-                new ToolbarItem()
-                {
-                    Text = AppResources.UnSelect,
-                    Order = ToolbarItemOrder.Primary,
-                    Command = new Command(UnSelect)
-                },
-                new ToolbarItem()
-                {
-                    Text = AppResources.RemoveSelect,
-                    Order = ToolbarItemOrder.Primary,
-                    Command = new Command(RemoveSelection)
-                }
-            };
-        }
-
-        #endregion toolbar items
     }
 }

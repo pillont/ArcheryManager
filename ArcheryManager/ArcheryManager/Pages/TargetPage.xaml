@@ -8,11 +8,10 @@
              xmlns:shape="clr-namespace:XFShapeView;assembly=XFShapeView"
              x:Class="ArcheryManager.Pages.TargetPage">
 
-    <Grid x:Name="globalGrid">
+  <Grid x:Name="globalGrid">
 
-        <ctl:TotalCounter x:Name="totalCounter" Grid.Row="0" />
-        <Grid x:Name="targetGrid" />
-
-        <ScrollView x:Name="scrollArrows"  BackgroundColor="AliceBlue" />
-    </Grid>
+    <ctl:TotalCounter x:Name="totalCounter" Grid.Row="0" BindingContext="{Binding Counter}" />
+    <Grid x:Name="targetGrid" />
+    <ScrollView x:Name="scrollArrows"  BackgroundColor="AliceBlue" />
+  </Grid>
 </page:ContentPageWithGeneralEvent>

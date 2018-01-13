@@ -5,9 +5,10 @@
              xmlns:ctm="clr-namespace:ArcheryManager.CustomControls"
              x:Class="ArcheryManager.CustomControls.RemarkEditor">
     <ContentView.Content>
-        <StackLayout>
+        <StackLayout x:Name="generalLayer">
             <StackLayout Orientation="Horizontal" VerticalOptions="End">
                 <Label Text="{Binding Title}"
+                           FontSize="Large"
                            HorizontalTextAlignment="Center"
                            HorizontalOptions="FillAndExpand"
                            VerticalOptions="End"

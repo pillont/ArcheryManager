@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,6 +9,16 @@ namespace ArcheryManager.Resources
     public class TranslateExtension : IMarkupExtension
     {
         public string Text { get; set; }
+
+        public static string GetTextResource(string key)
+        {
+            string text = AppResources.ResourceManager.GetString(key);
+            if (text == null)
+            {
+                text = ErrorResources.ResourceManager.GetString(key);
+            }
+            return text;
+        }
 
         public object ProvideValue(IServiceProvider serviceProvider)
         {
@@ -25,16 +31,6 @@ namespace ArcheryManager.Resources
             if (text == null)
             {
                 text = ErrorResources.ResourceManager.GetString(Text, CultureInfo.CurrentCulture);
-            }
-            return text;
-        }
-
-        public static string GetTextResource(string key)
-        {
-            string text = AppResources.ResourceManager.GetString(key);
-            if (text == null)
-            {
-                text = ErrorResources.ResourceManager.GetString(key);
             }
             return text;
         }

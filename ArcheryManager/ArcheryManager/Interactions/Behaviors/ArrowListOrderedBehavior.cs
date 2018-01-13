@@ -1,37 +1,28 @@
 ﻿using ArcheryManager.CustomControls;
-using ArcheryManager.Settings;
-using ArcheryManager.Utils;
+using ArcheryManager.Entities;
 
 namespace ArcheryManager.Interactions.Behaviors
 {
     public class ArrowListOrderedBehavior : CustomBehavior<ArrowUniformGrid>
     {
-        private readonly IGeneralCounterSetting GeneralCounterSetting;
+        private readonly CountedShoot Shoot;
 
-        private CountSetting CountSetting
+        public ArrowListOrderedBehavior(CountedShoot shoot)
         {
-            get
-            {
-                return GeneralCounterSetting.CountSetting;
-            }
-        }
-
-        public ArrowListOrderedBehavior(IGeneralCounterSetting generalCounterSetting)
-        {
-            GeneralCounterSetting = generalCounterSetting;
+            Shoot = shoot;
         }
 
         protected override void OnAttachedTo(ArrowUniformGrid bindable)
         {
             base.OnAttachedTo(bindable);
-            CountSetting.PropertyChanged += TargetSetting_PropertyChanged;
+            Shoot.PropertyChanged += TargetSetting_PropertyChanged;
         }
 
         private void TargetSetting_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(CountSetting.IsDecreasingOrder))
+            if (e.PropertyName == nameof(CountedShoot.IsDecreasingOrder))
             {
-                if (CountSetting.IsDecreasingOrder)
+                if (Shoot.IsDecreasingOrder)
                 {
                     AssociatedObject.OrderSelector = a => a.Index * -1;
                 }

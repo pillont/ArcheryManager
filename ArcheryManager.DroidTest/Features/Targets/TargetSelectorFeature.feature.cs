@@ -72,15 +72,15 @@ namespace ArcheryManager.DroidTest.Features.Targets
         public virtual void TestDeSelectionDeCible(string type, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test de sélection de cible", exampleTags);
-#line 5
-this.ScenarioSetup(scenarioInfo);
 #line 6
- testRunner.When("J\'ouvre une page de sélection de cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+this.ScenarioSetup(scenarioInfo);
 #line 7
- testRunner.And(string.Format("je click sur le texte {0}", type), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.When("J\'ouvre une page de sélection de cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 8
+ testRunner.And(string.Format("je click sur le texte {0}", type), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 9
  testRunner.And("je valide la sélection de cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 10
+#line 11
  testRunner.Then(string.Format("il y a une cible {0}", type), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
@@ -91,13 +91,13 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TestDeNombreParDefaultDeFleche()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test de nombre par défault de flèche", ((string[])(null)));
-#line 20
-this.ScenarioSetup(scenarioInfo);
 #line 21
- testRunner.When("J\'ouvre une page de sélection de cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+this.ScenarioSetup(scenarioInfo);
 #line 22
+ testRunner.When("J\'ouvre une page de sélection de cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 23
  testRunner.And("je click sur le slider de nombre fixe de flèche", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 24
+#line 25
  testRunner.Then("le nombre de flèches est de 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
@@ -108,17 +108,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TestDeNombreDeFlecheParDefault()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test de nombre de flèche par défault", ((string[])(null)));
-#line 26
-this.ScenarioSetup(scenarioInfo);
 #line 27
- testRunner.When("J\'ouvre une page de sélection de cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+this.ScenarioSetup(scenarioInfo);
 #line 28
- testRunner.And("je valide la sélection de cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.When("J\'ouvre une page de sélection de cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 29
+ testRunner.And("je valide la sélection de cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 30
  testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 31
- testRunner.Then("le nombre de flèches actuelles sur la cible est de 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 32
+ testRunner.Then("le nombre de flèches actuelles sur la cible est de 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 33
  testRunner.And("le bouton nouvelle volée est activé", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line hidden
             this.ScenarioCleanup();
@@ -129,21 +129,21 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TestDeNombreDeFlecheDefiniBoutonNouvelleVoleeDesactive()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test de nombre de flèche défini bouton nouvelle volée désactivé", ((string[])(null)));
-#line 35
-this.ScenarioSetup(scenarioInfo);
 #line 36
- testRunner.When("J\'ouvre une page de sélection de cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+this.ScenarioSetup(scenarioInfo);
 #line 37
- testRunner.And("je click sur le slider de nombre fixe de flèche", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.When("J\'ouvre une page de sélection de cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 38
- testRunner.And("je rentre 5 en nombre de flèche", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je click sur le slider de nombre fixe de flèche", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 39
- testRunner.And("je valide la sélection de cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je rentre 5 en nombre de flèche", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 40
+ testRunner.And("je valide la sélection de cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 41
  testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 42
- testRunner.Then("le nombre de flèches actuelles sur la cible est de 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 43
+ testRunner.Then("le nombre de flèches actuelles sur la cible est de 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 44
  testRunner.And("le bouton nouvelle volée est désactivé", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line hidden
             this.ScenarioCleanup();
@@ -154,31 +154,31 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TestDeSelectionDuNombreDeFleche()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test de sélection du nombre de flèche", ((string[])(null)));
-#line 46
-this.ScenarioSetup(scenarioInfo);
 #line 47
- testRunner.When("J\'ouvre une page de sélection de cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+this.ScenarioSetup(scenarioInfo);
 #line 48
- testRunner.And("je click sur le slider de nombre fixe de flèche", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.When("J\'ouvre une page de sélection de cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 49
- testRunner.And("je rentre 5 en nombre de flèche", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je click sur le slider de nombre fixe de flèche", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 50
- testRunner.And("je valide la sélection de cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je rentre 5 en nombre de flèche", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 51
- testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je valide la sélection de cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 52
- testRunner.And("je tire une flèche en -4, -30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 53
- testRunner.And("je tire une flèche en -2, 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en -4, -30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 54
- testRunner.And("je tire une flèche en 25, 40", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en -2, 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 55
- testRunner.And("je tire une flèche en -10, 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 25, 40", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 56
+ testRunner.And("je tire une flèche en -10, 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 57
  testRunner.And("je tire une flèche en 5, -15", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 58
- testRunner.Then("le nombre de flèches actuelles sur la cible est de 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 59
+ testRunner.Then("le nombre de flèches actuelles sur la cible est de 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 60
  testRunner.And("le bouton nouvelle volée est activé", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line hidden
             this.ScenarioCleanup();
@@ -193,18 +193,43 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TestDeSelectionDeBoutonDeCible(string type, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test de sélection de bouton de cible", exampleTags);
-#line 62
-this.ScenarioSetup(scenarioInfo);
 #line 63
- testRunner.When("J\'ouvre une page de sélection de cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+this.ScenarioSetup(scenarioInfo);
 #line 64
- testRunner.And(string.Format("je click sur le texte {0}", type), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.When("J\'ouvre une page de sélection de cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 65
- testRunner.And("je click sur l\'option cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And(string.Format("je click sur le texte {0}", type), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 66
+ testRunner.And("je click sur l\'option cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 67
  testRunner.And("je valide la sélection de cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 68
+#line 69
  testRunner.Then(string.Format("il y a des boutons de {0}", type), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Test de retour après un selector")]
+        public virtual void TestDeRetourApresUnSelector()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test de retour après un selector", ((string[])(null)));
+#line 79
+this.ScenarioSetup(scenarioInfo);
+#line 80
+ testRunner.When("J\'ouvre une page de menu general", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+#line 81
+ testRunner.And("je click sur le bouton de tir compté", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 82
+ testRunner.And("je valide la sélection de cible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 83
+ testRunner.And("j\'attend 5 secondes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 84
+ testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 85
+ testRunner.And("je click sur le texte Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 87
+ testRunner.Then("il y a le titre de backdoor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
         }

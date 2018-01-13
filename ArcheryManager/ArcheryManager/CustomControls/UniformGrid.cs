@@ -1,25 +1,28 @@
-﻿using Xamarin.Forms;
-using System.Linq;
-using System.Collections.Specialized;
-using System.Runtime.CompilerServices;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using Xamarin.Forms;
 
 namespace ArcheryManager.CustomControls
 {
     public abstract class UniformGrid<T> : ItemsGrid<T>
     {
-        public static readonly BindableProperty OrderSelectorProperty =
-                      BindableProperty.Create(nameof(OrderSelector), typeof(Func<T, object>), typeof(UniformGrid<T>), null);
-
-        public virtual Func<T, object> OrderSelector
-        {
-            get { return (Func<T, object>)GetValue(OrderSelectorProperty); }
-            set { SetValue(OrderSelectorProperty, value); }
-        }
+        public static readonly BindableProperty CountByRowProperty =
+                      BindableProperty.Create(nameof(CountByRow), typeof(int?), typeof(UniformGrid<T>), null);
 
         public static readonly BindableProperty HeightCellProperty =
                       BindableProperty.Create(nameof(HeightCell), typeof(double), typeof(UniformGrid<T>), 50d);
+
+        public static readonly BindableProperty OrderSelectorProperty =
+                                      BindableProperty.Create(nameof(OrderSelector), typeof(Func<T, object>), typeof(UniformGrid<T>), null);
+
+        public int? CountByRow
+        {
+            get { return (int?)GetValue(CountByRowProperty); }
+            set { SetValue(CountByRowProperty, value); }
+        }
 
         public double HeightCell
         {
@@ -27,13 +30,10 @@ namespace ArcheryManager.CustomControls
             set { SetValue(HeightCellProperty, value); }
         }
 
-        public static readonly BindableProperty CountByRowProperty =
-                      BindableProperty.Create(nameof(CountByRow), typeof(int?), typeof(UniformGrid<T>), null);
-
-        public int? CountByRow
+        public virtual Func<T, object> OrderSelector
         {
-            get { return (int?)GetValue(CountByRowProperty); }
-            set { SetValue(CountByRowProperty, value); }
+            get { return (Func<T, object>)GetValue(OrderSelectorProperty); }
+            set { SetValue(OrderSelectorProperty, value); }
         }
 
         public UniformGrid()
@@ -47,7 +47,7 @@ namespace ArcheryManager.CustomControls
         {
             base.OnPropertyChanged(propertyName);
 
-            if (propertyName == nameof(Items))
+            if (propertyName == nameof(Items) && Items != null)
             {
                 this.Items.CollectionChanged += Items_CollectionChanged;
             }
@@ -66,55 +66,14 @@ namespace ArcheryManager.CustomControls
             }
         }
 
-        private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void AddColumn()
         {
-            if (e.Action == NotifyCollectionChangedAction.Reset)
-            {
-                resetDimension();
-            }
+            this.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
         }
 
-        private void UniformGrid_ItemRemoved(BindableObject obj)
+        private void AddRow()
         {
-            ResetPosition();
-        }
-
-        private void ResetPosition()
-        {
-            resetDimension();
-
-            IEnumerable<T> ordered;
-            if (OrderSelector != null)
-            {
-                ordered = Items.OrderBy(OrderSelector);
-            }
-            else
-            {
-                ordered = Items;
-            }
-
-            int indexChild = 0;
-            foreach (var data in ordered)
-            {
-                var child = FindContainer(data);
-                if (child != null)
-                {
-                    ApplyPosition(child, indexChild);
-                    indexChild++;
-                }
-            }
-        }
-
-        private void resetDimension()
-        {
-            this.RowDefinitions.Clear();
-            this.ColumnDefinitions.Clear();
-            AddRow();
-        }
-
-        private void UniformGrid_ItemAdded(BindableObject obj)
-        {
-            ResetPosition();
+            this.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(HeightCell) });
         }
 
         private void ApplyPosition(BindableObject obj, int childIndex)
@@ -153,20 +112,61 @@ namespace ArcheryManager.CustomControls
             }
         }
 
+        private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Reset)
+            {
+                resetDimension();
+            }
+        }
+
+        private void resetDimension()
+        {
+            this.RowDefinitions.Clear();
+            this.ColumnDefinitions.Clear();
+            AddRow();
+        }
+
+        private void ResetPosition()
+        {
+            resetDimension();
+
+            IEnumerable<T> ordered;
+            if (OrderSelector != null)
+            {
+                ordered = Items.OrderBy(OrderSelector);
+            }
+            else
+            {
+                ordered = Items;
+            }
+
+            int indexChild = 0;
+            foreach (var data in ordered)
+            {
+                var child = FindContainer(data);
+                if (child != null)
+                {
+                    ApplyPosition(child, indexChild);
+                    indexChild++;
+                }
+            }
+        }
+
         private void SetItemInNewColumn(BindableObject item)
         {
             AddColumn();
             Grid.SetColumn(item, this.ColumnDefinitions.Count - 1);
         }
 
-        private void AddRow()
+        private void UniformGrid_ItemAdded(BindableObject obj)
         {
-            this.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(HeightCell) });
+            ResetPosition();
         }
 
-        private void AddColumn()
+        private void UniformGrid_ItemRemoved(BindableObject obj)
         {
-            this.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
+            ResetPosition();
         }
     }
 }

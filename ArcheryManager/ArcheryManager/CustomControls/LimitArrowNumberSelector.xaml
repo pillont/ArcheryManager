@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resources="clr-namespace:ArcheryManager.Resources"
+             xmlns:b="clr-namespace:ArcheryManager.Interactions.Behaviors"
              x:Class="ArcheryManager.CustomControls.LimitArrowNumberSelector">
     <ContentView.Content>
-        <Grid>
+        <Grid x:Name="generalGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -32,11 +33,16 @@
                    Grid.Column="2"
                    IsVisible="{Binding HaveMaxArrowsCount}"
                    Text="{Binding ArrowsCount}"
-                   Unfocused="ArrowCount_Unfocused"
                    VerticalOptions="Center"
                    HorizontalTextAlignment="Center"
                    AutomationId="numberArrowEntry"
-                   x:Name="numberArrowEntry" />
+                   x:Name="numberArrowEntry">
+                <Entry.Behaviors>
+                    <b:EventToCommandBehavior EventName="Unfocused"
+                                              Command="{Binding Unfocused}"
+                                              CommandParameter="{Reference numberArrowEntry}" />
+                </Entry.Behaviors>
+            </Entry>
         </Grid>
     </ContentView.Content>
 </ContentView>

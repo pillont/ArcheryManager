@@ -6,10 +6,8 @@ namespace ArcheryManager.Settings.ArrowSettings
 {
     public class FieldArrowSetting : IArrowSetting
     {
-        public int ZoneCount => 7;
-
-        private const string MissScore = "M";
         private const int FieldMaxValue = 6;
+        private const string MissScore = "M";
         private static FieldArrowSetting instance;
 
         public static FieldArrowSetting Instance
@@ -32,6 +30,10 @@ namespace ArcheryManager.Settings.ArrowSettings
                 return FieldMaxValue;
             }
         }
+
+        public string MaxValue => "6";
+        public string PreMaxValue => "5";
+        public int ZoneCount => 7;
 
         private FieldArrowSetting()
         {
@@ -72,6 +74,12 @@ namespace ArcheryManager.Settings.ArrowSettings
             {// other
                 return Color.White;
             }
+        }
+
+        public Color ColorOf(int value)
+        {
+            string score = value != 0 ? value.ToString() : MissScore;
+            return ColorOf(score);
         }
 
         public Color ColorofTargetZone(int i)

@@ -25,6 +25,7 @@ Scénario: test le message pour quitter une cible bouton navigation
 	Alors il y a le texte SureQuitCount
 
 
+ #TODO
 Scénario: test le message pour quitter une zapette bouton navigation
 	Quand J'ouvre une page tabbed de zappette
 	Et je reviens à la page d'avant
@@ -77,19 +78,19 @@ Scénario: test la restitution de score après le message d'erreur dans une zape
 Scénario: test la restitution de score après le message d'erreur dans une cible
 	Quand J'ouvre une page tabbed de cible fita
 	Et je tire une flèche en 0, 0
-	Et je tire une flèche en 50, 70
-	Et je tire une flèche en 30, 20
+	Et je tire une flèche en 60, 80
+	Et je tire une flèche en 45, 20
 
 	Et je reviens à la page d'avant
 	Et je click sur le texte No
 
 	Alors le nombre de flèches dans la liste est de 3
 	Et la fleche 0 de la liste est un X10
-	Et la fleche 1 de la liste est un 8
+	Et la fleche 1 de la liste est un 9
 	Et la fleche 2 de la liste est un 10
 	
-	Et la fleche 0 de la cible est en 376, 684
-	Et la fleche 1 de la cible est en 437, 769
-	Et la fleche 2 de la cible est en 415, 709
+	Et la fleche 0 de la cible est en 528, 1027
+	Et la fleche 1 de la cible est en 589, 1109
+	Et la fleche 2 de la cible est en 574, 1047
 
 

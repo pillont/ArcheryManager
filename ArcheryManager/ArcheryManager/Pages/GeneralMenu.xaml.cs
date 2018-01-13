@@ -1,14 +1,14 @@
-﻿using ArcheryManager.Settings;
+﻿using ArcheryManager.Controllers;
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XLabs.Forms.Mvvm;
 
 namespace ArcheryManager.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GeneralMenu : ContentPage
     {
-        private static readonly GeneralCounterSetting GeneralCounterSetting = DependencyService.Get<IGeneralCounterSetting>() as GeneralCounterSetting;
-
         public GeneralMenu()
         {
             InitializeComponent();
@@ -20,14 +20,23 @@ namespace ArcheryManager.Pages
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
-        private async void Timer_Tapped(object sender, System.EventArgs e)
+        protected override void OnBindingContextChanged()
         {
-            await App.NavigationPage.PushAsync(new TimerPage());
+            base.OnBindingContextChanged();
         }
+    }
 
-        private async void Counter_Tapped(object sender, System.EventArgs e)
+    public class GeneralMenuViewModel : ViewModel
+    {
+        private readonly PageOpenerController Controller;
+
+        public ICommand CounterTapped => new Command(Controller.OpenCounterSelector);
+        public ICommand SavesCommand => new Command(Controller.OpenSaveCounterList);
+        public ICommand TimerTapped => new Command(Controller.OpenTimerPage);
+
+        public GeneralMenuViewModel(PageOpenerController controller)
         {
-            await App.NavigationPage.PushAsync(new CounterSelectorPage());
+            Controller = controller;
         }
     }
 }

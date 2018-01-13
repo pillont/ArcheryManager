@@ -8,24 +8,14 @@ namespace ArcheryManager.Settings.ArrowSettings
 {
     public class IndoorRecurveArrowSetting : IArrowSetting
     {
-        public const string MissScore = "M";
-        public const string SixScore = "6";
-        public const string SevenScore = "7";
         public const string HeightScore = "8";
+        public const string MissScore = "M";
         public const string NineScore = "9";
+        public const string SevenScore = "7";
+        public const string SixScore = "6";
         public const string TenScore = "10";
-        private const int IndoorRecurveZoneCount = 6;
         private const int IndoorRecurveMaxValue = 10;
-
-        private static Dictionary<string, Color> IndoorRecurveColorOf = new Dictionary<string, Color>()
-        {
-            { MissScore, Color.Green},
-            { SixScore,  Color.CornflowerBlue},
-            { SevenScore, Color.Red},
-            { HeightScore, Color.Red},
-            { NineScore, Color.Yellow},
-            { TenScore, Color.Yellow},
-        };
+        private const int IndoorRecurveZoneCount = 6;
 
         private static readonly Dictionary<int, string> IndoorRecurveScoreByIndex = new Dictionary<int, string>()
         {
@@ -37,21 +27,15 @@ namespace ArcheryManager.Settings.ArrowSettings
             { 5 , TenScore },
         };
 
-        public int MaxScore
+        private static Dictionary<string, Color> IndoorRecurveColorOf = new Dictionary<string, Color>()
         {
-            get
-            {
-                return IndoorRecurveMaxValue;
-            }
-        }
-
-        public int ZoneCount
-        {
-            get
-            {
-                return IndoorRecurveZoneCount;
-            }
-        }
+            { MissScore, Color.Green},
+            { SixScore,  Color.CornflowerBlue},
+            { SevenScore, Color.Red},
+            { HeightScore, Color.Red},
+            { NineScore, Color.Yellow},
+            { TenScore, Color.Yellow},
+        };
 
         private static IArrowSetting instance;
 
@@ -67,20 +51,36 @@ namespace ArcheryManager.Settings.ArrowSettings
             }
         }
 
-        private IndoorRecurveArrowSetting()
+        public int MaxScore
         {
+            get
+            {
+                return IndoorRecurveMaxValue;
+            }
         }
 
-        public string ScoreByIndex(int i)
+        public string MaxValue => TenScore;
+
+        public string PreMaxValue => NineScore;
+
+        public int ZoneCount
         {
-            if (IndoorRecurveScoreByIndex.ContainsKey(i))
+            get
             {
-                return IndoorRecurveScoreByIndex[i];
+                return IndoorRecurveZoneCount;
             }
-            else
-            {
-                return MissScore;
-            }
+        }
+
+        private IndoorRecurveArrowSetting()
+        { }
+
+        /// <summary>
+        /// determine the color of the zone string
+        /// </summary>
+        /// <param name="i">score zone</param>
+        public Color BorderColorZone(int i)
+        {
+            return Color.Black;
         }
 
         public Color ColorOf(string score)
@@ -95,19 +95,10 @@ namespace ArcheryManager.Settings.ArrowSettings
             }
         }
 
-        public int ValueByScore(string score)
+        public Color ColorOf(int value)
         {
-            var index = IndoorRecurveScoreByIndex.Where(val => val.Value == score).FirstOrDefault().Key;
-            if (index == 0)
-                return index;
-            else
-            {
-                index += 5;
-                if (index < 11)
-                    return index;
-                else
-                    throw new IndexOutOfRangeException();
-            }
+            string score = IndoorRecurveScoreByIndex.First(pair => pair.Key == value).Value;
+            return ColorOf(score);
         }
 
         /// <summary>
@@ -137,13 +128,31 @@ namespace ArcheryManager.Settings.ArrowSettings
             }
         }
 
-        /// <summary>
-        /// determine the color of the zone string
-        /// </summary>
-        /// <param name="i">score zone</param>
-        public Color BorderColorZone(int i)
+        public string ScoreByIndex(int i)
         {
-            return Color.Black;
+            if (IndoorRecurveScoreByIndex.ContainsKey(i))
+            {
+                return IndoorRecurveScoreByIndex[i];
+            }
+            else
+            {
+                return MissScore;
+            }
+        }
+
+        public int ValueByScore(string score)
+        {
+            var index = IndoorRecurveScoreByIndex.Where(val => val.Value == score).FirstOrDefault().Key;
+            if (index == 0)
+                return index;
+            else
+            {
+                index += 5;
+                if (index < 11)
+                    return index;
+                else
+                    throw new IndexOutOfRangeException();
+            }
         }
     }
 }

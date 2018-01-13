@@ -85,20 +85,20 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ScoreApresTir()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Score après tir", ((string[])(null)));
-#line 10
-this.ScenarioSetup(scenarioInfo);
 #line 11
- testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+this.ScenarioSetup(scenarioInfo);
 #line 12
- testRunner.And("je tire une flèche en 100, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 13
- testRunner.And("je tire une flèche en 50, 235", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 100, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 14
+ testRunner.And("je tire une flèche en 50, 240", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 15
  testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 16
- testRunner.Then("le score de la volée est 15/30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line 17
- testRunner.Then("le score total est 15/30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.Then("le score de la volée est 22/30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 18
+ testRunner.Then("le score total est 22/30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -108,22 +108,22 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ScoreApresUneNouvelleVolee()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Score après une nouvelle volée", ((string[])(null)));
-#line 19
-this.ScenarioSetup(scenarioInfo);
-#line 20
- testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 21
- testRunner.And("je tire une flèche en 100, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+this.ScenarioSetup(scenarioInfo);
 #line 22
- testRunner.And("je tire une flèche en 50, 235", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 23
- testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 100, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 24
- testRunner.And("Je click sur le bouton nouvelle volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je tire une flèche en 50, 240", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 25
+ testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 26
+ testRunner.And("Je click sur le bouton nouvelle volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 28
  testRunner.Then("le score de la volée est 0/0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
-#line 27
- testRunner.Then("le score total est 15/30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 29
+ testRunner.Then("le score total est 22/30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -133,28 +133,28 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ScoreTirApresUneNouvelleVolee()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Score tir après une nouvelle volée", ((string[])(null)));
-#line 29
-this.ScenarioSetup(scenarioInfo);
-#line 30
-testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
-#line 31
- testRunner.And("je tire une flèche en 100, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 32
- testRunner.And("je tire une flèche en 50, 235", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+this.ScenarioSetup(scenarioInfo);
 #line 33
- testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 34
- testRunner.And("Je click sur le bouton nouvelle volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 35
  testRunner.And("je tire une flèche en 100, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 35
+ testRunner.And("je tire une flèche en 50, 240", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 36
- testRunner.And("je tire une flèche en 50, 235", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 37
  testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 37
+ testRunner.And("Je click sur le bouton nouvelle volée", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 38
+ testRunner.And("je tire une flèche en 100, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 39
- testRunner.Then("le score de la volée est 15/30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.And("je tire une flèche en 50, 240", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 40
- testRunner.Then("le score total est 30/60", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+ testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 42
+ testRunner.Then("le score de la volée est 22/30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
+#line 43
+ testRunner.Then("le score total est 44/60", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();
         }

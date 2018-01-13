@@ -1,9 +1,9 @@
-﻿using System.IO;
-using Foundation;
-using AVFoundation;
-using Xamarin.Forms;
-using ArcheryManager.iOS;
+﻿using ArcheryManager.iOS;
 using ArcheryManager.Services;
+using AVFoundation;
+using Foundation;
+using System.IO;
+using Xamarin.Forms;
 
 [assembly: Dependency(typeof(AudioService))]
 

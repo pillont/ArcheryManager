@@ -120,6 +120,15 @@
   <data name="CantAddMoreThanMaxArrow" xml:space="preserve">
     <value>Can't add more arrow than the max</value>
   </data>
+  <data name="CantFinishEmptyCount" xml:space="preserve">
+    <value>Can't finish empty count</value>
+  </data>
+  <data name="EmailMissing" xml:space="preserve">
+    <value>Email missing</value>
+  </data>
+  <data name="EmailNotFound" xml:space="preserve">
+    <value>Email not found</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
@@ -131,5 +140,11 @@
   </data>
   <data name="NoAddingDuringSelection" xml:space="preserve">
     <value>Can't add arrow during selection</value>
+  </data>
+  <data name="ShootNameEmpty" xml:space="preserve">
+    <value>Name of the shoot empty</value>
+  </data>
+  <data name="ShootNameExist" xml:space="preserve">
+    <value>Name of the shoot already existing</value>
   </data>
 </root>

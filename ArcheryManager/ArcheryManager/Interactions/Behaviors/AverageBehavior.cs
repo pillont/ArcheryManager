@@ -1,7 +1,6 @@
 ﻿using ArcheryManager.CustomControls;
+using ArcheryManager.Entities;
 using ArcheryManager.Helpers;
-using ArcheryManager.Models;
-using ArcheryManager.Settings;
 using ArcheryManager.Utils;
 using System;
 using System.Collections.Generic;
@@ -15,49 +14,38 @@ namespace ArcheryManager.Interactions.Behaviors
     {
         private const int MinArrowForAverage = 2;
         private readonly ScoreCounter Counter;
-        public Point? AverageCenter { get; private set; }
-        private readonly IGeneralCounterSetting GeneralCounterSetting;
-
-        private ScoreResult Result
-        {
-            get
-            {
-                return GeneralCounterSetting.ScoreResult;
-            }
-        }
-
-        private CountSetting CountSetting
-        {
-            get
-            {
-                return GeneralCounterSetting.CountSetting;
-            }
-        }
-
+        private readonly CountedShoot Shoot;
         private readonly Target Target;
+        public Point? AverageCenter { get; private set; }
 
-        public AverageBehavior(Target target, ScoreCounter counter, IGeneralCounterSetting generalCounterSetting)
+        public AverageBehavior(CounterManager manager, Target target)
         {
+            Shoot = manager.CurrentShoot;
+            Counter = manager.Counter;
             Target = target;
-            Counter = counter;
-            GeneralCounterSetting = generalCounterSetting;
         }
 
         protected override void OnAttachedTo(AverageCanvas bindable)
         {
             base.OnAttachedTo(bindable);
-            CountSetting.PropertyChanged += Setting_PropertyChanged;
-            Result.ArrowsChanged += Counter_ArrowsChanged;
-        }
+            Shoot.PropertyChanged += Setting_PropertyChanged;
+            Counter.PropertyChanged += Counter_PropertyChanged;
 
-        private void Counter_ArrowsChanged()
-        {
-            UpdateAverage();
+            Target.PropertyChanged += Target_PropertyChanged;
         }
 
         protected override void OnDetachingFrom(AverageCanvas bindable)
         {
-            CountSetting.PropertyChanged -= Setting_PropertyChanged;
+            Shoot.PropertyChanged -= Setting_PropertyChanged;
+            Counter.PropertyChanged -= Counter_PropertyChanged;
+        }
+
+        private void Counter_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Counter.CurrentArrows))
+            {
+                UpdateAverage();
+            }
         }
 
         /// <summary>
@@ -65,58 +53,41 @@ namespace ArcheryManager.Interactions.Behaviors
         /// </summary>
         private void Setting_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            try
+            if (e.PropertyName == nameof(CountedShoot.ShowAllArrows)
+            || e.PropertyName == nameof(CountedShoot.AverageIsVisible))
             {
-                if (e.PropertyName == nameof(CountSetting.ShowAllArrows))
-                {
-                    if (Counter.ArrowsShowed.Count > MinArrowForAverage)
-                    {
-                        UpdateAverage();
-                    }
-                }
-
-                if (e.PropertyName == nameof(CountSetting.AverageIsVisible))
-                {
-                    UpdateAverage();
-                }
+                UpdateAverage();
             }
-            catch (Exception)
+        }
+
+        private void Target_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Target.TargetSize))
             {
-                throw;
+                UpdateAverage();
             }
         }
 
         #region average update
 
-        private async void UpdateAverageAsync()
+        private object AverageIsUpdatingLocker = new object();
+
+        /// <summary>
+        /// update average when AllArrow of the counter changing
+        /// </summary>
+        public void UpdateAverage()
         {
-            var list = Counter.ArrowsShowed.ToList();
+            bool seeAverage = Shoot.AverageIsVisible
+                            && Counter.ArrowsShowed.Count() >= MinArrowForAverage;
 
-            await Task.Run(() =>
+            if (seeAverage)
             {
-                try
-                {
-                    if (list.Count != 0)
-                    {
-                        UpdateAverageCenter(list);
-                        double standartDeviationX = StatisticHelper.CalculateStdDev(list.Select(a => ArrowTranslationHelper.TranslationXOf(a, Target.TargetSize)));
-                        double standartDeviationY = StatisticHelper.CalculateStdDev(list.Select(a => ArrowTranslationHelper.TranslationYOf(a, Target.TargetSize)));
-
-                        if (!AverageCenter.HasValue)
-                        {
-                            throw new NullReferenceException("average center hasn't value");
-                        }
-
-                        var visual = AssociatedObject.CreateAverageVisual(standartDeviationX, standartDeviationY, AverageCenter.Value);
-                        Device.BeginInvokeOnMainThread(() =>
-                                                    AssociatedObject.Content = visual);
-                    }
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-            });
+                UpdateAverageAsync();
+            }
+            else
+            {
+                RemoveAverage();
+            }
         }
 
         public void UpdateAverageCenter(List<Arrow> list)
@@ -133,22 +104,52 @@ namespace ArcheryManager.Interactions.Behaviors
             }
         }
 
-        /// <summary>
-        /// update average when AllArrow of the counter changing
-        /// </summary>
-        public void UpdateAverage()
+        private void ComputeAverage()
         {
-            bool seeAverage = CountSetting.AverageIsVisible
-                            && Counter.ArrowsShowed.Count >= MinArrowForAverage;
+            var list = Counter.ArrowsShowed.ToList();
 
-            if (seeAverage)
+            UpdateAverageCenter(list);
+            double standartDeviationX = StatisticHelper.CalculateStdDev(list.Select(a => ArrowTranslationHelper.TranslationXOf(a, Target.TargetSize)));
+            double standartDeviationY = StatisticHelper.CalculateStdDev(list.Select(a => ArrowTranslationHelper.TranslationYOf(a, Target.TargetSize)));
+
+            if (!AverageCenter.HasValue)
             {
-                UpdateAverageAsync();
+                throw new NullReferenceException("average center hasn't value");
             }
-            else
+
+            var visual = AssociatedObject.CreateAverageVisual(standartDeviationX, standartDeviationY, AverageCenter.Value);
+            Device.BeginInvokeOnMainThread(() =>
+                                        AssociatedObject.Content = visual);
+        }
+
+        private void RemoveAverage()
+        {
+            Task.Run(() =>
             {
-                AssociatedObject.Content = null;
-            }
+                lock (AverageIsUpdatingLocker)
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        RemoveVisualOfAverage();
+                    });
+                }
+            });
+        }
+
+        private void RemoveVisualOfAverage()
+        {
+            AssociatedObject.Content = null;
+        }
+
+        private async void UpdateAverageAsync()
+        {
+            await Task.Run(() =>
+            {
+                lock (AverageIsUpdatingLocker)
+                {
+                    ComputeAverage();
+                }
+            });
         }
 
         #endregion average update

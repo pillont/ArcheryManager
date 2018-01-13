@@ -309,4 +309,34 @@
   <data name="FlightNumberTitle" xml:space="preserve">
     <value>Number of the flight</value>
   </data>
+  <data name="Count" xml:space="preserve">
+    <value>Count</value>
+  </data>
+  <data name="Saves" xml:space="preserve">
+    <value>Saves</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="InProgress" xml:space="preserve">
+    <value>In Progress</value>
+  </data>
+  <data name="Finished" xml:space="preserve">
+    <value>Finished</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Mail adress</value>
+  </data>
+  <data name="Connect" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="AverageStringFormat" xml:space="preserve">
+    <value>Average :</value>
+  </data>
+  <data name="TotalStringFormat" xml:space="preserve">
+    <value>Total : {0:F0}</value>
+  </data>
+  <data name="TenCountFormat" xml:space="preserve">
+    <value>Count of {0} :</value>
+  </data>
 </root>

@@ -1,7 +1,7 @@
-﻿using Xamarin.Forms;
-using UIKit;
-using ArcheryManager.iOS;
+﻿using ArcheryManager.iOS;
 using ArcheryManager.Settings;
+using UIKit;
+using Xamarin.Forms;
 
 [assembly: Dependency(typeof(IOSKeyboardHelper))]
 

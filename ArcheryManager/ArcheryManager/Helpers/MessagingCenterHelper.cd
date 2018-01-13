@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="call function to send message">
+    <Position X="3.595" Y="7.173" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="listen message to apply change in the navigation">
+    <Position X="6.753" Y="1.022" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Send message when navigation page popped sub page">
+    <Position X="10.77" Y="2.49" Height="0.75" Width="1.7" />
+  </Comment>
+  <Class Name="ArcheryManager.Helpers.MessagingCenterHelper">
+    <Position X="6" Y="2.75" Width="2.25" />
+    <NestedTypes>
+      <Enum Name="ArcheryManager.Helpers.MessagingCenterHelper.Message" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Helpers\MessagingCenterHelper.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAEAAAACAAQAAAEAAQAAAAAAAAQEAAAQBACAgAGAgA=</HashCode>
+      <FileName>Helpers\MessagingCenterHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArcheryManager.App">
+    <Position X="9.25" Y="1" Width="2.5" />
+    <Members>
+      <Field Name="_navigationPage" Hidden="true" />
+      <Method Name="App" Hidden="true" />
+      <Method Name="CheckValueOrThrow" Hidden="true" />
+      <Method Name="CreateTables" Hidden="true" />
+      <Field Name="DBName" Hidden="true" />
+      <Method Name="InitSqliteTables" Hidden="true" />
+      <Method Name="InitViewFactory" Hidden="true" />
+      <Method Name="Instance_BackPageEvent" Hidden="true" />
+      <Method Name="Instance_PushingPageEvent" Hidden="true" />
+      <Method Name="Instance_SendToastEvent" Hidden="true" />
+      <Method Name="NavigationPage_Popped" Hidden="true" />
+      <Method Name="OnResume" Hidden="true" />
+      <Method Name="OnSleep" Hidden="true" />
+      <Method Name="OnStart" Hidden="true" />
+    </Members>
+    <AssociationLine Name="NavigationPage" Type="Xamarin.Forms.NavigationPage">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.053" Y="0.856" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABBAgAgAlAAAAABAAQAEAAAAAAAABQAACBE=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="MessagingCenterHelper" />
+      <Property Name="NavigationPage" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ArcheryManager.Pages.BackDoorPageViewModel">
+    <Position X="1.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BIAAAAAAAAgEAAAAAQAAAMGAAACABgAAAUAABCAAEAA=</HashCode>
+      <FileName>Pages\BackDoorPage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArcheryManager.Pages.GeneralMenuViewModel">
+    <Position X="3.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEQAAAAAAAAAAAAAAAAAAAAAAAAAEAgAAABAAAAAA=</HashCode>
+      <FileName>Pages\GeneralMenu.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xamarin.Forms.NavigationPage" Collapsed="true">
+    <Position X="9.75" Y="4" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,62 +1,78 @@
-﻿using System.Threading.Tasks;
+﻿using ArcheryManager.Helpers;
 using ArcheryManager.Pages.PagesTemplates;
+using System;
 using Xamarin.Forms;
 
 namespace ArcheryManager.Interactions.Behaviors
 {
+    /// <summary>
+    /// <seealso cref="Page.DisplayAlert(string, string, string, string)"/>
+    /// </summary>
+    public class AlertArg
+    {
+        public event EventHandler<bool> ResultChange;
+
+        public string Accept { get; set; }
+        public string Cancel { get; set; }
+        public string Message { get; set; }
+        public string Title { get; set; }
+
+        public void ResultChanged(bool r)
+        {
+            ResultChange?.Invoke(this, r);
+        }
+    }
+
     public class BackMessageBehavior<T> : CustomBehavior<T> where T : Page, IGeneralEventHolder
     {
+        public event EventHandler PoppedAccept;
+
         private readonly AlertArg AlertArg;
-        private readonly NavigationPage NavigationReference;
 
         /// <summary>
         /// behavior to display alert when the navigation page pop the associated page
         /// </summary>
-        public BackMessageBehavior(NavigationPage navigationP, AlertArg alertArg)
+        public BackMessageBehavior(AlertArg alertArg)
         {
-            NavigationReference = navigationP;
             AlertArg = alertArg;
         }
 
         protected override void OnAttachedTo(T bindable)
         {
             base.OnAttachedTo(bindable);
-            NavigationReference.Popped += NavigationPage_Popped;
+            MessagingCenterHelper.Instance.PoppingPageEvent += NavigationPage_Popped;
         }
 
-        private async void NavigationPage_Popped(object sender, NavigationEventArgs e)
+        private void DisplayAlert()
         {
-            if (e.Page == AssociatedObject)
+            MessagingCenterHelper.SendToast(this, AlertArg);
+        }
+
+        private void NavigationPage_Popped(object sender, Page page)
+        {
+            if (page == AssociatedObject)
             {
-                bool answer = await DisplayAlert();
-                if (!answer)
+                DisplayAlert();
+
+                EventHandler<bool> ee = null;
+                ee = (s, answer) =>
                 {
-                    await NavigationReference.PushAsync(e.Page);
-                }
-                else
-                {
-                    NavigationReference.Popped -= NavigationPage_Popped;
-                }
+                    AlertArg.ResultChange -= ee;
+
+                    //return to the target
+                    if (!answer)
+                    {
+                        MessagingCenterHelper.PushInNavigationPage(this, page);
+                    }
+                    else
+                    {
+                        MessagingCenterHelper.Instance.PoppingPageEvent -= NavigationPage_Popped;
+                        PoppedAccept?.Invoke(AssociatedObject, null);
+                    }
+                };
+
+                AlertArg.ResultChange += ee;
             }
         }
-
-        private async Task<bool> DisplayAlert()
-        {
-            return await NavigationReference.DisplayAlert(AlertArg.Title,
-                                                            AlertArg.Message,
-                                                            AlertArg.Accept,
-                                                            AlertArg.Cancel);
-        }
-    }
-
-    /// <summary>
-    /// <seealso cref="Page.DisplayAlert(string, string, string, string)"/>
-    /// </summary>
-    public class AlertArg
-    {
-        public string Title { get; set; }
-        public string Message { get; set; }
-        public string Accept { get; set; }
-        public string Cancel { get; set; }
     }
 }

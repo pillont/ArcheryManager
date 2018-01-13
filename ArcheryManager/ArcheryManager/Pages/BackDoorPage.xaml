@@ -14,15 +14,19 @@
                VerticalTextAlignment="Center"
                FontAttributes="Bold"
                FontSize="Large" />
-            <Button Text="{resources:Translate Timer}" AutomationId="TimerButton" Clicked="Timer_Click" />
-            <Button Text="{resources:Translate EnglishTarget}" AutomationId="EnglishTargetButton" x:Name="EnglishTargetButton" Clicked="Target_Click" />
-            <Button Text="{resources:Translate FieldTarget}" AutomationId="fieldTargetButton" x:Name="fieldTargetButton" Clicked="Target_Click" />
-            <Button Text="{resources:Translate IndoorRecurveTarget}" AutomationId="indoorRecurveTargetButton" x:Name="indoorRecurveTargetButton" Clicked="Target_Click" />
-            <Button Text="{resources:Translate IndoorCompoundTarget}" AutomationId="indoorCompoundTargetButton" x:Name="indoorCompoundTargetButton" Clicked="Target_Click" />
-            <Button Text="{resources:Translate ButtonCounter}" AutomationId="ButtonCounterButton" Clicked="ButtonCounter_Clicked" />
-            <Button Text="{resources:Translate CounterSelector}" AutomationId="CounterSelectorButton" Clicked="CounterSelector_Clicked" />
-            <Button Text="{resources:Translate GeneralMenu}" AutomationId="GeneralMenuButton" Clicked="GeneralMenu_Clicked" />
-            <Button Text="{resources:Translate Remarks}" AutomationId="remarksButton" Clicked="Remarks_Clicked" />
+            <Button Text="{resources:Translate Timer}" AutomationId="TimerButton" Command="{Binding TimerClick}" />
+            <Button Text="{resources:Translate EnglishTarget}" AutomationId="EnglishTargetButton" x:Name="EnglishTargetButton" Command="{Binding TargetClick}" CommandParameter="{Reference EnglishTargetButton}" />
+            <Button Text="{resources:Translate FieldTarget}" AutomationId="fieldTargetButton" x:Name="fieldTargetButton" Command="{Binding TargetClick}" CommandParameter="{Reference fieldTargetButton}" />
+            <Button Text="{resources:Translate IndoorRecurveTarget}" AutomationId="indoorRecurveTargetButton" x:Name="indoorRecurveTargetButton" Command="{Binding TargetClick}" CommandParameter="{Reference indoorRecurveTargetButton}" />
+            <Button Text="{resources:Translate IndoorCompoundTarget}" AutomationId="indoorCompoundTargetButton" x:Name="indoorCompoundTargetButton" Command="{Binding TargetClick}" CommandParameter="{Reference indoorCompoundTargetButton}" />
+            <Button Text="{resources:Translate ButtonCounter}" AutomationId="ButtonCounterButton" Command="{Binding ButtonCounterClicked}" />
+            <Button Text="{resources:Translate CounterSelector}" AutomationId="CounterSelectorButton" Command="{Binding CounterSelectorClicked}" />
+            <Button Text="{resources:Translate GeneralMenu}" AutomationId="GeneralMenuButton" Command="{Binding GeneralMenuClicked}" />
+            <Button Text="{resources:Translate Remarks}" AutomationId="remarksButton" Command="{Binding RemarksClicked}" />
+            <Button Text="{resources:Translate Saves}" AutomationId="SavesListPageButton" Command="{Binding SavesClicked}" />
+            <!--    <Button Text="Log" Command="{Binding LogClicked}" />-->
+            <Button Text="Add counter" Command="{Binding AddCounterClicked}" />
+            <Button Text="Start Connected Shoot" AutomationId="StartConnectedShootButton" Command="{Binding ConnectedShootCommand}" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

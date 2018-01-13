@@ -1,66 +1,62 @@
-﻿using ArcheryManager.Interfaces;
+﻿using ArcheryManager.Entities;
+using ArcheryManager.Helpers;
+using ArcheryManager.Interfaces;
+using ArcheryManager.Pages;
 using ArcheryManager.Pages.PagesTemplates;
 using ArcheryManager.Resources;
-using ArcheryManager.Settings;
+using ArcheryManager.Utils;
 using System;
-using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using Xamarin.Forms;
 
 namespace ArcheryManager.Interactions.Behaviors
 {
-    public class CounterToolbarItemsBehavior<T> : CustomBehavior<T> where T : BindableObject, IToolbarItemsHolder
+    public class CounterToolbarItemsBehavior : CustomBehavior<ContentPageWithGeneralEvent>
     {
-        #region toolbar item
-
-        private readonly IGeneralCounterSetting GeneralCounterSetting;
         private readonly ScoreCounter Counter;
+        private readonly MessageManager MessageManager;
+        private readonly CountedShoot Shoot;
+        private readonly CounterToolbarGenerator ToolbarItemsGenerator;
+        private ToolbarItem NewFlightButton { get; set; }
 
-        public CounterToolbarItemsBehavior(IGeneralCounterSetting generalCounterSetting, ScoreCounter counter)
+        public CounterToolbarItemsBehavior(CounterManager manager, CounterToolbarGenerator generator)
         {
-            GeneralCounterSetting = generalCounterSetting;
-            Counter = counter;
+            ToolbarItemsGenerator = generator;
+            Counter = manager.Counter;
+            Shoot = manager.CurrentShoot;
+            MessageManager = manager.MessageManager;
+        }
+
+        public void AddDefaultToolbarItems()
+        {
+            foreach (var item in ToolbarItemsGenerator.ToolbarItems)
+            {
+                var arg = new ToolbarItemsArg()
+                {
+                    ToolbarItem = item,
+                    PageType = typeof(ICounterPage)
+                };
+                MessagingCenterHelper.AddToolbarItem(this, arg);
+            }
         }
 
         protected override void OnAttachedTo(BindableObject bindable)
         {
             base.OnAttachedTo(bindable);
 
-            var countSetting = GeneralCounterSetting.CountSetting;
-            var result = GeneralCounterSetting.ScoreResult;
-            result.CurrentArrows.CollectionChanged += Arrows_CollectionChanged;
-            countSetting.PropertyChanged += CountSetting_PropertyChanged;
+            AssociatedObject.PagePushed += AssociatedObject_PagePushed;
         }
 
-        private void Arrows_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void AddNewFlightButton()
         {
-            if (e.Action == NotifyCollectionChangedAction.Add)
+            NewFlightButton = ToolbarItemsGenerator.NewFlightButton;
+            var arg = new ToolbarItemsArg()
             {
-                AddNewFlightButtonIfCanValidFlight();
-            }
-            else if (e.Action == NotifyCollectionChangedAction.Remove
-                || e.Action == NotifyCollectionChangedAction.Reset)
-            {
-                RemoveNewFlightIfCantValidFlight();
-            }
-        }
-
-        private void CountSetting_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(CountSetting.HaveMaxArrowsCount)
-                || e.PropertyName == nameof(CountSetting.ArrowsCount))
-            {
-                RemoveNewFlightButton();
-                AddNewFlightButtonIfCanValidFlight();
-            }
-        }
-
-        private void RemoveNewFlightIfCantValidFlight()
-        {
-            if (!CanValidFlight())
-            {
-                RemoveNewFlightButton();
-            }
+                ToolbarItem = NewFlightButton,
+                PageType = typeof(ICounterPage)
+            };
+            MessagingCenterHelper.AddToolbarItem(this, arg);
         }
 
         private void AddNewFlightButtonIfCanValidFlight()
@@ -74,56 +70,51 @@ namespace ArcheryManager.Interactions.Behaviors
             }
         }
 
+        private void AssociatedObject_PagePushed(object sender, EventArgs e)
+        {
+            AssociatedObject.PagePushed -= AssociatedObject_PagePushed;
+
+            Counter.PropertyChanged += Counter_PropertyChanged;
+            Shoot.PropertyChanged += CountSetting_PropertyChanged;
+
+            MessagingCenterHelper.ClearToolbarItem(this, new ClearArg<ToolbarItem>() { PageType = typeof(TabbedPage) });
+            AddDefaultToolbarItems();
+            AddNewFlightButtonIfCanValidFlight();
+        }
+
         private bool CanValidFlight()
         {
-            var currentArrows = GeneralCounterSetting.ScoreResult.CurrentArrows;
-            bool haveMaxArrowsCount = GeneralCounterSetting.CountSetting.HaveMaxArrowsCount;
-            var currentArrows1 = GeneralCounterSetting.ScoreResult.CurrentArrows;
-            int arrowsCount = GeneralCounterSetting.CountSetting.ArrowsCount;
+            var currentArrows = Shoot.CurrentArrows;
+            bool haveMaxArrowsCount = Shoot.HaveMaxArrowsCount;
+            int arrowsCount = Shoot.ArrowsCount;
 
-            return currentArrows.Count > 0 &&
+            return currentArrows != null &&
+                currentArrows.Count > 0 &&
                 ((!haveMaxArrowsCount)
-                || currentArrows1.Count >= arrowsCount);
-        }
-
-        public void AddDefaultToolbarItems()
-        {
-            AssociatedObject.ToolbarItems.Add(new ToolbarItem()
-            {
-                Text = AppResources.RemoveLast,
-                Order = ToolbarItemOrder.Primary,
-                Command = new Command(Counter.RemoveLastArrow)
-            });
-
-            AssociatedObject.ToolbarItems.Add(new ToolbarItem()
-            {
-                Text = AppResources.RemoveAll,
-                Order = ToolbarItemOrder.Secondary,
-                Command = new Command(() => AskValidation(AppResources.RemoveAllQuestion, Counter.ClearArrows))
-            });
-
-            AssociatedObject.ToolbarItems.Add(new ToolbarItem()
-            {
-                Text = AppResources.Restart,
-                Order = ToolbarItemOrder.Secondary,
-                Command = new Command(() => AskValidation(AppResources.RestartQuestion, Counter.RestartCount))
-            });
-        }
-
-        private void AddNewFlightButton()
-        {
-            AssociatedObject.ToolbarItems.Add(new ToolbarItem()
-            {
-                Text = AppResources.NewFlight,
-                Order = ToolbarItemOrder.Primary,
-                Command = new Command(() => AskValidation(AppResources.NewFlightQuestion, Counter.NewFlight)),
-            });
+                || currentArrows.Count >= arrowsCount);
         }
 
         private bool ContainsNewFlightButton()
         {
             var button = GetCurrentNewFlightButton();
             return button != null;
+        }
+
+        private void Counter_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            UpdateFlightButton();
+        }
+
+        /// <summary>
+        /// if setting value have changed
+        /// </summary>
+        private void CountSetting_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(CountedShoot.HaveMaxArrowsCount)
+                || e.PropertyName == nameof(CountedShoot.ArrowsCount))
+            {
+                UpdateFlightButton();
+            }
         }
 
         private ToolbarItem GetCurrentNewFlightButton()
@@ -134,22 +125,23 @@ namespace ArcheryManager.Interactions.Behaviors
 
         private void RemoveNewFlightButton()
         {
-            var button = GetCurrentNewFlightButton();
-            if (button != null)
+            if (NewFlightButton != null)
             {
-                AssociatedObject.ToolbarItems.Remove(button);
+                var arg = new ToolbarItemsArg()
+                {
+                    ToolbarItem = NewFlightButton,
+                    PageType = typeof(ICounterPage)
+                };
+
+                MessagingCenterHelper.RemoveToolbarItem(this, arg);
+                NewFlightButton = null;
             }
         }
 
-        private async void AskValidation(string message, Action action)
+        private void UpdateFlightButton()
         {
-            var valid = await App.NavigationPage.DisplayAlert(AppResources.Question, message, AppResources.Yes, AppResources.No);
-            if (valid)
-            {
-                action?.Invoke();
-            }
+            RemoveNewFlightButton();
+            AddNewFlightButtonIfCanValidFlight();
         }
-
-        #endregion toolbar item
     }
 }

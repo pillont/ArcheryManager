@@ -28,7 +28,7 @@
                         </Grid.ColumnDefinitions>
                         <Label Text="{Binding FlightIndex, StringFormat={resources:Translate FlightNumber}}"
                                Grid.Column="0"
-                               IsVisible=" {Binding BindingContext.AreNotGeneralRemarks, Source={x:Reference Name=listView}}"
+                               IsVisible="{Binding BindingContext.AreNotGeneralRemarks, Source={x:Reference Name=listView}}"
                                VerticalOptions="FillAndExpand"
                                VerticalTextAlignment="Center"
                                BackgroundColor="CornflowerBlue"

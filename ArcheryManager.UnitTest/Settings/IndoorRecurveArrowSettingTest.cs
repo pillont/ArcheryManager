@@ -11,15 +11,11 @@ namespace ArcheryManager.UnitTest.Settings
         private readonly IArrowSetting Setting = IndoorRecurveArrowSetting.Instance;
 
         [Test]
-        public void ColorOfTest()
+        public void BorderColorZoneTest()
         {
-            Assert.AreEqual(Color.Green, Setting.ColorOf("M"));
-            Assert.AreEqual(Color.CornflowerBlue, Setting.ColorOf("6"));
-            Assert.AreEqual(Color.Red, Setting.ColorOf("7"));
-            Assert.AreEqual(Color.Red, Setting.ColorOf("8"));
-            Assert.AreEqual(Color.Yellow, Setting.ColorOf("9"));
-            Assert.AreEqual(Color.Yellow, Setting.ColorOf("10"));
-            Assert.AreEqual(Color.Green, Setting.ColorOf("test"));
+            Assert.AreEqual(Color.Black, Setting.BorderColorZone(3));
+            Assert.AreEqual(Color.Black, Setting.BorderColorZone(4));
+            Assert.AreEqual(Color.Black, Setting.BorderColorZone(5));
         }
 
         [Test]
@@ -34,11 +30,15 @@ namespace ArcheryManager.UnitTest.Settings
         }
 
         [Test]
-        public void BorderColorZoneTest()
+        public void ColorOfTest()
         {
-            Assert.AreEqual(Color.Black, Setting.BorderColorZone(3));
-            Assert.AreEqual(Color.Black, Setting.BorderColorZone(4));
-            Assert.AreEqual(Color.Black, Setting.BorderColorZone(5));
+            Assert.AreEqual(Color.Green, Setting.ColorOf("M"));
+            Assert.AreEqual(Color.CornflowerBlue, Setting.ColorOf("6"));
+            Assert.AreEqual(Color.Red, Setting.ColorOf("7"));
+            Assert.AreEqual(Color.Red, Setting.ColorOf("8"));
+            Assert.AreEqual(Color.Yellow, Setting.ColorOf("9"));
+            Assert.AreEqual(Color.Yellow, Setting.ColorOf("10"));
+            Assert.AreEqual(Color.Green, Setting.ColorOf("test"));
         }
 
         [Test]

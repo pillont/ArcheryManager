@@ -1,104 +1,105 @@
-﻿using ArcheryManager.Factories;
-using ArcheryManager.Interfaces;
-using ArcheryManager.Settings;
-using ArcheryManager.Settings.ArrowSettings;
-using System;
-using System.Threading.Tasks;
+﻿using ArcheryManager.Controllers;
+using ArcheryManager.Resources;
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XLabs.Forms.Mvvm;
+using static ArcheryManager.CustomControls.TargetImage;
+using System;
+using ArcheryManager.Utils;
+using ArcheryManager.Entities;
+using ArcheryManager.Helpers;
 
 namespace ArcheryManager.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BackDoorPage : ContentPage
     {
-        private static readonly GeneralCounterSetting GeneralCounterSetting = DependencyService.Get<IGeneralCounterSetting>() as GeneralCounterSetting;
-
         public BackDoorPage()
         {
-            try
+            InitializeComponent();
+        }
+
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+        }
+    }
+
+    public class BackDoorPageViewModel : ViewModel
+    {
+        private readonly PageOpenerController Controller;
+        public ICommand AddCounterClicked => new Command(AddCounter);
+        public ICommand ButtonCounterClicked => new Command(Controller.OpenEnglishButtonsCounterPage);
+        public ICommand ConnectedShootCommand => new Command(Controller.ConnectedShoot);
+        public ICommand CounterSelectorClicked => new Command(Controller.OpenCounterSelector);
+        public ISQLiteConnectionManager DBSaver { get; }
+        public ICommand GeneralMenuClicked => new Command(Controller.OpenGeneralMenuPage);
+        public ICommand LogClicked => new Command(Controller.OpenLogPage);
+        public ICommand RemarksClicked => new Command(Controller.OpenRemarksPage);
+        public ICommand SavesClicked => new Command(Controller.OpenSaveCounterList);
+        public ICommand TargetClick => new Command<Button>(OpenTarget);
+        public ICommand TimerClick => new Command(Controller.OpenTimerPage);
+
+        public BackDoorPageViewModel(PageOpenerController controller, ISQLiteConnectionManager dBSaver)
+        {
+            DBSaver = dBSaver;
+            Controller = controller;
+        }
+
+        public void OpenTarget(Button btn)
+        {
+            TargetStyle style;
+            if (btn.Text == AppResources.EnglishTarget)
             {
-                InitializeComponent();
+                style = TargetStyle.EnglishTarget;
             }
-            catch (Exception e)
+            else if (btn.Text == AppResources.FieldTarget)
             {
-                throw;
+                style = TargetStyle.FieldTarget;
             }
-        }
-
-        private async void Timer_Click(object sender, EventArgs e)
-        {
-            await App.NavigationPage.PushAsync(new TimerPage());
-        }
-
-        private async void Target_Click(object sender, EventArgs e)
-        {
-            try
+            else if (btn.Text == AppResources.IndoorCompoundTarget)
             {
-                IArrowSetting setting;
-                if (sender == EnglishTargetButton)
-                {
-                    setting = EnglishArrowSetting.Instance;
-                }
-                else if (sender == fieldTargetButton)
-                {
-                    setting = FieldArrowSetting.Instance;
-                }
-                else if (sender == indoorCompoundTargetButton)
-                {
-                    setting = IndoorCompoundArrowSetting.Instance;
-                }
-                else // indoorRecurveTargetButton
-                {
-                    setting = IndoorRecurveArrowSetting.Instance;
-                }
-
-                var countSetting = new CountSetting() { HaveTarget = true };
-
-                UpdateGeneralCounterSetting(setting, countSetting);
-                await OpenNewCounterView();
+                style = TargetStyle.IndoorCompoundTarget;
             }
-            catch (Exception ee)
+            else // indoorRecurveTargetButton
             {
-                throw;
+                style = TargetStyle.IndoorRecurveTarget;
             }
+
+            Controller.OpenTarget(style);
         }
 
-        private async Task OpenNewCounterView()
+        private void AddCounter()
         {
-            var page = CounterPageFactory.CreateTabbedCounter(GeneralCounterSetting);
-            await App.NavigationPage.PushAsync(page);
-        }
+            Random random = new Random();
 
-        private static void UpdateGeneralCounterSetting(IArrowSetting setting, CountSetting countSetting)
-        {
-            GeneralCounterSetting.CountSetting = countSetting;
-            GeneralCounterSetting.ArrowSetting = setting;
-        }
+            var date = new DateTime(2017, 05, 5);
+            for (int day = 0; day < 7; day++)
+            {
+                int max = Enum.GetNames(typeof(TargetStyle)).Length;
+                for (int count = 0; count < max; count++)
+                {
+                    var counter = new CountedShoot()
+                    {
+                        CreationDate = date,
+                        TargetStyle = (TargetStyle)count,
+                        IsFinished = random.Next(0, 2) == 0,
+                    };
 
-        private async void ButtonCounter_Clicked(object sender, EventArgs e)
-        {
-            var countSetting = new CountSetting() { HaveTarget = false };
-            var arrowSetting = EnglishArrowSetting.Instance;
-            UpdateGeneralCounterSetting(arrowSetting, countSetting);
-            await OpenNewCounterView();
-        }
+                    DBSaver.InsertOrReplaceWithChildrenRecursivelyAsync(counter);
 
-        private async void CounterSelector_Clicked(object sender, EventArgs e)
-        {
-            await App.NavigationPage.PushAsync(new CounterSelectorPage());
-        }
+                    var man = new ScoreCounter(counter, DBSaver, null);
+                    man.NewFlight();
+                    for (int arrow = 0; arrow < 10; arrow++)
+                    {
+                        man.AddArrowIfPossible(new Arrow() { Index = 5 });
+                    }
+                }
+                date = date.AddDays(1);
+            }
 
-        private async void GeneralMenu_Clicked(object sender, EventArgs e)
-        {
-            var generalMenu = new GeneralMenu();
-            await App.NavigationPage.PushAsync(generalMenu);
-        }
-
-        private async void Remarks_Clicked(object sender, EventArgs e)
-        {
-            var page = new RemarksPage();
-            await App.NavigationPage.PushAsync(page);
+            MessagingCenterHelper.SendToast(this, "shoot adding", "shoot was added", "OK");
         }
     }
 }

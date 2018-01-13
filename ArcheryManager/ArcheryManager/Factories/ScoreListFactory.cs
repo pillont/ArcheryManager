@@ -1,11 +1,9 @@
 ﻿using ArcheryManager.CustomControls;
 using ArcheryManager.Interactions.Behaviors;
 using ArcheryManager.Utils;
-using System.Collections.Generic;
 using Xamarin.Forms;
-using System.Linq;
-using System.Collections.Specialized;
-using ArcheryManager.Settings;
+using XLabs.Forms.Mvvm;
+using XLabs.Ioc;
 
 namespace ArcheryManager.Factories
 {
@@ -16,18 +14,35 @@ namespace ArcheryManager.Factories
         /// scoreList items is currentarrows of counter
         /// Add selectableArrowInListBehavior to change the toolbar Items during selection
         /// </summary>
-        public static ArrowUniformGrid Create(IGeneralCounterSetting generalCounterSetting, IList<ToolbarItem> toolbarItems)
+        public static ArrowUniformGrid AddInScrollView(ScrollView scrollArrows)
         {
-            var arrowSetting = generalCounterSetting.ArrowSetting;
+            var scoreList = CreateScoreList();
 
-            var scoreList = new ArrowUniformGrid { AutomationId = "scoreList", CountByRow = 6, ArrowSetting = arrowSetting };
-            scoreList.Items = generalCounterSetting.ScoreResult.CurrentArrows;
+            scoreList.SizeChanged += (t, e) =>
+            {
+                scrollArrows.ScrollToAsync(scrollArrows.Content, ScrollToPosition.End, true);
+            };
 
-            var selectBehavior = new SelectableArrowInListBehavior(toolbarItems, generalCounterSetting);
+            scrollArrows.Content = scoreList;
+
+            return scoreList;
+        }
+
+        public static ScoreList CreateScoreList()
+        {
+            var scoreList = ViewFactory.CreatePage<ScoreListCurrentArrowsViewModel, ScoreList>() as ScoreList;
+
+            scoreList.AutomationId = "scoreList";
+            scoreList.CountByRow = 6;
+            var viewModel = Resolver.Resolve<ScoreListViewModel>();
+
+            var counter = Resolver.Resolve<ScoreCounter>();
+            var selectBehavior = new SelectableArrowInListBehavior(counter);
             scoreList.Behaviors.Add(selectBehavior);
 
-            var orderBehavior = new ArrowListOrderedBehavior(generalCounterSetting);
+            var orderBehavior = Resolver.Resolve<ArrowListOrderedBehavior>();
             scoreList.Behaviors.Add(orderBehavior);
+
             return scoreList;
         }
     }

@@ -26,7 +26,7 @@ Scénario: test de sauvegarde des remarques générales
 	Et la volée de la remarque 2 n'est pas visible
 
 
-	
+	#// FAIL
 Scénario: test de sauvegarde des remarques de volées
 	Quand J'ouvre une page tabbed de cible fita
 	Et je click sur l'onglet de remarque
@@ -69,15 +69,15 @@ Scénario: test de la taille des ligne de la list
 
 	Et je click sur le bouton d'historique de remarque de la volée
 
-	Alors la volée de la remarque 0 a comme taille 107
-	Et la volée de la remarque 1 a comme taille 107 
-	Et la remarque 0 a comme taille 651 
-	Et la remarque 1 a comme taille 347
+	Alors la volée de la remarque 0 a comme taille 158
+	Et la volée de la remarque 1 a comme taille 158
+	Et la remarque 0 a comme taille 1034 
+	Et la remarque 1 a comme taille 578
 
 	Quand je scrool en bas
 	# scrool remove the first remarks of the view
-	Alors la volée de la remarque 1 a comme taille 107
-	Et la remarque 1 a comme taille 43
+	Alors la volée de la remarque 1 a comme taille 158
+	Et la remarque 1 a comme taille 65
 
 
 Scénario: test du text par défault pour une liste vide

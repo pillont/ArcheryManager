@@ -11,21 +11,21 @@
 
     <StackLayout HorizontalOptions="Center" VerticalOptions="Center" AutomationId="test">
         <Picker x:Name="songPicker"
-                ItemsSource="{Static utl:TimerPageSetting.AllSongFilesNames}"
-                IsVisible="False"
-                SelectedIndexChanged="SongPicker_SelectedIndexChanged" />
+            ItemsSource="{Static utl:TimerPageSetting.AllSongFilesNames}"
+            IsVisible="False"
+            SelectedIndexChanged="SongPicker_SelectedIndexChanged" />
         <Picker x:Name="modePicker"
-                ItemsSource="{Static utl:TimerPageSetting.TimerModes}"
-                IsVisible="False"
-                SelectedIndexChanged="modePicker_SelectedIndexChanged" />
+            ItemsSource="{Static utl:TimerPageSetting.TimerModes}"
+            IsVisible="False"
+            SelectedIndexChanged="modePicker_SelectedIndexChanged" />
         <Picker x:Name="timePicker"
-                           IsVisible="False"
-                           SelectedIndexChanged="TimerPicker_SelectedIndexChanged" />
+                       IsVisible="False"
+                       SelectedIndexChanged="TimerPicker_SelectedIndexChanged" />
 
         <Label Text="{Binding Mode, StringFormat={resources:Translate ModeFormat}}"
-               HorizontalOptions="Center"
-               HorizontalTextAlignment="Center"
-               AutomationId="labelMode" />
+           HorizontalOptions="Center"
+           HorizontalTextAlignment="Center"
+           AutomationId="labelMode" />
         <ctl:CustomTimer x:Name="timer" FontSize="72" AutomationId="CustomTimer" />
         <Button Text="{Binding PauseReplayText}" AutomationId="PauseButton" Clicked="ButtonPause_Clicked" IsEnabled="{Binding IsPauseEnabled}" />
     </StackLayout>

@@ -10,21 +10,8 @@ namespace ArcheryManager.UnitTest.Factories
     [TestFixture]
     public class ArrowFactoryTest
     {
-        private Mock<IMovableTarget> target;
         private ArrowFactory factory;
-
-        [SetUp]
-        public void Init()
-        {
-            var setting = new Mock<IArrowSetting>();
-            setting.Setup(c => c.ColorOf(It.IsAny<string>())).Returns(Color.Pink);
-            setting.Setup(c => c.ScoreByIndex(It.IsAny<int>())).Returns("test");
-            setting.Setup(c => c.ValueByScore(It.IsAny<string>())).Returns(42);
-
-            target = new Mock<IMovableTarget>();
-            target.SetupGet(c => c.TargetSize).Returns(350);
-            factory = new ArrowFactory(target.Object, setting.Object);
-        }
+        private Mock<IMovableTarget> target;
 
         [Test]
         public void EnglishArrowFactory_CreateTest()
@@ -43,6 +30,19 @@ namespace ArcheryManager.UnitTest.Factories
             Assert.AreEqual(44.4, Math.Round(arrow.TranslationX, 1));
             Assert.AreEqual(22.2, Math.Round(arrow.TranslationY, 1));
             Assert.AreEqual(0, arrow.NumberInFlight);
+        }
+
+        [SetUp]
+        public void Init()
+        {
+            var setting = new Mock<IArrowSetting>();
+            setting.Setup(c => c.ColorOf(It.IsAny<string>())).Returns(Color.Pink);
+            setting.Setup(c => c.ScoreByIndex(It.IsAny<int>())).Returns("test");
+            setting.Setup(c => c.ValueByScore(It.IsAny<string>())).Returns(42);
+
+            target = new Mock<IMovableTarget>();
+            target.SetupGet(c => c.TargetSize).Returns(350);
+            factory = new ArrowFactory(target.Object, setting.Object);
         }
     }
 }

@@ -44,7 +44,7 @@ Scénario: test la non possibilité de tirer plus du max
 	Quand J'ouvre une page de cible fita
 	Et j'ouvre le menu de paramètre
 	Et je click sur le check nombre de flèches défini
-	Et je reviens à la page d'avant
+	Et je click sur le texte Finish
 	Et je tire une flèche en 200, 100
 	Et je tire une flèche en -200, -200
 	Et je tire une flèche en 0, 0
@@ -60,13 +60,11 @@ Scénario: test la non possibilité de tirer plus du max
 	Et le nombre de flèches actuelles sur la cible est de 6
 
 
-
-	
 Scénario: test la non possibilité de tirer plus du max dans la vue de bouton
 	Quand J'ouvre une page zappette
 	Et j'ouvre le menu de paramètre
 	Et je click sur le check nombre de flèches défini
-	Et je reviens à la page d'avant
+	Et je click sur le texte Finish
 	Et je click sur le boutton 10
 	Et je click sur le boutton 9
 	Et je click sur le boutton 8

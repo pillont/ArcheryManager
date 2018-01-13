@@ -5,9 +5,8 @@
              x:Class="ArcheryManager.CustomControls.TargetImage">
     <ContentView.Content>
         <Grid x:Name="generalGrid">
-            <shape:ShapeView IsVisible="{Binding IsSelected}"
-                             ShapeType="Box"
-                             Color="Aquamarine"
+            <shape:ShapeView ShapeType="Box"
+                             Color="{Binding Color}"
                              VerticalOptions="CenterAndExpand"
                              HorizontalOptions="CenterAndExpand"
                              WidthRequest="2000"
@@ -20,6 +19,8 @@
                 <Image Source="{Binding Source}" Grid.Row="0" />
                 <Label Text="{Binding Text}"
                        Grid.Row="1"
+                       VerticalOptions="End"
+                       VerticalTextAlignment="End"
                        HorizontalTextAlignment="Center"
                        HorizontalOptions="CenterAndExpand" />
             </Grid>

@@ -14,7 +14,9 @@
                     <RowDefinition Height="8*" />
                 </Grid.RowDefinitions>
             </Grid>
-            <Label Text="Archery Manager" Scale="2"
+            <Label Text="Archery Manager"
+                   AutomationId="GeneralMenuTitle"
+                   Scale="2"
                    FontSize="Large"
                    FontAttributes="Bold"
                    VerticalOptions="Center"
@@ -26,19 +28,26 @@
 
             <StackLayout Grid.Row="1">
                 <custom:CustomShapeButton HeightRequest="50"
-                                          AutomationId="CounterButton"
-                                     WidthRequest="200"
-                                     VerticalOptions="Center"
-                                     HorizontalOptions="Center"
-                                     Text="{resources:Translate CountShoot}"
-                                     Tapped="Counter_Tapped" />
+                                         AutomationId="CounterButton"
+                                         WidthRequest="200"
+                                         VerticalOptions="Center"
+                                         HorizontalOptions="Center"
+                                         Text="{resources:Translate CountShoot}"
+                                         Command="{Binding CounterTapped}" />
                 <custom:CustomShapeButton HeightRequest="50"
-                                          AutomationId="TimerButton"
-                                     WidthRequest="200"
-                                     VerticalOptions="Center"
-                                     HorizontalOptions="Center"
-                                     Text="{resources:Translate Timer}"
-                                     Tapped="Timer_Tapped" />
+                                         AutomationId="TimerButton"
+                                         WidthRequest="200"
+                                         VerticalOptions="Center"
+                                         HorizontalOptions="Center"
+                                         Text="{resources:Translate Timer}"
+                                         Command="{Binding TimerTapped}" />
+                <custom:CustomShapeButton HeightRequest="50"
+                                         AutomationId="SavedButton"
+                                         WidthRequest="200"
+                                         VerticalOptions="Center"
+                                         HorizontalOptions="Center"
+                                         Text="{resources:Translate Saves}"
+                                         Command="{Binding SavesCommand}" />
             </StackLayout>
         </Grid>
     </Grid>

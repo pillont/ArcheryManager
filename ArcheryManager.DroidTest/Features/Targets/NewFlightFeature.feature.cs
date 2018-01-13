@@ -132,7 +132,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 30
  testRunner.And("je remplit le nombre de flèche par 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 31
- testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("je click sur le texte Finish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 32
  testRunner.And("je tire une flèche en 200, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 33
@@ -185,35 +185,35 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("test désactiviation du bouton nouvelle volée lorsque le nombre de flèche à changé" +
                     "", ((string[])(null)));
-#line 56
-this.ScenarioSetup(scenarioInfo);
 #line 57
- testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
+this.ScenarioSetup(scenarioInfo);
 #line 58
- testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.When("J\'ouvre une page de cible fita", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quand ");
 #line 59
- testRunner.And("je click sur le check nombre de flèches défini", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 60
- testRunner.And("je remplit le nombre de flèche par 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 61
- testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 62
- testRunner.And("je tire une flèche en 200, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 63
- testRunner.And("je tire une flèche en 100, 300", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 64
- testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 65
- testRunner.And("je tire une flèche en 100, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 66
- testRunner.And("je tire une flèche en 300, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 68
  testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 60
+ testRunner.And("je click sur le check nombre de flèches défini", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 61
+ testRunner.And("je remplit le nombre de flèche par 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 62
+ testRunner.And("je click sur le texte Finish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 63
+ testRunner.And("je tire une flèche en 200, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 64
+ testRunner.And("je tire une flèche en 100, 300", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 65
+ testRunner.And("je tire une flèche en 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 66
+ testRunner.And("je tire une flèche en 100, 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 67
+ testRunner.And("je tire une flèche en 300, 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 69
- testRunner.And("je remplit le nombre de flèche par 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+ testRunner.And("j\'ouvre le menu de paramètre", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
 #line 70
- testRunner.And("je reviens à la page d\'avant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
-#line 73
+ testRunner.And("je remplit le nombre de flèche par 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 71
+ testRunner.And("je click sur le texte Finish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Et ");
+#line 74
  testRunner.Then("le bouton nouvelle volée est désactivé", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Alors ");
 #line hidden
             this.ScenarioCleanup();

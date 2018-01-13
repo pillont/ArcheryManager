@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:custom="clr-namespace:ArcheryManager.CustomControls"
+             xmlns:resources="clr-namespace:ArcheryManager.Resources"
+             xmlns:bhv="clr-namespace:ArcheryManager.Interactions.Behaviors"
+             x:Class="ArcheryManager.Pages.ResultPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid HorizontalOptions="CenterAndExpand">
+                <Label Text="{Binding Total, StringFormat={resources:Translate TotalStringFormat}}"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="CenterAndExpand" />
+
+                <StackLayout Grid.Column="1"
+                             Grid.Row="0"
+                             HorizontalOptions="Center"
+                             Orientation="Horizontal">
+                    <Label HorizontalTextAlignment="End"
+                           HorizontalOptions="End"
+                           Text="{resources:Translate AverageStringFormat}" />
+
+                    <Label HorizontalTextAlignment="Start"
+                           HorizontalOptions="Start"
+                           Text="{Binding Average, StringFormat='{0:F0}'}"
+                           TextColor="{Binding AverageColor}" />
+                </StackLayout>
+
+                <StackLayout Grid.Column="0"
+                             Grid.Row="1"
+                             HorizontalOptions="Center"
+                             Orientation="Horizontal">
+                    <Label Text="{Binding MaxValue, StringFormat={resources:Translate TenCountFormat}}"
+                           HorizontalTextAlignment="End" />
+
+                    <Label HorizontalTextAlignment="Start"
+                           Text="{Binding MaxCount}" />
+                </StackLayout>
+                <StackLayout Grid.Column="1"
+                             Grid.Row="1"
+                             HorizontalOptions="Center"
+                             Orientation="Horizontal">
+                    <Label Text="{Binding PreMaxValue, StringFormat={resources:Translate TenCountFormat}}"
+                           HorizontalTextAlignment="End" />
+
+                    <Label HorizontalTextAlignment="Start"
+                           Text="{Binding PreMaxCount}" />
+                </StackLayout>
+            </Grid>
+
+            <ListView ItemsSource="{Binding ListSource}"
+                  ItemTapped="ListView_ItemTappedDisabled"
+                  HasUnevenRows="True" SeparatorColor="Gray">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Orientation="Vertical"
+                                         Grid.Column="0"
+                                         HorizontalOptions="Center"
+                                         VerticalOptions="Center"
+                                         Margin="5,0">
+                                    <Label Text="{Binding FlightNumber}"
+                                       FontSize="Micro" />
+                                </StackLayout>
+                                <custom:ScoreList ArrowSetting="{Binding ArrowSetting}"
+                                                    Items="{Binding Arrows}"
+                                                    CountByRow ="6"
+                                                    Grid.Column="1" />
+                                <Grid   Grid.Column="2"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        Margin="5,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="45" />
+                                        <ColumnDefinition Width="1" />
+                                        <ColumnDefinition Width="45" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Total}"
+                                           FontSize="Large"
+                                           Grid.Column="0"
+                                           HorizontalTextAlignment="Center" />
+                                    <Frame BackgroundColor="Black"
+                                           Grid.Column="1" />
+                                    <Label Text="{Binding AccruedTotal}"
+                                           FontSize="Large"
+                                           Grid.Column="2"
+                                           HorizontalTextAlignment="Center" />
+                                </Grid>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

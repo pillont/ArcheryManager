@@ -7,14 +7,8 @@ namespace ArcheryManager.Interactions.Behaviors
         public const string AB = "AB";
         public const string CD = "CD";
 
-        public bool DuelMode { get; set; }
-
         private bool changeWave = false;
-
-        public void StopWave()
-        {
-            AssociatedObject.Text = string.Empty;
-        }
+        public bool DuelMode { get; set; }
 
         public void NextWave()
         {
@@ -33,6 +27,17 @@ namespace ArcheryManager.Interactions.Behaviors
             }
         }
 
+        public void StartWave()
+        {
+            AssociatedObject.Text = AB;
+            changeWave = false;
+        }
+
+        public void StopWave()
+        {
+            AssociatedObject.Text = string.Empty;
+        }
+
         private void changeWaveText()
         {
             if (!string.IsNullOrWhiteSpace(AssociatedObject.Text))
@@ -42,12 +47,6 @@ namespace ArcheryManager.Interactions.Behaviors
                                                 CD :
                                                     AB;
             }
-        }
-
-        public void StartWave()
-        {
-            AssociatedObject.Text = AB;
-            changeWave = false;
         }
     }
 }

@@ -8,24 +8,14 @@ namespace ArcheryManager.Settings.ArrowSettings
 {
     public class IndoorCompoundArrowSetting : IArrowSetting
     {
-        public const string MissScore = "M";
-        public const string SixScore = "6";
-        public const string SevenScore = "7";
         public const string HeightScore = "8";
+        public const string MissScore = "M";
         public const string NineScore = "9";
+        public const string SevenScore = "7";
+        public const string SixScore = "6";
         public const string TenScore = "10";
-        private const int IndoorRecurveZoneCount = 7;
         private const int IndoorCounpoundMaxValue = 10;
-
-        private static Dictionary<string, Color> IndoorRecurveColorOf = new Dictionary<string, Color>()
-        {
-            { MissScore, Color.Green},
-            { SixScore,  Color.CornflowerBlue},
-            { SevenScore, Color.Red},
-            { HeightScore, Color.Red},
-            { NineScore, Color.Yellow},
-            { TenScore, Color.Yellow},
-        };
+        private const int IndoorRecurveZoneCount = 7;
 
         private static readonly Dictionary<int, string> IndoorCompoundScoreByIndex = new Dictionary<int, string>()
         {
@@ -38,21 +28,15 @@ namespace ArcheryManager.Settings.ArrowSettings
             { 6 , TenScore },
         };
 
-        public int ZoneCount
+        private static Dictionary<string, Color> IndoorRecurveColorOf = new Dictionary<string, Color>()
         {
-            get
-            {
-                return IndoorRecurveZoneCount;
-            }
-        }
-
-        public int MaxScore
-        {
-            get
-            {
-                return IndoorCounpoundMaxValue;
-            }
-        }
+            { MissScore, Color.Green},
+            { SixScore,  Color.CornflowerBlue},
+            { SevenScore, Color.Red},
+            { HeightScore, Color.Red},
+            { NineScore, Color.Yellow},
+            { TenScore, Color.Yellow},
+        };
 
         private static IArrowSetting instance;
 
@@ -68,20 +52,41 @@ namespace ArcheryManager.Settings.ArrowSettings
             }
         }
 
+        public int MaxScore
+        {
+            get
+            {
+                return IndoorCounpoundMaxValue;
+            }
+        }
+
+        public string MaxValue => TenScore;
+
+        public string PreMaxValue => NineScore;
+
+        public int ZoneCount
+        {
+            get
+            {
+                return IndoorRecurveZoneCount;
+            }
+        }
+
         private IndoorCompoundArrowSetting()
         {
         }
 
-        public string ScoreByIndex(int i)
+        /// <summary>
+        /// determine the color of the zone string
+        /// </summary>
+        /// <param name="i">score zone</param>
+        public Color BorderColorZone(int i)
         {
-            if (IndoorCompoundScoreByIndex.ContainsKey(i))
+            if (i == 5)
             {
-                return IndoorCompoundScoreByIndex[i];
+                return Color.Yellow; // border to not see defferent between first and second nine
             }
-            else
-            {
-                return MissScore;
-            }
+            return Color.Black;
         }
 
         public Color ColorOf(string score)
@@ -96,21 +101,10 @@ namespace ArcheryManager.Settings.ArrowSettings
             }
         }
 
-        public int ValueByScore(string score)
+        public Color ColorOf(int value)
         {
-            var index = IndoorCompoundScoreByIndex.Where(val => val.Value == score).FirstOrDefault().Key;
-            if (index == 0) // miss
-                return index;
-            else
-            {
-                index += 5;
-                if (index < 10) // 6 to 9
-                    return index;
-                else if (index == 10 || index == 11) // second nine and ten
-                    return index - 1;
-                else
-                    throw new IndexOutOfRangeException();
-            }
+            string score = IndoorCompoundScoreByIndex.First(pair => pair.Key == value).Value;
+            return ColorOf(score);
         }
 
         /// <summary>
@@ -140,17 +134,33 @@ namespace ArcheryManager.Settings.ArrowSettings
             }
         }
 
-        /// <summary>
-        /// determine the color of the zone string
-        /// </summary>
-        /// <param name="i">score zone</param>
-        public Color BorderColorZone(int i)
+        public string ScoreByIndex(int i)
         {
-            if (i == 5)
+            if (IndoorCompoundScoreByIndex.ContainsKey(i))
             {
-                return Color.Yellow; // border to not see defferent between first and second nine
+                return IndoorCompoundScoreByIndex[i];
             }
-            return Color.Black;
+            else
+            {
+                return MissScore;
+            }
+        }
+
+        public int ValueByScore(string score)
+        {
+            var index = IndoorCompoundScoreByIndex.Where(val => val.Value == score).FirstOrDefault().Key;
+            if (index == 0) // miss
+                return index;
+            else
+            {
+                index += 5;
+                if (index < 10) // 6 to 9
+                    return index;
+                else if (index == 10 || index == 11) // second nine and ten
+                    return index - 1;
+                else
+                    throw new IndexOutOfRangeException();
+            }
         }
     }
 }

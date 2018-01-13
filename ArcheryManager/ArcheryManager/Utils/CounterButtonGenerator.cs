@@ -1,44 +1,43 @@
-﻿using ArcheryManager.Interfaces;
-using ArcheryManager.Models;
+﻿using ArcheryManager.Entities;
+using ArcheryManager.Interfaces;
 using ArcheryManager.Settings.ArrowSettings;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace ArcheryManager.Utils
 {
-    public class CounterButtonGenerator
+    public static class CounterButtonGenerator
     {
-        private IArrowSetting ArrowSetting { get; set; }
-
-        public CounterButtonGenerator(IArrowSetting arrowSetting)
+        public static ObservableCollection<Arrow> GeneralButton(IArrowSetting setting)
         {
-            ArrowSetting = arrowSetting;
-        }
-
-        public ObservableCollection<Arrow> GeneralButton()
-        {
-            var buttonsData = new ObservableCollection<Arrow>();
-
-            for (int i = 1; i < ArrowSetting.ZoneCount; i++)
-            {
-                Arrow arrow = GetArrow(i);
-                buttonsData.Add(arrow);
-            }
-
-            //NOTE : remove second 9 zone on indoor compound target
-            if (ArrowSetting is IndoorCompoundArrowSetting)
-            {
-                buttonsData.RemoveAt(buttonsData.Count - 2);
-            }
-
-            var missArrow = GetArrow(0);
-            buttonsData.Add(missArrow);
+            // NOTE : reverse to have decrementing list
+            var arrows = ArrowsEnumerable(setting).Reverse();
+            var buttonsData = new ObservableCollection<Arrow>(arrows);
 
             return buttonsData;
         }
 
-        private Arrow GetArrow(int i)
+        private static IEnumerable<Arrow> ArrowsEnumerable(IArrowSetting setting)
         {
-            var arrow = new Arrow(i, -1);
+            for (int i = 0; i < setting.ZoneCount; i++)
+            {
+                //NOTE : remove second 9 zone on indoor compound target
+                if (setting is IndoorCompoundArrowSetting
+                && i == setting.ZoneCount - 2)
+                {
+                    continue;
+                }
+
+                yield return GetArrow(i);
+            }
+
+            yield break;
+        }
+
+        private static Arrow GetArrow(int i)
+        {
+            var arrow = new Arrow() { Index = i };
             return arrow;
         }
     }

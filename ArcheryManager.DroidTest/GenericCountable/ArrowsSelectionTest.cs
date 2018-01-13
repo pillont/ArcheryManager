@@ -1,4 +1,5 @@
-﻿using ArcheryManager.Resources;
+﻿using ArcheryManager.DroidTest.Helpers;
+using ArcheryManager.Resources;
 using NUnit.Framework;
 using System.Linq;
 using Xamarin.UITest.Android;
@@ -16,166 +17,6 @@ namespace ArcheryManager.DroidTest.GenericCountable
             app = TestSetting.InitTestApplication();
             app.Screenshot("BackDoor Page");
             app.Tap("EnglishTargetButton");
-        }
-
-        [Test]
-        public void UnSelectButtonsVisibilityTest()
-
-        {
-            var list = app.WaitForElement("scoreList");
-
-            // not visible
-            app.WaitForNoElement(TranslateExtension.GetTextResource("UnSelect"));
-            app.WaitForNoElement(TranslateExtension.GetTextResource("RemoveSelect"));
-
-            // drag to create arrow
-            app.DragCoordinates(500, 800, 450, 750);
-            app.DragCoordinates(500, 800, 600, 900);
-
-            app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
-            app.Tap(e => e.Marked("scoreList").Child(1).Child(1).Child());
-
-            // visible
-            app.WaitForElement(TranslateExtension.GetTextResource("UnSelect"));
-            app.WaitForElement(TranslateExtension.GetTextResource("RemoveSelect"));
-
-            //un select all
-            app.Tap(TranslateExtension.GetTextResource("UnSelect"));
-
-            // not visible
-            app.WaitForNoElement(TranslateExtension.GetTextResource("UnSelect"));
-            app.WaitForNoElement(TranslateExtension.GetTextResource("RemoveSelect"));
-        }
-
-        [Test]
-        public void RemoveButtonsVisibilityTest()
-        {
-            var list = app.WaitForElement("scoreList");
-
-            // not visible
-            app.WaitForNoElement(TranslateExtension.GetTextResource("UnSelect"));
-            app.WaitForNoElement(TranslateExtension.GetTextResource("RemoveSelect"));
-
-            // drag to create arrow
-            app.DragCoordinates(500, 800, 450, 750);
-            app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
-
-            // visible
-            app.WaitForElement(TranslateExtension.GetTextResource("UnSelect"));
-            app.WaitForElement(TranslateExtension.GetTextResource("RemoveSelect"));
-
-            // remove arrow
-            app.Tap(TranslateExtension.GetTextResource("RemoveSelect"));
-
-            // not visible
-            app.WaitForNoElement(TranslateExtension.GetTextResource("UnSelect"));
-            app.WaitForNoElement(TranslateExtension.GetTextResource("RemoveSelect"));
-        }
-
-        [Test]
-        public void UnSelection_ButtonsVisibilityTest()
-
-        {
-            var list = app.WaitForElement("scoreList");
-
-            // not visible
-            app.WaitForNoElement(TranslateExtension.GetTextResource("UnSelect"));
-            app.WaitForNoElement(TranslateExtension.GetTextResource("RemoveSelect"));
-
-            // drag to create arrow
-            app.DragCoordinates(500, 800, 450, 750);
-            app.DragCoordinates(500, 800, 400, 900);
-            app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
-            app.Tap(e => e.Marked("scoreList").Child(1).Child(1).Child());
-
-            // visible
-            app.WaitForElement(TranslateExtension.GetTextResource("UnSelect"));
-            app.WaitForElement(TranslateExtension.GetTextResource("RemoveSelect"));
-
-            // TranslateExtension.GetTextResource("UnSelect") one
-            app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
-
-            // visible
-            app.WaitForElement(TranslateExtension.GetTextResource("UnSelect"));
-            app.WaitForElement(TranslateExtension.GetTextResource("RemoveSelect"));
-
-            // TranslateExtension.GetTextResource("UnSelect") all
-            app.Tap(e => e.Marked("scoreList").Child(1).Child(1).Child());
-
-            // not visible
-            app.WaitForNoElement(TranslateExtension.GetTextResource("UnSelect"));
-            app.WaitForNoElement(TranslateExtension.GetTextResource("RemoveSelect"));
-        }
-
-        [Test]
-        public void RemoveBySelectionTest()
-        {
-            var list = app.WaitForElement("scoreList");
-
-            // drag to create arrow
-            app.DragCoordinates(500, 800, 475, 775);
-            // drag to create arrow
-            app.DragCoordinates(500, 800, 570, 850);
-            // drag to create arrow
-            app.DragCoordinates(500, 800, 475, 825);
-            // drag to create arrow
-            app.DragCoordinates(500, 800, 570, 750);
-
-            Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Text);
-            Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Text);
-            Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(2).Child(1).Child()).First().Text);
-            Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(3).Child(1).Child()).First().Text);
-
-            //remove last
-            app.Tap(e => e.Marked("scoreList").Child(3).Child(1).Child());
-            app.Tap(TranslateExtension.GetTextResource("RemoveSelect"));
-
-            Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Text);
-            Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Text);
-            Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(2).Child(1).Child()).First().Text);
-
-            //remove first
-            app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
-            app.Tap(TranslateExtension.GetTextResource("RemoveSelect"));
-
-            Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Text);
-            Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Text);
-        }
-
-        [Test]
-        public void UnSelectTest()
-
-        {
-            var list = app.WaitForElement("scoreList");
-
-            // drag to create arrow
-            app.DragCoordinates(500, 800, 470, 770);
-            // drag to create arrow
-            app.DragCoordinates(500, 800, 570, 870);
-            // drag to create arrow
-            app.DragCoordinates(500, 800, 470, 830);
-            // drag to create arrow
-            app.DragCoordinates(500, 800, 570, 730);
-
-            Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Text);
-            Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Text);
-            Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(2).Child(1).Child()).First().Text);
-            Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(3).Child(1).Child()).First().Text);
-
-            //select 0,1,2
-            app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
-            app.Tap(e => e.Marked("scoreList").Child(1).Child(1).Child());
-            app.Tap(e => e.Marked("scoreList").Child(2).Child(1).Child());
-
-            //TranslateExtension.GetTextResource("UnSelect") 0,1
-            app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
-            app.Tap(e => e.Marked("scoreList").Child(1).Child(1).Child());
-            app.Tap(TranslateExtension.GetTextResource("RemoveSelect"));
-
-            // wait 0,1,3
-            Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Text);
-            Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Text);
-            Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(2).Child(1).Child()).First().Text);
         }
 
         [Test]
@@ -197,48 +38,194 @@ namespace ArcheryManager.DroidTest.GenericCountable
             var rec3 = app.Query(e => e.Marked("scoreList").Child(2).Child(1).Child()).First().Rect;
             var rec4 = app.Query(e => e.Marked("scoreList").Child(3).Child(1).Child()).First().Rect;
 
-            Assert.LessOrEqual(87, rec1.CenterX);
-            Assert.GreaterOrEqual(95, rec1.CenterX);
-            Assert.LessOrEqual(1105, rec1.CenterY);
-            Assert.GreaterOrEqual(1115, rec1.CenterY);
+            Assert.AreEqual(126, rec1.CenterX, 5);
+            Assert.AreEqual(1664, rec1.CenterY, 5);
 
-            Assert.LessOrEqual(280, rec2.CenterX);
-            Assert.GreaterOrEqual(290, rec2.CenterX);
-            Assert.LessOrEqual(1105, rec2.CenterY);
-            Assert.GreaterOrEqual(1115, rec2.CenterY);
+            Assert.AreEqual(400, rec2.CenterX, 5);
+            Assert.AreEqual(1664, rec2.CenterY, 5);
 
-            Assert.LessOrEqual(475, rec3.CenterX);
-            Assert.GreaterOrEqual(485, rec3.CenterX);
-            Assert.LessOrEqual(1105, rec3.CenterY);
-            Assert.GreaterOrEqual(1115, rec3.CenterY);
+            Assert.AreEqual(675, rec3.CenterX, 5);
+            Assert.AreEqual(1664, rec3.CenterY, 5);
 
-            Assert.LessOrEqual(670, rec4.CenterX);
-            Assert.GreaterOrEqual(680, rec4.CenterX);
-            Assert.LessOrEqual(1105, rec4.CenterY);
-            Assert.GreaterOrEqual(1115, rec4.CenterY);
+            Assert.AreEqual(950, rec4.CenterX, 5);
+            Assert.AreEqual(1664, rec4.CenterY, 5);
 
             // remove first
             app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
-            app.Tap(TranslateExtension.GetTextResource("RemoveSelect")); // toolbar items to remove
+            app.Tap(TranslationHelper.GetTextResource("RemoveSelect")); // toolbar items to remove
 
             rec1 = app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Rect;
             rec2 = app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Rect;
             rec3 = app.Query(e => e.Marked("scoreList").Child(2).Child(1).Child()).First().Rect;
 
-            Assert.LessOrEqual(120, rec1.CenterX);
-            Assert.GreaterOrEqual(130, rec1.CenterX);
-            Assert.LessOrEqual(1105, rec1.CenterY);
-            Assert.GreaterOrEqual(1115, rec1.CenterY);
+            Assert.AreEqual(174, rec1.CenterX, 5);
+            Assert.AreEqual(1664, rec1.CenterY, 5);
 
-            Assert.LessOrEqual(380, rec2.CenterX);
-            Assert.GreaterOrEqual(385, rec2.CenterX);
-            Assert.LessOrEqual(1105, rec2.CenterY);
-            Assert.GreaterOrEqual(1115, rec2.CenterY);
+            Assert.AreEqual(540, rec2.CenterX, 5);
+            Assert.AreEqual(1664, rec2.CenterY, 5);
 
-            Assert.LessOrEqual(640, rec3.CenterX);
-            Assert.GreaterOrEqual(650, rec3.CenterX);
-            Assert.LessOrEqual(1105, rec3.CenterY);
-            Assert.GreaterOrEqual(1115, rec3.CenterY);
+            Assert.AreEqual(906, rec3.CenterX, 5);
+            Assert.AreEqual(1664, rec3.CenterY, 5);
+        }
+
+        [Test]
+        public void RemoveButtonsVisibilityTest()
+        {
+            var list = app.WaitForElement("scoreList");
+
+            // not visible
+            app.WaitForNoElement(TranslationHelper.GetTextResource("UnSelect"));
+            app.WaitForNoElement(TranslationHelper.GetTextResource("RemoveSelect"));
+
+            // drag to create arrow
+            app.DragCoordinates(500, 800, 450, 750);
+            app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
+
+            // visible
+            app.WaitForElement(TranslationHelper.GetTextResource("UnSelect"));
+            app.WaitForElement(TranslationHelper.GetTextResource("RemoveSelect"));
+
+            // remove arrow
+            app.Tap(TranslationHelper.GetTextResource("RemoveSelect"));
+
+            // not visible
+            app.WaitForNoElement(TranslationHelper.GetTextResource("UnSelect"));
+            app.WaitForNoElement(TranslationHelper.GetTextResource("RemoveSelect"));
+        }
+
+        [Test]
+        public void RemoveBySelectionTest()
+        {
+            var list = app.WaitForElement("scoreList");
+
+            // drag to create arrow
+            app.DragCoordinates(500, 800, 475, 725);
+            // drag to create arrow
+            app.DragCoordinates(500, 800, 570, 900);
+            // drag to create arrow
+            app.DragCoordinates(500, 800, 475, 875);
+            // drag to create arrow
+            app.DragCoordinates(500, 800, 570, 650);
+
+            Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Text);
+            Assert.AreEqual("9", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Text);
+            Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(2).Child(1).Child()).First().Text);
+            Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(3).Child(1).Child()).First().Text);
+
+            //remove last
+            app.Tap(e => e.Marked("scoreList").Child(3).Child(1).Child());
+            app.Tap(TranslationHelper.GetTextResource("RemoveSelect"));
+
+            Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Text);
+            Assert.AreEqual("9", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Text);
+            Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(2).Child(1).Child()).First().Text);
+
+            //remove first
+            app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
+            app.Tap(TranslationHelper.GetTextResource("RemoveSelect"));
+
+            Assert.AreEqual("9", app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Text);
+            Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Text);
+        }
+
+        [Test]
+        public void UnSelectButtonsVisibilityTest()
+
+        {
+            var list = app.WaitForElement("scoreList");
+
+            // not visible
+            app.WaitForNoElement(TranslationHelper.GetTextResource("UnSelect"));
+            app.WaitForNoElement(TranslationHelper.GetTextResource("RemoveSelect"));
+
+            // drag to create arrow
+            app.DragCoordinates(500, 800, 450, 750);
+            app.DragCoordinates(500, 800, 600, 900);
+
+            app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
+            app.Tap(e => e.Marked("scoreList").Child(1).Child(1).Child());
+
+            // visible
+            app.WaitForElement(TranslationHelper.GetTextResource("UnSelect"));
+            app.WaitForElement(TranslationHelper.GetTextResource("RemoveSelect"));
+
+            //un select all
+            app.Tap(TranslationHelper.GetTextResource("UnSelect"));
+
+            // not visible
+            app.WaitForNoElement(TranslationHelper.GetTextResource("UnSelect"));
+            app.WaitForNoElement(TranslationHelper.GetTextResource("RemoveSelect"));
+        }
+
+        [Test]
+        public void UnSelection_ButtonsVisibilityTest()
+
+        {
+            var list = app.WaitForElement("scoreList");
+
+            // not visible
+            app.WaitForNoElement(TranslationHelper.GetTextResource("UnSelect"));
+            app.WaitForNoElement(TranslationHelper.GetTextResource("RemoveSelect"));
+
+            // drag to create arrow
+            app.DragCoordinates(500, 800, 450, 750);
+            app.DragCoordinates(500, 800, 400, 900);
+            app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
+            app.Tap(e => e.Marked("scoreList").Child(1).Child(1).Child());
+
+            // visible
+            app.WaitForElement(TranslationHelper.GetTextResource("UnSelect"));
+            app.WaitForElement(TranslationHelper.GetTextResource("RemoveSelect"));
+
+            // TranslationHelper.GetTextResource("UnSelect") one
+            app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
+
+            // visible
+            app.WaitForElement(TranslationHelper.GetTextResource("UnSelect"));
+            app.WaitForElement(TranslationHelper.GetTextResource("RemoveSelect"));
+
+            // TranslationHelper.GetTextResource("UnSelect") all
+            app.Tap(e => e.Marked("scoreList").Child(1).Child(1).Child());
+
+            // not visible
+            app.WaitForNoElement(TranslationHelper.GetTextResource("UnSelect"));
+            app.WaitForNoElement(TranslationHelper.GetTextResource("RemoveSelect"));
+        }
+
+        [Test]
+        public void UnSelectTest()
+
+        {
+            var list = app.WaitForElement("scoreList");
+
+            // drag to create arrow
+            app.DragCoordinates(500, 800, 470, 770);
+            // drag to create arrow
+            app.DragCoordinates(500, 800, 650, 870);
+            // drag to create arrow
+            app.DragCoordinates(500, 800, 470, 830);
+            // drag to create arrow
+            app.DragCoordinates(500, 800, 650, 730);
+
+            Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Text);
+            Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Text);
+            Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(2).Child(1).Child()).First().Text);
+            Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(3).Child(1).Child()).First().Text);
+
+            //select 0,1,2
+            app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
+            app.Tap(e => e.Marked("scoreList").Child(1).Child(1).Child());
+            app.Tap(e => e.Marked("scoreList").Child(2).Child(1).Child());
+
+            //TranslationHelper.GetTextResource("UnSelect") 0,1
+            app.Tap(e => e.Marked("scoreList").Child(0).Child(1).Child());
+            app.Tap(e => e.Marked("scoreList").Child(1).Child(1).Child());
+            app.Tap(TranslationHelper.GetTextResource("RemoveSelect"));
+
+            // wait 0,1,3
+            Assert.AreEqual("10", app.Query(e => e.Marked("scoreList").Child(0).Child(1).Child()).First().Text);
+            Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(1).Child(1).Child()).First().Text);
+            Assert.AreEqual("8", app.Query(e => e.Marked("scoreList").Child(2).Child(1).Child()).First().Text);
         }
     }
 }

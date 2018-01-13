@@ -9,18 +9,18 @@ namespace ArcheryManager.UnitTest.Utils
     public class StatisticHelperTest
     {
         [Test]
-        public void StdDev_NullTest()
-        {
-            double res = -1;
-            Assert.DoesNotThrow(() => res = StatisticHelper.CalculateStdDev(null));
-            Assert.AreEqual(0, res);
-        }
-
-        [Test]
         public void StdDev_EmptyTest()
         {
             double res = -1;
             Assert.DoesNotThrow(() => res = StatisticHelper.CalculateStdDev(new List<double>()));
+            Assert.AreEqual(0, res);
+        }
+
+        [Test]
+        public void StdDev_NullTest()
+        {
+            double res = -1;
+            Assert.DoesNotThrow(() => res = StatisticHelper.CalculateStdDev(null));
             Assert.AreEqual(0, res);
         }
 

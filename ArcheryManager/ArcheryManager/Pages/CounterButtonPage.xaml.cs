@@ -1,68 +1,96 @@
-﻿using ArcheryManager.Settings;
+﻿using ArcheryManager.CustomControls;
+using ArcheryManager.Factories;
+using ArcheryManager.Interactions.Behaviors;
+using ArcheryManager.Interfaces;
+using ArcheryManager.Pages.PagesTemplates;
+using ArcheryManager.Resources;
+using ArcheryManager.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using ArcheryManager.Interactions.Behaviors;
-using ArcheryManager.Resources;
-using ArcheryManager.Pages.PagesTemplates;
-using ArcheryManager.Interfaces;
+using XLabs.Forms.Mvvm;
+using XLabs.Ioc;
 
 namespace ArcheryManager.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CounterButtonPage : ContentPageWithGeneralEvent, IToolbarItemsHolder
+    public partial class CounterButtonPage : ContentPageWithGeneralEvent, IToolbarItemsHolder, ICounterPage
     {
-        public readonly ScoreCounter Counter;
-        private readonly CountSetting CountSetting;
-
-        private static readonly IGeneralCounterSetting GeneralCounterSetting = DependencyService.Get<IGeneralCounterSetting>();
+        private ArrowUniformGrid ScoreList { get; set; }
 
         public CounterButtonPage()
         {
             InitializeComponent();
-            var arrowSetting = GeneralCounterSetting.ArrowSetting;
-            var countSetting = GeneralCounterSetting.CountSetting;
-            countSetting.HaveTarget = false;
-            CountSetting = countSetting;
+            ApplyRotationEvent();
+        }
 
-            Counter = new ScoreCounter(GeneralCounterSetting);
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
 
-            totalCounter.BindingContext = Counter;
-
-            scoreList.ArrowSetting = GeneralCounterSetting.ArrowSetting;
-            scoreList.SizeChanged += ScoreList_SizeChanged;
-            scoreList.Items = GeneralCounterSetting.ScoreResult.CurrentArrows;
-
-            var selectBehavior = new SelectableArrowInListBehavior(this.ToolbarItems, GeneralCounterSetting);
-            scoreList.Behaviors.Add(selectBehavior);
-
-            var behavior = new CounterButtonBehavior(GeneralCounterSetting, Counter);
+            var behavior = Resolver.Resolve<CounterButtonBehavior>();
             counterButtons.Behaviors.Add(behavior);
 
-            var toolbarBehavior = new CounterToolbarItemsBehavior<CounterButtonPage>(GeneralCounterSetting, Counter);
-            this.Behaviors.Add(toolbarBehavior);
-            toolbarBehavior.AddDefaultToolbarItems();
-            AddCounterButtonsToolbarItems();
+            ScoreListFactory.AddInScrollView(scrollArrows);
         }
 
-        private void ScoreList_SizeChanged(object sender, System.EventArgs e)
+        private void ApplyRotationEvent()
         {
-            scrollArrows.ScrollToAsync(scoreList, ScrollToPosition.End, true);
+            VerticalScreenRotation += SetupGridForVerticalDevice;
+            HorizontalScreenRotation += SetupGridForHorizontalDevice;
         }
 
-        private void AddCounterButtonsToolbarItems()
+        private void SetupGridForHorizontalDevice(Size obj)
         {
-            ToolbarItems.Add(new ToolbarItem()
-            {
-                Text = AppResources.Settings,
-                Order = ToolbarItemOrder.Secondary,
-                Command = new Command(OpenSettingPage)
-            });
+            globalGrid.RowDefinitions.Clear();
+            globalGrid.ColumnDefinitions.Clear();
+
+            globalGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            globalGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+
+            globalGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+            globalGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+
+            Grid.SetColumn(totalCounter, 1);
+            Grid.SetColumn(scrollArrows, 1);
+            Grid.SetColumn(counterButtons, 0);
+
+            Grid.SetRow(totalCounter, 0);
+            Grid.SetRow(scrollArrows, 1);
+            Grid.SetRow(counterButtons, 0);
+
+            Grid.SetRowSpan(counterButtons, 2);
         }
 
-        private void OpenSettingPage(object obj)
+        private void SetupGridForVerticalDevice(Size obj)
         {
-            var page = new SettingTargetPage() { BindingContext = CountSetting };
-            App.NavigationPage.PushAsync(page);
+            globalGrid.RowDefinitions.Clear();
+            globalGrid.ColumnDefinitions.Clear();
+
+            globalGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+            globalGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+            globalGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(3, GridUnitType.Star) });
+
+            Grid.SetColumn(totalCounter, 0);
+            Grid.SetColumn(scrollArrows, 0);
+            Grid.SetColumn(counterButtons, 0);
+
+            Grid.SetRow(totalCounter, 0);
+            Grid.SetRow(scrollArrows, 1);
+            Grid.SetRow(counterButtons, 2);
+
+            Grid.SetRowSpan(counterButtons, 1);
+        }
+    }
+
+    public class CounterButtonPageViewModel : ViewModel
+    {
+        private readonly CounterManager Manager;
+        public CounterButtonsViewModel CounterButtonsViewModel => Resolver.Resolve<CounterButtonsViewModel>();
+        public ScoreCounter Counter => Manager.Counter;
+
+        public CounterButtonPageViewModel(CounterManager manager)
+        {
+            Manager = manager;
         }
     }
 }
